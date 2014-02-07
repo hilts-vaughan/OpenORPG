@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{79A11015-B16C-4A65-ADC4-FB8406DAE5DD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Server</RootNamespace>
+    <AssemblyName>Game.Server</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Fleck">
+      <HintPath>Lib\Fleck.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Game\ChatManager.cs" />
+    <Compile Include="Game\Combat\AttackPayload.cs" />
+    <Compile Include="Game\Combat\Actions\ICombatAction.cs" />
+    <Compile Include="Game\Combat\Payloads\IPayload.cs" />
+    <Compile Include="Game\Entities\Character.cs" />
+    <Compile Include="Game\Entities\Player.cs" />
+    <Compile Include="Game\Movement\MovementSystem.cs" />
+    <Compile Include="Game\Network\Handlers\MovementHandler.cs" />
+    <Compile Include="Game\Network\Packets\AttributeName.cs" />
+    <Compile Include="Game\Database\Maps\UserHeroMap.cs" />
+    <Compile Include="Game\Database\Maps\UserAccounConfiguration.cs" />
+    <Compile Include="Game\Database\Models\ContentTemplates\IContentTemplate.cs" />
+    <Compile Include="Game\Database\Models\ContentTemplates\ItemTemplate.cs" />
+    <Compile Include="Game\Database\Models\ContentTemplates\ItemType.cs" />
+    <Compile Include="Game\Database\Models\ContentTemplates\MapTemplate.cs" />
+    <Compile Include="Game\Database\Models\ContentTemplates\MonsterTemplate.cs" />
+    <Compile Include="Game\Database\Models\ContentTemplates\SkillTemplate.cs" />
+    <Compile Include="Game\Database\Models\UserHero.cs" />
+    <Compile Include="Game\Database\Seeds\DataPopulatorInit.cs" />
+    <Compile Include="Game\Database\GameDatabaseContext.cs" />
+    <Compile Include="GameClient.cs" />
+    <Compile Include="GameServer.cs" />
+    <Compile Include="Game\Database\Models\UserAccount.cs" />
+    <Compile Include="Game\GameObjectFactory.cs" />
+    <Compile Include="Game\Network\Authentication\Providers\DatabaseAuthenticationProvider.cs" />
+    <Compile Include="Game\Network\Handlers\ChatHandler.cs" />
+    <Compile Include="Game\Network\Handlers\HeroSelectionHandler.cs" />
+    <Compile Include="Game\Network\Authentication\IAuthenticationProvider.cs" />
+    <Compile Include="Game\Network\Handlers\LoginHandler.cs" />
+    <Compile Include="Game\Network\Packets\ChannelType.cs" />
+    <Compile Include="Game\Network\Packets\ClientChatMessagePacket.cs" />
+    <Compile Include="Game\Network\Packets\ClientHeroSelectPacket.cs" />
+    <Compile Include="Game\Network\Packets\ClientHeroCreatePacket.cs" />
+    <Compile Include="Game\Network\Packets\ClientMovementRequestPacket.cs" />
+    <Compile Include="Game\Network\Packets\ClientUsePowerPacket.cs" />
+    <Compile Include="Game\Network\Packets\ServreMobUsePowerPacket.cs" />
+    <Compile Include="Game\Network\Packets\ServerFloatingMessagePacket.cs" />
+    <Compile Include="Game\Network\Packets\Direction.cs" />
+    <Compile Include="Game\Network\Packets\PowerId.cs" />
+    <Compile Include="Game\Network\Packets\ServerAttributesChangedPacket.cs" />
+    <Compile Include="Game\Network\Packets\ServerChatMessagePacket.cs" />
+    <Compile Include="Game\Network\Packets\ServerJoinChannelPacket.cs" />
+    <Compile Include="Game\Network\Packets\ServerMobCreatePacket.cs" />
+    <Compile Include="Game\Network\Packets\ServerHeroCreateResponsePacket.cs" />
+    <Compile Include="Game\Network\Packets\ServerHeroListPacket.cs" />
+    <Compile Include="Game\Network\Packets\ServerHeroSelectResponsePacket.cs" />
+    <Compile Include="Game\Network\Packets\ServerLoginResponsePacket.cs" />
+    <Compile Include="Game\Network\Packets\ServerMobDestroyPacket.cs" />
+    <Compile Include="Game\Network\Packets\ServerZoneChangedPacket.cs" />
+    <Compile Include="Game\Network\PacketTask.cs" />
+    <Compile Include="Game\Storage\Item.cs" />
+    <Compile Include="Game\Storage\ItemStorage.cs" />
+    <Compile Include="Game\World\Systems\DebugMonitorSystem.cs" />
+    <Compile Include="Game\Zones\ZoneCollection.cs" />
+    <Compile Include="Infrastructure\Configuration\ServerSettings.cs" />
+    <Compile Include="Infrastructure\Content\AssetCache.cs" />
+    <Compile Include="Infrastructure\Content\AssetLoaders\XmlLoader.cs" />
+    <Compile Include="Infrastructure\Content\AssetReader.cs" />
+    <Compile Include="Infrastructure\Logging\ILogger.cs" />
+    <Compile Include="Infrastructure\Logging\Logger.cs" />
+    <Compile Include="Infrastructure\Logging\Loggers\ConsoleLogger.cs" />
+    <Compile Include="Infrastructure\Logging\LogLevel.cs" />
+    <Compile Include="Infrastructure\Network\Handlers\PacketHandler.cs" />
+    <Compile Include="Infrastructure\Network\Handlers\PacketHandlerAttribute.cs" />
+    <Compile Include="Infrastructure\Network\Packets\IPacketSerializer.cs" />
+    <Compile Include="Infrastructure\Network\Packets\JsonPacketSerializer.cs" />
+    <Compile Include="Infrastructure\Network\Packets\Connection.cs" />
+    <Compile Include="Infrastructure\Network\NetworkManager.cs" />
+    <Compile Include="Infrastructure\Content\ContentManager.cs" />
+    <Compile Include="Infrastructure\Content\IAssetLoader.cs" />
+    <Compile Include="Infrastructure\Content\JsonAssetSerializer.cs" />
+    <Compile Include="Infrastructure\Content\AssetLoaders\JsonLoader.cs" />
+    <Compile Include="Game\Network\Packets\ClientLoginRequestPacket.cs" />
+    <Compile Include="Infrastructure\Network\Packets\IPacket.cs" />
+    <Compile Include="Game\Network\Packets\OpCodes.cs" />
+    <Compile Include="Infrastructure\Network\ReflectionHelper.cs" />
+    <Compile Include="Game\Zones\Zone.cs" />
+    <Compile Include="Game\Zones\ZoneManager.cs" />
+    <Compile Include="Game\Utility\UserUtility.cs" />
+    <Compile Include="Infrastructure\World\GameWorld.cs" />
+    <Compile Include="Infrastructure\World\Entity.cs" />
+    <Compile Include="Infrastructure\World\Systems\GameSystem.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\PathHelper.cs" />
+    <Compile Include="Utils\HtmlTools.cs" />
+    <Compile Include="Utils\Math\Vector2.cs" />
+    <Compile Include="Utils\Math\MathHelper.cs" />
+    <Compile Include="WorldServer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Game\Chat\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TiledSharp\TiledSharp.csproj">
+      <Project>{e4130f8d-d301-4e0c-916d-489c4a23c9b1}</Project>
+      <Name>TiledSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

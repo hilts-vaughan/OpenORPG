@@ -1,0 +1,809 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"onConn",
+				"onConnectionErrorCallback"
+			],
+			[
+				"connect",
+				"connectSplash"
+			],
+			[
+				"send",
+				"sendMessage"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "/*\n	The gameplay state is where the core gameplay of the game runs.\n	This has everything required to run. operate, and update the game world.\n\n	There should only ever be one of these states in existance.\n*/\n\n\nmodule.exports = function() {\n\n  GameplayState = Class.extend({\n\n    init: function(game) {\n      this.game = game;\n      var self = this;\n\n      self.game\n\n    },\n\n    create: function() {\n\n\n\n\n      var self = this;\n      self.map = self.game.add.tilemap('map_1');\n      self.map.addTilesetImage('tilesheet')\n\n      $.each(self.map.layers, function(key, value) {\n        var layer = self.map.createLayer(value.name);\n        layer.resizeWorld();\n      });\n\n      this.game.net.registerPacket(PacketTypes.SMSG_ZONE_CHANGED, function(packet) {\n\n      });\n\n      var sprite = this.game.add.sprite(72 * 32, 150 * 32, \"player_active\", 0);\n      this.game.camera.follow(sprite);\n      \n\n    },\n\n\n    preload: function() {\n      this.game.load.tilemap('map_1', 'assets/Maps/1.json', null, Phaser.Tilemap.TILED_JSON);\n      this.game.load.image('tilesheet', 'assets/Maps/tilesheet_16.png');\n    }\n\n\n  });\n\n}();",
+			"file": "src/js/Game/StateManagement/GameplayState.js",
+			"file_size": 1150,
+			"file_write_time": 130357129024598192,
+			"settings":
+			{
+				"buffer_size": 1112,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "#include <sys/types.h>\n#include <utmp.h>\n#include <time.h>\n\n\nvoid showtime( time_t timeval )\n/*\n *      displays time in a format fit for human consumption\n *      uses ctime to build a string then picks parts out of it\n *      Note: %12.12s prints a string 12 chars wide and LIMITS\n *      it to 12chars.\n */\n{\n        char    *ctime();               /* convert long to ascii        */\n        char    *cp;                    /* to hold address of time      */\n\n\n\nvoid showtime( time_t timeval )\n/*\n *      displays time in a format fit for human consumption\n *      uses ctime to build a string then picks parts out of it\n *      Note: %12.12s prints a string 12 chars wide and LIMITS\n *      it to 12chars.\n */\n{\n        char    *ctime();               /* convert long to ascii        */\n        char    *cp;                    /* to hold address of time      */\n\n        cp = ctime( &timeval );         /* convert time to string       */\n                                        /* string looks like            */\n                                        /* Mon Feb  4 00:46:40 EST 1991 */\n                                        /* 0123456789012345.            */\n        printf(\"%12.12s\", cp+4 );       /* pick 12 chars from pos 4     */\n}\n\n\n\n/*\n Shows information regarding the given information record. We use this to output our dead proceses.\n*/\nvoid show_info( struct utmp *utbufp )\n\n▽\n        if(utbufp->ut_type == BOOT_TIME)\n        {\n                printf(\"The system was booted on: \");\n                showtime( utbufp->ut_time);\n                return;\n        }\n\n        if ( utbufp->ut_type != USER_PROCESS )\n                return;\n\n        printf(\"%-8.8s\", utbufp->ut_name);              /* the logname  */\n        printf(\" \");                                    /* a space      */\n        printf(\"%-8.8s\", utbufp->ut_line);              /* the tty      */\n        printf(\" \");                                    /* a space      */\n        showtime( utbufp->ut_time );                    /* display time */\n        printf(\"\\n\");                                   /* newline      */\n}\n\n\n/*\n   Our main entry point to the application\n*/\nint main()\n{\n        struct utmp     *utbufp,        /* holds pointer to next rec    */\n                        *utmp_next();   /* returns pointer to next      */\n\n        // Open file and the like\n        if ( utmp_open( UTMP_FILE ) == -1 ){\n                perror(UTMP_FILE);\n                exit(1);\n        }\n        while ( ( utbufp = utmp_next() ) != ((struct utmp *) NULL) )\n                show_info( utbufp );\n",
+			"settings":
+			{
+				"buffer_size": 2572,
+				"line_ending": "Windows",
+				"name": "#include <sys/types.h>"
+			}
+		},
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/start.js",
+			"settings":
+			{
+				"buffer_size": 697,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/Infrastructure/PacketTypes.js",
+			"settings":
+			{
+				"buffer_size": 578,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/Game/StateManagement/HeroSelectState.js",
+			"settings":
+			{
+				"buffer_size": 700,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/Infrastructure/StateManagement/States/MainMenuState.js",
+			"settings":
+			{
+				"buffer_size": 3044,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 60.0,
+		"selected_items":
+		[
+			[
+				"Package Control: Install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: T",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control Install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 386.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/lib/phaser.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/Gruntfile.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Game/EntityFactory.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/States/MainMenuState.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Debug.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/States/BaseMenuState.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Infrastructure/SerializationTypes.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/index.html",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Game/Entities/Character.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Game/Entities/Player.js",
+		"/src/js/Game/EntityFactory.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Infrastructure/Entities/Entity.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Game/StateManagement/GameplayState.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/DevContent/Maps/tilesheet.tsx",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Game/StateManagement/HeroSelectState.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/start.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Infrastructure/Network/GameClient.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/BootstrapState.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/DevContent/Maps/map.tmx",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/States/ErrorMenuState.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Infrastructure/PacketTypes.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/deploy/js/GameDevTemplateJS.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client//tasks/browserify.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/tasks/browserify.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/lib/class.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/GameEntry.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Infrastructure/ComponentCollection.js",
+		"/C/Users/Vaughan Hilts/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/assets/html/States/LoginScreen.html",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/deploy/index.html",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/package.json",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/css/game.css",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/README.MD",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/States/_BootstrapState.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client//src/js/Infrastructure/StateManagement/BootstrapState.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/.gitignore",
+		"/Z/School/CP217/Assignments/A2/Assignment/Debug/test4",
+		"/C/Users/Vaughan Hilts/Downloads/0596517742_JavaScr.epub",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client//src/js/Infrastructure/StateManagement/States/_BootstrapState.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/deploy/css/game.css",
+		"/C/Users/Vaughan Hilts/Downloads/wood.png",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/lib/jquery.js",
+		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/States/BootstrapState.js",
+		"/C/Users/Vaughan Hilts/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 92.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"copy",
+			"index.html",
+			"16",
+			"index.html",
+			"src.index",
+			"copy",
+			"browserify",
+			"build",
+			"conc",
+			"copy",
+			"_super",
+			"new",
+			"](",
+			"=",
+			"19",
+			"MenuState",
+			"MainMenuState",
+			"TestGame",
+			"ctrl+s",
+			"strl+s"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			":",
+			"BaseMenuState",
+			"ORPG"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/js/Game/StateManagement/GameplayState.js",
+					"settings":
+					{
+						"buffer_size": 1112,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								364,
+								364
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"settings":
+					{
+						"buffer_size": 2572,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1249,
+								1249
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#include <sys/types.h>",
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/js/start.js",
+					"settings":
+					{
+						"buffer_size": 697,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								697,
+								697
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/js/Infrastructure/PacketTypes.js",
+					"settings":
+					{
+						"buffer_size": 578,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								261,
+								278
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/js/Game/StateManagement/HeroSelectState.js",
+					"settings":
+					{
+						"buffer_size": 700,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								656,
+								656
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 7,
+					"file": "src/js/Infrastructure/StateManagement/States/MainMenuState.js",
+					"settings":
+					{
+						"buffer_size": 3044,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1509,
+								1515
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 8,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 166.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"packettp",
+				"src/js/Infrastructure/PacketTypes.js"
+			],
+			[
+				"gameplay",
+				"src/js/Game/StateManagement/GameplayState.js"
+			],
+			[
+				"entity",
+				"src/js/Game/EntityFactory.js"
+			],
+			[
+				"mainmenustate",
+				"src/js/Infrastructure/StateManagement/States/MainMenuState.js"
+			],
+			[
+				"heroselec",
+				"src/js/Game/StateManagement/HeroSelectState.js"
+			],
+			[
+				"mainmen",
+				"src/js/Infrastructure/StateManagement/States/MainMenuState.js"
+			],
+			[
+				"herosel",
+				"src/js/Game/StateManagement/HeroSelectState.js"
+			],
+			[
+				"gamecl",
+				"src/js/Infrastructure/Network/GameClient.js"
+			],
+			[
+				"gameclient",
+				"src/js/Infrastructure/Network/GameClient.js"
+			],
+			[
+				"bootstr",
+				"src/js/Infrastructure/StateManagement/BootstrapState.js"
+			],
+			[
+				"gameentr",
+				"src/js/GameEntry.js"
+			],
+			[
+				"gamclien",
+				"src/js/Infrastructure/Network/GameClient.js"
+			],
+			[
+				"index.html",
+				"src/index.html"
+			],
+			[
+				"mainmenus",
+				"src/js/Infrastructure/StateManagement/States/MainMenuState.js"
+			],
+			[
+				"bootstrap",
+				"src/js/Infrastructure/StateManagement/BootstrapState.js"
+			],
+			[
+				"mainm",
+				"src/js/Infrastructure/StateManagement/States/MainMenuState.js"
+			],
+			[
+				"mainmenu",
+				"src/js/Infrastructure/StateManagement/States/MainMenuState.js"
+			],
+			[
+				"index",
+				"src/index.html"
+			],
+			[
+				"index.",
+				"src/index.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 270.0,
+	"status_bar_visible": false
+}
