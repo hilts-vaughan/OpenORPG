@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Game\Combat\Payloads\AttackPayloadTest.cs" />
     <Compile Include="Game\Zones\ZoneManagerTests.cs" />
+    <Compile Include="Infrastructure\Cryptography\HashTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
