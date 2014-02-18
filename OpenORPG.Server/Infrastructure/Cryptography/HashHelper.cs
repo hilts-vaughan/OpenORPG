@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace Server.Infrastructure.Cryptography
 {
+    /// <summary>
+    /// A static helper that can compute hashes while blocking, this takes up computational time and is used
+    /// on the server to generate timesinks while checking passwords.
+    /// 
+    /// The hash to use is probably SHA512 for most needs as it's the most secure. MD5 can be used for things that need to be quicker.
+    /// </summary>
     public class HashHelper
     {
 
@@ -21,7 +27,7 @@ namespace Server.Infrastructure.Cryptography
         /// </summary>
         /// <param name="message">The message to get</param>
         /// <returns></returns>
-        public static string GetSHA512(string message)
+        public static string GetSha512(string message)
         {
             return ComputeHash(message, HashType.SHA512);
         }
@@ -31,7 +37,7 @@ namespace Server.Infrastructure.Cryptography
         /// </summary>
         /// <param name="message">The message to get</param>
         /// <returns></returns>
-        public static string GetMD5(string message)
+        public static string GetMd5(string message)
         {
             return ComputeHash(message, HashType.MD5);
         }

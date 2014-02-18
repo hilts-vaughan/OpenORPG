@@ -23,7 +23,7 @@ namespace Server.Game.Network.Packets
 
     public struct ServerMobCreatePacket : IPacket
     {
-        public List<AttributeKeyValue> Attributes;
+ 
         public ulong Id;
 
         public string Name;

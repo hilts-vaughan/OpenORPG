@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using Server.Game.Entities;
 using Server.Game.Network.Packets;
+using Server.Game.Network.Packets.Server;
 using Server.Infrastructure.Logging;
+using Server.Infrastructure.Network.Packets;
 using Server.Infrastructure.World;
 using Server.Infrastructure.World.Systems;
 using Server.Utils;
@@ -175,8 +177,36 @@ namespace Server.Game.Zones
 
             _toRemove.Clear();
             _toAdd.Clear();
-            // Update anything else that would need updating
+
+            // Check for syncing of packets
+            foreach (var entity in Entities)
+            {
+                var properties = entity.GetSyncProperties();
+
+                if (properties != null)
+                {
+                    var packet = new ServerEntityPropertyChange(properties);
+                    SendToZone(packet);
+                }
+
+            }
         }
+
+        /// <summary>
+        /// Sends a packet to the entire zone.
+        /// </summary>
+        /// <param name="packet">The packet to send to the zone</param>
+        public void SendToZone(IPacket packet)
+        {
+            foreach (var client in GameClients)
+            {
+                client.Send(packet);
+            }
+        }
+
+
+
+
 
         /// <summary>
         ///     The name of the actual zone
@@ -223,6 +253,6 @@ namespace Server.Game.Zones
 
         }
 
-   
+
     }
 }

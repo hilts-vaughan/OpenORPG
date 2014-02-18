@@ -20,13 +20,13 @@ namespace OpenORPG.Server.Tests.Infrastructure.Cryptography
         [Fact]
         public void Md5ShouldReturnLowercaseMd5()
         {
-            var testCase = HashHelper.GetMD5("thisissomething");
+            var testCase = HashHelper.GetMd5("thisissomething");
             const string expectedTestCase = "b95b8b34ac2872a1192f803aa9dd92a8";
 
-            var testCase2 = HashHelper.GetMD5("thisisareallylongstring!@#44withalotofelements");
+            var testCase2 = HashHelper.GetMd5("thisisareallylongstring!@#44withalotofelements");
             const string expectedTestCase2 = "e1060c0600512023069ec54f8de79708";
 
-            var testCase3 = HashHelper.GetMD5("");
+            var testCase3 = HashHelper.GetMd5("");
             const string expectedTestCase3 = "d41d8cd98f00b204e9800998ecf8427e";
 
             Assert.Equal(expectedTestCase, testCase);
@@ -40,9 +40,9 @@ namespace OpenORPG.Server.Tests.Infrastructure.Cryptography
         [Fact]
         public void Sha512ShouldReturnLowercaseMd5()
         {
-            var testCase = HashHelper.GetSHA512("thisissomething");
-            var testCase2 = HashHelper.GetSHA512("thisisareallylongstring!@#44withalotofelements");
-            var testCase3 = HashHelper.GetSHA512("");
+            var testCase = HashHelper.GetSha512("thisissomething");
+            var testCase2 = HashHelper.GetSha512("thisisareallylongstring!@#44withalotofelements");
+            var testCase3 = HashHelper.GetSha512("");
 
             var expected =
                 "1A2860F4E7F6F74827185CFBF3B798D69119C4F19FFB63925DCAB92A0E38FA0C2F9FE8944B784625DFE3D718A2DFC6F057226F92F735F89D9B6EE91837AAD456"

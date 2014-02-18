@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <FodyPath>..\packages\Fody.1.20.0.0</FodyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -112,11 +113,11 @@
     <Compile Include="Game\Network\Packets\ClientHeroCreatePacket.cs" />
     <Compile Include="Game\Network\Packets\ClientMovementRequestPacket.cs" />
     <Compile Include="Game\Network\Packets\ClientUsePowerPacket.cs" />
+    <Compile Include="Game\Network\Packets\Server\ServerEntityPropertyChange.cs" />
     <Compile Include="Game\Network\Packets\ServreMobUsePowerPacket.cs" />
     <Compile Include="Game\Network\Packets\ServerFloatingMessagePacket.cs" />
     <Compile Include="Game\Network\Packets\Direction.cs" />
     <Compile Include="Game\Network\Packets\PowerId.cs" />
-    <Compile Include="Game\Network\Packets\ServerAttributesChangedPacket.cs" />
     <Compile Include="Game\Network\Packets\ServerChatMessagePacket.cs" />
     <Compile Include="Game\Network\Packets\ServerJoinChannelPacket.cs" />
     <Compile Include="Game\Network\Packets\ServerMobCreatePacket.cs" />
@@ -157,6 +158,10 @@
     <Compile Include="Game\Zones\Zone.cs" />
     <Compile Include="Game\Zones\ZoneManager.cs" />
     <Compile Include="Game\Utility\UserUtility.cs" />
+    <Compile Include="Infrastructure\Synchronization\ISyncSerializer.cs" />
+    <Compile Include="Infrastructure\Synchronization\SyncAttribute.cs" />
+    <Compile Include="Infrastructure\Synchronization\Groups\SyncGroup.cs" />
+    <Compile Include="Infrastructure\Synchronization\SyncPropertyCollection.cs" />
     <Compile Include="Infrastructure\World\GameWorld.cs" />
     <Compile Include="Infrastructure\World\Entity.cs" />
     <Compile Include="Infrastructure\World\Systems\GameSystem.cs" />
@@ -177,6 +182,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <Content Include="FodyWeavers.xml" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
