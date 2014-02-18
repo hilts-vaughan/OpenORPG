@@ -24,7 +24,7 @@ namespace Server.Infrastructure.Content
                 {
                     foreach (string extension in attribute.Extensions)
                     {
-                        _assetLoaders.Add(extension, (IAssetLoader) Activator.CreateInstance(type));
+                        _assetLoaders.Add(extension, (IAssetLoader)Activator.CreateInstance(type));
                     }
                 });
         }
@@ -53,17 +53,20 @@ namespace Server.Infrastructure.Content
 
             string fileExtension = Path.GetExtension(assetName);
 
-            IAssetLoader assetLoader = _assetLoaders[fileExtension];
+            IAssetLoader assetLoader;
+            _assetLoaders.TryGetValue(fileExtension, out assetLoader);
+
+
 
             if (assetLoader == null)
-                throw new Exception(
+                throw new NotSupportedException(
                     "The given extension type at the file path was not supported by the content manager. Consider implementing an AssetLoader for it.");
 
             Stream stream = File.OpenRead(Path.Combine(Root, assetName));
 
-            var input = new AssetReader(stream, typeof (T));
+            var input = new AssetReader(stream, typeof(T));
 
-            return (T) _assetLoaders[fileExtension].LoadAsset(input, typeof (T));
+            return (T)_assetLoaders[fileExtension].LoadAsset(input, typeof(T));
         }
     }
 }
