@@ -182,6 +182,11 @@ namespace Server.Game.Zones
             _toRemove.Clear();
             _toAdd.Clear();
 
+            SyncEntityProperties();
+        }
+
+        private void SyncEntityProperties()
+        {
             // Check for syncing of packets
             foreach (var entity in Entities)
             {
@@ -192,7 +197,6 @@ namespace Server.Game.Zones
                     var packet = new ServerEntityPropertyChange(properties);
                     SendToEveryone(packet);
                 }
-
             }
         }
 
@@ -222,7 +226,7 @@ namespace Server.Game.Zones
             }
         }
 
-
+    
         /// <summary>
         ///     The name of the actual zone
         /// </summary>
@@ -244,8 +248,12 @@ namespace Server.Game.Zones
         public GameClientCollection GameClients { get; private set; }
 
 
+        /// <summary>
+        /// A reference to the chat channel this zone maintains, used for communication purposes
+        /// </summary>
         public ChatChannel ChatChannel { get; set; }
 
+        
         public void OnClientLeave(GameClient client)
         {
             GameClients.Remove(client);

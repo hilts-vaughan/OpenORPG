@@ -17,7 +17,7 @@ namespace Server.Game.Network.Packets
         /// <summary>
         /// This is the current direction the client claims to be willing to head towards
         /// </summary>
-        public Vector2 Direction { get; set; }
+        public Direction Direction { get; set; }
 
         public OpCodes OpCode
         {

@@ -119,6 +119,7 @@
     <Compile Include="Game\Network\Packets\ClientHeroCreatePacket.cs" />
     <Compile Include="Game\Network\Packets\ClientMovementRequestPacket.cs" />
     <Compile Include="Game\Network\Packets\ClientUsePowerPacket.cs" />
+    <Compile Include="Game\Network\Packets\Server\ServerEntityMovementPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEntityPropertyChange.cs" />
     <Compile Include="Game\Network\Packets\ServreMobUsePowerPacket.cs" />
     <Compile Include="Game\Network\Packets\ServerFloatingMessagePacket.cs" />

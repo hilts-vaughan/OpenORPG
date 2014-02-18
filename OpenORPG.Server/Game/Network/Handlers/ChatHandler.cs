@@ -7,13 +7,20 @@ namespace Server.Game.Network.Handlers
 {
     public class ChatHandler
     {
-        public const string MessageFormat =
-            "<span style='color: gray'>[{0}]&nbsp;<span style='color: cornflowerblue'>{1}</span>:</span>&nbsp;{2}";
-
+        /// <summary>
+        /// Handles incoming chat messages as they come in and processes them accordingly
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="packet"></param>
         [PacketHandler(OpCodes.CMSG_CHAT_MESSAGE)]
         public static void OnChatMessage(GameClient client, ClientChatMessagePacket packet)
         {
-            //TODO: Implement me. :)
+            var channelId = packet.ChannelId;
+            var channel = ChatManager.Current.GetChannel(channelId);
+            var newPacket = new ServerChatMessagePacket(packet.Message, channelId);
+            channel.SendMessage(newPacket);
         }
+
+
     }
 }

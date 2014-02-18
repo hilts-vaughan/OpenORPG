@@ -6,13 +6,27 @@ namespace Server.Game
 {
     public class ChatChannel
     {
-        public List<GameClient> Clients = new List<GameClient>();
+        public List<GameClient> Clients { get; set; }
+
         public int Id;
         public ChannelType Type;
 
-        //public void Broadcast(Packet packet)
-        //{
-        //}
+        public ChatChannel()
+        {
+            Clients = new List<GameClient>();
+        }
+
+        /// <summary>
+        /// Broadcasts a message to all users in this chat channel.
+        /// </summary>
+        /// <param name="messagePacket">The message packet to send to this chat channel</param>
+        public void SendMessage(ServerChatMessagePacket messagePacket)
+        {
+            foreach (var client in Clients)
+            {
+                client.Send(messagePacket);
+            }
+        }
 
         public void Join(GameClient client)
         {
