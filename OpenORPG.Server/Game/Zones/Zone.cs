@@ -20,6 +20,9 @@ namespace Server.Game.Zones
         private readonly List<GameClient> _internalList;
         private readonly Zone _zone;
 
+        private const int ViewWidth = 1920;
+        private const int ViewHeight = 1080;
+
         public GameClientCollection(Zone zone)
         {
             _zone = zone;
@@ -187,7 +190,7 @@ namespace Server.Game.Zones
                 if (properties != null)
                 {
                     var packet = new ServerEntityPropertyChange(properties);
-                    SendToZone(packet);
+                    SendToEveryone(packet);
                 }
 
             }
@@ -197,7 +200,7 @@ namespace Server.Game.Zones
         /// Sends a packet to the entire zone.
         /// </summary>
         /// <param name="packet">The packet to send to the zone</param>
-        public void SendToZone(IPacket packet)
+        public void SendToEveryone(IPacket packet)
         {
             foreach (var client in GameClients)
             {
@@ -205,8 +208,19 @@ namespace Server.Game.Zones
             }
         }
 
-
-
+        /// <summary>
+        /// Sends a packet to all clients in range of the source. 
+        /// This is useful for information that only needs to be broadcast to some.
+        /// </summary>
+        /// <param name="packet">The packet to send to the clients</param>
+        /// <param name="source">The source entity we check all other clients against</param>
+        public void SendToEntitiesInRange(IPacket packet, Entity source)
+        {
+            foreach (var client in GameClients.Where(client => client.HeroEntity.IsInView(source)))
+            {
+                client.Send(packet);
+            }
+        }
 
 
         /// <summary>

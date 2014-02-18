@@ -5,7 +5,7 @@ namespace Server.Infrastructure.Content
     /// <summary>
     ///     Contains storage for various pieces of content.
     ///     This is a basic implementation of a cache, it will retain everything in memory until the program is terminated.
-    ///     Most assets are classes and refernce types, so it
+    ///     Most assets are classes and reference types, so it's required to return a clone.
     /// </summary>
     public class AssetCache
     {

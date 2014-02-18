@@ -63,12 +63,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Content\AssetLoaderTests.cs" />
-    <Compile Include="Content\ContentLoadingTests.cs" />
+    <Compile Include="Infrastructure\Content\AssetCacheTests.cs" />
+    <Compile Include="Infrastructure\Content\AssetLoaderTests.cs" />
+    <Compile Include="Infrastructure\Content\ContentLoadingTests.cs" />
     <Compile Include="Game\Combat\Payloads\AttackPayloadTest.cs" />
     <Compile Include="Game\Zones\ZoneManagerTests.cs" />
     <Compile Include="Infrastructure\Cryptography\HashTests.cs" />
     <Compile Include="Infrastructure\Synchronization\SyncMonitorTests.cs" />
+    <Compile Include="Infrastructure\World\DummyEntity.cs" />
+    <Compile Include="Infrastructure\World\EntityTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

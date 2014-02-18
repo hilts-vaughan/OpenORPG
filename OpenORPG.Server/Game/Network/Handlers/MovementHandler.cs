@@ -15,12 +15,15 @@ namespace Server.Game.Network.Handlers
     /// </summary>
    public class MovementHandler
     {
+
+
        [PacketHandler(OpCodes.CMSG_MOVEMENT_REQUEST)]
        public static void OnChatMessage(GameClient client, ClientMovementRequestPacket  packet)
        {
-           client.HeroEntity.Position = packet.CurrentPosition;
+           var player = client.HeroEntity;
+           var zone = client.HeroEntity.Zone;
 
-           var zone = UserUtility.GetZoneForPlayer(client.HeroEntity);
+       
 
        }
         

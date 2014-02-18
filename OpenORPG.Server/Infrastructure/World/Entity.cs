@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Reflection;
 using Newtonsoft.Json;
 using Server.Game.Zones;
+using Server.Infrastructure.Math;
 using Server.Infrastructure.Synchronization;
 using Server.Utils.Math;
 
@@ -37,6 +38,23 @@ namespace Server.Infrastructure.World
         }
 
 
+        /// <summary>
+        /// Checks whether this entity can see another in the defined global view
+        /// This is useful for checking whether a client has the potential to see a entity or not
+        /// </summary>
+        /// <param name="entity">The entity to check for in view</param>
+        /// <returns>Returns true if the entity is in view, otherwise false.</returns>
+        public bool IsInView(Entity entity)
+        {
+            const int viewWidth = 1920;
+            const int viewHeight = 1080;
+
+            var sourceRectangle = new Rectangle(Position.X, Position.Y, viewWidth, viewHeight);
+            var destinationRectangle = new Rectangle(entity.Position.X, entity.Position.Y, 1, 1);
+
+            return sourceRectangle.Intersects(destinationRectangle);
+        }
+
         public Vector2 Position
         {
             get { return _position; }
@@ -47,7 +65,10 @@ namespace Server.Infrastructure.World
         /// Internally moves the entity to the location, notifying other clients as well.
         /// </summary>
         /// <param name="location">The new location to move the entity into</param>
-        protected abstract void MoveEntity(Vector2 location);
+        protected virtual void MoveEntity(Vector2 location)
+        {
+            _position = location;
+        }
 
         public Dictionary<string, dynamic> GetSyncProperties()
         {

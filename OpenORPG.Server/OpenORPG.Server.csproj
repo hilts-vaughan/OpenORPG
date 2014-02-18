@@ -70,6 +70,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\packages\ServiceStack.Text.4.0.11\lib\net40\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -144,6 +147,8 @@
     <Compile Include="Infrastructure\Logging\Logger.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\ConsoleLogger.cs" />
     <Compile Include="Infrastructure\Logging\LogLevel.cs" />
+    <Compile Include="Infrastructure\Math\Point.cs" />
+    <Compile Include="Infrastructure\Math\Rectangle.cs" />
     <Compile Include="Infrastructure\Network\Handlers\PacketHandler.cs" />
     <Compile Include="Infrastructure\Network\Handlers\PacketHandlerAttribute.cs" />
     <Compile Include="Infrastructure\Network\Packets\IPacketSerializer.cs" />
