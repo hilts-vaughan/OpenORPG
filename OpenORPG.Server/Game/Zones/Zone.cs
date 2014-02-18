@@ -147,6 +147,7 @@ namespace Server.Game.Zones
             // Notify the player about this change
             var packet = new ServerZoneChangedPacket(Id, player.Id, Entities);
             player.Client.Send(packet);
+            player.Name = "Zorro";
         }
 
         public void RemoveEntity(Entity entity)

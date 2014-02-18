@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using Newtonsoft.Json;
-using PropertyChanged;
 using Server.Game.Zones;
 using Server.Infrastructure.Synchronization;
 using Server.Utils.Math;
@@ -17,11 +16,13 @@ namespace Server.Infrastructure.World
     {
 
 
-        protected SyncPropertyCollection PropertyCollection;
+        protected SyncMonitor PropertyCollection;
 
         private static ulong _idCounter = 0;
         protected Vector2 _position = new Vector2();
         private string _name;
+        private ulong _id;
+        private string _sprite;
 
 
         /// <summary>
@@ -30,9 +31,9 @@ namespace Server.Infrastructure.World
         /// </summary>
         protected Entity()
         {
+            PropertyCollection = new SyncMonitor();
+            
             Id = _idCounter++;
-
-            PropertyCollection = new SyncPropertyCollection();
         }
 
 
@@ -58,9 +59,17 @@ namespace Server.Infrastructure.World
         /// <summary>
         /// The unique ID that identifies this entity
         /// </summary>
-        public ulong Id { get; set; }
+        public ulong Id
+        {
+            get { return _id; }
+            set { _id = value; PropertyCollection.WriteValue("Id", value); }
+        }
 
-        public string Sprite { get; set; }
+        public string Sprite
+        {
+            get { return _sprite; }
+            set { _sprite = value; PropertyCollection.WriteValue("Sprite", value); }
+        }
 
         /// <summary>
         /// A reference to the <see cref="World"/> this entity lives within.

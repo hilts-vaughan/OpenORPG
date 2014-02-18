@@ -64,6 +64,9 @@
     <Reference Include="Fleck">
       <HintPath>Lib\Fleck.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Lib\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -161,7 +164,7 @@
     <Compile Include="Infrastructure\Synchronization\ISyncSerializer.cs" />
     <Compile Include="Infrastructure\Synchronization\SyncAttribute.cs" />
     <Compile Include="Infrastructure\Synchronization\Groups\SyncGroup.cs" />
-    <Compile Include="Infrastructure\Synchronization\SyncPropertyCollection.cs" />
+    <Compile Include="Infrastructure\Synchronization\SyncMonitor.cs" />
     <Compile Include="Infrastructure\World\GameWorld.cs" />
     <Compile Include="Infrastructure\World\Entity.cs" />
     <Compile Include="Infrastructure\World\Systems\GameSystem.cs" />

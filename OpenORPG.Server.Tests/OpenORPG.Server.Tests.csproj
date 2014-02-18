@@ -66,6 +66,7 @@
     <Compile Include="Game\Combat\Payloads\AttackPayloadTest.cs" />
     <Compile Include="Game\Zones\ZoneManagerTests.cs" />
     <Compile Include="Infrastructure\Cryptography\HashTests.cs" />
+    <Compile Include="Infrastructure\Synchronization\SyncMonitorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +78,7 @@
       <Name>OpenORPG.Server</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
