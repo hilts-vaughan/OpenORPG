@@ -30,14 +30,14 @@ namespace Server.Infrastructure.Network
 
         public void Initialize()
         {
-            _server = new WebSocketServer(_port, "ws://localhost:" + _port + "/");
+            _server = new WebSocketServer(_port, "ws://localhost:" + _port + "/");          
             _server.Start(OnConfig);
         }
 
         private void OnConfig(IWebSocketConnection socket)
         {
             var connection = new Connection(socket, _packetSerializer);
-
+    
             socket.OnOpen += () => Connected(connection);
             socket.OnClose += () => Disconnected(connection);
             //socket.OnBinary += (data) => DataRecieved(client, data);

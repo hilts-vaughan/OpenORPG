@@ -7,6 +7,7 @@
         SMSG_HERO_LIST = 2,
         CMSG_HERO_SELECT = 3,
         CMSG_HERO_CREATE = 4,
+        CMMSG_ZONE_CHANGE = 5,
 
         SMSG_GAME_OBJECT_UPDATE = 5,
         SMSG_HERO_SELECT_RESPONSE = 6,

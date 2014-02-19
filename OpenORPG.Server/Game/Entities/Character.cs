@@ -11,7 +11,11 @@ namespace Server.Game.Entities
 {
     public class Character : Entity
     {
-        
+        public Character()
+        {
+            //TODO: Be a bit more creative than this
+            Sprite = "male_base";
+        }
 
         /// <summary>
         /// The amount of hitpoints a character has
