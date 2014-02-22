@@ -33,8 +33,8 @@ namespace Server.Game.Network.Handlers
             // Should also probably compare to the old position and make sure it seems reasonable
             player.Position = requestedPosition;
 
-            var newPacket = new ServerEntityMovementPacket(requestedPosition, direction);
-            zone.SendToEntitiesInRange(newPacket, player);
+            var newPacket = new ServerEntityMovementPacket(requestedPosition, direction, player.Id);
+            zone.SendToEntitiesInRangeExcludingSource(newPacket, player);
         }
 
         [PacketHandler(OpCodes.CMMSG_ZONE_CHANGE)]

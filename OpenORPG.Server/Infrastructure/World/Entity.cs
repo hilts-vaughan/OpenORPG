@@ -33,7 +33,7 @@ namespace Server.Infrastructure.World
         protected Entity()
         {
             PropertyCollection = new SyncMonitor();
-            
+
             Id = _idCounter++;
         }
 
@@ -49,12 +49,23 @@ namespace Server.Infrastructure.World
             const int viewWidth = 1920;
             const int viewHeight = 1080;
 
-            var sourceRectangle = new Rectangle(Position.X, Position.Y, viewWidth, viewHeight);
+            var sourceRectangle = new Rectangle(Position.X - (viewWidth / 2), Position.Y - (viewHeight / 2), viewWidth * 2, viewHeight * 2);
             var destinationRectangle = new Rectangle(entity.Position.X, entity.Position.Y, 1, 1);
 
             return sourceRectangle.Intersects(destinationRectangle);
         }
 
+        public int X
+        {
+            get { return (int)_position.X; }
+        }
+
+        public int Y
+        {
+            get { return (int)_position.Y; }
+        }
+
+        [JsonIgnore]
         public Vector2 Position
         {
             get { return _position; }

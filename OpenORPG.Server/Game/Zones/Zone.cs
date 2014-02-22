@@ -150,7 +150,6 @@ namespace Server.Game.Zones
             // Notify the player about this change
             var packet = new ServerZoneChangedPacket(Id, player.Id, Entities);
             player.Client.Send(packet);
-            player.Name = "Zorro";
         }
 
         public void RemoveEntity(Entity entity)
@@ -194,7 +193,7 @@ namespace Server.Game.Zones
 
                 if (properties != null)
                 {
-                    var packet = new ServerEntityPropertyChange(properties);
+                    var packet = new ServerEntityPropertyChange(properties, entity.Id);
                     SendToEveryone(packet);
                 }
             }
@@ -226,6 +225,16 @@ namespace Server.Game.Zones
             }
         }
 
+
+
+        public void SendToEntitiesInRangeExcludingSource(IPacket packet, Entity source)
+        {
+            foreach (var client in GameClients.Where(client =>  client.HeroEntity.IsInView(source) && (client.HeroEntity.Id != source.Id) ))
+            {
+                client.Send(packet);
+            }
+
+        }
     
         /// <summary>
         ///     The name of the actual zone
@@ -277,5 +286,6 @@ namespace Server.Game.Zones
         }
 
 
+      
     }
 }

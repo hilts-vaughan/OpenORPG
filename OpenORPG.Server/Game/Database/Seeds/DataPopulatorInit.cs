@@ -12,43 +12,18 @@ namespace Server.Game.Database.Seeds
         protected override void Seed(GameDatabaseContext context)
         {
             // Add a new user
+            for(int i = 0; i < 50; i++)
             {
-                var account = new UserAccount("Vaughan", "Vaughan", "someone@someone.com");
+                var account = new UserAccount("Vaughan" + i, "Vaughan", "someone@someone.com");
 
                 var character = new UserHero();
-                character.Name = "Vaughan";
+                character.Name = "Vaughan" + i;
                 character.Account = account;
                 character.ZoneId = 1;
                 character.PositionX = 77 * 32;
-                character.PositionY = 207 * 32;
+                character.PositionY = (207 + i) * 32;
 
                 context.Characters.Add(character);
-
-                context.Accounts.Add(account);
-            }
-
-            {
-                var account = new UserAccount("test", "test", "someone@someone.com");
-
-                {
-                    var character = new UserHero();
-                    character.Account = account;
-
-                    character.Name = "Test";
-                    character.ZoneId = 0;
-                    character.PositionX = 64;
-                    character.PositionY = 64;
-                    character.Strength = 10;
-                    character.Dexterity = 10;
-                    character.Intelligence = 10;
-                    character.Vitality = 10;
-                    character.Gold = 100;
-                    character.Hitpoints = 9; //TODO: what to set here?
-                    character.Experience = 0;
-                    character.Level = 1;
-
-                    context.Characters.Add(character);
-                }
 
                 context.Accounts.Add(account);
             }

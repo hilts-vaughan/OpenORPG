@@ -14,9 +14,12 @@ namespace Server.Game.Network.Packets.Server
         /// </summary>
         public Dictionary<string, dynamic> Properties { get; set; }
 
-        public ServerEntityPropertyChange(Dictionary<string, dynamic> properties)
+        public ulong EntityId { get; set; }
+
+        public ServerEntityPropertyChange(Dictionary<string, dynamic> properties, ulong entityId)
         {
             Properties = properties;
+            EntityId = entityId;
         }
 
         public OpCodes OpCode

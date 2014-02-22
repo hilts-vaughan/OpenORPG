@@ -8,7 +8,7 @@ using Server.Utils.Math;
 
 namespace Server.Game.Network.Packets.Server
 {
-    public class ServerEntityMovementPacket : IPacket
+    public struct ServerEntityMovementPacket : IPacket
     {
         public OpCodes OpCode
         {
@@ -17,11 +17,13 @@ namespace Server.Game.Network.Packets.Server
 
         public Vector2 Position { get; set; }
         public Direction Direction { get; set; }
+        public ulong Id { get; set; }
 
-        public ServerEntityMovementPacket(Vector2 position, Direction direction)
+        public ServerEntityMovementPacket(Vector2 position, Direction direction, ulong id) : this()
         {
             Position = position;
             Direction = direction;
+            Id = id;
         }
 
     }

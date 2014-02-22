@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Network.Packets;
@@ -25,7 +26,7 @@ namespace Server.Game.Network.Handlers
                 return;
 
             // Get the hero the user wanted
-            UserHero hero = client.Account.Heroes.FirstOrDefault(x => x.Id == packet.HeroId);
+            UserHero hero = client.Account.Heroes.FirstOrDefault();
 
 
             if (hero == null)
@@ -48,6 +49,8 @@ namespace Server.Game.Network.Handlers
                     // Create a response and alert the client that their selection is okay
                     var response = new ServerHeroSelectResponsePacket(HeroStatus.OK);
                     client.Send(response);
+
+                    Thread.Sleep(500);
 
                     Logger.Instance.Info("{0} has entered the game.", hero.Name);
                     zone.OnClientEnter(client, heroObject);
