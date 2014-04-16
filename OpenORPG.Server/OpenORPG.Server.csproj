@@ -89,6 +89,7 @@
     <Compile Include="Game\Combat\Actions\ICombatAction.cs" />
     <Compile Include="Game\Combat\Payloads\IPayload.cs" />
     <Compile Include="Game\Entities\Character.cs" />
+    <Compile Include="Game\Entities\NPC.cs" />
     <Compile Include="Game\Entities\Player.cs" />
     <Compile Include="Game\Movement\MovementSystem.cs" />
     <Compile Include="Game\Network\Handlers\MovementHandler.cs" />
@@ -139,6 +140,9 @@
     <Compile Include="Game\Storage\Item.cs" />
     <Compile Include="Game\Storage\ItemStorage.cs" />
     <Compile Include="Game\World\Systems\DebugMonitorSystem.cs" />
+    <Compile Include="Game\Zones\Spawns\MonsterSpawnSet.cs" />
+    <Compile Include="Game\Zones\Spawns\SpawnManager.cs" />
+    <Compile Include="Game\Zones\Spawns\SpawnSet.cs" />
     <Compile Include="Game\Zones\ZoneCollection.cs" />
     <Compile Include="Infrastructure\Configuration\ServerSettings.cs" />
     <Compile Include="Infrastructure\Content\AssetCache.cs" />
@@ -192,7 +196,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <Content Include="FodyWeavers.xml" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>

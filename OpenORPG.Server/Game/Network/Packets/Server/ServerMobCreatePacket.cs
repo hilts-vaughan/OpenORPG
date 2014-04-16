@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using Server.Infrastructure.Network.Packets;
+﻿using Server.Infrastructure.Network.Packets;
+using Server.Infrastructure.World;
 using Server.Utils.Math;
 
-namespace Server.Game.Network.Packets
+namespace Server.Game.Network.Packets.Server
 {
+
     public struct ServerMobMovementPacket : IPacket
     {
         public Vector2 Goal;
@@ -21,16 +22,18 @@ namespace Server.Game.Network.Packets
         }
     }
 
+    /// <summary>
+    /// A packet to send to instruct a client that a mob is being created and they should be aware of it's existance.
+    /// </summary>
     public struct ServerMobCreatePacket : IPacket
     {
  
-        public ulong Id;
+        public Entity Mobile { get; set; }
 
-        public string Name;
-        public Vector2 Position;
-        public string Sprite;
-        //public Attributes;
-
+        public ServerMobCreatePacket(Entity mobile) : this()
+        {
+            Mobile = mobile;
+        }
 
         public OpCodes OpCode
         {

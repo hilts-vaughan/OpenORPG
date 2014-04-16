@@ -29,5 +29,17 @@ namespace Server.Infrastructure.Network.Packets
         {
             _socket.Send(_packetSerializer.Serialize(packet));
         }
+
+        public override string ToString()
+        {
+            string charName = "";
+
+            if (Client != null && Client.HeroEntity != null)
+                charName = "/" + Client.HeroEntity.Name;
+
+            return Address + charName;
+        }
+
+
     }
 }

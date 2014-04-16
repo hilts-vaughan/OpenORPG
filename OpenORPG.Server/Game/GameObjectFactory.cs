@@ -24,5 +24,12 @@ namespace Server.Game
 
             return entity;
         }
+
+        public static Npc CreateMonster(ulong id)
+        {
+            //TODO: Please create me
+            return null;
+        }
+
     }
 }

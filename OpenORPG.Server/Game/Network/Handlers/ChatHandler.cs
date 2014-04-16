@@ -17,6 +17,7 @@ namespace Server.Game.Network.Handlers
         {
             var channelId = packet.ChannelId;
             var channel = ChatManager.Current.GetChannel(channelId);
+        
             var newPacket = new ServerChatMessagePacket(packet.Message, channelId);
             channel.SendMessage(newPacket);
         }

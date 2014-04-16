@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Zones;
 
 namespace Server.Infrastructure.World.Systems
 {
     /// <summary>
-    /// A game system is used to update the state of the world in a dynamic way.
+    /// A game system is used to update the state of a zone in a dynamic way.
     /// </summary>
     public abstract class GameSystem
     {
 
-        private GameWorld _world;
+        protected Zone Zone;
 
-        protected GameSystem(GameWorld world)
+        protected GameSystem(Zone world)
         {
-            _world = world;
+            Zone = world;
         }
 
 

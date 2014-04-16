@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using Server.Game.Zones;
 using Server.Infrastructure.World;
 using Server.Infrastructure.World.Systems;
 
@@ -17,7 +18,7 @@ namespace Server.Game.Movement
     {
 
 
-        public MovementSystem(GameWorld world) : base(world)
+        public MovementSystem(Zone world) : base(world)
         {
         }
 

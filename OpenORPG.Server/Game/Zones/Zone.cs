@@ -6,6 +6,7 @@ using System.Linq;
 using Server.Game.Entities;
 using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Server;
+using Server.Game.Zones.Spawns;
 using Server.Infrastructure.Logging;
 using Server.Infrastructure.Network.Packets;
 using Server.Infrastructure.World;
@@ -72,7 +73,7 @@ namespace Server.Game.Zones
                                            id + PathHelper.MapExtension);
             try
             {
-                _tileMap = new TmxMap(zonePath);
+                TileMap = new TmxMap(zonePath);
             }
             catch (FileNotFoundException exception)
             {
@@ -82,6 +83,13 @@ namespace Server.Game.Zones
                 Logger.Instance.Error("The world in zone #{0} could not be started. The tilemap could not be found.", id);
             }
 
+            AddGameSystems();
+
+        }
+
+        private void AddGameSystems()
+        {
+            GameSystems.Add(new SpawnGameSystem(this));
         }
 
         /// <summary>
@@ -106,7 +114,7 @@ namespace Server.Game.Zones
         /// <summary>
         /// This is the internal representation of the world.
         /// </summary>
-        private TmxMap _tileMap;
+        public TmxMap TileMap { get; set; }
 
 
 
@@ -165,23 +173,37 @@ namespace Server.Game.Zones
             // Remove and add elements that need to be
 
             foreach (var entity in _toRemove)
+            {
                 Entities.Remove(entity);
+                ProcessRemovedEntity(entity);
+            }
 
             foreach (var entity in _toAdd)
             {
                 Entities.Add(entity);
-            }
 
-            foreach (var entity in _toAdd)
-            {
                 if (entity is Player)
                     ProcessNewPlayer(entity as Player);
+                ProcessAddedEntity(entity);
             }
+
 
             _toRemove.Clear();
             _toAdd.Clear();
 
             SyncEntityProperties();
+        }
+
+        private void ProcessAddedEntity(Entity entity)
+        {
+            var packet = new ServerMobCreatePacket(entity);
+            SendToEveryone(packet);
+        }
+
+        private void ProcessRemovedEntity(Entity entity)
+        {
+            var packet = new ServerMobDestroyPacket(entity.Id);
+            SendToEveryone(packet);
         }
 
         private void SyncEntityProperties()
@@ -227,15 +249,20 @@ namespace Server.Game.Zones
 
 
 
+        /// <summary>
+        /// Sends a packet to all clients in range of the source, excluding the source.
+        /// </summary>
+        /// <param name="packet">The packet to be sent to the clients.</param>
+        /// <param name="source">The source entity that is checked against for ranges.</param>
         public void SendToEntitiesInRangeExcludingSource(IPacket packet, Entity source)
         {
-            foreach (var client in GameClients.Where(client =>  client.HeroEntity.IsInView(source) && (client.HeroEntity.Id != source.Id) ))
+            foreach (var client in GameClients.Where(client => client.HeroEntity.IsInView(source) && (client.HeroEntity.Id != source.Id)))
             {
                 client.Send(packet);
             }
 
         }
-    
+
         /// <summary>
         ///     The name of the actual zone
         /// </summary>
@@ -262,7 +289,7 @@ namespace Server.Game.Zones
         /// </summary>
         public ChatChannel ChatChannel { get; set; }
 
-        
+
         public void OnClientLeave(GameClient client)
         {
             GameClients.Remove(client);
@@ -286,6 +313,6 @@ namespace Server.Game.Zones
         }
 
 
-      
+
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Zones;
 using Server.Infrastructure.World;
 using Server.Infrastructure.World.Systems;
 
@@ -14,7 +15,7 @@ namespace Server.Game.World.Systems
     public class DebugMonitorSystem : GameSystem 
     {
 
-        public DebugMonitorSystem(GameWorld world) : base(world)
+        public DebugMonitorSystem(Zone world) : base(world)
         {
             // 
         }
