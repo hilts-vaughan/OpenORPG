@@ -19,9 +19,9 @@ namespace Server.Game.Zones.Spawns
         /// </summary>
         public bool CanStray { get; set; }
 
-        public ulong MobId { get; set; }
+        public long MobId { get; set; }
 
-        public MonsterSpawnSet(int maximumAmount, bool repeat, float spawnTime, bool canStray, ulong mobId) : base(maximumAmount, repeat, spawnTime)
+        public MonsterSpawnSet(int maximumAmount, bool repeat, float spawnTime, bool canStray, long mobId) : base(maximumAmount, repeat, spawnTime)
         {
             CanStray = canStray;
             MobId = mobId;

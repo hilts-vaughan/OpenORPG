@@ -7,7 +7,7 @@ namespace Server.Game.Database.Models.ContentTemplates
     /// </summary>
     public class ItemTemplate : IContentTemplate
     {
-        public ItemTemplate(int id, string name, string description, ItemType type, int price, bool consumed,
+        public ItemTemplate(long id, string name, string description, ItemType type, int price, bool consumed,
                             int useSpeed)
         {
             Id = id;
@@ -32,7 +32,7 @@ namespace Server.Game.Database.Models.ContentTemplates
         /// </summary>
         public int UseSpeed { get; set; }
 
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string VirtualCategory { get; set; }
     }

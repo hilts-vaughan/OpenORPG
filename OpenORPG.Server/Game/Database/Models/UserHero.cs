@@ -1,11 +1,12 @@
 ﻿using System;
+using Server.Game.Database.Models.ContentTemplates;
 
 namespace Server.Game.Database.Models
 {
     /// <summary>
     ///     A UserHero contains information pertaining to a particular hero; a <see cref="UserAccount" /> may contain several of these
     /// </summary>
-    public class UserHero
+    public class UserHero : IStatTemplate
     {
         public UserHero(UserAccount account, int positionX, int positionY, long id, string name)
         {

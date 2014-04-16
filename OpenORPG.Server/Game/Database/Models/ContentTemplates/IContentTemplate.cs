@@ -8,7 +8,7 @@
         /// <summary>
         ///     The unique identifier associated with this piece of content
         /// </summary>
-        int Id { get; set; }
+        long Id { get; set; }
 
         /// <summary>
         ///     The name associated with this piece of content

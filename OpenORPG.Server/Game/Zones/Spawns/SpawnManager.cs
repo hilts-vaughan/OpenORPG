@@ -45,7 +45,7 @@ namespace Server.Game.Zones.Spawns
                 {
                     if (mobSpawn.Type == MobSpawnSetType)
                     {
-                        var mobId = Convert.ToUInt64(mobSpawn.Properties["MobId"]);
+                        var mobId = Convert.ToInt64(mobSpawn.Properties["MobId"]);
                         var mobCanStray = Convert.ToBoolean(mobSpawn.Properties["MobStrays"]);
                         var mobMaxAmount = Convert.ToInt32(mobSpawn.Properties["MobMax"]);
                         var mobSpawnTime = Convert.ToSingle(mobSpawn.Properties["MobSpawnTime"]);

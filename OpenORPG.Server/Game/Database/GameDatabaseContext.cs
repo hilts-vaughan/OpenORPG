@@ -1,6 +1,7 @@
 using System.Data.Entity;
 using Server.Game.Database.Maps;
 using Server.Game.Database.Models;
+using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Database.Seeds;
 
 namespace Server.Game.Database
@@ -28,12 +29,14 @@ namespace Server.Game.Database
 
         public DbSet<UserAccount> Accounts { get; set; }
         public DbSet<UserHero> Characters { get; set; }
+        public DbSet<MonsterTemplate> MonsterTemplates { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new UserAccounConfiguration());
             modelBuilder.Configurations.Add(new UserHeroMap());
+            modelBuilder.Configurations.Add(new MonsterTemplateMap());
         }
     }
 }

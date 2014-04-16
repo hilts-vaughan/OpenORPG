@@ -89,6 +89,8 @@
     <Compile Include="Game\Combat\Actions\ICombatAction.cs" />
     <Compile Include="Game\Combat\CharacterStat.cs" />
     <Compile Include="Game\Combat\Payloads\IPayload.cs" />
+    <Compile Include="Game\Database\Maps\MonsterTemplateMap.cs" />
+    <Compile Include="Game\Database\Models\ContentTemplates\IStatTemplate.cs" />
     <Compile Include="Game\Entities\Character.cs" />
     <Compile Include="Game\Entities\NPC.cs" />
     <Compile Include="Game\Entities\Player.cs" />
