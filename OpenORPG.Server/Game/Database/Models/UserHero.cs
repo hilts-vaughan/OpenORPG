@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Server.Game.Database.Models.ContentTemplates;
 
 namespace Server.Game.Database.Models
@@ -41,6 +42,7 @@ namespace Server.Game.Database.Models
         public int PositionY { get; set; }
         public long ZoneId { get; set; }
 
+        public UserStorage Inventory { get; set; }
 
         public DateTime? CreationDate { get; set; }
 

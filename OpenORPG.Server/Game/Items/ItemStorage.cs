@@ -9,6 +9,8 @@ namespace Server.Game.Storage
 {
     /// <summary>
     /// An item storage is a piece of storage that can carry a particular amount of items.
+    /// 
+    /// This includes things like backpacks and storage banks.
     /// </summary>
     public class ItemStorage : IEnumerable<Item>
     {
