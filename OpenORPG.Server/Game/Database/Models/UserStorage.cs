@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 
 namespace Server.Game.Database.Models
 {
-    public class UserStorage
+    public class UserItem
     {
      
-        public int UserId { get; set; }
+        public int ItemEntryId { get; set; }
 
-        public ICollection<int> ItemIds { get; set; }
-        public ICollection<int> ItemValues { get; set; } 
+        public long ItemId { get; set; }
+        public long ItemValue { get; set; }
 
         /// <summary>
         /// This refers to the user that this storage belongs to
         /// </summary>
         public virtual UserHero User { get; set; }
 
-        public UserStorage()
+        public UserItem(long id, long value)
         {
-            ItemIds = new List<int>();
-            ItemValues = new List<int>();
+            ItemId = id;
+            ItemValue = value;
         }
 
     }

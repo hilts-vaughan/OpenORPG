@@ -32,6 +32,7 @@ namespace Server.Game.Database.Maps
                 .IsRequired();
             Property(t => t.Gold)
                 .IsRequired();
+      
         
 
         

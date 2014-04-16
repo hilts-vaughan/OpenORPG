@@ -17,7 +17,7 @@ namespace Server.Game.Database.Seeds
                 var account = new UserAccount("Vaughan" + i, "Vaughan", "someone@someone.com");
 
                 var character = new UserHero();
-                character.Inventory = new UserStorage();
+               
 
                 character.Name = "Vaughan" + i;
                 character.Account = account;
@@ -25,8 +25,8 @@ namespace Server.Game.Database.Seeds
                 character.PositionX = 77 * 32;
                 character.PositionY = (207 + i) * 32;
 
-                character.Inventory.ItemIds.Add(1);
-                character.Inventory.ItemValues.Add(1);
+                character.Inventory.Add(new UserItem(0, 1));
+                
 
                 context.Characters.Add(character);
 

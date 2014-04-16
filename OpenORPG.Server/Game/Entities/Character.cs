@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Server.Game.Combat;
+using Server.Game.Items.Equipment;
 using Server.Infrastructure.World;
 using Server.Utils.Math;
 
@@ -23,6 +24,10 @@ namespace Server.Game.Entities
             // We initialize the size of our stats here
             var numberOfStats = Enum.GetNames(typeof(StatTypes)).Length;
             CharacterStats = new CharacterStat[numberOfStats];
+
+            // Allocate just enough room for equipment
+            var numberOfEquipmentSlots = Enum.GetNames(typeof (EquipmentSlot)).Length;
+            Equipment = new Equipment[numberOfEquipmentSlots];
         }
 
 
@@ -30,6 +35,7 @@ namespace Server.Game.Entities
         /// An array of stats for this character
         /// </summary>
         public CharacterStat[] CharacterStats { get; set; }
+        public Equipment[] Equipment { get; set; }
 
         public int ZoneId { get; set; }
 

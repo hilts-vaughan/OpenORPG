@@ -108,7 +108,9 @@
     <Compile Include="Game\Entities\Monster.cs" />
     <Compile Include="Game\Entities\Player.cs" />
     <Compile Include="Game\Entities\StatTypes.cs" />
+    <Compile Include="Game\Items\Equipment\Equipment.cs" />
     <Compile Include="Game\Items\Equipment\EquipmentSlot.cs" />
+    <Compile Include="Game\Items\ItemFactory.cs" />
     <Compile Include="Game\Movement\MovementSystem.cs" />
     <Compile Include="Game\Network\Handlers\CombatHandler.cs" />
     <Compile Include="Game\Network\Handlers\MovementHandler.cs" />
