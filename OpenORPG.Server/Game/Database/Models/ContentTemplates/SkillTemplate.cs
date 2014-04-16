@@ -1,4 +1,6 @@
-﻿namespace Server.Game.Database.Models.ContentTemplates
+﻿using Server.Game.Combat;
+
+namespace Server.Game.Database.Models.ContentTemplates
 {
     /// <summary>
     ///     A skill template represents a given skill in the database
@@ -13,10 +15,16 @@
             Garbage = garbage;
         }
 
+        public SkillType SkillType { get; set; }
+        public SkillTargetType  SkillTargetType { get; set; }
+        public SkillActivationType SiSkillActivationType { get; set; }
+
         public string Description { get; set; }
         public string Garbage { get; set; }
         public long Id { get; set; }
         public string Name { get; set; }
         public string VirtualCategory { get; set; }
+    
+    
     }
 }

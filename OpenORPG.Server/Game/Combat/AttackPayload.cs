@@ -23,7 +23,7 @@ namespace Server.Game.Combat
         public override void Apply(Character victim)
         {
             // Set the victims hit points directly to zero
-            victim.CharacterStats[(int) StatTypes.Hitpoints].CurrentValue = 0;
+            victim.CharacterStats[(int) StatTypes.Hitpoints].CurrentValue -= 1;
         }
 
 

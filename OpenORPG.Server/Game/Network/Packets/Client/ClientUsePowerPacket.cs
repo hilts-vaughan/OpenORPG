@@ -2,14 +2,22 @@
 
 namespace Server.Game.Network.Packets
 {
-    public struct ClientUsePowerPacket : IPacket
+    public struct ClientUseSkillPacket : IPacket
     {
-        public PowerId PowerId;
-        public ulong TargetId;
+        public long SkillId { get; set; }
+
+        public ulong TargetId { get; set; }
+
+        public ClientUseSkillPacket(long skillId, ulong targetId) : this()
+        {
+            SkillId = skillId;
+            TargetId = targetId;
+        }
 
         public OpCodes OpCode
         {
-            get { return OpCodes.CMSG_USE_POWER; }
+            get { return OpCodes.CMSG_USE_SKILL; }
         }
+
     }
 }

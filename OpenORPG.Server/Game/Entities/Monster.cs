@@ -15,5 +15,7 @@ namespace Server.Game.Entities
         public Monster()
         {
         }
+
+
     }
 }

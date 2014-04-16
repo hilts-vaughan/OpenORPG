@@ -29,8 +29,9 @@ namespace Server.Game.Database
 
         public DbSet<UserAccount> Accounts { get; set; }
         public DbSet<UserHero> Characters { get; set; }
-        public DbSet<MonsterTemplate> MonsterTemplates { get; set; }
 
+        public DbSet<MonsterTemplate> MonsterTemplates { get; set; }
+        public DbSet<SkillTemplate> SkillTemplates { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
