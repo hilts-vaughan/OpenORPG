@@ -14,7 +14,7 @@ namespace Server.Game.Combat
     {
         public ICombatAction GenerateAction()
         {
-            
+            return null;
         }
  
     }
