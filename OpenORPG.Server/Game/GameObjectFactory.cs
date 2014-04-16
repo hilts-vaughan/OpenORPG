@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.CodeDom;
+using System.Linq;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
@@ -31,15 +32,24 @@ namespace Server.Game
             return entity;
         }
 
-        public static Npc CreateMonster(long id)
+        /// <summary>
+        /// Creates a monster given a reference ID.
+        /// </summary>
+        /// <param name="id">The ID of the monster to fetch the template for</param>
+        /// <returns></returns>
+        public static Monster CreateMonster(long id)
         {
             using (var context = new GameDatabaseContext())
             {
-                var template = context.MonsterTemplates.FirstOrDefault(x => x.Id == id);              
-            }
+                var template = context.MonsterTemplates.FirstOrDefault(x => x.Id == id);
+                
+                // Setup actual object
+                var monster = new Monster();
+                monster.Name = template.Name;
+                CopyStatsFromTemplateToCharacter(template, monster);
 
-            //TODO: Please create me
-            return null;
+                return monster;
+            }
         }
 
 
@@ -50,12 +60,13 @@ namespace Server.Game
         /// <param name="character">The character being constructed</param>
         private static void CopyStatsFromTemplateToCharacter(IStatTemplate template, Character character)
         {
-            character.CharacterStats[(int) StatTypes.Strength].CurrentValue = template.Strength;
+            character.CharacterStats[(int)StatTypes.Strength].CurrentValue = template.Strength;
             character.CharacterStats[(int)StatTypes.Vitality].CurrentValue = template.Vitality;
             character.CharacterStats[(int)StatTypes.Intelligence].CurrentValue = template.Intelligence;
             character.CharacterStats[(int)StatTypes.Dexterity].CurrentValue = template.Dexterity;
             character.CharacterStats[(int)StatTypes.Luck].CurrentValue = template.Luck;
             character.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue = template.Hitpoints;
+            character.CharacterStats[(int)StatTypes.Luck].CurrentValue = template.Luck;
         }
 
 

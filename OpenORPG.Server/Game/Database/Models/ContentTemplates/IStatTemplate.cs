@@ -13,5 +13,7 @@ namespace Server.Game.Database.Models.ContentTemplates
         int Vitality { get; set; }
         int Intelligence { get; set; }
         int Hitpoints { get; set; }
+
+        int Luck { get; set; }
     }
 }

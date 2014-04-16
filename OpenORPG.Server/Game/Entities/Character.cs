@@ -26,6 +26,9 @@ namespace Server.Game.Entities
         }
 
 
+        /// <summary>
+        /// An array of stats for this character
+        /// </summary>
         public CharacterStat[] CharacterStats { get; set; }
 
         public int ZoneId { get; set; }

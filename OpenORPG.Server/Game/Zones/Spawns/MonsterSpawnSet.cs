@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Server.Game.Entities;
+using Server.Infrastructure.Math;
 
 namespace Server.Game.Zones.Spawns
 {
     /// <summary>
-    /// Defines a set of spawns that can spawn <see cref="Npc"/>s onto a zone.
+    /// Defines a set of spawns that can spawn <see cref="Monster"/>s onto a zone.
     /// 
     /// </summary>
     public class MonsterSpawnSet : SpawnSet
@@ -21,13 +22,13 @@ namespace Server.Game.Zones.Spawns
 
         public long MobId { get; set; }
 
-        public MonsterSpawnSet(int maximumAmount, bool repeat, float spawnTime, bool canStray, long mobId) : base(maximumAmount, repeat, spawnTime)
+        public MonsterSpawnSet(int maximumAmount, bool repeat, float spawnTime, Rectangle spawnArea, bool canStray, long mobId) : base(maximumAmount, repeat, spawnTime, spawnArea)
         {
             CanStray = canStray;
             MobId = mobId;
         }
 
-        public Npc PerformCheck(float time)
+        public Monster PerformCheck(float time)
         {
             LastSpawnTime += time;
 

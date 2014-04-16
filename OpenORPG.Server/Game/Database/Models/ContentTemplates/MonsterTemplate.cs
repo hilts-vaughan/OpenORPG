@@ -15,6 +15,6 @@
         public int Vitality { get; set; }
         public int Intelligence { get; set; }
         public int Hitpoints { get; set; }
-
+        public int Luck { get; set; }
     }
 }

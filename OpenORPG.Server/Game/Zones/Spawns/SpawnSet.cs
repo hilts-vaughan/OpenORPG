@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Infrastructure.Math;
 using Server.Infrastructure.World;
 
 namespace Server.Game.Zones.Spawns
@@ -34,14 +35,15 @@ namespace Server.Game.Zones.Spawns
         /// </summary>
         public float SpawnTime { get; set; }
 
+        public Rectangle SpawnArea { get; set; }
 
-        protected SpawnSet(int maximumAmount, bool repeat, float spawnTime)
+
+        protected SpawnSet(int maximumAmount, bool repeat, float spawnTime, Rectangle spawnArea)
         {
             MaximumAmount = maximumAmount;
             Repeat = repeat;
             SpawnTime = spawnTime;
+            SpawnArea = spawnArea;
         }
-
-
     }
 }

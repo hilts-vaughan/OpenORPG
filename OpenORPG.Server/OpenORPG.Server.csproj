@@ -92,7 +92,7 @@
     <Compile Include="Game\Database\Maps\MonsterTemplateMap.cs" />
     <Compile Include="Game\Database\Models\ContentTemplates\IStatTemplate.cs" />
     <Compile Include="Game\Entities\Character.cs" />
-    <Compile Include="Game\Entities\NPC.cs" />
+    <Compile Include="Game\Entities\Monster.cs" />
     <Compile Include="Game\Entities\Player.cs" />
     <Compile Include="Game\Entities\StatTypes.cs" />
     <Compile Include="Game\Movement\MovementSystem.cs" />
