@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Combat;
 using Server.Infrastructure.World;
 using Server.Utils.Math;
 
@@ -18,13 +19,14 @@ namespace Server.Game.Entities
             //TODO: Be a bit more creative than this
             Sprite = "male_base";
             Speed = 32;
+
+            // We initialize the size of our stats here
+            var numberOfStats = Enum.GetNames(typeof(StatTypes)).Length;
+            CharacterStats = new CharacterStat[numberOfStats];
         }
 
-        /// <summary>
-        /// The amount of hitpoints a character has
-        /// </summary>
-        public int HP { get; set; }
 
+        public CharacterStat[] CharacterStats { get; set; }
 
         public int ZoneId { get; set; }
 

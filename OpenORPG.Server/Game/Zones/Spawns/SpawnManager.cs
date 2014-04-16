@@ -66,7 +66,7 @@ namespace Server.Game.Zones.Spawns
 
         public override void Update(float frameTime)
         {
-            foreach (MonsterSpawnSet monsterSpawn in SpawnSet)
+            foreach (MonsterSpawnSet monsterSpawn in _spawnSets)
             {
                 var npc = monsterSpawn.PerformCheck(frameTime);
                 
