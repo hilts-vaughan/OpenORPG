@@ -1,4 +1,5 @@
-﻿using Server.Game.Entities;
+﻿using System.Collections.Generic;
+using Server.Game.Entities;
 
 namespace Server.Game.Combat.Actions
 {
@@ -10,6 +11,14 @@ namespace Server.Game.Combat.Actions
     /// </summary>
     public interface ICombatAction
     {
-        void PerformAction();
+        /// <summary>
+        /// Executes the action in the context of all possible combat characters.
+        /// </summary>
+        void PerformAction(IEnumerable<Character> combatCharacters);
+
+        /// <summary>
+        /// The character that will be executing the action in the context.
+        /// </summary>
+        Character ExecutingCharacter{ get; set; }
     }
 }

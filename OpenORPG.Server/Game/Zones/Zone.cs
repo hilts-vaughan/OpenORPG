@@ -116,7 +116,10 @@ namespace Server.Game.Zones
         /// </summary>
         public TmxMap TileMap { get; set; }
 
-
+        public IEnumerable<Character> ZoneCharacters
+        {
+            get { return (IEnumerable<Character>) Entities.Where(x => x is Character); }
+        }
 
 
         /// <summary>

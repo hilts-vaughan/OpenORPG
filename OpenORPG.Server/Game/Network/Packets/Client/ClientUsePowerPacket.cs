@@ -6,9 +6,10 @@ namespace Server.Game.Network.Packets
     {
         public long SkillId { get; set; }
 
-        public ulong TargetId { get; set; }
+        public long TargetId { get; set; }
 
-        public ClientUseSkillPacket(long skillId, ulong targetId) : this()
+        public ClientUseSkillPacket(long skillId, long targetId)
+            : this()
         {
             SkillId = skillId;
             TargetId = targetId;

@@ -24,7 +24,7 @@ namespace OpenORPG.Server.Tests.Game.Combat.Payloads
             var agressor = new Character();
             var victim = new Character();
 
-            var payload = new AttackPayload(agressor);
+            var payload = new DamagePayload(agressor);
             payload.Apply(victim);
 
             Assert.Equal(0, victim.CharacterStats[ (int) StatTypes.Hitpoints].CurrentValue);

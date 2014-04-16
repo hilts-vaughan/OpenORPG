@@ -17,8 +17,12 @@ namespace Server.Game.Combat
 {
     public class CombatSystem : GameSystem
     {
+
+        private ActionGenerator _actionGenerator;
+
         public CombatSystem(Zone world) : base(world)
         {
+            _actionGenerator = new ActionGenerator();
         }
 
 
@@ -36,6 +40,16 @@ namespace Server.Game.Combat
         public override void OnEntityRemoved(Entity entity)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Fetches all combat ready characters within the system.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<Character> GetCombatCharactersInRange()
+        {
+            // We can implement some filtering here later to determine who is eligible for combat if required
+            return Zone.ZoneCharacters;
         }
 
 
@@ -65,7 +79,13 @@ namespace Server.Game.Combat
             }
                 
             // Skill is good, execute!
+            var action = _actionGenerator.GenerateActionFromSkill(skill, targetId, requestingHero);
 
+            if (action == null)
+                return;
+
+            // Performs the action
+            action.PerformAction(GetCombatCharactersInRange());
         }
 
 

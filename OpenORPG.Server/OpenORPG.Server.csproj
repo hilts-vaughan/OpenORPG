@@ -86,16 +86,19 @@
   <ItemGroup>
     <Compile Include="Game\AI\IAI.cs" />
     <Compile Include="Game\ChatManager.cs" />
+    <Compile Include="Game\Combat\ActionExecutor.cs" />
     <Compile Include="Game\Combat\ActionGenerator.cs" />
-    <Compile Include="Game\Combat\Actions\MeleeAction.cs" />
-    <Compile Include="Game\Combat\AttackPayload.cs" />
+    <Compile Include="Game\Combat\Actions\ImmediateSkillAction.cs" />
+    <Compile Include="Game\Combat\Payloads\DamagePayload.cs" />
     <Compile Include="Game\Combat\Actions\ICombatAction.cs" />
     <Compile Include="Game\Combat\CharacterStat.cs" />
     <Compile Include="Game\Combat\CombatSystem.cs" />
-    <Compile Include="Game\Combat\Payloads\IPayload.cs" />
+    <Compile Include="Game\Combat\Payloads\HealingPayload.cs" />
+    <Compile Include="Game\Combat\Payloads\Payload.cs" />
     <Compile Include="Game\Combat\Enumerations\SkillActivationType.cs" />
     <Compile Include="Game\Combat\Enumerations\SkillTargetType.cs" />
     <Compile Include="Game\Combat\Enumerations\SkillType.cs" />
+    <Compile Include="Game\Combat\Payloads\StatusEffectPayload.cs" />
     <Compile Include="Game\Database\Maps\SkillTemplateMap.cs" />
     <Compile Include="Game\Database\Maps\MonsterTemplateMap.cs" />
     <Compile Include="Game\Database\Models\ContentTemplates\IStatTemplate.cs" />

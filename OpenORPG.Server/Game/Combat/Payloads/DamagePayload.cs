@@ -14,16 +14,17 @@ namespace Server.Game.Combat
     /// 
     /// Any combat damage should be applied via a payload so subsystems can track this.
     /// </summary>
-    public class AttackPayload : Payload
+    public class DamagePayload : Payload
     {
-        public AttackPayload(Character aggressor) : base(aggressor)
+        public DamagePayload(Character aggressor) : base(aggressor)
         {
         }
 
         public override void Apply(Character victim)
         {
             // Set the victims hit points directly to zero
-            victim.CharacterStats[(int) StatTypes.Hitpoints].CurrentValue -= 1;
+            var damageToDeal = Aggressor.CharacterStats[(int) StatTypes.Strength].CurrentValue;
+            victim.CharacterStats[(int) StatTypes.Hitpoints].CurrentValue -= damageToDeal;
         }
 
 
