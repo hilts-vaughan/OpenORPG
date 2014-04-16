@@ -18,15 +18,53 @@ namespace Server.Game.Combat
     {
         public DamagePayload(Character aggressor) : base(aggressor)
         {
+
         }
 
         public override void Apply(Character victim)
         {
-            // Set the victims hit points directly to zero
-            var damageToDeal = Aggressor.CharacterStats[(int) StatTypes.Strength].CurrentValue;
+            // Get the final stats from both our targets
+            var aggressorFinalStats = GetCharacterStats(Aggressor);
+            var victimFinalStats = GetCharacterStats(victim);
+
+            // Compute the damage using a basic formula for now
+            var damageToDeal = aggressorFinalStats[(int)StatTypes.Strength].CurrentValue * 2 - victimFinalStats[(int) StatTypes.Vitality].CurrentValue;
+
             victim.CharacterStats[(int) StatTypes.Hitpoints].CurrentValue -= damageToDeal;
         }
 
+ 
+
+        private CharacterStat[] GetCharacterStats(Character character)
+        {
+            var statsWithEquipmentMods = new CharacterStat[character.Equipment.Length];
+
+            // Include character stats
+            statsWithEquipmentMods = CombineStats(statsWithEquipmentMods, character.CharacterStats);
+
+            // Get inclusive equipment stats
+            statsWithEquipmentMods = character.Equipment.Aggregate(statsWithEquipmentMods,
+                (current, equip) => CombineStats(current, equip.GetEquipmentModifierStats()));
+            return statsWithEquipmentMods;
+        }
+
+
+
+        private CharacterStat[] CombineStats(CharacterStat[] first, CharacterStat[] second)
+        {
+            var stats = new CharacterStat[first.Length];
+
+            for (int index = 0; index < first.Length; index++)
+            {
+                var stat = first[index];
+                var stat2 = second[index];
+
+                stats[index].CurrentValue = stat.CurrentValue + stat2.MaximumValue;
+                stats[index].MaximumValue = stat.MaximumValue + stat2.MaximumValue;
+            }
+
+            return stats;
+        }
 
 
     }

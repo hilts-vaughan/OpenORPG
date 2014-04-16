@@ -55,7 +55,6 @@ namespace Server.Game.Network.Handlers
 
 
         }
-
         private static void EquipFromSlotIdInInventory(ClientHeroEquipItemPacket packet, Player hero)
         {
             var itemInInventory = hero.Backpack.GetItemAt(packet.SlotId) as Equipment;
@@ -81,6 +80,7 @@ namespace Server.Game.Network.Handlers
             else
                 Logger.Instance.Warn("{0} tried to equip an item that they did not have.", hero.Name);
         }
+
 
 
 
