@@ -3,6 +3,7 @@
     public enum ItemType
     {
         Consumable,
-        KeyItem
+        KeyItem,
+        Equipment
     }
 }

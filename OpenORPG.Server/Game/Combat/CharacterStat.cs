@@ -13,10 +13,11 @@ namespace Server.Game.Combat
     /// </summary>
     public struct CharacterStat
     {
-        public int MaximumValue { get; set; }
-        public int CurrentValue { get; set; }
+        public long MaximumValue { get; set; }
+        public long CurrentValue { get; set; }
 
-        public CharacterStat(int maximumValue, int currentValue) : this()
+        public CharacterStat(long maximumValue, long currentValue)
+            : this()
         {
             MaximumValue = maximumValue;
             CurrentValue = currentValue;

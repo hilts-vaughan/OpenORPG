@@ -32,6 +32,7 @@ namespace Server.Game.Database
 
         public DbSet<MonsterTemplate> MonsterTemplates { get; set; }
         public DbSet<SkillTemplate> SkillTemplates { get; set; }
+        public DbSet<ItemTemplate> ItemTemplates { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -39,6 +40,7 @@ namespace Server.Game.Database
             modelBuilder.Configurations.Add(new UserHeroMap());
             modelBuilder.Configurations.Add(new MonsterTemplateMap());
             modelBuilder.Configurations.Add(new UserStorageMap());
+            modelBuilder.Configurations.Add(new ItemTemplateMap());
         }
     }
 }

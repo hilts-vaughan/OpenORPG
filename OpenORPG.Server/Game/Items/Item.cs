@@ -1,15 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Server.Game.Database.Models.ContentTemplates;
 
-namespace Server.Game.Storage
+namespace Server.Game.Items
 {
     /// <summary>
     /// A game item
     /// </summary>
-    public class Item
+    public abstract class Item
     {
+        protected ItemTemplate ItemTemplate;
+
+        /// <summary>
+        /// Returns the name of this item
+        /// </summary>
+        public string Name
+        {
+            get { return ItemTemplate.Name; }
+        }
+
+        protected Item(ItemTemplate itemTemplate)
+        {
+            ItemTemplate = itemTemplate;
+        }
+
+
     }
 }

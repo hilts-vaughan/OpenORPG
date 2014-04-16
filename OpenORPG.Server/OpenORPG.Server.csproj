@@ -99,6 +99,7 @@
     <Compile Include="Game\Combat\Enumerations\SkillTargetType.cs" />
     <Compile Include="Game\Combat\Enumerations\SkillType.cs" />
     <Compile Include="Game\Combat\Payloads\StatusEffectPayload.cs" />
+    <Compile Include="Game\Database\Maps\ItemTemplateMap.cs" />
     <Compile Include="Game\Database\Maps\SkillTemplateMap.cs" />
     <Compile Include="Game\Database\Maps\MonsterTemplateMap.cs" />
     <Compile Include="Game\Database\Maps\UserStorageMap.cs" />
