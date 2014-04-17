@@ -20,14 +20,12 @@ namespace Server.Game.Network.Packets.Client
         /// <summary>
         /// The ZoneId the client has requested to change to
         /// </summary>
-        public int ZoneId { get; set; }
+        public Direction Direction{ get; set; }
 
 
-        public ClientZoneChangeRequestPacket(int zoneId)
+        public ClientZoneChangeRequestPacket(Direction direction)
         {
-            ZoneId = zoneId;
+            Direction = direction;
         }
-
-
     }
 }

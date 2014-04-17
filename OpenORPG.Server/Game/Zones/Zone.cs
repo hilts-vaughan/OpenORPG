@@ -8,6 +8,7 @@ using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Server;
 using Server.Game.Zones.Spawns;
 using Server.Infrastructure.Logging;
+using Server.Infrastructure.Math;
 using Server.Infrastructure.Network.Packets;
 using Server.Infrastructure.World;
 using Server.Infrastructure.World.Systems;
@@ -62,6 +63,10 @@ namespace Server.Game.Zones
     /// </summary>
     public class Zone
     {
+
+        private Rectangle topZoneArea, bottomZoneArea, leftZoneArea, rightZoneArea;
+
+
         public Zone(long id)
         {
             GameClients = new GameClientCollection(this);
@@ -85,6 +90,76 @@ namespace Server.Game.Zones
 
             AddGameSystems();
 
+            // Create our empty slots
+            ZoneExitPoints = new long[4] { -1, -1, -1, -1 };
+
+            // We can extract and setup our exit points now
+            SetupExitPoints();
+
+            // Setup our sensors
+            SetupExitRectangles();
+        }
+
+        private void SetupExitRectangles()
+        {
+            // Create a top sensor
+            topZoneArea = new Rectangle(0, 0, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight);
+
+            // Bottom sensor
+            bottomZoneArea = new Rectangle(0, TileMap.Height * TileMap.TileHeight - TileMap.Height, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight);
+
+            // Left
+            leftZoneArea = new Rectangle(0, 0, TileMap.TileWidth, TileMap.Height * TileMap.TileHeight);
+
+            // Right
+            rightZoneArea = new Rectangle(0, TileMap.Width * (TileMap.TileWidth - 1), TileMap.TileWidth, TileMap.Height * TileMap.TileHeight);
+
+        }
+
+        private void SetupExitPoints()
+        {
+            string up;
+            string right;
+            string down;
+            string left;
+
+            var suc = TileMap.Properties.TryGetValue("UpExitPoint", out up);
+            if (suc)
+                ZoneExitPoints[(int)Direction.North] = Convert.ToInt64(up);
+
+            suc = TileMap.Properties.TryGetValue("RightExitPoint", out right);
+            if (suc)
+                ZoneExitPoints[(int)Direction.East] = Convert.ToInt64(right);
+
+            suc = TileMap.Properties.TryGetValue("DownExitPoint", out  down);
+            if (suc)
+                ZoneExitPoints[(int)Direction.South] = Convert.ToInt64(down);
+
+            suc = TileMap.Properties.TryGetValue("LeftExitPoint", out left);
+            if (suc)
+                ZoneExitPoints[(int)Direction.West] = Convert.ToInt64(left);
+
+        }
+
+        public bool CanLeave(Direction direction, Player player)
+        {
+
+            //TODO: Please don't hard-code me
+            var playerRect = new Rectangle(player.X, player.Y, 32, 32);
+
+            switch (direction)
+            {
+                case Direction.North:
+                    return topZoneArea.Intersects(playerRect);
+                case Direction.East:
+                    return rightZoneArea.Intersects(playerRect);
+                case Direction.South:
+                    return bottomZoneArea.Intersects(playerRect);
+                case Direction.West:
+                    return leftZoneArea.Intersects(playerRect);
+            }
+
+            return false;
         }
 
         private void AddGameSystems()
@@ -102,6 +177,10 @@ namespace Server.Game.Zones
 
         protected List<GameSystem> GameSystems = new List<GameSystem>();
 
+        /// <summary>
+        /// An array of zone exit point IDs that users might choose to leave by
+        /// </summary>
+        public long[] ZoneExitPoints { get; set; }
 
         /// <summary>
         /// Indicates whether or not the world is currently available. If something fatal happens which requires
@@ -118,7 +197,7 @@ namespace Server.Game.Zones
 
         public IEnumerable<Character> ZoneCharacters
         {
-            get { return (IEnumerable<Character>) Entities.Where(x => x is Character); }
+            get { return (IEnumerable<Character>)Entities.Where(x => x is Character); }
         }
 
 
