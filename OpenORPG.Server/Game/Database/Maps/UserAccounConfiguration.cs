@@ -3,7 +3,7 @@ using Server.Game.Database.Models;
 
 namespace Server.Game.Database.Maps
 {
-    //TODO: shouldnt this be called UserAccountConfiguration? Or only AccountConfiguration
+
     public class UserAccounConfiguration : EntityTypeConfiguration<UserAccount>
     {
         public UserAccounConfiguration()

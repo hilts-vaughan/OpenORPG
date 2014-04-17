@@ -10,7 +10,7 @@ namespace Server
     /// <summary>
     ///     A game client represents a single, connected client on the server.
     /// </summary>
-    public class GameClient //TODO: isnt this actually ZoneClient inside ZoneServer
+    public class GameClient
     {
         public GameClient(Connection connection)
         {

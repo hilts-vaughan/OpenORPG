@@ -29,8 +29,7 @@ namespace Server.Game
         }
 
         public void Join(GameClient client)
-        {
-            //TODO: broadcast
+        {            
             client.Send(new ServerJoinChannelPacket(Id, Type, null));
             Clients.Add(client);
         }
@@ -68,7 +67,7 @@ namespace Server.Game
         public ChatChannel CreateChannel(ChannelType channelType)
         {
             var channel = new ChatChannel();
-            channel.Id = _lastId++; //TODO: fake number
+            channel.Id = _lastId++; 
             channel.Type = channelType;
 
             Channels.Add(channel);
