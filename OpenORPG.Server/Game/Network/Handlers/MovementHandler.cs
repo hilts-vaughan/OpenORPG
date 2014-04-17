@@ -8,6 +8,7 @@ using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Client;
 using Server.Game.Network.Packets.Server;
 using Server.Game.Utility;
+using Server.Game.Zones;
 using Server.Infrastructure.Logging;
 using Server.Infrastructure.Network.Handlers;
 
@@ -40,6 +41,7 @@ namespace Server.Game.Network.Handlers
         [PacketHandler(OpCodes.CMMSG_ZONE_CHANGE)]
         public static void OnZoneChangeRequest(GameClient client, ClientZoneChangeRequestPacket packet)
         {
+            
             Logger.Instance.Info("{0} is changing zones...", client.HeroEntity.ToString());
         }
 

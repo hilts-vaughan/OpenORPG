@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Game.Entities;
+using Server.Utils.Math;
 
 namespace Server.Game.Zones
 {
@@ -54,6 +56,22 @@ namespace Server.Game.Zones
         {
             //TODO: Check for outstanding NetStates
             _zonesToRemove.Add(zone);
+        }
+
+        /// <summary>
+        /// Switches a player from their current zone to one specified.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="zone">The zone to switch the player into</param>
+        /// <param name="position"></param>
+        public void SwitchToZoneAndPosition(Player player, Zone zone, Vector2 position)
+        {
+            // Remove our player from here
+            zone.RemoveEntity(player);
+
+            // Add them to the new zone and move them
+            zone.AddEntity(player);
+            player.Position = position;
         }
 
         /// <summary>

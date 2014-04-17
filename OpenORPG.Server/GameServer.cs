@@ -112,7 +112,7 @@ namespace Server
                 {
                     var filename = Path.GetFileNameWithoutExtension(mapFile);
                     long id;
-                    if (long.TryParse(filename, out id))
+                    if (long.TryParse(filename, out id) && Path.GetExtension(mapFile) == ".tmx")
                     {
                         ZoneManager.Instance.AddZone(new Zone(id));
                         count++;
@@ -150,6 +150,7 @@ namespace Server
         {
             using (var context = new GameDatabaseContext())
             {
+                
                 List<UserAccount> accounts = context.Accounts.Where(x => x.IsOnline).ToList();
                 accounts.ForEach(x => x.IsOnline = false);
                 context.SaveChanges();

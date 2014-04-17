@@ -27,7 +27,7 @@ namespace Server.Game.Combat
             var aggressorFinalStats = GetCharacterStats(Aggressor);
             var victimFinalStats = GetCharacterStats(victim);
 
-            // Compute the damage using a basic formula for now
+            // Compute the damage using a basic formula for now (STR * 2) - VIT
             var damageToDeal = aggressorFinalStats[(int)StatTypes.Strength].CurrentValue * 2 - victimFinalStats[(int) StatTypes.Vitality].CurrentValue;
 
             victim.CharacterStats[(int) StatTypes.Hitpoints].CurrentValue -= damageToDeal;
