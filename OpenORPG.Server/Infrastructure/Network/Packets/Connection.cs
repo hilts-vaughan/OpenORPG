@@ -1,4 +1,5 @@
 ﻿using Fleck;
+using Server.Infrastructure.Logging;
 
 namespace Server.Infrastructure.Network.Packets
 {
@@ -12,6 +13,12 @@ namespace Server.Infrastructure.Network.Packets
         {
             _socket = socket;
             _packetSerializer = packetSerializer;
+        }
+
+        public void Disconnect(string reason)
+        {
+            Logger.Instance.Info("{0} was disconnected because of {1}", this, reason);
+            _socket.Close();
         }
 
         public bool IsAvailable
