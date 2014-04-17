@@ -8,3 +8,13 @@ canvas
 {
 	margin: 0 auto;
 }
+
+#controls
+{
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  background-color: black;
+  width: 100%;
+}

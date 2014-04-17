@@ -20,7 +20,7 @@ namespace Server.Game.Network.Handlers
     /// </summary>
     public class MovementHandler
     {
-        private const int LenianceFactor = 12;
+        private const int LenianceFactor = 100;
 
         [PacketHandler(OpCodes.CMSG_MOVEMENT_REQUEST)]
         public static void OnChatMessage(GameClient client, ClientMovementRequestPacket packet)
@@ -31,8 +31,9 @@ namespace Server.Game.Network.Handlers
             var requestedPosition = packet.CurrentPosition;
             var direction = packet.Direction;
 
+            var distance = Vector2.Distance(requestedPosition, player.Position);
             // Ignore packets claiming to make large leaps and bounds
-            if (Vector2.Distance(requestedPosition, player.Position) > LenianceFactor)
+            if (distance > LenianceFactor)
             {
                 client.Connection.Disconnect("Hacking Attempt: Movement pulse exceeded");
             }

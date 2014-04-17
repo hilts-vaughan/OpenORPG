@@ -96,7 +96,6 @@ namespace Server.Game.Zones.Spawns
 
         private Vector2 GetRandomSpawnPosition(MonsterSpawnSet monsterSpawn, Monster monster)
         {
-            //TODO: Check for overlap, do some more advanced logic
             var maxX = monsterSpawn.SpawnArea.Width;
             var maxY = monsterSpawn.SpawnArea.Height;
 

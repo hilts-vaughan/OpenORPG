@@ -14,7 +14,7 @@ module.exports = function(grunt) {
             src: {
                 root: 'src/',
                 lib: 'src/lib/',
-                js: 'src/js/**/*.js',
+                js: 'src/js/**/*.coffee',
                 assets: 'src/assets/',
                 css: 'src/css/',
                 index: 'src/index.html'
@@ -29,13 +29,14 @@ module.exports = function(grunt) {
 
         browserify: {
             basic: {
-                src: ['src/js/start.js'],
+                src: ['src/js/**/*.coffee'],
                 dest: 'deploy/js/GameDevTemplateJS.js',
                 debug: true
             },
 
             options: {
-                debug: true             
+                debug: true,
+                transform: ['coffeeify']
             }
 
 
@@ -243,7 +244,6 @@ module.exports = function(grunt) {
         'browserify'
     ]);
     grunt.registerTask('default', [
-        'clean',
         'build',
         'connect',
         'watch'

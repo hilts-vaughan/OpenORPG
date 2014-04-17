@@ -4,91 +4,194 @@
 		"selected_items":
 		[
 			[
+				"proper",
+				"propertyChanged"
+			],
+			[
+				"send",
+				"sendPacket"
+			],
+			[
+				"entit",
+				"entities"
+			],
+			[
 				"onConn",
 				"onConnectionErrorCallback"
 			],
 			[
 				"connect",
 				"connectSplash"
-			],
-			[
-				"send",
-				"sendMessage"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"contents": "/*\n	The gameplay state is where the core gameplay of the game runs.\n	This has everything required to run. operate, and update the game world.\n\n	There should only ever be one of these states in existance.\n*/\n\n\nmodule.exports = function() {\n\n  GameplayState = Class.extend({\n\n    init: function(game) {\n      this.game = game;\n      var self = this;\n\n      self.game\n\n    },\n\n    create: function() {\n\n\n\n\n      var self = this;\n      self.map = self.game.add.tilemap('map_1');\n      self.map.addTilesetImage('tilesheet')\n\n      $.each(self.map.layers, function(key, value) {\n        var layer = self.map.createLayer(value.name);\n        layer.resizeWorld();\n      });\n\n      this.game.net.registerPacket(PacketTypes.SMSG_ZONE_CHANGED, function(packet) {\n\n      });\n\n      var sprite = this.game.add.sprite(72 * 32, 150 * 32, \"player_active\", 0);\n      this.game.camera.follow(sprite);\n      \n\n    },\n\n\n    preload: function() {\n      this.game.load.tilemap('map_1', 'assets/Maps/1.json', null, Phaser.Tilemap.TILED_JSON);\n      this.game.load.image('tilesheet', 'assets/Maps/tilesheet_16.png');\n    }\n\n\n  });\n\n}();",
-			"file": "src/js/Game/StateManagement/GameplayState.js",
-			"file_size": 1150,
-			"file_write_time": 130357129024598192,
+			"file": "src/js/start.coffee",
 			"settings":
 			{
-				"buffer_size": 1112,
+				"buffer_size": 682,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "#include <sys/types.h>\n#include <utmp.h>\n#include <time.h>\n\n\nvoid showtime( time_t timeval )\n/*\n *      displays time in a format fit for human consumption\n *      uses ctime to build a string then picks parts out of it\n *      Note: %12.12s prints a string 12 chars wide and LIMITS\n *      it to 12chars.\n */\n{\n        char    *ctime();               /* convert long to ascii        */\n        char    *cp;                    /* to hold address of time      */\n\n\n\nvoid showtime( time_t timeval )\n/*\n *      displays time in a format fit for human consumption\n *      uses ctime to build a string then picks parts out of it\n *      Note: %12.12s prints a string 12 chars wide and LIMITS\n *      it to 12chars.\n */\n{\n        char    *ctime();               /* convert long to ascii        */\n        char    *cp;                    /* to hold address of time      */\n\n        cp = ctime( &timeval );         /* convert time to string       */\n                                        /* string looks like            */\n                                        /* Mon Feb  4 00:46:40 EST 1991 */\n                                        /* 0123456789012345.            */\n        printf(\"%12.12s\", cp+4 );       /* pick 12 chars from pos 4     */\n}\n\n\n\n/*\n Shows information regarding the given information record. We use this to output our dead proceses.\n*/\nvoid show_info( struct utmp *utbufp )\n\n▽\n        if(utbufp->ut_type == BOOT_TIME)\n        {\n                printf(\"The system was booted on: \");\n                showtime( utbufp->ut_time);\n                return;\n        }\n\n        if ( utbufp->ut_type != USER_PROCESS )\n                return;\n\n        printf(\"%-8.8s\", utbufp->ut_name);              /* the logname  */\n        printf(\" \");                                    /* a space      */\n        printf(\"%-8.8s\", utbufp->ut_line);              /* the tty      */\n        printf(\" \");                                    /* a space      */\n        showtime( utbufp->ut_time );                    /* display time */\n        printf(\"\\n\");                                   /* newline      */\n}\n\n\n/*\n   Our main entry point to the application\n*/\nint main()\n{\n        struct utmp     *utbufp,        /* holds pointer to next rec    */\n                        *utmp_next();   /* returns pointer to next      */\n\n        // Open file and the like\n        if ( utmp_open( UTMP_FILE ) == -1 ){\n                perror(UTMP_FILE);\n                exit(1);\n        }\n        while ( ( utbufp = utmp_next() ) != ((struct utmp *) NULL) )\n                show_info( utbufp );\n",
+			"file": "src/js/Infrastructure/StateManagement/BootstrapState.coffee",
 			"settings":
 			{
-				"buffer_size": 2572,
+				"buffer_size": 1333,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/Infrastructure/Network/GameClient.coffee",
+			"settings":
+			{
+				"buffer_size": 3215,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/Game/StateManagement/HeroSelectState.coffee",
+			"settings":
+			{
+				"buffer_size": 895,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/Game/Entities/Player.coffee",
+			"settings":
+			{
+				"buffer_size": 165,
 				"line_ending": "Windows",
-				"name": "#include <sys/types.h>"
+				"name": "module.exports ="
 			}
 		},
 		{
-			"contents": "",
+			"file": "src/js/Infrastructure/StateManagement/States/ErrorMenuState.coffee",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 621,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/Debug.coffee",
+			"settings":
+			{
+				"buffer_size": 154,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "# A class to help manage paths\nclass DirectoryHelper\n\n	@BASE_ASSET_PATH = \"../assets/\"\n	@SPRITE_ENTITY_PATH = @BASE_ASSET_PATH + \"sprites/\"\n\n",
+			"file": "src/js/Game/DirectoryHelper.coffee",
+			"file_size": 147,
+			"file_write_time": 130372487697105925,
+			"settings":
+			{
+				"buffer_size": 141,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/Infrastructure/DirectoryHelper.coffee",
+			"settings":
+			{
+				"buffer_size": 162,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/Infrastructure/Entities/Entity.coffee",
+			"settings":
+			{
+				"buffer_size": 2186,
 				"line_ending": "Windows"
 			}
 		},
 		{
 			"contents": "",
+			"file": "src/js/Game/World/Systems/SpriteText.coffee",
+			"file_size": 269,
+			"file_write_time": 130375198139039786,
 			"settings":
 			{
 				"buffer_size": 0,
+				"line_ending": "Windows",
+				"name": "module.exports ="
+			}
+		},
+		{
+			"file": "src/js/Infrastructure/Entities/SpriteText.coffee",
+			"settings":
+			{
+				"buffer_size": 789,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/js/start.js",
+			"file": "src/js/Game/StateManagement/GameplayState.coffee",
 			"settings":
 			{
-				"buffer_size": 697,
+				"buffer_size": 2283,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/js/Infrastructure/PacketTypes.js",
+			"file": "src/css/game.css",
 			"settings":
 			{
-				"buffer_size": 578,
+				"buffer_size": 242,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/js/Game/StateManagement/HeroSelectState.js",
+			"file": "src/index.html",
 			"settings":
 			{
-				"buffer_size": 700,
+				"buffer_size": 557,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/js/Infrastructure/StateManagement/States/MainMenuState.js",
+			"file": "src/lib/phaser.js",
 			"settings":
 			{
-				"buffer_size": 3044,
+				"buffer_size": 1383633,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "PacketTypes = require('./../../../Infrastructure/PacketTypes.coffee')\n\nmodule.exports = \n\n	# Controls the movement of entities on the screen and is responsible for managing\n	# tweening and interpolating entities across the screen\n	class MovementSystem\n\n		# The frequency in which we choose to dispatch movement events to the server		\n		MOVE_TICK_FREQ: 300\n\n		constructor: (@game, @entity) ->\n			@game.net.registerPacket PacketTypes.SMSG_ENTITY_MOVE, (packet) =>\n				@_handleEntityMove(packet)\n\n			\n			# Build stuff we need\n			#@game.time.events.loop(Phaser.Timer.SECOND, @_generateMovementTicket, @)\n\n			setInterval =>\n				@_generateMovementTicket()\n			, @MOVE_TICK_FREQ\n\n		_generateMovementTicket: =>\n			if @entity.body.velocity.isZero() == false\n				@game.net.sendMovement( Math.floor(@entity.x), Math.floor(@entity.y) )			\n\n		update: ->\n			if @game.input.keyboard.isDown(Phaser.Keyboard.LEFT)     \n				@entity.body.velocity.setTo(-120, 0)\n			if @game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)     \n				@entity.body.velocity.setTo(120, 0)\n			if @game.input.keyboard.isDown(Phaser.Keyboard.UP)     \n				@entity.body.velocity.setTo(0, -120)\n			if @game.input.keyboard.isDown(Phaser.Keyboard.DOWN)     \n				@entity.body.velocity.setTo(0, 120)\n			if @game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)								\n				@entity.body.velocity.setTo(0, 0)\n\n			# This is asking for trouble, probably\n			# TODO: This will only work for movement\n			for k,entity of @game.entities\n				if entity.body.velocity.isZero()\n					entity.animations.stop(null, true)\n				else\n					entity.animations.play()\n\n		# Used to handle when an entity has moved from their intial location\n		_handleEntityMove: (packet) =>\n			console.log(\"Loud and clear, folks!\" )\n			console.log(@)			\n			id = packet.id\n			console.log(id)\n			position = packet.position\n			entity = @game.entities[id]\n\n			if entity == undefined\n				return\n\n			x = position.x\n			y = position.y\n\n			if entity.tween != undefined\n				entity.tween.stop()\n\n			tween = @game.add.tween(entity).to\n				x: x\n				y: y\n			, @MOVE_TICK_FREQ + 100, Phaser.Easing.Linear.None, true\n\n			entity.tween = tween\n\n\n\n\n\n\n",
+			"file": "src/js/Game/World/Systems/MovementSystem.coffee",
+			"file_size": 2170,
+			"file_write_time": 130375793051839720,
+			"settings":
+			{
+				"buffer_size": 2134,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/Infrastructure/StateManagement/States/MainMenuState.coffee",
+			"settings":
+			{
+				"buffer_size": 2536,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/Infrastructure/PacketTypes.coffee",
+			"settings":
+			{
+				"buffer_size": 663,
 				"line_ending": "Windows"
 			}
 		}
 	],
-	"build_system": "",
+	"build_system": "Packages/Better CoffeeScript/CoffeeScript.sublime-build",
 	"command_palette":
 	{
 		"height": 60.0,
@@ -128,6 +231,45 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/States/MainMenuState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Game/World/Systems/MovementSystem.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/lib/phaser.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Game/StateManagement/GameplayState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Infrastructure/PacketTypes.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/node_modules/browserify/node_modules/browser-pack/node_modules/JSONStream/test/empty.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Infrastructure/Entities/Entity.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/deploy/js/phaser.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Game/DirectoryHelper.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/States/BaseMenuState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/Gruntfile.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/deploy/js/GameDevTemplateJS.js",
+		"/C/Users/Vaughan Hilts/AppData/Roaming/Sublime Text 2/Packages/Better CoffeeScript/CoffeeScript.sublime-settings",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/start.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client//src/js/start.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client//src/js/Infrastructure/StateManagement/BootstrapState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client//src/js/Debug.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client//src/js/Infrastructure/PacketTypes.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client//src/js/Infrastructure/StateManagement/States/BaseMenuState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client//src/js/Infrastructure/StateManagement/States/ErrorMenuState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/States/ErrorMenuState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client//src/js/Infrastructure/StateManagement/States/MainMenuState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/BootstrapState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client//src/js/Infrastructure/Network/GameClient.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client//src/js/Infrastructure/Entities/Entity.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Infrastructure/Network/GameClient.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Game/EntityFactory.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client//src/js/Game/StateManagement/GameplayState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Debug.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client//src/js/Game/StateManagement/HeroSelectState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/start.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Game/StateManagement/HeroSelectState.coffee",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Game/Entities/Player.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Infrastructure/Entities/Entity.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/BootstrapState.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Infrastructure/StateManagement/States/MainMenuState.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Game/StateManagement/HeroSelectState.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Infrastructure/PacketTypes.js",
+		"/C/Users/Vaughan Hilts/Documents/OpenORPG/OpenORPG.Client/client/src/js/Game/StateManagement/GameplayState.js",
 		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/lib/phaser.js",
 		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/Gruntfile.js",
 		"/C/Users/Vaughan Hilts/Documents/GitHub/open-orpg/OpenORPG.Client/client/src/js/Game/EntityFactory.js",
@@ -179,7 +321,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 92.0,
+		"height": 0.0,
 		"where_history":
 		[
 		]
@@ -189,6 +331,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"style",
+			"isZero",
+			"izzero",
+			"@entities",
+			"animationmanager",
+			"gameplay",
+			"@currentPlayer",
+			"sprite",
+			"onConnection",
 			"copy",
 			"index.html",
 			"16",
@@ -229,23 +380,23 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 11,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/js/Game/StateManagement/GameplayState.js",
+					"file": "src/js/start.coffee",
 					"settings":
 					{
-						"buffer_size": 1112,
+						"buffer_size": 682,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								364,
-								364
+								518,
+								518
 							]
 						],
 						"settings":
@@ -354,7 +505,137 @@
 							},
 							"codeintel_tooltips": "popup",
 							"sublime_auto_complete": true,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/js/Infrastructure/StateManagement/BootstrapState.coffee",
+					"settings":
+					{
+						"buffer_size": 1333,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1083,
+								1083
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -365,23 +646,23 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
+					"file": "src/js/Infrastructure/Network/GameClient.coffee",
 					"settings":
 					{
-						"buffer_size": 2572,
+						"buffer_size": 3215,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1249,
-								1249
+								2686,
+								2686
 							]
 						],
 						"settings":
 						{
-							"auto_name": "#include <sys/types.h>",
 							"codeintel": true,
 							"codeintel_config":
 							{
@@ -486,7 +767,1581 @@
 							},
 							"codeintel_tooltips": "popup",
 							"sublime_auto_complete": true,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 903.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/js/Game/StateManagement/HeroSelectState.coffee",
+					"settings":
+					{
+						"buffer_size": 895,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								399,
+								399
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/js/Game/Entities/Player.coffee",
+					"settings":
+					{
+						"buffer_size": 165,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								139,
+								129
+							]
+						],
+						"settings":
+						{
+							"auto_name": "module.exports =",
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/js/Infrastructure/StateManagement/States/ErrorMenuState.coffee",
+					"settings":
+					{
+						"buffer_size": 621,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								621,
+								621
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/js/Debug.coffee",
+					"settings":
+					{
+						"buffer_size": 154,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								131,
+								131
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/js/Game/DirectoryHelper.coffee",
+					"settings":
+					{
+						"buffer_size": 141,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								89,
+								107
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/js/Infrastructure/DirectoryHelper.coffee",
+					"settings":
+					{
+						"buffer_size": 162,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								162,
+								162
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/js/Infrastructure/Entities/Entity.coffee",
+					"settings":
+					{
+						"buffer_size": 2186,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								975,
+								975
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "src/js/Game/World/Systems/SpriteText.coffee",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "module.exports =",
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "src/js/Infrastructure/Entities/SpriteText.coffee",
+					"settings":
+					{
+						"buffer_size": 789,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								789,
+								789
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "src/js/Game/StateManagement/GameplayState.coffee",
+					"settings":
+					{
+						"buffer_size": 2283,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								737,
+								737
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 140.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "src/css/game.css",
+					"settings":
+					{
+						"buffer_size": 242,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								239,
+								239
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "src/index.html",
+					"settings":
+					{
+						"buffer_size": 557,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								530,
+								530
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -497,130 +2352,289 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 15,
+					"file": "src/lib/phaser.js",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 1383633,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1457,
+								1457
 							]
 						],
 						"settings":
 						{
-							"auto_name": "",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/js/start.js",
-					"settings":
-					{
-						"buffer_size": 697,
-						"regions":
-						{
-						},
-						"selection":
-						[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
 							[
-								697,
-								697
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "src/js/Infrastructure/PacketTypes.js",
-					"settings":
-					{
-						"buffer_size": 578,
-						"regions":
-						{
-						},
-						"selection":
-						[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
 							[
-								261,
-								278
-							]
-						],
-						"settings":
-						{
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "src/js/Game/World/Systems/MovementSystem.coffee",
+					"settings":
+					{
+						"buffer_size": 2134,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1587,
+								1587
+							]
+						],
+						"settings":
+						{
+							"codeintel": true,
+							"codeintel_config":
+							{
+								"JavaScript":
+								{
+									"codeintel_max_recursive_dir_depth": 2,
+									"codeintel_scan_files_in_project": false,
+									"javascriptExtraPaths":
+									[
+									]
+								},
+								"PHP":
+								{
+									"codeintel_max_recursive_dir_depth": 5,
+									"codeintel_scan_files_in_project": false,
+									"phpExtraPaths":
+									[
+									]
+								},
+								"Python":
+								{
+									"env":
+									{
+									}
+								}
+							},
+							"codeintel_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_live": true,
+							"codeintel_live_enabled_languages":
+							[
+								"JavaScript",
+								"Mason",
+								"XBL",
+								"XUL",
+								"RHTML",
+								"SCSS",
+								"Python",
+								"HTML",
+								"Ruby",
+								"Python3",
+								"XML",
+								"Sass",
+								"XSLT",
+								"Django",
+								"HTML5",
+								"Perl",
+								"CSS",
+								"Twig",
+								"Less",
+								"Smarty",
+								"Node.js",
+								"Tcl",
+								"TemplateToolkit",
+								"PHP"
+							],
+							"codeintel_max_recursive_dir_depth": 10,
+							"codeintel_scan_exclude_dir":
+							{
+								"JavaScript":
+								[
+									"/build/",
+									"/min/"
+								]
+							},
+							"codeintel_scan_files_in_project": true,
+							"codeintel_selected_catalogs":
+							[
+								"PyWin32",
+								"jQuery",
+								"Rails"
+							],
+							"codeintel_snippets": true,
+							"codeintel_syntax_map":
+							{
+								"Python Django": "Python"
+							},
+							"codeintel_tooltips": "popup",
+							"sublime_auto_complete": true,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 120.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "src/js/Game/StateManagement/HeroSelectState.js",
+					"buffer": 17,
+					"file": "src/js/Infrastructure/StateManagement/States/MainMenuState.coffee",
 					"settings":
 					{
-						"buffer_size": 700,
+						"buffer_size": 2536,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								656,
-								656
+								763,
+								768
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -635,28 +2649,28 @@
 			"sheets":
 			[
 				{
-					"buffer": 7,
-					"file": "src/js/Infrastructure/StateManagement/States/MainMenuState.js",
+					"buffer": 18,
+					"file": "src/js/Infrastructure/PacketTypes.coffee",
 					"settings":
 					{
-						"buffer_size": 3044,
+						"buffer_size": 663,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1509,
-								1515
+								506,
+								506
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 8,
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 166.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -707,23 +2721,115 @@
 	{
 		"height": 62.0
 	},
-	"save_all_on_build": true,
+	"save_all_on_build": false,
 	"select_file":
 	{
 		"height": 0.0,
 		"selected_items":
 		[
 			[
-				"packettp",
-				"src/js/Infrastructure/PacketTypes.js"
-			],
-			[
-				"gameplay",
-				"src/js/Game/StateManagement/GameplayState.js"
+				"sprite",
+				"src/js/Infrastructure/Entities/SpriteText.coffee"
 			],
 			[
 				"entity",
-				"src/js/Game/EntityFactory.js"
+				"src/js/Infrastructure/Entities/Entity.coffee"
+			],
+			[
+				"entity.co",
+				"src/js/Infrastructure/Entities/Entity.coffee"
+			],
+			[
+				"player.c",
+				"src/js/Game/Entities/Player.coffee"
+			],
+			[
+				"spritete",
+				"src/js/Infrastructure/Entities/SpriteText.coffee"
+			],
+			[
+				"spritetext",
+				"src/js/Infrastructure/Entities/SpriteText.coffee"
+			],
+			[
+				"mainmenus",
+				"src/js/Infrastructure/StateManagement/States/MainMenuState.coffee"
+			],
+			[
+				"mainmenu",
+				"src/js/Infrastructure/StateManagement/States/MainMenuState.coffee"
+			],
+			[
+				"player.",
+				"src/js/Game/Entities/Player.coffee"
+			],
+			[
+				"movementsystem",
+				"src/js/Game/World/Systems/MovementSystem.coffee"
+			],
+			[
+				"entity.coffee",
+				"src/js/Infrastructure/Entities/Entity.coffee"
+			],
+			[
+				"gameplaystate",
+				"src/js/Game/StateManagement/GameplayState.coffee"
+			],
+			[
+				"movement",
+				"src/js/Game/World/Systems/MovementSystem.coffee"
+			],
+			[
+				"gameclient",
+				"src/js/Infrastructure/Network/GameClient.coffee"
+			],
+			[
+				"gameclien",
+				"src/js/Infrastructure/Network/GameClient.coffee"
+			],
+			[
+				"gameplay",
+				"src/js/Game/StateManagement/GameplayState.coffee"
+			],
+			[
+				"packett",
+				"src/js/Infrastructure/PacketTypes.coffee"
+			],
+			[
+				"packettypes",
+				"src/js/Infrastructure/PacketTypes.coffee"
+			],
+			[
+				"gameplaysc",
+				"src/js/Game/StateManagement/GameplayState.coffee"
+			],
+			[
+				"entity.coffe",
+				"src/js/Infrastructure/Entities/Entity.coffee"
+			],
+			[
+				"packettpy",
+				"node_modules/browserify/node_modules/browser-pack/node_modules/JSONStream/test/empty.js"
+			],
+			[
+				"phaser.js",
+				"deploy/js/phaser.js"
+			],
+			[
+				"gamepla",
+				"src/js/Game/StateManagement/GameplayState.coffee"
+			],
+			[
+				"entity.",
+				"src/js/Infrastructure/Entities/Entity.coffee"
+			],
+			[
+				"gameplays",
+				"src/js/Game/StateManagement/GameplayState.coffee"
+			],
+			[
+				"packettp",
+				"src/js/Infrastructure/PacketTypes.js"
 			],
 			[
 				"mainmenustate",
@@ -746,10 +2852,6 @@
 				"src/js/Infrastructure/Network/GameClient.js"
 			],
 			[
-				"gameclient",
-				"src/js/Infrastructure/Network/GameClient.js"
-			],
-			[
 				"bootstr",
 				"src/js/Infrastructure/StateManagement/BootstrapState.js"
 			],
@@ -766,19 +2868,11 @@
 				"src/index.html"
 			],
 			[
-				"mainmenus",
-				"src/js/Infrastructure/StateManagement/States/MainMenuState.js"
-			],
-			[
 				"bootstrap",
 				"src/js/Infrastructure/StateManagement/BootstrapState.js"
 			],
 			[
 				"mainm",
-				"src/js/Infrastructure/StateManagement/States/MainMenuState.js"
-			],
-			[
-				"mainmenu",
 				"src/js/Infrastructure/StateManagement/States/MainMenuState.js"
 			],
 			[

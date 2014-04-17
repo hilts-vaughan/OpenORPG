@@ -9,7 +9,7 @@
 }(this, function() {
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -18,7 +18,7 @@
 *
 * Phaser - http://www.phaser.io
 *
-* v1.1.4 - Built at: Fri Jan 31 2014 10:32:49
+* v1.1.5 - Built at: Wed Feb 12 2014 15:32:36
 *
 * By Richard Davey http://www.photonstorm.com @photonstorm
 *
@@ -48,7 +48,7 @@ var PIXI = PIXI || {};
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -57,53 +57,53 @@ var PIXI = PIXI || {};
 */
 var Phaser = Phaser || {
 
-	VERSION: '1.1.4',
-	DEV_VERSION: '1.1.4',
-	GAMES: [],
+    VERSION: '1.1.5',
+    DEV_VERSION: '1.1.5',
+    GAMES: [],
 
-	AUTO: 0,
-	CANVAS: 1,
-	WEBGL: 2,
-	HEADLESS: 3,
+    AUTO: 0,
+    CANVAS: 1,
+    WEBGL: 2,
+    HEADLESS: 3,
 
-	SPRITE: 0,
-	BUTTON: 1,
-	BULLET: 2,
-	GRAPHICS: 3,
-	TEXT: 4,
-	TILESPRITE: 5,
-	BITMAPTEXT: 6,
-	GROUP: 7,
-	RENDERTEXTURE: 8,
-	TILEMAP: 9,
-	TILEMAPLAYER: 10,
-	EMITTER: 11,
-	POLYGON: 12,
-	BITMAPDATA: 13,
-	CANVAS_FILTER: 14,
-	WEBGL_FILTER: 15,
+    SPRITE: 0,
+    BUTTON: 1,
+    BULLET: 2,
+    GRAPHICS: 3,
+    TEXT: 4,
+    TILESPRITE: 5,
+    BITMAPTEXT: 6,
+    GROUP: 7,
+    RENDERTEXTURE: 8,
+    TILEMAP: 9,
+    TILEMAPLAYER: 10,
+    EMITTER: 11,
+    POLYGON: 12,
+    BITMAPDATA: 13,
+    CANVAS_FILTER: 14,
+    WEBGL_FILTER: 15,
 
-	NONE: 0,
-	LEFT: 1,
-	RIGHT: 2,
-	UP: 3,
-	DOWN: 4,
+    NONE: 0,
+    LEFT: 1,
+    RIGHT: 2,
+    UP: 3,
+    DOWN: 4,
 
-	CANVAS_PX_ROUND: false,
-	CANVAS_CLEAR_RECT: true
+    CANVAS_PX_ROUND: false,
+    CANVAS_CLEAR_RECT: true
 
  };
 
 PIXI.InteractionManager = function (dummy) {
-	//	We don't need this in Pixi, so we've removed it to save space
-	//	however the Stage object expects a reference to it, so here is a dummy entry.
+    //  We don't need this in Pixi, so we've removed it to save space
+    //  however the Stage object expects a reference to it, so here is a dummy entry.
 };
 
 /* jshint supernew: true */
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -139,9 +139,9 @@ Phaser.Utils = {
     * dir = 1 (left), 2 (right), 3 (both)
     * @method Phaser.Utils.pad
     * @param {string} str - The target string. 
-    * @param {number} len - Description.
-    * @param {number} pad - the string to pad it out with (defaults to a space).
-    * @param {number} [dir=3] the direction dir = 1 (left), 2 (right), 3 (both).
+    * @param {number} len - The number of characters to be added.
+    * @param {number} pad - The string to pad it out with (defaults to a space).
+    * @param {number} [dir=3] The direction dir = 1 (left), 2 (right), 3 (both).
     * @return {string} The padded string
     */
     pad: function (str, len, pad, dir) {
@@ -173,18 +173,6 @@ Phaser.Utils = {
         }
 
         return str;
-
-    },
-
-    /**
-    * Returns true if the object is an Array, otherwise false.
-    * @method Phaser.Utils.isArray
-    * @param {object} obj - The object to inspect.
-    * @return {boolean} - true if the object is an array, otherwise false.
-    */
-    isArray: function (obj) {
-
-        return toString.call(obj) === "[object Array]";
 
     },
 
@@ -310,22 +298,10 @@ Phaser.Utils = {
 
 };
 
-/**
-* Converts a hex color number to an [R, G, B] array
-*
-* @param {number} hex 
-* @return {array}
-*/
 function HEXtoRGB(hex) {
     return [(hex >> 16 & 0xFF) / 255, ( hex >> 8 & 0xFF) / 255, (hex & 0xFF)/ 255];
 }
 
-/**
- * Converts a hex color number to an [R, G, B] array
- *
- * @method hex2rgb
- * @param hex {Number}
- */
 PIXI.hex2rgb = function hex2rgb(hex) {
     return [(hex >> 16 & 0xFF) / 255, ( hex >> 8 & 0xFF) / 255, (hex & 0xFF)/ 255];
 };
@@ -366,6 +342,16 @@ if (typeof Function.prototype.bind != 'function') {
         };
     })();
 }
+
+/**
+* A polyfill for Array.isArray
+*/
+if (!Array.isArray) {
+  Array.isArray = function (arg) {
+    return Object.prototype.toString.call(arg) == '[object Array]';
+  };
+}
+
 
 
 
@@ -4543,9 +4529,6 @@ PIXI.WebGLFilterManager.prototype.pushFilter = function(filterBlock)
 
     this.getBounds(filterBlock.target);
 
-    // addpadding?
-    //displayObject.filterArea.x
-
     var filterArea = filterBlock.target.filterArea;
 
     var padidng = filter.padding;
@@ -4563,7 +4546,6 @@ PIXI.WebGLFilterManager.prototype.pushFilter = function(filterBlock)
     //gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA,  filterArea.width, filterArea.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
     gl.bindFramebuffer(gl.FRAMEBUFFER, texture.frameBuffer);
 
-    //console.log(filterArea)
     // set view port
     gl.viewport(0, 0, filterArea.width, filterArea.height);
 
@@ -4573,7 +4555,6 @@ PIXI.WebGLFilterManager.prototype.pushFilter = function(filterBlock)
     PIXI.offset.x = -filterArea.x;
     PIXI.offset.y = -filterArea.y;
 
-    //console.log(PIXI.defaultShader.projectionVector)
     // update projection
     gl.uniform2f(PIXI.defaultShader.projectionVector, filterArea.width/2, -filterArea.height/2);
     gl.uniform2f(PIXI.defaultShader.offsetVector, -filterArea.x, -filterArea.y);
@@ -4583,10 +4564,7 @@ PIXI.WebGLFilterManager.prototype.pushFilter = function(filterBlock)
     gl.clearColor(0,0,0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    //filter.texture = texture;
     filterBlock._glFilterTexture = texture;
-
-    //console.log("PUSH")
 };
 
 
@@ -4783,12 +4761,10 @@ PIXI.WebGLFilterManager.prototype.applyFilterPass = function(filter, filterArea,
 
     if(filter.uniforms.dimensions)
     {
-        //console.log(filter.uniforms.dimensions)
         filter.uniforms.dimensions.value[0] = this.width;//width;
         filter.uniforms.dimensions.value[1] = this.height;//height;
         filter.uniforms.dimensions.value[2] = this.vertexArray[0];
         filter.uniforms.dimensions.value[3] = this.vertexArray[5];//filterArea.height;
-    //  console.log(this.vertexArray[5])
     }
 
     shader.syncUniforms();
@@ -4954,14 +4930,9 @@ PIXI.WebGLFilterManager.prototype.getBounds = function(displayObject)
     }
     while(tempObject !== testObject);
 
-    // maximum bounds is the size of the screen..
-    //minX = minX > 0 ? minX : 0;
-    //minY = minY > 0 ? minY : 0;
-
     displayObject.filterArea.x = minX;
     displayObject.filterArea.y = minY;
 
-//  console.log(maxX+ " : " + minX)
     displayObject.filterArea.width = maxX - minX;
     displayObject.filterArea.height = maxY - minY;
 };
@@ -5915,16 +5886,16 @@ PIXI.WebGLRenderer.prototype.handleContextRestored = function()
  */
 PIXI.WebGLRenderGroup = function(gl, transparent)
 {
-	this.gl = gl;
-	this.root;
-	
-	this.backgroundColor;
-	this.transparent = transparent == undefined ? true : transparent;
-	
-	this.batchs = [];
-	this.toRemove = [];
-	// console.log(this.transparent)
-	this.filterManager = new PIXI.WebGLFilterManager(this.transparent);
+    this.gl = gl;
+    this.root;
+    
+    this.backgroundColor;
+    this.transparent = transparent == undefined ? true : transparent;
+    
+    this.batchs = [];
+    this.toRemove = [];
+    // console.log(this.transparent)
+    this.filterManager = new PIXI.WebGLFilterManager(this.transparent);
 }
 
 // constructor
@@ -5939,17 +5910,17 @@ PIXI.WebGLRenderGroup.prototype.constructor = PIXI.WebGLRenderGroup;
  */
 PIXI.WebGLRenderGroup.prototype.setRenderable = function(displayObject)
 {
-	// has this changed??
-	if(this.root)this.removeDisplayObjectAndChildren(this.root);
-	
-	displayObject.worldVisible = displayObject.visible;
-	
-	// soooooo //
-	// to check if any batchs exist already??
-	
-	// TODO what if its already has an object? should remove it
-	this.root = displayObject;
-	this.addDisplayObjectAndChildren(displayObject);
+    // has this changed??
+    if(this.root)this.removeDisplayObjectAndChildren(this.root);
+    
+    displayObject.worldVisible = displayObject.visible;
+    
+    // soooooo //
+    // to check if any batchs exist already??
+    
+    // TODO what if its already has an object? should remove it
+    this.root = displayObject;
+    this.addDisplayObjectAndChildren(displayObject);
 }
 
 /**
@@ -5960,32 +5931,32 @@ PIXI.WebGLRenderGroup.prototype.setRenderable = function(displayObject)
  */
 PIXI.WebGLRenderGroup.prototype.render = function(projection, buffer)
 {
-	PIXI.WebGLRenderer.updateTextures();
-	
-	var gl = this.gl;
-	gl.uniform2f(PIXI.defaultShader.projectionVector, projection.x, projection.y);
+    PIXI.WebGLRenderer.updateTextures();
+    
+    var gl = this.gl;
+    gl.uniform2f(PIXI.defaultShader.projectionVector, projection.x, projection.y);
 
-	this.filterManager.begin(projection, buffer);
+    this.filterManager.begin(projection, buffer);
 
-	
-	gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-	// will render all the elements in the group
-	var renderable;
+    
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    // will render all the elements in the group
+    var renderable;
 
-	for (var i=0; i < this.batchs.length; i++) 
-	{
-		
-		renderable = this.batchs[i];
-		if(renderable instanceof PIXI.WebGLBatch)
-		{
-			this.batchs[i].render();
-			continue;
-		}
-		
-		// render special
-		this.renderSpecial(renderable, projection);
-	}
-	
+    for (var i=0; i < this.batchs.length; i++) 
+    {
+        
+        renderable = this.batchs[i];
+        if(renderable instanceof PIXI.WebGLBatch)
+        {
+            this.batchs[i].render();
+            continue;
+        }
+        
+        // render special
+        this.renderSpecial(renderable, projection);
+    }
+    
 }
 
 /**
@@ -5998,154 +5969,151 @@ PIXI.WebGLRenderGroup.prototype.render = function(projection, buffer)
  */
 PIXI.WebGLRenderGroup.prototype.renderSpecific = function(displayObject, projection, buffer)
 {
-	PIXI.WebGLRenderer.updateTextures();
-	var gl = this.gl;
+    PIXI.WebGLRenderer.updateTextures();
+    var gl = this.gl;
 
-	gl.uniform2f(PIXI.defaultShader.projectionVector, projection.x, projection.y);
+    gl.uniform2f(PIXI.defaultShader.projectionVector, projection.x, projection.y);
 
-	this.filterManager.begin(projection, buffer);
+    this.filterManager.begin(projection, buffer);
 
-	// to do!
-	// render part of the scene...
-	
-	var startIndex;
-	var startBatchIndex;
-	
-	var endIndex;
-	var endBatchIndex;
-	
-	/*
-	 *  LOOK FOR THE NEXT SPRITE
-	 *  This part looks for the closest next sprite that can go into a batch
-	 *  it keeps looking until it finds a sprite or gets to the end of the display
-	 *  scene graph
-	 */
-	var nextRenderable = displayObject.first;
-	while(nextRenderable._iNext)
-	{
-		if(nextRenderable.renderable && nextRenderable.__renderGroup)break;
-		nextRenderable = nextRenderable._iNext;
-	}
-	var startBatch = nextRenderable.batch;
-	//console.log(nextRenderable);
-	
-	//console.log(renderable)
-	if(nextRenderable instanceof PIXI.Sprite)
-	{
-		startBatch = nextRenderable.batch;
-		
-		var head = startBatch.head;
-		var next = head;
-		
-		// ok now we have the batch.. need to find the start index!
-		if(head == nextRenderable)
-		{
-			startIndex = 0;
-		}
-		else
-		{
-			startIndex = 1;
-			
-			while(head.__next != nextRenderable)
-			{
-				startIndex++;
-				head = head.__next;
-			}
-		}
-	}
-	else
-	{
-		startBatch = nextRenderable;
-	}
-	
-	// Get the LAST renderable object
-	var lastRenderable = displayObject.last;
-	while(lastRenderable._iPrev)
-	{
-		if(lastRenderable.renderable && lastRenderable.__renderGroup)break;
-		lastRenderable = lastRenderable._iNext;
-	}
-	
-	if(lastRenderable instanceof PIXI.Sprite)
-	{
-		endBatch = lastRenderable.batch;
-		
-		var head = endBatch.head;
-		
-		if(head == lastRenderable)
-		{
-			endIndex = 0;
-		}
-		else
-		{
-			endIndex = 1;
-			
-			while(head.__next != lastRenderable)
-			{
-				endIndex++;
-				head = head.__next;
-			}
-		}
-	}
-	else
-	{
-		endBatch = lastRenderable;
-	}
-	
-	//console.log(endBatch);
-	// TODO - need to fold this up a bit!
-	
-	if(startBatch == endBatch)
-	{
-		if(startBatch instanceof PIXI.WebGLBatch)
-		{
-			startBatch.render(startIndex, endIndex+1);
-		}
-		else
-		{
-			this.renderSpecial(startBatch, projection);
-		}
-		return;
-	}
-	
-	// now we have first and last!
-	startBatchIndex = this.batchs.indexOf(startBatch);
-	endBatchIndex = this.batchs.indexOf(endBatch);
-	
-	// DO the first batch
-	if(startBatch instanceof PIXI.WebGLBatch)
-	{
-		startBatch.render(startIndex);
-	}
-	else
-	{
-		this.renderSpecial(startBatch, projection);
-	}
-	
-	// DO the middle batchs..
-	for (var i=startBatchIndex+1; i < endBatchIndex; i++) 
-	{
-		renderable = this.batchs[i];
-	
-		if(renderable instanceof PIXI.WebGLBatch)
-		{
-			this.batchs[i].render();
-		}
-		else
-		{
-			this.renderSpecial(renderable, projection);
-		}
-	}
-	
-	// DO the last batch..
-	if(endBatch instanceof PIXI.WebGLBatch)
-	{
-		endBatch.render(0, endIndex+1);
-	}
-	else
-	{
-		this.renderSpecial(endBatch, projection);
-	}
+    // to do!
+    // render part of the scene...
+    
+    var startIndex;
+    var startBatchIndex;
+    
+    var endIndex;
+    var endBatchIndex;
+    
+    /*
+     *  LOOK FOR THE NEXT SPRITE
+     *  This part looks for the closest next sprite that can go into a batch
+     *  it keeps looking until it finds a sprite or gets to the end of the display
+     *  scene graph
+     */
+    var nextRenderable = displayObject.first;
+    while(nextRenderable._iNext)
+    {
+        if(nextRenderable.renderable && nextRenderable.__renderGroup)break;
+        nextRenderable = nextRenderable._iNext;
+    }
+    var startBatch = nextRenderable.batch;
+    //console.log(nextRenderable);
+    
+    //console.log(renderable)
+    if(nextRenderable instanceof PIXI.Sprite)
+    {
+        startBatch = nextRenderable.batch;
+        
+        var head = startBatch.head;
+        var next = head;
+        
+        // ok now we have the batch.. need to find the start index!
+        if(head == nextRenderable)
+        {
+            startIndex = 0;
+        }
+        else
+        {
+            startIndex = 1;
+            
+            while(head.__next != nextRenderable)
+            {
+                startIndex++;
+                head = head.__next;
+            }
+        }
+    }
+    else
+    {
+        startBatch = nextRenderable;
+    }
+    
+    // Get the LAST renderable object
+    var lastRenderable = displayObject.last;
+    while(lastRenderable._iPrev)
+    {
+        if(lastRenderable.renderable && lastRenderable.__renderGroup)break;
+        lastRenderable = lastRenderable._iNext;
+    }
+    
+    if(lastRenderable instanceof PIXI.Sprite)
+    {
+        endBatch = lastRenderable.batch;
+        
+        var head = endBatch.head;
+        
+        if(head == lastRenderable)
+        {
+            endIndex = 0;
+        }
+        else
+        {
+            endIndex = 1;
+            
+            while(head.__next != lastRenderable)
+            {
+                endIndex++;
+                head = head.__next;
+            }
+        }
+    }
+    else
+    {
+        endBatch = lastRenderable;
+    }
+    
+    if(startBatch == endBatch)
+    {
+        if(startBatch instanceof PIXI.WebGLBatch)
+        {
+            startBatch.render(startIndex, endIndex+1);
+        }
+        else
+        {
+            this.renderSpecial(startBatch, projection);
+        }
+        return;
+    }
+    
+    // now we have first and last!
+    startBatchIndex = this.batchs.indexOf(startBatch);
+    endBatchIndex = this.batchs.indexOf(endBatch);
+    
+    // DO the first batch
+    if(startBatch instanceof PIXI.WebGLBatch)
+    {
+        startBatch.render(startIndex);
+    }
+    else
+    {
+        this.renderSpecial(startBatch, projection);
+    }
+    
+    // DO the middle batchs..
+    for (var i=startBatchIndex+1; i < endBatchIndex; i++) 
+    {
+        renderable = this.batchs[i];
+    
+        if(renderable instanceof PIXI.WebGLBatch)
+        {
+            this.batchs[i].render();
+        }
+        else
+        {
+            this.renderSpecial(renderable, projection);
+        }
+    }
+    
+    // DO the last batch..
+    if(endBatch instanceof PIXI.WebGLBatch)
+    {
+        endBatch.render(0, endIndex+1);
+    }
+    else
+    {
+        this.renderSpecial(endBatch, projection);
+    }
 }
 
 /**
@@ -6158,30 +6126,30 @@ PIXI.WebGLRenderGroup.prototype.renderSpecific = function(displayObject, project
  */
 PIXI.WebGLRenderGroup.prototype.renderSpecial = function(renderable, projection)
 {
-	
-	var worldVisible = renderable.vcount === PIXI.visibleCount
+    
+    var worldVisible = renderable.vcount === PIXI.visibleCount
 
 
-	if(renderable instanceof PIXI.TilingSprite)
-	{
-		if(worldVisible)this.renderTilingSprite(renderable, projection);
-	}
-	else if(renderable instanceof PIXI.Strip)
-	{
-		if(worldVisible)this.renderStrip(renderable, projection);
-	}
-	else if(renderable instanceof PIXI.CustomRenderable)
-	{
-		if(worldVisible) renderable.renderWebGL(this, projection);
-	}
-	else if(renderable instanceof PIXI.Graphics)
-	{
-		if(worldVisible && renderable.renderable) PIXI.WebGLGraphics.renderGraphics(renderable, projection);
-	}
-	else if(renderable instanceof PIXI.FilterBlock)
-	{
-		this.handleFilterBlock(renderable, projection);
-	}
+    if(renderable instanceof PIXI.TilingSprite)
+    {
+        if(worldVisible)this.renderTilingSprite(renderable, projection);
+    }
+    else if(renderable instanceof PIXI.Strip)
+    {
+        if(worldVisible)this.renderStrip(renderable, projection);
+    }
+    else if(renderable instanceof PIXI.CustomRenderable)
+    {
+        if(worldVisible) renderable.renderWebGL(this, projection);
+    }
+    else if(renderable instanceof PIXI.Graphics)
+    {
+        if(worldVisible && renderable.renderable) PIXI.WebGLGraphics.renderGraphics(renderable, projection);
+    }
+    else if(renderable instanceof PIXI.FilterBlock)
+    {
+        this.handleFilterBlock(renderable, projection);
+    }
 }
 
 flip = false;
@@ -6192,67 +6160,67 @@ var maskPosition = 0;
 
 PIXI.WebGLRenderGroup.prototype.handleFilterBlock = function(filterBlock, projection)
 {
-	/*
-	 * for now only masks are supported..
-	 */
-	var gl = PIXI.gl;
-	
-	if(filterBlock.open)
-	{
-		if(filterBlock.data instanceof Array)
-		{
-			this.filterManager.pushFilter(filterBlock);
-			// ok so..
-			
-		}
-		else
-		{	
-			maskPosition++;
+    /*
+     * for now only masks are supported..
+     */
+    var gl = PIXI.gl;
+    
+    if(filterBlock.open)
+    {
+        if(filterBlock.data instanceof Array)
+        {
+            this.filterManager.pushFilter(filterBlock);
+            // ok so..
+            
+        }
+        else
+        {   
+            maskPosition++;
 
-			maskStack.push(filterBlock)
-	
-			gl.enable(gl.STENCIL_TEST);
-			
-			gl.colorMask(false, false, false, false);
-			
-			gl.stencilFunc(gl.ALWAYS,1,1);
-			gl.stencilOp(gl.KEEP,gl.KEEP,gl.INCR);
-	
-			PIXI.WebGLGraphics.renderGraphics(filterBlock.data, projection);
-			
-			gl.colorMask(true, true, true, true);
-			gl.stencilFunc(gl.NOTEQUAL,0,maskStack.length);
-			gl.stencilOp(gl.KEEP,gl.KEEP,gl.KEEP);
-		}
-	}
-	else
-	{
-		if(filterBlock.data instanceof Array)
-		{
-			this.filterManager.popFilter();
-		}
-		else
-		{
-			var maskData = maskStack.pop(filterBlock)
+            maskStack.push(filterBlock)
+    
+            gl.enable(gl.STENCIL_TEST);
+            
+            gl.colorMask(false, false, false, false);
+            
+            gl.stencilFunc(gl.ALWAYS,1,1);
+            gl.stencilOp(gl.KEEP,gl.KEEP,gl.INCR);
+    
+            PIXI.WebGLGraphics.renderGraphics(filterBlock.data, projection);
+            
+            gl.colorMask(true, true, true, true);
+            gl.stencilFunc(gl.NOTEQUAL,0,maskStack.length);
+            gl.stencilOp(gl.KEEP,gl.KEEP,gl.KEEP);
+        }
+    }
+    else
+    {
+        if(filterBlock.data instanceof Array)
+        {
+            this.filterManager.popFilter();
+        }
+        else
+        {
+            var maskData = maskStack.pop(filterBlock)
 
 
-			if(maskData)
-			{
-				gl.colorMask(false, false, false, false);
-			
-				gl.stencilFunc(gl.ALWAYS,1,1);
-				gl.stencilOp(gl.KEEP,gl.KEEP,gl.DECR);
+            if(maskData)
+            {
+                gl.colorMask(false, false, false, false);
+            
+                gl.stencilFunc(gl.ALWAYS,1,1);
+                gl.stencilOp(gl.KEEP,gl.KEEP,gl.DECR);
 
-				PIXI.WebGLGraphics.renderGraphics(maskData.data, projection);
-			
-				gl.colorMask(true, true, true, true);
-				gl.stencilFunc(gl.NOTEQUAL,0,maskStack.length);
-				gl.stencilOp(gl.KEEP,gl.KEEP,gl.KEEP);
-			};
+                PIXI.WebGLGraphics.renderGraphics(maskData.data, projection);
+            
+                gl.colorMask(true, true, true, true);
+                gl.stencilFunc(gl.NOTEQUAL,0,maskStack.length);
+                gl.stencilOp(gl.KEEP,gl.KEEP,gl.KEEP);
+            };
 
-			gl.disable(gl.STENCIL_TEST);
-		}
-	}
+            gl.disable(gl.STENCIL_TEST);
+        }
+    }
 }
 
 /**
@@ -6264,37 +6232,37 @@ PIXI.WebGLRenderGroup.prototype.handleFilterBlock = function(filterBlock, projec
  */
 PIXI.WebGLRenderGroup.prototype.updateTexture = function(displayObject)
 {
-	
-	// TODO definitely can optimse this function..
-	
-	this.removeObject(displayObject);
-	
-	/*
-	 *  LOOK FOR THE PREVIOUS RENDERABLE
-	 *  This part looks for the closest previous sprite that can go into a batch
-	 *  It keeps going back until it finds a sprite or the stage
-	 */
-	var previousRenderable = displayObject.first;
-	while(previousRenderable != this.root)
-	{
-		previousRenderable = previousRenderable._iPrev;
-		if(previousRenderable.renderable && previousRenderable.__renderGroup)break;
-	}
-	
-	/*
-	 *  LOOK FOR THE NEXT SPRITE
-	 *  This part looks for the closest next sprite that can go into a batch
-	 *  it keeps looking until it finds a sprite or gets to the end of the display
-	 *  scene graph
-	 */
-	var nextRenderable = displayObject.last;
-	while(nextRenderable._iNext)
-	{
-		nextRenderable = nextRenderable._iNext;
-		if(nextRenderable.renderable && nextRenderable.__renderGroup)break;
-	}
-	
-	this.insertObject(displayObject, previousRenderable, nextRenderable);
+    
+    // TODO definitely can optimse this function..
+    
+    this.removeObject(displayObject);
+    
+    /*
+     *  LOOK FOR THE PREVIOUS RENDERABLE
+     *  This part looks for the closest previous sprite that can go into a batch
+     *  It keeps going back until it finds a sprite or the stage
+     */
+    var previousRenderable = displayObject.first;
+    while(previousRenderable != this.root)
+    {
+        previousRenderable = previousRenderable._iPrev;
+        if(previousRenderable.renderable && previousRenderable.__renderGroup)break;
+    }
+    
+    /*
+     *  LOOK FOR THE NEXT SPRITE
+     *  This part looks for the closest next sprite that can go into a batch
+     *  it keeps looking until it finds a sprite or gets to the end of the display
+     *  scene graph
+     */
+    var nextRenderable = displayObject.last;
+    while(nextRenderable._iNext)
+    {
+        nextRenderable = nextRenderable._iNext;
+        if(nextRenderable.renderable && nextRenderable.__renderGroup)break;
+    }
+    
+    this.insertObject(displayObject, previousRenderable, nextRenderable);
 }
 
 /**
@@ -6307,34 +6275,34 @@ PIXI.WebGLRenderGroup.prototype.updateTexture = function(displayObject)
  */
 PIXI.WebGLRenderGroup.prototype.addFilterBlocks = function(start, end)
 {
-	start.__renderGroup = this;
-	end.__renderGroup = this;
-	/*
-	 *  LOOK FOR THE PREVIOUS RENDERABLE
-	 *  This part looks for the closest previous sprite that can go into a batch
-	 *  It keeps going back until it finds a sprite or the stage
-	 */
-	var previousRenderable = start;
-	while(previousRenderable != this.root.first)
-	{
-		previousRenderable = previousRenderable._iPrev;
-		if(previousRenderable.renderable && previousRenderable.__renderGroup)break;
-	}
-	this.insertAfter(start, previousRenderable);
-		
-	/*
-	 *  LOOK FOR THE NEXT SPRITE
-	 *  This part looks for the closest next sprite that can go into a batch
-	 *  it keeps looking until it finds a sprite or gets to the end of the display
-	 *  scene graph
-	 */
-	var previousRenderable2 = end;
-	while(previousRenderable2 != this.root.first)
-	{
-		previousRenderable2 = previousRenderable2._iPrev;
-		if(previousRenderable2.renderable && previousRenderable2.__renderGroup)break;
-	}
-	this.insertAfter(end, previousRenderable2);
+    start.__renderGroup = this;
+    end.__renderGroup = this;
+    /*
+     *  LOOK FOR THE PREVIOUS RENDERABLE
+     *  This part looks for the closest previous sprite that can go into a batch
+     *  It keeps going back until it finds a sprite or the stage
+     */
+    var previousRenderable = start;
+    while(previousRenderable != this.root.first)
+    {
+        previousRenderable = previousRenderable._iPrev;
+        if(previousRenderable.renderable && previousRenderable.__renderGroup)break;
+    }
+    this.insertAfter(start, previousRenderable);
+        
+    /*
+     *  LOOK FOR THE NEXT SPRITE
+     *  This part looks for the closest next sprite that can go into a batch
+     *  it keeps looking until it finds a sprite or gets to the end of the display
+     *  scene graph
+     */
+    var previousRenderable2 = end;
+    while(previousRenderable2 != this.root.first)
+    {
+        previousRenderable2 = previousRenderable2._iPrev;
+        if(previousRenderable2.renderable && previousRenderable2.__renderGroup)break;
+    }
+    this.insertAfter(end, previousRenderable2);
 }
 
 /**
@@ -6347,8 +6315,8 @@ PIXI.WebGLRenderGroup.prototype.addFilterBlocks = function(start, end)
  */
 PIXI.WebGLRenderGroup.prototype.removeFilterBlocks = function(start, end)
 {
-	this.removeObject(start);
-	this.removeObject(end);
+    this.removeObject(start);
+    this.removeObject(end);
 }
 
 /**
@@ -6360,52 +6328,52 @@ PIXI.WebGLRenderGroup.prototype.removeFilterBlocks = function(start, end)
  */
 PIXI.WebGLRenderGroup.prototype.addDisplayObjectAndChildren = function(displayObject)
 {
-	if(displayObject.__renderGroup)displayObject.__renderGroup.removeDisplayObjectAndChildren(displayObject);
-	
-	/*
-	 *  LOOK FOR THE PREVIOUS RENDERABLE
-	 *  This part looks for the closest previous sprite that can go into a batch
-	 *  It keeps going back until it finds a sprite or the stage
-	 */
-	
-	var previousRenderable = displayObject.first;
-	while(previousRenderable != this.root.first)
-	{
-		previousRenderable = previousRenderable._iPrev;
-		if(previousRenderable.renderable && previousRenderable.__renderGroup)break;
-	}
-	
-	/*
-	 *  LOOK FOR THE NEXT SPRITE
-	 *  This part looks for the closest next sprite that can go into a batch
-	 *  it keeps looking until it finds a sprite or gets to the end of the display
-	 *  scene graph
-	 */
-	var nextRenderable = displayObject.last;
-	while(nextRenderable._iNext)
-	{
-		nextRenderable = nextRenderable._iNext;
-		if(nextRenderable.renderable && nextRenderable.__renderGroup)break;
-	}
-	
-	// one the display object hits this. we can break the loop	
-	
-	var tempObject = displayObject.first;
-	var testObject = displayObject.last._iNext;
-	do	
-	{
-		tempObject.__renderGroup = this;
-		
-		if(tempObject.renderable)
-		{
-		
-			this.insertObject(tempObject, previousRenderable, nextRenderable);
-			previousRenderable = tempObject;
-		}
-		
-		tempObject = tempObject._iNext;
-	}
-	while(tempObject != testObject)
+    if(displayObject.__renderGroup)displayObject.__renderGroup.removeDisplayObjectAndChildren(displayObject);
+    
+    /*
+     *  LOOK FOR THE PREVIOUS RENDERABLE
+     *  This part looks for the closest previous sprite that can go into a batch
+     *  It keeps going back until it finds a sprite or the stage
+     */
+    
+    var previousRenderable = displayObject.first;
+    while(previousRenderable != this.root.first)
+    {
+        previousRenderable = previousRenderable._iPrev;
+        if(previousRenderable.renderable && previousRenderable.__renderGroup)break;
+    }
+    
+    /*
+     *  LOOK FOR THE NEXT SPRITE
+     *  This part looks for the closest next sprite that can go into a batch
+     *  it keeps looking until it finds a sprite or gets to the end of the display
+     *  scene graph
+     */
+    var nextRenderable = displayObject.last;
+    while(nextRenderable._iNext)
+    {
+        nextRenderable = nextRenderable._iNext;
+        if(nextRenderable.renderable && nextRenderable.__renderGroup)break;
+    }
+    
+    // one the display object hits this. we can break the loop  
+    
+    var tempObject = displayObject.first;
+    var testObject = displayObject.last._iNext;
+    do  
+    {
+        tempObject.__renderGroup = this;
+        
+        if(tempObject.renderable)
+        {
+        
+            this.insertObject(tempObject, previousRenderable, nextRenderable);
+            previousRenderable = tempObject;
+        }
+        
+        tempObject = tempObject._iNext;
+    }
+    while(tempObject != testObject)
 }
 
 /**
@@ -6417,17 +6385,17 @@ PIXI.WebGLRenderGroup.prototype.addDisplayObjectAndChildren = function(displayOb
  */
 PIXI.WebGLRenderGroup.prototype.removeDisplayObjectAndChildren = function(displayObject)
 {
-	if(displayObject.__renderGroup != this)return;
-	
-//	var displayObject = displayObject.first;
-	var lastObject = displayObject.last;
-	do	
-	{
-		displayObject.__renderGroup = null;
-		if(displayObject.renderable)this.removeObject(displayObject);
-		displayObject = displayObject._iNext;
-	}
-	while(displayObject)
+    if(displayObject.__renderGroup != this)return;
+    
+//  var displayObject = displayObject.first;
+    var lastObject = displayObject.last;
+    do  
+    {
+        displayObject.__renderGroup = null;
+        if(displayObject.renderable)this.removeObject(displayObject);
+        displayObject = displayObject._iNext;
+    }
+    while(displayObject)
 }
 
 /**
@@ -6441,130 +6409,130 @@ PIXI.WebGLRenderGroup.prototype.removeDisplayObjectAndChildren = function(displa
  */
 PIXI.WebGLRenderGroup.prototype.insertObject = function(displayObject, previousObject, nextObject)
 {
-	// while looping below THE OBJECT MAY NOT HAVE BEEN ADDED
-	var previousSprite = previousObject;
-	var nextSprite = nextObject;
-	
-	/*
-	 * so now we have the next renderable and the previous renderable
-	 * 
-	 */
-	if(displayObject instanceof PIXI.Sprite)
-	{
-		var previousBatch
-		var nextBatch
-		
-		if(previousSprite instanceof PIXI.Sprite)
-		{
-			previousBatch = previousSprite.batch;
-			if(previousBatch)
-			{
-				if(previousBatch.texture == displayObject.texture.baseTexture && previousBatch.blendMode == displayObject.blendMode)
-				{
-					previousBatch.insertAfter(displayObject, previousSprite);
-					return;
-				}
-			}
-		}
-		else
-		{
-			// TODO reword!
-			previousBatch = previousSprite;
-		}
-	
-		if(nextSprite)
-		{
-			if(nextSprite instanceof PIXI.Sprite)
-			{
-				nextBatch = nextSprite.batch;
-			
-				//batch may not exist if item was added to the display list but not to the webGL
-				if(nextBatch)
-				{
-					if(nextBatch.texture == displayObject.texture.baseTexture && nextBatch.blendMode == displayObject.blendMode)
-					{
-						nextBatch.insertBefore(displayObject, nextSprite);
-						return;
-					}
-					else
-					{
-						if(nextBatch == previousBatch)
-						{
-							// THERE IS A SPLIT IN THIS BATCH! //
-							var splitBatch = previousBatch.split(nextSprite);
-							// COOL!
-							// add it back into the array	
-							/*
-							 * OOPS!
-							 * seems the new sprite is in the middle of a batch
-							 * lets split it.. 
-							 */
-							var batch = PIXI.WebGLRenderer.getBatch();
+    // while looping below THE OBJECT MAY NOT HAVE BEEN ADDED
+    var previousSprite = previousObject;
+    var nextSprite = nextObject;
+    
+    /*
+     * so now we have the next renderable and the previous renderable
+     * 
+     */
+    if(displayObject instanceof PIXI.Sprite)
+    {
+        var previousBatch
+        var nextBatch
+        
+        if(previousSprite instanceof PIXI.Sprite)
+        {
+            previousBatch = previousSprite.batch;
+            if(previousBatch)
+            {
+                if(previousBatch.texture == displayObject.texture.baseTexture && previousBatch.blendMode == displayObject.blendMode)
+                {
+                    previousBatch.insertAfter(displayObject, previousSprite);
+                    return;
+                }
+            }
+        }
+        else
+        {
+            // TODO reword!
+            previousBatch = previousSprite;
+        }
+    
+        if(nextSprite)
+        {
+            if(nextSprite instanceof PIXI.Sprite)
+            {
+                nextBatch = nextSprite.batch;
+            
+                //batch may not exist if item was added to the display list but not to the webGL
+                if(nextBatch)
+                {
+                    if(nextBatch.texture == displayObject.texture.baseTexture && nextBatch.blendMode == displayObject.blendMode)
+                    {
+                        nextBatch.insertBefore(displayObject, nextSprite);
+                        return;
+                    }
+                    else
+                    {
+                        if(nextBatch == previousBatch)
+                        {
+                            // THERE IS A SPLIT IN THIS BATCH! //
+                            var splitBatch = previousBatch.split(nextSprite);
+                            // COOL!
+                            // add it back into the array   
+                            /*
+                             * OOPS!
+                             * seems the new sprite is in the middle of a batch
+                             * lets split it.. 
+                             */
+                            var batch = PIXI.WebGLRenderer.getBatch();
 
-							var index = this.batchs.indexOf( previousBatch );
-							batch.init(displayObject);
-							this.batchs.splice(index+1, 0, batch, splitBatch);
-							
-							return;
-						}
-					}
-				}
-			}
-			else
-			{
-				// TODO re-word!
-				
-				nextBatch = nextSprite;
-			}
-		}
-		
-		/*
-		 * looks like it does not belong to any batch!
-		 * but is also not intersecting one..
-		 * time to create anew one!
-		 */
-		
-		var batch =  PIXI.WebGLRenderer.getBatch();
-		batch.init(displayObject);
+                            var index = this.batchs.indexOf( previousBatch );
+                            batch.init(displayObject);
+                            this.batchs.splice(index+1, 0, batch, splitBatch);
+                            
+                            return;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // TODO re-word!
+                
+                nextBatch = nextSprite;
+            }
+        }
+        
+        /*
+         * looks like it does not belong to any batch!
+         * but is also not intersecting one..
+         * time to create anew one!
+         */
+        
+        var batch =  PIXI.WebGLRenderer.getBatch();
+        batch.init(displayObject);
 
-		if(previousBatch) // if this is invalid it means 
-		{
-			var index = this.batchs.indexOf( previousBatch );
-			this.batchs.splice(index+1, 0, batch);
-		}
-		else
-		{
-			this.batchs.push(batch);
-		}
-		
-		return;
-	}
-	else if(displayObject instanceof PIXI.TilingSprite)
-	{
-		
-		// add to a batch!!
-		this.initTilingSprite(displayObject);
-	//	this.batchs.push(displayObject);
-		
-	}
-	else if(displayObject instanceof PIXI.Strip)
-	{
-		// add to a batch!!
-		this.initStrip(displayObject);
-	//	this.batchs.push(displayObject);
-	}
-	else if(displayObject)// instanceof PIXI.Graphics)
-	{
-		//displayObject.initWebGL(this);
-		
-		// add to a batch!!
-		//this.initStrip(displayObject);
-		//this.batchs.push(displayObject);
-	}
-	
-	this.insertAfter(displayObject, previousSprite);
-			
-	// insert and SPLIT!
+        if(previousBatch) // if this is invalid it means 
+        {
+            var index = this.batchs.indexOf( previousBatch );
+            this.batchs.splice(index+1, 0, batch);
+        }
+        else
+        {
+            this.batchs.push(batch);
+        }
+        
+        return;
+    }
+    else if(displayObject instanceof PIXI.TilingSprite)
+    {
+        
+        // add to a batch!!
+        this.initTilingSprite(displayObject);
+    //  this.batchs.push(displayObject);
+        
+    }
+    else if(displayObject instanceof PIXI.Strip)
+    {
+        // add to a batch!!
+        this.initStrip(displayObject);
+    //  this.batchs.push(displayObject);
+    }
+    else if(displayObject)// instanceof PIXI.Graphics)
+    {
+        //displayObject.initWebGL(this);
+        
+        // add to a batch!!
+        //this.initStrip(displayObject);
+        //this.batchs.push(displayObject);
+    }
+    
+    this.insertAfter(displayObject, previousSprite);
+            
+    // insert and SPLIT!
 
 }
 
@@ -6578,49 +6546,49 @@ PIXI.WebGLRenderGroup.prototype.insertObject = function(displayObject, previousO
  */
 PIXI.WebGLRenderGroup.prototype.insertAfter = function(item, displayObject)
 {
-	if(displayObject instanceof PIXI.Sprite)
-	{
-		var previousBatch = displayObject.batch;
-		
-		if(previousBatch)
-		{
-			// so this object is in a batch!
-			
-			// is it not? need to split the batch
-			if(previousBatch.tail == displayObject)
-			{
-				// is it tail? insert in to batchs	
-				var index = this.batchs.indexOf( previousBatch );
-				this.batchs.splice(index+1, 0, item);
-			}
-			else
-			{
-				// TODO MODIFY ADD / REMOVE CHILD TO ACCOUNT FOR FILTERS (also get prev and next) //
-				
-				// THERE IS A SPLIT IN THIS BATCH! //
-				var splitBatch = previousBatch.split(displayObject.__next);
-				
-				// COOL!
-				// add it back into the array	
-				/*
-				 * OOPS!
-				 * seems the new sprite is in the middle of a batch
-				 * lets split it.. 
-				 */
-				var index = this.batchs.indexOf( previousBatch );
-				this.batchs.splice(index+1, 0, item, splitBatch);
-			}
-		}
-		else
-		{
-			this.batchs.push(item);
-		}
-	}
-	else
-	{
-		var index = this.batchs.indexOf( displayObject );
-		this.batchs.splice(index+1, 0, item);
-	}
+    if(displayObject instanceof PIXI.Sprite)
+    {
+        var previousBatch = displayObject.batch;
+        
+        if(previousBatch)
+        {
+            // so this object is in a batch!
+            
+            // is it not? need to split the batch
+            if(previousBatch.tail == displayObject)
+            {
+                // is it tail? insert in to batchs  
+                var index = this.batchs.indexOf( previousBatch );
+                this.batchs.splice(index+1, 0, item);
+            }
+            else
+            {
+                // TODO MODIFY ADD / REMOVE CHILD TO ACCOUNT FOR FILTERS (also get prev and next) //
+                
+                // THERE IS A SPLIT IN THIS BATCH! //
+                var splitBatch = previousBatch.split(displayObject.__next);
+                
+                // COOL!
+                // add it back into the array   
+                /*
+                 * OOPS!
+                 * seems the new sprite is in the middle of a batch
+                 * lets split it.. 
+                 */
+                var index = this.batchs.indexOf( previousBatch );
+                this.batchs.splice(index+1, 0, item, splitBatch);
+            }
+        }
+        else
+        {
+            this.batchs.push(item);
+        }
+    }
+    else
+    {
+        var index = this.batchs.indexOf( displayObject );
+        this.batchs.splice(index+1, 0, item);
+    }
 }
 
 /**
@@ -6632,73 +6600,73 @@ PIXI.WebGLRenderGroup.prototype.insertAfter = function(item, displayObject)
  */
 PIXI.WebGLRenderGroup.prototype.removeObject = function(displayObject)
 {
-	// loop through children..
-	// display object //
-	
-	// add a child from the render group..
-	// remove it and all its children!
-	//displayObject.cacheVisible = false;//displayObject.visible;
+    // loop through children..
+    // display object //
+    
+    // add a child from the render group..
+    // remove it and all its children!
+    //displayObject.cacheVisible = false;//displayObject.visible;
 
-	/*
-	 * removing is a lot quicker..
-	 * 
-	 */
-	var batchToRemove;
-	
-	if(displayObject instanceof PIXI.Sprite)
-	{
-		// should always have a batch!
-		var batch = displayObject.batch;
-		if(!batch)return; // this means the display list has been altered befre rendering
-		
-		batch.remove(displayObject);
-		
-		if(batch.size==0)
-		{
-			batchToRemove = batch;
-		}
-	}
-	else
-	{
-		batchToRemove = displayObject;
-	}
-	
-	/*
-	 * Looks like there is somthing that needs removing!
-	 */
-	if(batchToRemove)	
-	{
-		var index = this.batchs.indexOf( batchToRemove );
-		if(index == -1)return;// this means it was added then removed before rendered
-		
-		// ok so.. check to see if you adjacent batchs should be joined.
-		// TODO may optimise?
-		if(index == 0 || index == this.batchs.length-1)
-		{
-			// wha - eva! just get of the empty batch!
-			this.batchs.splice(index, 1);
-			if(batchToRemove instanceof PIXI.WebGLBatch)PIXI.WebGLRenderer.returnBatch(batchToRemove);
-		
-			return;
-		}
-		
-		if(this.batchs[index-1] instanceof PIXI.WebGLBatch && this.batchs[index+1] instanceof PIXI.WebGLBatch)
-		{
-			if(this.batchs[index-1].texture == this.batchs[index+1].texture && this.batchs[index-1].blendMode == this.batchs[index+1].blendMode)
-			{
-				//console.log("MERGE")
-				this.batchs[index-1].merge(this.batchs[index+1]);
-				
-				if(batchToRemove instanceof PIXI.WebGLBatch)PIXI.WebGLRenderer.returnBatch(batchToRemove);
-				PIXI.WebGLRenderer.returnBatch(this.batchs[index+1]);
-				this.batchs.splice(index, 2);
-				return;
-			}
-		}
-		
-		this.batchs.splice(index, 1);
-		if(batchToRemove instanceof PIXI.WebGLBatch)PIXI.WebGLRenderer.returnBatch(batchToRemove);
-	}
+    /*
+     * removing is a lot quicker..
+     * 
+     */
+    var batchToRemove;
+    
+    if(displayObject instanceof PIXI.Sprite)
+    {
+        // should always have a batch!
+        var batch = displayObject.batch;
+        if(!batch)return; // this means the display list has been altered befre rendering
+        
+        batch.remove(displayObject);
+        
+        if(batch.size==0)
+        {
+            batchToRemove = batch;
+        }
+    }
+    else
+    {
+        batchToRemove = displayObject;
+    }
+    
+    /*
+     * Looks like there is somthing that needs removing!
+     */
+    if(batchToRemove)   
+    {
+        var index = this.batchs.indexOf( batchToRemove );
+        if(index == -1)return;// this means it was added then removed before rendered
+        
+        // ok so.. check to see if you adjacent batchs should be joined.
+        // TODO may optimise?
+        if(index == 0 || index == this.batchs.length-1)
+        {
+            // wha - eva! just get of the empty batch!
+            this.batchs.splice(index, 1);
+            if(batchToRemove instanceof PIXI.WebGLBatch)PIXI.WebGLRenderer.returnBatch(batchToRemove);
+        
+            return;
+        }
+        
+        if(this.batchs[index-1] instanceof PIXI.WebGLBatch && this.batchs[index+1] instanceof PIXI.WebGLBatch)
+        {
+            if(this.batchs[index-1].texture == this.batchs[index+1].texture && this.batchs[index-1].blendMode == this.batchs[index+1].blendMode)
+            {
+                //console.log("MERGE")
+                this.batchs[index-1].merge(this.batchs[index+1]);
+                
+                if(batchToRemove instanceof PIXI.WebGLBatch)PIXI.WebGLRenderer.returnBatch(batchToRemove);
+                PIXI.WebGLRenderer.returnBatch(this.batchs[index+1]);
+                this.batchs.splice(index, 2);
+                return;
+            }
+        }
+        
+        this.batchs.splice(index, 1);
+        if(batchToRemove instanceof PIXI.WebGLBatch)PIXI.WebGLRenderer.returnBatch(batchToRemove);
+    }
 }
 
 
@@ -6711,54 +6679,54 @@ PIXI.WebGLRenderGroup.prototype.removeObject = function(displayObject)
  */
 PIXI.WebGLRenderGroup.prototype.initTilingSprite = function(sprite)
 {
-	var gl = this.gl;
+    var gl = this.gl;
 
-	// make the texture tilable..
-			
-	sprite.verticies = new Float32Array([0, 0,
-										  sprite.width, 0,
-										  sprite.width,  sprite.height,
-										 0,  sprite.height]);
-					
-	sprite.uvs = new Float32Array([0, 0,
-									1, 0,
-									1, 1,
-									0, 1]);
-				
-	sprite.colors = new Float32Array([1,1,1,1]);
-	
-	sprite.indices =  new Uint16Array([0, 1, 3,2])//, 2]);
-	
-	sprite._vertexBuffer = gl.createBuffer();
-	sprite._indexBuffer = gl.createBuffer();
-	sprite._uvBuffer = gl.createBuffer();
-	sprite._colorBuffer = gl.createBuffer();
-						
-	gl.bindBuffer(gl.ARRAY_BUFFER, sprite._vertexBuffer);
-	gl.bufferData(gl.ARRAY_BUFFER, sprite.verticies, gl.STATIC_DRAW);
+    // make the texture tilable..
+            
+    sprite.verticies = new Float32Array([0, 0,
+                                          sprite.width, 0,
+                                          sprite.width,  sprite.height,
+                                         0,  sprite.height]);
+                    
+    sprite.uvs = new Float32Array([0, 0,
+                                    1, 0,
+                                    1, 1,
+                                    0, 1]);
+                
+    sprite.colors = new Float32Array([1,1,1,1]);
+    
+    sprite.indices =  new Uint16Array([0, 1, 3,2])//, 2]);
+    
+    sprite._vertexBuffer = gl.createBuffer();
+    sprite._indexBuffer = gl.createBuffer();
+    sprite._uvBuffer = gl.createBuffer();
+    sprite._colorBuffer = gl.createBuffer();
+                        
+    gl.bindBuffer(gl.ARRAY_BUFFER, sprite._vertexBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, sprite.verticies, gl.STATIC_DRAW);
 
-	gl.bindBuffer(gl.ARRAY_BUFFER, sprite._uvBuffer);
+    gl.bindBuffer(gl.ARRAY_BUFFER, sprite._uvBuffer);
     gl.bufferData(gl.ARRAY_BUFFER,  sprite.uvs, gl.DYNAMIC_DRAW);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, sprite._colorBuffer);
-	gl.bufferData(gl.ARRAY_BUFFER, sprite.colors, gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, sprite.colors, gl.STATIC_DRAW);
 
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, sprite._indexBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, sprite.indices, gl.STATIC_DRAW);
     
 //    return ( (x > 0) && ((x & (x - 1)) == 0) );
 
-	if(sprite.texture.baseTexture._glTexture)
-	{
-    	gl.bindTexture(gl.TEXTURE_2D, sprite.texture.baseTexture._glTexture);
-    	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
-		sprite.texture.baseTexture._powerOf2 = true;
-	}
-	else
-	{
-		sprite.texture.baseTexture._powerOf2 = true;
-	}
+    if(sprite.texture.baseTexture._glTexture)
+    {
+        gl.bindTexture(gl.TEXTURE_2D, sprite.texture.baseTexture._glTexture);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
+        sprite.texture.baseTexture._powerOf2 = true;
+    }
+    else
+    {
+        sprite.texture.baseTexture._powerOf2 = true;
+    }
 }
 
 /**
@@ -6771,86 +6739,86 @@ PIXI.WebGLRenderGroup.prototype.initTilingSprite = function(sprite)
  */
 PIXI.WebGLRenderGroup.prototype.renderStrip = function(strip, projection)
 {
-	var gl = this.gl;
+    var gl = this.gl;
 
-	PIXI.activateStripShader();
+    PIXI.activateStripShader();
 
-	var shader = PIXI.stripShader;
+    var shader = PIXI.stripShader;
 
-	var program = shader.program;
-	
-	var m = PIXI.mat3.clone(strip.worldTransform);
-	
-	PIXI.mat3.transpose(m);
-	
-//	console.log(projection)
-	// set the matrix transform for the 
- 	gl.uniformMatrix3fv(shader.translationMatrix, false, m);
-	gl.uniform2f(shader.projectionVector, projection.x, projection.y);
-	gl.uniform2f(shader.offsetVector, -PIXI.offset.x, -PIXI.offset.y);
-	
-	gl.uniform1f(shader.alpha, strip.worldAlpha);
+    var program = shader.program;
+    
+    var m = PIXI.mat3.clone(strip.worldTransform);
+    
+    PIXI.mat3.transpose(m);
+    
+//  console.log(projection)
+    // set the matrix transform for the 
+    gl.uniformMatrix3fv(shader.translationMatrix, false, m);
+    gl.uniform2f(shader.projectionVector, projection.x, projection.y);
+    gl.uniform2f(shader.offsetVector, -PIXI.offset.x, -PIXI.offset.y);
+    
+    gl.uniform1f(shader.alpha, strip.worldAlpha);
 
-	/*
-	if(strip.blendMode == PIXI.blendModes.NORMAL)
-	{
-		gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-	}
-	else
-	{
-		gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_COLOR);
-	}
-	*/
-	
-	//console.log("!!")
-	if(!strip.dirty)
-	{	
-		gl.bindBuffer(gl.ARRAY_BUFFER, strip._vertexBuffer);
-		gl.bufferSubData(gl.ARRAY_BUFFER, 0, strip.verticies)
-	    gl.vertexAttribPointer(shader.aVertexPosition, 2, gl.FLOAT, false, 0, 0);
-		
-		// update the uvs
-	   	gl.bindBuffer(gl.ARRAY_BUFFER, strip._uvBuffer);
-	    gl.vertexAttribPointer(shader.aTextureCoord, 2, gl.FLOAT, false, 0, 0);
-			
-	    gl.activeTexture(gl.TEXTURE0);
-	    gl.bindTexture(gl.TEXTURE_2D, strip.texture.baseTexture._glTexture);
-		
-		gl.bindBuffer(gl.ARRAY_BUFFER, strip._colorBuffer);
-	    gl.vertexAttribPointer(shader.colorAttribute, 1, gl.FLOAT, false, 0, 0);
-		
-		// dont need to upload!
-	    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, strip._indexBuffer);
-	}
-	else
-	{
-		strip.dirty = false;
-		gl.bindBuffer(gl.ARRAY_BUFFER, strip._vertexBuffer);
-		gl.bufferData(gl.ARRAY_BUFFER, strip.verticies, gl.STATIC_DRAW)
-	    gl.vertexAttribPointer(shader.aVertexPosition, 2, gl.FLOAT, false, 0, 0);
-		
-		// update the uvs
-	   	gl.bindBuffer(gl.ARRAY_BUFFER, strip._uvBuffer);
-	   	gl.bufferData(gl.ARRAY_BUFFER, strip.uvs, gl.STATIC_DRAW)
-	    gl.vertexAttribPointer(shader.aTextureCoord, 2, gl.FLOAT, false, 0, 0);
-			
-	    gl.activeTexture(gl.TEXTURE0);
-	    gl.bindTexture(gl.TEXTURE_2D, strip.texture.baseTexture._glTexture);
-	//	console.log(strip.texture.baseTexture._glTexture)
-		gl.bindBuffer(gl.ARRAY_BUFFER, strip._colorBuffer);
-		gl.bufferData(gl.ARRAY_BUFFER, strip.colors, gl.STATIC_DRAW)
-	    gl.vertexAttribPointer(shader.colorAttribute, 1, gl.FLOAT, false, 0, 0);
-		
-		// dont need to upload!
-	    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, strip._indexBuffer);
-	    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, strip.indices, gl.STATIC_DRAW);
-	    
-	}
-	
-	gl.drawElements(gl.TRIANGLE_STRIP, strip.indices.length, gl.UNSIGNED_SHORT, 0);
+    /*
+    if(strip.blendMode == PIXI.blendModes.NORMAL)
+    {
+        gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    }
+    else
+    {
+        gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_COLOR);
+    }
+    */
+    
+    //console.log("!!")
+    if(!strip.dirty)
+    {   
+        gl.bindBuffer(gl.ARRAY_BUFFER, strip._vertexBuffer);
+        gl.bufferSubData(gl.ARRAY_BUFFER, 0, strip.verticies)
+        gl.vertexAttribPointer(shader.aVertexPosition, 2, gl.FLOAT, false, 0, 0);
+        
+        // update the uvs
+        gl.bindBuffer(gl.ARRAY_BUFFER, strip._uvBuffer);
+        gl.vertexAttribPointer(shader.aTextureCoord, 2, gl.FLOAT, false, 0, 0);
+            
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, strip.texture.baseTexture._glTexture);
+        
+        gl.bindBuffer(gl.ARRAY_BUFFER, strip._colorBuffer);
+        gl.vertexAttribPointer(shader.colorAttribute, 1, gl.FLOAT, false, 0, 0);
+        
+        // dont need to upload!
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, strip._indexBuffer);
+    }
+    else
+    {
+        strip.dirty = false;
+        gl.bindBuffer(gl.ARRAY_BUFFER, strip._vertexBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, strip.verticies, gl.STATIC_DRAW)
+        gl.vertexAttribPointer(shader.aVertexPosition, 2, gl.FLOAT, false, 0, 0);
+        
+        // update the uvs
+        gl.bindBuffer(gl.ARRAY_BUFFER, strip._uvBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, strip.uvs, gl.STATIC_DRAW)
+        gl.vertexAttribPointer(shader.aTextureCoord, 2, gl.FLOAT, false, 0, 0);
+            
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, strip.texture.baseTexture._glTexture);
+    //  console.log(strip.texture.baseTexture._glTexture)
+        gl.bindBuffer(gl.ARRAY_BUFFER, strip._colorBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, strip.colors, gl.STATIC_DRAW)
+        gl.vertexAttribPointer(shader.colorAttribute, 1, gl.FLOAT, false, 0, 0);
+        
+        // dont need to upload!
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, strip._indexBuffer);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, strip.indices, gl.STATIC_DRAW);
+        
+    }
+    
+    gl.drawElements(gl.TRIANGLE_STRIP, strip.indices.length, gl.UNSIGNED_SHORT, 0);
     
     PIXI.deactivateStripShader();
-  	//gl.useProgram(PIXI.currentProgram);
+    //gl.useProgram(PIXI.currentProgram);
 }
 
 /**
@@ -6863,36 +6831,36 @@ PIXI.WebGLRenderGroup.prototype.renderStrip = function(strip, projection)
  */
 PIXI.WebGLRenderGroup.prototype.renderTilingSprite = function(sprite, projectionMatrix)
 {
-	var gl = this.gl;
+    var gl = this.gl;
 
 
-	var shaderProgram = PIXI.shaderProgram;
-	
-	var tilePosition = sprite.tilePosition;
-	var tileScale = sprite.tileScale;
-	
-	var offsetX =  tilePosition.x/sprite.texture.baseTexture.width;
-	var offsetY =  tilePosition.y/sprite.texture.baseTexture.height;
-	
-	var scaleX =  (sprite.width / sprite.texture.baseTexture.width)  / tileScale.x;
-	var scaleY =  (sprite.height / sprite.texture.baseTexture.height) / tileScale.y;
+    var shaderProgram = PIXI.shaderProgram;
+    
+    var tilePosition = sprite.tilePosition;
+    var tileScale = sprite.tileScale;
+    
+    var offsetX =  tilePosition.x/sprite.texture.baseTexture.width;
+    var offsetY =  tilePosition.y/sprite.texture.baseTexture.height;
+    
+    var scaleX =  (sprite.width / sprite.texture.baseTexture.width)  / tileScale.x;
+    var scaleY =  (sprite.height / sprite.texture.baseTexture.height) / tileScale.y;
 
-	sprite.uvs[0] = 0 - offsetX;
-	sprite.uvs[1] = 0 - offsetY;
-	
-	sprite.uvs[2] = (1 * scaleX)  -offsetX;
-	sprite.uvs[3] = 0 - offsetY;
-	
-	sprite.uvs[4] = (1 *scaleX) - offsetX;
-	sprite.uvs[5] = (1 *scaleY) - offsetY;
-	
-	sprite.uvs[6] = 0 - offsetX;
-	sprite.uvs[7] = (1 *scaleY) - offsetY;
-	
-	gl.bindBuffer(gl.ARRAY_BUFFER, sprite._uvBuffer);
-	gl.bufferSubData(gl.ARRAY_BUFFER, 0, sprite.uvs)
-	
-	this.renderStrip(sprite, projectionMatrix);
+    sprite.uvs[0] = 0 - offsetX;
+    sprite.uvs[1] = 0 - offsetY;
+    
+    sprite.uvs[2] = (1 * scaleX)  -offsetX;
+    sprite.uvs[3] = 0 - offsetY;
+    
+    sprite.uvs[4] = (1 *scaleX) - offsetX;
+    sprite.uvs[5] = (1 *scaleY) - offsetY;
+    
+    sprite.uvs[6] = 0 - offsetX;
+    sprite.uvs[7] = (1 *scaleY) - offsetY;
+    
+    gl.bindBuffer(gl.ARRAY_BUFFER, sprite._uvBuffer);
+    gl.bufferSubData(gl.ARRAY_BUFFER, 0, sprite.uvs)
+    
+    this.renderStrip(sprite, projectionMatrix);
 }
 
 /**
@@ -6904,25 +6872,25 @@ PIXI.WebGLRenderGroup.prototype.renderTilingSprite = function(sprite, projection
  */
 PIXI.WebGLRenderGroup.prototype.initStrip = function(strip)
 {
-	// build the strip!
-	var gl = this.gl;
-	var shaderProgram = this.shaderProgram;
-	
-	strip._vertexBuffer = gl.createBuffer();
-	strip._indexBuffer = gl.createBuffer();
-	strip._uvBuffer = gl.createBuffer();
-	strip._colorBuffer = gl.createBuffer();
-	
-	gl.bindBuffer(gl.ARRAY_BUFFER, strip._vertexBuffer);
-	gl.bufferData(gl.ARRAY_BUFFER, strip.verticies, gl.DYNAMIC_DRAW);
+    // build the strip!
+    var gl = this.gl;
+    var shaderProgram = this.shaderProgram;
+    
+    strip._vertexBuffer = gl.createBuffer();
+    strip._indexBuffer = gl.createBuffer();
+    strip._uvBuffer = gl.createBuffer();
+    strip._colorBuffer = gl.createBuffer();
+    
+    gl.bindBuffer(gl.ARRAY_BUFFER, strip._vertexBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, strip.verticies, gl.DYNAMIC_DRAW);
 
-	gl.bindBuffer(gl.ARRAY_BUFFER, strip._uvBuffer);
+    gl.bindBuffer(gl.ARRAY_BUFFER, strip._uvBuffer);
     gl.bufferData(gl.ARRAY_BUFFER,  strip.uvs, gl.STATIC_DRAW);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, strip._colorBuffer);
-	gl.bufferData(gl.ARRAY_BUFFER, strip.colors, gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, strip.colors, gl.STATIC_DRAW);
 
-	
+    
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, strip._indexBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, strip.indices, gl.STATIC_DRAW);
 }
@@ -8186,11 +8154,11 @@ PIXI.EventTarget = function () {
 
     };
 
-	this.removeAllEventListeners = function( type ) {
-		var a = listeners[type];
-		if (a)
-			a.length = 0;
-	};
+    this.removeAllEventListeners = function( type ) {
+        var a = listeners[type];
+        if (a)
+            a.length = 0;
+    };
 };
 
 /*
@@ -8352,7 +8320,7 @@ PIXI.PolyK._convex = function(ax, ay, bx, by, cx, cy, sign)
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -8770,7 +8738,7 @@ Object.defineProperty(Phaser.Camera.prototype, "height", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -8944,7 +8912,7 @@ Phaser.State.prototype.constructor = Phaser.State;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -9471,7 +9439,7 @@ Phaser.StateManager.prototype.constructor = Phaser.StateManager;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -9628,7 +9596,7 @@ Phaser.LinkedList.prototype.constructor = Phaser.LinkedList;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -9933,7 +9901,7 @@ Phaser.Signal.prototype.constructor = Phaser.Signal;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -10098,7 +10066,7 @@ Phaser.SignalBinding.prototype.constructor = Phaser.SignalBinding;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -10258,7 +10226,7 @@ Object.defineProperty(Phaser.Filter.prototype, 'height', {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -10384,7 +10352,7 @@ Phaser.Plugin.prototype.constructor = Phaser.Plugin;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -10682,7 +10650,7 @@ Phaser.PluginManager.prototype.constructor = Phaser.PluginManager;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -10953,7 +10921,7 @@ Object.defineProperty(Phaser.Stage.prototype, "backgroundColor", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -11003,7 +10971,6 @@ Phaser.Group = function (game, parent, name, useStage) {
             if (parent instanceof Phaser.Group)
             {
                 parent._container.addChild(this._container);
-                parent._container.updateTransform();
             }
             else
             {
@@ -11048,6 +11015,11 @@ Phaser.Group = function (game, parent, name, useStage) {
     * @property {Phaser.Point} scale - The scane of the Group container.
     */
     this.scale = this._container.scale;
+
+    /**
+    * @property {Phaser.Point} pivot - The pivot point of the Group container.
+    */
+    this.pivot = this._container.pivot;
 
     /**
     * The cursor is a simple way to iterate through the objects in a Group using the Group.next and Group.previous functions.
@@ -11117,14 +11089,14 @@ Phaser.Group.prototype = {
             {
                 child.group = this;
 
+                this._container.addChild(child);
+
+                child.updateTransform();
+
                 if (child.events)
                 {
                     child.events.onAddedToGroup.dispatch(child, this);
                 }
-
-                this._container.addChild(child);
-
-                child.updateTransform();
             }
 
             if (this.cursor === null)
@@ -11162,14 +11134,14 @@ Phaser.Group.prototype = {
             {
                 child.group = this;
 
+                this._container.addChildAt(child, index);
+
+                child.updateTransform();
+
                 if (child.events)
                 {
                     child.events.onAddedToGroup.dispatch(child, this);
                 }
-
-                this._container.addChildAt(child, index);
-
-                child.updateTransform();
             }
 
             if (this.cursor === null)
@@ -11218,14 +11190,14 @@ Phaser.Group.prototype = {
         child.visible = exists;
         child.alive = exists;
 
+        this._container.addChild(child);
+            
+        child.updateTransform();
+
         if (child.events)
         {
             child.events.onAddedToGroup.dispatch(child, this);
         }
-
-        this._container.addChild(child);
-            
-        child.updateTransform();
 
         if (this.cursor === null)
         {
@@ -11260,13 +11232,14 @@ Phaser.Group.prototype = {
             child.visible = exists;
             child.alive = exists;
 
+            this._container.addChild(child);
+
+            child.updateTransform();
+
             if (child.events)
             {
                 child.events.onAddedToGroup.dispatch(child, this);
             }
-
-            this._container.addChild(child);
-            child.updateTransform();
 
             if (this.cursor === null)
             {
@@ -11363,8 +11336,6 @@ Phaser.Group.prototype = {
 
         var child1 = this.getAt(index1);
         var child2 = this.getAt(index2);
-
-        console.log('swapIndex ', index1, ' with ', index2);
 
         this.swap(child1, child2);
 
@@ -12402,102 +12373,6 @@ Phaser.Group.prototype = {
 
         return true;
 
-    },
-
-    /**
-    * Dumps out a list of Group children and their index positions to the browser console. Useful for group debugging.
-    *
-    * @method Phaser.Group#dump
-    * @param {boolean} [full=false] - If full the dump will include the entire display list, start from the Stage. Otherwise it will only include this container.
-    */
-    dump: function (full) {
-
-        if (typeof full == 'undefined')
-        {
-            full = false;
-        }
-
-        var spacing = 20;
-        var output = "\n" + Phaser.Utils.pad('Node', spacing) + "|" + Phaser.Utils.pad('Next', spacing) + "|" + Phaser.Utils.pad('Previous', spacing) + "|" + Phaser.Utils.pad('First', spacing) + "|" + Phaser.Utils.pad('Last', spacing);
-
-        console.log(output);
-
-        var output = Phaser.Utils.pad('----------', spacing) + "|" + Phaser.Utils.pad('----------', spacing) + "|" + Phaser.Utils.pad('----------', spacing) + "|" + Phaser.Utils.pad('----------', spacing) + "|" + Phaser.Utils.pad('----------', spacing);
-        console.log(output);
-
-        if (full)
-        {
-            var testObject = this.game.stage._stage.last._iNext;
-            var displayObject = this.game.stage._stage;
-        }
-        else
-        {
-            var testObject = this._container.last._iNext;
-            var displayObject = this._container;
-        }
-        
-        do
-        {
-            var name = displayObject.name || '*';
-
-            if (this.cursor == displayObject)
-            {
-                var name = '> ' + name;
-            }
-
-            var nameNext = '-';
-            var namePrev = '-';
-            var nameFirst = '-';
-            var nameLast = '-';
-
-            if (displayObject._iNext)
-            {
-                nameNext = displayObject._iNext.name;
-            }
-
-            if (displayObject._iPrev)
-            {
-                namePrev = displayObject._iPrev.name;
-            }
-
-            if (displayObject.first)
-            {
-                nameFirst = displayObject.first.name;
-            }
-
-            if (displayObject.last)
-            {
-                nameLast = displayObject.last.name;
-            }
-
-            if (typeof nameNext === 'undefined')
-            {
-                nameNext = '-';
-            }
-
-            if (typeof namePrev === 'undefined')
-            {
-                namePrev = '-';
-            }
-
-            if (typeof nameFirst === 'undefined')
-            {
-                nameFirst = '-';
-            }
-
-            if (typeof nameLast === 'undefined')
-            {
-                nameLast = '-';
-            }
-
-            var output = Phaser.Utils.pad(name, spacing) + "|" + Phaser.Utils.pad(nameNext, spacing) + "|" + Phaser.Utils.pad(namePrev, spacing) + "|" + Phaser.Utils.pad(nameFirst, spacing) + "|" + Phaser.Utils.pad(nameLast, spacing);
-            console.log(output);
-
-            displayObject = displayObject._iNext;
-
-        }
-        while(displayObject != testObject)
-
     }
 
 };
@@ -12654,7 +12529,7 @@ Object.defineProperty(Phaser.Group.prototype, "alpha", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -12860,6 +12735,8 @@ Phaser.World.prototype.setBounds = function (x, y, width, height) {
         this.camera.bounds.setTo(x, y, width, height);
     }
 
+    this.game.physics.setBoundsToWorld();
+
 }
 
 /**
@@ -12997,7 +12874,7 @@ Object.defineProperty(Phaser.World.prototype, "visible", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -13609,9 +13486,9 @@ Phaser.Game.prototype = {
                 this.world.preUpdate();
 
                 this.stage.update();
-                this.input.update();
                 this.tweens.update();
                 this.sound.update();
+                this.input.update();
                 this.state.update();
                 this.world.update();
                 this.particles.update();            
@@ -13742,7 +13619,7 @@ Object.defineProperty(Phaser.Game.prototype, "paused", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -14587,7 +14464,7 @@ Object.defineProperty(Phaser.Input.prototype, "worldY", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -14761,7 +14638,7 @@ Phaser.Key.prototype.constructor = Phaser.Key;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -15259,7 +15136,7 @@ Phaser.Keyboard.NUM_LOCK = 144;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -15591,7 +15468,7 @@ Phaser.Mouse.prototype.constructor = Phaser.Mouse;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -15762,7 +15639,7 @@ Phaser.MSPointer.prototype.constructor = Phaser.MSPointer;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -16407,7 +16284,7 @@ Object.defineProperty(Phaser.Pointer.prototype, "worldY", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -16676,13 +16553,6 @@ Phaser.Touch.prototype = {
             event.preventDefault();
         }
 
-        /*
-        for (var i = 0; i < event.changedTouches.length; i++)
-        {
-            //console.log('touch enter');
-        }
-       */
-
     },
 
     /**
@@ -16704,13 +16574,6 @@ Phaser.Touch.prototype = {
         {
             event.preventDefault();
         }
-
-        /*
-        for (var i = 0; i < event.changedTouches.length; i++)
-        {
-            //console.log('touch leave');
-        }
-       */
 
     },
 
@@ -16793,7 +16656,7 @@ Phaser.Touch.prototype.constructor = Phaser.Touch;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -17972,7 +17835,7 @@ Phaser.InputHandler.prototype.constructor = Phaser.InputHandler;
 
 /**
 * @author       @karlmacklin <tacklemcclean@gmail.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -18551,7 +18414,7 @@ Phaser.Gamepad.XBOX360_STICK_RIGHT_Y = 3;
 
 /**
 * @author       @karlmacklin <tacklemcclean@gmail.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -19121,7 +18984,7 @@ Object.defineProperty(Phaser.SinglePad.prototype, "index", {
 
 /**
 * @author       @karlmacklin <tacklemcclean@gmail.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -19297,7 +19160,7 @@ Phaser.GamepadButton.prototype.constructor = Phaser.GamepadButton;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -19321,6 +19184,7 @@ Phaser.GamepadButton.prototype.constructor = Phaser.GamepadButton;
 Phaser.Events = function (sprite) {
     
     this.parent = sprite;
+
     this.onAddedToGroup = new Phaser.Signal();
     this.onRemovedFromGroup = new Phaser.Signal();
     this.onKilled = new Phaser.Signal();
@@ -19337,6 +19201,9 @@ Phaser.Events = function (sprite) {
     this.onAnimationStart = null;
     this.onAnimationComplete = null;
     this.onAnimationLoop = null;
+
+    this.onBeginContact = null;
+    this.onEndContact = null;
 
 };
 
@@ -19376,7 +19243,7 @@ Phaser.Events.prototype.constructor = Phaser.Events;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -19700,7 +19567,7 @@ Phaser.GameObjectFactory.prototype.constructor = Phaser.GameObjectFactory;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -20821,7 +20688,7 @@ Phaser.BitmapData.prototype.de = Phaser.BitmapData.prototype.ellipse;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -21030,6 +20897,7 @@ Phaser.Sprite = function (game, x, y, key, frame) {
     */
     this._cache = {
 
+        fresh: true,
         dirty: false,
 
         //  Transform cache
@@ -21217,6 +21085,24 @@ Phaser.Sprite.prototype.constructor = Phaser.Sprite;
 * @memberof Phaser.Sprite
 */
 Phaser.Sprite.prototype.preUpdate = function() {
+
+    if (this._cache.fresh)
+    {
+        this.world.setTo(this.parent.position.x + this.x, this.parent.position.y + this.y);
+        this.worldTransform[2] = this.world.x;
+        this.worldTransform[5] = this.world.y;
+        this._cache.fresh = false;
+
+        if (this.body)
+        {
+            this.body.x = (this.world.x - (this.anchor.x * this.width)) + this.body.offset.x;
+            this.body.y = (this.world.y - (this.anchor.y * this.height)) + this.body.offset.y;
+            this.body.preX = this.body.x;
+            this.body.preY = this.body.y;
+        }
+
+        return;
+    }
 
     if (!this.exists || (this.group && !this.group.exists))
     {
@@ -21498,7 +21384,6 @@ Phaser.Sprite.prototype.postUpdate = function() {
 
     if (this.exists)
     {
-        //  The sprite is positioned in this call, after taking into consideration motion updates and collision
         if (this.body)
         {
             this.body.postUpdate();
@@ -21514,8 +21399,6 @@ Phaser.Sprite.prototype.postUpdate = function() {
             this._cache.x = this.x;
             this._cache.y = this.y;
         }
-
-        this.world.setTo(this.game.camera.x + this.worldTransform[2], this.game.camera.y + this.worldTransform[5]);
 
         this.position.x = this._cache.x;
         this.position.y = this._cache.y;
@@ -21696,6 +21579,11 @@ Phaser.Sprite.prototype.destroy = function() {
         this.animations.destroy();
     }
 
+    if (this.body)
+    {
+        this.body.destroy();
+    }
+
     this.alive = false;
     this.exists = false;
     this.visible = false;
@@ -21760,7 +21648,7 @@ Phaser.Sprite.prototype.reset = function(x, y, health) {
 
     if (this.body)
     {
-        this.body.reset();
+        this.body.reset(false);
     }
 
     return this;
@@ -22013,7 +21901,7 @@ Object.defineProperty(Phaser.Sprite.prototype, "inputEnabled", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -22172,7 +22060,7 @@ Object.defineProperty(Phaser.TileSprite.prototype, "inputEnabled", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -22474,7 +22362,7 @@ Object.defineProperty(Phaser.Text.prototype, 'font', {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -22708,7 +22596,7 @@ Object.defineProperty(Phaser.BitmapText.prototype, 'y', {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -23344,7 +23232,7 @@ Phaser.Button.prototype.setState = function (newState) {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -23366,7 +23254,7 @@ Phaser.Graphics = function (game, x, y) {
 
     /**
     * @property {number} type - The Phaser Object Type.
-	*/
+    */
     this.type = Phaser.GRAPHICS;
 
     this.position.x = x;
@@ -23449,7 +23337,7 @@ Object.defineProperty(Phaser.Graphics.prototype, 'y', {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -23782,7 +23670,7 @@ Phaser.RenderTexture.prototype.renderCanvas = function(displayObject, position, 
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -24069,7 +23957,7 @@ Phaser.Canvas = {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -24779,8 +24667,6 @@ Phaser.StageScaleMode.prototype = {
         var availableWidth = window.innerWidth;
         var availableHeight = window.innerHeight;
 
-        // console.log('available', availableWidth, availableHeight);
-
         if (this.maxWidth && availableWidth > this.maxWidth)
         {
             this.width = this.maxWidth;
@@ -24848,7 +24734,7 @@ Object.defineProperty(Phaser.StageScaleMode.prototype, "isLandscape", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -25528,7 +25414,7 @@ Phaser.Device.prototype.constructor = Phaser.Device;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -25690,7 +25576,7 @@ Phaser.RequestAnimationFrame.prototype.constructor = Phaser.RequestAnimationFram
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -25938,7 +25824,7 @@ Phaser.RandomDataGenerator.prototype.constructor = Phaser.RandomDataGenerator;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -27258,7 +27144,7 @@ Phaser.Math = {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -27546,7 +27432,7 @@ Phaser.QuadTree.prototype.constructor = Phaser.QuadTree;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -28024,7 +27910,7 @@ Phaser.Circle.intersectsRectangle = function (c, r) {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -28457,7 +28343,7 @@ Phaser.Point.rotate = function (a, x, y, angle, asDegrees, distance) {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -29148,7 +29034,7 @@ Phaser.Rectangle.union = function (a, b, out) {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -29178,7 +29064,272 @@ Phaser.Polygon.prototype = Object.create(PIXI.Polygon.prototype);
 Phaser.Polygon.prototype.constructor = Phaser.Polygon;
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
+* @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+*/
+
+/**
+* Creates a new Line object with a start and an end point.
+* @class Line
+* @classdesc Phaser - Line
+* @constructor
+* @param {number} [x1=0] - The x coordinate of the start of the line.
+* @param {number} [y1=0] - The y coordinate of the start of the line.
+* @param {number} [x2=0] - The x coordinate of the end of the line.
+* @param {number} [y2=0] - The y coordinate of the end of the line.
+* @return {Phaser.Line} This line object
+*/
+Phaser.Line = function (x1, y1, x2, y2) {
+
+    x1 = x1 || 0;
+    y1 = y1 || 0;
+    x2 = x2 || 0;
+    y2 = y2 || 0;
+
+    /**
+    * @property {Phaser.Point} start - The start point of the line.
+    */
+    this.start = new Phaser.Point(x1, y1);
+
+    /**
+    * @property {Phaser.Point} end - The end point of the line.
+    */
+    this.end = new Phaser.Point(x2, y2);
+
+};
+
+Phaser.Line.prototype = {
+
+    /**
+    * Sets the components of the Line to the specified values.
+    * @method Phaser.Line#setTo
+    * @param {number} [x1=0] - The x coordinate of the start of the line.
+    * @param {number} [y1=0] - The y coordinate of the start of the line.
+    * @param {number} [x2=0] - The x coordinate of the end of the line.
+    * @param {number} [y2=0] - The y coordinate of the end of the line.
+    * @return {Phaser.Line} This line object
+    */
+    setTo: function (x1, y1, x2, y2) {
+
+        this.start.setTo(x1, y1);
+        this.end.setTo(x2, y2);
+
+        return this;
+
+    },
+
+    /**
+    * Sets the line to match the x/y coordinates of the two given sprites.
+    * Can optionally be calculated from their center coordinates.
+    * @method Phaser.Line#fromSprite
+    * @param {Phaser.Sprite} startSprite - The coordinates of this Sprite will be set to the Line.start point.
+    * @param {Phaser.Sprite} endSprite - The coordinates of this Sprite will be set to the Line.start point.
+    * @param {boolean} [useCenter=true] - If true it will use startSprite.center.x, if false startSprite.x.
+    * @return {Phaser.Line} This line object
+    */
+    fromSprite: function (startSprite, endSprite, useCenter) {
+
+        if (typeof useCenter === 'undefined') { useCenter = true; }
+
+        if (useCenter)
+        {
+            return this.setTo(startSprite.center.x, startSprite.center.y, endSprite.center.x, endSprite.center.y);
+        }
+        else
+        {
+            return this.setTo(startSprite.x, startSprite.y, endSprite.x, endSprite.y);
+        }
+
+    },
+
+    /**
+    * Checks for intersection between this line and another Line.
+    * If asSegment is true it will check for segment intersection. If asSegment is false it will check for line intersection.
+    * Returns the intersection segment of AB and EF as a Point, or null if there is no intersection.
+    *
+    * @method Phaser.Line#intersects
+    * @param {Phaser.Line} line - The line to check against this one.
+    * @param {boolean} [asSegment=true] - If true it will check for segment intersection, otherwise full line intersection.
+    * @param {Phaser.Point} [result] - A Point object to store the result in, if not given a new one will be created.
+    * @return {Phaser.Point} The intersection segment of the two lines as a Point, or null if there is no intersection.
+    */
+    intersects: function (line, asSegment, result) {
+
+        return Phaser.Line.intersectsPoints(this.start, this.end, line.start, line.end, asSegment, result);
+
+    },
+
+    /**
+    * Tests if the given coordinates fall on this line. See pointOnSegment to test against just the line segment.
+    * @method Phaser.Line#pointOnLine
+    * @param {number} x - The line to check against this one.
+    * @param {number} y - The line to check against this one.
+    * @return {boolean} True if the point is on the line, false if not.
+    */
+    pointOnLine: function (x, y) {
+
+        return ((x - this.start.x) * (this.end.y - this.end.y) === (this.end.x - this.start.x) * (y - this.end.y));
+
+    },
+
+    /**
+    * Tests if the given coordinates fall on this line and within the segment. See pointOnLine to test against just the line.
+    * @method Phaser.Line#pointOnSegment
+    * @param {number} x - The line to check against this one.
+    * @param {number} y - The line to check against this one.
+    * @return {boolean} True if the point is on the line and segment, false if not.
+    */
+    pointOnSegment: function (x, y) {
+
+        var xMin = Math.min(this.start.x, this.end.x);
+        var xMax = Math.max(this.start.x, this.end.x);
+        var yMin = Math.min(this.start.y, this.end.y);
+        var yMax = Math.max(this.start.y, this.end.y);
+
+        return (this.pointOnLine(x, y) && (x >= xMin && x <= xMax) && (y >= yMin && y <= yMax));
+
+    }
+
+};
+
+/**
+* @name Phaser.Line#length
+* @property {number} length - Gets the length of the line segment.
+* @readonly
+*/
+Object.defineProperty(Phaser.Line.prototype, "length", {
+
+    get: function () {
+        return Math.sqrt((this.end.x - this.start.x) * (this.end.x - this.start.x) + (this.end.y - this.start.y) * (this.end.y - this.start.y));
+    }
+
+});
+
+/**
+* @name Phaser.Line#angle
+* @property {number} angle - Gets the angle of the line.
+* @readonly
+*/
+Object.defineProperty(Phaser.Line.prototype, "angle", {
+
+    get: function () {
+        return Math.atan2(this.end.x - this.start.x, this.end.y - this.start.y);
+    }
+
+});
+
+/**
+* @name Phaser.Line#slope
+* @property {number} slope - Gets the slope of the line (y/x).
+* @readonly
+*/
+Object.defineProperty(Phaser.Line.prototype, "slope", {
+
+    get: function () {
+        return (this.end.y - this.start.y) / (this.end.x - this.start.x);
+    }
+
+});
+
+/**
+* @name Phaser.Line#perpSlope
+* @property {number} perpSlope - Gets the perpendicular slope of the line (x/y).
+* @readonly
+*/
+Object.defineProperty(Phaser.Line.prototype, "perpSlope", {
+
+    get: function () {
+        return -((this.end.x - this.start.x) / (this.end.y - this.start.y));
+    }
+
+});
+
+/**
+* Checks for intersection between two lines as defined by the given start and end points.
+* If asSegment is true it will check for line segment intersection. If asSegment is false it will check for line intersection.
+* Returns the intersection segment of AB and EF as a Point, or null if there is no intersection.
+* Adapted from code by Keith Hair
+*
+* @method Phaser.Line.intersects
+* @param {Phaser.Point} a - The start of the first Line to be checked.
+* @param {Phaser.Point} b - The end of the first line to be checked.
+* @param {Phaser.Point} e - The start of the second Line to be checked.
+* @param {Phaser.Point} f - The end of the second line to be checked.
+* @param {boolean} [asSegment=true] - If true it will check for segment intersection, otherwise full line intersection.
+* @param {Phaser.Point} [result] - A Point object to store the result in, if not given a new one will be created.
+* @return {Phaser.Point} The intersection segment of the two lines as a Point, or null if there is no intersection.
+*/
+Phaser.Line.intersectsPoints = function (a, b, e, f, asSegment, result) {
+
+    if (typeof asSegment === 'undefined') { asSegment = true; }
+    if (typeof result === 'undefined') { result = new Phaser.Point(); }
+
+    var a1 = b.y - a.y;
+    var a2 = f.y - e.y;
+    var b1 = a.x - b.x;
+    var b2 = e.x - f.x;
+    var c1 = (b.x * a.y) - (a.x * b.y);
+    var c2 = (f.x * e.y) - (e.x * f.y);
+    var denom = (a1 * b2) - (a2 * b1);
+
+    if (denom === 0)
+    {
+        return null;
+    }
+
+    result.x = ((b1 * c2) - (b2 * c1)) / denom;
+    result.y = ((a2 * c1) - (a1 * c2)) / denom;
+ 
+    if (asSegment)
+    {
+        if (Math.pow((result.x - b.x) + (result.y - b.y), 2) > Math.pow((a.x - b.x) + (a.y - b.y), 2))
+        {
+            return null;
+        }
+
+        if (Math.pow((result.x - a.x) + (result.y - a.y), 2) > Math.pow((a.x - b.x) + (a.y - b.y), 2))
+        {
+            return null;
+        }
+
+        if (Math.pow((result.x - f.x) + (result.y - f.y), 2) > Math.pow((e.x - f.x) + (e.y - f.y), 2))
+        {
+            return null;
+        }
+
+        if (Math.pow((result.x - e.x) + (result.y - e.y), 2) > Math.pow((e.x - f.x) + (e.y - f.y), 2))
+        {
+            return null;
+        }
+    }
+
+    return result;
+
+};
+
+/**
+* Checks for intersection between two lines.
+* If asSegment is true it will check for segment intersection.
+* If asSegment is false it will check for line intersection.
+* Returns the intersection segment of AB and EF as a Point, or null if there is no intersection.
+* Adapted from code by Keith Hair
+*
+* @method Phaser.Line.intersects
+* @param {Phaser.Line} a - The first Line to be checked.
+* @param {Phaser.Line} b - The second Line to be checked.
+* @param {boolean} [asSegment=true] - If true it will check for segment intersection, otherwise full line intersection.
+* @param {Phaser.Point} [result] - A Point object to store the result in, if not given a new one will be created.
+* @return {Phaser.Point} The intersection segment of the two lines as a Point, or null if there is no intersection.
+*/
+Phaser.Line.intersects = function (a, b, asSegment, result) {
+
+    return Phaser.Line.intersectsPoints(a.start, a.end, b.start, b.end, asSegment, result);
+
+};
+
+/**
+* @author       Richard Davey <rich@photonstorm.com>
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -29345,7 +29496,7 @@ Phaser.Net.prototype.constructor = Phaser.Net;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -29373,13 +29524,13 @@ Phaser.TweenManager = function (game) {
     this.game = game;
     
     /**
-    * @property {array} _tweens - Description.
+    * @property {array<Phaser.Tween>} _tweens - All of the currently running tweens.
     * @private
     */
     this._tweens = [];
     
     /**
-    * @property {array} _add - Description.
+    * @property {array<Phaser.Tween>} _add - All of the tweens queued to be added in the next update.
     * @private
     */
     this._add = [];
@@ -29390,13 +29541,6 @@ Phaser.TweenManager = function (game) {
 };
 
 Phaser.TweenManager.prototype = {
-
-    /**
-    * Version number of this library.
-    * @property {string} REVISION
-    * @default 
-    */
-    REVISION: '11dev',
 
     /**
     * Get all the tween objects in an array.
@@ -29410,12 +29554,17 @@ Phaser.TweenManager.prototype = {
     },
 
     /**
-    * Remove all tween objects.
+    * Remove all tweens running and in the queue. Doesn't call any of the tween onComplete events.
     * @method Phaser.TweenManager#removeAll
     */
     removeAll: function () {
 
-        this._tweens = [];
+        for (var i = 0; i < this._tweens.length; i++)
+        {
+            this._tweens[i].pendingDelete = true;
+        }
+
+        this._add = [];
 
     },
 
@@ -29552,7 +29701,7 @@ Phaser.TweenManager.prototype.constructor = Phaser.TweenManager;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -29677,6 +29826,13 @@ Phaser.Tween = function (object, game) {
     */
     this._onUpdateCallback = null;
    
+    /**
+    * @property {object} _onUpdateCallbackContext - The context in which to call the onUpdate callback.
+    * @private
+    * @default null
+    */
+    this._onUpdateCallbackContext = null;
+
     /**
     * @property {number} _pausedTime - Private pause timer.
     * @private
@@ -29845,6 +30001,8 @@ Phaser.Tween.prototype = {
 
         this.isRunning = false;
 
+        this._onUpdateCallback = null;
+
         this._manager.remove(this);
 
         return this;
@@ -29963,9 +30121,11 @@ Phaser.Tween.prototype = {
     * @param {function} callback - The callback to invoke each time this tween is updated.
     * @return {Phaser.Tween} Itself.
     */
-    onUpdateCallback: function (callback) {
+    onUpdateCallback: function (callback, callbackContext) {
 
         this._onUpdateCallback = callback;
+        this._onUpdateCallbackContext = callbackContext;
+
         return this;
 
     },
@@ -30058,7 +30218,7 @@ Phaser.Tween.prototype = {
 
         if (this._onUpdateCallback !== null)
         {
-            this._onUpdateCallback.call(this._object, value);
+            this._onUpdateCallback.call(this._onUpdateCallbackContext, this, value);
         }
 
         if (elapsed == 1)
@@ -30123,7 +30283,7 @@ Phaser.Tween.prototype.constructor = Phaser.Tween;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -30685,7 +30845,7 @@ Phaser.Easing = {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -31033,7 +31193,7 @@ Phaser.Time.prototype.constructor = Phaser.Time;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -31199,7 +31359,7 @@ Phaser.Timer.prototype = {
     * @param {number} delay - The number of milliseconds that should elapse before the Timer will call the given callback.
     * @param {function} callback - The callback that will be called when the Timer event occurs.
     * @param {object} callbackContext - The context in which the callback will be called.
-    * @param {...} arguments - The values to be sent to your callback function when it is called.
+    * @param {...*} arguments - The values to be sent to your callback function when it is called.
     * @return {Phaser.TimerEvent} The Phaser.TimerEvent object that was created.
     */
     add: function (delay, callback, callbackContext) {
@@ -31218,7 +31378,7 @@ Phaser.Timer.prototype = {
     * @param {number} repeatCount - The number of times the event will repeat.
     * @param {function} callback - The callback that will be called when the Timer event occurs.
     * @param {object} callbackContext - The context in which the callback will be called.
-    * @param {...} arguments - The values to be sent to your callback function when it is called.
+    * @param {...*} arguments - The values to be sent to your callback function when it is called.
     * @return {Phaser.TimerEvent} The Phaser.TimerEvent object that was created.
     */
     repeat: function (delay, repeatCount, callback, callbackContext) {
@@ -31236,7 +31396,7 @@ Phaser.Timer.prototype = {
     * @param {number} delay - The number of milliseconds that should elapse before the Timer will call the given callback.
     * @param {function} callback - The callback that will be called when the Timer event occurs.
     * @param {object} callbackContext - The context in which the callback will be called.
-    * @param {...} arguments - The values to be sent to your callback function when it is called.
+    * @param {...*} arguments - The values to be sent to your callback function when it is called.
     * @return {Phaser.TimerEvent} The Phaser.TimerEvent object that was created.
     */
     loop: function (delay, callback, callbackContext) {
@@ -31278,7 +31438,7 @@ Phaser.Timer.prototype = {
         {
             if (this.events[i] === event)
             {
-                this.events.splice(i, 1);
+                this.events[i].pendingDelete = true;
                 return true;
             }
         }
@@ -31338,6 +31498,21 @@ Phaser.Timer.prototype = {
         }
 
         this._now = time - this._started;
+
+        this._len = this.events.length;
+
+        this._i = 0;
+
+        while (this._i < this._len)
+        {
+            if (this.events[this._i].pendingDelete)
+            {
+                this.events.splice(this._i, 1);
+                this._len--;
+            }
+
+            this._i++;
+        }
 
         this._len = this.events.length;
 
@@ -31404,9 +31579,12 @@ Phaser.Timer.prototype = {
     */
     pause: function () {
         
-        this._pauseStarted = this.game.time.now;
+        if (this.running && !this.expired)
+        {
+            this._pauseStarted = this.game.time.now;
 
-        this.paused = true;
+            this.paused = true;
+        }
 
     },
 
@@ -31416,16 +31594,19 @@ Phaser.Timer.prototype = {
     */
     resume: function () {
 
-        var pauseDuration = this.game.time.now - this._pauseStarted;
-
-        for (var i = 0; i < this.events.length; i++)
+        if (this.running && !this.expired)
         {
-            this.events[i].tick += pauseDuration;
+            var pauseDuration = this.game.time.now - this._pauseStarted;
+
+            for (var i = 0; i < this.events.length; i++)
+            {
+                this.events[i].tick += pauseDuration;
+            }
+
+            this.nextTick += pauseDuration;
+
+            this.paused = false;
         }
-
-        this.nextTick += pauseDuration;
-
-        this.paused = false;
 
     },
 
@@ -31438,6 +31619,7 @@ Phaser.Timer.prototype = {
         this.onComplete.removeAll();
         this.running = false;
         this.events = [];
+        this._i = this._len;
 
     }
 
@@ -31521,7 +31703,7 @@ Phaser.Timer.prototype.constructor = Phaser.Timer;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -31546,42 +31728,48 @@ Phaser.TimerEvent = function (timer, delay, tick, repeatCount, loop, callback, c
     /**
     * @property {Phaser.Timer} timer - The Timer object that this TimerEvent belongs to.
     */
-	this.timer = timer;
+    this.timer = timer;
 
     /**
     * @property {number} delay - The delay in ms at which this TimerEvent fires.
     */
-	this.delay = delay;
+    this.delay = delay;
 
     /**
     * @property {number} tick - The tick is the next game clock time that this event will fire at.
     */
-	this.tick = tick;
+    this.tick = tick;
 
     /**
     * @property {number} repeatCount - If this TimerEvent repeats it will do so this many times.
     */
-	this.repeatCount = repeatCount - 1;
+    this.repeatCount = repeatCount - 1;
 
     /**
     * @property {boolean} loop - True if this TimerEvent loops, otherwise false.
     */
-	this.loop = loop;
+    this.loop = loop;
 
     /**
     * @property {function} callback - The callback that will be called when the TimerEvent occurs.
     */
-	this.callback = callback;
+    this.callback = callback;
 
     /**
     * @property {object} callbackContext - The context in which the callback will be called.
     */
-	this.callbackContext = callbackContext;
+    this.callbackContext = callbackContext;
 
     /**
     * @property {array} arguments - The values to be passed to the callback.
     */
-	this.args = args;
+    this.args = args;
+
+    /**
+    * @property {boolean} pendingDelete - A flag that controls if the TimerEvent is pending deletion.
+    * @protected
+    */
+    this.pendingDelete = false;
 
 };
 
@@ -31589,7 +31777,7 @@ Phaser.TimerEvent.prototype.constructor = Phaser.TimerEvent;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -31855,7 +32043,7 @@ Phaser.AnimationManager.prototype = {
     *
     * @method Phaser.AnimationManager#getAnimation
     * @param {string} name - The name of the animation to be returned, e.g. "fire".
-    * @return {Phaser.Animation|boolean} The Animation instance, if found, otherwise false.
+    * @return {Phaser.Animation} The Animation instance, if found, otherwise null.
     */
     getAnimation: function (name) {
 
@@ -31867,7 +32055,7 @@ Phaser.AnimationManager.prototype = {
             }
         }
 
-        return false;
+        return null;
 
     },
 
@@ -32019,7 +32207,7 @@ Object.defineProperty(Phaser.AnimationManager.prototype, 'frameName', {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -32493,7 +32681,7 @@ Phaser.Animation.generateFrameNames = function (prefix, start, stop, suffix, zer
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -32656,7 +32844,7 @@ Phaser.Frame.prototype.constructor = Phaser.Frame;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -32896,7 +33084,7 @@ Object.defineProperty(Phaser.FrameData.prototype, "total", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -33224,7 +33412,7 @@ Phaser.AnimationParser = {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -34074,7 +34262,7 @@ Phaser.Cache.prototype.constructor = Phaser.Cache;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -35388,7 +35576,7 @@ Phaser.Loader.prototype.constructor = Phaser.Loader;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -35471,7 +35659,7 @@ Phaser.LoaderParser = {
 };
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -36297,7 +36485,7 @@ Object.defineProperty(Phaser.Sound.prototype, "volume", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -36780,7 +36968,7 @@ Object.defineProperty(Phaser.SoundManager.prototype, "volume", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -37213,7 +37401,7 @@ Phaser.Utils.Debug.prototype = {
         this.start(x, y, color, 210);
 
         this.splitline('x: ' + sprite.body.x.toFixed(2), 'y: ' + sprite.body.y.toFixed(2), 'width: ' + sprite.width, 'height: ' + sprite.height);
-        this.splitline('speed: ' + sprite.body.speed.toFixed(2), 'angle: ' + sprite.body.angle.toFixed(2), 'friction: ' + sprite.body.friction);
+        this.splitline('speed: ' + sprite.body.speed.toFixed(2), 'angle: ' + sprite.body.angle.toFixed(2), 'linear damping: ' + sprite.body.linearDamping);
         this.splitline('blocked left: ' + sprite.body.blocked.left, 'right: ' + sprite.body.blocked.right, 'up: ' + sprite.body.blocked.up, 'down: ' + sprite.body.blocked.down);
         this.splitline('touching left: ' + sprite.body.touching.left, 'right: ' + sprite.body.touching.right, 'up: ' + sprite.body.touching.up, 'down: ' + sprite.body.touching.down);
         this.splitline('gravity x: ' + sprite.body.gravity.x, 'y: ' + sprite.body.gravity.y, 'world gravity x: ' + this.game.physics.gravity.x, 'y: ' + this.game.physics.gravity.y);
@@ -37702,7 +37890,7 @@ Phaser.Utils.Debug.prototype.constructor = Phaser.Utils.Debug;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -38060,33 +38248,7 @@ Phaser.Color = {
 // polygons using the Separating Axis Theorem.
 /** @preserve SAT.js - Version 0.2 - Copyright 2013 - Jim Riecken <jimr@jimr.ca> - released under the MIT License. https://github.com/jriecken/sat-js */
 
-/*global define: false, module: false*/
-/*jshint shadow:true, sub:true, forin:true, noarg:true, noempty:true, 
-  eqeqeq:true, bitwise:true, strict:true, undef:true, 
-  curly:true, browser:true */
-
-// Create a UMD wrapper for SAT. Works in:
-//
-//  - Plain browser via global SAT variable
-//  - AMD loader (like require.js)
-//  - Node.js
-//
-// The quoted properties all over the place are used so that the Closure Compiler
-// does not mangle the exposed API in advanced mode.
-/**
- * @param {*} root - The global scope
- * @param {Function} factory - Factory that creates SAT module
- */
-(function (root, factory) {
-  "use strict";
-  if (typeof define === 'function' && define['amd']) {
-    define(factory);
-  } else if (typeof exports === 'object') {
-    module['exports'] = factory();
-  } else {
-    root['SAT'] = factory();
-  }
-}(this, function () {
+var SAT = (function () {
   "use strict";
 
   var SAT = {};
@@ -38099,7 +38261,7 @@ Phaser.Color = {
 
   // Create a new Vector, optionally passing in the `x` and `y` coordinates. If
   // a coordinate is not specified, it will be set to `0`
-  /** 
+  /**
    * @param {?number=} x The x position.
    * @param {?number=} y The y position.
    * @constructor
@@ -38172,7 +38334,7 @@ Phaser.Color = {
     this['y'] = -this['y'];
     return this;
   };
-  
+
 
   // Normalize this vector.  (make it have length of `1`)
   /**
@@ -38186,7 +38348,7 @@ Phaser.Color = {
     }
     return this;
   };
-  
+
   // Add another vector to this one.
   /**
    * @param {Vector} other The other Vector.
@@ -38197,7 +38359,7 @@ Phaser.Color = {
     this['y'] += other['y'];
     return this;
   };
-  
+
   // Subtract another vector from this one.
   /**
    * @param {Vector} other The other Vector.
@@ -38208,7 +38370,7 @@ Phaser.Color = {
     this['y'] -= other['y'];
     return this;
   };
-  
+
   // Scale this vector. An independant scaling factor can be provided
   // for each axis, or a single scaling factor that will scale both `x` and `y`.
   /**
@@ -38220,9 +38382,9 @@ Phaser.Color = {
   Vector.prototype['scale'] = Vector.prototype.scale = function(x,y) {
     this['x'] *= x;
     this['y'] *= y || x;
-    return this; 
+    return this;
   };
-  
+
   // Project this vector on to another vector.
   /**
    * @param {Vector} other The vector to project onto.
@@ -38234,7 +38396,7 @@ Phaser.Color = {
     this['y'] = amt * other['y'];
     return this;
   };
-  
+
   // Project this vector onto a vector of unit length. This is slightly more efficient
   // than `project` when dealing with unit vectors.
   /**
@@ -38247,7 +38409,7 @@ Phaser.Color = {
     this['y'] = amt * other['y'];
     return this;
   };
-  
+
   // Reflect this vector on an arbitrary axis.
   /**
    * @param {Vector} axis The vector representing the axis.
@@ -38261,7 +38423,7 @@ Phaser.Color = {
     this['y'] -= y;
     return this;
   };
-  
+
   // Reflect this vector on an arbitrary axis (represented by a unit vector). This is
   // slightly more efficient than `reflect` when dealing with an axis that is a unit vector.
   /**
@@ -38276,7 +38438,7 @@ Phaser.Color = {
     this['y'] -= y;
     return this;
   };
-  
+
   // Get the dot product of this vector and another.
   /**
    * @param {Vector}  other The vector to dot this one against.
@@ -38285,7 +38447,7 @@ Phaser.Color = {
   Vector.prototype['dot'] = Vector.prototype.dot = function(other) {
     return this['x'] * other['x'] + this['y'] * other['y'];
   };
-  
+
   // Get the squared length of this vector.
   /**
    * @return {number} The length^2 of this vector.
@@ -38293,7 +38455,7 @@ Phaser.Color = {
   Vector.prototype['len2'] = Vector.prototype.len2 = function() {
     return this.dot(this);
   };
-  
+
   // Get the length of this vector.
   /**
    * @return {number} The length of this vector.
@@ -38301,7 +38463,7 @@ Phaser.Color = {
   Vector.prototype['len'] = Vector.prototype.len = function() {
     return Math.sqrt(this.len2());
   };
-  
+
   // ## Circle
   //
   // Represents a circle with a position and a radius.
@@ -38344,7 +38506,7 @@ Phaser.Color = {
     this.recalc();
   }
   SAT['Polygon'] = Polygon;
-  
+
   // Recalculates the edges and normals of the polygon. This **must** be called
   // if the `points` array is modified at all and the edges or normals are to be
   // accessed.
@@ -38363,7 +38525,7 @@ Phaser.Color = {
     var points = this['points'];
     var len = points.length;
     for (var i = 0; i < len; i++) {
-      var p1 = points[i]; 
+      var p1 = points[i];
       var p2 = i < len - 1 ? points[i + 1] : points[0];
       var e = new Vector().copy(p2).sub(p1);
       var n = new Vector().copy(e).perp().normalize();
@@ -38472,11 +38634,11 @@ Phaser.Color = {
     var w = this['w'];
     var h = this['h'];
     return new Polygon(new Vector(pos['x'], pos['y']), [
-     new Vector(), new Vector(w, 0), 
+     new Vector(), new Vector(w, 0),
      new Vector(w,h), new Vector(0,h)
     ]);
   };
-  
+
   // ## Response
   //
   // An object representing the result of an intersection. Contains:
@@ -38487,7 +38649,7 @@ Phaser.Color = {
   //  - Whether the first object is entirely inside the second, and vice versa.
   /**
    * @constructor
-   */  
+   */
   function Response() {
     this['a'] = null;
     this['b'] = null;
@@ -38519,7 +38681,7 @@ Phaser.Color = {
    */
   var T_VECTORS = [];
   for (var i = 0; i < 10; i++) { T_VECTORS.push(new Vector()); }
-  
+
   // A pool of arrays of numbers used in calculations to avoid allocating
   // memory.
   /**
@@ -38552,7 +38714,7 @@ Phaser.Color = {
     }
     result[0] = min; result[1] = max;
   }
-  
+
   // Check whether two convex polygons are separated by the specified
   // axis (must be a unit vector).
   /**
@@ -38582,8 +38744,8 @@ Phaser.Color = {
     rangeB[1] += projectedOffset;
     // Check if there is a gap. If there is, this is a separating axis and we can stop
     if (rangeA[0] > rangeB[1] || rangeB[0] > rangeA[1]) {
-      T_VECTORS.push(offsetV); 
-      T_ARRAYS.push(rangeA); 
+      T_VECTORS.push(offsetV);
+      T_ARRAYS.push(rangeA);
       T_ARRAYS.push(rangeB);
       return true;
     }
@@ -38594,7 +38756,7 @@ Phaser.Color = {
       if (rangeA[0] < rangeB[0]) {
         response['aInB'] = false;
         // A ends before B does. We have to pull A out of B
-        if (rangeA[1] < rangeB[1]) { 
+        if (rangeA[1] < rangeB[1]) {
           overlap = rangeA[1] - rangeB[0];
           response['bInA'] = false;
         // B is fully inside A.  Pick the shortest way out.
@@ -38607,7 +38769,7 @@ Phaser.Color = {
       } else {
         response['bInA'] = false;
         // B ends before A ends. We have to push A out of B
-        if (rangeA[1] > rangeB[1]) { 
+        if (rangeA[1] > rangeB[1]) {
           overlap = rangeA[0] - rangeB[1];
           response['aInB'] = false;
         // A is fully inside B.  Pick the shortest way out.
@@ -38625,14 +38787,14 @@ Phaser.Color = {
         if (overlap < 0) {
           response['overlapN'].reverse();
         }
-      }      
+      }
     }
-    T_VECTORS.push(offsetV); 
-    T_ARRAYS.push(rangeA); 
+    T_VECTORS.push(offsetV);
+    T_ARRAYS.push(rangeA);
     T_ARRAYS.push(rangeB);
     return false;
   }
-  
+
   // Calculates which Vornoi region a point is on a line segment.
   // It is assumed that both the line and the point are relative to `(0,0)`
   //
@@ -38642,8 +38804,8 @@ Phaser.Color = {
   /**
    * @param {Vector} line The line segment.
    * @param {Vector} point The point.
-   * @return  {number} LEFT_VORNOI_REGION (-1) if it is the left region, 
-   *          MIDDLE_VORNOI_REGION (0) if it is the middle region, 
+   * @return  {number} LEFT_VORNOI_REGION (-1) if it is the left region,
+   *          MIDDLE_VORNOI_REGION (0) if it is the middle region,
    *          RIGHT_VORNOI_REGION (1) if it is the right region.
    */
   function vornoiRegion(line, point) {
@@ -38671,7 +38833,7 @@ Phaser.Color = {
    * @const
    */
   var RIGHT_VORNOI_REGION = 1;
-  
+
   // ## Collision Tests
 
   // Check if two circles collide.
@@ -38680,7 +38842,7 @@ Phaser.Color = {
    * @param {Circle} b The second circle.
    * @param {Response=} response Response object (optional) that will be populated if
    *   the circles intersect.
-   * @return {boolean} true if the circles intersect, false if they don't. 
+   * @return {boolean} true if the circles intersect, false if they don't.
    */
   function testCircleCircle(a, b, response) {
     // Check if the distance between the centers of the two
@@ -38695,7 +38857,7 @@ Phaser.Color = {
       return false;
     }
     // They intersect.  If we're calculating a response, calculate the overlap.
-    if (response) { 
+    if (response) {
       var dist = Math.sqrt(distanceSq);
       response['a'] = a;
       response['b'] = b;
@@ -38709,7 +38871,7 @@ Phaser.Color = {
     return true;
   }
   SAT['testCircleCircle'] = testCircleCircle;
-  
+
   // Check if a polygon and a circle collide.
   /**
    * @param {Polygon} polygon The polygon.
@@ -38727,30 +38889,30 @@ Phaser.Color = {
     var len = points.length;
     var edge = T_VECTORS.pop();
     var point = T_VECTORS.pop();
-    
+
     // For each edge in the polygon:
     for (var i = 0; i < len; i++) {
       var next = i === len - 1 ? 0 : i + 1;
       var prev = i === 0 ? len - 1 : i - 1;
       var overlap = 0;
       var overlapN = null;
-      
+
       // Get the edge.
       edge.copy(polygon['edges'][i]);
       // Calculate the center of the circle relative to the starting point of the edge.
       point.copy(circlePos).sub(points[i]);
-      
+
       // If the distance between the center of the circle and the point
       // is bigger than the radius, the polygon is definitely not fully in
       // the circle.
       if (response && point.len2() > radius2) {
         response['aInB'] = false;
       }
-      
+
       // Calculate which Vornoi region the center of the circle is in.
       var region = vornoiRegion(edge, point);
       // If it's the left region:
-      if (region === LEFT_VORNOI_REGION) { 
+      if (region === LEFT_VORNOI_REGION) {
         // We need to make sure we're in the RIGHT_VORNOI_REGION of the previous edge.
         edge.copy(polygon['edges'][prev]);
         // Calculate the center of the circle relative the starting point of the previous edge
@@ -38761,9 +38923,9 @@ Phaser.Color = {
           var dist = point.len();
           if (dist > radius) {
             // No intersection
-            T_VECTORS.push(circlePos); 
+            T_VECTORS.push(circlePos);
             T_VECTORS.push(edge);
-            T_VECTORS.push(point); 
+            T_VECTORS.push(point);
             T_VECTORS.push(point2);
             return false;
           } else if (response) {
@@ -38786,10 +38948,10 @@ Phaser.Color = {
           var dist = point.len();
           if (dist > radius) {
             // No intersection
-            T_VECTORS.push(circlePos); 
-            T_VECTORS.push(edge); 
+            T_VECTORS.push(circlePos);
+            T_VECTORS.push(edge);
             T_VECTORS.push(point);
-            return false;              
+            return false;
           } else if (response) {
             // It intersects, calculate the overlap.
             response['bInA'] = false;
@@ -38802,15 +38964,15 @@ Phaser.Color = {
         // Need to check if the circle is intersecting the edge,
         // Change the edge into its "edge normal".
         var normal = edge.perp().normalize();
-        // Find the perpendicular distance between the center of the 
+        // Find the perpendicular distance between the center of the
         // circle and the edge.
         var dist = point.dot(normal);
         var distAbs = Math.abs(dist);
         // If the circle is on the outside of the edge, there is no intersection.
         if (dist > 0 && distAbs > radius) {
           // No intersection
-          T_VECTORS.push(circlePos); 
-          T_VECTORS.push(normal); 
+          T_VECTORS.push(circlePos);
+          T_VECTORS.push(normal);
           T_VECTORS.push(point);
           return false;
         } else if (response) {
@@ -38824,28 +38986,28 @@ Phaser.Color = {
           }
         }
       }
-      
-      // If this is the smallest overlap we've seen, keep it. 
+
+      // If this is the smallest overlap we've seen, keep it.
       // (overlapN may be null if the circle was in the wrong Vornoi region).
       if (overlapN && response && Math.abs(overlap) < Math.abs(response['overlap'])) {
         response['overlap'] = overlap;
         response['overlapN'].copy(overlapN);
       }
     }
-    
+
     // Calculate the final overlap vector - based on the smallest overlap.
     if (response) {
       response['a'] = polygon;
       response['b'] = circle;
       response['overlapV'].copy(response['overlapN']).scale(response['overlap']);
     }
-    T_VECTORS.push(circlePos); 
-    T_VECTORS.push(edge); 
+    T_VECTORS.push(circlePos);
+    T_VECTORS.push(edge);
     T_VECTORS.push(point);
     return true;
   }
   SAT['testPolygonCircle'] = testPolygonCircle;
-  
+
   // Check if a circle and a polygon collide.
   //
   // **NOTE:** This is slightly less efficient than polygonCircle as it just
@@ -38874,7 +39036,7 @@ Phaser.Color = {
     return result;
   }
   SAT['testCirclePolygon'] = testCirclePolygon;
-  
+
   // Checks whether polygons collide.
   /**
    * @param {Polygon} a The first polygon.
@@ -38913,10 +39075,11 @@ Phaser.Color = {
   SAT['testPolygonPolygon'] = testPolygonPolygon;
 
   return SAT;
-}));
+})();
+
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -39099,7 +39262,7 @@ Phaser.Physics.Arcade.prototype = {
 
         if (!body.collideWorldBounds || (!this.worldLeft && !this.worldRight && !this.worldTop && !this.worldBottom))
         {
-            return;
+            return false;
         }
 
         this._response.clear();
@@ -39151,11 +39314,6 @@ Phaser.Physics.Arcade.prototype = {
         }
 
         return rebounded;
-
-        if (body.sprite.debug)
-        {
-            console.log('checkBounds finished', body.blocked);
-        }
 
     },
 
@@ -39313,12 +39471,6 @@ Phaser.Physics.Arcade.prototype = {
         // pos = pos + dt*(vel + temp/2)
         // vel = vel + temp
 
-        if (body.sprite.debug)
-        {
-            console.log('updateMotion: acx', body.acceleration.x, 'acy', body.acceleration.y, 'gravx', this._gravityX, 'gravy', this._gravityY, 'elapsed', this.game.time.physicsElapsed);
-            // console.log('updateMotion: rotation', body.rotation, 'vd', this._velocityDelta, 'drag', this._drag, 'acceleration', body.angularAcceleration);
-        }
-
         this._p.setTo((body.acceleration.x + this._gravityX) * this.game.time.physicsElapsed, (body.acceleration.y + this._gravityY) * this.game.time.physicsElapsed);
 
         return this._p;
@@ -39329,10 +39481,11 @@ Phaser.Physics.Arcade.prototype = {
     * Checks for overlaps between two game objects. The objects can be Sprites, Groups or Emitters.
     * You can perform Sprite vs. Sprite, Sprite vs. Group and Group vs. Group overlap checks.
     * Unlike collide the objects are NOT automatically separated or have any physics applied, they merely test for overlap results.
+    * The second parameter can be an array of objects, of differing types.
     *
     * @method Phaser.Physics.Arcade#overlap
     * @param {Phaser.Sprite|Phaser.Group|Phaser.Particles.Emitter} object1 - The first object to check. Can be an instance of Phaser.Sprite, Phaser.Group or Phaser.Particles.Emitter.
-    * @param {Phaser.Sprite|Phaser.Group|Phaser.Particles.Emitter} object2 - The second object to check. Can be an instance of Phaser.Sprite, Phaser.Group or Phaser.Particles.Emitter.
+    * @param {Phaser.Sprite|Phaser.Group|Phaser.Particles.Emitter|array} object2 - The second object or array of objects to check. Can be Phaser.Sprite, Phaser.Group or Phaser.Particles.Emitter.
     * @param {function} [overlapCallback=null] - An optional callback function that is called if the objects overlap. The two objects will be passed to this function in the same order in which you specified them.
     * @param {function} [processCallback=null] - A callback function that lets you perform additional checks against the two objects if they overlap. If this is set then overlapCallback will only be called if processCallback returns true.
     * @param {object} [callbackContext] - The context in which to run the callbacks.
@@ -39347,39 +39500,16 @@ Phaser.Physics.Arcade.prototype = {
         this._result = false;
         this._total = 0;
 
-        this.collideHandler(object1, object2, overlapCallback, processCallback, callbackContext, true);
-
-        return (this._total > 0);
-
-    },
-
-    /**
-    * Checks for overlaps between a game object and a array of game objects. You can perform Sprite vs. Sprite, Sprite vs. Group, Group vs. Group, Sprite vs. Tilemap Layer or Group vs. Tilemap Layer checks.
-    * Unlike collide the objects are NOT automatically separated or have any physics applied, they merely test for overlap results.
-    * An optional processCallback can be provided. If given this function will be called when two sprites are found to be overlapping,
-    * giving you the chance to perform additional checks. If the function returns true then the overlap takes place. If it returns false it is skipped.
-    * The collideCallback is an optional function that is only called if two sprites collide. If a processCallback has been set then it needs to return true for overlapCallback to be called.
-    *
-    * @method Phaser.Physics.Arcade#overlapArray
-    * @param {Phaser.Sprite|Phaser.Group|Phaser.Particles.Emitter|Phaser.Tilemap} object1 - The first object to check. Can be an instance of Phaser.Sprite, Phaser.Group, Phaser.Particles.Emitter, or Phaser.Tilemap.
-    * @param {<Phaser.Sprite>array|<Phaser.Group>array|<Phaser.Particles.Emitter>array|<Phaser.Tilemap>array} objectArray - An array of objects to check. Can contain instances of Phaser.Sprite, Phaser.Group, Phaser.Particles.Emitter or Phaser.Tilemap.
-    * @param {function} [overlapCallback=null] - An optional callback function that is called if the objects overlap. The two objects will be passed to this function in the same order in which you specified them.
-    * @param {function} [processCallback=null] - A callback function that lets you perform additional checks against the two objects if they overlap. If this is set then collision will only happen if processCallback returns true. The two objects will be passed to this function in the same order in which you specified them.
-    * @param {object} [callbackContext] - The context in which to run the callbacks.
-    * @returns {boolean} True if a collision occured otherwise false.
-    */
-    overlapArray: function (object1, objectArray, overlapCallback, processCallback, callbackContext) {
-
-        overlapCallback = overlapCallback || null;
-        processCallback = processCallback || null;
-        callbackContext = callbackContext || overlapCallback;
-
-        this._result = false;
-        this._total = 0;
-
-        for (var i = 0,  len = objectArray.length; i < len; i++)
+        if (Array.isArray(object2))
         {
-            this.collideHandler(object1, objectArray[i], overlapCallback, processCallback, callbackContext, true);
+            for (var i = 0,  len = object2.length; i < len; i++)
+            {
+                this.collideHandler(object1, object2[i], overlapCallback, processCallback, callbackContext, true);
+            }
+        }
+        else
+        {
+            this.collideHandler(object1, object2, overlapCallback, processCallback, callbackContext, true);
         }
 
         return (this._total > 0);
@@ -39388,7 +39518,7 @@ Phaser.Physics.Arcade.prototype = {
 
     /**
     * Checks for collision between two game objects. You can perform Sprite vs. Sprite, Sprite vs. Group, Group vs. Group, Sprite vs. Tilemap Layer or Group vs. Tilemap Layer collisions.
-    * If you'd like to collide an array of objects see Phaser.Physics.Arcade#collideArray.
+    * The second parameter can be an array of objects, of differing types.
     * The objects are also automatically separated. If you don't require separation then use ArcadePhysics.overlap instead.
     * An optional processCallback can be provided. If given this function will be called when two sprites are found to be colliding. It is called before any separation takes place,
     * giving you the chance to perform additional checks. If the function returns true then the collision and separation is carried out. If it returns false it is skipped.
@@ -39396,7 +39526,7 @@ Phaser.Physics.Arcade.prototype = {
     *
     * @method Phaser.Physics.Arcade#collide
     * @param {Phaser.Sprite|Phaser.Group|Phaser.Particles.Emitter|Phaser.Tilemap} object1 - The first object to check. Can be an instance of Phaser.Sprite, Phaser.Group, Phaser.Particles.Emitter, or Phaser.Tilemap.
-    * @param {Phaser.Sprite|Phaser.Group|Phaser.Particles.Emitter|Phaser.Tilemap} object2 - The second object to check. Can be an instance of Phaser.Sprite, Phaser.Group, Phaser.Particles.Emitter or Phaser.Tilemap.
+    * @param {Phaser.Sprite|Phaser.Group|Phaser.Particles.Emitter|Phaser.Tilemap|array} object2 - The second object or array of objects to check. Can be Phaser.Sprite, Phaser.Group, Phaser.Particles.Emitter or Phaser.Tilemap.
     * @param {function} [collideCallback=null] - An optional callback function that is called if the objects collide. The two objects will be passed to this function in the same order in which you specified them.
     * @param {function} [processCallback=null] - A callback function that lets you perform additional checks against the two objects if they overlap. If this is set then collision will only happen if processCallback returns true. The two objects will be passed to this function in the same order in which you specified them.
     * @param {object} [callbackContext] - The context in which to run the callbacks.
@@ -39411,39 +39541,16 @@ Phaser.Physics.Arcade.prototype = {
         this._result = false;
         this._total = 0;
 
-        this.collideHandler(object1, object2, collideCallback, processCallback, callbackContext, false);
-
-        return (this._total > 0);
-
-    },
-
-    /**
-    * Checks for collision between a game object and an array of game objects. You can perform Sprite vs. Sprite, Sprite vs. Group, Group vs. Group, Sprite vs. Tilemap Layer or Group vs. Tilemap Layer collisions.
-    * The objects are also automatically separated. If you don't require separation then use ArcadePhysics.overlap instead.
-    * An optional processCallback can be provided. If given this function will be called when two sprites are found to be colliding. It is called before any separation takes place,
-    * giving you the chance to perform additional checks. If the function returns true then the collision and separation is carried out. If it returns false it is skipped.
-    * The collideCallback is an optional function that is only called if two sprites collide. If a processCallback has been set then it needs to return true for collideCallback to be called.
-    *
-    * @method Phaser.Physics.Arcade#collideArray
-    * @param {Phaser.Sprite|Phaser.Group|Phaser.Particles.Emitter|Phaser.Tilemap} object1 - The first object to check. Can be an instance of Phaser.Sprite, Phaser.Group, Phaser.Particles.Emitter, or Phaser.Tilemap.
-    * @param {<Phaser.Sprite>array|<Phaser.Group>array|<Phaser.Particles.Emitter>array|<Phaser.Tilemap>array} objectArray - An array of objects to check. Can contain instances of Phaser.Sprite, Phaser.Group, Phaser.Particles.Emitter or Phaser.Tilemap.
-    * @param {function} [collideCallback=null] - An optional callback function that is called if the objects collide. The two objects will be passed to this function in the same order in which you specified them.
-    * @param {function} [processCallback=null] - A callback function that lets you perform additional checks against the two objects if they overlap. If this is set then collision will only happen if processCallback returns true. The two objects will be passed to this function in the same order in which you specified them.
-    * @param {object} [callbackContext] - The context in which to run the callbacks.
-    * @returns {boolean} True if a collision occured otherwise false.
-    */
-    collideArray: function (object1, objectArray, collideCallback, processCallback, callbackContext) {
-
-        collideCallback = collideCallback || null;
-        processCallback = processCallback || null;
-        callbackContext = callbackContext || collideCallback;
-
-        this._result = false;
-        this._total = 0;
-
-        for (var i = 0,  len = objectArray.length; i < len; i++)
+        if (Array.isArray(object2))
         {
-            this.collideHandler(object1, objectArray[i], collideCallback, processCallback, callbackContext, false);
+            for (var i = 0,  len = object2.length; i < len; i++)
+            {
+                this.collideHandler(object1, object2[i], collideCallback, processCallback, callbackContext, false);
+            }
+        }
+        else
+        {
+            this.collideHandler(object1, object2, collideCallback, processCallback, callbackContext, false);
         }
 
         return (this._total > 0);
@@ -39661,8 +39768,6 @@ Phaser.Physics.Arcade.prototype = {
     */
     collideSpriteVsTilemapLayer: function (sprite, tilemapLayer, collideCallback, processCallback, callbackContext) {
 
-        // console.log('collideSpriteVsTilemapLayer x:', sprite.body.x, 'y:', sprite.body.y, 'body left:', sprite.body.left, 'right:', sprite.body.right);
-
         this._mapData = tilemapLayer.getTiles(sprite.body.left, sprite.body.top, sprite.body.width, sprite.body.height, true);
 
         if (this._mapData.length === 0)
@@ -39787,12 +39892,19 @@ Phaser.Physics.Arcade.prototype = {
     */
     intersects: function (a, b) {
 
+        var result = false;
+
         if (a.width <= 0 || a.height <= 0 || b.width <= 0 || b.height <= 0)
         {
-            return false;
+            result = false;
         }
 
-        return !(a.right < b.left || a.bottom < b.top || a.left > b.right || a.top > b.bottom);
+        result = !(a.right < b.left || a.bottom < b.top || a.left > b.right || a.top > b.bottom);
+
+        if (!result && a.inContact(b))
+        {
+            a.removeContact(b);
+        }
 
     },
 
@@ -39812,10 +39924,6 @@ Phaser.Physics.Arcade.prototype = {
             return this._intersection;
         }
 
-        // console.log('____ tileIntersects');
-        // console.log('body: ', body.left, body.top, body.right, body.bottom);
-        // console.log('tile: ', tile.x, tile.y, tile.right, tile.bottom);
-
         if (!(body.right < tile.x || body.bottom < tile.y || body.left > tile.right || body.top > tile.bottom))
         {
             this._intersection[0] = Math.max(body.left, tile.x);                                    // x
@@ -39828,6 +39936,7 @@ Phaser.Physics.Arcade.prototype = {
         }
 
         this._intersection[4] = 0;
+
         return this._intersection;
 
     },
@@ -39836,12 +39945,10 @@ Phaser.Physics.Arcade.prototype = {
     * The core separation function to separate a physics body and an array of tiles.
     * @method Phaser.Physics.Arcade#separateTiles
     * @param {Phaser.Physics.Arcade.Body} body - The Body object to separate.
-    * @param {<Phaser.Tile>array} tiles - The array of tiles to collide against.
+    * @param {array<Phaser.Tile>} tiles - The array of tiles to collide against.
     * @returns {boolean} Returns true if the body was separated, otherwise false.
     */
     separateTiles: function (body, tiles) {
-
-        // console.log('!!! separateTiles', tiles);
 
         var tile;
         var result = false;
@@ -39874,14 +39981,8 @@ Phaser.Physics.Arcade.prototype = {
         //  If the intersection area is either entirely null, or has a width/height of zero, we bail out now
         if (this._intersection[4] === 0 || this._intersection[2] === 0 || this._intersection[3] === 0)
         {
-            // console.log('Tile does not intersect body');
             return false;
         }
-
-        // console.log('*** separateTile', tile);
-        // console.log('intersection', this._intersection);
-
-        // tile.tile.debug = true;
 
         //  They overlap. Any custom callbacks?
         if (tile.tile.callback || tile.layer.callbacks[tile.tile.index])
@@ -39909,8 +40010,6 @@ Phaser.Physics.Arcade.prototype = {
             //  LEFT
             body.overlapX = body.left - tile.right;
 
-            // console.log('ST left', body.overlapX, body.deltaX(), 'bt', body.left, tile.right);
-
             if (body.overlapX < 0)
             {
                 process = true;
@@ -39924,8 +40023,6 @@ Phaser.Physics.Arcade.prototype = {
         {
             //  RIGHT
             body.overlapX = body.right - tile.x;
-
-            // console.log('ST right', body.overlapX, body.deltaX(), 'bt', body.right, tile.x);
 
             if (body.overlapX > 0)
             {
@@ -39942,8 +40039,6 @@ Phaser.Physics.Arcade.prototype = {
             //  UP
             body.overlapY = body.top - tile.bottom;
 
-            // console.log('ST up', body.overlapY, body.deltaY(), 'bt', body.top, tile.bottom);
-
             if (body.overlapY < 0)
             {
                 process = true;
@@ -39957,8 +40052,6 @@ Phaser.Physics.Arcade.prototype = {
         {
             //  DOWN
             body.overlapY = body.bottom - tile.y;
-
-            // console.log('ST down', body.overlapY, body.deltaY(), 'bt', body.bottom, tile.y);
 
             if (body.overlapY > 0)
             {
@@ -40004,8 +40097,6 @@ Phaser.Physics.Arcade.prototype = {
     */
     processTileSeparation: function (body) {
 
-        // console.log('PRE processTileSeparation xy', body.x, body.y, 'left', body.left, 'right', body.right, 'up', body.up, 'down', body.down);
-
         if (body.overlapX < 0)
         {
             body.x -= body.overlapX;
@@ -40014,8 +40105,6 @@ Phaser.Physics.Arcade.prototype = {
             body.blocked.x = Math.floor(body.x);
             body.blocked.y = Math.floor(body.y);
             body.blocked.left = true;
-            body.touching.left = true;
-            body.touching.none = false;
         }
         else if (body.overlapX > 0)
         {
@@ -40025,8 +40114,6 @@ Phaser.Physics.Arcade.prototype = {
             body.blocked.x = Math.floor(body.x);
             body.blocked.y = Math.floor(body.y);
             body.blocked.right = true;
-            body.touching.right = true;
-            body.touching.none = false;
         }
 
         if (body.overlapY < 0)
@@ -40037,9 +40124,6 @@ Phaser.Physics.Arcade.prototype = {
             body.blocked.x = Math.floor(body.x);
             body.blocked.y = Math.floor(body.y);
             body.blocked.up = true;
-            body.touching.up = true;
-            body.touching.none = false;
-
         }
         else if (body.overlapY > 0)
         {
@@ -40049,11 +40133,9 @@ Phaser.Physics.Arcade.prototype = {
             body.blocked.x = Math.floor(body.x);
             body.blocked.y = Math.floor(body.y);
             body.blocked.down = true;
-            body.touching.down = true;
-            body.touching.none = false;
         }
 
-        // console.log('POST processTileSeparation xy', body.x, body.y, 'left', body.left, 'right', body.right, 'up', body.up, 'down', body.down);
+        body.reboundCheck(body.overlapX, body.overlapY, true);
 
         return true;
 
@@ -40429,34 +40511,14 @@ Phaser.Physics.Arcade.prototype.constructor = Phaser.Physics.Arcade;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
-/*
-
-The SKPhysicsBody class defines properties that determine how the physics body is simulated. These properties affect how the body reacts to forces, what forces it generates on itself (to simulate friction), and how it reacts to collisions in the scene. In most cases, the properties are used to simulate physical effects.
-
-Each individual body also has its own property values that determine exactly how it reacts to forces and collisions in the scene. Here are the most important properties:
-
-The mass property determines how forces affect the body, as well as how much momentum the body has when it is involved in a collision.
-The friction property determines the roughness of the body’s surface. It is used to calculate the frictional force that a body applies to other bodies moving along its surface.
-The linearDamping and angularDamping properties are used to calculate friction on the body as it moves through the world. For example, this might be used to simulate air or water friction.
-The restitution property determines how much energy a body maintains during a collision—its bounciness.
-Other properties are used to determine how the simulation is performed on the body itself:
-
-The dynamic property determines whether the body is simulated by the physics subsystem.
-The affectedByGravity property determines whether the simulation exerts a gravitational force on the body. For more information on the physics world, see “Configuring the Physics World.”
-The allowsRotation property determines whether forces can impart angular velocity on the body.
-
-
-*/
-
-
-
 /**
-* The Physics Body is linked to a single Sprite. All physics operations should be performed against the body rather than
-* the Sprite itself. For example you can set the velocity, acceleration, bounce values etc all on the Body.
+* The Physics Body is linked to a single Sprite and defines properties that determine how the physics body is simulated.
+* These properties affect how the body reacts to forces, what forces it generates on itself (to simulate friction), and how it reacts to collisions in the scene. In most cases, the properties are used to simulate physical effects.
+* Each body also has its own property values that determine exactly how it reacts to forces and collisions in the scene.
 *
 * @class Phaser.Physics.Arcade.Body
 * @classdesc Arcade Physics Body Constructor
@@ -40524,7 +40586,7 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     this.gravity = new Phaser.Point();
 
     /**
-    * @property {Phaser.Point} bounce - The elasticitiy of the Body when colliding. bounce.x/y = 1 means full rebound, bounce.x/y = 0.5 means 50% rebound velocity.
+    * @property {Phaser.Point} bounce - The elasticitiy of the Body when colliding. This property determines how much energy a body maintains during a collision, i.e. its bounciness.
     */
     this.bounce = new Phaser.Point();
 
@@ -40532,7 +40594,7 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     * @property {Phaser.Point} minVelocity - When a body rebounds off another body or a wall the minVelocity is checked. If the new velocity is lower than minVelocity the body is stopped.
     * @default
     */
-    this.minVelocity = new Phaser.Point(5, 5);
+    this.minVelocity = new Phaser.Point();
 
     /**
     * @property {Phaser.Point} maxVelocity - The maximum velocity that the Body can reach.
@@ -40553,7 +40615,7 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     this.angularAcceleration = 0;
 
     /**
-    * @property {number} angularDrag - The angular drag applied to the rotation of the Body.
+    * @property {number} angularDrag - angularDrag is used to calculate friction on the body as it rotates.
     * @default
     */
     this.angularDrag = 0;
@@ -40565,16 +40627,16 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     this.maxAngular = 1000;
 
     /**
-    * @property {number} mass - The mass of the Body.
+    * @property {number} mass - The mass property determines how forces affect the body, as well as how much momentum the body has when it is involved in a collision.
     * @default
     */
     this.mass = 1;
 
     /**
-    * @property {number} friction - The amount of friction this body experiences during motion.
+    * @property {number} linearDamping - linearDamping is used to calculate friction on the body as it moves through the world. For example, this might be used to simulate air or water friction.
     * @default
     */
-    this.friction = 0.1;
+    this.linearDamping = 0.0;
 
     /**
     * Set the checkCollision properties to control which directions collision is processed for this Body.
@@ -40721,6 +40783,24 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     this.height = 0;
 
     /**
+    * @property {array<Phaser.Physics.Arcade.Body>} contacts - Used to store references to bodies this Body is in contact with.
+    * @protected
+    */
+    this.contacts = [];
+
+    /**
+    * @property {number} overlapX - Mostly used internally to store the overlap values from Tile seperation.
+    * @protected
+    */
+    this.overlapX = 0;
+
+    /**
+    * @property {number} overlapY - Mostly used internally to store the overlap values from Tile seperation.
+    * @protected
+    */
+    this.overlapY = 0;
+
+    /**
     * @property {Phaser.Point} _temp - Internal cache var.
     * @private
     */
@@ -40756,129 +40836,34 @@ Phaser.Physics.Arcade.Body = function (sprite) {
     */
     this._distances = [0, 0, 0, 0];
 
-    this.overlapX = 0;
-    this.overlapY = 0;
-
-    //  Velocity cache
+    /**
+    * @property {number} _vx - Internal cache var.
+    * @private
+    */
     this._vx = 0;
+
+    /**
+    * @property {number} _vy - Internal cache var.
+    * @private
+    */
     this._vy = 0;
 
     //  Set-up the default shape
     this.setRectangle(sprite.width, sprite.height, 0, 0);
+
+    //  Set-up contact events
+    this.sprite.events.onBeginContact = new Phaser.Signal();
+    this.sprite.events.onEndContact = new Phaser.Signal();
 
 };
 
 Phaser.Physics.Arcade.Body.prototype = {
 
     /**
-    * Sets this Body to use a circle of the given radius for all collision.
-    * The Circle will be centered on the center of the Sprite by default, but can be adjusted via the Body.offset property and the setCircle x/y parameters.
+    * Internal method that updates the Body scale in relation to the parent Sprite.
     *
-    * @method Phaser.Physics.Arcade#setCircle
-    * @param {number} radius - The radius of this circle (in pixels)
-    * @param {number} [offsetX=0] - The x amount the circle will be offset from the Sprites center.
-    * @param {number} [offsetY=0] - The y amount the circle will be offset from the Sprites center.
-    */
-    setCircle: function (radius, offsetX, offsetY) {
-
-        if (typeof offsetX === 'undefined') { offsetX = this.sprite._cache.halfWidth; }
-        if (typeof offsetY === 'undefined') { offsetY = this.sprite._cache.halfHeight; }
-
-        this.type = Phaser.Physics.Arcade.CIRCLE;
-        this.shape = new SAT.Circle(new SAT.Vector(this.sprite.x, this.sprite.y), radius);
-        this.polygon = null;
-
-        this.offset.setTo(offsetX, offsetY);
-
-    },
-
-    /**
-    * Sets this Body to use a rectangle for all collision.
-    * If you don't specify any parameters it will be sized to match the parent Sprites current width and height (including scale factor) and centered on the sprite.
-    *
-    * @method Phaser.Physics.Arcade#setRectangle
-    * @param {number} [width] - The width of the rectangle. If not specified it will default to the width of the parent Sprite.
-    * @param {number} [height] - The height of the rectangle. If not specified it will default to the height of the parent Sprite.
-    * @param {number} [translateX] - The x amount the rectangle will be translated from the Sprites center.
-    * @param {number} [translateY] - The y amount the rectangle will be translated from the Sprites center.
-    */
-    setRectangle: function (width, height, translateX, translateY) {
-
-        if (typeof width === 'undefined') { width = this.sprite.width; }
-        if (typeof height === 'undefined') { height = this.sprite.height; }
-        if (typeof translateX === 'undefined') { translateX = -this.sprite._cache.halfWidth; }
-        if (typeof translateY === 'undefined') { translateY = -this.sprite._cache.halfHeight; }
-
-        this.type = Phaser.Physics.Arcade.RECT;
-        this.shape = new SAT.Box(new SAT.Vector(this.sprite.world.x, this.sprite.world.y), width, height);
-        this.polygon = this.shape.toPolygon();
-        this.polygon.translate(translateX, translateY);
-
-        this.offset.setTo(0, 0);
-
-    },
-
-    /**
-    * Sets this Body to use a convex polygon for collision.
-    * The points are specified in a counter-clockwise direction and must create a convex polygon.
-    * Use Body.translate and/or Body.offset to re-position the polygon from the Sprite origin.
-    *
-    * @method Phaser.Physics.Arcade#setPolygon
-    * @param {array<SAT.Vector>|Array<Number>|SAT.Vector...|Number...} points - This can be an array of Vectors that form the polygon,
-    *      a flat array of numbers that will be interpreted as [x,y, x,y, ...], or the arguments passed can be
-    *      all the points of the polygon e.g. `setPolygon(new SAT.Vector(), new SAT.Vector(), ...)`, or the
-    *      arguments passed can be flat x,y values e.g. `setPolygon(x,y, x,y, x,y, ...)` where `x` and `y` are Numbers.
-    */
-    setPolygon: function (points) {
-
-        this.type = Phaser.Physics.Arcade.POLYGON;
-        this.shape = null;
-
-        if (!(points instanceof Array))
-        {
-            points = Array.prototype.slice.call(arguments);
-        }
-
-        if (typeof points[0] === 'number')
-        {
-            var p = [];
-
-            for (var i = 0, len = points.length; i < len; i += 2)
-            {
-                p.push(new SAT.Vector(points[i], points[i + 1]));
-            }
-
-            points = p;
-        }
-
-        this.polygon = new SAT.Polygon(new SAT.Vector(this.sprite.center.x, this.sprite.center.y), points);
-
-        this.offset.setTo(0, 0);
-
-    },
-
-    /**
-    * Used for translating rectangle and polygon bodies from the Sprite parent. Doesn't apply to Circles.
-    * See also the Body.offset property.
-    *
-    * @method Phaser.Physics.Arcade#translate
-    * @param {number} x - The x amount the polygon or rectangle will be translated by from the Sprite.
-    * @param {number} y - The y amount the polygon or rectangle will be translated by from the Sprite.
-    */
-    translate: function (x, y) {
-
-        if (this.polygon)
-        {
-            this.polygon.translate(x, y);
-        }
-
-    },
-
-    /**
-    * Internal method.
-    *
-    * @method Phaser.Physics.Arcade#updateScale
-    * @private
+    * @method Phaser.Physics.Arcade.Body#updateScale
+    * @protected
     */
     updateScale: function () {
 
@@ -40894,38 +40879,30 @@ Phaser.Physics.Arcade.Body.prototype = {
         this._sx = this.sprite.scale.x;
         this._sy = this.sprite.scale.y;
 
-        console.log('updateScale', this.sprite.scale.x, this.sprite.scale.y);
-
     },
 
     /**
-    * Internal method.
+    * Internal method that updates the Body position in relation to the parent Sprite.
     *
-    * @method Phaser.Physics.Arcade#preUpdate
+    * @method Phaser.Physics.Arcade.Body#preUpdate
     * @protected
     */
     preUpdate: function () {
 
+        this.x = (this.sprite.world.x - (this.sprite.anchor.x * this.sprite.width)) + this.offset.x;
+        this.y = (this.sprite.world.y - (this.sprite.anchor.y * this.sprite.height)) + this.offset.y;
+
+        //  This covers any motion that happens during this frame, not since the last frame
         this.preX = this.x;
         this.preY = this.y;
         this.preRotation = this.sprite.angle;
 
-        this.x = (this.sprite.world.x - (this.sprite.anchor.x * this.sprite.width)) + this.offset.x;
-        this.y = (this.sprite.world.y - (this.sprite.anchor.y * this.sprite.height)) + this.offset.y;
         this.rotation = this.preRotation;
 
         if (this.sprite.scale.x !== this._sx || this.sprite.scale.y !== this._sy)
         {
             this.updateScale();
         }
-
-if (this.sprite.debug)
-{
-    console.log('Body preUpdate x:', this.x, 'y:', this.y, 'left:', this.left, 'right:', this.right, 'WAS', this.preX, this.preY);
-    console.log('Body preUpdate blocked:', this.blocked, this.blockFlags);
-    console.log('Body preUpdate velocity:', this.velocity.x, this.velocity.y);
-    // console.log('Body preUpdate rotation:', this.rotation, this.preRotation);
-}
 
         this.checkBlocked();
 
@@ -40944,10 +40921,6 @@ if (this.sprite.debug)
                 this._vy = this.velocity.y;
                 this.speed = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
                 this.angle = Math.atan2(this.velocity.y, this.velocity.x);
-                if (this.sprite.debug)
-                {
-                    console.log('Body preUpdate speed / angle adjust', this.speed, this.angle);
-                }
             }
 
             if (this.game.physics.checkBounds(this))
@@ -40955,7 +40928,7 @@ if (this.sprite.debug)
                 this.reboundCheck(true, true, true);
             }
 
-            this.applyFriction();
+            this.applyDamping();
 
             this.integrateVelocity();
 
@@ -40968,28 +40941,24 @@ if (this.sprite.debug)
             this.updateBounds();
         }
 
-
-if (this.sprite.debug)
-{
-    console.log('Body preUpdate AFTER integration x:', this.x, 'y:', this.y, 'left:', this.left, 'right:', this.right);
-    console.log('Body preUpdate velocity:', this.velocity.x, this.velocity.y);
-}
-
-
     },
 
+    /**
+    * Internal method that checks and potentially resets the blocked status flags.
+    *
+    * @method Phaser.Physics.Arcade.Body#checkBlocked
+    * @protected
+    */
     checkBlocked: function () {
 
         if ((this.blocked.left || this.blocked.right) && (Math.floor(this.x) !== this.blocked.x || Math.floor(this.y) !== this.blocked.y))
         {
-            // console.log('resetBlocked unlocked left + right', Math.floor(this.x), this.blocked.x);
             this.blocked.left = false;
             this.blocked.right = false;
         }
 
         if ((this.blocked.up || this.blocked.down) && (Math.floor(this.x) !== this.blocked.x || Math.floor(this.y) !== this.blocked.y))
         {
-            // console.log('resetBlocked unlocked up + down', Math.floor(this.y), this.blocked.y, 'x', Math.floor(this.x), this.blocked.x);
             this.blocked.up = false;
             this.blocked.down = false;
         }
@@ -40999,7 +40968,7 @@ if (this.sprite.debug)
     /**
     * Internal method that updates the left, right, top, bottom, width and height properties.
     *
-    * @method Phaser.Physics.Arcade#updateBounds
+    * @method Phaser.Physics.Arcade.Body#updateBounds
     * @protected
     */
     updateBounds: function () {
@@ -41025,18 +40994,18 @@ if (this.sprite.debug)
     },
 
     /**
-    * Internal method.
+    * Internal method that checks the acceleration and applies damping if not set.
     *
-    * @method Phaser.Physics.Arcade#applyFriction
+    * @method Phaser.Physics.Arcade.Body#applyDamping
     * @protected
     */
-    applyFriction: function () {
+    applyDamping: function () {
 
-        if (this.friction > 0 && this.acceleration.isZero())
+        if (this.linearDamping > 0 && this.acceleration.isZero())
         {
-            if (this.speed > this.friction)
+            if (this.speed > this.linearDamping)
             {
-                this.speed -= this.friction;
+                this.speed -= this.linearDamping;
             }
             else
             {
@@ -41054,17 +41023,12 @@ if (this.sprite.debug)
             }
         }
 
-        if (this.sprite.debug)
-        {
-            console.log('Body applyFriction velocity:', this.velocity.x, this.velocity.y, 'speed', this.speed);
-        }
-
     },
 
     /**
     * Check if we're below minVelocity and gravity isn't trying to drag us in the opposite direction.
     *
-    * @method Phaser.Physics.Arcade#reboundCheck
+    * @method Phaser.Physics.Arcade.Body#reboundCheck
     * @protected
     * @param {boolean} x - Check the X axis?
     * @param {boolean} y - Check the Y axis?
@@ -41072,22 +41036,15 @@ if (this.sprite.debug)
     */
     reboundCheck: function (x, y, rebound) {
 
-        if (this.sprite.debug)
-        {
-            console.log('reboundCheck start', this.velocity.x, this.velocity.y);
-            console.log('reBound blocked state', this.blocked);
-        }
-
         if (x)
         {
-            if (rebound && this.bounce.x !== 0 && (this.blocked.left || this.blocked.right))
+            if (rebound && this.bounce.x !== 0 && (this.blocked.left || this.blocked.right || this.touching.left || this.touching.right))
             {
-                this.velocity.x *= -this.bounce.x;
-                this.angle = Math.atan2(this.velocity.y, this.velocity.x);
-
-                if (this.sprite.debug)
+                //  Don't rebound if they've already rebounded in this frame
+                if (!(this._vx <= 0 && this.velocity.x > 0) && !(this._vx >= 0 && this.velocity.x < 0))
                 {
-                    console.log('X rebound applied');
+                    this.velocity.x *= -this.bounce.x;
+                    this.angle = Math.atan2(this.velocity.y, this.velocity.x);
                 }
             }
 
@@ -41095,33 +41052,22 @@ if (this.sprite.debug)
             {
                 var gx = this.getUpwardForce();
 
-                if ((this.blocked.left && (gx < 0 || this.velocity.x < 0)) || (this.blocked.right && (gx > 0 || this.velocity.x > 0)))
+                if (((this.blocked.left || this.touching.left) && (gx < 0 || this.velocity.x < 0)) || ((this.blocked.right || this.touching.right) && (gx > 0 || this.velocity.x > 0)))
                 {
                     this.velocity.x = 0;
-
-                    if (this.sprite.debug)
-                    {
-                        console.log('reboundCheck X zeroed');
-                    }
                 }
-            }
-
-            if (this.sprite.debug)
-            {
-                console.log('reboundCheck X', this.velocity.x, 'gravity', gx);
             }
         }
 
         if (y)
         {
-            if (rebound && this.bounce.y !== 0 && (this.blocked.up || this.blocked.down))
+            if (rebound && this.bounce.y !== 0 && (this.blocked.up || this.blocked.down || this.touching.up || this.touching.down))
             {
-                this.velocity.y *= -this.bounce.y;
-                this.angle = Math.atan2(this.velocity.y, this.velocity.x);
-
-                if (this.sprite.debug)
+                //  Don't rebound if they've already rebounded in this frame
+                if (!(this._vy <= 0 && this.velocity.y > 0) && !(this._vy >= 0 && this.velocity.y < 0))
                 {
-                    console.log('Y rebound applied');
+                    this.velocity.y *= -this.bounce.y;
+                    this.angle = Math.atan2(this.velocity.y, this.velocity.x);
                 }
             }
 
@@ -41129,20 +41075,10 @@ if (this.sprite.debug)
             {
                 var gy = this.getDownwardForce();
 
-                if ((this.blocked.up && (gy < 0 || this.velocity.y < 0)) || (this.blocked.down && (gy > 0 || this.velocity.y > 0)))
+                if (((this.blocked.up || this.touching.up) && (gy < 0 || this.velocity.y < 0)) || ((this.blocked.down || this.touching.down) && (gy > 0 || this.velocity.y > 0)))
                 {
                     this.velocity.y = 0;
-
-                    if (this.sprite.debug)
-                    {
-                        console.log('reboundCheck Y zeroed');
-                    }
                 }
-            }
-
-            if (this.sprite.debug)
-            {
-                console.log('reboundCheck Y', this.velocity.y, 'gravity', gy);
             }
         }
 
@@ -41151,7 +41087,7 @@ if (this.sprite.debug)
     /**
     * Gets the total force being applied on the X axis, including gravity and velocity.
     *
-    * @method Phaser.Physics.Arcade#getUpwardForce
+    * @method Phaser.Physics.Arcade.Body#getUpwardForce
     * @return {number} The total force being applied on the X axis.
     */
     getUpwardForce: function () {
@@ -41170,7 +41106,7 @@ if (this.sprite.debug)
     /**
     * Gets the total force being applied on the X axis, including gravity and velocity.
     *
-    * @method Phaser.Physics.Arcade#getDownwardForce
+    * @method Phaser.Physics.Arcade.Body#getDownwardForce
     * @return {number} The total force being applied on the Y axis.
     */
     getDownwardForce: function () {
@@ -41189,7 +41125,7 @@ if (this.sprite.debug)
     /**
     * Subtracts the given Vector from this Body.
     *
-    * @method Phaser.Physics.Arcade#sub
+    * @method Phaser.Physics.Arcade.Body#sub
     * @protected
     * @param {SAT.Vector} v - The vector to substract from this Body.
     */
@@ -41201,9 +41137,9 @@ if (this.sprite.debug)
     },
 
     /**
-    * Adds the given Vector from this Body.
+    * Adds the given Vector to this Body.
     *
-    * @method Phaser.Physics.Arcade#add
+    * @method Phaser.Physics.Arcade.Body#add
     * @protected
     * @param {SAT.Vector} v - The vector to add to this Body.
     */
@@ -41217,7 +41153,7 @@ if (this.sprite.debug)
     /**
     * Separation response handler.
     *
-    * @method Phaser.Physics.Arcade#give
+    * @method Phaser.Physics.Arcade.Body#give
     * @protected
     * @param {Phaser.Physics.Arcade.Body} body - The Body that collided.
     * @param {SAT.Response} response - The SAT Response object containing the collision data.
@@ -41238,7 +41174,7 @@ if (this.sprite.debug)
     /**
     * Separation response handler.
     *
-    * @method Phaser.Physics.Arcade#take
+    * @method Phaser.Physics.Arcade.Body#take
     * @protected
     * @param {Phaser.Physics.Arcade.Body} body - The Body that collided.
     * @param {SAT.Response} response - The SAT Response object containing the collision data.
@@ -41259,7 +41195,7 @@ if (this.sprite.debug)
     /**
     * Split the collision response evenly between the two bodies.
     *
-    * @method Phaser.Physics.Arcade#split
+    * @method Phaser.Physics.Arcade.Body#split
     * @protected
     * @param {Phaser.Physics.Arcade.Body} body - The Body that collided.
     * @param {SAT.Response} response - The SAT Response object containing the collision data.
@@ -41282,7 +41218,7 @@ if (this.sprite.debug)
     /**
     * Exchange velocity with the given Body.
     *
-    * @method Phaser.Physics.Arcade#exchange
+    * @method Phaser.Physics.Arcade.Body#exchange
     * @protected
     * @param {Phaser.Physics.Arcade.Body} body - The Body that collided.
     */
@@ -41328,14 +41264,22 @@ if (this.sprite.debug)
     /**
     * Rebound the velocity of this Body.
     *
-    * @method Phaser.Physics.Arcade#processRebound
+    * @method Phaser.Physics.Arcade.Body#processRebound
     * @protected
     * @param {Phaser.Physics.Arcade.Body} body - The Body that collided.
     */
     processRebound: function (body) {
 
-        this.velocity.x = body.velocity.x - this.velocity.x * this.bounce.x;
-        this.velocity.y = body.velocity.y - this.velocity.y * this.bounce.y;
+        //  Don't rebound again if they've already rebounded in this frame
+        if (!(this._vx <= 0 && this.velocity.x > 0) && !(this._vx >= 0 && this.velocity.x < 0))
+        {
+            this.velocity.x = body.velocity.x - this.velocity.x * this.bounce.x;
+        }
+
+        if (!(this._vy <= 0 && this.velocity.y > 0) && !(this._vy >= 0 && this.velocity.y < 0))
+        {
+            this.velocity.y = body.velocity.y - this.velocity.y * this.bounce.y;
+        }
 
         this.angle = Math.atan2(this.velocity.y, this.velocity.x);
 
@@ -41346,68 +41290,153 @@ if (this.sprite.debug)
     /**
     * Checks for an overlap between this Body and the given Body.
     *
-    * @method Phaser.Physics.Arcade#overlap
+    * @method Phaser.Physics.Arcade.Body#overlap
     * @param {Phaser.Physics.Arcade.Body} body - The Body that is being checked against this Body.
     * @param {SAT.Response} response - SAT Response handler.
     * @return {boolean} True if the two bodies overlap, otherwise false.
     */
     overlap: function (body, response) {
 
+        var result = false;
+
         if ((this.type === Phaser.Physics.Arcade.RECT || this.type === Phaser.Physics.Arcade.POLYGON) && (body.type === Phaser.Physics.Arcade.RECT || body.type === Phaser.Physics.Arcade.POLYGON))
         {
-            return SAT.testPolygonPolygon(this.polygon, body.polygon, response);
+            result = SAT.testPolygonPolygon(this.polygon, body.polygon, response);
         }
         else if (this.type === Phaser.Physics.Arcade.CIRCLE && body.type === Phaser.Physics.Arcade.CIRCLE)
         {
-            return SAT.testCircleCircle(this.shape, body.shape, response);
+            result = SAT.testCircleCircle(this.shape, body.shape, response);
         }
         else if ((this.type === Phaser.Physics.Arcade.RECT || this.type === Phaser.Physics.Arcade.POLYGON) && body.type === Phaser.Physics.Arcade.CIRCLE)
         {
-            return SAT.testPolygonCircle(this.polygon, body.shape, response);
+            result = SAT.testPolygonCircle(this.polygon, body.shape, response);
         }
         else if (this.type === Phaser.Physics.Arcade.CIRCLE && (body.type === Phaser.Physics.Arcade.RECT || body.type === Phaser.Physics.Arcade.POLYGON))
         {
-            return SAT.testCirclePolygon(this.shape, body.polygon, response);
+            result = SAT.testCirclePolygon(this.shape, body.polygon, response);
         }
+
+        if (!result)
+        {
+            this.removeContact(body);
+        }
+
+        return result;
+
+    },
+
+    /**
+    * Checks if this Body is already in contact with the given Body.
+    *
+    * @method Phaser.Physics.Arcade.Body#inContact
+    * @param {Phaser.Physics.Arcade.Body} body - The Body to be checked.
+    * @return {boolean} True if the given Body is already in contact with this Body.
+    */
+    inContact: function (body) {
+
+        return (this.contacts.indexOf(body) != -1);
+
+    },
+
+    /**
+    * Adds the given Body to the contact list of this Body. Also adds this Body to the contact list of the given Body.
+    *
+    * @method Phaser.Physics.Arcade.Body#addContact
+    * @param {Phaser.Physics.Arcade.Body} body - The Body to be added.
+    * @return {boolean} True if the given Body was added to this contact list, false if already on it.
+    */
+    addContact: function (body) {
+
+        if (this.inContact(body))
+        {
+            return false;
+        }
+
+        this.contacts.push(body);
+
+        this.sprite.events.onBeginContact.dispatch(this.sprite, body.sprite, this, body);
+
+        body.addContact(this);
+
+        return true;
+
+    },
+
+    /**
+    * Removes the given Body from the contact list of this Body. Also removes this Body from the contact list of the given Body.
+    *
+    * @method Phaser.Physics.Arcade.Body#removeContact
+    * @param {Phaser.Physics.Arcade.Body} body - The Body to be removed.
+    * @return {boolean} True if the given Body was removed from this contact list, false if wasn't on it.
+    */
+    removeContact: function (body) {
+
+        if (!this.inContact(body))
+        {
+            return false;
+        }
+
+        this.contacts.splice(this.contacts.indexOf(body), 1);
+
+        this.sprite.events.onEndContact.dispatch(this.sprite, body.sprite, this, body);
+
+        body.removeContact(this);
+
+        return true;
 
     },
 
     /**
     * This separates this Body from the given Body unless a customSeparateCallback is set.
-    * It assumes they have already been overlap checked and the resulting overlap is stored in overlapX and overlapY.
+    * It assumes they have already been overlap checked and the resulting overlap is stored in the SAT response.
     *
-    * @method Phaser.Physics.Arcade#separate
+    * @method Phaser.Physics.Arcade.Body#separate
     * @protected
     * @param {Phaser.Physics.Arcade.Body} body - The Body to be separated from this one.
     * @param {SAT.Response} response - SAT Response handler.
-    * @return {boolean}
+    * @return {boolean} True if the bodies were separated, false if not (for example checkCollide allows them to pass through)
     */
     separate: function (body, response) {
 
-        if (this.customSeparateCallback)
-        {
-            return this.customSeparateCallback.call(this.customSeparateContext, this, response);
-        }
-
-        // console.log(this.sprite.name, 'collided with', body.sprite.name, response);
+        // if (this.inContact(body))
+        // {
+            // return false;
+        // }
 
         this._distances[0] = body.right - this.x;   // Distance of B to face on left side of A
         this._distances[1] = this.right - body.x;   // Distance of B to face on right side of A
         this._distances[2] = body.bottom - this.y;  // Distance of B to face on bottom side of A
         this._distances[3] = this.bottom - body.y;  // Distance of B to face on top side of A
 
+        //  If we've zero distance then check for side-slicing
+        if (response.overlapN.x && (this._distances[0] === 0 || this._distances[1] === 0))
+        {
+            response.overlapN.x = false;
+            response.overlapN.y = true;
+        }
+        else if (response.overlapN.y && (this._distances[2] === 0 || this._distances[3] === 0))
+        {
+            response.overlapN.x = true;
+            response.overlapN.y = false;
+        }
+
+        if (this.customSeparateCallback)
+        {
+            return this.customSeparateCallback.call(this.customSeparateContext, this, response, this._distances);
+        }
+
+        var hasSeparated = false;
+
         if (response.overlapN.x)
         {
             //  Which is smaller? Left or Right?
             if (this._distances[0] < this._distances[1])
             {
-                // console.log(this.sprite.name, 'collided on the LEFT with', body.sprite.name, response);
-                this.hitLeft(body, response);
+                hasSeparated = this.hitLeft(body, response);
             }
             else if (this._distances[1] < this._distances[0])
             {
-                // console.log(this.sprite.name, 'collided on the RIGHT with', body.sprite.name, response);
-                this.hitRight(body, response);
+                hasSeparated = this.hitRight(body, response);
             }
         }
         else if (response.overlapN.y)
@@ -41415,20 +41444,29 @@ if (this.sprite.debug)
             //  Which is smaller? Top or Bottom?
             if (this._distances[2] < this._distances[3])
             {
-                // console.log(this.sprite.name, 'collided on the TOP with', body.sprite.name, response);
-                this.hitTop(body, response);
+                hasSeparated = this.hitTop(body, response);
             }
             else if (this._distances[3] < this._distances[2])
             {
-                // console.log(this.sprite.name, 'collided on the BOTTOM with', body.sprite.name, response);
-                this.hitBottom(body, response);
+                hasSeparated = this.hitBottom(body, response);
             }
         }
 
-        this.game.physics.checkBounds(this);
-        this.game.physics.checkBounds(body);
+        if (hasSeparated)
+        {
+            this.game.physics.checkBounds(this);
+            this.game.physics.checkBounds(body);
+        }
+        else
+        {
+            //  They can only contact like this if at least one of their sides is open, otherwise it's a separation
+            if (!this.checkCollision.up || !this.checkCollision.down || !this.checkCollision.left || !this.checkCollision.right || !body.checkCollision.up || !body.checkCollision.down || !body.checkCollision.left || !body.checkCollision.right)
+            {
+                this.addContact(body);
+            }
+        }
 
-        return true;
+        return hasSeparated;
 
     },
 
@@ -41439,22 +41477,21 @@ if (this.sprite.debug)
     * If the callback returns true then separation, rebounds and the touching flags will all be set.
     * If it returns false this will be skipped and must be handled manually.
     *
-    * @method Phaser.Physics.Arcade#hitLeft
+    * @method Phaser.Physics.Arcade.Body#hitLeft
     * @protected
     * @param {Phaser.Physics.Arcade.Body} body - The Body that collided.
     * @param {SAT.Response} response - The SAT Response object containing the collision data.
     */
     hitLeft: function (body, response) {
 
-        //  We know that Body is overlapping with This on the left hand side (deltaX < 0 = moving left, > 0 = moving right)
-        // if (body.speed > 0 && (body.deltaX() <= 0 || (body.deltaX() > 0 && !this.checkCollision.left)))
-        // {
-        //     return;
-        // }
+        if (!this.checkCollision.left || !body.checkCollision.right)
+        {
+            return false;
+        }
 
         if (this.collideCallback && !this.collideCallback.call(this.collideCallbackContext, Phaser.LEFT, this, body, response))
         {
-            return;
+            return false;
         }
 
         if (!this.moves || this.immovable || this.blocked.right || this.touching.right)
@@ -41478,6 +41515,8 @@ if (this.sprite.debug)
         this.touching.left = true;
         body.touching.right = true;
 
+        return true;
+
     },
 
     /**
@@ -41487,24 +41526,21 @@ if (this.sprite.debug)
     * If the callback returns true then separation, rebounds and the touching flags will all be set.
     * If it returns false this will be skipped and must be handled manually.
     *
-    * @method Phaser.Physics.Arcade#hitRight
+    * @method Phaser.Physics.Arcade.Body#hitRight
     * @protected
     * @param {Phaser.Physics.Arcade.Body} body - The Body that collided.
     * @param {SAT.Response} response - The SAT Response object containing the collision data.
     */
     hitRight: function (body, response) {
 
-        //  We know that Body is overlapping with This on the right hand side (deltaX < 0 = moving left, > 0 = moving right)
-        // if (body.speed > 0 && (body.deltaX() >= 0 || (body.deltaX() < 0 && !this.checkCollision.right)))
-        // {
-        //     console.log('bail 1', body.deltaX());
-        //     return;
-        // }
+        if (!this.checkCollision.right || !body.checkCollision.left)
+        {
+            return false;
+        }
 
         if (this.collideCallback && !this.collideCallback.call(this.collideCallbackContext, Phaser.RIGHT, this, body))
         {
-            console.log('bail 2');
-            return;
+            return false;
         }
 
         if (!this.moves || this.immovable || this.blocked.left || this.touching.left)
@@ -41528,6 +41564,8 @@ if (this.sprite.debug)
         this.touching.right = true;
         body.touching.left = true;
 
+        return true;
+
     },
 
     /**
@@ -41537,24 +41575,21 @@ if (this.sprite.debug)
     * If the callback returns true then separation, rebounds and the touching flags will all be set.
     * If it returns false this will be skipped and must be handled manually.
     *
-    * @method Phaser.Physics.Arcade#hitTop
+    * @method Phaser.Physics.Arcade.Body#hitTop
     * @protected
     * @param {Phaser.Physics.Arcade.Body} body - The Body that collided.
     * @param {SAT.Response} response - The SAT Response object containing the collision data.
     */
     hitTop: function (body, response) {
 
-        //  We know that Body is overlapping with This on the bottom side (deltaY < 0 = moving up, > 0 = moving down)
-        // if (body.speed > 0 && (body.deltaY() <= 0 || (body.deltaY() > 0 && !this.checkCollision.up)))
-        // if (body.speed > 0 && (body.deltaY() <= 0 || (body.deltaY() > 0 && !this.checkCollision.up)))
-        // {
-            // console.log('bail', body.sprite.name, body.deltaY());
-            // return;
-        // }
+        if (!this.checkCollision.up || !body.checkCollision.down)
+        {
+            return false;
+        }
 
         if (this.collideCallback && !this.collideCallback.call(this.collideCallbackContext, Phaser.UP, this, body))
         {
-            return;
+            return false;
         }
 
         if (!this.moves || this.immovable || this.blocked.down || this.touching.down)
@@ -41578,6 +41613,8 @@ if (this.sprite.debug)
         this.touching.up = true;
         body.touching.down = true;
 
+        return true;
+
     },
 
     /**
@@ -41587,22 +41624,21 @@ if (this.sprite.debug)
     * If the callback returns true then separation, rebounds and the touching flags will all be set.
     * If it returns false this will be skipped and must be handled manually.
     *
-    * @method Phaser.Physics.Arcade#hitBottom
+    * @method Phaser.Physics.Arcade.Body#hitBottom
     * @protected
     * @param {Phaser.Physics.Arcade.Body} body - The Body that collided.
     * @param {SAT.Response} response - The SAT Response object containing the collision data.
     */
     hitBottom: function (body, response) {
 
-        //  We know that Body is overlapping with This on the bottom side (deltaY < 0 = moving up, > 0 = moving down)
-        // if (body.speed > 0 && (body.deltaY() >= 0 || (body.deltaY() < 0 && !this.checkCollision.down)))
-        // {
-        //     return;
-        // }
+        if (!this.checkCollision.down || !body.checkCollision.up)
+        {
+            return false;
+        }
 
         if (this.collideCallback && !this.collideCallback.call(this.collideCallbackContext, Phaser.DOWN, this, body))
         {
-            return;
+            return false;
         }
 
         if (!this.moves || this.immovable || this.blocked.up || this.touching.up)
@@ -41626,12 +41662,14 @@ if (this.sprite.debug)
         this.touching.down = true;
         body.touching.up = true;
 
+        return true;
+
     },
 
     /**
     * Internal method. Integrates velocity, global gravity and the delta timer.
     *
-    * @method Phaser.Physics.Arcade#integrateVelocity
+    * @method Phaser.Physics.Arcade.Body#integrateVelocity
     * @protected
     */
     integrateVelocity: function () {
@@ -41640,11 +41678,6 @@ if (this.sprite.debug)
         this._dx = this.game.time.physicsElapsed * (this.velocity.x + this._temp.x / 2);
         this._dy = this.game.time.physicsElapsed * (this.velocity.y + this._temp.y / 2);
 
-        if (this.sprite.debug)
-        {
-            // console.log('integrateVelocity TEMP:', this._temp.x, this._temp.y);
-        }
-
         //  positive = RIGHT / DOWN
         //  negative = LEFT / UP
 
@@ -41652,34 +41685,12 @@ if (this.sprite.debug)
         {
             this.x += this._dx;
             this.velocity.x += this._temp.x;
-            if (this.sprite.debug)
-            {
-                // console.log('integrateVelocity x added', this._dx, this.x);
-            }
-        }
-        else
-        {
-            if (this.sprite.debug)
-            {
-                // console.log('integrateVelocity x failed or zero, blocked left/right', this._dx);
-            }
         }
 
         if ((this._dy < 0 && !this.blocked.up && !this.touching.up) || (this._dy > 0 && !this.blocked.down && !this.touching.down))
         {
             this.y += this._dy;
             this.velocity.y += this._temp.y;
-            if (this.sprite.debug)
-            {
-                // console.log('integrateVelocity y added', this._dy, this.y);
-            }
-        }
-        else
-        {
-            if (this.sprite.debug)
-            {
-                // console.log('integrateVelocity y failed or zero, blocked up/down', this._dy);
-            }
         }
 
         if (this.velocity.x > this.maxVelocity.x)
@@ -41705,132 +41716,261 @@ if (this.sprite.debug)
     /**
     * Internal method. This is called directly before the sprites are sent to the renderer and after the update function has finished.
     *
-    * @method Phaser.Physics.Arcade#postUpdate
+    * @method Phaser.Physics.Arcade.Body#postUpdate
     * @protected
     */
     postUpdate: function () {
 
         if (this.moves)
         {
-            this.reboundCheck(true, true, true);
-
             this.game.physics.checkBounds(this);
 
-            if (this.deltaX() < 0)
+            this.reboundCheck(true, true, true);
+
+            this._dx = this.deltaX();
+            this._dy = this.deltaY();
+
+            if (this._dx < 0)
             {
                 this.facing = Phaser.LEFT;
             }
-            else if (this.deltaX() > 0)
+            else if (this._dx > 0)
             {
                 this.facing = Phaser.RIGHT;
             }
 
-            if (this.deltaY() < 0)
+            if (this._dy < 0)
             {
                 this.facing = Phaser.UP;
             }
-            else if (this.deltaY() > 0)
+            else if (this._dy > 0)
             {
                 this.facing = Phaser.DOWN;
             }
 
-if (this.sprite.debug)
-{
-    // console.log('Body postUpdate x:', this.x, 'y:', this.y, 'left:', this.left, 'right:', this.right, 'WAS', this.preX, this.preY);
-    // console.log('Body postUpdate blocked:', this.blocked, this.blockFlags);
-    // console.log('Body postUpdate velocity:', this.velocity.x, this.velocity.y);
-    // console.log('Body postUpdate Sprite:', this.sprite.x, this.sprite.y, 'cached', this.sprite._cache.x, this.sprite._cache.y);
-    console.log('Body postUpdate Rotation:', this.rotation);
-}
-
-            if (this.deltaX() !== 0 || this.deltaY() !== 0)
+            if (this._dx !== 0 || this._dy !== 0)
             {
-                this.sprite.worldTransform[2] = this.sprite.x = (this.x + (this.sprite.anchor.x * this.sprite.width) - this.offset.x);
-                this.sprite.worldTransform[5] = this.sprite.y = (this.y + (this.sprite.anchor.y * this.sprite.height) - this.offset.y);
+                this.sprite.x += this._dx;
+                this.sprite.y += this._dy;
             }
 
             if (this.allowRotation && this.deltaZ() !== 0)
             {
                 this.sprite.angle += this.deltaZ();
             }
-            
+
             if (this.sprite.scale.x !== this._sx || this.sprite.scale.y !== this._sy)
             {
                 this.updateScale();
             }
-
         }
 
     },
 
     /**
     * Resets the Body motion values: velocity, acceleration, angularVelocity and angularAcceleration.
-    * Also resets the forces to defaults: gravity, bounce, minVelocity,maxVelocity, angularDrag, maxAngular, mass, friction and checkCollision.
+    * Also resets the forces to defaults: gravity, bounce, minVelocity,maxVelocity, angularDrag, maxAngular, mass, friction and checkCollision if 'full' specified.
     *
-    * @method Phaser.Physics.Arcade#reset
+    * @method Phaser.Physics.Arcade.Body#reset
+    * @param {boolean} [full=false] - A full reset clears down settings you may have set, such as gravity, bounce and drag. A non-full reset just clears motion values.
     */
-    reset: function () {
+    reset: function (full) {
+
+        if (typeof full === 'undefined') { full = false; }
+
+        if (full)
+        {
+            this.gravity.setTo(0, 0);
+            this.bounce.setTo(0, 0);
+            this.minVelocity.setTo(5, 5);
+            this.maxVelocity.setTo(1000, 1000);
+            this.angularDrag = 0;
+            this.maxAngular = 1000;
+            this.mass = 1;
+            this.friction = 0.0;
+            this.checkCollision = { none: false, any: true, up: true, down: true, left: true, right: true };
+        }
 
         this.velocity.setTo(0, 0);
         this.acceleration.setTo(0, 0);
         this.angularVelocity = 0;
         this.angularAcceleration = 0;
-        this.gravity.setTo(0, 0);
-        this.bounce.setTo(0, 0);
-        this.minVelocity.setTo(5, 5);
-        this.maxVelocity.setTo(1000, 1000);
-        this.angularDrag = 0;
-        this.maxAngular = 1000;
-        this.mass = 1;
-        this.friction = 0.1;
-        this.checkCollision = { none: false, any: true, up: true, down: true, left: true, right: true };
         this.blocked = { x: 0, y: 0, up: false, down: false, left: false, right: false };
         this.x = (this.sprite.world.x - (this.sprite.anchor.x * this.sprite.width)) + this.offset.x;
         this.y = (this.sprite.world.y - (this.sprite.anchor.y * this.sprite.height)) + this.offset.y;
+        this.preX = this.x;
+        this.preY = this.y;
         this.updateBounds();
+
+        this.contacts.length = 0;
 
     },
 
     /**
-    * Returns the delta x value. The difference between Body.x now and in the previous step.
+    * Destroys this Body and all references it holds to other objects.
+    *
+    * @method Phaser.Physics.Arcade.Body#destroy
+    */
+    destroy: function () {
+
+        this.sprite = null;
+
+        this.collideCallback = null;
+        this.collideCallbackContext = null;
+
+        this.customSeparateCallback = null;
+        this.customSeparateContext = null;
+
+        this.contacts.length = 0;
+
+    },
+
+    /**
+    * Sets this Body to use a circle of the given radius for all collision.
+    * The Circle will be centered on the center of the Sprite by default, but can be adjusted via the Body.offset property and the setCircle x/y parameters.
+    *
+    * @method Phaser.Physics.Arcade.Body#setCircle
+    * @param {number} radius - The radius of this circle (in pixels)
+    * @param {number} [offsetX=0] - The x amount the circle will be offset from the Sprites center.
+    * @param {number} [offsetY=0] - The y amount the circle will be offset from the Sprites center.
+    */
+    setCircle: function (radius, offsetX, offsetY) {
+
+        if (typeof offsetX === 'undefined') { offsetX = this.sprite._cache.halfWidth; }
+        if (typeof offsetY === 'undefined') { offsetY = this.sprite._cache.halfHeight; }
+
+        this.type = Phaser.Physics.Arcade.CIRCLE;
+        this.shape = new SAT.Circle(new SAT.Vector(this.sprite.x, this.sprite.y), radius);
+        this.polygon = null;
+
+        this.offset.setTo(offsetX, offsetY);
+
+    },
+
+    /**
+    * Sets this Body to use a rectangle for all collision.
+    * If you don't specify any parameters it will be sized to match the parent Sprites current width and height (including scale factor) and centered on the sprite.
+    *
+    * @method Phaser.Physics.Arcade.Body#setRectangle
+    * @param {number} [width] - The width of the rectangle. If not specified it will default to the width of the parent Sprite.
+    * @param {number} [height] - The height of the rectangle. If not specified it will default to the height of the parent Sprite.
+    * @param {number} [translateX] - The x amount the rectangle will be translated from the Sprites center.
+    * @param {number} [translateY] - The y amount the rectangle will be translated from the Sprites center.
+    */
+    setRectangle: function (width, height, translateX, translateY) {
+
+        if (typeof width === 'undefined') { width = this.sprite.width; }
+        if (typeof height === 'undefined') { height = this.sprite.height; }
+        if (typeof translateX === 'undefined') { translateX = -this.sprite._cache.halfWidth; }
+        if (typeof translateY === 'undefined') { translateY = -this.sprite._cache.halfHeight; }
+
+        this.type = Phaser.Physics.Arcade.RECT;
+        this.shape = new SAT.Box(new SAT.Vector(this.sprite.world.x, this.sprite.world.y), width, height);
+        this.polygon = this.shape.toPolygon();
+        this.polygon.translate(translateX, translateY);
+
+        this.offset.setTo(0, 0);
+
+    },
+
+    /**
+    * Sets this Body to use a convex polygon for collision.
+    * The points are specified in a counter-clockwise direction and must create a convex polygon.
+    * Use Body.translate and/or Body.offset to re-position the polygon from the Sprite origin.
+    *
+    * @method Phaser.Physics.Arcade.Body#setPolygon
+    * @param {(SAT.Vector[]|number[]|...SAT.Vector|...number)} points - This can be an array of Vectors that form the polygon,
+    *      a flat array of numbers that will be interpreted as [x,y, x,y, ...], or the arguments passed can be
+    *      all the points of the polygon e.g. `setPolygon(new SAT.Vector(), new SAT.Vector(), ...)`, or the
+    *      arguments passed can be flat x,y values e.g. `setPolygon(x,y, x,y, x,y, ...)` where `x` and `y` are Numbers.
+    */
+    setPolygon: function (points) {
+
+        this.type = Phaser.Physics.Arcade.POLYGON;
+        this.shape = null;
+
+        if (!Array.isArray(points))
+        {
+            points = Array.prototype.slice.call(arguments);
+        }
+
+        if (typeof points[0] === 'number')
+        {
+            var p = [];
+
+            for (var i = 0, len = points.length; i < len; i += 2)
+            {
+                p.push(new SAT.Vector(points[i], points[i + 1]));
+            }
+
+            points = p;
+        }
+
+        this.polygon = new SAT.Polygon(new SAT.Vector(this.sprite.center.x, this.sprite.center.y), points);
+
+        this.offset.setTo(0, 0);
+
+    },
+
+    /**
+    * Used for translating rectangle and polygon bodies from the Sprite parent. Doesn't apply to Circles.
+    * See also the Body.offset property.
+    *
+    * @method Phaser.Physics.Arcade.Body#translate
+    * @param {number} x - The x amount the polygon or rectangle will be translated by from the Sprite.
+    * @param {number} y - The y amount the polygon or rectangle will be translated by from the Sprite.
+    */
+    translate: function (x, y) {
+
+        if (this.polygon)
+        {
+            this.polygon.translate(x, y);
+        }
+
+    },
+
+    /**
+    * Determines if this Body is 'on the floor', which means in contact with a Tile or World bounds, or other object that has set 'down' as blocked.
+    *
+    * @method Phaser.Physics.Arcade.Body#onFloor
+    * @return {boolean} True if this Body is 'on the floor', which means in contact with a Tile or World bounds, or object that has set 'down' as blocked.
+    */
+    onFloor: function () {
+        return this.blocked.down;
+    },
+
+    /**
+    * Determins if this Body is 'on a wall', which means horizontally in contact with a Tile or World bounds, or other object but not the ground.
+    *
+    * @method Phaser.Physics.Arcade.Body#onWall
+    * @return {boolean} True if this Body is 'on a wall', which means horizontally in contact with a Tile or World bounds, or other object but not the ground.
+    */
+    onWall: function () {
+        return (!this.blocked.down && (this.blocked.left || this.blocked.right));
+    },
+
+    /**
+    * Returns the delta x value. The amount the Body has moved horizontally in the current step.
     *
     * @method Phaser.Physics.Arcade.Body#deltaX
     * @return {number} The delta value. Positive if the motion was to the right, negative if to the left.
     */
     deltaX: function () {
-
-        if (this.moves)
-        {
-            return this.x - this.preX;
-        }
-        else
-        {
-            return this.sprite.deltaX;
-        }
-
+        return this.x - this.preX;
     },
 
     /**
-    * Returns the delta y value. The difference between Body.y now and in the previous step.
+    * Returns the delta y value. The amount the Body has moved vertically in the current step.
     *
     * @method Phaser.Physics.Arcade.Body#deltaY
     * @return {number} The delta value. Positive if the motion was downwards, negative if upwards.
     */
     deltaY: function () {
-
-        if (this.moves)
-        {
-            return this.y - this.preY;
-        }
-        else
-        {
-            return this.sprite.deltaY;
-        }
-
+        return this.y - this.preY;
     },
 
     /**
-    * Returns the delta z value. The difference between Body.rotation now and in the previous step.
+    * Returns the delta z value. The amount the Body has rotated in the current step.
     *
     * @method Phaser.Physics.Arcade.Body#deltaZ
     * @return {number} The delta value.
@@ -41845,14 +41985,10 @@ Phaser.Physics.Arcade.Body.prototype.constructor = Phaser.Physics.Arcade.Body;
 
 /**
 * @name Phaser.Physics.Arcade.Body#x
-* @property {number} x
+* @property {number} x - The x coordinate of this Body.
 */
 Object.defineProperty(Phaser.Physics.Arcade.Body.prototype, "x", {
     
-    /**
-    * @method x
-    * @return {number}
-    */
     get: function () {
         
         if (this.type === Phaser.Physics.Arcade.CIRCLE)
@@ -41866,10 +42002,6 @@ Object.defineProperty(Phaser.Physics.Arcade.Body.prototype, "x", {
 
     },
 
-    /**
-    * @method x
-    * @param {number} value
-    */
     set: function (value) {
 
         if (this.type === Phaser.Physics.Arcade.CIRCLE)
@@ -41881,22 +42013,16 @@ Object.defineProperty(Phaser.Physics.Arcade.Body.prototype, "x", {
             this.polygon.pos.x = value;
         }
 
-        // this.updateBounds();
-
     }
 
 });
 
 /**
 * @name Phaser.Physics.Arcade.Body#y
-* @property {number} y
+* @property {number} y - The y coordinate of this Body.
 */
 Object.defineProperty(Phaser.Physics.Arcade.Body.prototype, "y", {
     
-    /**
-    * @method y
-    * @return {number}
-    */
     get: function () {
         
         if (this.type === Phaser.Physics.Arcade.CIRCLE)
@@ -41910,10 +42036,6 @@ Object.defineProperty(Phaser.Physics.Arcade.Body.prototype, "y", {
 
     },
 
-    /**
-    * @method y
-    * @param {number} value
-    */
     set: function (value) {
 
         if (this.type === Phaser.Physics.Arcade.CIRCLE)
@@ -41925,15 +42047,13 @@ Object.defineProperty(Phaser.Physics.Arcade.Body.prototype, "y", {
             this.polygon.pos.y = value;
         }
 
-        // this.updateBounds();
-
     }
 
 });
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -42016,7 +42136,7 @@ Phaser.Particles.prototype.constructor = Phaser.Particles;
 Phaser.Particles.Arcade = {}
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -42651,7 +42771,7 @@ Object.defineProperty(Phaser.Particles.Arcade.Emitter.prototype, "bottom", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -42945,7 +43065,7 @@ Object.defineProperty(Phaser.Tile.prototype, "bottom", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -42977,14 +43097,49 @@ Phaser.Tilemap = function (game, key) {
         return;
     }
 
+    /**
+    * @property {number} width - The width of the map (in tiles).
+    */
     this.width = data.width;
+
+    /**
+    * @property {number} height - The height of the map (in tiles).
+    */
     this.height = data.height;
+
+    /**
+    * @property {number} tileWidth - The base width of the tiles in the map (in pixels).
+    */
     this.tileWidth = data.tileWidth;
+
+    /**
+    * @property {number} tileHeight - The base height of the tiles in the map (in pixels).
+    */
     this.tileHeight = data.tileHeight;
+
+    /**
+    * @property {string} orientation - The orientation of the map data (as specified in Tiled), usually 'orthogonal'.
+    */
     this.orientation = data.orientation;
+
+    /**
+    * @property {number} version - The version of the map data (as specified in Tiled, usually 1).
+    */
     this.version = data.version;
+
+    /**
+    * @property {object} properties - Map specific properties as specified in Tiled.
+    */
     this.properties = data.properties;
+
+    /**
+    * @property {number} widthInPixels - The width of the map in pixels based on width * tileWidth.
+    */
     this.widthInPixels = data.widthInPixels;
+
+    /**
+    * @property {number} heightInPixels - The height of the map in pixels based on height * tileHeight.
+    */
     this.heightInPixels = data.heightInPixels;
 
     /**
@@ -43029,13 +43184,13 @@ Phaser.Tilemap = function (game, key) {
     this._results = [];
 
     /**
-    * @property {number} _tempA - Internal var.
+    * @property {number} _tempA - Internal cache var.
     * @private
     */
     this._tempA = 0;
 
     /**
-    * @property {number} _tempB - Internal var.
+    * @property {number} _tempB - Internal cache var.
     * @private
     */
     this._tempB = 0;
@@ -43090,7 +43245,7 @@ Phaser.Tilemap.prototype = {
             format: Phaser.Tilemap.CSV,
             data: data,
             indexes: [],
-			dirty: true
+            dirty: true
 
         });
 
@@ -43136,12 +43291,13 @@ Phaser.Tilemap.prototype = {
 
     },
 
-    //  Region? Remove tile from map data?
+    /*
     createFromTiles: function (layer, tileIndex, key, frame, group) {
 
         if (typeof group === 'undefined') { group = this.game.world; }
 
     },
+    */
 
     /**
     * Creates a Sprite for every object matching the given gid in the map data. You can optionally specify the group that the Sprite will be created in. If none is
@@ -43149,7 +43305,7 @@ Phaser.Tilemap.prototype = {
     * configure Sprite properties from within the map editor. For example giving an object a property if alpha: 0.5 in the map editor will duplicate that when the
     * Sprite is created. You could also give it a value like: body.velocity.x: 100 to set it moving automatically.
     *
-    * @method Phaser.Tileset#createFromObjects
+    * @method Phaser.Tilemap#createFromObjects
     * @param {string} name - The name of the Object Group to create Sprites from.
     * @param {number} gid - The layer array index value, or if a string is given the layer name, within the map data that this TilemapLayer represents.
     * @param {string} key - The Game.cache key of the image that this Sprite will use.
@@ -43194,8 +43350,10 @@ Phaser.Tilemap.prototype = {
 
     /**
     * Creates a new TilemapLayer object. By default TilemapLayers are fixed to the camera.
+    * The `layer` parameter is important. If you've created your map in Tiled then you can get this by looking in Tiled and looking at the Layer name.
+    * Or you can open the JSON file it exports and look at the layers[].name value. Either way it must match.
     *
-    * @method Phaser.Tileset#createLayer
+    * @method Phaser.Tilemap#createLayer
     * @param {number|string} layer - The layer array index value, or if a string is given the layer name, within the map data that this TilemapLayer represents.
     * @param {number} [width] - The rendered width of the layer, should never be wider than Game.width. If not given it will be set to Game.width.
     * @param {number} [height] - The rendered height of the layer, should never be wider than Game.height. If not given it will be set to Game.height.
@@ -43230,7 +43388,7 @@ Phaser.Tilemap.prototype = {
     /**
     * Gets the layer index based on the layers name.
     *
-    * @method Phaser.Tileset#getIndex
+    * @method Phaser.Tilemap#getIndex
     * @protected
     * @param {array} location - The local array to search.
     * @param {string} name - The name of the array element to get.
@@ -43253,7 +43411,7 @@ Phaser.Tilemap.prototype = {
     /**
     * Gets the layer index based on its name.
     *
-    * @method Phaser.Tileset#getLayerIndex
+    * @method Phaser.Tilemap#getLayerIndex
     * @param {string} name - The name of the layer to get.
     * @return {number} The index of the layer in this tilemap, or null if not found.
     */
@@ -43266,7 +43424,7 @@ Phaser.Tilemap.prototype = {
     /**
     * Gets the tileset index based on its name.
     *
-    * @method Phaser.Tileset#getTilesetIndex
+    * @method Phaser.Tilemap#getTilesetIndex
     * @param {string} name - The name of the tileset to get.
     * @return {number} The index of the tileset in this tilemap, or null if not found.
     */
@@ -43279,7 +43437,7 @@ Phaser.Tilemap.prototype = {
     /**
     * Gets the image index based on its name.
     *
-    * @method Phaser.Tileset#getImageIndex
+    * @method Phaser.Tilemap#getImageIndex
     * @param {string} name - The name of the image to get.
     * @return {number} The index of the image in this tilemap, or null if not found.
     */
@@ -43292,7 +43450,7 @@ Phaser.Tilemap.prototype = {
     /**
     * Gets the object index based on its name.
     *
-    * @method Phaser.Tileset#getObjectIndex
+    * @method Phaser.Tilemap#getObjectIndex
     * @param {string} name - The name of the object to get.
     * @return {number} The index of the object in this tilemap, or null if not found.
     */
@@ -43307,7 +43465,7 @@ Phaser.Tilemap.prototype = {
     * If a callback is already set for the tile index it will be replaced. Set the callback to null to remove it.
     * If you want to set a callback for a tile at a specific location on the map then see setTileLocationCallback.
     *
-    * @method Phaser.Tileset#setTileIndexCallback
+    * @method Phaser.Tilemap#setTileIndexCallback
     * @param {number|array} indexes - Either a single tile index, or an array of tile indexes to have a collision callback set for.
     * @param {function} callback - The callback that will be invoked when the tile is collided with.
     * @param {object} callbackContext - The context under which the callback is called.
@@ -43338,7 +43496,7 @@ Phaser.Tilemap.prototype = {
     * If a callback is already set for the tile index it will be replaced. Set the callback to null to remove it.
     * If you want to set a callback for a tile at a specific location on the map then see setTileLocationCallback.
     *
-    * @method Phaser.Tileset#setTileLocationCallback
+    * @method Phaser.Tilemap#setTileLocationCallback
     * @param {number} x - X position of the top left of the area to copy (given in tiles, not pixels)
     * @param {number} y - Y position of the top left of the area to copy (given in tiles, not pixels)
     * @param {number} width - The width of the area to copy (given in tiles, not pixels)
@@ -43369,7 +43527,7 @@ Phaser.Tilemap.prototype = {
     * Sets collision the given tile or tiles. You can pass in either a single numeric index or an array of indexes: [ 2, 3, 15, 20].
     * The `collides` parameter controls if collision will be enabled (true) or disabled (false).
     *
-    * @method Phaser.Tileset#setCollision
+    * @method Phaser.Tilemap#setCollision
     * @param {number|array} indexes - Either a single tile index, or an array of tile IDs to be checked for collision.
     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear collision.
     * @param {number|string|Phaser.TilemapLayer} [layer] - The layer to operate on. If not given will default to this.currentLayer.
@@ -43403,7 +43561,7 @@ Phaser.Tilemap.prototype = {
     * Calling this with a start value of 10 and a stop value of 14 would set collision for tiles 10, 11, 12, 13 and 14.
     * The `collides` parameter controls if collision will be enabled (true) or disabled (false).
     *
-    * @method Phaser.Tileset#setCollisionBetween
+    * @method Phaser.Tilemap#setCollisionBetween
     * @param {number} start - The first index of the tile to be set for collision.
     * @param {number} stop - The last index of the tile to be set for collision.
     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear collision.
@@ -43434,7 +43592,7 @@ Phaser.Tilemap.prototype = {
     * Sets collision on all tiles in the given layer, except for the IDs of those in the given array.
     * The `collides` parameter controls if collision will be enabled (true) or disabled (false).
     *
-    * @method Phaser.Tileset#setCollisionByExclusion
+    * @method Phaser.Tilemap#setCollisionByExclusion
     * @param {array} indexes - An array of the tile IDs to not be counted for collision.
     * @param {boolean} [collides=true] - If true it will enable collision. If false it will clear collision.
     * @param {number|string|Phaser.TilemapLayer} [layer] - The layer to operate on. If not given will default to this.currentLayer.
@@ -43463,7 +43621,7 @@ Phaser.Tilemap.prototype = {
     * Sets collision values on a tile in the set.
     * You shouldn't usually call this method directly, instead use setCollision, setCollisionBetween or setCollisionByExclusion.
     *
-    * @method Phaser.Tileset#setCollisionByIndex
+    * @method Phaser.Tilemap#setCollisionByIndex
     * @protected
     * @param {number} index - The index of the tile on the layer.
     * @param {boolean} [collides=true] - If true it will enable collision on the tile. If false it will clear collision values from the tile.
@@ -43506,7 +43664,7 @@ Phaser.Tilemap.prototype = {
     /**
     * Gets the TilemapLayer index as used in the setCollision calls.
     *
-    * @method Phaser.Tileset#getLayer
+    * @method Phaser.Tilemap#getLayer
     * @protected
     * @param {number|string|Phaser.TilemapLayer} layer - The layer to operate on. If not given will default to this.currentLayer.
     * @return {number} The TilemapLayer index.
@@ -43537,7 +43695,7 @@ Phaser.Tilemap.prototype = {
     /**
     * Internal function.
     *
-    * @method Phaser.Tileset#calculateFaces
+    * @method Phaser.Tilemap#calculateFaces
     * @protected
     * @param {number} layer - The index of the TilemapLayer to operate on.
     */
@@ -43594,7 +43752,7 @@ Phaser.Tilemap.prototype = {
     * Gets the tile above the tile coordinates given.
     * Mostly used as an internal function by calculateFaces.
     *
-    * @method Phaser.Tileset#getTileAbove
+    * @method Phaser.Tilemap#getTileAbove
     * @param {number} layer - The local layer index to get the tile from. Can be determined by Tilemap.getLayer().
     * @param {number} x - The x coordinate to get the tile from. In tiles, not pixels.
     * @param {number} y - The y coordinate to get the tile from. In tiles, not pixels.
@@ -43614,7 +43772,7 @@ Phaser.Tilemap.prototype = {
     * Gets the tile below the tile coordinates given.
     * Mostly used as an internal function by calculateFaces.
     *
-    * @method Phaser.Tileset#getTileBelow
+    * @method Phaser.Tilemap#getTileBelow
     * @param {number} layer - The local layer index to get the tile from. Can be determined by Tilemap.getLayer().
     * @param {number} x - The x coordinate to get the tile from. In tiles, not pixels.
     * @param {number} y - The y coordinate to get the tile from. In tiles, not pixels.
@@ -43634,7 +43792,7 @@ Phaser.Tilemap.prototype = {
     * Gets the tile to the left of the tile coordinates given.
     * Mostly used as an internal function by calculateFaces.
     *
-    * @method Phaser.Tileset#getTileLeft
+    * @method Phaser.Tilemap#getTileLeft
     * @param {number} layer - The local layer index to get the tile from. Can be determined by Tilemap.getLayer().
     * @param {number} x - The x coordinate to get the tile from. In tiles, not pixels.
     * @param {number} y - The y coordinate to get the tile from. In tiles, not pixels.
@@ -43654,7 +43812,7 @@ Phaser.Tilemap.prototype = {
     * Gets the tile to the right of the tile coordinates given.
     * Mostly used as an internal function by calculateFaces.
     *
-    * @method Phaser.Tileset#getTileRight
+    * @method Phaser.Tilemap#getTileRight
     * @param {number} layer - The local layer index to get the tile from. Can be determined by Tilemap.getLayer().
     * @param {number} x - The x coordinate to get the tile from. In tiles, not pixels.
     * @param {number} y - The y coordinate to get the tile from. In tiles, not pixels.
@@ -43711,7 +43869,7 @@ Phaser.Tilemap.prototype = {
                 this.layers[layer].data[y][x].index = tile;
             }
 
-			this.layers[layer].dirty = true;
+            this.layers[layer].dirty = true;
             this.calculateFaces(layer);
         }
 
@@ -43863,15 +44021,15 @@ Phaser.Tilemap.prototype = {
         }
 
         //  Find out the difference between tileblock[1].x/y and x/y and use it as an offset, as it's the top left of the block to paste
-        var diffX = tileblock[1].x - x;
-        var diffY = tileblock[1].y - y;
+        var diffX = x - tileblock[1].x;
+        var diffY = y - tileblock[1].y;
 
         for (var i = 1; i < tileblock.length; i++)
         {
             this.layers[layer].data[ diffY + tileblock[i].y ][ diffX + tileblock[i].x ].copy(tileblock[i]);
         }
 
-		this.layers[layer].dirty = true;
+        this.layers[layer].dirty = true;
         this.calculateFaces(layer);
 
     },
@@ -44183,7 +44341,7 @@ Phaser.Tilemap.prototype.constructor = Phaser.Tilemap;
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -44475,8 +44633,8 @@ Phaser.TilemapLayer.prototype.constructor = Phaser.TilemapLayer;
 */
 Phaser.TilemapLayer.prototype.postUpdate = function () {
 
-	Phaser.Sprite.prototype.postUpdate.call(this);
-	
+    Phaser.Sprite.prototype.postUpdate.call(this);
+    
     //  Stops you being able to auto-scroll the camera if it's not following a sprite
     this.scrollX = this.game.camera.x * this.scrollFactorX;
     this.scrollY = this.game.camera.y * this.scrollFactorY;
@@ -44737,7 +44895,7 @@ Phaser.TilemapLayer.prototype.updateMax = function () {
 */
 Phaser.TilemapLayer.prototype.render = function () {
 
-	if (this.layer.dirty)
+    if (this.layer.dirty)
     {
         this.dirty = true;
     }
@@ -45064,7 +45222,7 @@ Object.defineProperty(Phaser.TilemapLayer.prototype, "collisionHeight", {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 
@@ -45443,7 +45601,7 @@ Phaser.TilemapParser = {
 
 /**
 * @author       Richard Davey <rich@photonstorm.com>
-* @copyright    2013 Photon Storm Ltd.
+* @copyright    2014 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
 */
 

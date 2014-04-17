@@ -51,6 +51,7 @@ namespace Server.Game.Entities
             // For now, we can simply move the object. 
             //TODO: We should send sync packets to keep things in sync
             _position = location;
+            
         }
     }
 }

@@ -599,7 +599,7 @@ namespace Ionic.Zlib
         {
             if (dstate == null)
                 throw new ZlibException("No Deflate State!");
-            // TODO: dinoch Tue, 03 Nov 2009  15:39 (test this)
+       
             //int ret = dstate.End();
             dstate = null;
             return ZlibConstants.Z_OK; //ret;
