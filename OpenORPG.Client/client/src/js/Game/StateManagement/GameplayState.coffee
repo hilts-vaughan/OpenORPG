@@ -22,6 +22,7 @@ module.exports =
 
 
     create: ->
+      @game.physics.startSystem(Phaser.Physics.ARCADE)
       self = this
       self.map = self.game.add.tilemap("map_1")
       self.map.addTilesetImage "tilesheet"

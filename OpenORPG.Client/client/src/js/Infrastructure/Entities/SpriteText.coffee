@@ -32,7 +32,7 @@ module.exports =
 
 		setText: (string) ->
 			# Setup as needed
-			@text.content = string
+			@text.text = string
 
 		update: ->
 			# Track our entity

@@ -15,10 +15,13 @@ module.exports =
       @game = game
       super game, x, y, "", 0
       @anchor.setTo 0, 0
+      @game.physics.enable(@, Phaser.Physics.ARCADE);
       @body.collideWorldBounds = true
 
       @spriteText = new SpriteText(game, x, y)
       @spriteText.attachTo(@)
+      
+
     
     #
     #    Obtains the distance between this current entity context and the one specificed in the
