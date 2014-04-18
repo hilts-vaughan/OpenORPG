@@ -10,6 +10,7 @@ Player = require('../Entities/Player.coffee')
 Entity = require('../../Infrastructure/Entities/Entity.coffee')
 DirectoryHelper = require('../../Infrastructure/DirectoryHelper.coffee')
 MovementSystem = require ('./../World/Systems/MovementSystem.coffee')
+SpriteManager = require('./../Resources/SpriteManager.coffee')
 
 module.exports =
   class GameplayState
@@ -22,7 +23,7 @@ module.exports =
 
 
     create: ->
-      @game.physics.startSystem(Phaser.Physics.ARCADE)
+      @game.physics.startSystem(Phaser.Physics.P2JS)
       self = this
       self.map = self.game.add.tilemap("map_1")
       self.map.addTilesetImage "tilesheet"
@@ -72,5 +73,5 @@ module.exports =
     preload: ->
       @game.load.tilemap "map_1", "assets/Maps/1.json", null, Phaser.Tilemap.TILED_JSON
       @game.load.image "tilesheet", "assets/Maps/tilesheet_16.png"
-      @game.load.spritesheet("entity_sprite_male_base", DirectoryHelper.SPRITE_ENTITY_PATH + "male_base.png", 64, 64)
-      @game.load.spritesheet("entity_sprite_snake", DirectoryHelper.SPRITE_ENTITY_PATH + "snake.png", 56, 56)    
+      SpriteManager.loadSpriteInfo(@game)
+      SpriteManager.loadSprites(@game)
