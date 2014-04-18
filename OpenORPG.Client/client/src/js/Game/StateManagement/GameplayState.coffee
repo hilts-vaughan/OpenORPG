@@ -40,8 +40,11 @@ module.exports =
           @game.entities[oEntity.id] = oEntity
           @game.add.existing(oEntity)
 
+          console.log("updating: " + oEntity)
           # Fire off the handlers as needed
           for k,v of entity
+            console.log(k)
+            console.log(v)
             oEntity.propertyChanged(k, v)
 
           if oEntity.id is packet.heroId
@@ -69,4 +72,5 @@ module.exports =
     preload: ->
       @game.load.tilemap "map_1", "assets/Maps/1.json", null, Phaser.Tilemap.TILED_JSON
       @game.load.image "tilesheet", "assets/Maps/tilesheet_16.png"
-      @game.load.spritesheet("entity_sprite_male_base", DirectoryHelper.SPRITE_ENTITY_PATH + "male_base.png", 64, 64, 32)     
+      @game.load.spritesheet("entity_sprite_male_base", DirectoryHelper.SPRITE_ENTITY_PATH + "male_base.png", 64, 64)
+      @game.load.spritesheet("entity_sprite_snake", DirectoryHelper.SPRITE_ENTITY_PATH + "snake.png", 56, 56)    

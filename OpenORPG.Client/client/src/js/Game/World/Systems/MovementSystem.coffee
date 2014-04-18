@@ -39,9 +39,9 @@ module.exports =
 
 			# This is asking for trouble, probably
 			# TODO: This will only work for movement
-			for k,entity of @game.entities
-				if entity.body.velocity.isZero()
-					entity.animations.stop(null, true)
+			#for k,entity of @game.entities
+			#	if entity.body.velocity.isZero()
+			#		entity.animations.stop(null, true)
 
 		# Used to handle when an entity has moved from their intial location
 		_handleEntityMove: (packet) =>

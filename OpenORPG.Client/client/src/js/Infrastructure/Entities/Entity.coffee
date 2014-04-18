@@ -52,13 +52,21 @@ module.exports =
 
           texId = "entity_sprite_" + value
           @game.load.image(texId, DirectoryHelper.SPRITE_ENTITY_PATH + value + ".png")
+
           @loadTexture(texId, 0)
 
           # Add new animations into place
-          @animations.add('move_right', [0, 1, 2, 3], 5, true, true)
-          @animations.add('move_left', [5, 6, 7, 8], 5, true, true)
-          @animations.add('move_up', [10, 11, 12, 13], 5, true, true)
-          @animations.add('move_down', [15, 16, 17, 18], 5, true, true)
+          if @name == "Vaughan1"
+            @animations.add('move_right', [0, 1, 2, 3], 5, true, true)
+            @animations.add('move_left', [5, 6, 7, 8], 5, true, true)
+            @animations.add('move_up', [10, 11, 12, 13], 5, true, true)
+            @animations.add('move_down', [35, 36, 37, 38], 5, true, true)
+          else
+            @animations.add('move_right', [0, 1, 2, 3], 5, true, true)
+            @animations.add('move_left', [5, 6, 7, 8], 5, true, true)
+            @animations.add('move_up', [10, 11, 12, 13], 5, true, true)
+            @animations.add('move_down', [39, 40, 41, 42], 5, true, true)
+
 
           @animations.play('move_down')          
 
