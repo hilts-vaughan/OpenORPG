@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Database.Models.ContentTemplates;
 
 namespace Server.Game.Entities
 {
@@ -12,8 +13,12 @@ namespace Server.Game.Entities
     /// </summary>
     public class Monster : Character
     {
-        public Monster()
+        public Monster(MonsterTemplate monsterTemplate)
         {
+            // Copy everything we need to into the object
+            Name = monsterTemplate.Name;
+            Sprite = monsterTemplate.Sprite;
+
         }
 
 

@@ -55,10 +55,10 @@ namespace Server.Game.Zones.Spawns
                         var mobSpawnTime = Convert.ToSingle(mobSpawn.Properties["MobSpawnTime"]);
                         var mobRepeats = Convert.ToBoolean(mobSpawn.Properties["MobRepeats"]);
 
-                        var x = mobSpawn.X*tileMap.TileWidth;
-                        var y = mobSpawn.Y*tileMap.TileHeight;
-                        var width = mobSpawn.Width*tileMap.TileWidth;
-                        var height = mobSpawn.Height*tileMap.TileHeight;
+                        var x = mobSpawn.X;
+                        var y = mobSpawn.Y;
+                        var width = mobSpawn.Width;
+                        var height = mobSpawn.Height;
 
                         var spawnArea = new Rectangle(x, y, width, height);
 

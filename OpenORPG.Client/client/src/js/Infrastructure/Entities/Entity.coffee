@@ -44,6 +44,9 @@ module.exports =
           @spriteText.setText(value)
 
         when "sprite"
+
+          # We should load the JSON from the remote server
+
           texId = "entity_sprite_" + value
           @game.load.image(texId, DirectoryHelper.SPRITE_ENTITY_PATH + value + ".png")
           @loadTexture(texId, 0)

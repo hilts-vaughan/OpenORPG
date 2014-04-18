@@ -5,7 +5,7 @@
         public long Id { get; set; }
         public string Name { get; set; }
         public string VirtualCategory { get; set; }
-            
+        public string Sprite { get; set; }
     
         public int Level { get; set; }
 

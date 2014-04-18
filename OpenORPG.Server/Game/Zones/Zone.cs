@@ -274,6 +274,9 @@ namespace Server.Game.Zones
             _toAdd.Clear();
 
             SyncEntityProperties();
+
+            // Update each game system
+            GameSystems.ForEach(x => x.Update((float) deltaTime.TotalSeconds));
         }
 
         private void ProcessAddedEntity(Entity entity)

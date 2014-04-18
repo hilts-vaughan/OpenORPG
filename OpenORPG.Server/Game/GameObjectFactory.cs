@@ -44,8 +44,9 @@ namespace Server.Game
                 var template = context.MonsterTemplates.FirstOrDefault(x => x.Id == id);
                 
                 // Setup actual object
-                var monster = new Monster();
-                monster.Name = template.Name;
+                var monster = new Monster(template);
+                
+                // Copy stats into
                 CopyStatsFromTemplateToCharacter(template, monster);
 
                 return monster;

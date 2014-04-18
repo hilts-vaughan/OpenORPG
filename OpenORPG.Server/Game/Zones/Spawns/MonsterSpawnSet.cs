@@ -26,6 +26,7 @@ namespace Server.Game.Zones.Spawns
         {
             CanStray = canStray;
             MobId = mobId;
+            LastSpawnTime = spawnTime + 1;
         }
 
         public Monster PerformCheck(float time)
