@@ -23,8 +23,8 @@ namespace Server.Game.Database.Seeds
                 character.Name = "Vaughan" + i;
                 character.Account = account;
                 character.ZoneId = 1;
-                character.PositionX = 77 * 32;
-                character.PositionY = (207 + i) * 32;
+                character.PositionX = 6 * 32;
+                character.PositionY = 4 * 32;
 
                 character.Inventory.Add(new UserItem(0, 1));
                 

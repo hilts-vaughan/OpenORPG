@@ -13,13 +13,19 @@ module.exports =
 
     constructor: (game, x, y, key, frame) ->
       @game = game
-      super game, x, y, "", 0
+      super game, x, y, "male_base", 0
       @anchor.setTo 0, 0
-      @game.physics.enable(@, Phaser.Physics.ARCADE);
+      @game.physics.enable(@, Phaser.Physics.ARCADE)
       @body.collideWorldBounds = true
 
       @spriteText = new SpriteText(game, x, y)
       @spriteText.attachTo(@)
+      @alpha = 0
+
+      # Add a nice fading effect so that enities don't 'pop' into the world
+      tween = @game.add.tween(@).to
+        alpha: 1
+      , 700, Phaser.Easing.Quadratic.In, true      
       
 
     
@@ -55,18 +61,11 @@ module.exports =
 
           @loadTexture(texId, 0)
 
-          # Add new animations into place
-          if @name == "Vaughan1"
-            @animations.add('move_right', [0, 1, 2, 3], 5, true, true)
-            @animations.add('move_left', [5, 6, 7, 8], 5, true, true)
-            @animations.add('move_up', [10, 11, 12, 13], 5, true, true)
-            @animations.add('move_down', [35, 36, 37, 38], 5, true, true)
-          else
-            @animations.add('move_right', [0, 1, 2, 3], 5, true, true)
-            @animations.add('move_left', [5, 6, 7, 8], 5, true, true)
-            @animations.add('move_up', [10, 11, 12, 13], 5, true, true)
-            @animations.add('move_down', [39, 40, 41, 42], 5, true, true)
 
+          @animations.add('move_right', [0, 1, 2, 3], 5, true, true)
+          @animations.add('move_left', [5, 6, 7, 8], 5, true, true)
+          @animations.add('move_up', [10, 11, 12, 13], 5, true, true)
+          @animations.add('move_down', [35, 36, 37, 38], 5, true, true)
 
           @animations.play('move_down')          
 

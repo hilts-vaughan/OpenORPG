@@ -4,6 +4,7 @@
 #
 
 GameClient = require('../Network/GameClient.coffee')
+SpriteManager = require('./../../Game/Resources/SpriteManager.coffee')
 
 module.exports =
   class BootstrapState
@@ -41,4 +42,5 @@ module.exports =
       @game.net.connect()
 
     preload: ->
+      SpriteManager.loadSpriteInfo(@game)
       @game.load.image "connecting", "../assets/ui/connecting.png"

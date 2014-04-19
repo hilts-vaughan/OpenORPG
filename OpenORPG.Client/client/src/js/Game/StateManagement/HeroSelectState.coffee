@@ -5,6 +5,7 @@
 BaseMenuState = require('../../Infrastructure/StateManagement/States/BaseMenuState.coffee')
 GameplayState = require('./GameplayState.coffee')
 PacketTypes = require('./../../Infrastructure/PacketTypes.coffee')
+SpriteManager = require('./../Resources/SpriteManager.coffee')
 
 module.exports =
   class HeroSelectState extends BaseMenuState
@@ -29,4 +30,6 @@ module.exports =
       return
 
     preload: ->
-      # Do something awesome
+
+      # We're here, so we load some of our sprite JSON here to be sneaky
+      SpriteManager.loadSprites(@game)

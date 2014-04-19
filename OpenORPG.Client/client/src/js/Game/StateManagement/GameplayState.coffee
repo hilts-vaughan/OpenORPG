@@ -23,7 +23,7 @@ module.exports =
 
 
     create: ->
-      @game.physics.startSystem(Phaser.Physics.P2JS)
+      @game.physics.startSystem(Phaser.Physics.ARCADE)
       self = this
       self.map = self.game.add.tilemap("map_1")
       self.map.addTilesetImage "tilesheet"
@@ -73,5 +73,6 @@ module.exports =
     preload: ->
       @game.load.tilemap "map_1", "assets/Maps/1.json", null, Phaser.Tilemap.TILED_JSON
       @game.load.image "tilesheet", "assets/Maps/tilesheet_16.png"
-      SpriteManager.loadSpriteInfo(@game)
-      SpriteManager.loadSprites(@game)
+      SpriteManager.loadSpriteImages(@game)      
+      #@game.load.spritesheet("entity_sprite_male_base", DirectoryHelper.SPRITE_ENTITY_PATH + "male_base.png", 64, 64)
+      @game.load.spritesheet("entity_sprite_snake", DirectoryHelper.SPRITE_ENTITY_PATH + "snake.png", 56, 56)

@@ -11149,5 +11149,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="MobSpawns" width="36" height="22"/>
+ <objectgroup name="MobSpawns" width="36" height="22">
+  <object x="431" y="499" width="240" height="154"/>
+ </objectgroup>
 </map>

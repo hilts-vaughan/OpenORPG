@@ -109,6 +109,7 @@ namespace Server.Infrastructure.World
             set { _sprite = value; PropertyCollection.WriteValue("Sprite", value); }
         }
 
+        [JsonIgnore]
         public EntityBody Body { get; private set; }
 
         /// <summary>
