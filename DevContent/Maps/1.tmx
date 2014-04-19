@@ -3,6 +3,7 @@
  <properties>
   <property name="LeftExitPoint" value="2"/>
   <property name="RightExitPoint" value="1"/>
+  <property name="UpExitPoint" value="2"/>
  </properties>
  <tileset firstgid="1" source="tilesheet.tsx"/>
  <layer name="ground" width="36" height="22">

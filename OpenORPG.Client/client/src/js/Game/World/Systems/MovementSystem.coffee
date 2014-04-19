@@ -22,10 +22,23 @@ module.exports =
 			, @MOVE_TICK_FREQ
 
 		_generateMovementTicket: (overrride) =>
+			if @entity == null
+				return
+				
 			if @entity.body.velocity.isZero() == false or overrride
 				@game.net.sendMovement( Math.floor(@entity.x), Math.floor(@entity.y) )			
 
-		update: ->		
+
+		# Attaches an entity
+		attachEntity: (entity) ->
+			@entity = entity
+
+		# Update our system
+		update: ->
+
+			# Don't update if we have nothing to do right now
+			if not @entity
+				return
 
 			if @game.input.keyboard.isDown(Phaser.Keyboard.LEFT)     
 				@entity.body.velocity.setTo(-120, 0)

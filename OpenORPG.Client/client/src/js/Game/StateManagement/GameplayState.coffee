@@ -11,84 +11,58 @@ Entity = require('../../Infrastructure/Entities/Entity.coffee')
 DirectoryHelper = require('../../Infrastructure/DirectoryHelper.coffee')
 MovementSystem = require ('./../World/Systems/MovementSystem.coffee')
 SpriteManager = require('./../Resources/SpriteManager.coffee')
+Zone = require('./../World/Zone.coffee')
 
 module.exports =
   class GameplayState
 
     constructor: (game) ->
       @game = game
-      @game.entities = {}
 
-      @systems = []      
-      @toRemove = []
+      # The current zone we're operating on
+      @currentZone = null
+
 
     create: ->
+
+      # Let the game know we intend to use the arcade physics module from phaser
       @game.physics.startSystem(Phaser.Physics.ARCADE)
-      self = this
-      self.map = self.game.add.tilemap("map_1")
-      self.map.addTilesetImage "tilesheet"
 
-      $.each self.map.layers, (key, value) ->
-        layer = self.map.createLayer(value.name)
-        layer.resizeWorld()        
-     
-      @game.net.registerPacket PacketTypes.SMSG_MOB_CREATE, (packet) =>
-        entity = packet.mobile
-        oEntity = new Entity(@game, 0, 0)
-        oEntity.mergeWith(entity)
-        @game.entities[oEntity.id] = oEntity
-        @game.add.existing(oEntity)
-
-        for k,v of entity
-          oEntity.propertyChanged(k, v)
-
-      @game.net.registerPacket PacketTypes.SMSG_MOB_DESTROY, (packet) =>
-        @toRemove.push(packet.id)        
-
+      # Prepare for a zone change
       @game.net.registerPacket PacketTypes.SMSG_ZONE_CHANGED, (packet) =>
-        console.log("Got a zone change: ")
-        console.log(packet)
-        for entity in packet.entities          
-          oEntity = new Entity(@game, 0, 0)
-          oEntity.mergeWith(entity)
-          @game.entities[oEntity.id] = oEntity
-          @game.add.existing(oEntity)
-
-          # Fire off the handlers as needed
-          for k,v of entity
-            console.log(k)
-            console.log(v)
-            oEntity.propertyChanged(k, v)
-
-          if oEntity.id is packet.heroId
-            @game.camera.follow oEntity
-            movementSystem = new MovementSystem(@game, oEntity)
-            @systems.push(movementSystem)          
-
-      @game.net.registerPacket PacketTypes.SMSG_ENTITY_PROPERTY_CHANGE, (packet) =>
         
-        # Sync our entity collection here
-        entity = @game.entities[packet.entityId]
-        entity.mergeWith(packet.properties)
+        # If we're connected somewhere already, tear it down
+        @currentZone?.clearZone()
 
-        for k,v of packet.properties
-          entity.propertyChanged(k, v) 
+        # Create our new zone with the packet map ID
+        @currentZone = new Zone(@game, packet.zoneId)        
 
+        # Traverse our entities to process
+        for entity in packet.entities
+
+          # Add our network entity
+          oEntity = @currentZone.addNetworkEntityToZone(entity)
+
+          # Setup our camera as required to follow if needed
+          if entity.id is packet.heroId
+            @currentZone.movementSystem.attachEntity(oEntity)
+            @game.camera.follow oEntity            
 
     update: ->
-      for remove in @toRemove
-        @game.entities[remove].spriteText.destroy()
-        @game.entities[remove].destroy()
-        delete @game.entities[remove]
-      @toRemove = []
-
-      for system in @systems
-        system.update()
+      # Update the current zone if it is required
+      @currentZone?.update()
 
 
 
 
+
+    # Load all the assets that might be required at some point
     preload: ->
+      
+      # Load map assets
       @game.load.tilemap "map_1", "assets/Maps/1.json", null, Phaser.Tilemap.TILED_JSON
+      @game.load.tilemap "map_2", "assets/Maps/2.json", null, Phaser.Tilemap.TILED_JSON
       @game.load.image "tilesheet", "assets/Maps/tilesheet_16.png"
+
+      # Load sprite definitions
       SpriteManager.loadSpriteImages(@game)
