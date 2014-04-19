@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Game.AI
+namespace Server.Game.AI.Combat
 {
-
     /// <summary>
-    /// Represents an interface to an artificial intelligence strategy. 
+    /// A basic AI class that handles combat routines. 
     /// </summary>
-    public interface IAi
+    public class CombatAi
     {
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.AI;
 using Server.Game.Combat;
 using Server.Game.Items.Equipment;
 using Server.Infrastructure.World;
@@ -38,6 +39,15 @@ namespace Server.Game.Entities
         public Equipment[] Equipment { get; set; }
 
         public int ZoneId { get; set; }
+
+        /// <summary>
+        /// The current AI this Character will be running. 
+        /// This is typically only applicable to NPCs
+        /// but in some cases AI can be attached to players, too.
+        /// 
+        /// If this is null, no AI is currently running.
+        /// </summary>
+        public AiBase CurrentAi { get; set; }
 
 
         public int Speed

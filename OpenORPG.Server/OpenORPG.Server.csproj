@@ -84,7 +84,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\AI\IAI.cs" />
+    <Compile Include="Game\AI\AiBase.cs" />
+    <Compile Include="Game\AI\BasicAi.cs" />
+    <Compile Include="Game\AI\Fight\CombatAi.cs" />
     <Compile Include="Game\ChatManager.cs" />
     <Compile Include="Game\Combat\ActionExecutor.cs" />
     <Compile Include="Game\Combat\ActionGenerator.cs" />
@@ -233,6 +235,7 @@
   <ItemGroup>
     <Folder Include="Game\Chat\" />
     <Folder Include="Infrastructure\AI\" />
+    <Folder Include="Infrastructure\Pathfinding\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TiledSharp\TiledSharp.csproj">

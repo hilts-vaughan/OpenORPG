@@ -9,19 +9,26 @@ namespace TiledSharp
 {
     public class TmxMap : TmxDocument
     {
-        public string Version {get; private set;}
-        public OrientationType Orientation {get; private set;}
-        public int Width {get; private set;}
-        public int Height {get; private set;}
-        public int TileWidth {get; private set;}
-        public int TileHeight {get; private set;}
-        public TmxColor BackgroundColor {get; private set;}
+        public string Version { get; private set; }
+        public OrientationType Orientation { get; private set; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+        public int TileWidth { get; private set; }
+        public int TileHeight { get; private set; }
+        public TmxColor BackgroundColor { get; private set; }
 
-        public TmxList<TmxTileset> Tilesets {get; private set;}
-        public TmxList<TmxLayer> Layers {get; private set;}
-        public TmxList<TmxObjectGroup> ObjectGroups {get; private set;}
-        public TmxList<TmxImageLayer> ImageLayers {get; private set;}
-        public PropertyDict Properties {get; private set;}
+        public TmxList<TmxTileset> Tilesets { get; private set; }
+        public TmxList<TmxLayer> Layers { get; private set; }
+        public TmxList<TmxObjectGroup> ObjectGroups { get; private set; }
+        public TmxList<TmxImageLayer> ImageLayers { get; private set; }
+        public PropertyDict Properties { get; private set; }
+
+
+        /// <summary>
+        /// Contains information about the map grid and whether or a certain tile is considered
+        /// able to be walked on. 
+        /// </summary>
+        public bool[,] BlockMap { get; private set; }
 
         public TmxMap(string filename)
         {
@@ -29,7 +36,7 @@ namespace TiledSharp
             var xMap = xDoc.Element("map");
 
             Version = (string)xMap.Attribute("version");
-            Orientation = (OrientationType) Enum.Parse(
+            Orientation = (OrientationType)Enum.Parse(
                                     typeof(OrientationType),
                                     xMap.Attribute("orientation").Value,
                                     true);
@@ -56,6 +63,30 @@ namespace TiledSharp
                 ImageLayers.Add(new TmxImageLayer(e, TmxDirectory));
 
             Properties = new PropertyDict(xMap.Element("properties"));
+
+            GenerateBlockMap();
+
+        }
+
+        /// <summary>
+        /// Generates a block map for the given <see cref="Map"/> based on 
+        /// properties stored within the tile properties and other potential
+        /// data or way to go.
+        /// </summary>
+        private void GenerateBlockMap()
+        {
+            // Get all the tile properties and check for 'Blocked' on each tile
+            foreach (var layer in Layers)
+            {
+                foreach (var tile in layer.Tiles)
+                {
+                    var gid = tile.Gid;
+                    var tileProperties = Tilesets[0].Tiles[gid].Properties;
+
+                    if (tileProperties.ContainsKey("Blocked"))
+                        BlockMap[tile.X, tile.Y] = true;
+                }
+            }
         }
 
         public enum OrientationType : byte

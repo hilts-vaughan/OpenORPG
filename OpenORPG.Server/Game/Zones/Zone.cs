@@ -199,6 +199,7 @@ namespace Server.Game.Zones
         {
             get { return (IEnumerable<Character>)Entities.Where(x => x is Character); }
         }
+ 
 
 
         /// <summary>
