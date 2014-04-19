@@ -28,7 +28,10 @@ module.exports =
 
 
 		attachTo: (entity) ->
-			@entity = entity			
+			@entity = entity
+
+		destroy: ->
+			@text.destroy()		
 
 
 		setText: (string) ->

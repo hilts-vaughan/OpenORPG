@@ -18,9 +18,10 @@ module.exports =
       @game.physics.enable(@, Phaser.Physics.ARCADE)
       @body.collideWorldBounds = true
 
-      @spriteText = new SpriteText(game, x, y)
-      @spriteText.attachTo(@)
+
       @alpha = 0
+      @x = x
+      @y = y
 
       # Add a nice fading effect so that enities don't 'pop' into the world
       tween = @game.add.tween(@).to
@@ -40,7 +41,7 @@ module.exports =
 
 
     update: ->
-      @spriteText.update()
+      @spriteText?.update()
 
 
     # This method is invoked when a property has changed
@@ -50,6 +51,9 @@ module.exports =
       switch name
 
         when "name"
+          @spriteText?.destroy()
+          @spriteText = new SpriteText(@game, @x, @y)
+          @spriteText.attachTo(@)
           @spriteText.setText(value)
 
         when "sprite"
@@ -57,18 +61,25 @@ module.exports =
           # We should load the JSON from the remote server
 
           texId = "entity_sprite_" + value
-          @game.load.image(texId, DirectoryHelper.SPRITE_ENTITY_PATH + value + ".png")
+          spriteImage = @game.cache.getImage(texId)
 
           @loadTexture(texId, 0)
 
 
-          @animations.add('move_right', [0, 1, 2], 5, true, true)
-          @animations.add('move_left', [5, 6, 7, 8], 5, true, true)
-          @animations.add('move_up', [10, 11, 12, 13], 5, true, true)
-          @animations.add('move_down', [35, 36, 37, 38], 5, true, true)
+          # We can use our sprite definition to find out what we need to for sure
+          spriteDef = @game.cache.getJSON("spritedef_" + texId)
+          rowFrames = spriteImage.width / spriteDef.width
 
-          @animations.play('move_right')          
+          for k,v of spriteDef.animations
 
+            startingIndex = rowFrames * v.row            
+            frames = []
+            for i in [0..v.length - 1]
+              frames.push(startingIndex + i)
+            @animations.add(k, frames, 4, true, true)
+
+          # Start a random animation by the end
+          @animations.play("idle_right")
     
     #
     #    Merges an entity with a given object. This operation is dangerous if you're not careful.
