@@ -17,6 +17,8 @@ module.exports =
       @anchor.setTo 0, 0
       @game.physics.enable(@, Phaser.Physics.ARCADE)
       @body.collideWorldBounds = true
+      @smoothed = false
+      @movementQueue = []
 
 
       @alpha = 0
