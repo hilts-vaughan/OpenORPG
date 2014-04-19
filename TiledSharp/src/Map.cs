@@ -77,7 +77,6 @@ namespace TiledSharp
         private void GenerateBlockMap()
         {
 
-            // Bah, fix me
             return;
 
             // Get all the tile properties and check for 'Blocked' on each tile
@@ -88,7 +87,7 @@ namespace TiledSharp
                     var gid = tile.Gid;                    
 
 
-                    var tileProperties = Tilesets[0].Tiles.First(x => x.Id == gid).Properties;
+                    var tileProperties = Tilesets[0].Tiles.First(x => x.Id - 1 == gid).Properties;
 
                     if (tileProperties.ContainsKey("Blocked"))
                         BlockMap[tile.X, tile.Y] = true;

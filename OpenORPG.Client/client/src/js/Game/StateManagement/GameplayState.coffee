@@ -20,7 +20,7 @@ module.exports =
       @game.entities = {}
 
       @systems = []      
-
+      @toRemove = []
 
     create: ->
       @game.physics.startSystem(Phaser.Physics.ARCADE)
@@ -32,6 +32,19 @@ module.exports =
         layer = self.map.createLayer(value.name)
         layer.resizeWorld()        
      
+      @game.net.registerPacket PacketTypes.SMSG_MOB_CREATE, (packet) =>
+        entity = packet.mobile
+        oEntity = new Entity(@game, 0, 0)
+        oEntity.mergeWith(entity)
+        @game.entities[oEntity.id] = oEntity
+        @game.add.existing(oEntity)
+
+        for k,v of entity
+          oEntity.propertyChanged(k, v)
+
+      @game.net.registerPacket PacketTypes.SMSG_MOB_DESTROY, (packet) =>
+        @toRemove.push(packet.id)        
+
       @game.net.registerPacket PacketTypes.SMSG_ZONE_CHANGED, (packet) =>
         console.log("Got a zone change: ")
         console.log(packet)
@@ -41,7 +54,6 @@ module.exports =
           @game.entities[oEntity.id] = oEntity
           @game.add.existing(oEntity)
 
-          console.log("updating: " + oEntity)
           # Fire off the handlers as needed
           for k,v of entity
             console.log(k)
@@ -64,6 +76,12 @@ module.exports =
 
 
     update: ->
+      for remove in @toRemove
+        @game.entities[remove].spriteText.destroy()
+        @game.entities[remove].destroy()
+        delete @game.entities[remove]
+      @toRemove = []
+
       for system in @systems
         system.update()
 
@@ -73,6 +91,4 @@ module.exports =
     preload: ->
       @game.load.tilemap "map_1", "assets/Maps/1.json", null, Phaser.Tilemap.TILED_JSON
       @game.load.image "tilesheet", "assets/Maps/tilesheet_16.png"
-      SpriteManager.loadSpriteImages(@game)      
-      #@game.load.spritesheet("entity_sprite_male_base", DirectoryHelper.SPRITE_ENTITY_PATH + "male_base.png", 64, 64)
-      @game.load.spritesheet("entity_sprite_snake", DirectoryHelper.SPRITE_ENTITY_PATH + "snake.png", 56, 56)
+      SpriteManager.loadSpriteImages(@game)

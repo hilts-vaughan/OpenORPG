@@ -199,7 +199,7 @@ namespace Server.Game.Zones
         {
             get { return (IEnumerable<Character>)Entities.Where(x => x is Character); }
         }
- 
+
 
 
         /// <summary>
@@ -257,17 +257,19 @@ namespace Server.Game.Zones
 
             foreach (var entity in _toRemove)
             {
-                Entities.Remove(entity);
                 ProcessRemovedEntity(entity);
+                Entities.Remove(entity);
+
             }
 
             foreach (var entity in _toAdd)
             {
+                ProcessAddedEntity(entity);
                 Entities.Add(entity);
 
                 if (entity is Player)
                     ProcessNewPlayer(entity as Player);
-                ProcessAddedEntity(entity);
+
             }
 
 
@@ -277,14 +279,20 @@ namespace Server.Game.Zones
             SyncEntityProperties();
 
             // Update each game system
-            GameSystems.ForEach(x => x.Update((float) deltaTime.TotalSeconds));
+            GameSystems.ForEach(x => x.Update((float)deltaTime.TotalSeconds));
         }
 
         private void ProcessAddedEntity(Entity entity)
         {
             var packet = new ServerMobCreatePacket(entity);
-            SendToEveryone(packet);
+
+            if (entity is Player)
+                SendToEveryoneBut(packet, entity as Player);
+            else
+                SendToEveryone(packet);
         }
+
+
 
         private void ProcessRemovedEntity(Entity entity)
         {
@@ -316,6 +324,15 @@ namespace Server.Game.Zones
             foreach (var client in GameClients)
             {
                 client.Send(packet);
+            }
+        }
+
+        private void SendToEveryoneBut(IPacket packet, Player player)
+        {
+            foreach (var client in GameClients)
+            {
+                if (client.HeroEntity.Id != player.Id)
+                    client.Send(packet);
             }
         }
 

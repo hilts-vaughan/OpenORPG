@@ -11155,7 +11155,7 @@
     <property name="MobId" value="1"/>
     <property name="MobMax" value="3"/>
     <property name="MobRepeats" value="True"/>
-    <property name="MobSpawnTime" value="500"/>
+    <property name="MobSpawnTime" value="30"/>
     <property name="MobStrays" value="True"/>
    </properties>
   </object>
