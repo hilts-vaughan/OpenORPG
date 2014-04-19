@@ -202,6 +202,7 @@
     <Compile Include="Infrastructure\Synchronization\SyncAttribute.cs" />
     <Compile Include="Infrastructure\Synchronization\Groups\SyncGroup.cs" />
     <Compile Include="Infrastructure\Synchronization\SyncMonitor.cs" />
+    <Compile Include="Infrastructure\World\EntityBody.cs" />
     <Compile Include="Infrastructure\World\GameWorld.cs" />
     <Compile Include="Infrastructure\World\Entity.cs" />
     <Compile Include="Infrastructure\World\Systems\GameSystem.cs" />

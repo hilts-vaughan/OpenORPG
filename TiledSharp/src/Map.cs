@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0
 // http://www.apache.org/licenses/LICENSE-2.0
 using System;
+using System.Linq;
 using System.Xml.Linq;
 using System.Globalization;
 
@@ -75,13 +76,18 @@ namespace TiledSharp
         /// </summary>
         private void GenerateBlockMap()
         {
+            return;
+
             // Get all the tile properties and check for 'Blocked' on each tile
             foreach (var layer in Layers)
             {
                 foreach (var tile in layer.Tiles)
                 {
                     var gid = tile.Gid;
-                    var tileProperties = Tilesets[0].Tiles[gid].Properties;
+                    
+                    
+
+                    var tileProperties = Tilesets[0].Tiles.First(x => x.Id == gid).Properties;
 
                     if (tileProperties.ContainsKey("Blocked"))
                         BlockMap[tile.X, tile.Y] = true;

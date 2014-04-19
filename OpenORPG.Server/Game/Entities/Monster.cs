@@ -14,10 +14,10 @@ namespace Server.Game.Entities
     public class Monster : Character
     {
         public Monster(MonsterTemplate monsterTemplate)
+            : base(monsterTemplate.Sprite)
         {
             // Copy everything we need to into the object
             Name = monsterTemplate.Name;
-            Sprite = monsterTemplate.Sprite;
 
         }
 

@@ -21,8 +21,8 @@ namespace OpenORPG.Server.Tests.Game.Combat.Payloads
         [Fact]
         public void PayloadShouldCapAtZero()
         {
-            var agressor = new Character();
-            var victim = new Character();
+            var agressor = new Character("");
+            var victim = new Character("");
 
             var payload = new DamagePayload(agressor);
             payload.Apply(victim);

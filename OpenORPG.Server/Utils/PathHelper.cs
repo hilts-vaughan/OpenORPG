@@ -35,5 +35,10 @@
         {
             get { return "Maps\\"; }
         }
+
+        public static string SpritesPath
+        {
+            get { return "sprites\\";  }
+        }
     }
 }

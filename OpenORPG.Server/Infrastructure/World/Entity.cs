@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Reflection;
 using Newtonsoft.Json;
 using Server.Game.Zones;
+using Server.Infrastructure.Content;
 using Server.Infrastructure.Math;
 using Server.Infrastructure.Synchronization;
+using Server.Utils;
 using Server.Utils.Math;
 
 namespace Server.Infrastructure.World
@@ -30,9 +33,12 @@ namespace Server.Infrastructure.World
         /// Creating an entity can be fairly expensive due to the sync procedure, making a lot of them
         /// is not advised. 
         /// </summary>
-        protected Entity()
+        protected Entity(string sprite)
         {
             PropertyCollection = new SyncMonitor();
+            _sprite = sprite;
+            var bodyInfo = ContentManager.Current.Load<EntityBody>(PathHelper.SpritesPath + _sprite + ".json");
+            Body = new EntityBody(bodyInfo.Width, bodyInfo.Height);
 
             Id = _idCounter++;
         }
@@ -102,6 +108,8 @@ namespace Server.Infrastructure.World
             get { return _sprite; }
             set { _sprite = value; PropertyCollection.WriteValue("Sprite", value); }
         }
+
+        public EntityBody Body { get; private set; }
 
         /// <summary>
         /// A reference to the <see cref="World"/> this entity lives within.

@@ -11,7 +11,7 @@ namespace Server.Game.Entities
 {
     public class Player : Character
     {
-        public Player(GameClient client)
+        public Player(string sprite, GameClient client) : base(sprite)
         {
             Client = client;
             Backpack = new ItemStorage();

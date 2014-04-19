@@ -23,10 +23,10 @@ namespace OpenORPG.Server.Tests.Infrastructure.World
         [Fact]
         public void TestIsInViewDetectsInBoundsCorrectly()
         {
-            var entity = new DummyEntity();
+            var entity = new DummyEntity("");
             entity.Position = new Vector2(0, 0);
 
-            var entity2 = new DummyEntity();
+            var entity2 = new DummyEntity("");
             entity2.Position = new Vector2(1920, 1079);
 
             Assert.Equal(true, entity.IsInView(entity2));
@@ -38,10 +38,10 @@ namespace OpenORPG.Server.Tests.Infrastructure.World
         [Fact]
         public void TestIsInViewDetectsOutOfBoundsCorrectly()
         {
-            var entity = new DummyEntity();
+            var entity = new DummyEntity("");
             entity.Position = new Vector2(0, 0);
 
-            var entity2 = new DummyEntity();
+            var entity2 = new DummyEntity("");
             entity.Position = new Vector2(1931, 1085);
 
             Assert.Equal(false, entity.IsInView(entity2));

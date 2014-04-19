@@ -16,10 +16,9 @@ namespace Server.Game.Entities
     {
         private int _speed;
 
-        public Character()
+        public Character(string sprite) : base(sprite)
         {
             //TODO: Be a bit more creative than this
-            Sprite = "male_base";
             Speed = 32;
 
             // We initialize the size of our stats here

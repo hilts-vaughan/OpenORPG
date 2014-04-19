@@ -10,8 +10,8 @@ namespace OpenORPG.Server.Tests.Infrastructure.World
 {
     public class DummyEntity : Entity 
     {
-  
-    
-
+        public DummyEntity(string sprite) : base(sprite)
+        {
+        }
     }
 }

@@ -27,6 +27,8 @@ SOFTWARE.
 
 #endregion License
 
+using System;
+
 namespace Server.Utils.Math
 {
     /// <summary>
@@ -37,7 +39,7 @@ namespace Server.Utils.Math
         /// <summary>
         ///     Represents the mathematical constant e(2.71828175).
         /// </summary>
-        public const float E = (float) System.Math.E;
+        public const float E = (float)System.Math.E;
 
         /// <summary>
         ///     Represents the log base ten of e(0.4342945).
@@ -52,22 +54,22 @@ namespace Server.Utils.Math
         /// <summary>
         ///     Represents the value of pi(3.14159274).
         /// </summary>
-        public const float Pi = (float) System.Math.PI;
+        public const float Pi = (float)System.Math.PI;
 
         /// <summary>
         ///     Represents the value of pi divided by two(1.57079637).
         /// </summary>
-        public const float PiOver2 = (float) (System.Math.PI/2.0);
+        public const float PiOver2 = (float)(System.Math.PI / 2.0);
 
         /// <summary>
         ///     Represents the value of pi divided by four(0.7853982).
         /// </summary>
-        public const float PiOver4 = (float) (System.Math.PI/4.0);
+        public const float PiOver4 = (float)(System.Math.PI / 4.0);
 
         /// <summary>
         ///     Represents the value of pi times two(6.28318548).
         /// </summary>
-        public const float TwoPi = (float) (System.Math.PI*2.0);
+        public const float TwoPi = (float)(System.Math.PI * 2.0);
 
         /// <summary>
         ///     Returns the Cartesian coordinate for one axis of a point that is defined by a given triangle and two normalized barycentric (areal) coordinates.
@@ -80,7 +82,7 @@ namespace Server.Utils.Math
         /// <returns>Cartesian coordinate of the specified point with respect to the axis being used.</returns>
         public static float Barycentric(float value1, float value2, float value3, float amount1, float amount2)
         {
-            return value1 + (value2 - value1)*amount1 + (value3 - value1)*amount2;
+            return value1 + (value2 - value1) * amount1 + (value3 - value1) * amount2;
         }
 
         /// <summary>
@@ -96,12 +98,12 @@ namespace Server.Utils.Math
         {
             // Using formula from http://www.mvps.org/directx/articles/catmull/
             // Internally using doubles not to lose precission
-            double amountSquared = amount*amount;
-            double amountCubed = amountSquared*amount;
-            return (float) (0.5*(2.0*value2 +
-                                 (value3 - value1)*amount +
-                                 (2.0*value1 - 5.0*value2 + 4.0*value3 - value4)*amountSquared +
-                                 (3.0*value2 - value1 - 3.0*value3 + value4)*amountCubed));
+            double amountSquared = amount * amount;
+            double amountCubed = amountSquared * amount;
+            return (float)(0.5 * (2.0 * value2 +
+                                 (value3 - value1) * amount +
+                                 (2.0 * value1 - 5.0 * value2 + 4.0 * value3 - value4) * amountSquared +
+                                 (3.0 * value2 - value1 - 3.0 * value3 + value4) * amountCubed));
         }
 
         /// <summary>
@@ -170,19 +172,19 @@ namespace Server.Utils.Math
             // All transformed to double not to lose precission
             // Otherwise, for high numbers of param:amount the result is NaN instead of Infinity
             double v1 = value1, v2 = value2, t1 = tangent1, t2 = tangent2, s = amount, result;
-            double sCubed = s*s*s;
-            double sSquared = s*s;
+            double sCubed = s * s * s;
+            double sSquared = s * s;
 
             if (amount == 0f)
                 result = value1;
             else if (amount == 1f)
                 result = value2;
             else
-                result = (2*v1 - 2*v2 + t2 + t1)*sCubed +
-                         (3*v2 - 3*v1 - 2*t1 - t2)*sSquared +
-                         t1*s +
+                result = (2 * v1 - 2 * v2 + t2 + t1) * sCubed +
+                         (3 * v2 - 3 * v1 - 2 * t1 - t2) * sSquared +
+                         t1 * s +
                          v1;
-            return (float) result;
+            return (float)result;
         }
 
 
@@ -200,7 +202,7 @@ namespace Server.Utils.Math
         /// </remarks>
         public static float Lerp(float value1, float value2, float amount)
         {
-            return value1 + (value2 - value1)*amount;
+            return value1 + (value2 - value1) * amount;
         }
 
         /// <summary>
@@ -255,7 +257,7 @@ namespace Server.Utils.Math
         /// </remarks>
         public static float ToDegrees(float radians)
         {
-            return (float) (radians*57.295779513082320876798154814105);
+            return (float)(radians * 57.295779513082320876798154814105);
         }
 
         /// <summary>
@@ -270,7 +272,7 @@ namespace Server.Utils.Math
         /// </remarks>
         public static float ToRadians(float degrees)
         {
-            return (float) (degrees*0.017453292519943295769236907684886);
+            return (float)(degrees * 0.017453292519943295769236907684886);
         }
 
         /// <summary>
@@ -280,7 +282,7 @@ namespace Server.Utils.Math
         /// <returns>The new angle, in radians.</returns>
         public static float WrapAngle(float angle)
         {
-            angle = (float) System.Math.IEEERemainder(angle, 6.2831854820251465);
+            angle = (float)System.Math.IEEERemainder(angle, 6.2831854820251465);
             if (angle <= -3.14159274f)
             {
                 angle += 6.28318548f;
@@ -306,5 +308,11 @@ namespace Server.Utils.Math
         {
             return (value > 0) && ((value & (value - 1)) == 0);
         }
+
+        public static int ToNextMultiple(int n, int multipleOf)
+        {
+            return (int)System.Math.Ceiling((n / (double)multipleOf)) * multipleOf;
+        }
+
     }
 }
