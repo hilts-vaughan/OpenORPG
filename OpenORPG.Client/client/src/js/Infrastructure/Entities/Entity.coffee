@@ -62,12 +62,12 @@ module.exports =
           @loadTexture(texId, 0)
 
 
-          @animations.add('move_right', [0, 1, 2, 3], 5, true, true)
+          @animations.add('move_right', [0, 1, 2], 5, true, true)
           @animations.add('move_left', [5, 6, 7, 8], 5, true, true)
           @animations.add('move_up', [10, 11, 12, 13], 5, true, true)
           @animations.add('move_down', [35, 36, 37, 38], 5, true, true)
 
-          @animations.play('move_down')          
+          @animations.play('move_right')          
 
     
     #

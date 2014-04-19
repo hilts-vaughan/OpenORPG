@@ -5,7 +5,7 @@ module.exports =
 	# Text that is attached to a particular entity
 	class SpriteText		
 
-		PLAYER_COLOR: "#FFFFFF"
+		PLAYER_COLOR: "#ffff00"
 		STROKE_COLOR: "#000000"
 
 		constructor: (@game, @x, @y) ->	
@@ -15,9 +15,10 @@ module.exports =
 
 			# Our style object, this can be changed accordingly
 			@style = 
-				font: "12px Arial"
+				font: "12px Georgia"
 				fill:  @currentColor
 				stroke: @STROKE_COLOR
+				strokeThickness: 3
 				align: "center"
 
 			# Create our phaser text here
@@ -37,5 +38,5 @@ module.exports =
 		update: ->
 			# Track our entity
 			if @entity?
-				@text.x = @entity.x + 20
-				@text.y = @entity.y				
+				@text.x = @entity.x + (@entity.texture.width) / 2
+				@text.y = @entity.y

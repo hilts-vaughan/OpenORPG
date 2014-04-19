@@ -11159,5 +11159,23 @@
     <property name="MobStrays" value="True"/>
    </properties>
   </object>
+  <object name="Mob Spawn" type="MobSpawn" x="640" y="128" width="224" height="96">
+   <properties>
+    <property name="MobId" value="2"/>
+    <property name="MobMax" value="3"/>
+    <property name="MobRepeats" value="True"/>
+    <property name="MobSpawnTime" value="500"/>
+    <property name="MobStrays" value="True"/>
+   </properties>
+  </object>
+  <object name="Mob Spawn" type="MobSpawn" x="1024" y="544" width="96" height="128">
+   <properties>
+    <property name="MobId" value="3"/>
+    <property name="MobMax" value="3"/>
+    <property name="MobRepeats" value="True"/>
+    <property name="MobSpawnTime" value="500"/>
+    <property name="MobStrays" value="True"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
