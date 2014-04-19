@@ -11149,7 +11149,15 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="MobSpawns" width="36" height="22">
-  <object x="431" y="499" width="240" height="154"/>
+ <objectgroup name="MobSpawns">
+  <object name="Mob Spawn" type="MobSpawn" x="431" y="499" width="240" height="154">
+   <properties>
+    <property name="MobId" value="1"/>
+    <property name="MobMax" value="3"/>
+    <property name="MobRepeats" value="True"/>
+    <property name="MobSpawnTime" value="500"/>
+    <property name="MobStrays" value="True"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
