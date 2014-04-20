@@ -145,7 +145,7 @@ namespace Server.Game.Zones
         {
 
             //TODO: Please don't hard-code me
-            var playerRect = new Rectangle(player.X, player.Y, 32, 32);
+            var playerRect = new Rectangle(player.X, player.Y, player.Body.Width, player.Body.Height);
 
             switch (direction)
             {
