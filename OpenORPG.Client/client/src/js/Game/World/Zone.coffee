@@ -84,7 +84,7 @@ module.exports =
 				console.log(entity)
 				entity.spriteText?.destroy()
 				entity.destroy()
-				delete @game.entities[entity.id]
+			@game.entities = []
 
 			# Remove the tile map
 			@map.destroy()
