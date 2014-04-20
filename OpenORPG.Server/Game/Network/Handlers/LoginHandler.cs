@@ -86,7 +86,7 @@ namespace Server.Game.Network.Handlers
             if (client.HeroEntity == null)
                 return;
 
-            client.Zone.OnClientLeave(client);
+            client.HeroEntity.Zone.RemoveEntity(client.HeroEntity);
         }
     }
 }

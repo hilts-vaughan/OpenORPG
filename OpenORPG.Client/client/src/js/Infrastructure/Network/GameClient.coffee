@@ -102,6 +102,15 @@ module.exports =
 
       @sendPacket packet
 
+
+    # Sends a zone change request with the given direction
+    sendZoneChangeRequest: (direction) ->
+      packet = 
+        opCode: PacketTypes.CMSG_ZONE_CHANGE
+        direction: direction
+
+      @sendPacket packet
+
     # Packets being sent are stored below, here
     sendLogin: (username, password) ->
       opCode = PacketTypes.CMSG_LOGIN_REQUEST

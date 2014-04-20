@@ -67,7 +67,7 @@ namespace Server.Game.Zones
         public void SwitchToZoneAndPosition(Player player, Zone zone, Vector2 position)
         {
             // Remove our player from here
-            zone.RemoveEntity(player);
+            player.Zone.RemoveEntity(player);
 
             // Add them to the new zone and move them
             zone.AddEntity(player);

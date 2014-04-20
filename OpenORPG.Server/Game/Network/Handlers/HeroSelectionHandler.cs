@@ -53,7 +53,7 @@ namespace Server.Game.Network.Handlers
                     Thread.Sleep(500);
 
                     Logger.Instance.Info("{0} has entered the game.", hero.Name);
-                    zone.OnClientEnter(client, heroObject);
+                    zone.AddEntity(heroObject);
                 }
                 else
                 {

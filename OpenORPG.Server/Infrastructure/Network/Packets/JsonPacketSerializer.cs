@@ -43,7 +43,8 @@ namespace Server.Infrastructure.Network.Packets
             int start = data.IndexOf("opCode\":") + 8;
             int end = data.IndexOf(",", start);
 
-            var opCode = (OpCodes) ushort.Parse(data.Substring(start, end - start).Trim());
+            var fragment = data.Substring(start, end - start).Trim();
+            var opCode = (OpCodes) ushort.Parse(fragment);
 
 
             var packet = (IPacket) JsonConvert.DeserializeObject(data, packetFactory[opCode], settings);

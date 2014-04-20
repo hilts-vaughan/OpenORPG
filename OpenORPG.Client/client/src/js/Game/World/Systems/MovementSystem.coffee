@@ -17,7 +17,7 @@ module.exports =
 			# Build stuff we need
 			#@game.time.events.loop(Phaser.Timer.SECOND, @_generateMovementTicket, @)
 
-			setInterval =>
+			@movementToken = setInterval =>
 				@_generateMovementTicket()
 			, @MOVE_TICK_FREQ
 
@@ -28,6 +28,11 @@ module.exports =
 			if @entity.body.velocity.isZero() == false or overrride
 				@game.net.sendMovement( Math.floor(@entity.x), Math.floor(@entity.y) )			
 
+		destroy: ->
+			@entity = null
+
+			# Clear any movement request pulses
+			clearInterval(@movementToken)
 
 		# Attaches an entity
 		attachEntity: (entity) ->

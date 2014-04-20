@@ -56,7 +56,7 @@ namespace Server.Game.Network.Handlers
                 Logger.Instance.Info("{0} is changing zones...", client.HeroEntity.ToString());
 
                 // Fetch the zone we'll be transferring to
-                var zoneId = client.Zone.ZoneExitPoints[(int)packet.Direction];
+                var zoneId = client.HeroEntity.Zone.ZoneExitPoints[(int)packet.Direction];
                 var zone = ZoneManager.Instance.FindZone(zoneId);
 
                 // Check for existence first before trying to transfer 

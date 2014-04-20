@@ -241,6 +241,8 @@ namespace Server.Game.Zones
             // Notify the player about this change
             var packet = new ServerZoneChangedPacket(Id, player.Id, Entities);
             player.Client.Send(packet);
+
+            OnClientEnter(player.Client, player);
         }
 
         public void RemoveEntity(Entity entity)
@@ -296,6 +298,9 @@ namespace Server.Game.Zones
 
         private void ProcessRemovedEntity(Entity entity)
         {
+            if (entity is Player)
+                OnClientLeave((entity as Player).Client);
+
             var packet = new ServerMobDestroyPacket(entity.Id);
             SendToEveryone(packet);
         }
@@ -393,22 +398,20 @@ namespace Server.Game.Zones
         public ChatChannel ChatChannel { get; set; }
 
 
-        public void OnClientLeave(GameClient client)
+        protected void OnClientLeave(GameClient client)
         {
             GameClients.Remove(client);
 
             ChatManager.Current.Global.Leave(client);
             ChatChannel.Leave(client);
 
-            RemoveEntity(client.HeroEntity);
         }
 
-        public void OnClientEnter(GameClient client, Player heroEntity)
+        protected void OnClientEnter(GameClient client, Player heroEntity)
         {
             GameClients.Add(client);
             ChatManager.Current.Global.Join(client);
             ChatChannel.Join(client);
-            AddEntity(heroEntity);
 
             string name = heroEntity.Name;
             Logger.Instance.Info("{0} has entered {1}", name, Name);

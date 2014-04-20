@@ -79,16 +79,32 @@ module.exports =
 		# for an incoming client to use
 		clearZone: ->
 			
-
 			# Kill off entity stuff
-			for entity in @game.entities
+			for k,entity of @game.entities
+				console.log(entity)
 				entity.spriteText?.destroy()
 				entity.destroy()
+				delete @game.entities[entity.id]
+
+			# Remove the tile map
+			@map.destroy()
+
+			# Kill all systems that need to be
+			for system in @systems
+				system.destroy?()
 
 
 
 
 		update: ->
+
+			# Send a request to go north on space bar
+			if @game.input.keyboard.justReleased(Phaser.Keyboard.SPACEBAR, 100)
+				@game.net.sendZoneChangeRequest( 2 )
+			if @game.input.keyboard.justReleased(Phaser.Keyboard.A, 100)
+				@game.net.sendZoneChangeRequest( 0 )
+
+
 			# Remove and delete entities as needed
 			for remove in @toRemove
 				@game.entities[remove].spriteText?.destroy()
