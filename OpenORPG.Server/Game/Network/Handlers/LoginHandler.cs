@@ -80,9 +80,6 @@ namespace Server.Game.Network.Handlers
             client.Account = null;
 
 
-            if (client.Zone == null)
-                return;
-
             if (client.HeroEntity == null)
                 return;
 
