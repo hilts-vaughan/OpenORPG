@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Dynamic;
 using System.Reflection;
 using Newtonsoft.Json;
+using Server.Game.Network.Packets;
 using Server.Game.Zones;
 using Server.Infrastructure.Content;
 using Server.Infrastructure.Math;
@@ -84,7 +85,10 @@ namespace Server.Infrastructure.World
         /// <param name="location">The new location to move the entity into</param>
         protected virtual void MoveEntity(Vector2 location)
         {
-            _position = location;
+            var difference = _position - location;
+
+
+
         }
 
         public Dictionary<string, dynamic> GetSyncProperties()
@@ -93,6 +97,8 @@ namespace Server.Infrastructure.World
                 return PropertyCollection.GetAndFlushValues();
             return null;
         }
+
+        public Direction Direction { get; set; }
 
         /// <summary>
         /// The unique ID that identifies this entity

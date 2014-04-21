@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Entities;
 using Server.Game.Movement;
 using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Client;
@@ -38,7 +39,14 @@ namespace Server.Game.Network.Handlers
                 client.Connection.Disconnect("Hacking Attempt: Movement pulse exceeded");
             }
 
+            // Move the player
             player.Position = requestedPosition;
+            player.Direction = packet.Direction;
+
+            if (packet.Terminates)
+                player.CharacterState = CharacterState.Idle;
+            else
+                player.CharacterState = CharacterState.Moving;
 
             var newPacket = new ServerEntityMovementPacket(requestedPosition, direction, player.Id);
             zone.SendToEntitiesInRangeExcludingSource(newPacket, player);
@@ -66,7 +74,9 @@ namespace Server.Game.Network.Handlers
                     return;
                 }
                 var newPos = GetFreePositionInZoneFromDirection(packet.Direction, client.HeroEntity.Zone, client.HeroEntity.Position);
+
                 ZoneManager.Instance.SwitchToZoneAndPosition(client.HeroEntity, zone, newPos);
+                client.HeroEntity.Direction = packet.Direction;
             }
         }
 
@@ -84,9 +94,9 @@ namespace Server.Game.Network.Handlers
             {
                 case Direction.North:
                     x = oldPosition.X;
-                    y = ((zone.TileMap.Height - 2)*zone.TileMap.TileHeight);
+                    y = ((zone.TileMap.Height - 2) * zone.TileMap.TileHeight);
                     return new Vector2(x, y);
-                
+
                 case Direction.East:
                     x = zone.TileMap.TileWidth * 2;
                     y = oldPosition.Y;

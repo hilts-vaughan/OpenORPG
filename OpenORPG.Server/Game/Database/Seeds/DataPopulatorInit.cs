@@ -1,4 +1,6 @@
 ﻿using System.Data.Entity;
+using System.Linq;
+using Server.Game.Combat;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
 
@@ -8,17 +10,21 @@ namespace Server.Game.Database.Seeds
     ///     A custom intalizer that populates the game database with mock data useful for testing, clean, good known states.
     /// </summary>
     public class CustomInitializer : DropCreateDatabaseAlways<GameDatabaseContext>
-        // DropCreateDatabaseIfModelChanges<GameDatabaseContext>
+    // DropCreateDatabaseIfModelChanges<GameDatabaseContext>
     {
         protected override void Seed(GameDatabaseContext context)
         {
+            CreateTestSkills(context);
+
+            context.SaveChanges();
+
             // Add a new user
-            for(int i = 0; i < 50; i++)
+            for (int i = 0; i < 50; i++)
             {
                 var account = new UserAccount("Vaughan" + i, "Vaughan", "someone@someone.com");
 
                 var character = new UserHero();
-               
+
 
                 character.Name = "Vaughan" + i;
                 character.Account = account;
@@ -26,8 +32,10 @@ namespace Server.Game.Database.Seeds
                 character.PositionX = 6 * 32;
                 character.PositionY = 4 * 32;
 
-                character.Inventory.Add(new UserItem(0, 1));
+                character.Inventory.Add(new UserItem(1, 1));
                 
+                // Add a basic attack to this character
+                character.Skills.Add(context.SkillTemplates.First(x => x.Id == 1));
 
                 context.Characters.Add(character);
 
@@ -36,6 +44,7 @@ namespace Server.Game.Database.Seeds
 
             CreateTestMonsters(context);
 
+
             context.SaveChanges();
 
 
@@ -43,11 +52,21 @@ namespace Server.Game.Database.Seeds
             base.Seed(context);
         }
 
+        private void CreateTestSkills(GameDatabaseContext context)
+        {
+            var attack = new SkillTemplate(SkillType.Damage, SkillTargetType.Enemy, SkillActivationType.Immediate, 0, 1, "Slay mighty foes!", 1, "Attack");
+            context.SkillTemplates.Add(attack);
+
+            var banish = new SkillTemplate(SkillType.Damage, SkillTargetType.Enemy, SkillActivationType.Immediate, 0,
+                long.MaxValue, "Eradicates a foe.", 2, "Banish");
+            context.SkillTemplates.Add(banish);
+        }
+
         private void CreateTestMonsters(GameDatabaseContext context)
         {
 
             // Create a sample 'snake'
-            
+
             var snake = new MonsterTemplate();
             snake.Strength = 3;
             snake.Hitpoints = 10;

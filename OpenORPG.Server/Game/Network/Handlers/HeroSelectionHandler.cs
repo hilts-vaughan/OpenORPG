@@ -25,6 +25,8 @@ namespace Server.Game.Network.Handlers
             if (!actionCanBePerformed)
                 return;
 
+
+
             // Get the hero the user wanted
             UserHero hero = client.Account.Heroes.FirstOrDefault();
 
@@ -36,6 +38,13 @@ namespace Server.Game.Network.Handlers
             }
             else
             {
+
+                using (var context = new GameDatabaseContext())
+                {
+                    context.Characters.Attach(hero);
+                    context.Entry(hero).Collection(a => a.Skills).Load();
+                    context.Entry(hero).Collection(a => a.Inventory).Load();
+                }
 
 
                 // Create an object and assign it the world if everything is okay
@@ -59,7 +68,7 @@ namespace Server.Game.Network.Handlers
                 {
                     var response = new ServerHeroSelectResponsePacket(HeroStatus.Unavailable);
                     client.Send(response);
-                
+
                     Logger.Instance.Error("{0} attempted to enter the game but could not be loaded.", hero.Name);
                 }
 

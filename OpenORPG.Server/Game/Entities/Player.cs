@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Server.Game.Combat;
+using Server.Game.Database.Models;
 using Server.Game.Storage;
 using Server.Infrastructure.World;
 
@@ -11,11 +13,19 @@ namespace Server.Game.Entities
 {
     public class Player : Character
     {
-        public Player(string sprite, GameClient client) : base(sprite)
+        public Player(string sprite, GameClient client, UserHero userHero)
+            : base(sprite)
         {
             Client = client;
             Backpack = new ItemStorage();
             Bank = new ItemStorage();
+
+            // Add the skills this player knows
+            foreach (var skillTemplate in userHero.Skills)
+            {
+                var skill = new Skill(skillTemplate);
+                Skills.Add(skill);
+            }
         }
 
         /// <summary>   
@@ -23,6 +33,7 @@ namespace Server.Game.Entities
         /// </summary>
         [JsonIgnore]
         public GameClient Client { get; set; }
+
 
         /// <summary>
         /// The backpack this player is currently holding

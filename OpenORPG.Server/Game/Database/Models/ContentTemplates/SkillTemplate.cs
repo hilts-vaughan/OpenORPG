@@ -7,20 +7,44 @@ namespace Server.Game.Database.Models.ContentTemplates
     /// </summary>
     public class SkillTemplate : IContentTemplate
     {
-        public SkillTemplate(string description, long id, string name, string garbage)
+ 
+
+        public SkillTemplate(SkillType skillType, SkillTargetType skillTargetType, SkillActivationType skillActivationType, long castTime, long damage, string description, long id, string name)
         {
+            SkillType = skillType;
+            SkillTargetType = skillTargetType;
+            SkillActivationType = skillActivationType;
+            CastTime = castTime;
+            Damage = damage;
             Description = description;
             Id = id;
             Name = name;
-            Garbage = garbage;
+        }
+
+        public SkillTemplate()
+        {
+            
         }
 
         public SkillType SkillType { get; set; }
         public SkillTargetType  SkillTargetType { get; set; }
-        public SkillActivationType SiSkillActivationType { get; set; }
+        public SkillActivationType SkillActivationType { get; set; }
+
+
+        /// <summary>
+        /// The amount of time (milliseconds) it takes to perform this skill
+        /// 
+        /// A time of 0 indicates that this skill can be performed instantly.
+        /// </summary>
+        public long CastTime { get; set; }
+
+        /// <summary>
+        /// The amount of damage this skill performs
+        /// </summary>
+        public long Damage { get; set; }
 
         public string Description { get; set; }
-        public string Garbage { get; set; }
+        
         public long Id { get; set; }
         public string Name { get; set; }
         public string VirtualCategory { get; set; }

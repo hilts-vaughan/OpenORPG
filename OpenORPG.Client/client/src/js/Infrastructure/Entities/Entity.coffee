@@ -45,6 +45,40 @@ module.exports =
     update: ->
       @spriteText?.update()
 
+      # Play the graphic for the right state
+      switch @characterState
+        when "Idle"
+          @_playIdle()
+        when "UsingSkill"
+          @_playAttack()
+        when "Moving"
+          console.log("Walks like a duck")
+          @_playWalk()
+
+
+
+    mapDirectionTo: ->
+      switch @direction
+        when 0
+          return "down"
+        when 1
+          return "left"
+        when 2
+          return "up"
+        when 3
+          return "right"
+
+    _playIdle: ->
+      dir = @mapDirectionTo()
+      @animations.play("idle_" + dir)
+
+    _playAttack: ->
+      dir = @mapDirectionTo()
+      @animations.play("atk_" + dir)
+
+    _playWalk: ->
+      dir = @mapDirectionTo()
+      @animations.play("walk_" + dir)
 
     # This method is invoked when a property has changed
     propertyChanged: (name, value) ->
@@ -80,8 +114,7 @@ module.exports =
               frames.push(startingIndex + i)
             @animations.add(k, frames, 4, true, true)
 
-          # Start a random animation by the end
-          @animations.play("idle_right")
+          @_playIdle()
     
     #
     #    Merges an entity with a given object. This operation is dangerous if you're not careful.

@@ -93,12 +93,14 @@ module.exports =
       return
 
     
-    sendMovement: (x, y) ->
+    sendMovement: (x, y, terminates, dir) ->
       packet =
         opCode: PacketTypes.CMSG_MOVEMENT_REQUEST
         currentPosition:
           x: x
           y: y
+        terminates: terminates
+        direction: dir
 
       @sendPacket packet
 

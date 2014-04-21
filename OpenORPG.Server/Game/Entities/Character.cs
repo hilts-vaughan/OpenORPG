@@ -15,8 +15,10 @@ namespace Server.Game.Entities
     public class Character : Entity
     {
         private int _speed;
+        private CharacterState _characterState;
 
-        public Character(string sprite) : base(sprite)
+        public Character(string sprite)
+            : base(sprite)
         {
             //TODO: Be a bit more creative than this
             Speed = 32;
@@ -26,8 +28,10 @@ namespace Server.Game.Entities
             CharacterStats = new CharacterStat[numberOfStats];
 
             // Allocate just enough room for equipment
-            var numberOfEquipmentSlots = Enum.GetNames(typeof (EquipmentSlot)).Length;
+            var numberOfEquipmentSlots = Enum.GetNames(typeof(EquipmentSlot)).Length;
             Equipment = new Equipment[numberOfEquipmentSlots];
+
+            Skills = new List<Skill>();
         }
 
 
@@ -36,6 +40,8 @@ namespace Server.Game.Entities
         /// </summary>
         public CharacterStat[] CharacterStats { get; set; }
         public Equipment[] Equipment { get; set; }
+
+        public List<Skill> Skills { get; set; }
 
         public int ZoneId { get; set; }
 
@@ -48,6 +54,22 @@ namespace Server.Game.Entities
         /// </summary>
         public AiBase CurrentAi { get; set; }
 
+        /// <summary>
+        /// The current state of this character is stored here
+        /// </summary>
+        public CharacterState CharacterState
+        {
+            get { return _characterState; }
+            set
+            {
+                // Write only if value changed
+                if (value != _characterState)
+                    PropertyCollection.WriteValue("CharacterState", value.ToString());
+
+                _characterState = value;
+
+            }
+        }
 
         public int Speed
         {
@@ -57,10 +79,14 @@ namespace Server.Game.Entities
 
         protected override void MoveEntity(Vector2 location)
         {
+            base.MoveEntity(location);
+
             // For now, we can simply move the object. 
             //TODO: We should send sync packets to keep things in sync
             _position = location;
-            
+
+
+
         }
     }
 }

@@ -23,11 +23,12 @@ namespace Server.Game.Combat
             return new ImmediateSkillAction(user, skillTemplate);
         }
 
-        public ICombatAction GenerateActionFromSkill(SkillTemplate skillTemplate, long targetId, Character requestingHero)
+        public ICombatAction GenerateActionFromSkill(Skill skill, long targetId, Character requestingHero)
         {
             ICombatAction action = null;
+            var skillTemplate = skill.SkillTemplate;
 
-            switch (skillTemplate.SiSkillActivationType)
+            switch (skillTemplate.SkillActivationType)
             {
                 case SkillActivationType.Immediate:
                     return CreateImmediateSkillAction(skillTemplate, requestingHero);

@@ -36,11 +36,14 @@ namespace Server.Game.Database
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new SkillTemplateMap());
+
             modelBuilder.Configurations.Add(new UserAccounConfiguration());
             modelBuilder.Configurations.Add(new UserHeroMap());
             modelBuilder.Configurations.Add(new MonsterTemplateMap());
             modelBuilder.Configurations.Add(new UserStorageMap());
             modelBuilder.Configurations.Add(new ItemTemplateMap());
+            
         }
     }
 }

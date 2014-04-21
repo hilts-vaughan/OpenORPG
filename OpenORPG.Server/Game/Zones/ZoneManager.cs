@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Server.Game.Entities;
+using Server.Game.Network.Packets;
 using Server.Utils.Math;
 
 namespace Server.Game.Zones
@@ -70,8 +71,9 @@ namespace Server.Game.Zones
             player.Zone.RemoveEntity(player);
 
             // Add them to the new zone and move them
-            zone.AddEntity(player);
             player.Position = position;
+            zone.AddEntity(player);
+            
         }
 
         /// <summary>

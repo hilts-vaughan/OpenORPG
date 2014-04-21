@@ -63,13 +63,8 @@ namespace Server.Game.Combat
             var skillId = skillRequest.SkillId;
             var targetId = skillRequest.TargetId;
 
-            SkillTemplate skill;
-
-            using (var context = new GameDatabaseContext())
-            {
-                // Fetch our skill from the database
-                skill = context.SkillTemplates.FirstOrDefault(x => x.Id == skillId);
-            }
+            // Fetch skill
+            Skill skill = requestingHero.Skills.Find(x => x.SkillTemplate.Id == skillRequest.SkillId);
 
             // Checks if the skill requested did not exist
             if (skill == null)
@@ -77,7 +72,11 @@ namespace Server.Game.Combat
                 Logger.Instance.Info("{0} requested the use of the non-existent skill #{1}", requestingHero.Name, skillId);
                 return;
             }
-                
+
+            // Check that this skill is usable
+            if (!skill.CanUse())
+                return;
+
             // Skill is good, execute!
             var action = _actionGenerator.GenerateActionFromSkill(skill, targetId, requestingHero);
 

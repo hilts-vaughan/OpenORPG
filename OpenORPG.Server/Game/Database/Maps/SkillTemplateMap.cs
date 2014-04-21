@@ -21,7 +21,7 @@ namespace Server.Game.Database.Maps
                 .IsRequired();
 
             Property(t => t.SkillTargetType).IsRequired();
-            Property(t => t.SiSkillActivationType).IsRequired();
+            Property(t => t.SkillActivationType).IsRequired();
 
         }
     }

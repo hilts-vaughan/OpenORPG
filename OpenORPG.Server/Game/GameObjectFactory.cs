@@ -22,7 +22,7 @@ namespace Server.Game
 
         public static Player CreateHero(UserHero userHero, GameClient gameClient)
         {
-            var entity = new Player("male_base", gameClient);
+            var entity = new Player("male_base", gameClient, userHero);
             entity.Position = new Vector2(userHero.PositionX, userHero.PositionY);
             entity.Name = userHero.Name;
 

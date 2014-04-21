@@ -21,12 +21,13 @@ module.exports =
 				@_generateMovementTicket()
 			, @MOVE_TICK_FREQ
 
-		_generateMovementTicket: (overrride) =>
+		_generateMovementTicket: (overrride = false) =>
 			if @entity == null
-				return
+				return				
 				
-			if @entity.body.velocity.isZero() == false or overrride
-				@game.net.sendMovement( Math.floor(@entity.x), Math.floor(@entity.y) )			
+			if not @entity.body.velocity.isZero()
+				console.log(overrride)
+				@game.net.sendMovement( Math.floor(@entity.x), Math.floor(@entity.y), overrride, @entity.direction )			
 
 		destroy: ->
 			@entity = null
@@ -47,39 +48,25 @@ module.exports =
 
 			if @game.input.keyboard.isDown(Phaser.Keyboard.LEFT)     
 				@entity.body.velocity.setTo(-120, 0)
-				@entity.animations.play("walk_right")
-				@entity.isMoving = true
+				@entity.direction = 1
 			else if @game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)     
 				@entity.body.velocity.setTo(120, 0)
-				@entity.animations.play("walk_right")
-				@entity.isMoving = true
+				@entity.direction = 3
 			else if @game.input.keyboard.isDown(Phaser.Keyboard.UP)     
 				@entity.body.velocity.setTo(0, -120)
-				@entity.animations.play("walk_up")
-				@entity.isMoving = true
+				@entity.direction = 2
 			else if @game.input.keyboard.isDown(Phaser.Keyboard.DOWN)     
 				@entity.body.velocity.setTo(0, 120)
-				@entity.animations.play("walk_down")
-				@entity.isMoving = true
+				@entity.direction = 0
 			else								
 				if not @entity.body.velocity.isZero()
 					@_generateMovementTicket(true)
 				@entity.body.velocity.setTo(0, 0)
-				@entity.isMoving = false
-
-
-			# This is asking for trouble, probably
-			# TODO: This will only work for movement
-			for k,entity of @game.entities
-				okay = entity.animations.currentAnim.name.indexOf("walk")
-				if not entity.isMoving and okay > -1
-					entity.animations.stop(null, true)
 
 
 		# Used to handle when an entity has moved from their intial location
 		_handleEntityMove: (packet) =>
-			console.log("Loud and clear, folks!" )
-			console.log(@)			
+		
 			id = packet.id
 			console.log(packet)
 			position = packet.position
@@ -91,22 +78,8 @@ module.exports =
 			x = position.x
 			y = position.y
 
+			entity.direction = packet.direction
 
-			destX = Math.floor(entity.x - x)
-			destY = Math.floor(entity.y - y)
-
-			console.log(destX)
-			console.log(destY)
-
-			if destX > 3
-				entity.animations.play("walk_right")
-			else if destX < -3
-				entity.animations.play("walk_right")
-
-			if destY > 3
-				entity.animations.play("walk_up")
-			else if destY < -3
-				entity.animations.play("walk_down")
 
 			if entity.tween != undefined
 				entity.tween.stop()

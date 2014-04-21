@@ -28,5 +28,10 @@ namespace Server.Game.Database.Models
             ItemValue = value;
         }
 
+        public UserItem()
+        {
+                
+        }
+
     }
 }

@@ -15,6 +15,11 @@ namespace Server.Game.Network.Packets
         public Vector2 CurrentPosition { get; set; }
 
         /// <summary>
+        /// A flag that is set when a player has terminated their movement
+        /// </summary>
+        public bool Terminates { get; set; }
+
+        /// <summary>
         /// This is the current direction the client claims to be willing to head towards
         /// </summary>
         public Direction Direction { get; set; }
