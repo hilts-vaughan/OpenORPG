@@ -1,0 +1,7 @@
+{
+	"entity_sprite_snake": "snake",
+	"entity_sprite_male_base": "male_base",
+	"entity_sprite_goblin": "goblin",
+	"effect_death": "effects/death",
+	"effect_sparks": "effects/sparks"
+}

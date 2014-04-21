@@ -16,22 +16,23 @@ namespace Server.Game.Combat.Actions
     /// </summary>
     public class ImmediateSkillAction : ICombatAction
     {
-        public ImmediateSkillAction(Character executingCharacter, SkillTemplate skillTemplate)
+
+        public ImmediateSkillAction(Character executingCharacter, Skill skill)
         {
             ExecutingCharacter = executingCharacter;
-            SkillTemplate = skillTemplate;
+            Skill = skill;
         }
 
-  
 
-        public void PerformAction(IEnumerable<Character> combatCharacters)
+
+        public Character PerformAction(IEnumerable<Character> combatCharacters)
         {
-            var validTargets = SkillTemplate.SkillTargetType;
+            var validTargets = Skill.SkillTemplate.SkillTargetType;
 
             float highestDistance = float.MaxValue;
             Character target = null;
 
-            foreach (var character in combatCharacters)
+            foreach (var character in combatCharacters.Where(x => x.Id != ExecutingCharacter.Id))
             {
                 var distance = Vector2.Distance(character.Position, ExecutingCharacter.Position);
 
@@ -43,29 +44,32 @@ namespace Server.Game.Combat.Actions
             }
 
             if (target == null)
-                return;
+                return null;
 
 
-           // Depending on the skill type, apply a payload or operation
-            switch (SkillTemplate.SkillType)
+            // Depending on the skill type, apply a payload or operation
+            switch (Skill.SkillTemplate.SkillType)
             {
                 case SkillType.Healing:
                     break;
                 case SkillType.Damage:
                     var damagePayload = new DamagePayload(ExecutingCharacter);
-                    damagePayload.Apply(ExecutingCharacter);
+                    damagePayload.Apply(target);
                     break;
                 case SkillType.Special:
                     break;
             }
 
+            return target;
+
         }
 
         public Character ExecutingCharacter { get; set; }
+        public float ExecutionTime { get; set; }
 
         /// <summary>
         /// The skill template that is associated with this
         /// </summary>
-        public SkillTemplate SkillTemplate { get; set; }
+        public Skill Skill { get; set; }
     }
 }

@@ -46,14 +46,17 @@ module.exports =
       @spriteText?.update()
 
       # Play the graphic for the right state
-      switch @characterState
-        when "Idle"
-          @_playIdle()
-        when "UsingSkill"
-          @_playAttack()
-        when "Moving"
-          console.log("Walks like a duck")
-          @_playWalk()
+      if @skillUseAnim is undefined
+        switch @characterState
+          when "Idle"
+            @_playIdle()
+          when "UsingSkill"
+            @_playAttack()
+          when "Moving"
+            @_playWalk()
+      else
+        if @skillUseAnim.isFinished
+          @skillUseAnim = undefined
 
 
 
@@ -79,6 +82,11 @@ module.exports =
     _playWalk: ->
       dir = @mapDirectionTo()
       @animations.play("walk_" + dir)
+
+    # Play your animation
+    playSkillAnimation: ->
+      dir = @mapDirectionTo()
+      @skillUseAnim = @animations.play("atk_" + dir, 12, false)
 
     # This method is invoked when a property has changed
     propertyChanged: (name, value) ->

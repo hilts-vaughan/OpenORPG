@@ -35,7 +35,7 @@ namespace Server.Game.Database.Seeds
                 character.Inventory.Add(new UserItem(1, 1));
                 
                 // Add a basic attack to this character
-                character.Skills.Add(context.SkillTemplates.First(x => x.Id == 1));
+                character.Skills.Add(new UserSkill(1));
 
                 context.Characters.Add(character);
 

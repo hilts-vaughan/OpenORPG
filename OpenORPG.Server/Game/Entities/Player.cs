@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Server.Game.Combat;
+using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Storage;
 using Server.Infrastructure.World;
@@ -20,11 +21,15 @@ namespace Server.Game.Entities
             Backpack = new ItemStorage();
             Bank = new ItemStorage();
 
-            // Add the skills this player knows
-            foreach (var skillTemplate in userHero.Skills)
+            using (var context = new GameDatabaseContext())
             {
-                var skill = new Skill(skillTemplate);
-                Skills.Add(skill);
+                // Add the skills this player knows
+                foreach (var skillEntry in userHero.Skills)
+                {
+                    var skillTemplate = context.SkillTemplates.First(x => x.Id == skillEntry.SkillId);
+                    var skill = new Skill(skillTemplate);
+                    Skills.Add(skill);
+                }
             }
         }
 

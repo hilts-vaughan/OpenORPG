@@ -47,6 +47,19 @@ module.exports =
 			@game.net.registerPacket PacketTypes.SMSG_MOB_DESTROY, (packet) =>
 				@toRemove.push(packet.id)        
 
+			# Register for use results
+			@game.net.registerPacket PacketTypes.SMSG_SKILL_USE_RESULT, (packet) =>
+				victim = @game.entities[packet.targetId]
+				user = @game.entities[packet.userId]
+
+				tween = @game.add.tween(victim).to
+					tint: 0x7E3517
+					alpha: 0.9
+				, 200, Phaser.Easing.Linear.None, true, 0, true, true
+
+				# Play the attack animation
+				user.playSkillAnimation()
+
 			# Sync entities
 			@game.net.registerPacket PacketTypes.SMSG_ENTITY_PROPERTY_CHANGE, (packet) =>
         
@@ -103,6 +116,9 @@ module.exports =
 				@game.net.sendZoneChangeRequest( 2 )
 			if @game.input.keyboard.justReleased(Phaser.Keyboard.A, 100)
 				@game.net.sendZoneChangeRequest( 0 )
+
+			if @game.input.keyboard.justReleased(Phaser.Keyboard.Q, 100)
+				@game.net.sendSkillUse(1, 1)
 
 
 			# Remove and delete entities as needed

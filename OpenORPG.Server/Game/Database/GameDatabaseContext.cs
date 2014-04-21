@@ -42,6 +42,7 @@ namespace Server.Game.Database
             modelBuilder.Configurations.Add(new UserHeroMap());
             modelBuilder.Configurations.Add(new MonsterTemplateMap());
             modelBuilder.Configurations.Add(new UserStorageMap());
+            modelBuilder.Configurations.Add(new UserSkillMap());
             modelBuilder.Configurations.Add(new ItemTemplateMap());
             
         }

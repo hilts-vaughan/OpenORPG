@@ -12,9 +12,19 @@ namespace Server.Game.Database.Maps
         {
             HasKey(t => t.ItemEntryId);
 
-       
+
 
         }
 
+    }
+
+
+    public class UserSkillMap : EntityTypeConfiguration<UserSkill>
+    {
+        public UserSkillMap()
+        {
+            HasKey(t => t.UserSkillId);
+
+        }
     }
 }

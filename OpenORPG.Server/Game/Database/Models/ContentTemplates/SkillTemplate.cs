@@ -9,7 +9,7 @@ namespace Server.Game.Database.Models.ContentTemplates
     {
  
 
-        public SkillTemplate(SkillType skillType, SkillTargetType skillTargetType, SkillActivationType skillActivationType, long castTime, long damage, string description, long id, string name)
+        public SkillTemplate(SkillType skillType, SkillTargetType skillTargetType, SkillActivationType skillActivationType, float castTime, long damage, string description, long id, string name)
         {
             SkillType = skillType;
             SkillTargetType = skillTargetType;
@@ -19,6 +19,9 @@ namespace Server.Game.Database.Models.ContentTemplates
             Description = description;
             Id = id;
             Name = name;
+
+
+            CooldownTime = 1f;
         }
 
         public SkillTemplate()
@@ -32,11 +35,16 @@ namespace Server.Game.Database.Models.ContentTemplates
 
 
         /// <summary>
-        /// The amount of time (milliseconds) it takes to perform this skill
+        /// The amount of time (seconds) it takes to perform this skill
         /// 
         /// A time of 0 indicates that this skill can be performed instantly.
         /// </summary>
-        public long CastTime { get; set; }
+        public float CastTime { get; set; }
+
+        /// <summary>
+        /// The amount of time this skill takes to reuse
+        /// </summary>
+        public float CooldownTime { get; set; }
 
         /// <summary>
         /// The amount of damage this skill performs

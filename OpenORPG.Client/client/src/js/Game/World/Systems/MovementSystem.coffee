@@ -46,22 +46,24 @@ module.exports =
 			if not @entity
 				return
 
-			if @game.input.keyboard.isDown(Phaser.Keyboard.LEFT)     
-				@entity.body.velocity.setTo(-120, 0)
-				@entity.direction = 1
-			else if @game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)     
-				@entity.body.velocity.setTo(120, 0)
-				@entity.direction = 3
-			else if @game.input.keyboard.isDown(Phaser.Keyboard.UP)     
-				@entity.body.velocity.setTo(0, -120)
-				@entity.direction = 2
-			else if @game.input.keyboard.isDown(Phaser.Keyboard.DOWN)     
-				@entity.body.velocity.setTo(0, 120)
-				@entity.direction = 0
-			else								
-				if not @entity.body.velocity.isZero()
-					@_generateMovementTicket(true)
-				@entity.body.velocity.setTo(0, 0)
+			# Assuming it's okay to move
+			if @entity.characterState == "Moving" or @entity.characterState == "Idle"
+				if @game.input.keyboard.isDown(Phaser.Keyboard.LEFT)     
+					@entity.body.velocity.setTo(-120, 0)
+					@entity.direction = 1
+				else if @game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)     
+					@entity.body.velocity.setTo(120, 0)
+					@entity.direction = 3
+				else if @game.input.keyboard.isDown(Phaser.Keyboard.UP)     
+					@entity.body.velocity.setTo(0, -120)
+					@entity.direction = 2
+				else if @game.input.keyboard.isDown(Phaser.Keyboard.DOWN)     
+					@entity.body.velocity.setTo(0, 120)
+					@entity.direction = 0
+				else								
+					if not @entity.body.velocity.isZero()
+						@_generateMovementTicket(true)
+					@entity.body.velocity.setTo(0, 0)
 
 
 		# Used to handle when an entity has moved from their intial location

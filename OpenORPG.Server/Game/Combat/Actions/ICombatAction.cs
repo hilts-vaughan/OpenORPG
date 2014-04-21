@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using Server.Game.Entities;
 
 namespace Server.Game.Combat.Actions
@@ -14,11 +15,18 @@ namespace Server.Game.Combat.Actions
         /// <summary>
         /// Executes the action in the context of all possible combat characters.
         /// </summary>
-        void PerformAction(IEnumerable<Character> combatCharacters);
+        Character PerformAction(IEnumerable<Character> combatCharacters);
 
         /// <summary>
         /// The character that will be executing the action in the context.
         /// </summary>
         Character ExecutingCharacter{ get; set; }
+
+        Skill Skill { get; set; }
+        /// <summary>
+        /// The amount of time remaining before an execution for this skill is possible
+        /// </summary>
+        float ExecutionTime { get; set; }
+
     }
 }

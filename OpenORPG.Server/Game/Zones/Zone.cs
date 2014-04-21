@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Server.Game.Combat;
 using Server.Game.Entities;
 using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Server;
@@ -165,6 +166,7 @@ namespace Server.Game.Zones
         private void AddGameSystems()
         {
             GameSystems.Add(new SpawnGameSystem(this));
+            GameSystems.Add(new CombatSystem(this));
         }
 
         /// <summary>
@@ -197,7 +199,12 @@ namespace Server.Game.Zones
 
         public IEnumerable<Character> ZoneCharacters
         {
-            get { return (IEnumerable<Character>)Entities.Where(x => x is Character); }
+            get
+            {
+                var entities = Entities.Where(x => x is Character);
+
+                return entities.Select(entity => entity as Character).ToList();
+            }
         }
 
 
@@ -238,6 +245,9 @@ namespace Server.Game.Zones
         /// <param name="player"></param>
         private void ProcessNewPlayer(Player player)
         {
+            player.CharacterState = CharacterState.Moving;
+            player.CharacterState = CharacterState.Idle;
+
             // Notify the player about this change
             var packet = new ServerZoneChangedPacket(Id, player.Id, Entities);
             player.Client.Send(packet);
@@ -414,6 +424,7 @@ namespace Server.Game.Zones
             ChatChannel.Join(client);
 
             string name = heroEntity.Name;
+
             Logger.Instance.Info("{0} has entered {1}", name, Name);
 
         }

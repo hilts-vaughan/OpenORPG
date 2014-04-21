@@ -15,12 +15,14 @@ namespace Server.Game.Combat
     /// </summary>
     public class ActionGenerator
     {
+
+     
         /// <summary>
         /// Generates an immediate skill action.
         /// </summary>
-        private ImmediateSkillAction CreateImmediateSkillAction(SkillTemplate skillTemplate, Character user)
+        private ImmediateSkillAction CreateImmediateSkillAction(Skill skill, Character user)
         {
-            return new ImmediateSkillAction(user, skillTemplate);
+            return new ImmediateSkillAction(user, skill);
         }
 
         public ICombatAction GenerateActionFromSkill(Skill skill, long targetId, Character requestingHero)
@@ -31,7 +33,7 @@ namespace Server.Game.Combat
             switch (skillTemplate.SkillActivationType)
             {
                 case SkillActivationType.Immediate:
-                    return CreateImmediateSkillAction(skillTemplate, requestingHero);
+                    return CreateImmediateSkillAction(skill, requestingHero);
                 default:
                     Logger.Instance.Warn("{0} is not a supported skill type, invoked on skill #{1}",
                         skillTemplate.SkillType.ToString(), skillTemplate.Id);

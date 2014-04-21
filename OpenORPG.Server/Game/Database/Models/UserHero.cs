@@ -21,13 +21,13 @@ namespace Server.Game.Database.Models
             CreationDate = DateTime.UtcNow;
 
             Inventory = new List<UserItem>();
-            Skills = new LinkedList<SkillTemplate>();
+            Skills = new LinkedList<UserSkill>();
         }
 
         public UserHero()
         {
             Inventory = new List<UserItem>();
-            Skills = new List<SkillTemplate>();
+            Skills = new List<UserSkill>();
         }
 
         public int Id { get; set; }
@@ -49,7 +49,7 @@ namespace Server.Game.Database.Models
         public long ZoneId { get; set; }
 
         public virtual ICollection<UserItem> Inventory { get; set; }
-        public virtual ICollection<SkillTemplate> Skills { get; set; } 
+        public virtual ICollection<UserSkill> Skills { get; set; } 
 
         public DateTime? CreationDate { get; set; }
 

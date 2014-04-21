@@ -105,6 +105,15 @@ module.exports =
       @sendPacket packet
 
 
+    # Sends a request for a skill to be used
+    sendSkillUse: (skillId, targetId) ->
+      packet =
+        opCode: PacketTypes.CMSG_USE_SKILL
+        skillId: skillId
+        targetId: targetId
+      @sendPacket packet  
+
+
     # Sends a zone change request with the given direction
     sendZoneChangeRequest: (direction) ->
       packet = 

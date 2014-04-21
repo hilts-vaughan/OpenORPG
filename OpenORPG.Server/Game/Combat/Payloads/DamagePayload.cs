@@ -16,7 +16,8 @@ namespace Server.Game.Combat
     /// </summary>
     public class DamagePayload : Payload
     {
-        public DamagePayload(Character aggressor) : base(aggressor)
+        public DamagePayload(Character aggressor)
+            : base(aggressor)
         {
 
         }
@@ -28,23 +29,27 @@ namespace Server.Game.Combat
             var victimFinalStats = GetCharacterStats(victim);
 
             // Compute the damage using a basic formula for now (STR * 2) - VIT
-            var damageToDeal = aggressorFinalStats[(int)StatTypes.Strength].CurrentValue * 2 - victimFinalStats[(int) StatTypes.Vitality].CurrentValue;
+            var damageToDeal = (aggressorFinalStats[(int)StatTypes.Strength].CurrentValue * 2 - victimFinalStats[(int)StatTypes.Vitality].CurrentValue) + 1;
 
-            victim.CharacterStats[(int) StatTypes.Hitpoints].CurrentValue -= damageToDeal;
+            victim.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue -= damageToDeal;
         }
 
- 
+
 
         private CharacterStat[] GetCharacterStats(Character character)
         {
-            var statsWithEquipmentMods = new CharacterStat[character.Equipment.Length];
+            var statsWithEquipmentMods = new CharacterStat[character.CharacterStats.Length];
 
             // Include character stats
             statsWithEquipmentMods = CombineStats(statsWithEquipmentMods, character.CharacterStats);
 
             // Get inclusive equipment stats
-            statsWithEquipmentMods = character.Equipment.Aggregate(statsWithEquipmentMods,
-                (current, equip) => CombineStats(current, equip.GetEquipmentModifierStats()));
+            foreach (var equip in character.Equipment)
+            {
+                if (equip != null)
+                    statsWithEquipmentMods = CombineStats(equip.GetEquipmentModifierStats(), statsWithEquipmentMods);
+            }
+
             return statsWithEquipmentMods;
         }
 

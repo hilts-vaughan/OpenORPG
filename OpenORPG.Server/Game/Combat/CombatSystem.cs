@@ -20,7 +20,13 @@ namespace Server.Game.Combat
 
         private ActionGenerator _actionGenerator;
 
-        public CombatSystem(Zone world) : base(world)
+        /// <summary>
+        /// A list of pending actions for this system to perform.
+        /// </summary>
+        private List<ICombatAction> _pendingActions = new List<ICombatAction>();
+
+        public CombatSystem(Zone world)
+            : base(world)
         {
             _actionGenerator = new ActionGenerator();
         }
@@ -29,17 +35,55 @@ namespace Server.Game.Combat
 
         public override void Update(float frameTime)
         {
-            throw new NotImplementedException();
+            var toRemove = new List<ICombatAction>();
+
+            foreach (var pendingAction in _pendingActions)
+            {
+                // Decrement time remaining
+                pendingAction.ExecutionTime -= frameTime;
+
+                if (pendingAction.ExecutionTime < 0f)
+                {
+                    var victim = pendingAction.PerformAction(GetCombatCharactersInRange());
+                    toRemove.Add(pendingAction);
+                    pendingAction.ExecutingCharacter.CharacterState = CharacterState.Idle;
+
+                    // If success 
+                    if (victim != null)
+                    {
+                        var packet = new ServerSkillUseResult(pendingAction.ExecutingCharacter.Id, victim.Id, 1);
+                        Zone.SendToEntitiesInRange(packet, victim);
+                    }
+
+                    // Force skill onto cooldown
+                    pendingAction.Skill.EnableCooldown();
+                }
+
+            }
+
+            // Remove skill
+            toRemove.ForEach(x => _pendingActions.Remove(x));
+
+            foreach (var c in Zone.ZoneCharacters)
+            {
+                foreach (var skill in c.Skills)
+                    skill.Cooldown -= frameTime;
+
+                if (c.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue <= 0 && c is Monster)
+                    Zone.RemoveEntity(c);
+            }
+
+
         }
 
         public override void OnEntityAdded(Entity entity)
         {
-            throw new NotImplementedException();
+
         }
 
         public override void OnEntityRemoved(Entity entity)
         {
-            throw new NotImplementedException();
+
         }
 
         /// <summary>
@@ -63,6 +107,11 @@ namespace Server.Game.Combat
             var skillId = skillRequest.SkillId;
             var targetId = skillRequest.TargetId;
 
+
+            // You may only use a skill if you are idle
+            if (requestingHero.CharacterState != CharacterState.Idle)
+                return;
+
             // Fetch skill
             Skill skill = requestingHero.Skills.Find(x => x.SkillTemplate.Id == skillRequest.SkillId);
 
@@ -83,8 +132,18 @@ namespace Server.Game.Combat
             if (action == null)
                 return;
 
-            // Performs the action
-            action.PerformAction(GetCombatCharactersInRange());
+            // Set the execution time and add it in
+            action.ExecutionTime = skill.SkillTemplate.CastTime;
+
+            // Add the action to the queue to be executed 
+            _pendingActions.Add(action);
+
+            Logger.Instance.Debug("Preparing for {0} to perform skill #{1}", requestingHero.Name, skillId);
+
+            // Character is casting now
+            requestingHero.CharacterState = CharacterState.UsingSkill;
+
+
         }
 
 

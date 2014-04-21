@@ -43,7 +43,7 @@ namespace Server.Game.Combat
         /// </summary>
         public void EnableCooldown()
         {
-            Cooldown = _skillTemplate.CastTime;
+            Cooldown = _skillTemplate.CooldownTime;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Server.Game.Combat
         /// <returns></returns>
         public bool CanUse()
         {
-            return Cooldown < 1;
+            return Cooldown <= 0;
         }
 
 
