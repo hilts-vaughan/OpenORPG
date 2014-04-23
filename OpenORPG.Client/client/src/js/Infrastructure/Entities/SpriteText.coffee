@@ -3,7 +3,7 @@ Entity = require('./Entity.coffee')
 module.exports =
 
 	# Text that is attached to a particular entity
-	class SpriteText		
+	class SpriteText	
 
 		PLAYER_COLOR: "#ffff00"
 		STROKE_COLOR: "#000000"

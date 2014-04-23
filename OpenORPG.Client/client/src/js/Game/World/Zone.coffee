@@ -2,6 +2,7 @@
 MovementSystem = require ('./Systems/MovementSystem.coffee')
 Entity = require('../../Infrastructure/Entities/Entity.coffee')
 PacketTypes = require('./../../Infrastructure/PacketTypes.coffee')
+FloatingText = require('./../Entities/FloatingText.coffee')
 
 module.exports = 
 	
@@ -56,6 +57,8 @@ module.exports =
 					tint: 0x7E3517
 					alpha: 0.9
 				, 200, Phaser.Easing.Linear.None, true, 0, true, true
+
+				text = new FloatingText(@game, victim, packet.damage)
 
 				# Play the attack animation
 				user.playSkillAnimation()

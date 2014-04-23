@@ -23,7 +23,7 @@ namespace Server.Game.Combat
         /// <summary>
         /// A list of pending actions for this system to perform.
         /// </summary>
-        private List<ICombatAction> _pendingActions = new List<ICombatAction>();
+        private readonly List<ICombatAction> _pendingActions = new List<ICombatAction>();
 
         public CombatSystem(Zone world)
             : base(world)

@@ -22,6 +22,9 @@ namespace Server.Infrastructure.World
         /// </summary>
         public int Height { get; set; }
 
+        public int OffsetX { get; set; }
+        public int OffsetY { get; set; }
+
         public EntityBody(int width, int height)
         {
             // Clamps the values to the nearest multiple

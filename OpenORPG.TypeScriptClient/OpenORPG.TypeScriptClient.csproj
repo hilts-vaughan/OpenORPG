@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{10477381-8EC3-4DE5-9842-3003C5E2B6A3}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="game.css" />
+    <Content Include="assets\atlas\boxes\box.png" />
+    <Content Include="assets\atlas\boxes\boxAlt.png" />
+    <Content Include="assets\atlas\boxes\boxCoin.png" />
+    <Content Include="assets\atlas\boxes\boxCoinAlt.png" />
+    <Content Include="assets\atlas\boxes\boxCoinAlt_disabled.png" />
+    <Content Include="assets\atlas\boxes\boxCoin_disabled.png" />
+    <Content Include="assets\atlas\boxes\boxEmpty.png" />
+    <Content Include="assets\atlas\boxes\boxExplosive.png" />
+    <Content Include="assets\atlas\boxes\boxExplosiveAlt.png" />
+    <Content Include="assets\atlas\boxes\boxExplosive_disabled.png" />
+    <Content Include="assets\atlas\boxes\boxItem.png" />
+    <Content Include="assets\atlas\boxes\boxItemAlt.png" />
+    <Content Include="assets\atlas\boxes\boxItemAlt_disabled.png" />
+    <Content Include="assets\atlas\boxes\boxItem_disabled.png" />
+    <Content Include="assets\atlas\boxes\boxWarning.png" />
+    <Content Include="assets\atlas\boxes\brickWall.png" />
+    <Content Include="assets\atlas\hud\hud_0.png" />
+    <Content Include="assets\atlas\hud\hud_1.png" />
+    <Content Include="assets\atlas\hud\hud_2.png" />
+    <Content Include="assets\atlas\hud\hud_3.png" />
+    <Content Include="assets\atlas\hud\hud_4.png" />
+    <Content Include="assets\atlas\hud\hud_5.png" />
+    <Content Include="assets\atlas\hud\hud_6.png" />
+    <Content Include="assets\atlas\hud\hud_7.png" />
+    <Content Include="assets\atlas\hud\hud_8.png" />
+    <Content Include="assets\atlas\hud\hud_9.png" />
+    <Content Include="assets\atlas\hud\hud_coins.png" />
+    <Content Include="assets\atlas\hud\hud_gem_blue.png" />
+    <Content Include="assets\atlas\hud\hud_gem_green.png" />
+    <Content Include="assets\atlas\hud\hud_gem_red.png" />
+    <Content Include="assets\atlas\hud\hud_gem_yellow.png" />
+    <Content Include="assets\atlas\hud\hud_heartEmpty.png" />
+    <Content Include="assets\atlas\hud\hud_heartFull.png" />
+    <Content Include="assets\atlas\hud\hud_heartHalf.png" />
+    <Content Include="assets\atlas\hud\hud_keyBlue.png" />
+    <Content Include="assets\atlas\hud\hud_keyBlue_disabled.png" />
+    <Content Include="assets\atlas\hud\hud_keyGreem_disabled.png" />
+    <Content Include="assets\atlas\hud\hud_keyGreen.png" />
+    <Content Include="assets\atlas\hud\hud_keyRed.png" />
+    <Content Include="assets\atlas\hud\hud_keyRed_disabled.png" />
+    <Content Include="assets\atlas\hud\hud_keyYellow.png" />
+    <Content Include="assets\atlas\hud\hud_keyYellow_disabled.png" />
+    <Content Include="assets\atlas\hud\hud_p1.png" />
+    <Content Include="assets\atlas\hud\hud_p1Alt.png" />
+    <Content Include="assets\atlas\hud\hud_p2.png" />
+    <Content Include="assets\atlas\hud\hud_p2Alt.png" />
+    <Content Include="assets\atlas\hud\hud_p3.png" />
+    <Content Include="assets\atlas\hud\hud_p3Alt.png" />
+    <Content Include="assets\atlas\hud\hud_x.png" />
+    <Content Include="assets\html\States\LoginScreen.html" />
+    <Content Include="assets\ui\connecting.png" />
+    <Content Include="assets\ui\player_active.png" />
+    <Content Include="assets\ui\player_inactive.png" />
+    <Content Include="assets\ui\play_button.png" />
+    <Content Include="assets\ui\scroll.png" />
+    <Content Include="assets\ui\wood.png" />
+    <TypeScriptCompile Include="Game\BootState.ts" />
+    <TypeScriptCompile Include="Game\MyState.ts" />
+    <TypeScriptCompile Include="Game.ts" />
+    <Content Include="index.html" />
+    <Content Include="phaser.d.ts" />
+    <Content Include="phaser.js" />
+    <Content Include="phaser.min.js" />
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="app.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="phaser.map" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>OpenORPG.TypeScriptClient</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" /> 
+<Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53857</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51853/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+  </PropertyGroup>
+  <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>
