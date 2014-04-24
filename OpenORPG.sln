@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30324.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenORPG.Server", "OpenORPG.Server\OpenORPG.Server.csproj", "{79A11015-B16C-4A65-ADC4-FB8406DAE5DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenORPG.Server.Tests", "OpenORPG.Server.Tests\OpenORPG.Server.Tests.csproj", "{350E5289-77F9-4B12-80CE-3920E45A068F}"

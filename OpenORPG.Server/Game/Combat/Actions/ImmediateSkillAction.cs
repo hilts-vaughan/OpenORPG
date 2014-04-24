@@ -36,7 +36,7 @@ namespace Server.Game.Combat.Actions
             {
                 var distance = Vector2.Distance(character.Position, ExecutingCharacter.Position);
 
-                if (distance < highestDistance)
+                if (distance < highestDistance && distance < 56)
                 {
                     highestDistance = distance;
                     target = character;

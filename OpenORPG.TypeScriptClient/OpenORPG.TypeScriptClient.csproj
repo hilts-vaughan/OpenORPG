@@ -17,6 +17,13 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="assets\Maps\mobset.png" />
+    <Content Include="assets\Maps\tilesheet_16.png" />
+    <Content Include="assets\sprites\effects\death.png" />
+    <Content Include="assets\sprites\effects\sparks.png" />
+    <Content Include="assets\sprites\goblin.png" />
+    <Content Include="assets\sprites\male_base.png" />
+    <Content Include="assets\sprites\snake.png" />
     <Content Include="game.css" />
     <Content Include="assets\atlas\boxes\box.png" />
     <Content Include="assets\atlas\boxes\boxAlt.png" />
@@ -74,20 +81,55 @@
     <Content Include="assets\ui\play_button.png" />
     <Content Include="assets\ui\scroll.png" />
     <Content Include="assets\ui\wood.png" />
-    <TypeScriptCompile Include="Game\BootState.ts" />
-    <TypeScriptCompile Include="Game\MyState.ts" />
+    <TypeScriptCompile Include="Game\Direction.ts" />
+    <TypeScriptCompile Include="Game\CharacterState.ts" />
+    <TypeScriptCompile Include="Game\Entities\DamageText.ts" />
+    <TypeScriptCompile Include="Game\Entities\Entity.ts" />
+    <TypeScriptCompile Include="Game\Entities\ZoneTrigger.ts" />
+    <TypeScriptCompile Include="Game\Movement\MovementSystem.ts" />
+    <TypeScriptCompile Include="Game\PacketFactory.ts" />
+    <TypeScriptCompile Include="Game\Resources\SpriteManager.ts" />
+    <TypeScriptCompile Include="Game\States\BootState.ts" />
     <TypeScriptCompile Include="Game.ts" />
     <Content Include="index.html" />
+    <Content Include="jquery-2.1.0.min.js" />
     <Content Include="phaser.d.ts" />
     <Content Include="phaser.js" />
     <Content Include="phaser.min.js" />
     <Content Include="web.config" />
+    <TypeScriptCompile Include="Game\States\GameplayState.ts" />
+    <TypeScriptCompile Include="Game\States\HeroSelectState.ts" />
+    <TypeScriptCompile Include="Game\States\LoginMenuState.ts" />
+    <TypeScriptCompile Include="Game\World\Zone.ts" />
+    <TypeScriptCompile Include="Infrastructure\DirectoryHelper.ts" />
+    <TypeScriptCompile Include="Infrastructure\EffectFactory.ts" />
+    <TypeScriptCompile Include="Infrastructure\FontFactory.ts" />
+    <TypeScriptCompile Include="Infrastructure\Font\FontDefinition.ts" />
+    <TypeScriptCompile Include="Infrastructure\Network\NetworkManager.ts" />
+    <TypeScriptCompile Include="Infrastructure\Network\OpCodes.ts" />
+    <TypeScriptCompile Include="Infrastructure\Network\Packet.ts" />
+    <TypeScriptCompile Include="Infrastructure\Settings.ts" />
+    <TypeScriptCompile Include="Infrastructure\World\GameSystem.ts" />
+    <TypeScriptCompile Include="jquery.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="phaser.map" />
+    <Content Include="assets\Maps\1.json" />
+    <Content Include="assets\Maps\1.tmx" />
+    <Content Include="assets\Maps\2.json" />
+    <Content Include="assets\Maps\2.tmx" />
+    <Content Include="assets\Maps\tilesheet.tsx" />
+    <Content Include="assets\sprites\effects\death.json" />
+    <Content Include="assets\sprites\effects\sparks.json" />
+    <Content Include="assets\sprites\goblin.json" />
+    <Content Include="assets\sprites\male_base.json" />
+    <Content Include="assets\sprites\snake.json" />
+    <Content Include="assets\sprites\sprites.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -95,7 +137,10 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="assets\effects\" />
+    <Folder Include="Game\Combat\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -103,8 +148,8 @@
   <PropertyGroup>
     <RootNamespace>OpenORPG.TypeScriptClient</RootNamespace>
   </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" /> 
-<Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
@@ -113,7 +158,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53857</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51853/</IISUrl>
+          <IISUrl>http://localhost:51853/?user=Vaughan1&amp;password=Vaughan</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:51853/?username=Vaughan1&amp;password=Vaughan</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -127,7 +174,9 @@
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
-    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptModuleKind>none</TypeScriptModuleKind>
+    <TypeScriptOutFile>app.js</TypeScriptOutFile>
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES5</TypeScriptTarget>

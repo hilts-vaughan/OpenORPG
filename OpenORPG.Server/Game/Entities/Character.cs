@@ -64,7 +64,7 @@ namespace Server.Game.Entities
             {
                 // Write only if value changed
                 if (value != _characterState)
-                    PropertyCollection.WriteValue("CharacterState", value.ToString());
+                    PropertyCollection.WriteValue("CharacterState", value);
 
                 _characterState = value;
 

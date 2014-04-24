@@ -1,10 +1,11 @@
 PacketTypes = require('./../../../Infrastructure/PacketTypes.coffee')
+GameSystem = require('./../../../Infrastructure/World/GameSystem.coffee')
 
 module.exports = 
 
 	# Controls the movement of entities on the screen and is responsible for managing
 	# tweening and interpolating entities across the screen
-	class MovementSystem
+	class MovementSystem extends GameSystem
 
 		# The frequency in which we choose to dispatch movement events to the server		
 		MOVE_TICK_FREQ: 250

@@ -28,7 +28,7 @@
         SMSG_ENTITY_PROPERTY_CHANGE = 20,
         SMSG_ENTITY_MOVE = 21,
         CMMSG_ZONE_CHANGE = 22,
-        CMSG_HERO_EQUIP
+        CMSG_HERO_EQUIP = 23,
 
     }
 }

@@ -104,16 +104,16 @@ namespace Server.Game.Zones
         private void SetupExitRectangles()
         {
             // Create a top sensor
-            topZoneArea = new Rectangle(0, 0, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight);
+            topZoneArea = new Rectangle(0, 0, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight + 16 );
 
             // Bottom sensor
-            bottomZoneArea = new Rectangle(0, TileMap.Height * TileMap.TileHeight - TileMap.Height, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight);
+            bottomZoneArea = new Rectangle(0, TileMap.Height * TileMap.TileHeight - TileMap.Height, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight + 16);
 
             // Left
-            leftZoneArea = new Rectangle(0, 0, TileMap.TileWidth, TileMap.Height * TileMap.TileHeight);
+            leftZoneArea = new Rectangle(0, 0, TileMap.TileWidth + 16, TileMap.Height * TileMap.TileHeight);
 
             // Right
-            rightZoneArea = new Rectangle(0, TileMap.Width * (TileMap.TileWidth - 1), TileMap.TileWidth, TileMap.Height * TileMap.TileHeight);
+            rightZoneArea = new Rectangle(TileMap.Width * (TileMap.TileWidth - 1), 0, TileMap.TileWidth + 16, TileMap.Height * TileMap.TileHeight);
 
         }
 

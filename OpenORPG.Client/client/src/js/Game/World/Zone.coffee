@@ -1,5 +1,7 @@
 
 MovementSystem = require ('./Systems/MovementSystem.coffee')
+CombatSystem = require('./../Combat/CombatSystem.coffee')
+
 Entity = require('../../Infrastructure/Entities/Entity.coffee')
 PacketTypes = require('./../../Infrastructure/PacketTypes.coffee')
 FloatingText = require('./../Entities/FloatingText.coffee')
@@ -15,20 +17,23 @@ module.exports =
 		constructor: (game, mapId) ->
 
 			# Store our game instance and keep things handy
-			@game = game
-			@game.entities = []
+      @game = game
+      @game.entities = []
 
 			# A list of entities to add/remove from the zone
-			@toRemove = []
-			@toAdd = []
+      @toAdd = []
+      @toAdd = []
 
 			# A list of systems to maintain
-			@systems = []
+      @systems = []
 
 			# Create our movement system, push it
-			@movementSystem = new MovementSystem(@game, null)
-			@systems.push(@movementSystem)
+      @movementSystem = new MovementSystem(@game, null)
+      @systems.push(@movementSystem)
 
+
+      combatSystem = new CombatSystem(@game)
+      @systems.push(combatSystem)
 			# Setup the tilemap
 			self = @
 			@map = self.game.add.tilemap("map_" + mapId)
@@ -47,21 +52,6 @@ module.exports =
 			# Handle mobile destructions
 			@game.net.registerPacket PacketTypes.SMSG_MOB_DESTROY, (packet) =>
 				@toRemove.push(packet.id)        
-
-			# Register for use results
-			@game.net.registerPacket PacketTypes.SMSG_SKILL_USE_RESULT, (packet) =>
-				victim = @game.entities[packet.targetId]
-				user = @game.entities[packet.userId]
-
-				tween = @game.add.tween(victim).to
-					tint: 0x7E3517
-					alpha: 0.9
-				, 200, Phaser.Easing.Linear.None, true, 0, true, true
-
-				text = new FloatingText(@game, victim, packet.damage)
-
-				# Play the attack animation
-				user.playSkillAnimation()
 
 			# Sync entities
 			@game.net.registerPacket PacketTypes.SMSG_ENTITY_PROPERTY_CHANGE, (packet) =>

@@ -1,0 +1,11 @@
+{
+	"id": "effect_sparks",
+	"width": 48,
+	"height": 48,
+	"animations": {
+		"use": {
+			"length": 6,
+			"row": 0
+		}
+	}
+}

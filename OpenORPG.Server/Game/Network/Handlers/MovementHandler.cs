@@ -29,6 +29,9 @@ namespace Server.Game.Network.Handlers
             var player = client.HeroEntity;
             var zone = client.HeroEntity.Zone;
 
+            if (zone == null)
+                return;
+
             var requestedPosition = packet.CurrentPosition;
             var direction = packet.Direction;
 
@@ -36,7 +39,9 @@ namespace Server.Game.Network.Handlers
             // Ignore packets claiming to make large leaps and bounds
             if (distance > LenianceFactor)
             {
-                client.Connection.Disconnect("Hacking Attempt: Movement pulse exceeded");
+                // Probably changing maps
+                return;
+                //client.Connection.Disconnect("Hacking Attempt: Movement pulse exceeded");
             }
 
             // Move the player
@@ -94,21 +99,21 @@ namespace Server.Game.Network.Handlers
             {
                 case Direction.North:
                     x = oldPosition.X;
-                    y = ((zone.TileMap.Height - 2) * zone.TileMap.TileHeight);
+                    y = ((zone.TileMap.Height - 4) * zone.TileMap.TileHeight);
                     return new Vector2(x, y);
 
                 case Direction.East:
-                    x = zone.TileMap.TileWidth * 2;
+                    x = zone.TileMap.TileWidth * 4;
                     y = oldPosition.Y;
                     return new Vector2(x, y);
 
                 case Direction.South:
                     x = oldPosition.X;
-                    y = 0 + zone.TileMap.TileHeight * 2;
+                    y = 0 + zone.TileMap.TileHeight * 4;
                     return new Vector2(x, y);
 
                 case Direction.West:
-                    x = ((zone.TileMap.Width - 2) * zone.TileMap.TileWidth);
+                    x = ((zone.TileMap.Width - 4) * zone.TileMap.TileWidth);
                     y = oldPosition.Y;
                     return new Vector2(x, y);
             }
