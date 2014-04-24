@@ -10,6 +10,8 @@
         // Internal lists for usage later
         private _toRemove: any = [];
         private _toAdd: any = [];
+        private entityLayer: Phaser.TilemapLayer;
+        private entityGroup: Phaser.Group;
 
         // An array of entities to use
         public entities: Array<Entity> = new Array<Entity>();
@@ -34,6 +36,14 @@
                 var layer: any = this.tileMap.layers[layerKey];
                 var worldLayer = this.tileMap.createLayer(layer.name);
                 worldLayer.resizeWorld();
+
+                // Check if this is the entity layer
+                if (worldLayer.layer["name"] == "Entities") {
+                    this.entityLayer = worldLayer;
+                    this.entityGroup = new Phaser.Group(this.game);
+                    this.game.world.addAt(this.entityGroup, worldLayer.index + 1);
+                }
+
             }
 
 
@@ -52,7 +62,8 @@
             worldEntity.mergeWith(entity);
 
             this.entities[worldEntity.id] = worldEntity;
-            this.game.add.existing(worldEntity);
+            this.entityGroup.addChild(worldEntity);
+           
 
             // Fire off property changes
             for (var key in entity) {
@@ -90,6 +101,12 @@
                 var entity = this.entities[value];
                 entity.destroy();              
                 delete this.entities[toRemove];
+            }
+
+
+            for (var entityKey in this.entities) {
+                var entity = this.entities[entityKey]
+                entity.update();
             }
 
             // Update list of removal

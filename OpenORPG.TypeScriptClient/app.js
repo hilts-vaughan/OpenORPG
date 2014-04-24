@@ -1,5 +1,139 @@
 ﻿var OpenORPG;
 (function (OpenORPG) {
+    (function (CharacterState) {
+        CharacterState[CharacterState["Idle"] = 0] = "Idle";
+        CharacterState[CharacterState["Moving"] = 1] = "Moving";
+        CharacterState[CharacterState["UsingSkill"] = 2] = "UsingSkill";
+    })(OpenORPG.CharacterState || (OpenORPG.CharacterState = {}));
+    var CharacterState = OpenORPG.CharacterState;
+})(OpenORPG || (OpenORPG = {}));
+var OpenORPG;
+(function (OpenORPG) {
+    var Zone = (function () {
+        function Zone(game, mapId) {
+            // Internal lists for usage later
+            this._toRemove = [];
+            this._toAdd = [];
+            // An array of entities to use
+            this.entities = new Array();
+            this.systems = new Array();
+            this.game = game;
+            this._mapId = mapId;
+
+            Zone.current = this;
+
+            // Setup tilemap
+            this.tileMap = game.add.tilemap("map_" + mapId);
+            this.tileMap.addTilesetImage("tilesheet");
+
+            // Size and prepare
+            var self = this;
+
+            for (var layerKey in this.tileMap.layers) {
+                var layer = this.tileMap.layers[layerKey];
+                var worldLayer = this.tileMap.createLayer(layer.name);
+                worldLayer.resizeWorld();
+
+                // Check if this is the entity layer
+                if (worldLayer.layer["name"] == "Entities") {
+                    this.entityLayer = worldLayer;
+                    this.entityGroup = new Phaser.Group(this.game);
+                    this.game.world.addAt(this.entityGroup, worldLayer.index + 1);
+                }
+            }
+
+            // Create our systems as we need them
+            this.movementSystem = new OpenORPG.MovementSystem(this, null);
+            var combatSystem = new OpenORPG.CombatSystem(this, null);
+            this.systems.push(this.movementSystem);
+            this.systems.push(combatSystem);
+
+            this.setupNetworkHandlers();
+        }
+        Zone.prototype.addNetworkEntityToZone = function (entity) {
+            var worldEntity = new OpenORPG.Entity(this.game, 0, 0);
+            worldEntity.mergeWith(entity);
+
+            this.entities[worldEntity.id] = worldEntity;
+            this.entityGroup.addChild(worldEntity);
+
+            for (var key in entity) {
+                var value = entity[key];
+                worldEntity.propertyChanged(key, value);
+            }
+
+            return worldEntity;
+        };
+
+        Zone.prototype.clearZone = function () {
+            for (var entityKey in this.entities) {
+                var entity = this.entities[entityKey];
+                entity.destroy();
+
+                // remove from list
+                delete this.entities[entityKey];
+            }
+
+            // Destroy our tilemap
+            this.tileMap.destroy();
+
+            for (var systemKey in this.systems) {
+                var system = this.systems[systemKey];
+                system.destroy();
+            }
+        };
+
+        Zone.prototype.update = function () {
+            for (var toRemove in this._toRemove) {
+                var value = this._toRemove[toRemove];
+                var entity = this.entities[value];
+                entity.destroy();
+                delete this.entities[toRemove];
+            }
+
+            for (var entityKey in this.entities) {
+                var entity = this.entities[entityKey];
+                entity.update();
+            }
+
+            // Update list of removal
+            this._toRemove = [];
+
+            for (var system in this.systems) {
+                this.systems[system].update();
+            }
+        };
+
+        Zone.prototype.setupNetworkHandlers = function () {
+            var network = OpenORPG.NetworkManager.getInstance();
+
+            network.registerPacket(9 /* SMSG_MOB_CREATE */, function (packet) {
+                var entity = Zone.current.addNetworkEntityToZone(packet.mobile);
+
+                // Apply the fade effect
+                EffectFactory.fadeEntityIn(entity);
+            });
+
+            network.registerPacket(13 /* SMSG_MOB_DESTROY */, function (packet) {
+                Zone.current._toRemove.push(packet.id);
+            });
+
+            network.registerPacket(20 /* SMSG_ENTITY_PROPERTY_CHANGE */, function (packet) {
+                var entity = Zone.current.entities[packet.entityId];
+                entity.mergeWith(packet.properties);
+
+                for (var key in packet.properties) {
+                    var value = packet.properties[key];
+                    entity.propertyChanged(key, value);
+                }
+            });
+        };
+        return Zone;
+    })();
+    OpenORPG.Zone = Zone;
+})(OpenORPG || (OpenORPG = {}));
+var OpenORPG;
+(function (OpenORPG) {
     (function (Direction) {
         Direction[Direction["South"] = 0] = "South";
         Direction[Direction["West"] = 1] = "West";
@@ -8,15 +142,14 @@
     })(OpenORPG.Direction || (OpenORPG.Direction = {}));
     var Direction = OpenORPG.Direction;
 })(OpenORPG || (OpenORPG = {}));
-var OpenORPG;
-(function (OpenORPG) {
-    (function (CharacterState) {
-        CharacterState[CharacterState["Idle"] = 0] = "Idle";
-        CharacterState[CharacterState["Moving"] = 1] = "Moving";
-        CharacterState[CharacterState["UsingSkill"] = 2] = "UsingSkill";
-    })(OpenORPG.CharacterState || (OpenORPG.CharacterState = {}));
-    var CharacterState = OpenORPG.CharacterState;
-})(OpenORPG || (OpenORPG = {}));
+/// <reference path="jquery.d.ts" />
+/// <reference path="phaser.d.ts" />
+/// <reference path="Game/CharacterState.ts" />
+/// <reference path="Game/World/Zone.ts" />
+/// <reference path="Game/Direction.ts" />
+window.onload = function () {
+    var game = new OpenORPG.Game();
+};
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -69,6 +202,9 @@ var OpenORPG;
             this.smoothed = false;
         }
         Entity.prototype.update = function () {
+            if (this.nameTagText != null)
+                this.nameTagText.position.setTo(this.x + this.texture.width / 2, this.y);
+
             var directionString = this.directionToString();
 
             // Use of a skill animate over-takes everything
@@ -136,8 +272,7 @@ var OpenORPG;
             if (this.nameTagText == null) {
                 this.nameTagText = new Phaser.Text(this.game, 0, 0, name, FontFactory.getPlayerFont());
                 this.nameTagText.anchor.set(0.5, 0.5);
-                this.nameTagText.position.setTo(this.texture.width / 2, 0);
-                this.addChild(this.nameTagText);
+                this.game.world.add(this.nameTagText);
             } else {
                 this.nameTagText.text = name;
             }
@@ -522,25 +657,6 @@ var OpenORPG;
 })(OpenORPG || (OpenORPG = {}));
 var OpenORPG;
 (function (OpenORPG) {
-    var Game = (function () {
-        function Game() {
-            // Init our game
-            this.game = new Phaser.Game(1024, 768, Phaser.CANVAS, 'gameContainer', null, true, false);
-
-            this.game.state.add("boot", new OpenORPG.BootState(), true);
-            this.game.state.start("boot");
-        }
-        Game.prototype.preload = function () {
-        };
-
-        Game.prototype.create = function () {
-        };
-        return Game;
-    })();
-    OpenORPG.Game = Game;
-})(OpenORPG || (OpenORPG = {}));
-var OpenORPG;
-(function (OpenORPG) {
     // The gameplay state manages
     var GameplayState = (function (_super) {
         __extends(GameplayState, _super);
@@ -678,116 +794,22 @@ var OpenORPG;
 })(OpenORPG || (OpenORPG = {}));
 var OpenORPG;
 (function (OpenORPG) {
-    var Zone = (function () {
-        function Zone(game, mapId) {
-            // Internal lists for usage later
-            this._toRemove = [];
-            this._toAdd = [];
-            // An array of entities to use
-            this.entities = new Array();
-            this.systems = new Array();
-            this.game = game;
-            this._mapId = mapId;
+    var Game = (function () {
+        function Game() {
+            // Init our game
+            this.game = new Phaser.Game(1024, 768, Phaser.CANVAS, 'gameContainer', null, true, false);
 
-            Zone.current = this;
-
-            // Setup tilemap
-            this.tileMap = game.add.tilemap("map_" + mapId);
-            this.tileMap.addTilesetImage("tilesheet");
-
-            // Size and prepare
-            var self = this;
-
-            for (var layerKey in this.tileMap.layers) {
-                var layer = this.tileMap.layers[layerKey];
-                var worldLayer = this.tileMap.createLayer(layer.name);
-                worldLayer.resizeWorld();
-            }
-
-            // Create our systems as we need them
-            this.movementSystem = new OpenORPG.MovementSystem(this, null);
-            var combatSystem = new OpenORPG.CombatSystem(this, null);
-            this.systems.push(this.movementSystem);
-            this.systems.push(combatSystem);
-
-            this.setupNetworkHandlers();
+            this.game.state.add("boot", new OpenORPG.BootState(), true);
+            this.game.state.start("boot");
         }
-        Zone.prototype.addNetworkEntityToZone = function (entity) {
-            var worldEntity = new OpenORPG.Entity(this.game, 0, 0);
-            worldEntity.mergeWith(entity);
-
-            this.entities[worldEntity.id] = worldEntity;
-            this.game.add.existing(worldEntity);
-
-            for (var key in entity) {
-                var value = entity[key];
-                worldEntity.propertyChanged(key, value);
-            }
-
-            return worldEntity;
+        Game.prototype.preload = function () {
         };
 
-        Zone.prototype.clearZone = function () {
-            for (var entityKey in this.entities) {
-                var entity = this.entities[entityKey];
-                entity.destroy();
-
-                // remove from list
-                delete this.entities[entityKey];
-            }
-
-            // Destroy our tilemap
-            this.tileMap.destroy();
-
-            for (var systemKey in this.systems) {
-                var system = this.systems[systemKey];
-                system.destroy();
-            }
+        Game.prototype.create = function () {
         };
-
-        Zone.prototype.update = function () {
-            for (var toRemove in this._toRemove) {
-                var value = this._toRemove[toRemove];
-                var entity = this.entities[value];
-                entity.destroy();
-                delete this.entities[toRemove];
-            }
-
-            // Update list of removal
-            this._toRemove = [];
-
-            for (var system in this.systems) {
-                this.systems[system].update();
-            }
-        };
-
-        Zone.prototype.setupNetworkHandlers = function () {
-            var network = OpenORPG.NetworkManager.getInstance();
-
-            network.registerPacket(9 /* SMSG_MOB_CREATE */, function (packet) {
-                var entity = Zone.current.addNetworkEntityToZone(packet.mobile);
-
-                // Apply the fade effect
-                EffectFactory.fadeEntityIn(entity);
-            });
-
-            network.registerPacket(13 /* SMSG_MOB_DESTROY */, function (packet) {
-                Zone.current._toRemove.push(packet.id);
-            });
-
-            network.registerPacket(20 /* SMSG_ENTITY_PROPERTY_CHANGE */, function (packet) {
-                var entity = Zone.current.entities[packet.entityId];
-                entity.mergeWith(packet.properties);
-
-                for (var key in packet.properties) {
-                    var value = packet.properties[key];
-                    entity.propertyChanged(key, value);
-                }
-            });
-        };
-        return Zone;
+        return Game;
     })();
-    OpenORPG.Zone = Zone;
+    OpenORPG.Game = Game;
 })(OpenORPG || (OpenORPG = {}));
 var DirectoryHelper;
 (function (DirectoryHelper) {
@@ -839,6 +861,22 @@ var EffectFactory;
     }
     EffectFactory.pulseDamage = pulseDamage;
 })(EffectFactory || (EffectFactory = {}));
+var OpenORPG;
+(function (OpenORPG) {
+    var FontDefinition = (function () {
+        function FontDefinition(font, fill, align, stroke, strokeThickness, wordWrap, wordWrapWidth) {
+            this.font = font;
+            this.fill = fill;
+            this.align = align;
+            this.stroke = stroke;
+            this.strokeThickness = strokeThickness;
+            this.wordWrap = wordWrap;
+            this.wordWrapWidth = wordWrapWidth;
+        }
+        return FontDefinition;
+    })();
+    OpenORPG.FontDefinition = FontDefinition;
+})(OpenORPG || (OpenORPG = {}));
 var FontFactory;
 (function (FontFactory) {
     // Returns a basic, usable font for the game
@@ -859,22 +897,6 @@ var FontFactory;
     }
     FontFactory.getDamageFont = getDamageFont;
 })(FontFactory || (FontFactory = {}));
-var OpenORPG;
-(function (OpenORPG) {
-    var FontDefinition = (function () {
-        function FontDefinition(font, fill, align, stroke, strokeThickness, wordWrap, wordWrapWidth) {
-            this.font = font;
-            this.fill = fill;
-            this.align = align;
-            this.stroke = stroke;
-            this.strokeThickness = strokeThickness;
-            this.wordWrap = wordWrap;
-            this.wordWrapWidth = wordWrapWidth;
-        }
-        return FontDefinition;
-    })();
-    OpenORPG.FontDefinition = FontDefinition;
-})(OpenORPG || (OpenORPG = {}));
 var OpenORPG;
 (function (OpenORPG) {
     var NetworkManager = (function () {
@@ -979,12 +1001,4 @@ var Settings;
     }
     Settings.autoLoginSet = autoLoginSet;
 })(Settings || (Settings = {}));
-/// <reference path="jquery.d.ts" />
-/// <reference path="phaser.d.ts" />
-/// <reference path="Game/CharacterState.ts" />
-/// <reference path="Game/World/Zone.ts" />
-/// <reference path="Game/Direction.ts" />
-window.onload = function () {
-    var game = new OpenORPG.Game();
-};
 //# sourceMappingURL=app.js.map

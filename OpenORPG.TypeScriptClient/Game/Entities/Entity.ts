@@ -31,6 +31,9 @@
 
         update() {
 
+            if (this.nameTagText != null)
+                this.nameTagText.position.setTo(this.x + this.texture.width / 2, this.y);
+
             var directionString = this.directionToString();
 
             // Use of a skill animate over-takes everything
@@ -75,6 +78,7 @@
 
 
         private directionToString(): string {
+
             switch (this.direction) {
                 case Direction.North:
                     return "up";
@@ -106,8 +110,7 @@
             if (this.nameTagText == null) {
                 this.nameTagText = new Phaser.Text(this.game, 0, 0, name, FontFactory.getPlayerFont());
                 this.nameTagText.anchor.set(0.5, 0.5);
-                this.nameTagText.position.setTo(this.texture.width / 2, 0);
-                this.addChild(this.nameTagText);
+                this.game.world.add(this.nameTagText);
             }
             else {
                 this.nameTagText.text = name;
