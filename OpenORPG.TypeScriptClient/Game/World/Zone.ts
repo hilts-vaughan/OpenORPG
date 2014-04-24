@@ -12,6 +12,7 @@
         private _toAdd: any = [];
         private entityLayer: Phaser.TilemapLayer;
         private entityGroup: Phaser.Group;
+        private bucket: any;
 
         // An array of entities to use
         public entities: Array<Entity> = new Array<Entity>();
@@ -19,7 +20,7 @@
 
         public movementSystem: MovementSystem;
 
-        constructor(game : Phaser.Game, mapId : number) {
+        constructor(game: Phaser.Game, mapId: number) {
             this.game = game;
             this._mapId = mapId;
 
@@ -30,12 +31,14 @@
             this.tileMap.addTilesetImage("tilesheet");
 
             // Size and prepare
-            var self: Zone = this;     
+            var self: Zone = this;
+            this.bucket = []
 
             for (var layerKey in this.tileMap.layers) {
                 var layer: any = this.tileMap.layers[layerKey];
                 var worldLayer = this.tileMap.createLayer(layer.name);
                 worldLayer.resizeWorld();
+                this.bucket.push(worldLayer);
 
                 // Check if this is the entity layer
                 if (worldLayer.layer["name"] == "Entities") {
@@ -45,6 +48,8 @@
                 }
 
             }
+
+            this.generateCollisionMap();
 
 
             // Create our systems as we need them
@@ -57,23 +62,23 @@
             this.setupNetworkHandlers();
         }
 
-        public addNetworkEntityToZone(entity: any) : Entity {
+        public addNetworkEntityToZone(entity: any): Entity {
             var worldEntity = new Entity(this.game, 0, 0);
             worldEntity.mergeWith(entity);
 
             this.entities[worldEntity.id] = worldEntity;
             this.entityGroup.addChild(worldEntity);
-           
+
 
             // Fire off property changes
             for (var key in entity) {
                 var value = entity[key];
                 worldEntity.propertyChanged(key, value);
-            }       
+            }
 
             return worldEntity;
-        } 
-       
+        }
+
 
         public clearZone() {
 
@@ -95,18 +100,44 @@
 
         }
 
+        private generateCollisionMap() {
+            var props: any = this.tileMap.tilesets[0];
+            var tileProps = props.tileProperties;
+
+            for (var propKey in tileProps) {
+                var propValue: Object = tileProps[propKey];
+
+                if (propValue.hasOwnProperty("c")) {
+                    // If collision flag is set, then we'll push the index
+                    for (var i = 0; i < this.tileMap.layers.length; i++) {
+                        this.tileMap.setCollision([parseInt(propKey) + 1], true, i);
+                    }
+                }
+
+            }
+
+       
+
+        }
+
+
+
         public update() {
             for (var toRemove in this._toRemove) {
                 var value = this._toRemove[toRemove];
                 var entity = this.entities[value];
-                entity.destroy();              
+                entity.destroy();
                 delete this.entities[toRemove];
             }
+
 
 
             for (var entityKey in this.entities) {
                 var entity = this.entities[entityKey]
                 entity.update();
+
+                for (var layer in this.bucket)
+                    this.game.physics.arcade.collide(entity, this.bucket[layer]);
             }
 
             // Update list of removal

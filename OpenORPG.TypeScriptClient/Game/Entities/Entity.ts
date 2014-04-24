@@ -75,6 +75,9 @@
             this.skillAnimation = this.animations.play("atk_" + direction, 12, false);
         }
 
+        render() {
+            this.game.debug.body(this);
+        }
 
 
         private directionToString(): string {
