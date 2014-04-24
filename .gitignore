@@ -170,3 +170,5 @@ node_modules/
 # Build
 dist/
 OpenORPG.Client/client/deploy/
+OpenORPG.TypeScriptClient/app.js
+OpenORPG.TypeScriptClient/app.js.map

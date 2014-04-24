@@ -117,6 +117,9 @@
                 this.systems[system].update();
             }
 
+            // Re sort our entities
+            this.entityGroup.sort('y', Phaser.Group.SORT_ASCENDING);
+
         }
 
         private setupNetworkHandlers() {
