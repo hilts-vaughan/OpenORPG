@@ -172,3 +172,5 @@ dist/
 OpenORPG.Client/client/deploy/
 OpenORPG.TypeScriptClient/app.js
 OpenORPG.TypeScriptClient/app.js.map
+OpenORPG.TypeScriptClient/app.js
+OpenORPG.TypeScriptClient/app.js.map
