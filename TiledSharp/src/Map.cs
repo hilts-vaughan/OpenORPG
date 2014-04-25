@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0
 // http://www.apache.org/licenses/LICENSE-2.0
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using System.Globalization;
@@ -65,6 +66,7 @@ namespace TiledSharp
 
             Properties = new PropertyDict(xMap.Element("properties"));
 
+            BlockMap = new bool[Width, Height];
             GenerateBlockMap();
 
         }
@@ -76,20 +78,27 @@ namespace TiledSharp
         /// </summary>
         private void GenerateBlockMap()
         {
+            var _blockedTiled = new Dictionary<int, bool>();
 
-            return;
+            foreach (var tile in this.Tilesets[0].Tiles)
+            {
+                var tileProperties = tile.Properties;
+
+                if (tile.Properties.ContainsKey("c"))
+                {
+                    // Okay, we're good
+                    _blockedTiled.Add(tile.Id + 1, true);
+                }
+
+            }
+
 
             // Get all the tile properties and check for 'Blocked' on each tile
             foreach (var layer in Layers)
-            {   
+            {
                 foreach (var tile in layer.Tiles)
                 {
-                    var gid = tile.Gid;                    
-
-
-                    var tileProperties = Tilesets[0].Tiles.First(x => x.Id - 1 == gid).Properties;
-
-                    if (tileProperties.ContainsKey("Blocked"))
+                    if (_blockedTiled.ContainsKey(tile.Gid))
                         BlockMap[tile.X, tile.Y] = true;
                 }
             }
