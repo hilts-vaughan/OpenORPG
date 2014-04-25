@@ -91,6 +91,7 @@
     <Compile Include="Game\Combat\ActionExecutor.cs" />
     <Compile Include="Game\Combat\ActionGenerator.cs" />
     <Compile Include="Game\Combat\Actions\ImmediateSkillAction.cs" />
+    <Compile Include="Game\Combat\CombatActionResult.cs" />
     <Compile Include="Game\Combat\Payloads\DamagePayload.cs" />
     <Compile Include="Game\Combat\Actions\ICombatAction.cs" />
     <Compile Include="Game\Combat\CharacterStat.cs" />

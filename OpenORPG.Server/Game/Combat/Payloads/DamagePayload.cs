@@ -16,6 +16,8 @@ namespace Server.Game.Combat
     /// </summary>
     public class DamagePayload : Payload
     {
+        public long DamageInflicted { get; set; }
+
         public DamagePayload(Character aggressor)
             : base(aggressor)
         {
@@ -29,9 +31,11 @@ namespace Server.Game.Combat
             var victimFinalStats = GetCharacterStats(victim);
 
             // Compute the damage using a basic formula for now (STR * 2) - VIT
-            var damageToDeal = (aggressorFinalStats[(int)StatTypes.Strength].CurrentValue * 2 - victimFinalStats[(int)StatTypes.Vitality].CurrentValue) + 1;
+            var damageToDeal = (aggressorFinalStats[(int)StatTypes.Strength].CurrentValue * 2 - victimFinalStats[(int)StatTypes.Vitality].CurrentValue);
 
             victim.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue -= damageToDeal;
+
+            DamageInflicted = damageToDeal;
         }
 
 
@@ -64,7 +68,7 @@ namespace Server.Game.Combat
                 var stat = first[index];
                 var stat2 = second[index];
 
-                stats[index].CurrentValue = stat.CurrentValue + stat2.MaximumValue;
+                stats[index].CurrentValue = stat.CurrentValue + stat2.CurrentValue;
                 stats[index].MaximumValue = stat.MaximumValue + stat2.MaximumValue;
             }
 

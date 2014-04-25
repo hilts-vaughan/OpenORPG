@@ -15,7 +15,7 @@ namespace Server.Game.Combat.Actions
         /// <summary>
         /// Executes the action in the context of all possible combat characters.
         /// </summary>
-        Character PerformAction(IEnumerable<Character> combatCharacters);
+        CombatActionResult PerformAction(IEnumerable<Character> combatCharacters);
 
         /// <summary>
         /// The character that will be executing the action in the context.

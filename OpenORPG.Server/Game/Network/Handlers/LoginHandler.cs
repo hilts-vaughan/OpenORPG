@@ -1,5 +1,7 @@
-﻿using Server.Game.Database;
+﻿using System.Linq;
+using Server.Game.Database;
 using Server.Game.Database.Models;
+using Server.Game.Entities;
 using Server.Game.Network.Authentication;
 using Server.Game.Network.Authentication.Providers;
 using Server.Game.Network.Packets;
@@ -83,7 +85,40 @@ namespace Server.Game.Network.Handlers
             if (client.HeroEntity == null)
                 return;
 
+            PersistPlayer(client.HeroEntity);
+
             client.HeroEntity.Zone.RemoveEntity(client.HeroEntity);
         }
+
+        private static void PersistPlayer(Player player)
+        {
+            using (var context = new GameDatabaseContext())
+            {
+                //TODO: Matching by a name might not be the best, but we'll run with it for now
+                var hero = context.Characters.First(x => x.Name == player.Name);
+
+                hero.Name = player.Name;
+                hero.PositionX = (int)player.Position.X;
+                hero.PositionY = (int)player.Position.Y;
+                hero.ZoneId = player.Zone.Id;
+
+                // Persist stats
+                hero.Hitpoints = (int) player.CharacterStats[(int) StatTypes.Hitpoints].CurrentValue;
+                hero.Strength = (int)player.CharacterStats[(int)StatTypes.Strength].CurrentValue;
+                hero.Intelligence = (int)player.CharacterStats[(int)StatTypes.Intelligence].CurrentValue;
+                hero.Dexterity = (int)player.CharacterStats[(int)StatTypes.Dexterity].CurrentValue;
+                hero.Luck = (int) player.CharacterStats[(int) StatTypes.Luck].CurrentValue;
+                hero.Vitality = (int)player.CharacterStats[(int)StatTypes.Vitality].CurrentValue;
+                hero.MaximumHitpoints = (int)player.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue;
+        
+                // Flush
+                context.SaveChanges();
+
+            }
+
+
+        }
+
+
     }
 }

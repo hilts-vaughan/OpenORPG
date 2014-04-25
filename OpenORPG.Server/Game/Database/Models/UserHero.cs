@@ -41,6 +41,7 @@ namespace Server.Game.Database.Models
         public int Experience { get; set; }
         public int Gold { get; set; }
         public int Hitpoints { get; set; }
+        public int MaximumHitpoints { get; set; }
         public int Luck { get; set; }
 
 

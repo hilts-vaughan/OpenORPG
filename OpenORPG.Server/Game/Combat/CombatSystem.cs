@@ -44,15 +44,15 @@ namespace Server.Game.Combat
 
                 if (pendingAction.ExecutionTime < 0f)
                 {
-                    var victim = pendingAction.PerformAction(GetCombatCharactersInRange());
+                    var result = pendingAction.PerformAction(GetCombatCharactersInRange());
                     toRemove.Add(pendingAction);
                     pendingAction.ExecutingCharacter.CharacterState = CharacterState.Idle;
 
                     // If success 
-                    if (victim != null)
+                    if (result.TargetId != 0 && result.Damage != 0)
                     {
-                        var packet = new ServerSkillUseResult(pendingAction.ExecutingCharacter.Id, victim.Id, 1);
-                        Zone.SendToEntitiesInRange(packet, victim);
+                        var packet = new ServerSkillUseResult(pendingAction.ExecutingCharacter.Id, (ulong) result.TargetId, result.Damage);
+                        Zone.SendToEntitiesInRange(packet, pendingAction.ExecutingCharacter);
                     }
 
                     // Force skill onto cooldown

@@ -9,9 +9,10 @@ namespace Server.Game.Database.Seeds
     /// <summary>
     ///     A custom intalizer that populates the game database with mock data useful for testing, clean, good known states.
     /// </summary>
-    public class CustomInitializer : DropCreateDatabaseAlways<GameDatabaseContext>
-    // DropCreateDatabaseIfModelChanges<GameDatabaseContext>
+    public class CustomInitializer :  DropCreateDatabaseIfModelChanges<GameDatabaseContext>
     {
+        //DropCreateDatabaseAlways<GameDatabaseContext>
+
         protected override void Seed(GameDatabaseContext context)
         {
             CreateTestSkills(context);
@@ -36,6 +37,10 @@ namespace Server.Game.Database.Seeds
                 
                 // Add a basic attack to this character
                 character.Skills.Add(new UserSkill(1));
+
+                character.Strength = 5;
+                character.Hitpoints = 10;
+                character.MaximumHitpoints = 10;
 
                 context.Characters.Add(character);
 

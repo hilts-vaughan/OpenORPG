@@ -25,7 +25,7 @@ namespace Server.Game.Combat.Actions
 
 
 
-        public Character PerformAction(IEnumerable<Character> combatCharacters)
+        public CombatActionResult PerformAction(IEnumerable<Character> combatCharacters)
         {
             var validTargets = Skill.SkillTemplate.SkillTargetType;
 
@@ -44,7 +44,7 @@ namespace Server.Game.Combat.Actions
             }
 
             if (target == null)
-                return null;
+                return new CombatActionResult(0, 0);
 
 
             // Depending on the skill type, apply a payload or operation
@@ -55,13 +55,13 @@ namespace Server.Game.Combat.Actions
                 case SkillType.Damage:
                     var damagePayload = new DamagePayload(ExecutingCharacter);
                     damagePayload.Apply(target);
+                    return new CombatActionResult((long) target.Id, damagePayload.DamageInflicted);
                     break;
                 case SkillType.Special:
                     break;
             }
 
-            return target;
-
+            return new CombatActionResult(0, 0);
         }
 
         public Character ExecutingCharacter { get; set; }
