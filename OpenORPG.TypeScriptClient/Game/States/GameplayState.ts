@@ -21,6 +21,11 @@
             loader.image("tilesheet", "assets/Maps/tilesheet_16.png");
         }
 
+        render() {
+            if (this.zone != null)
+                this.zone.render();
+        }
+
         create() {
             // Start our physics systems
             this.game.physics.startSystem(Phaser.Physics.ARCADE);

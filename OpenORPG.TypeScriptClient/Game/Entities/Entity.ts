@@ -21,11 +21,13 @@
             this.anchor.setTo(0, 0);
 
             // Do something with this entity
-            this.game.physics.enable(this, Phaser.Physics.ARCADE);
+            this.game.physics.enable(this, Phaser.Physics.ARCADE, true);
             this.body.collideWorldBounds = true;
 
             // Disable smoothing on the sprite
             this.smoothed = false;
+
+
 
         }
 
@@ -143,6 +145,9 @@
 
             // Finished updating sprite
             this.animations.play("idle_down");
+
+            // Setup the body for this sprite
+            this.body.setSize(32, 32, this.texture.width / 2 - 16, this.texture.height - 32);
         }
 
         /* This is used for network transmission only, it can be dangerous if used

@@ -121,6 +121,11 @@
         }
 
 
+        render() {
+            for (var system in this.systems) {
+                this.systems[system].render();
+            }
+        }
 
         public update() {
             for (var toRemove in this._toRemove) {
