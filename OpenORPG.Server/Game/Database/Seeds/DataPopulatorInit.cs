@@ -21,7 +21,7 @@ namespace Server.Game.Database.Seeds
             // Add a new user
             for (int i = 0; i < 50; i++)
             {
-                var account = new UserAccount("Vaughan" + i, "Vaughan", "someone@someone.com");
+                var account = new UserAccount("Vaughan" + i, @"Vaughan/", "someone@someone.com");
 
                 var character = new UserHero();
 

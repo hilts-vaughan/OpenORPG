@@ -21,11 +21,11 @@
             });
 
             if (Settings.autoLoginSet()) {
-                var username = this.game.net.getQueryString("username");
-                var password = this.game.net.getQueryString("password");
+                var options = this.game.net.getQueryString("username");
+  
 
                 //TODO: Get query parameters working
-                var loginPacket = PacketFactory.createLoginPacket("Vaughan1", "Vaughan");
+                var loginPacket = PacketFactory.createLoginPacket(options["user"], options["password"]);
                 network.sendPacket(loginPacket);
             }
 

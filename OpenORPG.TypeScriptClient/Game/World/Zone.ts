@@ -10,6 +10,7 @@
         // Internal lists for usage later
         private _toRemove: any = [];
         private _toAdd: any = [];
+
         private entityLayer: Phaser.TilemapLayer;
         private entityGroup: Phaser.Group;
         private bucket: any;
@@ -76,6 +77,8 @@
                 worldEntity.propertyChanged(key, value);
             }
 
+            this._toAdd.push(worldEntity.id);
+
             return worldEntity;
         }
 
@@ -116,7 +119,7 @@
 
             }
 
-       
+
 
         }
 
@@ -129,9 +132,12 @@
 
         public update() {
             for (var toRemove in this._toRemove) {
+
                 var value = this._toRemove[toRemove];
                 var entity = this.entities[value];
+
                 entity.destroy();
+                entity.destroyNamePlate();
                 delete this.entities[toRemove];
             }
 
@@ -147,6 +153,7 @@
 
             // Update list of removal
             this._toRemove = []
+            this._toAdd = []
 
             // Iterate our systems
             for (var system in this.systems) {

@@ -23,6 +23,11 @@ namespace Server.Infrastructure.World
 
         protected SyncMonitor PropertyCollection;
 
+        public static ulong IdCounter
+        {
+            get { return ++_idCounter; }
+        }
+
         private static ulong _idCounter = 0;
         protected Vector2 _position = new Vector2();
         private string _name;
@@ -106,7 +111,7 @@ namespace Server.Infrastructure.World
         public ulong Id
         {
             get { return _id; }
-            set { _id = value; PropertyCollection.WriteValue("Id", value); }
+            set { _id = value; }
         }
 
         public string Sprite

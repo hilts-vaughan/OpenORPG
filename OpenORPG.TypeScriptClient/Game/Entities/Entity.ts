@@ -81,6 +81,10 @@
             this.game.debug.body(this);
         }
 
+        destroyNamePlate() {
+            this.nameTagText.destroy();
+            this.destroy();
+        }
 
         private directionToString(): string {
 

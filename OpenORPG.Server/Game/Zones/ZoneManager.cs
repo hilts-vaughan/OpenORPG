@@ -4,6 +4,7 @@ using System.Linq;
 using Server.Game.Entities;
 using Server.Game.Network.Packets;
 using Server.Utils.Math;
+using Server.Infrastructure.World;
 
 namespace Server.Game.Zones
 {
@@ -67,6 +68,9 @@ namespace Server.Game.Zones
         /// <param name="position"></param>
         public void SwitchToZoneAndPosition(Player player, Zone zone, Vector2 position)
         {
+
+
+
             // Remove our player from here
             player.Zone.RemoveEntity(player);
 
