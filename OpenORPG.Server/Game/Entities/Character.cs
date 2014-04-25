@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Server.Game.AI;
 using Server.Game.Combat;
 using Server.Game.Items.Equipment;
+using Server.Game.Network.Packets.Server;
 using Server.Infrastructure.World;
 using Server.Utils.Math;
 
@@ -81,12 +82,26 @@ namespace Server.Game.Entities
         {
             base.MoveEntity(location);
 
-            // For now, we can simply move the object. 
-            //TODO: We should send sync packets to keep things in sync
-            _position = location;
+            _position = location;       
+        
+            // Syncs the position to the rest of the clients that can see this
+            SyncPosition();
+           
+        }
 
-
+        private void SyncPosition()
+        {
+            // We only need to bother syncing if we're attached somewhere yet
+            if (Zone != null)
+            {
+                // Send this packet to all interested parties
+                var newPacket = new ServerEntityMovementPacket(_position, Direction, this.Id);
+                Zone.SendToEntitiesInRangeExcludingSource(newPacket, this);
+            }
 
         }
+
+
+
     }
 }

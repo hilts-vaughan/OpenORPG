@@ -33,7 +33,7 @@
 
             // Size and prepare
             var self: Zone = this;
-            this.bucket = []
+            this.bucket = [];
 
             for (var layerKey in this.tileMap.layers) {
                 var layer: any = this.tileMap.layers[layerKey];

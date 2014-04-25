@@ -39,22 +39,21 @@ namespace Server.Game.Network.Handlers
             // Ignore packets claiming to make large leaps and bounds
             if (distance > LenianceFactor)
             {
-                // Probably changing maps
+                // Probably changing maps, so just ignore it
                 return;
                 //client.Connection.Disconnect("Hacking Attempt: Movement pulse exceeded");
             }
 
-            // Move the player
-            player.Position = requestedPosition;
-            player.Direction = packet.Direction;
-
+            // Set the state
             if (packet.Terminates)
                 player.CharacterState = CharacterState.Idle;
             else
                 player.CharacterState = CharacterState.Moving;
 
-            var newPacket = new ServerEntityMovementPacket(requestedPosition, direction, player.Id);
-            zone.SendToEntitiesInRangeExcludingSource(newPacket, player);
+            // Move the player and set direction
+            player.Direction = packet.Direction;
+            player.Position = requestedPosition;
+            
         }
 
         [PacketHandler(OpCodes.CMMSG_ZONE_CHANGE)]

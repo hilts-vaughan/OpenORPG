@@ -42,7 +42,7 @@
             var network = NetworkManager.getInstance();
             network.registerPacket(OpCode.SMSG_SKILL_USE_RESULT, (packet : any) => {
                 // Play animation on the client
-                var user = this.parent.entities[packet.userId]
+                var user = this.parent.entities[packet.userId];
                 user.playSkillAnimation();
 
                 // Do stuff to the victim
