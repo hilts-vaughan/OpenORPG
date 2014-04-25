@@ -59,7 +59,6 @@
             this.systems.push(this.movementSystem);
             this.systems.push(combatSystem);
 
-
             this.setupNetworkHandlers();
         }
 

@@ -3,6 +3,7 @@
     export class GameplayState extends Phaser.State {
 
         private zone: Zone = null;
+        private currenTrack : Phaser.Sound;
 
         constructor() {
             super();
@@ -19,6 +20,11 @@
             loader.tilemap("map_2", "assets/Maps/2.json", null, Phaser.Tilemap.TILED_JSON);
 
             loader.image("tilesheet", "assets/Maps/tilesheet_16.png");
+
+            // Load all our audio
+            loader.audio("audio_music_town", [DirectoryHelper.getMusicPath() + "town.ogg"]);
+            loader.audio("audio_effect_hit", [DirectoryHelper.getAudioEffectPath() + "hit1.ogg"]);
+
         }
 
         render() {
@@ -35,6 +41,14 @@
 
                 if (this.zone != null)
                     this.zone.clearZone();
+
+                // Stop current music and all sound effects
+                this.game.sound.stopAll();
+
+                // Load new audio track in
+                this.currenTrack = this.game.add.audio("audio_music_town", 0.5, true, true);
+                this.currenTrack.play();
+
 
                 this.zone = new Zone(this.game, packet.zoneId);
 

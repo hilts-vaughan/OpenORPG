@@ -7,7 +7,12 @@
         return baseAssetPath + "sprites/";
     }
 
-    export function getAudioPath() {
-        return baseAssetPath + "audio/";
+    export function getMusicPath() {
+        return baseAssetPath + "audio/music/";
     }
+
+    export function getAudioEffectPath() {
+        return baseAssetPath + "audio/sounds/";
+    }
+
 } 

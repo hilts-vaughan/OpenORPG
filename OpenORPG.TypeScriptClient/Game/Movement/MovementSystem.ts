@@ -50,6 +50,10 @@
                 var victimDamageText = new DamageText(victim, packet.damage);
                 EffectFactory.pulseDamage(victim);                
 
+                // Play hit effect
+                var effect = this.parent.game.add.audio("audio_effect_hit", 0.3, false, true);
+                effect.play();
+
             });
 
 
