@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Server.Game.Entities;
 using Server.Game.Network.Packets;
 using Server.Infrastructure.Math;
+using Server.Infrastructure.Pathfinding;
 using Server.Utils.Math;
+using TiledSharp;
 
 namespace Server.Game.AI
 {
@@ -42,7 +44,7 @@ namespace Server.Game.AI
                 var node = _destinationNodes.Peek();
                 var velocity = new Vector2(Character.Speed * deltaTime, Character.Speed * deltaTime);
 
-                if ((int) node.Y == (int) _current.Y)
+                if ((int)node.Y == (int)_current.Y)
                     velocity.Y = 0;
 
                 if ((int)node.X == (int)_current.X)
@@ -75,7 +77,7 @@ namespace Server.Game.AI
                 if (node.X > _start.X)
                 {
                     // Keep clamped
-                    newPosition.X = MathHelper.Clamp(newPosition.X, float.MinValue , node.X);
+                    newPosition.X = MathHelper.Clamp(newPosition.X, float.MinValue, node.X);
                 }
 
                 if (node.Y > _start.Y)
@@ -85,18 +87,18 @@ namespace Server.Game.AI
 
 
                 // Direction code
-                if(velocity.X > 0)
+                if (velocity.X > 0)
                     Character.Direction = Direction.East;
-              
+
                 if (velocity.X < 0)
                     Character.Direction = Direction.West;
 
-                if(velocity.Y > 0)
+                if (velocity.Y > 0)
                     Character.Direction = Direction.South;
 
-                if(velocity.Y < 0)
+                if (velocity.Y < 0)
                     Character.Direction = Direction.North;
-       
+
 
                 _current = newPosition;
 
@@ -108,7 +110,7 @@ namespace Server.Game.AI
                 }
 
 
-                if ((int) newPosition.X == (int) node.X && (int) newPosition.Y == (int) node.Y)
+                if ((int)newPosition.X == (int)node.X && (int)newPosition.Y == (int)node.Y)
                 {
                     // We're done with this node
                     _acc = 0f;
@@ -147,26 +149,20 @@ namespace Server.Game.AI
             var gridX = gridPoint.X;
             var gridY = gridPoint.Y;
 
-            var destX = gridX + 1;
-            var destY = gridY;
+            var destX = 4;
+            var destY = 4;
 
-            // Now, compute the point to travel to
-            destX *= 32;
-            destY *= 32;
+            var searcher = new AStarSearcher(this.Character.Zone.TileMap, new Point(destX, destY), new Point(gridX, gridY));
+            var results = searcher.GeneratePath(false);
 
+            var newPoints = new List<Point>();
 
+            foreach (var result in results)
+            {
+                var point = new Point(result.X * 32 - Character.Body.OffsetX, result.Y * 32 - Character.Body.OffsetY);
+                _destinationNodes.Enqueue(new Vector2(point.X, point.Y));
+            }
 
-            // Start navigating 
-            var dest = new Vector2(destX - Character.Body.OffsetX, destY - Character.Body.OffsetY);
-            var dest2 = dest + new Vector2(0, 32);
-            var dest3 = dest2 + new Vector2(-32, 0);
-            var dest4 = dest3 + new Vector2(0, -32);
-
-
-            _destinationNodes.Enqueue(dest);
-            _destinationNodes.Enqueue(dest2);
-            _destinationNodes.Enqueue(dest3);
-            _destinationNodes.Enqueue(dest4);
 
             // On the next AI step, we will begin steering towards there
             _start = Character.Position;

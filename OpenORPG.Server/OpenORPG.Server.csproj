@@ -202,6 +202,10 @@
     <Compile Include="Game\Zones\Zone.cs" />
     <Compile Include="Game\Zones\ZoneManager.cs" />
     <Compile Include="Game\Utility\UserUtility.cs" />
+    <Compile Include="Infrastructure\Pathfinding\AStarSearcher.cs" />
+    <Compile Include="Infrastructure\Pathfinding\BestAStar.cs" />
+    <Compile Include="Infrastructure\Pathfinding\IPathFinder.cs" />
+    <Compile Include="Infrastructure\Pathfinding\GraphNode.cs" />
     <Compile Include="Infrastructure\Synchronization\ISyncSerializer.cs" />
     <Compile Include="Infrastructure\Synchronization\SyncAttribute.cs" />
     <Compile Include="Infrastructure\Synchronization\Groups\SyncGroup.cs" />
@@ -240,7 +244,6 @@
   <ItemGroup>
     <Folder Include="Game\Chat\" />
     <Folder Include="Infrastructure\AI\" />
-    <Folder Include="Infrastructure\Pathfinding\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TiledSharp\TiledSharp.csproj">
