@@ -50,7 +50,7 @@ namespace Server.Game
                 // Copy stats into
                 CopyStatsFromTemplateToCharacter(template, monster);
 
-                monster.CurrentAi = new BasicAi(monster);
+                monster.CurrentAi = new WanderAi(monster);
 
                 return monster;
             }

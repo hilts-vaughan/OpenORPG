@@ -22,7 +22,7 @@ namespace Server.Game.Entities
             : base(sprite)
         {
             //TODO: Be a bit more creative than this
-            Speed = 32;
+            Speed = 64;
 
             // We initialize the size of our stats here
             var numberOfStats = Enum.GetNames(typeof(StatTypes)).Length;
@@ -31,6 +31,8 @@ namespace Server.Game.Entities
             // Allocate just enough room for equipment
             var numberOfEquipmentSlots = Enum.GetNames(typeof(EquipmentSlot)).Length;
             Equipment = new Equipment[numberOfEquipmentSlots];
+
+           
 
             Skills = new List<Skill>();
         }

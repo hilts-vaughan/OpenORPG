@@ -138,7 +138,7 @@
             for (var animKey in spriteDefinition.animations) {
                 var anim = spriteDefinition.animations[animKey];
                 var index = rowFrames * anim.row;
-                var frames = []
+                var frames = [];
 
                 for (var i = 0; i < anim.length; i++) {
                     frames.push(index + i);

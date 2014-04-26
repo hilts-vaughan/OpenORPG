@@ -1,0 +1,60 @@
+{
+	"id": "elemental_fire",
+	"width":48,
+	"height": 54,
+	"animations": {
+		"atk_right": {
+			"length": 3,
+			"row": 1
+		},
+		"walk_right": {
+			"length": 3,
+			"row": 1
+		},
+		"idle_right": {
+			"length": 1,
+			"row": 1
+		},
+		"atk_up": {
+			"length": 3,
+			"row": 0
+		},
+		"walk_up": {
+			"length": 3,
+			"row": 0
+		},
+		"idle_up": {
+			"length": 1,
+			"row": 0
+		},
+		"atk_down": {
+			"length": 3,
+			"row": 2
+		},
+		"walk_down": {
+			"length": 3,
+			"row": 2
+		},
+		"idle_down": {
+			"length": 1,
+			"row": 2
+		},
+
+		
+		"atk_left": {
+			"length": 3,
+			"row": 3
+		},
+		"walk_left": {
+			"length": 3,
+			"row": 3
+		},
+		"idle_left": {
+			"length": 1,
+			"row": 3
+		}
+		
+		
+
+	}
+}

@@ -70,7 +70,10 @@ namespace Server.Infrastructure.Pathfinding
 
                 if (diagonal)
                 {
-                    throw new Exception("Not supported right now!");
+                    AddAdjacentCellToNodeToOpenList(_current, 1, -1, 14);
+                    AddAdjacentCellToNodeToOpenList(_current, -1, -1, 14);
+                    AddAdjacentCellToNodeToOpenList(_current, -1, 1, 14);
+                    AddAdjacentCellToNodeToOpenList(_current, 1, 1, 14);
                 }
 
                 AddAdjacentCellToNodeToOpenList(_current, 0, -1, 10);

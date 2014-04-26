@@ -9,9 +9,9 @@ namespace Server.Game.Database.Seeds
     /// <summary>
     ///     A custom intalizer that populates the game database with mock data useful for testing, clean, good known states.
     /// </summary>
-    public class CustomInitializer :  DropCreateDatabaseIfModelChanges<GameDatabaseContext>
+    public class CustomInitializer : DropCreateDatabaseAlways<GameDatabaseContext> // DropCreateDatabaseIfModelChanges<GameDatabaseContext>
     {
-        //DropCreateDatabaseAlways<GameDatabaseContext>
+
 
         protected override void Seed(GameDatabaseContext context)
         {
@@ -94,8 +94,8 @@ namespace Server.Game.Database.Seeds
             goblinVariant.Strength = 7;
             goblinVariant.Hitpoints = 75;
             goblinVariant.Vitality = 6;
-            goblinVariant.Name = "Begusk";
-            goblinVariant.Sprite = "goblin";
+            goblinVariant.Name = "Fire Elemental";
+            goblinVariant.Sprite = "elemental_fire";
             goblinVariant.Id = 2;
             goblinVariant.Level = 5;
 

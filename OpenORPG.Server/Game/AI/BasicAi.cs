@@ -16,20 +16,20 @@ namespace Server.Game.AI
     /// A basic AI that controls passive characters in the game world.
     ///  
     /// The typical behaviour for an AI acting in this mode is to move randomly into free spots.
+    /// 
+    /// There is no logic checking done here for mobs already occupying spots or anything special.
+    /// Just uses a basic random number generator to generate spots
     /// </summary>
-    public class BasicAi : AiBase
+    public class WanderAi : AiBase
     {
         private float _idleTimer = 0f;
+        private const float WanderTime = 5f;
+        private Random _random = new Random();
 
-        private const float WanderTime = 1f;
+        private const int MaxWanderX = 4;
+        private const int MaxWnaderY = 4;
 
-        // A list of nodes we wish to traverse to
-        private Queue<Vector2> _destinationNodes = new Queue<Vector2>();
-        private Vector2 _start = Vector2.Zero;
-        private Vector2 _current = Vector2.Zero;
-        private float _acc = 0f;
-
-        public BasicAi(Character character)
+        public WanderAi(Character character)
             : base(character)
         {
 
@@ -37,93 +37,10 @@ namespace Server.Game.AI
 
         public override void PerformUpdate(float deltaTime)
         {
-
-            if (_destinationNodes.Count > 0)
+            // When walking, we should ignore everything else and just walk our path
+            if (DestinationNodes.Count > 0)
             {
-                // Perform a destination movement
-                var node = _destinationNodes.Peek();
-                var velocity = new Vector2(Character.Speed * deltaTime, Character.Speed * deltaTime);
-
-                if ((int)node.Y == (int)_current.Y)
-                    velocity.Y = 0;
-
-                if ((int)node.X == (int)_current.X)
-                    velocity.X = 0;
-
-
-                // Change direction as needed
-                if (node.X < _start.X)
-                    velocity.X *= -1;
-                if (node.Y < _start.Y)
-                    velocity.Y *= -1;
-
-                _acc += deltaTime;
-
-
-                // Head towards
-                var newPosition = _current + velocity;
-
-                if (node.X < _start.X)
-                {
-                    // Keep clamped
-                    newPosition.X = MathHelper.Clamp(newPosition.X, node.X, float.MaxValue);
-                }
-
-                if (node.Y < _start.Y)
-                {
-                    newPosition.Y = MathHelper.Clamp(newPosition.Y, node.Y, float.MaxValue);
-                }
-
-                if (node.X > _start.X)
-                {
-                    // Keep clamped
-                    newPosition.X = MathHelper.Clamp(newPosition.X, float.MinValue, node.X);
-                }
-
-                if (node.Y > _start.Y)
-                {
-                    newPosition.Y = MathHelper.Clamp(newPosition.Y, float.MinValue, node.Y);
-                }
-
-
-                // Direction code
-                if (velocity.X > 0)
-                    Character.Direction = Direction.East;
-
-                if (velocity.X < 0)
-                    Character.Direction = Direction.West;
-
-                if (velocity.Y > 0)
-                    Character.Direction = Direction.South;
-
-                if (velocity.Y < 0)
-                    Character.Direction = Direction.North;
-
-
-                _current = newPosition;
-
-
-                if (_acc > 0.2f)
-                {
-                    _acc = 0f;
-                    Character.Position = _current;
-                }
-
-
-                if ((int)newPosition.X == (int)node.X && (int)newPosition.Y == (int)node.Y)
-                {
-                    // We're done with this node
-                    _acc = 0f;
-                    _start = _current;
-                    Character.Position = _current;
-                    _destinationNodes.Dequeue();
-
-                    if (_destinationNodes.Count == 0)
-                        Character.CharacterState = CharacterState.Idle;
-
-                }
-
-                return;
+                WalkPath(deltaTime);
             }
 
             // When idle, start the timer to wait around
@@ -142,32 +59,58 @@ namespace Server.Game.AI
         }
 
 
+
+
         private void TakeRandomStep()
+        {
+            var gridPoint = GetTileGridPoints();
+
+            var newX = gridPoint.X + _random.Next(-MaxWanderX, MaxWanderX + 1);
+            var newY = gridPoint.Y + _random.Next(-MaxWnaderY, MaxWnaderY + 1);
+
+            var searcher = new AStarSearcher(Character.Zone.TileMap, new Point(newX, newY),
+                new Point(gridPoint.X, gridPoint.Y));
+            var results = searcher.GeneratePath(false);
+
+            var destList = new List<Vector2>();
+
+            // If it's even possible
+            if (results.Count > 0)
+            {
+
+                foreach (var result in results)
+                {
+                    var point = new Point(result.X * 32 - Character.Body.OffsetX, result.Y * 32 - Character.Body.OffsetY);
+                    destList.Add(new Vector2(point.X, point.Y));
+                }
+
+                BeginPath(destList);
+            }
+
+        }
+
+        private void ToRandomSpot()
         {
             // Get our position in the actual tilemap
             var gridPoint = GetTileGridPoints();
             var gridX = gridPoint.X;
             var gridY = gridPoint.Y;
 
-            var destX = 4;
-            var destY = 4;
+            var destX = 3;
+            var destY = 3;
 
             var searcher = new AStarSearcher(this.Character.Zone.TileMap, new Point(destX, destY), new Point(gridX, gridY));
-            var results = searcher.GeneratePath(false);
+            var results = searcher.GeneratePath(true);
 
-            var newPoints = new List<Point>();
+            var destList = new List<Vector2>();
 
             foreach (var result in results)
             {
                 var point = new Point(result.X * 32 - Character.Body.OffsetX, result.Y * 32 - Character.Body.OffsetY);
-                _destinationNodes.Enqueue(new Vector2(point.X, point.Y));
+                destList.Add(new Vector2(point.X, point.Y));
             }
 
-
-            // On the next AI step, we will begin steering towards there
-            _start = Character.Position;
-            _current = Character.Position;
-            Character.CharacterState = CharacterState.Moving;
+            BeginPath(destList);
         }
 
 

@@ -2,6 +2,7 @@
 	"entity_sprite_snake": "snake",
 	"entity_sprite_male_base": "male_base",
 	"entity_sprite_goblin": "goblin",
+	"entity_sprite_elemental_fire": "elemental_fire",
 	"effect_death": "effects/death",
 	"effect_sparks": "effects/sparks"
 }
