@@ -314,5 +314,10 @@ namespace Server.Utils.Math
             return (int)System.Math.Ceiling((n / (double)multipleOf)) * multipleOf;
         }
 
+        public static int ToLowMultiple(int n, int multipleOf)
+        {
+            return (int)System.Math.Floor((n / (double)multipleOf)) * multipleOf;
+        }
+
     }
 }

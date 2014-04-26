@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Server.Game.Entities;
+using Server.Infrastructure.Math;
+using Server.Utils.Math;
+using ServiceStack;
 
 namespace Server.Game.AI
 {
@@ -28,11 +31,21 @@ namespace Server.Game.AI
             Character = character;
         }
 
+
+        protected Point GetTileGridPoints()
+        {
+            var body = Character.Body.GetBodyRectangle();
+            var x = body.X;
+            var y = body.Y;
+
+            return new Point(MathHelper.ToLowMultiple(x, 32) / 32, MathHelper.ToLowMultiple(y, 32) / 32);
+        }
+
         /// <summary>
         /// Handles the logic for this <see cref="Character"/> that needs to be performed.
         /// </summary>
         /// <param name="deltaTime"></param>
-        protected abstract void PerformUpdate(float deltaTime);
+        public abstract void PerformUpdate(float deltaTime);
 
 
     }

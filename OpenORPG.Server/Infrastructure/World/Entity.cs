@@ -44,9 +44,30 @@ namespace Server.Infrastructure.World
             PropertyCollection = new SyncMonitor();
             _sprite = sprite;
             var bodyInfo = ContentManager.Current.Load<EntityBody>(PathHelper.SpritesPath + _sprite + ".json");
-            Body = new EntityBody(bodyInfo.Width, bodyInfo.Height);
+
+            // Setup the body
+            Body = new EntityBody(this, 32, 32, bodyInfo.Width / 2 - 16, bodyInfo.Height - 32);
 
             Id = _idCounter++;
+        }
+
+        /// <summary>
+        /// Returns true if the entity is grid aligned, otherwise false.
+        /// </summary>
+        /// <returns></returns>
+        bool IsGridAligned()
+        {
+            if (Zone == null)
+                return false;
+
+            if ((int)_position.X % Zone.TileMap.TileWidth != 0)
+                return false;
+            
+            if ((int)_position.Y % Zone.TileMap.TileHeight != 0)
+                return false;
+
+            // We must be grid aligned
+            return true;
         }
 
 

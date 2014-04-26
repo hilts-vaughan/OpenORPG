@@ -51,7 +51,7 @@ namespace Server.Game.Combat
                     // If success 
                     if (result.TargetId != 0 && result.Damage != 0)
                     {
-                        var packet = new ServerSkillUseResult(pendingAction.ExecutingCharacter.Id, (ulong) result.TargetId, result.Damage);
+                        var packet = new ServerSkillUseResult(pendingAction.ExecutingCharacter.Id, (ulong)result.TargetId, result.Damage);
                         Zone.SendToEntitiesInRange(packet, pendingAction.ExecutingCharacter);
                     }
 
@@ -69,8 +69,14 @@ namespace Server.Game.Combat
                 foreach (var skill in c.Skills)
                     skill.Cooldown -= frameTime;
 
+                // Update AI
+                if (c.CurrentAi != null)
+                    c.CurrentAi.PerformUpdate(frameTime);
+
                 if (c.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue <= 0 && c is Monster)
                     Zone.RemoveEntity(c);
+
+            
             }
 
 

@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 using System.Linq;
+using Server.Game.AI;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
@@ -42,12 +43,14 @@ namespace Server.Game
             using (var context = new GameDatabaseContext())
             {
                 var template = context.MonsterTemplates.FirstOrDefault(x => x.Id == id);
-                
+
                 // Setup actual object
                 var monster = new Monster(template);
-                
+
                 // Copy stats into
                 CopyStatsFromTemplateToCharacter(template, monster);
+
+                monster.CurrentAi = new BasicAi(monster);
 
                 return monster;
             }
@@ -67,7 +70,7 @@ namespace Server.Game
             character.CharacterStats[(int)StatTypes.Dexterity].CurrentValue = template.Dexterity;
             character.CharacterStats[(int)StatTypes.Luck].CurrentValue = template.Luck;
             character.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue = template.Hitpoints;
-            character.CharacterStats[(int) StatTypes.Hitpoints].MaximumValue = template.MaximumHitpoints;
+            character.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue = template.MaximumHitpoints;
             character.CharacterStats[(int)StatTypes.Luck].CurrentValue = template.Luck;
         }
 
