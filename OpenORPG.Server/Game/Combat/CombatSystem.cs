@@ -55,6 +55,10 @@ namespace Server.Game.Combat
                         Zone.SendToEntitiesInRange(packet, pendingAction.ExecutingCharacter);
                     }
 
+                    // Increase aggro
+                    var victim = Zone.ZoneCharacters.First(x => x.Id == (ulong) result.TargetId);
+                    victim.CurrentAi.AgressionTracker.IncreaseAgression(pendingAction.ExecutingCharacter, 1);
+
                     // Force skill onto cooldown
                     pendingAction.Skill.EnableCooldown();
                 }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Combat;
 using Server.Game.Entities;
 using Server.Game.Network.Packets;
 using Server.Infrastructure.Math;
@@ -31,8 +32,12 @@ namespace Server.Game.AI
         protected Vector2 Start = Vector2.Zero;
         protected Vector2 Current = Vector2.Zero;
 
-        private float _acc = 0f;
+        private float _acc = 500f;
 
+        public AgressionTracker AgressionTracker { get; set; }
+
+
+ 
 
         protected void BeginPath(IEnumerable<Vector2> pathPoints)
         {
@@ -47,10 +52,12 @@ namespace Server.Game.AI
             Current = Character.Position;
             Character.CharacterState = CharacterState.Moving;
 
+            _acc = 500f;
         }
 
         protected void EndPath()
         {
+            DestinationNodes.Clear();
             Character.CharacterState = CharacterState.Idle;
             Start = Vector2.Zero;
             Current = Vector2.Zero;
@@ -63,6 +70,8 @@ namespace Server.Game.AI
                 throw new ArgumentNullException("A null character is not acceptable for an AI module");
 
             Character = character;
+
+            AgressionTracker = new AgressionTracker();
         }
 
 
@@ -74,6 +83,16 @@ namespace Server.Game.AI
 
             return new Point(MathHelper.ToLowMultiple(x, 32) / 32, MathHelper.ToLowMultiple(y, 32) / 32);
         }
+
+        protected Point GetTileGridPoints(Character character)
+        {
+            var body = character.Body.GetBodyRectangle();
+            var x = body.X;
+            var y = body.Y;
+
+            return new Point(MathHelper.ToLowMultiple(x, 32) / 32, MathHelper.ToLowMultiple(y, 32) / 32);
+        }
+
 
         /// <summary>
         /// Handles the logic for this <see cref="Character"/> that needs to be performed.
@@ -88,10 +107,10 @@ namespace Server.Game.AI
             var node = DestinationNodes.Peek();
             var velocity = new Vector2(Character.Speed * deltaTime, Character.Speed * deltaTime);
 
-            if ((int)node.Y == (int)Current.Y)
+            if ( Math.Abs(node.Y - Current.Y) < 0.0001f)
                 velocity.Y = 0;
 
-            if ((int)node.X == (int)Current.X)
+            if ( Math.Abs(node.X - Current.X) < 0.0001f)
                 velocity.X = 0;
 
 

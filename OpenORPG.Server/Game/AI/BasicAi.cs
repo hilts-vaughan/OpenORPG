@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Combat;
 using Server.Game.Entities;
 using Server.Game.Network.Packets;
+using Server.Game.Zones;
 using Server.Infrastructure.Math;
 using Server.Infrastructure.Pathfinding;
 using Server.Utils.Math;
@@ -29,19 +31,41 @@ namespace Server.Game.AI
         private const int MaxWanderX = 4;
         private const int MaxWnaderY = 4;
 
+
+
         public WanderAi(Character character)
             : base(character)
         {
 
         }
 
+        private void ChaseTarget()
+        {
+
+        }
+
         public override void PerformUpdate(float deltaTime)
         {
+
+            //TODO: If there is agression and a target is close by
+            if (AgressionTracker.HasAgression())
+            {
+                //TODO: Check if we are in attack range
+                EndPath();
+
+                // Path find to our characters
+                ChasePlayer();
+
+            }
+
             // When walking, we should ignore everything else and just walk our path
             if (DestinationNodes.Count > 0)
             {
                 WalkPath(deltaTime);
+                return;
             }
+
+
 
             // When idle, start the timer to wait around
             if (Character.CharacterState == CharacterState.Idle)
@@ -59,6 +83,37 @@ namespace Server.Game.AI
         }
 
 
+        private void ChasePlayer()
+        {
+            var victim =
+                Character.Zone.ZoneCharacters.First(x => x.Id == AgressionTracker.GetCharacterIdWithMostAgression());
+            var start = GetTileGridPoints();
+
+            var gridPoint = GetTileGridPoints(victim);
+
+            var newX = gridPoint.X;
+            var newY = gridPoint.Y;
+
+            var searcher = new AStarSearcher(Character.Zone.TileMap, new Point(newX, newY),
+                new Point(start.X, start.Y));
+            var results = searcher.GeneratePath(false);
+            results.RemoveAt(0);
+            var destList = new List<Vector2>();
+
+            // If it's even possible
+            if (results.Count > 0)
+            {
+
+                foreach (var result in results)
+                {
+                    var point = new Point(result.X * 32 - Character.Body.OffsetX, result.Y * 32 - Character.Body.OffsetY);
+                    destList.Add(new Vector2(point.X, point.Y));
+                }
+
+                BeginPath(destList);
+            }
+
+        }
 
 
         private void TakeRandomStep()

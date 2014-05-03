@@ -104,7 +104,7 @@ namespace Server.Game.Zones
         private void SetupExitRectangles()
         {
             // Create a top sensor
-            topZoneArea = new Rectangle(0, 0, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight + 16 );
+            topZoneArea = new Rectangle(0, 0, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight + 16);
 
             // Bottom sensor
             bottomZoneArea = new Rectangle(0, TileMap.Height * TileMap.TileHeight - TileMap.Height, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight + 16);
@@ -195,7 +195,7 @@ namespace Server.Game.Zones
         /// <summary>
         /// This is the internal representation of the world.
         /// </summary>
-        public TmxMap TileMap { get; set; }
+        public TmxMap TileMap { get; private set; }
 
         public IEnumerable<Character> ZoneCharacters
         {
