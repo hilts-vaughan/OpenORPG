@@ -31,7 +31,7 @@
         private meleeKey: Phaser.Key;
         private player: Entity;
 
-        constructor(zone : Zone, player : Entity) {
+        constructor(zone: Zone, player: Entity) {
             super(zone);
 
             // Setup our key presses
@@ -40,7 +40,7 @@
 
             // Setup our network events
             var network = NetworkManager.getInstance();
-            network.registerPacket(OpCode.SMSG_SKILL_USE_RESULT, (packet : any) => {
+            network.registerPacket(OpCode.SMSG_SKILL_USE_RESULT, (packet: any) => {
                 // Play animation on the client
                 var user = this.parent.entities[packet.userId];
                 user.playSkillAnimation();
@@ -48,7 +48,7 @@
                 // Do stuff to the victim
                 var victim = this.parent.entities[packet.targetId]
                 var victimDamageText = new DamageText(victim, packet.damage);
-                EffectFactory.pulseDamage(victim);                
+                EffectFactory.pulseDamage(victim);
 
                 // Play hit effect
                 var effect = this.parent.game.add.audio("audio_effect_hit", 0.3, false, true);
@@ -86,7 +86,7 @@
 
     export class MovementSystem extends GameSystem {
 
-        private static MOVEMENT_TICKET_FREQUENCY: number = 200;
+        private static MOVEMENT_TICKET_FREQUENCY: number = 500;
         private static current: MovementSystem = null;
 
         private timerToken: number;
@@ -167,27 +167,42 @@
             // This chunk of code is used to control the player physics body around the map
             if (this.player.characterState == CharacterState.Moving || this.player.characterState == CharacterState.Idle) {
                 var speed: number = 120;
-                if(this.parent.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-                    this.player.body.velocity.setTo(-120, 0);
-                    this.player.direction = Direction.West;
+                var velocity: Phaser.Point = new Phaser.Point(0, 0);
+
+                if (this.parent.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
+                    velocity.add(-120, 0);
                 }
-                else if(this.parent.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-                    this.player.body.velocity.setTo(120, 0);
-                    this.player.direction = Direction.East;
+                if (this.parent.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+                    velocity.add(120, 0);
                 }
-                else if(this.parent.game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-                    this.player.body.velocity.setTo(0, -120);
-                    this.player.direction = Direction.North;
+                if (this.parent.game.input.keyboard.isDown(Phaser.Keyboard.UP)) {
+                    velocity.add(0, -120);
                 }
 
-                else if(this.parent.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
-                    this.player.body.velocity.setTo(0, 120);
-                    this.player.direction = Direction.South;
+                if (this.parent.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
+                    velocity.add(0, 120);
                 }
-                else {
+
+                if(velocity.isZero()) {
                     if (!this.player.body.velocity.isZero())
                         this.generateMovementTicket(true);
                     this.player.body.velocity.setTo(0, 0);
+                }
+
+
+                if (!velocity.isZero()) {
+                    this.player.body.velocity.setTo(velocity.x, velocity.y);
+
+                    if (velocity.x < 0)
+                        this.player.direction = Direction.West;
+                    else if (velocity.x > 0)
+                        this.player.direction = Direction.East;
+
+                    if (velocity.y < 0)
+                        this.player.direction = Direction.North;
+                    else if (velocity.y > 0)
+                        this.player.direction = Direction.South;
+
                 }
 
             } // end movement controller

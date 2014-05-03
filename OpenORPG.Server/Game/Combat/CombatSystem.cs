@@ -113,6 +113,10 @@ namespace Server.Game.Combat
             {
                 if (character is Player)
                 {
+                    // Restore hitpoints
+                    character.CharacterStats[(int) StatTypes.Hitpoints].CurrentValue =
+                        character.CharacterStats[(int) StatTypes.Hitpoints].MaximumValue;
+
                     var player = character as Player;
                     var homePoint = ZoneManager.Instance.FindZone(player.HomepointZoneId);
 

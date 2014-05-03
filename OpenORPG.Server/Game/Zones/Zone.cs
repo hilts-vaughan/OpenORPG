@@ -107,7 +107,7 @@ namespace Server.Game.Zones
             topZoneArea = new Rectangle(0, 0, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight + 16);
 
             // Bottom sensor
-            bottomZoneArea = new Rectangle(0, TileMap.Height * TileMap.TileHeight - TileMap.Height, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight + 16);
+            bottomZoneArea = new Rectangle(0, (TileMap.Height * TileMap.TileHeight) - 48, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight + 16);
 
             // Left
             leftZoneArea = new Rectangle(0, 0, TileMap.TileWidth + 16, TileMap.Height * TileMap.TileHeight);
@@ -146,7 +146,7 @@ namespace Server.Game.Zones
         {
 
             //TODO: Please don't hard-code me
-            var playerRect = new Rectangle(player.X, player.Y, player.Body.Width, player.Body.Height);
+            var playerRect = new Rectangle(player.X + player.Body.OffsetX, player.Y + player.Body.OffsetY, player.Body.Width, player.Body.Height);
 
             switch (direction)
             {

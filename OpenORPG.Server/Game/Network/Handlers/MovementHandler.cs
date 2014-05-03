@@ -39,6 +39,7 @@ namespace Server.Game.Network.Handlers
             // Ignore packets claiming to make large leaps and bounds
             if (distance > LenianceFactor)
             {
+                Logger.Instance.Debug("Ignoring movement request");
                 // Probably changing maps, so just ignore it
                 return;
                 //client.Connection.Disconnect("Hacking Attempt: Movement pulse exceeded");
