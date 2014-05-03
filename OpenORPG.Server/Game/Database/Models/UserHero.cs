@@ -49,6 +49,11 @@ namespace Server.Game.Database.Models
         public int PositionY { get; set; }
         public long ZoneId { get; set; }
 
+
+        public long HomepointZoneId { get; set; }
+        public long HomepointZoneX { get; set; }
+        public long HomepointZoneY { get; set; }
+
         public virtual ICollection<UserItem> Inventory { get; set; }
         public virtual ICollection<UserSkill> Skills { get; set; } 
 

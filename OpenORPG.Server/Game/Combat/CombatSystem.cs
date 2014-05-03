@@ -12,6 +12,7 @@ using Server.Game.Zones;
 using Server.Infrastructure.Logging;
 using Server.Infrastructure.World;
 using Server.Infrastructure.World.Systems;
+using Server.Utils.Math;
 
 namespace Server.Game.Combat
 {
@@ -92,7 +93,7 @@ namespace Server.Game.Combat
         {
             // Increase aggro as required
             var victim = Zone.ZoneCharacters.FirstOrDefault(x => x.Id == (ulong)result.TargetId);
-            if (victim != null)
+            if (victim != null && victim.CurrentAi != null)
                 victim.CurrentAi.AgressionTracker.IncreaseAgression(pendingAction.ExecutingCharacter, 1);
         }
 
@@ -112,7 +113,12 @@ namespace Server.Game.Combat
             {
                 if (character is Player)
                 {
-                    // TODO: Respawn a player here effectively
+                    var player = character as Player;
+                    var homePoint = ZoneManager.Instance.FindZone(player.HomepointZoneId);
+
+                    if (homePoint != null)
+                        ZoneManager.Instance.SwitchToZoneAndPosition(player, homePoint, new Vector2(player.HomepointZoneX, player.HomepointZoneY));
+
                 }
 
                 else

@@ -9,9 +9,9 @@ namespace Server.Game.Database.Seeds
     /// <summary>
     ///     A custom intalizer that populates the game database with mock data useful for testing, clean, good known states.
     /// </summary>
-    public class CustomInitializer :  DropCreateDatabaseIfModelChanges<GameDatabaseContext>
+    public class CustomInitializer :  DropCreateDatabaseAlways<GameDatabaseContext> //DropCreateDatabaseIfModelChanges<GameDatabaseContext>
     {
-        // DropCreateDatabaseAlways<GameDatabaseContext>
+        
 
 
         protected override void Seed(GameDatabaseContext context)
@@ -30,12 +30,17 @@ namespace Server.Game.Database.Seeds
 
                 character.Name = "Vaughan" + i;
                 character.Account = account;
+
                 character.ZoneId = 1;
                 character.PositionX = 6 * 32;
                 character.PositionY = 4 * 32;
 
+                character.HomepointZoneId = character.ZoneId;
+                character.HomepointZoneX = character.PositionX;
+                character.HomepointZoneY = character.PositionY;
+
                 character.Inventory.Add(new UserItem(1, 1));
-                
+
                 // Add a basic attack to this character
                 character.Skills.Add(new UserSkill(1));
 

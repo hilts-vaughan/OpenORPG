@@ -77,7 +77,7 @@ namespace Server.Game.Network.Handlers
                     Logger.Instance.Error("{0} tried to transfer to {1} from {2} but the zone could not be found.", client.HeroEntity.Name, client.HeroEntity.Zone.Id, zoneId);
                     return;
                 }
-                var newPos = GetFreePositionInZoneFromDirection(packet.Direction, client.HeroEntity.Zone, client.HeroEntity.Position);
+                var newPos = GetFreePositionInZoneFromDirection(packet.Direction, zone, client.HeroEntity.Position);
 
                 ZoneManager.Instance.SwitchToZoneAndPosition(client.HeroEntity, zone, newPos);
                 client.HeroEntity.Direction = packet.Direction;

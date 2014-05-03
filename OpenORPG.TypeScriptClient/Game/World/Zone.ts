@@ -143,6 +143,7 @@
         }
 
         public update() {
+
             for (var toRemove in this._toRemove) {
 
                 var value = this._toRemove[toRemove];
@@ -153,10 +154,20 @@
                 delete this.entities[toRemove];
             }
 
+            for (var toAdd in this._toAdd) {
+                var valueA = this._toAdd[toAdd];
+                
+                var entityA = Zone.current.addNetworkEntityToZone(valueA);
+
+                // Apply the fade effect
+                EffectFactory.fadeEntityIn(entityA);
+
+
+            }
 
 
             for (var entityKey in this.entities) {
-                var entity = this.entities[entityKey]
+                var entity = this.entities[entityKey];
                 entity.update();
 
                 for (var layer in this.bucket)
@@ -181,11 +192,9 @@
             var network = NetworkManager.getInstance();
 
             network.registerPacket(OpCode.SMSG_MOB_CREATE, (packet: any) => {
-                var entity = Zone.current.addNetworkEntityToZone(packet.mobile);
 
-                // Apply the fade effect
-                EffectFactory.fadeEntityIn(entity);
 
+                Zone.current._toAdd.push(packet.mobile);
             });
 
             network.registerPacket(OpCode.SMSG_MOB_DESTROY, (packet: any) => {

@@ -265,6 +265,10 @@ namespace Server.Game.Zones
 
         public void Update(TimeSpan deltaTime)
         {
+  
+
+    
+
             // Remove and add elements that need to be
 
             foreach (var entity in _toRemove)
@@ -273,6 +277,8 @@ namespace Server.Game.Zones
                 Entities.Remove(entity);
 
             }
+
+
 
             foreach (var entity in _toAdd)
             {

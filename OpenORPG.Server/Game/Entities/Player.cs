@@ -14,6 +14,8 @@ namespace Server.Game.Entities
 {
     public class Player : Character
     {
+        private UserHero _hero;
+
         public Player(string sprite, GameClient client, UserHero userHero)
             : base(sprite)
         {
@@ -31,7 +33,29 @@ namespace Server.Game.Entities
                     Skills.Add(skill);
                 }
             }
+
+            // Store the user hero internally
+            _hero = userHero;
         }
+
+        public long HomepointZoneId
+        {
+            get { return _hero.HomepointZoneId; }
+            set { _hero.HomepointZoneId = value; }
+        }
+
+        public long HomepointZoneX
+        {
+            get { return _hero.HomepointZoneX; }
+            set { _hero.HomepointZoneX = value; }
+        }
+
+        public long HomepointZoneY
+        {
+            get { return _hero.HomepointZoneY; }
+            set { _hero.HomepointZoneY = value; }
+        }
+
 
         /// <summary>   
         /// The client attached to this player. 
