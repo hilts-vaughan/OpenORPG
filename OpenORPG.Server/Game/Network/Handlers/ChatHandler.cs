@@ -7,6 +7,7 @@ namespace Server.Game.Network.Handlers
 {
     public class ChatHandler
     {
+        private static string _chatTemplate = "[{0}]: {1}";
         /// <summary>
         /// Handles incoming chat messages as they come in and processes them accordingly
         /// </summary>
@@ -15,11 +16,24 @@ namespace Server.Game.Network.Handlers
         [PacketHandler(OpCodes.CMSG_CHAT_MESSAGE)]
         public static void OnChatMessage(GameClient client, ClientChatMessagePacket packet)
         {
-            var channelId = packet.ChannelId;
-            var channel = ChatManager.Current.GetChannel(channelId);
-        
-            var newPacket = new ServerChatMessagePacket(packet.Message, channelId);
-            channel.SendMessage(newPacket);
+            var player = client.HeroEntity;
+            var channel = ChatManager.Current.GetChannel(player.Zone.ChatChannel.Id);
+
+            packet.Message.Trim();
+            if (channel != null && packet.Message != string.Empty)
+            {
+                // Strip out any nasty HTML tags that a player might try and inject
+                packet.Message = HtmlTools.StripTagsCharArray(packet.Message);
+                
+                // Format the message accordingly
+                packet.Message = string.Format(_chatTemplate, player.Name, packet.Message);
+                
+                // Send the actual message to the user as requested
+                var newPacket = new ServerChatMessagePacket(packet.Message, channel.Id);
+                channel.SendMessage(newPacket);
+            }
+
+
         }
 
 

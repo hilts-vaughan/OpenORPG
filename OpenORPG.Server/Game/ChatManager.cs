@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Server.Game.Network.Packets;
+using Server.Game.Network.Packets.Server;
 
 namespace Server.Game
 {
@@ -36,7 +37,7 @@ namespace Server.Game
 
         public void Leave(GameClient client)
         {
-            //client.Send(new ServerLeaveChatChannelPacket(Id, this.Type, null));
+            client.Send(new ServerLeaveChatChannelPacket(Id));
             Clients.Remove(client);
         }
     }

@@ -44,5 +44,14 @@
         }
     }
 
+    export function createChatPacket(channeld: number, message: string) {
+        return {
+            opCode: OpenORPG.OpCode.CMSG_CHAT_MESSAGE,
+            channelId: channeld,
+            message: message
+        }
+    }
+
+
 
 } 

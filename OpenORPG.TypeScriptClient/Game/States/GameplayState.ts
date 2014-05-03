@@ -3,10 +3,14 @@
     export class GameplayState extends Phaser.State {
 
         private zone: Zone = null;
-        private currenTrack : Phaser.Sound;
+        private currenTrack: Phaser.Sound;
+        private ChatManager : ChatManager;
 
         constructor() {
             super();
+
+            // Init
+            this.ChatManager = new ChatManager();
 
         }
 

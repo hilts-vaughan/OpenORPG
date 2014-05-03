@@ -158,6 +158,7 @@
     <Compile Include="Game\Network\Packets\Client\ClientZoneChangeRequestPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEntityMovementPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEntityPropertyChange.cs" />
+    <Compile Include="Game\Network\Packets\Server\ServerLeaveChatChannelPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServreMobUsePowerPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerFloatingMessagePacket.cs" />
     <Compile Include="Game\Network\Packets\Direction.cs" />

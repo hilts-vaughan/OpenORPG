@@ -83,6 +83,8 @@
     <Content Include="assets\ui\play_button.png" />
     <Content Include="assets\ui\scroll.png" />
     <Content Include="assets\ui\wood.png" />
+    <TypeScriptCompile Include="Game\Chat\ChatChannel.ts" />
+    <TypeScriptCompile Include="Game\Chat\ChatManager.ts" />
     <TypeScriptCompile Include="Game\Direction.ts" />
     <TypeScriptCompile Include="Game\CharacterState.ts" />
     <TypeScriptCompile Include="Game\Entities\DamageText.ts" />

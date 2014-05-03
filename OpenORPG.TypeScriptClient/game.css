@@ -1,52 +1,76 @@
-﻿/* Typography*/		
+﻿/* Typography*/
 
-    @font-face {
-        font-family: 'GraphicPixel';
-        src: url('assets/fonts/graphicpixel-webfont.eot');
-        src: url('assets/fonts/graphicpixel-webfont.eot?#iefix') format('embedded-opentype'),
-             url('assets/fonts/graphicpixel-webfont.woff') format('woff'),
-             url('assets/fonts/graphicpixel-webfont.ttf') format('truetype'),
-             url('assets/fonts/graphicpixel-webfont.svg#GraphicPixelRegular') format('svg');
-        font-weight: normal;
-        font-style: normal;
+@font-face {
+    font-family: 'GraphicPixel';
+    src: url('assets/fonts/graphicpixel-webfont.eot');
+    src: url('assets/fonts/graphicpixel-webfont.eot?#iefix') format('embedded-opentype'), url('assets/fonts/graphicpixel-webfont.woff') format('woff'), url('assets/fonts/graphicpixel-webfont.ttf') format('truetype'), url('assets/fonts/graphicpixel-webfont.svg#GraphicPixelRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
-    }
-    
-    @font-face {
-        font-family: 'AdvoCut';
-        src: url('assets/fonts/advocut-webfont.eot');
-        src: url('assets/fonts/advocut-webfont.eot?#iefix') format('embedded-opentype'),
-             url('assets/fonts/advocut-webfont.woff') format('woff'),
-             url('assets/fonts/advocut-webfont.ttf') format('truetype'),
-             url('assets/fonts/advocut-webfont.svg#AndinaRegular') format('svg');
-        font-weight: normal;
-        font-style: normal;
-
-    }
+@font-face {
+    font-family: 'AdvoCut';
+    src: url('assets/fonts/advocut-webfont.eot');
+    src: url('assets/fonts/advocut-webfont.eot?#iefix') format('embedded-opentype'), url('assets/fonts/advocut-webfont.woff') format('woff'), url('assets/fonts/advocut-webfont.ttf') format('truetype'), url('assets/fonts/advocut-webfont.svg#AndinaRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 
 body {
-    margin: 0px;
-    padding: 0px;
     background: black;
 }
 
 canvas {
-    margin: 0 auto;
-        border-style: solid;
-    border-width: 5px;
+    border-style: solid;
+    border-width: 1px;
     border-color: white;
 }
 
-#gameContainer {
+#overlay {
+    position: absolute;
+    bottom: 0px;
+    width: 390px;
+    height: 270px;
+    background-color: rgba(0, 0, 0, 0);
+    font-family: "AdvoCut";
+    color: white;
+}
 
+#chatlog {
+    background-color: rgba(0, 0, 0, 0.5);
+    font-family: "AdvoCut";
+    color: yellow;
+    padding-left: 15px;
+    padding-top: 15px;
+    line-height: 20px;
+    border: none;
+}
+
+#chatmessage {
+    width: 100%;
+    background-color: rgba(122, 0, 0, 0.5);
+    outline: none;
+    border: 1px solid white;
+    font-family: "AdvoCut";
+    color: white;
+    padding-left: 15px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+#gameContainer {
+    position: relative;
 }
 
 #controls {
     bottom: 0;
     left: 0;
-    position: absolute;
-    width: 100%;
-    background-color: black;
-    width: 100%;
+    width: 1336px;
+    height: 50px;
+    text-align: center;
+    background: #333333;
+    border-color: #a9a9a9;
+    border-width: 1px;
+    border-style: solid;
 }

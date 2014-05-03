@@ -30,5 +30,6 @@
         CMMSG_ZONE_CHANGE = 22,
         CMSG_HERO_EQUIP = 23,
 
+        SMSG_LEAVE_CHAT_CHANNEL = 24,
     }
 }
