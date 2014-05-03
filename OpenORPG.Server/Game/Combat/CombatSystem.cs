@@ -98,7 +98,7 @@ namespace Server.Game.Combat
 
         private void SendActionResult(ICombatAction action, CombatActionResult result)
         {
-            if (result.TargetId != 0 && result.Damage != 0)
+            if (result.TargetId != -1)
             {
                 var packet = new ServerSkillUseResult(action.ExecutingCharacter.Id, (ulong)result.TargetId,
                     result.Damage);

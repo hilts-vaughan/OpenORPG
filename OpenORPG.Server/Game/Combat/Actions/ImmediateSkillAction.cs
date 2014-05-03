@@ -61,7 +61,7 @@ namespace Server.Game.Combat.Actions
                     break;
             }
 
-            return new CombatActionResult(0, 0);
+            return new CombatActionResult(-1, 0);
         }
 
         public Character ExecutingCharacter { get; set; }
