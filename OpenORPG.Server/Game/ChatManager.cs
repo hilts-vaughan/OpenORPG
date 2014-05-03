@@ -29,8 +29,16 @@ namespace Server.Game
             }
         }
 
+        public void SendMessage(string message)
+        {
+            foreach (var client in Clients)
+            {
+                client.Send(new ServerChatMessagePacket(message, Id));
+            }
+        }
+
         public void Join(GameClient client)
-        {            
+        {
             client.Send(new ServerJoinChannelPacket(Id, Type, null));
             Clients.Add(client);
         }
@@ -68,7 +76,7 @@ namespace Server.Game
         public ChatChannel CreateChannel(ChannelType channelType)
         {
             var channel = new ChatChannel();
-            channel.Id = _lastId++; 
+            channel.Id = _lastId++;
             channel.Type = channelType;
 
             Channels.Add(channel);

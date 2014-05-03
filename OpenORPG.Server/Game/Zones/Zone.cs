@@ -417,16 +417,13 @@ namespace Server.Game.Zones
         protected void OnClientLeave(GameClient client)
         {
             GameClients.Remove(client);
-
-            ChatManager.Current.Global.Leave(client);
             ChatChannel.Leave(client);
 
         }
 
         protected void OnClientEnter(GameClient client, Player heroEntity)
         {
-            GameClients.Add(client);
-            ChatManager.Current.Global.Join(client);
+            GameClients.Add(client);      
             ChatChannel.Join(client);
 
             string name = heroEntity.Name;
