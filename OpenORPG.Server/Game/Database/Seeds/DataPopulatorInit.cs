@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Server.Game.Combat;
 using Server.Game.Database.Models;
@@ -9,9 +11,9 @@ namespace Server.Game.Database.Seeds
     /// <summary>
     ///     A custom intalizer that populates the game database with mock data useful for testing, clean, good known states.
     /// </summary>
-    public class CustomInitializer :  DropCreateDatabaseAlways<GameDatabaseContext> //DropCreateDatabaseIfModelChanges<GameDatabaseContext>
+    public class CustomInitializer : DropCreateDatabaseAlways<GameDatabaseContext> //DropCreateDatabaseIfModelChanges<GameDatabaseContext>
     {
-        
+
 
 
         protected override void Seed(GameDatabaseContext context)
@@ -28,7 +30,7 @@ namespace Server.Game.Database.Seeds
                 var character = new UserHero();
 
 
-                character.Name = "Vaughan" + i;
+                character.Name = GetRandomName();
                 character.Account = account;
 
                 character.ZoneId = 1;
@@ -61,6 +63,23 @@ namespace Server.Game.Database.Seeds
 
 
             base.Seed(context);
+        }
+
+        private string GetRandomName()
+        {
+            var names = new List<string>()
+            {
+                "Touma",
+                "Haruki",
+                "Setsuna",
+                "Nymph",
+                "Zeta",
+                "Holo",
+                "Haruhi"
+            };
+
+            return names.OrderBy(s => Guid.NewGuid()).First();
+
         }
 
         private void CreateTestSkills(GameDatabaseContext context)

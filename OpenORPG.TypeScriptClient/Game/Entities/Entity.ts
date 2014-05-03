@@ -82,7 +82,8 @@
         }
 
         destroyNamePlate() {
-            this.nameTagText.destroy();
+            if (this.nameTagText != null)
+                this.nameTagText.destroy();
             this.destroy();
         }
 

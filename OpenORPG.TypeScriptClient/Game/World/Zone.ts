@@ -10,6 +10,7 @@
         // Internal lists for usage later
         private _toRemove: any = [];
         private _toAdd: any = [];
+        private _toUpdate: any  = [];
 
         private entityLayer: Phaser.TilemapLayer;
         private entityGroup: Phaser.Group;
@@ -61,7 +62,7 @@
 
             this.setupNetworkHandlers();
 
-    
+
 
         }
 
@@ -91,6 +92,9 @@
                 var entity = this.entities[entityKey];
                 entity.destroy();
 
+
+                entity.destroyNamePlate();
+
                 // remove from list
                 delete this.entities[entityKey];
             }
@@ -110,7 +114,7 @@
                 system.destroy();
             }
 
-         
+
 
 
         }
@@ -156,11 +160,23 @@
 
             for (var toAdd in this._toAdd) {
                 var valueA = this._toAdd[toAdd];
-                
+
                 var entityA = Zone.current.addNetworkEntityToZone(valueA);
 
                 // Apply the fade effect
                 EffectFactory.fadeEntityIn(entityA);
+            }
+
+            for (var toUpdate in this._toUpdate) {
+                var valueB = this._toUpdate[toUpdate];
+
+                var entityB: any = Zone.current.entities[valueB.entityId];
+                entityB.mergeWith(valueB.properties);
+
+                for (var key in valueB.properties) {
+                    var v = valueB.properties[key];
+                    entityB.propertyChanged(key, v);
+                }
 
 
             }
@@ -175,8 +191,9 @@
             }
 
             // Update list of removal
-            this._toRemove = []
-            this._toAdd = []
+            this._toRemove = [];
+            this._toAdd = [];
+            this._toUpdate = [];
 
             // Iterate our systems
             for (var system in this.systems) {
@@ -202,13 +219,7 @@
             });
 
             network.registerPacket(OpCode.SMSG_ENTITY_PROPERTY_CHANGE, (packet: any) => {
-                var entity: any = Zone.current.entities[packet.entityId];
-                entity.mergeWith(packet.properties);
-
-                for (var key in packet.properties) {
-                    var value = packet.properties[key];
-                    entity.propertyChanged(key, value);
-                }
+                Zone.current._toUpdate.push(packet);
             });
 
         }
