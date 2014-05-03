@@ -7,12 +7,12 @@
 
     // Returns a font for a specific player
     export function getPlayerFont(): OpenORPG.FontDefinition {
-        var font = new OpenORPG.FontDefinition("12px Georgia", "#ffff00", "center", "#000000", 3);
+        var font = new OpenORPG.FontDefinition("14px AdvoCut", "#ffff00", "center", "#000000", 3);
         return font;
     }
 
     export function getDamageFont(): OpenORPG.FontDefinition {
-        return new OpenORPG.FontDefinition("22px Georgia", "##AA0114", "center", "#000000", 3);
+        return new OpenORPG.FontDefinition("26px AdvoCut", "#FFFFFF", "center", "#000000", 4);
     }
 
 }

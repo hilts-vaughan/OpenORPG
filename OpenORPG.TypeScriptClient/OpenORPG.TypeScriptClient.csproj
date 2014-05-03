@@ -17,6 +17,8 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="assets\fonts\advocut-webfont.svg" />
+    <Content Include="assets\fonts\graphicpixel-webfont.svg" />
     <Content Include="assets\Maps\mobset.png" />
     <Content Include="assets\Maps\tilesheet_16.png" />
     <Content Include="assets\sprites\effects\death.png" />
@@ -130,6 +132,12 @@
     <Content Include="assets\sprites\sprites.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="assets\fonts\advocut-webfont.eot" />
+    <Content Include="assets\fonts\advocut-webfont.ttf" />
+    <Content Include="assets\fonts\advocut-webfont.woff" />
+    <Content Include="assets\fonts\graphicpixel-webfont.eot" />
+    <Content Include="assets\fonts\graphicpixel-webfont.ttf" />
+    <Content Include="assets\fonts\graphicpixel-webfont.woff" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
