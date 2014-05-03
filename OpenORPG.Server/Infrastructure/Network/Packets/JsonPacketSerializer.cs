@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Server.Exceptions;
 using Server.Game.Network.Packets;
 
 namespace Server.Infrastructure.Network.Packets
@@ -18,13 +19,13 @@ namespace Server.Infrastructure.Network.Packets
         {
             foreach (
                 Type packetType in
-                    typeof (JsonPacketSerializer).Assembly.GetTypes()
+                    typeof(JsonPacketSerializer).Assembly.GetTypes()
                                                  .Where(
                                                      (type) =>
-                                                     typeof (IPacket).IsAssignableFrom(type) && !type.IsInterface))
+                                                     typeof(IPacket).IsAssignableFrom(type) && !type.IsInterface))
             {
-                var obj = (IPacket) FormatterServices.GetUninitializedObject(packetType);
-                    // This doesnt require parameterless constructor
+                var obj = (IPacket)FormatterServices.GetUninitializedObject(packetType);
+                // This doesnt require parameterless constructor
 
                 OpCodes opCode = obj.OpCode;
 
@@ -40,16 +41,24 @@ namespace Server.Infrastructure.Network.Packets
 
         public IPacket Deserialize(string data)
         {
-            int start = data.IndexOf("opCode\":") + 8;
-            int end = data.IndexOf(",", start);
+            try
+            {
+                int start = data.IndexOf("opCode\":") + 8;
+                int end = data.IndexOf(",", start);
 
-            var fragment = data.Substring(start, end - start).Trim();
-            var opCode = (OpCodes) ushort.Parse(fragment);
+                var fragment = data.Substring(start, end - start).Trim();
+                var opCode = (OpCodes)ushort.Parse(fragment);
 
 
-            var packet = (IPacket) JsonConvert.DeserializeObject(data, packetFactory[opCode], settings);
+                var packet = (IPacket)JsonConvert.DeserializeObject(data, packetFactory[opCode], settings);
+                return packet;
+            }
+            catch (Exception exception)
+            {
+                throw new IllegalPacketException(data, exception);
+            }
 
-            return packet;
+    
         }
 
         public string Serialize<TPacket>(TPacket packet) where TPacket : IPacket

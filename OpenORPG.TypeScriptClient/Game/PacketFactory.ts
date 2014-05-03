@@ -2,7 +2,7 @@
 
     export function createLoginPacket(user: string, password: string) {
         return {
-            opCode: OpenORPG.OpCode.CMSG_LOGIN_REQUEST,
+            opCodex: OpenORPG.OpCode.CMSG_LOGIN_REQUEST,
             username: user,
             password: password
         };

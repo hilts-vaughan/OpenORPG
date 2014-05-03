@@ -86,7 +86,7 @@ namespace Server.Game.Zones
                 // Mark the world as offline
                 Available = false;
 
-                Logger.Instance.Error("The world in zone #{0} could not be started. The tilemap could not be found.", id);
+                Logger.Instance.Error("The world in zone #{0} could not be started. The tilemap could not be found. \n" + exception, id);
             }
 
             AddGameSystems();

@@ -18,6 +18,7 @@ namespace Server.Infrastructure.World.Systems
         protected GameSystem(Zone world)
         {
             Zone = world;
+            UpdateFrequency = 0f;
         }
 
 
@@ -38,6 +39,14 @@ namespace Server.Infrastructure.World.Systems
         /// </summary>
         /// <param name="entity">The tnity being removed from the system</param>
         public abstract void OnEntityRemoved(Entity entity);
+
+        /// <summary>
+        /// If this is set to a number that is not 0f, the game will try to only call this system
+        /// at the minimum at this interval.
+        /// 
+        /// For example, if this is set to 0.5f then AI will only be updated every 500ms
+        /// </summary>
+        public float UpdateFrequency { get; set; }
 
     }
 }

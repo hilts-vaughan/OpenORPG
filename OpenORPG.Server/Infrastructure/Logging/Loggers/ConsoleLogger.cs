@@ -40,7 +40,7 @@ namespace Server.Infrastructure.Logging.Loggers
             LogAction(LogLevel.Debug, message, objects);
         }
 
-        public void Info(string message, params Object[] objects)
+        public void Info(string message, params Object[] objects)   
         {
             LogAction(LogLevel.Info, message, objects);
         }

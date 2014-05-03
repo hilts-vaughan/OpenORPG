@@ -121,7 +121,7 @@ namespace Server
             }
             catch (DirectoryNotFoundException exception)
             {
-                Logger.Instance.Warn("The server could not locate the map path. Zones are shutdown.");
+                Logger.Instance.Warn("The server could not locate the map path. Zones are shutdown. \n" + exception);
             }
 
             Logger.Instance.Info("{0} zones were created succesfully.", count);
@@ -150,7 +150,7 @@ namespace Server
         {
             using (var context = new GameDatabaseContext())
             {
-                
+
                 List<UserAccount> accounts = context.Accounts.Where(x => x.IsOnline).ToList();
                 accounts.ForEach(x => x.IsOnline = false);
                 context.SaveChanges();
@@ -166,7 +166,7 @@ namespace Server
         {
             // The game couuld be in absolutely any state, we'll store these for later
             _packetTasks.Enqueue(new PacketTask(connection.Client, packet));
-            Logger.Instance.Debug(connection + " sent " + packet.GetType().Name );
+            Logger.Instance.Debug(connection + " sent " + packet.GetType().Name);
         }
 
         private readonly ConcurrentQueue<PacketTask> _packetTasks = new ConcurrentQueue<PacketTask>();

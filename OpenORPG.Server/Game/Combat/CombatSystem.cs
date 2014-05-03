@@ -35,6 +35,27 @@ namespace Server.Game.Combat
 
         public override void Update(float frameTime)
         {
+
+            // Perform any skills that may be pending in the queue
+            PerformPendingSkills(frameTime);
+
+            foreach (var c in Zone.ZoneCharacters)
+            {
+                // Remove dead mobs as neccessary
+                VerifyCharacterIsAlive(frameTime, c);
+                DecreaseCooldowns(frameTime, c);
+            }
+
+        }
+
+        private static void DecreaseCooldowns(float frameTime, Character character)
+        {
+            foreach (var skill in character.Skills)
+                skill.Cooldown -= frameTime;
+        }
+
+        private void PerformPendingSkills(float frameTime)
+        {
             var toRemove = new List<ICombatAction>();
 
             foreach (var pendingAction in _pendingActions)
@@ -44,46 +65,50 @@ namespace Server.Game.Combat
 
                 if (pendingAction.ExecutionTime < 0f)
                 {
-                    var result = pendingAction.PerformAction(GetCombatCharactersInRange());
                     toRemove.Add(pendingAction);
-                    pendingAction.ExecutingCharacter.CharacterState = CharacterState.Idle;
-
-                    // If success 
-                    if (result.TargetId != 0 && result.Damage != 0)
-                    {
-                        var packet = new ServerSkillUseResult(pendingAction.ExecutingCharacter.Id, (ulong)result.TargetId, result.Damage);
-                        Zone.SendToEntitiesInRange(packet, pendingAction.ExecutingCharacter);
-                    }
-
-                    // Increase aggro
-                    var victim = Zone.ZoneCharacters.First(x => x.Id == (ulong) result.TargetId);
-                    victim.CurrentAi.AgressionTracker.IncreaseAgression(pendingAction.ExecutingCharacter, 1);
-
-                    // Force skill onto cooldown
-                    pendingAction.Skill.EnableCooldown();
+                    ActivateSkill(pendingAction);
                 }
-
             }
 
-            // Remove skill
+            // Remove all pending skills
             toRemove.ForEach(x => _pendingActions.Remove(x));
+        }
 
-            foreach (var c in Zone.ZoneCharacters)
+        private void ActivateSkill(ICombatAction pendingAction)
+        {
+            // Execute the skill and reset the character state
+            var result = pendingAction.PerformAction(GetCombatCharactersInRange());
+            pendingAction.ExecutingCharacter.CharacterState = CharacterState.Idle;
+
+            SendActionResult(pendingAction, result);
+
+            CalculateAgression(pendingAction, result);
+
+            // Force skill onto cooldown
+            pendingAction.Skill.EnableCooldown();
+        }
+
+        private void CalculateAgression(ICombatAction pendingAction, CombatActionResult result)
+        {
+            // Increase aggro as required
+            var victim = Zone.ZoneCharacters.First(x => x.Id == (ulong)result.TargetId);
+            victim.CurrentAi.AgressionTracker.IncreaseAgression(pendingAction.ExecutingCharacter, 1);
+        }
+
+        private void SendActionResult(ICombatAction action, CombatActionResult result)
+        {
+            if (result.TargetId != 0 && result.Damage != 0)
             {
-                foreach (var skill in c.Skills)
-                    skill.Cooldown -= frameTime;
-
-                // Update AI
-                if (c.CurrentAi != null)
-                    c.CurrentAi.PerformUpdate(frameTime);
-
-                if (c.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue <= 0 && c is Monster)
-                    Zone.RemoveEntity(c);
-
-            
+                var packet = new ServerSkillUseResult(action.ExecutingCharacter.Id, (ulong)result.TargetId,
+                    result.Damage);
+                Zone.SendToEntitiesInRange(packet, action.ExecutingCharacter);
             }
+        }
 
-
+        private void VerifyCharacterIsAlive(float frameTime, Character character)
+        {
+            if (character.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue <= 0 && character is Monster)
+                Zone.RemoveEntity(character);
         }
 
         public override void OnEntityAdded(Entity entity)
@@ -112,10 +137,8 @@ namespace Server.Game.Combat
         /// </summary>
         /// <param name="requestingHero"></param>
         /// <param name="skillRequest"></param>
-        public void ProcessCombatRequest(Player requestingHero, ClientUseSkillPacket skillRequest)
+        public void ProcessCombatRequest(Character requestingHero, long skillId, long targetId)
         {
-            var skillId = skillRequest.SkillId;
-            var targetId = skillRequest.TargetId;
 
 
             // You may only use a skill if you are idle
@@ -123,7 +146,7 @@ namespace Server.Game.Combat
                 return;
 
             // Fetch skill
-            Skill skill = requestingHero.Skills.Find(x => x.SkillTemplate.Id == skillRequest.SkillId);
+            Skill skill = requestingHero.Skills.Find(x => x.SkillTemplate.Id == skillId);
 
             // Checks if the skill requested did not exist
             if (skill == null)

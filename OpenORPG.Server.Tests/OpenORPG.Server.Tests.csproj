@@ -48,6 +48,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,6 +64,9 @@
     <Reference Include="xunit.extensions">
       <HintPath>..\packages\xunit.extensions.1.9.2\lib\net20\xunit.extensions.dll</HintPath>
     </Reference>
+    <Reference Include="xunit.runner.visualstudio.testadapter">
+      <HintPath>..\packages\xunit.runner.visualstudio.0.99.2\lib\xunit.runner.visualstudio.testadapter.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\Content\AssetCacheTests.cs" />
@@ -69,6 +75,7 @@
     <Compile Include="Game\Combat\Payloads\AttackPayloadTest.cs" />
     <Compile Include="Game\Zones\ZoneManagerTests.cs" />
     <Compile Include="Infrastructure\Cryptography\HashTests.cs" />
+    <Compile Include="Infrastructure\Pathfinding\AStarPathfindingTests.cs" />
     <Compile Include="Infrastructure\Synchronization\SyncMonitorTests.cs" />
     <Compile Include="Infrastructure\World\DummyEntity.cs" />
     <Compile Include="Infrastructure\World\EntityTests.cs" />
@@ -85,11 +92,18 @@
       <Project>{79A11015-B16C-4A65-ADC4-FB8406DAE5DD}</Project>
       <Name>OpenORPG.Server</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TiledSharp\TiledSharp.csproj">
+      <Project>{e4130f8d-d301-4e0c-916d-489c4a23c9b1}</Project>
+      <Name>TiledSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Test.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

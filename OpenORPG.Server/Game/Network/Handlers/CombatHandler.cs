@@ -16,12 +16,8 @@ namespace Server.Game.Network.Handlers
         [PacketHandler(OpCodes.CMSG_USE_SKILL)]
         public static void OnHeroSkillUse(GameClient client, ClientUseSkillPacket packet)
         {
-            var zone = client.HeroEntity.Zone;
-            var combatSystem = zone.GetGameSystem<CombatSystem>();
-
-            // Pipe the request to the right system on the given zone
-            combatSystem.ProcessCombatRequest(client.HeroEntity, packet);
-
+            var hero = client.HeroEntity;
+            hero.UseSkill(packet.SkillId, packet.TargetId);
         }
 
 

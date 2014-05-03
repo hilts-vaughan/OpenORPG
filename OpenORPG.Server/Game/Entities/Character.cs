@@ -32,7 +32,7 @@ namespace Server.Game.Entities
             var numberOfEquipmentSlots = Enum.GetNames(typeof(EquipmentSlot)).Length;
             Equipment = new Equipment[numberOfEquipmentSlots];
 
-           
+
 
             Skills = new List<Skill>();
         }
@@ -84,11 +84,11 @@ namespace Server.Game.Entities
         {
             base.MoveEntity(location);
 
-            _position = location;       
-        
+            _position = location;
+
             // Syncs the position to the rest of the clients that can see this
             SyncPosition();
-           
+
         }
 
         private void SyncPosition()
@@ -101,6 +101,13 @@ namespace Server.Game.Entities
                 Zone.SendToEntitiesInRangeExcludingSource(newPacket, this);
             }
 
+        }
+
+        public void UseSkill(long skillId, long targetId)
+        {
+            var combatSystem = Zone.GetGameSystem<CombatSystem>();
+            if (combatSystem != null)
+                combatSystem.ProcessCombatRequest(this, skillId, targetId);
         }
 
 

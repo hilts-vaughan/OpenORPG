@@ -30,7 +30,12 @@ namespace TiledSharp
         /// Contains information about the map grid and whether or a certain tile is considered
         /// able to be walked on. 
         /// </summary>
-        public bool[,] BlockMap { get; private set; }
+        public virtual bool[,] BlockMap { get; private set; }
+
+        public TmxMap()
+        {
+            
+        }
 
         public TmxMap(string filename)
         {
