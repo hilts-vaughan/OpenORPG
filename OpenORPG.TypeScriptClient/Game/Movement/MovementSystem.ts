@@ -46,9 +46,13 @@
                 user.playSkillAnimation();
 
                 // Do stuff to the victim
-                var victim = this.parent.entities[packet.targetId]
-                var victimDamageText = new DamageText(victim, packet.damage);
-                EffectFactory.pulseDamage(victim);
+                var victim = this.parent.entities[packet.targetId];
+
+                // If this packet is delayed, we might get a null reference
+                if (victim != null) {
+                    var victimDamageText = new DamageText(victim, packet.damage);
+                    EffectFactory.pulseDamage(victim);
+                }
 
                 // Play hit effect
                 var effect = this.parent.game.add.audio("audio_effect_hit", 0.3, false, true);

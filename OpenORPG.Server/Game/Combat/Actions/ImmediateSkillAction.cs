@@ -56,7 +56,6 @@ namespace Server.Game.Combat.Actions
                     var damagePayload = new DamagePayload(ExecutingCharacter);
                     damagePayload.Apply(target);
                     return new CombatActionResult((long) target.Id, damagePayload.DamageInflicted);
-                    break;
                 case SkillType.Special:
                     break;
             }
