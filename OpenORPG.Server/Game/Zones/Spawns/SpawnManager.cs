@@ -77,20 +77,20 @@ namespace Server.Game.Zones.Spawns
 
         public override void Update(float frameTime)
         {
-            foreach (MonsterSpawnSet monsterSpawn in _spawnSets)
+            for (int index = 0; index < _spawnSets.Count; index++)
             {
-                var monster = monsterSpawn.PerformCheck(frameTime);
+                var monsterSpawn = (MonsterSpawnSet)_spawnSets[index];
+                var monster = monsterSpawn.TrySpawn(frameTime);
 
                 if (monster != null)
                 {
-
                     // Assign the monster a position suitable within the spawn region
                     monster.Position = GetRandomSpawnPosition(monsterSpawn, monster);
+                    monster.OriginSpawn = index;
 
                     // Add the monster
                     Zone.AddEntity(monster);
                 }
-
             }
         }
 
@@ -105,7 +105,7 @@ namespace Server.Game.Zones.Spawns
 
             var actualX = monsterSpawn.SpawnArea.X + pickedX;
             var actualY = monsterSpawn.SpawnArea.Y + pickedY;
-            
+
             return new Vector2(actualX, actualY);
         }
 
@@ -116,7 +116,13 @@ namespace Server.Game.Zones.Spawns
 
         public override void OnEntityRemoved(Entity entity)
         {
-            var id = entity.Id;
+            if (entity is Monster)
+            {
+                var monster = entity as Monster;
+                var spawnSet = _spawnSets[monster.OriginSpawn];
+
+                spawnSet.DecrementCounter();
+            }
         }
 
 

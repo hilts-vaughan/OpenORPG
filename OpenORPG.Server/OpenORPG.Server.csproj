@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\IllegalPacketException.cs" />
     <Compile Include="Game\AI\AiBase.cs" />
+    <Compile Include="Game\AI\AiSystem.cs" />
     <Compile Include="Game\AI\BasicAi.cs" />
     <Compile Include="Game\AI\Fight\CombatAi.cs" />
     <Compile Include="Game\ChatManager.cs" />

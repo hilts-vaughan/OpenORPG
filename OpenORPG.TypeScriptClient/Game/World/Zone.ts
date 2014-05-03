@@ -60,6 +60,9 @@
             this.systems.push(combatSystem);
 
             this.setupNetworkHandlers();
+
+    
+
         }
 
         public addNetworkEntityToZone(entity: any): Entity {
@@ -92,13 +95,23 @@
                 delete this.entities[entityKey];
             }
 
+            for (var bucketKey in this.bucket) {
+                var layer = this.bucket[bucketKey];
+                layer.destroy();
+            }
+
             // Destroy our tilemap
             this.tileMap.destroy();
+            this.entityGroup.destroy(true);
+
 
             for (var systemKey in this.systems) {
                 var system = this.systems[systemKey];
                 system.destroy();
             }
+
+         
+
 
         }
 

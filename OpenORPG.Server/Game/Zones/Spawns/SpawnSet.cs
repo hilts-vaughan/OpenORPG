@@ -17,6 +17,8 @@ namespace Server.Game.Zones.Spawns
         // The last elapsed spawn time
         protected float LastSpawnTime = 0f;
 
+        protected int SpawnedSoFar = 0;
+
         /// <summary>
         /// Defines the maximum amount of spawnable objects that can be created and managed by this set.
         /// This limits the amount of objects at any given time that can be spawned.
@@ -45,5 +47,11 @@ namespace Server.Game.Zones.Spawns
             SpawnTime = spawnTime;
             SpawnArea = spawnArea;
         }
+
+        public void DecrementCounter()
+        {
+            SpawnedSoFar--;
+        }
+
     }
 }

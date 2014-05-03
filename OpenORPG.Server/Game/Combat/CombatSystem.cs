@@ -91,8 +91,9 @@ namespace Server.Game.Combat
         private void CalculateAgression(ICombatAction pendingAction, CombatActionResult result)
         {
             // Increase aggro as required
-            var victim = Zone.ZoneCharacters.First(x => x.Id == (ulong)result.TargetId);
-            victim.CurrentAi.AgressionTracker.IncreaseAgression(pendingAction.ExecutingCharacter, 1);
+            var victim = Zone.ZoneCharacters.FirstOrDefault(x => x.Id == (ulong)result.TargetId);
+            if (victim != null)
+                victim.CurrentAi.AgressionTracker.IncreaseAgression(pendingAction.ExecutingCharacter, 1);
         }
 
         private void SendActionResult(ICombatAction action, CombatActionResult result)
@@ -107,8 +108,20 @@ namespace Server.Game.Combat
 
         private void VerifyCharacterIsAlive(float frameTime, Character character)
         {
-            if (character.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue <= 0 && character is Monster)
-                Zone.RemoveEntity(character);
+            if (character.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue <= 0)
+            {
+                if (character is Player)
+                {
+                    // TODO: Respawn a player here effectively
+                }
+
+                else
+                {
+                    Zone.RemoveEntity(character);
+                }
+
+            }
+
         }
 
         public override void OnEntityAdded(Entity entity)

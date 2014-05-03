@@ -29,18 +29,20 @@ namespace Server.Game.Zones.Spawns
             LastSpawnTime = spawnTime + 1;
         }
 
-        public Monster PerformCheck(float time)
+        public Monster TrySpawn(float time)
         {
             LastSpawnTime += time;
 
-            if (LastSpawnTime > SpawnTime)
+            if (LastSpawnTime > SpawnTime && SpawnedSoFar < MaximumAmount)
             {
                 LastSpawnTime = 0;
+                SpawnedSoFar++;
                 return GameObjectFactory.CreateMonster(MobId);
             }
 
             return null;
         }
+     
 
     }
 }

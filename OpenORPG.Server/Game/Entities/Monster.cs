@@ -21,6 +21,8 @@ namespace Server.Game.Entities
 
         }
 
+        public int OriginSpawn { get; set; }
+
 
     }
 }
