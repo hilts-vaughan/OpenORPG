@@ -116,6 +116,7 @@
     <Compile Include="Game\Entities\Character.cs" />
     <Compile Include="Game\Entities\CharacterState.cs" />
     <Compile Include="Game\Entities\Monster.cs" />
+    <Compile Include="Game\Entities\Npc.cs" />
     <Compile Include="Game\Entities\Player.cs" />
     <Compile Include="Game\Entities\StatTypes.cs" />
     <Compile Include="Game\Items\Equipment\Equipment.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Game\Network\PacketTask.cs" />
     <Compile Include="Game\Items\Item.cs" />
     <Compile Include="Game\Items\ItemStorage.cs" />
+    <Compile Include="Game\NPC\Discussion.cs" />
     <Compile Include="Game\World\Systems\DebugMonitorSystem.cs" />
     <Compile Include="Game\Zones\Spawns\MonsterSpawnSet.cs" />
     <Compile Include="Game\Zones\Spawns\SpawnManager.cs" />
