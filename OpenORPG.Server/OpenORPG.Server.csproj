@@ -95,6 +95,7 @@
     <Compile Include="Game\Combat\Actions\ImmediateSkillAction.cs" />
     <Compile Include="Game\Combat\AgressionTracker.cs" />
     <Compile Include="Game\Combat\CombatActionResult.cs" />
+    <Compile Include="Game\Combat\CombatUtility.cs" />
     <Compile Include="Game\Combat\Payloads\DamagePayload.cs" />
     <Compile Include="Game\Combat\Actions\ICombatAction.cs" />
     <Compile Include="Game\Combat\CharacterStat.cs" />
@@ -212,6 +213,11 @@
     <Compile Include="Infrastructure\Pathfinding\BestAStar.cs" />
     <Compile Include="Infrastructure\Pathfinding\IPathFinder.cs" />
     <Compile Include="Infrastructure\Pathfinding\GraphNode.cs" />
+    <Compile Include="Infrastructure\Quests\IQuestProvider.cs" />
+    <Compile Include="Infrastructure\Quests\Quest.cs" />
+    <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirement.cs" />
+    <Compile Include="Infrastructure\Quests\Requirements\QuestHasItemRequirement.cs" />
+    <Compile Include="Infrastructure\Quests\Rewards\IQuestReward.cs" />
     <Compile Include="Infrastructure\Synchronization\ISyncSerializer.cs" />
     <Compile Include="Infrastructure\Synchronization\SyncAttribute.cs" />
     <Compile Include="Infrastructure\Synchronization\Groups\SyncGroup.cs" />
@@ -249,6 +255,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Game\Chat\" />
+    <Folder Include="Game\Database\Repository\" />
     <Folder Include="Infrastructure\AI\" />
   </ItemGroup>
   <ItemGroup>

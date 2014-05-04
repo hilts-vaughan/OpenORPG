@@ -36,7 +36,7 @@ namespace Server.Game.Combat.Actions
             {
                 var distance = Vector2.Distance(character.Position, ExecutingCharacter.Position);
 
-                if (distance < highestDistance && distance < 56)
+                if (distance < highestDistance && distance < 70)
                 {
                     highestDistance = distance;
                     target = character;
@@ -44,8 +44,10 @@ namespace Server.Game.Combat.Actions
             }
 
             if (target == null)
-                return new CombatActionResult(0, 0);
+                return new CombatActionResult(-1, 0);
 
+            if(!CombatUtility.CanSee(ExecutingCharacter, target))
+                return new CombatActionResult(-1, 0);
 
             // Depending on the skill type, apply a payload or operation
             switch (Skill.SkillTemplate.SkillType)

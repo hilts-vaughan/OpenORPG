@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Server.Game.AI;
 using Server.Game.Combat;
 using Server.Game.Entities;
+using Server.Game.Movement;
 using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Server;
 using Server.Game.Zones.Spawns;
@@ -167,6 +169,8 @@ namespace Server.Game.Zones
         {
             GameSystems.Add(new SpawnGameSystem(this));
             GameSystems.Add(new CombatSystem(this));
+            GameSystems.Add(new AiSystem(this));
+    
         }
 
         /// <summary>

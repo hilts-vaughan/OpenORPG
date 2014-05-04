@@ -32,12 +32,10 @@ namespace Server.Game.AI
         protected Vector2 Start = Vector2.Zero;
         protected Vector2 Current = Vector2.Zero;
 
-        private float _acc = 500f;
+        private float _acc = 0f;
 
         public AgressionTracker AgressionTracker { get; set; }
 
-
- 
 
         protected void BeginPath(IEnumerable<Vector2> pathPoints)
         {
@@ -46,13 +44,29 @@ namespace Server.Game.AI
                 DestinationNodes.Enqueue(pathPoint);
             }
 
+                _acc = 500f;
+                      
+            ResetPath();
 
+            //ResetPath();
+
+            Character.CharacterState = CharacterState.Moving;
+
+
+
+        }
+
+        protected void UpdatePath()
+        {
+            DestinationNodes.Clear();  
+        }
+
+        protected void ResetPath()
+        {
             // On the next AI step, we will begin steering towards there
             Start = Character.Position;
             Current = Character.Position;
-            Character.CharacterState = CharacterState.Moving;
 
-            _acc = 500f;
         }
 
         protected void EndPath()
@@ -107,10 +121,10 @@ namespace Server.Game.AI
             var node = DestinationNodes.Peek();
             var velocity = new Vector2(Character.Speed * deltaTime, Character.Speed * deltaTime);
 
-            if ( Math.Abs(node.Y - Current.Y) < 0.0001f)
+            if (Math.Abs(node.Y - Current.Y) < 0.0001f)
                 velocity.Y = 0;
 
-            if ( Math.Abs(node.X - Current.X) < 0.0001f)
+            if (Math.Abs(node.X - Current.X) < 0.0001f)
                 velocity.X = 0;
 
 
@@ -166,7 +180,7 @@ namespace Server.Game.AI
             Current = newPosition;
 
 
-            if (_acc > 0.2f)
+            if (_acc > 0.5f)
             {
                 _acc = 0f;
                 Character.Position = Current;

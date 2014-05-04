@@ -1,6 +1,7 @@
 ﻿using System.CodeDom;
 using System.Linq;
 using Server.Game.AI;
+using Server.Game.Combat;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
@@ -51,6 +52,7 @@ namespace Server.Game
                 CopyStatsFromTemplateToCharacter(template, monster);
 
                 monster.CurrentAi = new WanderAi(monster);
+                monster.Skills.Add(new Skill(context.SkillTemplates.First(x => x.Id == 1)));
 
                 return monster;
             }

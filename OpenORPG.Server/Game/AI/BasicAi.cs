@@ -46,15 +46,43 @@ namespace Server.Game.AI
 
         public override void PerformUpdate(float deltaTime)
         {
+            if (!Character.IsAlive)
+                return;
 
             //TODO: If there is agression and a target is close by
             if (AgressionTracker.HasAgression())
             {
-                //TODO: Check if we are in attack range
-                EndPath();
+                var victim = GetVictim();
 
-                // Path find to our characters
-                ChasePlayer();
+                if (Vector2.Distance(victim.Position, Character.Position) < 70)
+                {
+                    if (Character.CharacterState == CharacterState.Moving)
+                    {
+                        Character.CharacterState = CharacterState.Idle;
+                        EndPath();
+                    }
+
+
+                    FaceVictim();
+
+
+                    Character.UseSkill(1, (long)victim.Id);
+                }
+                else
+                {
+
+
+
+                    if (DestinationNodes.Count == 0)
+                        ChasePlayer();
+
+                    else
+                    {
+                        UpdatePath();
+                        DestinationNodes = new Queue<Vector2>(RegeneratePath());
+                    }
+                }
+
 
             }
 
@@ -82,11 +110,59 @@ namespace Server.Game.AI
 
         }
 
+        private void FaceVictim()
+        {
+            var victim = GetVictim();
+
+            // Do something nice here
+            if (CombatUtility.CanSeeInDirection(Character, victim, Direction.North))
+            {
+                Character.Direction = Direction.North;
+                return;
+            }
+
+            // Do something nice here
+            if (CombatUtility.CanSeeInDirection(Character, victim, Direction.South))
+            {
+                Character.Direction = Direction.South;
+                return;
+            }
+
+            // Do something nice here
+            if (CombatUtility.CanSeeInDirection(Character, victim, Direction.East))
+            {
+                Character.Direction = Direction.East;
+                return;
+            }
+
+            // Do something nice here
+            if (CombatUtility.CanSeeInDirection(Character, victim, Direction.West))
+            {
+                Character.Direction = Direction.West;
+                return;
+            }
+
+
+        }
+
 
         private void ChasePlayer()
         {
-            var victim =
-                Character.Zone.ZoneCharacters.First(x => x.Id == AgressionTracker.GetCharacterIdWithMostAgression());
+
+
+            var destList = RegeneratePath();
+
+
+            BeginPath(destList);
+
+
+
+
+        }
+
+        private List<Vector2> RegeneratePath()
+        {
+            var victim = GetVictim();
             var start = GetTileGridPoints();
 
             var gridPoint = GetTileGridPoints(victim);
@@ -97,12 +173,15 @@ namespace Server.Game.AI
             var searcher = new AStarSearcher(Character.Zone.TileMap, new Point(newX, newY),
                 new Point(start.X, start.Y));
             var results = searcher.GeneratePath(false);
-            results.RemoveAt(0);
+
             var destList = new List<Vector2>();
+
 
             // If it's even possible
             if (results.Count > 0)
             {
+                results.RemoveAt(0);
+                results.RemoveAt(results.Count - 1);
 
                 foreach (var result in results)
                 {
@@ -110,9 +189,23 @@ namespace Server.Game.AI
                     destList.Add(new Vector2(point.X, point.Y));
                 }
 
-                BeginPath(destList);
+            }
+            else
+            {
+                AgressionTracker.RemoveAgression(victim.Id);
+                EndPath();
             }
 
+            // ResetPath();
+
+            return destList;
+        }
+
+        private Character GetVictim()
+        {
+            var victim =
+                Character.Zone.ZoneCharacters.First(x => x.Id == AgressionTracker.GetCharacterIdWithMostAgression());
+            return victim;
         }
 
 

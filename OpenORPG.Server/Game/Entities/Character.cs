@@ -22,7 +22,7 @@ namespace Server.Game.Entities
             : base(sprite)
         {
             //TODO: Be a bit more creative than this
-            Speed = 64;
+            Speed = 130;
 
             // We initialize the size of our stats here
             var numberOfStats = Enum.GetNames(typeof(StatTypes)).Length;
@@ -78,6 +78,11 @@ namespace Server.Game.Entities
         {
             get { return _speed; }
             set { _speed = value; PropertyCollection.WriteValue("Speed", value); }
+        }
+
+        public bool IsAlive
+        {
+            get { return CharacterStats[(int) StatTypes.Hitpoints].CurrentValue > 0; }
         }
 
         protected override void MoveEntity(Vector2 location)

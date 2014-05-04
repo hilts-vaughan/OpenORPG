@@ -25,6 +25,14 @@ namespace Server.Game.Combat
             _agressionLevels.Clear();
         }
 
+
+        public void RemoveAgression(ulong id)
+        {
+            if (_agressionLevels.ContainsKey(id))
+                _agressionLevels.Remove(id);
+        }
+
+
         public void IncreaseAgression(Character character, int amount)
         {
             if (_agressionLevels.ContainsKey(character.Id))
