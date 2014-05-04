@@ -36,8 +36,24 @@
 			"row": 7
 		},
 		"idle_down": {
-			"length": 6,
+			"length": 4,
 			"row": 8
+		},
+
+		"atk_left": {
+			"length": 5,
+			"row": 9
+		},
+		"walk_left": {
+			"length": 4,
+			"row": 10
+		},
+		"idle_left": {
+			"length": 4,
+			"row": 11
 		}
+
+
+
 	}
 }
