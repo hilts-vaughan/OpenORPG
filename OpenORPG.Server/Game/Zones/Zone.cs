@@ -16,6 +16,7 @@ using Server.Infrastructure.Network.Packets;
 using Server.Infrastructure.World;
 using Server.Infrastructure.World.Systems;
 using Server.Utils;
+using Server.Utils.Math;
 using TiledSharp;
 
 namespace Server.Game.Zones
@@ -78,7 +79,7 @@ namespace Server.Game.Zones
 
 
             string zonePath = Path.Combine(PathHelper.AssetBasePath, PathHelper.MapPath,
-                                           id + PathHelper.MapExtension);
+                id + PathHelper.MapExtension);
             try
             {
                 TileMap = new TmxMap(zonePath);
@@ -88,7 +89,8 @@ namespace Server.Game.Zones
                 // Mark the world as offline
                 Available = false;
 
-                Logger.Instance.Error("The world in zone #{0} could not be started. The tilemap could not be found. \n" + exception, id);
+                Logger.Instance.Error(
+                    "The world in zone #{0} could not be started. The tilemap could not be found. \n" + exception, id);
             }
 
             AddGameSystems();
@@ -101,6 +103,8 @@ namespace Server.Game.Zones
 
             // Setup our sensors
             SetupExitRectangles();
+
+            SpawnNpcs();
         }
 
         private void SetupExitRectangles()
@@ -109,13 +113,15 @@ namespace Server.Game.Zones
             topZoneArea = new Rectangle(0, 0, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight + 16);
 
             // Bottom sensor
-            bottomZoneArea = new Rectangle(0, (TileMap.Height * TileMap.TileHeight) - 48, TileMap.Width * TileMap.TileWidth, TileMap.TileHeight + 16);
+            bottomZoneArea = new Rectangle(0, (TileMap.Height * TileMap.TileHeight) - 48, TileMap.Width * TileMap.TileWidth,
+                TileMap.TileHeight + 16);
 
             // Left
             leftZoneArea = new Rectangle(0, 0, TileMap.TileWidth + 16, TileMap.Height * TileMap.TileHeight);
 
             // Right
-            rightZoneArea = new Rectangle(TileMap.Width * (TileMap.TileWidth - 1), 0, TileMap.TileWidth + 16, TileMap.Height * TileMap.TileHeight);
+            rightZoneArea = new Rectangle(TileMap.Width * (TileMap.TileWidth - 1), 0, TileMap.TileWidth + 16,
+                TileMap.Height * TileMap.TileHeight);
 
         }
 
@@ -134,7 +140,7 @@ namespace Server.Game.Zones
             if (suc)
                 ZoneExitPoints[(int)Direction.East] = Convert.ToInt64(right);
 
-            suc = TileMap.Properties.TryGetValue("DownExitPoint", out  down);
+            suc = TileMap.Properties.TryGetValue("DownExitPoint", out down);
             if (suc)
                 ZoneExitPoints[(int)Direction.South] = Convert.ToInt64(down);
 
@@ -148,7 +154,8 @@ namespace Server.Game.Zones
         {
 
             //TODO: Please don't hard-code me
-            var playerRect = new Rectangle(player.X + player.Body.OffsetX, player.Y + player.Body.OffsetY, player.Body.Width, player.Body.Height);
+            var playerRect = new Rectangle(player.X + player.Body.OffsetX, player.Y + player.Body.OffsetY,
+                player.Body.Width, player.Body.Height);
 
             switch (direction)
             {
@@ -170,13 +177,48 @@ namespace Server.Game.Zones
             GameSystems.Add(new SpawnGameSystem(this));
             GameSystems.Add(new CombatSystem(this));
             GameSystems.Add(new AiSystem(this));
-    
+
         }
+
+
+        private void SpawnNpcs()
+        {
+            string NpcSpawnSetName = "NpcSpawns";
+
+            // If we have this layer, parse it
+            if (TileMap.ObjectGroups.Contains(NpcSpawnSetName))
+            {
+                var groups = TileMap.ObjectGroups[NpcSpawnSetName];
+
+                foreach (var npcSpawn in groups.Objects)
+                {
+                    if (npcSpawn.Type == "NpcSpawn")
+                    {
+                        var npcId = Convert.ToInt64(npcSpawn.Properties["NpcId"]);
+
+                        var x = npcSpawn.X;
+                        var y = npcSpawn.Y;
+                        var width = npcSpawn.Width;
+                        var height = npcSpawn.Height;
+
+                        var spawnArea = new Rectangle(x, y, width, height);
+
+                        var npc = GameObjectFactory.CreateNpc(npcId);
+                        npc.Position = new Vector2(x, y);
+
+                        AddEntity(npc);
+
+                    }
+                }
+            }
+        }
+
 
         /// <summary>
         /// A collection of entities that this game world is responsible for handling.
         /// </summary>
-        protected List<Entity> Entities = new List<Entity>();
+        protected
+        List<Entity> Entities = new List<Entity>();
 
         private readonly List<Entity> _toAdd = new List<Entity>();
         private readonly List<Entity> _toRemove = new List<Entity>();
@@ -269,9 +311,9 @@ namespace Server.Game.Zones
 
         public void Update(TimeSpan deltaTime)
         {
-  
 
-    
+
+
 
             // Remove and add elements that need to be
 
@@ -427,7 +469,7 @@ namespace Server.Game.Zones
 
         protected void OnClientEnter(GameClient client, Player heroEntity)
         {
-            GameClients.Add(client);      
+            GameClients.Add(client);
             ChatChannel.Join(client);
 
             string name = heroEntity.Name;

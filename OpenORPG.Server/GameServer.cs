@@ -159,6 +159,11 @@ namespace Server
                 context.SaveChanges();
             }
 
+            using (var context = new GameDatabaseContext())
+            {
+
+            }
+
 
 
         }

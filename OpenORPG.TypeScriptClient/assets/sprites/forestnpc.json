@@ -1,0 +1,11 @@
+{
+	"id": "forestnpc",
+	"width": 48,
+	"height": 48,
+	"animations": {
+		"idle_down": {
+			"length": 2,
+			"row": 0
+		}
+	}
+}

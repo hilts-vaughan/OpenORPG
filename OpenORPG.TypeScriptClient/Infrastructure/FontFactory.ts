@@ -15,4 +15,8 @@
         return new OpenORPG.FontDefinition("26px AdvoCut", "#FFFFFF", "center", "#000000", 4);
     }
 
+    export function getNpcFont(): OpenORPG.FontDefinition {
+        var font = new OpenORPG.FontDefinition("14px AdvoCut", "#FFFFFF", "center", "#000000", 3);
+        return font;
+    }
 }

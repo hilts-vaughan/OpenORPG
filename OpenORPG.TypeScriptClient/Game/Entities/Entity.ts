@@ -5,6 +5,7 @@
         // These properties are what are strongly typed
         public name: string;
         public id: number;
+        private entityType : string;
 
         public characterState: CharacterState;
         public direction: Direction;
@@ -118,13 +119,18 @@
         private updateName(name: string) {
 
             if (this.nameTagText == null) {
-                this.nameTagText = new Phaser.Text(this.game, 0, 0, name, FontFactory.getPlayerFont());
+                this.nameTagText = new Phaser.Text(this.game, 0, 0, name, FontFactory.getPlayerFont());              
                 this.nameTagText.anchor.set(0.5, 0.5);
                 this.game.world.add(this.nameTagText);
             }
             else {
                 this.nameTagText.text = name;
             }
+
+            if (this.entityType == "Npc") {
+                this.nameTagText.fill = FontFactory.getNpcFont().fill;
+            }
+
         }
 
         private updateSprite(sprite: string) {

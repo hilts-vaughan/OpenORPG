@@ -1,4 +1,5 @@
-﻿using System.CodeDom;
+﻿using System;
+using System.CodeDom;
 using System.Linq;
 using Server.Game.AI;
 using Server.Game.Combat;
@@ -58,6 +59,22 @@ namespace Server.Game
             }
         }
 
+        public static Npc CreateNpc(long id)
+        {
+            using (var context = new GameDatabaseContext())
+            {
+                var template = context.Npcs.FirstOrDefault(x => x.NpcId == id);
+
+                if(template == null)
+                    throw new Exception("Creating an NPC with the given Id is invalid.");
+
+                var npc = new Npc(template);
+
+                return npc;
+
+            }
+
+        }
 
         /// <summary>
         /// Copies the template stats given to the <see cref="Character"/> being created from these.

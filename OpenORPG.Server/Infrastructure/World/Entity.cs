@@ -11,6 +11,7 @@ using Server.Infrastructure.Math;
 using Server.Infrastructure.Synchronization;
 using Server.Utils;
 using Server.Utils.Math;
+using ServiceStack;
 
 namespace Server.Infrastructure.World
 {
@@ -160,6 +161,11 @@ namespace Server.Infrastructure.World
                 // Write a new changed value
                 PropertyCollection.WriteValue("Name", value);
             }
+        }
+
+        public string EntityType
+        {
+            get { return GetType().Name.ToString(); }
         }
 
     }

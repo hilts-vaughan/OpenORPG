@@ -63,6 +63,8 @@ namespace Server.Infrastructure.Quests
 
         private void LoadFinishRequirements(QuestTable questTable)
         {
+            FinishRequirements = new List<IQuestRequirement>();
+
             // If we have some monster requirements
             if (questTable.EndMonsterRequirements != null)
             {

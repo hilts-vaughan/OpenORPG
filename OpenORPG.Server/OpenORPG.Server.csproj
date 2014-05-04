@@ -112,6 +112,7 @@
     <Compile Include="Game\Database\Maps\MonsterTemplateMap.cs" />
     <Compile Include="Game\Database\Maps\UserStorageMap.cs" />
     <Compile Include="Game\Database\Models\ContentTemplates\IStatTemplate.cs" />
+    <Compile Include="Game\Database\Models\NpcTemplate.cs" />
     <Compile Include="Game\Database\Models\Quests\QuestItemRequirement.cs" />
     <Compile Include="Game\Database\Models\Quests\QuestMonsterRequirement.cs" />
     <Compile Include="Game\Database\Models\Quests\QuestTable.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Game\Entities\CharacterState.cs" />
     <Compile Include="Game\Entities\Monster.cs" />
     <Compile Include="Game\Entities\Npc.cs" />
+    <Compile Include="Game\Entities\NpcInfo.cs" />
     <Compile Include="Game\Entities\Player.cs" />
     <Compile Include="Game\Entities\StatTypes.cs" />
     <Compile Include="Game\Items\Equipment\Equipment.cs" />
@@ -221,6 +223,7 @@
     <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirement.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirementTable.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\QuestHasItemRequirement.cs" />
+    <Compile Include="Infrastructure\Quests\Requirements\QuestMonstersKilledRequirement.cs" />
     <Compile Include="Infrastructure\Quests\Rewards\IQuestReward.cs" />
     <Compile Include="Infrastructure\Synchronization\ISyncSerializer.cs" />
     <Compile Include="Infrastructure\Synchronization\SyncAttribute.cs" />

@@ -118,6 +118,14 @@ namespace Server.Game.Database.Seeds
 
             context.Quests.Add(quest);
 
+
+            var npc = new NpcTemplate();
+            npc.Name = "Forest Explorer";
+            npc.Sprite = "forestnpc";
+            npc.Quests.Add(quest);
+
+            context.Npcs.Add(npc);
+
         }
 
         private void CreateTestMonsters(GameDatabaseContext context)

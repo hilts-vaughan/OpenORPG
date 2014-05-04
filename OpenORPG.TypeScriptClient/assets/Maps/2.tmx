@@ -6394,4 +6394,11 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="NpcSpawns">
+  <object name="Forest Explorer" type="NpcSpawn" x="320" y="256" width="32" height="32">
+   <properties>
+    <property name="NpcId" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
