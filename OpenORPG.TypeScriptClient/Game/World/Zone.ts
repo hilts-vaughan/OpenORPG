@@ -155,7 +155,7 @@
 
                 entity.destroy();
                 entity.destroyNamePlate();
-                delete this.entities[toRemove];
+                delete this.entities[value];
             }
 
             for (var toAdd in this._toAdd) {

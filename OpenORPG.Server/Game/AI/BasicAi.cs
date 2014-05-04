@@ -172,7 +172,7 @@ namespace Server.Game.AI
 
             var searcher = new AStarSearcher(Character.Zone.TileMap, new Point(newX, newY),
                 new Point(start.X, start.Y));
-            var results = searcher.GeneratePath(false);
+            var results = searcher.GeneratePath(true);
 
             var destList = new List<Vector2>();
 
@@ -218,7 +218,7 @@ namespace Server.Game.AI
 
             var searcher = new AStarSearcher(Character.Zone.TileMap, new Point(newX, newY),
                 new Point(gridPoint.X, gridPoint.Y));
-            var results = searcher.GeneratePath(false);
+            var results = searcher.GeneratePath(true);
 
             var destList = new List<Vector2>();
 
