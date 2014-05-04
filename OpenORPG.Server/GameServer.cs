@@ -18,6 +18,7 @@ using Server.Infrastructure.Logging.Loggers;
 using Server.Infrastructure.Network;
 using Server.Infrastructure.Network.Handlers;
 using Server.Infrastructure.Network.Packets;
+using Server.Infrastructure.Quests;
 using Server.Utils;
 
 namespace Server
@@ -75,10 +76,11 @@ namespace Server
 
         public void Run()
         {
+            SetupLoggers();
 
             ResetOnlineFlags();
             SetupManagers();
-            SetupLoggers();
+
 
             StartZones();
 
@@ -153,8 +155,12 @@ namespace Server
 
                 List<UserAccount> accounts = context.Accounts.Where(x => x.IsOnline).ToList();
                 accounts.ForEach(x => x.IsOnline = false);
+
                 context.SaveChanges();
             }
+
+
+
         }
 
         private void OnDisconnected(Connection obj)

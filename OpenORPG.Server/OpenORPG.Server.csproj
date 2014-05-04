@@ -112,6 +112,9 @@
     <Compile Include="Game\Database\Maps\MonsterTemplateMap.cs" />
     <Compile Include="Game\Database\Maps\UserStorageMap.cs" />
     <Compile Include="Game\Database\Models\ContentTemplates\IStatTemplate.cs" />
+    <Compile Include="Game\Database\Models\Quests\QuestItemRequirement.cs" />
+    <Compile Include="Game\Database\Models\Quests\QuestMonsterRequirement.cs" />
+    <Compile Include="Game\Database\Models\Quests\QuestTable.cs" />
     <Compile Include="Game\Database\Models\UserSkill.cs" />
     <Compile Include="Game\Database\Models\UserStorage.cs" />
     <Compile Include="Game\Entities\Character.cs" />
@@ -216,6 +219,7 @@
     <Compile Include="Infrastructure\Quests\IQuestProvider.cs" />
     <Compile Include="Infrastructure\Quests\Quest.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirement.cs" />
+    <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirementTable.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\QuestHasItemRequirement.cs" />
     <Compile Include="Infrastructure\Quests\Rewards\IQuestReward.cs" />
     <Compile Include="Infrastructure\Synchronization\ISyncSerializer.cs" />
@@ -255,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Game\Chat\" />
+    <Folder Include="Game\Database\Maps\Quests\" />
     <Folder Include="Game\Database\Repository\" />
     <Folder Include="Infrastructure\AI\" />
   </ItemGroup>

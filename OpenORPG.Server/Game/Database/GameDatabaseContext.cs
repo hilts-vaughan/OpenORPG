@@ -2,7 +2,9 @@ using System.Data.Entity;
 using Server.Game.Database.Maps;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
+using Server.Game.Database.Models.Quests;
 using Server.Game.Database.Seeds;
+using Server.Infrastructure.Quests;
 
 namespace Server.Game.Database
 {
@@ -23,8 +25,8 @@ namespace Server.Game.Database
 
         public GameDatabaseContext()
         {
-            //Configuration.LazyLoadingEnabled = true;
-            //Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = true;
+            //Configuration.ProxyCreationEnabled = true;
         }
 
         public DbSet<UserAccount> Accounts { get; set; }
@@ -33,6 +35,8 @@ namespace Server.Game.Database
         public DbSet<MonsterTemplate> MonsterTemplates { get; set; }
         public DbSet<SkillTemplate> SkillTemplates { get; set; }
         public DbSet<ItemTemplate> ItemTemplates { get; set; }
+        public DbSet<QuestTable> Quests { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -44,7 +48,14 @@ namespace Server.Game.Database
             modelBuilder.Configurations.Add(new UserStorageMap());
             modelBuilder.Configurations.Add(new UserSkillMap());
             modelBuilder.Configurations.Add(new ItemTemplateMap());
-            
+
+            modelBuilder.Entity<QuestTable>().HasKey(x => x.QuestTableId);
+
+
+            modelBuilder.Entity<QuestItemRequirementTable>().HasKey(x => x.QuestTableId).HasRequired(x => x.Quest).WithOptional(x => x.ItemRequirements).WillCascadeOnDelete(true);
+            modelBuilder.Entity<QuestMonsterRequirementTable>().HasKey(x => x.QuestTableId).HasRequired(x => x.Quest).WithOptional(x => x.MonsterRequirements).WillCascadeOnDelete(true);
+
+
         }
     }
 }

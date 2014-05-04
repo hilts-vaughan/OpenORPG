@@ -5,6 +5,8 @@ using System.Linq;
 using Server.Game.Combat;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
+using Server.Game.Database.Models.Quests;
+using Server.Infrastructure.Quests;
 
 namespace Server.Game.Database.Seeds
 {
@@ -56,8 +58,10 @@ namespace Server.Game.Database.Seeds
             }
 
             CreateTestMonsters(context);
+            CreateTestQuests(context);
 
 
+            context.SaveChanges();
             context.SaveChanges();
 
 
@@ -90,6 +94,30 @@ namespace Server.Game.Database.Seeds
             var banish = new SkillTemplate(SkillType.Damage, SkillTargetType.Enemy, SkillActivationType.Immediate, 0,
                 long.MaxValue, "Eradicates a foe.", 2, "Banish");
             context.SkillTemplates.Add(banish);
+        }
+
+        private void CreateTestQuests(GameDatabaseContext context)
+        {
+            var items = context.ItemTemplates.Where(x => x.Id == 1).ToList();
+            var monsterReq = new QuestMonsterRequirementTable()
+            {
+                QuestTableId = 1,
+                MonsterId = 2,
+                MonsterAmount = 5
+            };
+
+            var quest = new QuestTable()
+            {
+                Name = "Overthrow the Goblins",
+                Description = "We've got a goblin problem going around. Think you can help us out? I reckon knocking out at least 5 of them should give them a spook.",
+                RewardCurrency = 0,
+                RewardExp = 100,
+                QuestTableId = 1,
+                EndMonsterRequirements = monsterReq
+            };
+
+            context.Quests.Add(quest);
+
         }
 
         private void CreateTestMonsters(GameDatabaseContext context)

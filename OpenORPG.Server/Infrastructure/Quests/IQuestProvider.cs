@@ -11,5 +11,10 @@ namespace Server.Infrastructure.Quests
     /// </summary>
     public interface IQuestProvider
     {
+
+        /// <summary>
+        /// A list of quests that this NPC can provide
+        /// </summary>
+        List<Quest> Quests { get; set; } 
     }
 }

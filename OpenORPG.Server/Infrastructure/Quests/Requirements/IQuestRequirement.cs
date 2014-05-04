@@ -8,13 +8,23 @@ using Server.Game.Entities;
 namespace Server.Infrastructure.Quests.Requirements
 {
     /// <summary>
-    /// A quest requirement interface
+    /// A quest requirement interface that specifices a concrete implementation for a requirement   
     /// </summary>
+    public interface IQuestRequirement<T> where T : IQuestRequirementTable
+    {
+
+        /// <summary>
+        /// A quest requirement table containing information regarding what will be required to check
+        /// this requirement properly.
+        /// </summary>
+        T RequirementInfo { get; set; }
+    }
+
     public interface IQuestRequirement
     {
         /// <summary>
         /// This method will do checks on the given player context and verify the requirements have been met
-        /// to finish the quest succesfully. 
+        /// to finish the quest successfully. 
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
@@ -27,6 +37,6 @@ namespace Server.Infrastructure.Quests.Requirements
         /// </summary>
         /// <param name="player"></param>
         void TakeRequirements(Player player);
-
     }
+
 }

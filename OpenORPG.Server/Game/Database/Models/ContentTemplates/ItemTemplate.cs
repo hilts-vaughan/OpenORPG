@@ -25,6 +25,10 @@ namespace Server.Game.Database.Models.ContentTemplates
 
         }
 
+        public ItemTemplate()
+        {
+            
+        }
 
         public string Description { get; set; }
         public ItemType Type { get; set; }
