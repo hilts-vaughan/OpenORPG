@@ -8,6 +8,7 @@ using Server.Game.Combat;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Storage;
+using Server.Infrastructure.Quests;
 using Server.Infrastructure.World;
 
 namespace Server.Game.Entities
@@ -22,6 +23,7 @@ namespace Server.Game.Entities
             Client = client;
             Backpack = new ItemStorage();
             Bank = new ItemStorage();
+            QuestInfo = new List<UserQuestInfo>();
 
             using (var context = new GameDatabaseContext())
             {
@@ -32,7 +34,15 @@ namespace Server.Game.Entities
                     var skill = new Skill(skillTemplate);
                     Skills.Add(skill);
                 }
+
+                // Add the state of the quest world to the user
+                foreach (var questEntry in userHero.QuestInfo)
+                {
+                    QuestInfo.Add(questEntry);
+                }
+
             }
+
 
             // Store the user hero internally
             _hero = userHero;
@@ -73,6 +83,9 @@ namespace Server.Game.Entities
         /// A bank is a players storage, usually it can hold a lot more than the standard backpack.
         /// </summary>
         public ItemStorage Bank { get; set; }
+
+        public List<UserQuestInfo> QuestInfo { get; set; }
+
 
     }
 }

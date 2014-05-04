@@ -44,6 +44,7 @@ namespace Server.Game.Network.Handlers
                     context.Characters.Attach(hero);
                     context.Entry(hero).Collection(a => a.Skills).Load();
                     context.Entry(hero).Collection(a => a.Inventory).Load();
+                    context.Entry(hero).Collection(a => a.QuestInfo).Load();
                 }
 
 

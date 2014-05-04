@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Server.Game.Database.Models.ContentTemplates;
+using Server.Infrastructure.Quests;
 
 namespace Server.Game.Database.Models
 {
@@ -21,13 +22,15 @@ namespace Server.Game.Database.Models
             CreationDate = DateTime.UtcNow;
 
             Inventory = new List<UserItem>();
-            Skills = new LinkedList<UserSkill>();
+            Skills = new List<UserSkill>();
+            QuestInfo = new List<UserQuestInfo>();
         }
 
         public UserHero()
         {
             Inventory = new List<UserItem>();
             Skills = new List<UserSkill>();
+            QuestInfo = new List<UserQuestInfo>();
         }
 
         public int Id { get; set; }
@@ -55,7 +58,9 @@ namespace Server.Game.Database.Models
         public long HomepointZoneY { get; set; }
 
         public virtual ICollection<UserItem> Inventory { get; set; }
-        public virtual ICollection<UserSkill> Skills { get; set; } 
+        public virtual ICollection<UserSkill> Skills { get; set; }
+
+        public virtual ICollection<UserQuestInfo> QuestInfo { get; set; }
 
         public DateTime? CreationDate { get; set; }
 

@@ -110,7 +110,10 @@ namespace Server.Game.Network.Handlers
                 hero.Luck = (int) player.CharacterStats[(int) StatTypes.Luck].CurrentValue;
                 hero.Vitality = (int)player.CharacterStats[(int)StatTypes.Vitality].CurrentValue;
                 hero.MaximumHitpoints = (int)player.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue;
-        
+
+                // Save the heroes quest info
+                hero.QuestInfo = player.QuestInfo;                
+
                 // Flush
                 context.SaveChanges();
 
