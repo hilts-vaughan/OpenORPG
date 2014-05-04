@@ -187,7 +187,7 @@ namespace Server.Game.AI
             }
 
 
-            if ((int)newPosition.X == (int)node.X && (int)newPosition.Y == (int)node.Y)
+            if (velocity.X == 0 && velocity.Y == 0)
             {
                 // We're done with this node
                 _acc = 0f;
