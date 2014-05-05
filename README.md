@@ -8,7 +8,7 @@ Feature List
 
 OpenORPG is being built up at a fast pace and this list will be changing and growing at a rapid pace during initial development. With all the rambling aside, OpenRPG supports the following features as of right now:
 
-# General Features
+## General Features
 
 * **Pixel-based maps**. Be constrained to a grid no more. Entities in your game world will have full freedom to move.
 * **Multiple characters per account**. OpenORPG fully supports multiple characters per account.
@@ -16,7 +16,7 @@ OpenORPG is being built up at a fast pace and this list will be changing and gro
 * **Rich world design tools.**. Using Tiled as a map editor, creating towns, fields, mountains and dungeons for your game could not be much easier.
 * **Quests**. OpenORPG includes some basic NPC and quest interaction with more to come in future versions.
 
-# In the future
+## In the future
 
 * More advanced quest info would be benefical
 * Advanced UI customization
