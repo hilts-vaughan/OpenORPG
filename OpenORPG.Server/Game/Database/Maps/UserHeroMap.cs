@@ -8,7 +8,7 @@ namespace Server.Game.Database.Maps
         public UserHeroMap()
         {
             // Primary Key
-            HasKey(t => t.Id);
+            HasKey(t => t.UserHeroId);
 
 
             // Properties

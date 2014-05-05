@@ -20,6 +20,7 @@ namespace Server.Game.Database.Models
             Quests = new List<QuestTable>();
         }
 
+
         /// <summary>
         /// A quest that this NPC can have
         /// </summary

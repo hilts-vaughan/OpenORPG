@@ -29,6 +29,8 @@
     export class CombatSystem extends GameSystem {
 
         private meleeKey: Phaser.Key;
+        private interactKey: Phaser.Key;
+
         private player: Entity;
 
         constructor(zone: Zone, player: Entity) {
@@ -37,6 +39,10 @@
             // Setup our key presses
             this.meleeKey = zone.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
             this.meleeKey.onDown.add(this.sendMeleeSkill, this);
+
+            this.interactKey = zone.game.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
+            this.interactKey.onDown.add(this.sendInteraction, this);
+
 
             // Setup our network events
             var network = NetworkManager.getInstance();
@@ -73,6 +79,13 @@
             var packet = PacketFactory.createSkillUsePacket(1, -1);
             network.sendPacket(packet);
         }
+
+        private sendInteraction() {
+            var network = NetworkManager.getInstance();
+            var packet = PacketFactory.createInteractionRequest();
+            network.sendPacket(packet);
+        }
+
 
         destroy() {
             this.parent.game.input.keyboard.removeKey(Phaser.Keyboard.CONTROL);

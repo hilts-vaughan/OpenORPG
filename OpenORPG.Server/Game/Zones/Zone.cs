@@ -253,6 +253,16 @@ namespace Server.Game.Zones
             }
         }
 
+        public IEnumerable<Npc> Npcs
+        {
+            get
+            {
+                var entities = Entities.Where(x => x is Npc);
+
+                return entities.Select(entity => entity as Npc).ToList();
+            }
+        }
+
 
 
         /// <summary>

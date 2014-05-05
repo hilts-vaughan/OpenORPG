@@ -4,6 +4,7 @@ using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Database.Models.Quests;
 using Server.Game.Database.Seeds;
+using Server.Game.Entities;
 using Server.Infrastructure.Quests;
 
 namespace Server.Game.Database
@@ -39,6 +40,8 @@ namespace Server.Game.Database
 
         public DbSet<NpcTemplate> Npcs { get; set; }
 
+        public DbSet<UserQuestInfo> UserQuestInfo { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new SkillTemplateMap());
@@ -55,6 +58,8 @@ namespace Server.Game.Database
 
             modelBuilder.Entity<QuestItemRequirementTable>().HasKey(x => x.QuestTableId).HasRequired(x => x.Quest).WithOptional(x => x.EndItemRequirements).WillCascadeOnDelete(true);
             modelBuilder.Entity<QuestMonsterRequirementTable>().HasKey(x => x.QuestTableId).HasRequired(x => x.Quest).WithOptional(x => x.EndMonsterRequirements).WillCascadeOnDelete(true);
+
+
 
 
         }

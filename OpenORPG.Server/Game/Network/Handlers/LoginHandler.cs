@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Entities;
@@ -95,7 +96,10 @@ namespace Server.Game.Network.Handlers
             using (var context = new GameDatabaseContext())
             {
                 //TODO: Matching by a name might not be the best, but we'll run with it for now
-                var hero = context.Characters.First(x => x.Name == player.Name);
+                var hero = context.Characters.First(x => x.UserHeroId == player.UserId);
+
+                // Load quest info
+                context.Entry(hero).Collection(x => x.QuestInfo).Load();
 
                 hero.Name = player.Name;
                 hero.PositionX = (int)player.Position.X;
@@ -103,16 +107,39 @@ namespace Server.Game.Network.Handlers
                 hero.ZoneId = player.Zone.Id;
 
                 // Persist stats
-                hero.Hitpoints = (int) player.CharacterStats[(int) StatTypes.Hitpoints].CurrentValue;
+                hero.Hitpoints = (int)player.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue;
                 hero.Strength = (int)player.CharacterStats[(int)StatTypes.Strength].CurrentValue;
                 hero.Intelligence = (int)player.CharacterStats[(int)StatTypes.Intelligence].CurrentValue;
                 hero.Dexterity = (int)player.CharacterStats[(int)StatTypes.Dexterity].CurrentValue;
-                hero.Luck = (int) player.CharacterStats[(int) StatTypes.Luck].CurrentValue;
+                hero.Luck = (int)player.CharacterStats[(int)StatTypes.Luck].CurrentValue;
                 hero.Vitality = (int)player.CharacterStats[(int)StatTypes.Vitality].CurrentValue;
                 hero.MaximumHitpoints = (int)player.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue;
 
-                // Save the heroes quest info
-                hero.QuestInfo = player.QuestInfo;                
+
+                //TODO: Need better tracking code here, incrementing the row needlessly here
+
+                hero.QuestInfo.ToList().ForEach(r => context.UserQuestInfo.Remove(r));
+
+                //context.SaveChanges();
+
+                foreach (var questInfo in player.QuestInfo)
+                {
+                    
+
+                    var item = new UserQuestInfo()
+                    {
+                        QuestId = questInfo.QuestId,
+                        State = questInfo.State,
+                        UserQuestInfoId = questInfo.UserQuestInfoId,
+                        UserHero = hero
+
+                    };
+
+                    hero.QuestInfo.Add(item);
+                  
+                }
+
+                context.Entry(hero).State = EntityState.Modified;
 
                 // Flush
                 context.SaveChanges();

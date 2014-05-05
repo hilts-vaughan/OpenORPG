@@ -44,5 +44,7 @@ namespace Server.Game.Database.Models.Quests
 
         public virtual QuestMonsterRequirementTable EndMonsterRequirements { get; set; }
 
+        public virtual NpcTemplate QuestStarter { get; set; }
+
     }
 }

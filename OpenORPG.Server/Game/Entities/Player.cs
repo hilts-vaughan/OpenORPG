@@ -41,6 +41,8 @@ namespace Server.Game.Entities
                     QuestInfo.Add(questEntry);
                 }
 
+                UserId = userHero.UserHeroId;
+
             }
 
 
@@ -85,7 +87,6 @@ namespace Server.Game.Entities
         public ItemStorage Bank { get; set; }
 
         public List<UserQuestInfo> QuestInfo { get; set; }
-
-
+        public long UserId { get; set; }
     }
 }

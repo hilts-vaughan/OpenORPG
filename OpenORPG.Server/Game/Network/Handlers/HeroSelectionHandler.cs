@@ -127,7 +127,7 @@ namespace Server.Game.Network.Handlers
             foreach (UserHero hero in client.Account.Heroes)
             {
                 var info = new HeroInfo();
-                info.HeroId = hero.Id;
+                info.HeroId = hero.UserHeroId;
                 info.Name = hero.Name;
                 list.Add(info);
             }

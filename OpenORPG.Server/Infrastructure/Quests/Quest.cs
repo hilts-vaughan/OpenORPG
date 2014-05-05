@@ -58,7 +58,7 @@ namespace Server.Infrastructure.Quests
 
         private void LoadStartRequirements(QuestTable questTable)
         {
-
+            StartRequirements = new List<IQuestRequirement>();
         }
 
         private void LoadFinishRequirements(QuestTable questTable)

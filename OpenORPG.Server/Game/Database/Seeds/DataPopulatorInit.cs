@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using Server.Game.Combat;
@@ -13,7 +14,7 @@ namespace Server.Game.Database.Seeds
     /// <summary>
     ///     A custom intalizer that populates the game database with mock data useful for testing, clean, good known states.
     /// </summary>
-    public class CustomInitializer : DropCreateDatabaseAlways<GameDatabaseContext> // DropCreateDatabaseIfModelChanges<GameDatabaseContext> // > 
+    public class CustomInitializer : DropCreateDatabaseIfModelChanges<GameDatabaseContext> //  DropCreateDatabaseAlways<GameDatabaseContext>  
     {
 
 
@@ -118,15 +119,18 @@ namespace Server.Game.Database.Seeds
 
             context.Quests.Add(quest);
 
+            context.SaveChanges();
+
 
             var npc = new NpcTemplate();
             npc.Name = "Forest Explorer";
             npc.Sprite = "forestnpc";
+            npc.Quests = new List<QuestTable>();
             npc.Quests.Add(quest);
-
+                
             context.Npcs.Add(npc);
 
-        }
+            }
 
         private void CreateTestMonsters(GameDatabaseContext context)
         {

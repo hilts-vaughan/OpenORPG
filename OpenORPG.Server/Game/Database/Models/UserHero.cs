@@ -33,7 +33,7 @@ namespace Server.Game.Database.Models
             QuestInfo = new List<UserQuestInfo>();
         }
 
-        public int Id { get; set; }
+        public int UserHeroId { get; set; }
         public int AccountId { get; set; }
 
         public int Strength { get; set; }

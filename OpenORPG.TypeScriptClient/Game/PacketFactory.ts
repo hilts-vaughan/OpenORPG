@@ -29,7 +29,7 @@
         }
     }
 
-    export function createZoneRequestChange(dir: OpenORPG.Direction) : any {
+    export function createZoneRequestChange(dir: OpenORPG.Direction): any {
         return {
             opCode: OpenORPG.OpCode.CMMSG_ZONE_CHANGE,
             direction: dir
@@ -43,6 +43,14 @@
             targetId: targetId
         }
     }
+
+    export function createInteractionRequest() {
+         return {
+             opCode: OpenORPG.OpCode.CMSG_INTERACT_REQUEST,
+             data: "Something to fill up space"
+        }
+    }
+
 
     export function createChatPacket(channeld: number, message: string) {
         return {

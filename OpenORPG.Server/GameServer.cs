@@ -65,12 +65,20 @@ namespace Server
             ZoneManager.Instance.Update(delta);
             _stopwatch.Restart();
 
+
+            GameClient client;
+            while (_logoutQueue.TryDequeue(out client))
+            {
+                LoginHandler.Logout(client);
+            }
+
             PacketTask task;
             while (_packetTasks.TryDequeue(out task))
             {
                 IPacketHandler handler = _packetHandlers[task.Packet.OpCode];
                 handler.Invoke(task.Client, task.Packet);
             }
+         
 
         }
 
@@ -168,9 +176,11 @@ namespace Server
 
         }
 
+        private ConcurrentQueue<GameClient> _logoutQueue = new ConcurrentQueue<GameClient>();
+
         private void OnDisconnected(Connection obj)
         {
-            LoginHandler.Logout(obj.Client);
+            _logoutQueue.Enqueue(obj.Client);
         }
 
         private void OnPacketRecieved(Connection connection, IPacket packet)

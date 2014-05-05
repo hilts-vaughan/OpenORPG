@@ -64,6 +64,9 @@ namespace Server.Game
             using (var context = new GameDatabaseContext())
             {
                 var template = context.Npcs.FirstOrDefault(x => x.NpcId == id);
+                
+                // Load up the quests this NPC will have
+                context.Entry(template).Collection(x => x.Quests).Load();
 
                 if(template == null)
                     throw new Exception("Creating an NPC with the given Id is invalid.");
