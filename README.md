@@ -1,26 +1,58 @@
-open-orpg
+OpenORPG
 =========
 
-open-RPG is an online roleplaying game framework that runs on the web. It uses open-source tools to help developers create their own net dream on the internet and share with other players with little to no hassle. open-orpg takes a scalable and modern approach to online game engines.
+OpenORPG is an online roleplaying game engine that runs on the web. It uses open-source tools to help developers create their own net dream on the internet and share with other players with little to no hassle. OpenORPG takes a modern approach to develop accessible games ready for the web.
+
+Feature List
+=============
+
+OpenORPG is being built up at a fast pace and this list will be changing and growing at a rapid pace during initial development. With all the rambling aside, OpenRPG supports the following features as of right now:
+
+# General Features
+
+* **Pixel-based maps**. Be constrained to a grid no more. Entities in your game world will have full freedom to move.
+* **Multiple characters per account**. OpenORPG fully supports multiple characters per account.
+* **Chatting in-game**. The world is socialable.
+* **Rich world design tools.**. Using Tiled as a map editor, creating towns, fields, mountains and dungeons for your game could not be much easier.
+* **Quests**. OpenORPG includes some basic NPC and quest interaction with more to come in future versions.
+
+# In the future
+
+* More advanced quest info would be benefical
+* Advanced UI customization
+* World statistics that can hook into various systems and record
+
+
 
 Client
 ======
 
-* Using a modern component system, open-orpg utilizes a modular and easy to use system that allows cutomization of entities with ease
 * A web based client means your players will be accessible: Facebook, the web, a desktop client, mobile. If you build it, you can reach them.
-* Built entirely in JavaScript and based on the ever grrowing Phaser, the client has access to amazing tools developed by something of the best growing opensource projects.
+
+* Built entirely in TypeScript and based on the ever growing and popular Phaser, the client has access to amazing tools developed by something of the best growing open-source projects.
+
+* Use HTMl and CSS to design and create good looking UIs -- no need to worry about propietary UI systems
+
 * Updates are instant -- using the HTTP protocol you don't need to worry about it.
 
 
 Server
 ======
 
-* A fully unit tested server to reduce bugs, it's one of the first open game sources that makes an effort to put speed and lack of bugs first
-* With full load balancing, you don't need to worry about the software ever being the bottleneck to your dream. Scale horizontally - it's just that easy.
-* Speed. We've built this server to be fast and modular. We want everyone to be able to develop on the lowest possible specifications we can. With growing technology, this has become possible even on a modern language such as C# 
+* Speed. We've built this server to be fast and modular. We want everyone to be able to develop on the lowest possible specifications we can. With growing technology, this has become possible modern languages such as C# 
+
+* Accessible. We've made sure setup is easy and painless. Get started with little scaffolding and dive right into developing a great game.
+
+* Object oriented! In a world like today, what else would you expect, right?
 
 
-Getting Started
-===============
 
-We're still in the early stages. Considering taking an issue, implementing it and opening a pull request! I'm sure the community will be glad to review and accept it. 
+
+Getting Started & Helping Out
+=============================
+
+We're still in the early stages. If something is missing, fork us and submit a pull request. If it get benefit to everyone and does not break existing functionality, we'll be glad to include it! This is a communtiy project. 
+
+If you would like to request a feature, please open a GitHub issue. Every issue will recieve consideration and feedback. 
+
+Finally, have fun and help the community grow!
