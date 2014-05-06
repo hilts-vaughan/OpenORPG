@@ -73,6 +73,8 @@ namespace Server.Game.Entities
 
         public int ZoneId { get; set; }
 
+        public int Level { get; set; }
+
         /// <summary>
         /// The current AI this Character will be running. 
         /// This is typically only applicable to NPCs

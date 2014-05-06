@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Server.Game.Database.Models.Quests;
+using Server.Game.Entities;
 using Server.Infrastructure.Quests.Requirements;
 using Server.Infrastructure.Quests.Rewards;
 
@@ -52,9 +53,95 @@ namespace Server.Infrastructure.Quests
             // Load up requirements
             LoadStartRequirements(questTable);
             LoadFinishRequirements(questTable);
+            LoadRewards(questTable);
 
-            // TODO: Give some logic for rewards here?
         }
+
+        private void LoadRewards(QuestTable questTable)
+        {
+            QuestRewards = new List<IQuestReward>();
+            QuestRewards.Add(new ExperienceQuestReward(questTable.RewardExp));
+        }
+
+        /// <summary>
+        /// Attempts to complete the quest and returns whether
+        /// or not the attempt was successful 
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public bool TryCompleteQuest(Player player)
+        {
+            // Verify the player actually has this quest
+            var questInfo = player.QuestInfo.FirstOrDefault(x => x.QuestId == QuestId);
+
+            if (questInfo == null)
+                return false;
+
+            bool requirementsMet = AreAllRequirementsMet(player);
+
+            // Fail fast if requirements are not met
+            if (!requirementsMet)
+                return false;
+
+
+            // Give the rewards as necessary
+            bool canGive = TryGiveRewards(player);
+
+            if (!canGive)
+                return false;
+
+            // Take all the requirements if they have been given their rewards
+            TakeAllRequirements(player);
+
+            // Mark this quest as complete
+            questInfo.State = QuestState.Finished;            
+
+
+            return true;
+
+        }
+
+        private bool TryGiveRewards(Player player)
+        {
+            bool validate = true;
+
+            foreach (var reward in QuestRewards)
+                validate = validate & reward.CanGive(player);
+
+            // If we can't give something away for some reason...
+            if (!validate)
+                return false;
+
+            foreach (var reward in QuestRewards)
+                reward.Give(player);
+
+
+            return true;
+        }
+
+
+        private void TakeAllRequirements(Player player)
+        {
+            foreach (var requirement in FinishRequirements)
+                requirement.TakeRequirements(player);
+        }
+
+        /// <summary>
+        /// Runs through all the requirements and verifies whether or not
+        /// they have all been met.
+        /// </summary>
+        /// <param name="player">The player to compare all the requirements against</param>
+        /// <returns></returns>
+        private bool AreAllRequirementsMet(Player player)
+        {
+            bool validated = true;
+
+            foreach (var requirement in FinishRequirements)
+                validated = validated & requirement.HasRequirements(player);
+
+            return validated;
+        }
+
 
         private void LoadStartRequirements(QuestTable questTable)
         {

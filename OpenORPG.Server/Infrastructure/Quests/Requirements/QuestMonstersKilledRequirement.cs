@@ -19,12 +19,16 @@ namespace Server.Infrastructure.Quests.Requirements
 
         public bool HasRequirements(Player player)
         {
-            throw new NotImplementedException();
+            var quest = player.QuestInfo.First(x => x.QuestId == RequirementInfo.QuestTableId);
+            return quest.MobsKilled == RequirementInfo.MonsterAmount;
         }
 
         public void TakeRequirements(Player player)
         {
-            throw new NotImplementedException();
+            // Reset the mob count in case this quest can be repeated
+            var quest = player.QuestInfo.First(x => x.QuestId == RequirementInfo.QuestTableId);
+            quest.MobsKilled = 0;
         }
+
     }
 }

@@ -33,7 +33,7 @@ namespace Server.Game.Database.Models.Quests
 
         public bool CanRepeat { get; set; }
 
-        public long RewardExp { get; set; }
+        public int RewardExp { get; set; }
 
         public long RewardCurrency { get; set; }
 

@@ -52,6 +52,8 @@ namespace Server.Game.Database.Seeds
                 character.Strength = 5;
                 character.Hitpoints = 100;
                 character.MaximumHitpoints = 100;
+                character.Level = 1;
+                character.Experience = 0;
 
                 context.Characters.Add(character);
 
@@ -127,10 +129,10 @@ namespace Server.Game.Database.Seeds
             npc.Sprite = "forestnpc";
             npc.Quests = new List<QuestTable>();
             npc.Quests.Add(quest);
-                
+
             context.Npcs.Add(npc);
 
-            }
+        }
 
         private void CreateTestMonsters(GameDatabaseContext context)
         {

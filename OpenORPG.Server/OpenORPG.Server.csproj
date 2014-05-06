@@ -230,6 +230,7 @@
     <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirementTable.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\QuestHasItemRequirement.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\QuestMonstersKilledRequirement.cs" />
+    <Compile Include="Infrastructure\Quests\Rewards\ExperienceQuestReward.cs" />
     <Compile Include="Infrastructure\Quests\Rewards\IQuestReward.cs" />
     <Compile Include="Infrastructure\Synchronization\ISyncSerializer.cs" />
     <Compile Include="Infrastructure\Synchronization\SyncAttribute.cs" />

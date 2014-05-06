@@ -26,6 +26,8 @@ namespace Server.Game.Entities
             if (handler != null) handler(userquestinfo, player);
         }
 
+        public int Experience { get; set; }
+
 
         private UserHero _hero;
 
@@ -54,6 +56,8 @@ namespace Server.Game.Entities
                 }
 
                 UserId = userHero.UserHeroId;
+                Experience = userHero.Experience;
+                Level = userHero.Level;
 
             }
 
