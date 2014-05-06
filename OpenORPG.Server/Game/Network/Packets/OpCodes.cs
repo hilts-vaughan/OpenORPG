@@ -31,6 +31,14 @@
         CMSG_HERO_EQUIP = 23,
 
         SMSG_LEAVE_CHAT_CHANNEL = 24,
-        CMSG_INTERACT_REQUEST = 25
+        CMSG_INTERACT_REQUEST = 25,
+
+        // Quest opcodes
+
+        CMSG_QUEST_REQUEST_COMPLETION = 26,
+        CMSG_QUEST_ACCEPT = 27,
+        SMSG_QUEST_ACCEPT_RESULT = 28,
+        SMSG_QUEST_COMPLETE_RESULT = 29
+
     }
 }
