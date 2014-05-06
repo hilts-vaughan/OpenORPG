@@ -13,8 +13,33 @@ using Server.Utils.Math;
 
 namespace Server.Game.Entities
 {
+
+    /// <summary>
+    /// A signature for events when a character has died
+    /// </summary>
+    /// <param name="aggressor">The aggressor is the person whom was killed</param>
+    /// <param name="victim"></param>
+    public delegate void CharacterKilled(Character aggressor, Character victim);
+
     public class Character : Entity
     {
+
+        // Events are up here
+
+        /// <summary>
+        /// This event is raised when this character dies.
+        /// The concept of death occurs when the hitpoints of a character
+        /// reaches zero. 
+        /// </summary>
+        public event CharacterKilled Killed;
+
+        protected virtual void OnKilled(Character aggressor, Character victim)
+        {
+            CharacterKilled handler = Killed;
+            if (handler != null) handler(aggressor, victim);
+        }
+
+
         private int _speed;
         private CharacterState _characterState;
 
@@ -82,7 +107,26 @@ namespace Server.Game.Entities
 
         public bool IsAlive
         {
-            get { return CharacterStats[(int) StatTypes.Hitpoints].CurrentValue > 0; }
+            get { return CharacterStats[(int)StatTypes.Hitpoints].CurrentValue > 0; }
+        }
+
+        public void ApplyDamage(DamagePayload damagePayload)
+        {
+
+            // If we're already dead, don't bother
+            if (!IsAlive)
+                return;
+
+            // Applies the actual damage to this character
+            damagePayload.Apply(this);
+
+            // If this died, tell any interested parties
+            if (CharacterStats[(int)StatTypes.Hitpoints].CurrentValue <= 0)
+            {
+                CharacterStats[(int)StatTypes.Hitpoints].CurrentValue = 0;
+                OnKilled(damagePayload.Aggressor, this);
+            }
+
         }
 
         protected override void MoveEntity(Vector2 location)

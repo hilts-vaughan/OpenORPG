@@ -42,8 +42,6 @@ namespace Server.Game.Combat
 
             foreach (var c in Zone.ZoneCharacters)
             {
-                // Remove dead mobs as neccessary
-                VerifyCharacterIsAlive(frameTime, c);
                 DecreaseCooldowns(frameTime, c);
             }
 
@@ -107,42 +105,53 @@ namespace Server.Game.Combat
             }
         }
 
-        private void VerifyCharacterIsAlive(float frameTime, Character character)
-        {
-            if (character.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue <= 0)
-            {
-                if (character is Player)
-                {
-                    // Restore hitpoints
-                    character.CharacterStats[(int) StatTypes.Hitpoints].CurrentValue =
-                        character.CharacterStats[(int) StatTypes.Hitpoints].MaximumValue;
-
-                    var player = character as Player;
-                    var homePoint = ZoneManager.Instance.FindZone(player.HomepointZoneId);
-
-                    if (homePoint != null)
-                        ZoneManager.Instance.SwitchToZoneAndPosition(player, homePoint, new Vector2(player.HomepointZoneX, player.HomepointZoneY));
-
-                }
-
-                else
-                {
-                    Zone.RemoveEntity(character);
-                }
-
-            }
-
-        }
 
         public override void OnEntityAdded(Entity entity)
         {
-
+            if (entity is Character)
+                OnCharacterAdded(entity as Character);
         }
 
         public override void OnEntityRemoved(Entity entity)
         {
+            if (entity is Character)
+                OnCharacterRemoved(entity as Character);
+        }
+
+
+        private void OnCharacterAdded(Character character)
+        {
+            character.Killed += CharacterOnKilled;
+        }
+
+        private void CharacterOnKilled(Character aggressor, Character victim)
+        {
+            if (victim is Player)
+            {
+                // Restore hitpoints
+                victim.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue =
+                    victim.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue;
+
+                var player = victim as Player;
+                var homePoint = ZoneManager.Instance.FindZone(player.HomepointZoneId);
+
+                if (homePoint != null)
+                    ZoneManager.Instance.SwitchToZoneAndPosition(player, homePoint, new Vector2(player.HomepointZoneX, player.HomepointZoneY));
+            }
+
+            if (victim is Monster)
+            {
+                Zone.RemoveEntity(victim);
+            }
 
         }
+
+        private void OnCharacterRemoved(Character character)
+        {
+            character.Killed -= CharacterOnKilled;
+        }
+
+
 
         /// <summary>
         /// Fetches all combat ready characters within the system.

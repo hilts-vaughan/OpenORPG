@@ -46,7 +46,7 @@ namespace Server.Game.Combat.Actions
             if (target == null)
                 return new CombatActionResult(-1, 0);
 
-            if(!CombatUtility.CanSee(ExecutingCharacter, target))
+            if (!CombatUtility.CanSee(ExecutingCharacter, target))
                 return new CombatActionResult(-1, 0);
 
             // Depending on the skill type, apply a payload or operation
@@ -56,8 +56,8 @@ namespace Server.Game.Combat.Actions
                     break;
                 case SkillType.Damage:
                     var damagePayload = new DamagePayload(ExecutingCharacter);
-                    damagePayload.Apply(target);
-                    return new CombatActionResult((long) target.Id, damagePayload.DamageInflicted);
+                    target.ApplyDamage(damagePayload);
+                    return new CombatActionResult((long)target.Id, damagePayload.DamageInflicted);
                 case SkillType.Special:
                     break;
             }

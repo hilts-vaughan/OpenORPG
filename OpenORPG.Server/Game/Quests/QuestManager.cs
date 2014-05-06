@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Entities;
 using Server.Infrastructure.Logging;
@@ -89,6 +90,21 @@ namespace Server.Game.Quests
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Retrieves a quest that has been created
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Quest GetQuest(long id)
+        {
+            using (var context = new GameDatabaseContext())
+            {
 
+
+
+
+            }
+            return null;
+        }
     }
 }

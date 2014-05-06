@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,13 @@ namespace Server.Game.Database.Models
         /// This marks the current state of a quest for a user
         /// </summary>
         public QuestState State { get; set; }
+
+        /// <summary>
+        /// A simple integer used to track the amount of mobs kill in relation to the
+        /// monsters requirement
+        /// </summary>
+        [Required, DefaultValue(0)]
+        public int MobsKilled { get; set; }
 
         [Required]
         public virtual UserHero UserHero { get; set; }

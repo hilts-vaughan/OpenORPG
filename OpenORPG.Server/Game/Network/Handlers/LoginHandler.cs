@@ -3,6 +3,7 @@ using System.Linq;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Entities;
+using Server.Game.Items;
 using Server.Game.Network.Authentication;
 using Server.Game.Network.Authentication.Providers;
 using Server.Game.Network.Packets;
@@ -118,7 +119,7 @@ namespace Server.Game.Network.Handlers
 
                 //TODO: Need better tracking code here, incrementing the row needlessly here
 
-                hero.QuestInfo.ToList().ForEach(r => context.UserQuestInfo.Remove(r));
+                //hero.QuestInfo.ToList().ForEach(r => context.UserQuestInfo.Remove(r));
 
                 //context.SaveChanges();
 
@@ -131,7 +132,8 @@ namespace Server.Game.Network.Handlers
                         QuestId = questInfo.QuestId,
                         State = questInfo.State,
                         UserQuestInfoId = questInfo.UserQuestInfoId,
-                        UserHero = hero
+                        UserHero = hero,
+                        MobsKilled = questInfo.MobsKilled
 
                     };
 

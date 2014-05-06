@@ -185,6 +185,7 @@
     <Compile Include="Game\Items\ItemStorage.cs" />
     <Compile Include="Game\NPC\Discussion.cs" />
     <Compile Include="Game\Quests\QuestManager.cs" />
+    <Compile Include="Game\Quests\QuestRequirementTracker.cs" />
     <Compile Include="Game\World\Systems\DebugMonitorSystem.cs" />
     <Compile Include="Game\Zones\Spawns\MonsterSpawnSet.cs" />
     <Compile Include="Game\Zones\Spawns\SpawnManager.cs" />
@@ -267,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Game\Chat\" />
+    <Folder Include="Game\Combat\Events\" />
     <Folder Include="Game\Database\Maps\Quests\" />
     <Folder Include="Game\Database\Repository\" />
     <Folder Include="Infrastructure\AI\" />
