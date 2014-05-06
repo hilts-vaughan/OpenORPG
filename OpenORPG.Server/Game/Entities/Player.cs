@@ -13,8 +13,20 @@ using Server.Infrastructure.World;
 
 namespace Server.Game.Entities
 {
+    public delegate void QuestEvent(UserQuestInfo userQuestInfo, Player player);
+
     public class Player : Character
     {
+
+        public event QuestEvent AcceptedQuest;
+
+        protected virtual void OnAcceptedQuest(UserQuestInfo userquestinfo, Player player)
+        {
+            QuestEvent handler = AcceptedQuest;
+            if (handler != null) handler(userquestinfo, player);
+        }
+
+
         private UserHero _hero;
 
         public Player(string sprite, GameClient client, UserHero userHero)
@@ -87,6 +99,13 @@ namespace Server.Game.Entities
         public ItemStorage Bank { get; set; }
 
         public List<UserQuestInfo> QuestInfo { get; set; }
+
+        public void AddQuest(UserQuestInfo questInfo)
+        {
+            QuestInfo.Add(questInfo);
+            OnAcceptedQuest(questInfo, this);
+        }
+
         public long UserId { get; set; }
     }
 }

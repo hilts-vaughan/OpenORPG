@@ -5,10 +5,12 @@ using System.IO;
 using System.Linq;
 using Server.Game.AI;
 using Server.Game.Combat;
+using Server.Game.Database.Models;
 using Server.Game.Entities;
 using Server.Game.Movement;
 using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Server;
+using Server.Game.Quests;
 using Server.Game.Zones.Spawns;
 using Server.Infrastructure.Logging;
 using Server.Infrastructure.Math;
@@ -70,6 +72,8 @@ namespace Server.Game.Zones
 
         private Rectangle topZoneArea, bottomZoneArea, leftZoneArea, rightZoneArea;
 
+        // A simple tracker for tracking player quests
+        private QuestRequirementTracker _questRequirementTracker = new QuestRequirementTracker();
 
         public Zone(long id)
         {
@@ -287,12 +291,20 @@ namespace Server.Game.Zones
         {
             foreach (GameSystem system in GameSystems)
                 system.OnEntityAdded(entity);
+
+            if (entity is Monster)
+                _questRequirementTracker.OnMonsterAdded(entity as Monster);
+
+
         }
 
         private void NotifySystemsRemove(Entity entity)
         {
             foreach (GameSystem system in GameSystems)
                 system.OnEntityRemoved(entity);
+
+            if (entity is Monster)
+                _questRequirementTracker.OnMonsterRemoved(entity as Monster);
         }
 
         /// <summary>
@@ -470,25 +482,44 @@ namespace Server.Game.Zones
         public ChatChannel ChatChannel { get; set; }
 
 
+        private void HeroEntityOnAcceptedQuest(UserQuestInfo userquestinfo, Player player)
+        {
+            _questRequirementTracker.NotifyBeginTracking(userquestinfo, player);
+        }
+
+
         protected void OnClientLeave(GameClient client)
         {
+            // Get the player
+            var player = client.HeroEntity;
+
+            player.AcceptedQuest -= HeroEntityOnAcceptedQuest;
+            _questRequirementTracker.UnloadPlayer(player);
+
             GameClients.Remove(client);
             ChatChannel.Leave(client);
 
         }
+
+      
 
         protected void OnClientEnter(GameClient client, Player heroEntity)
         {
             GameClients.Add(client);
             ChatChannel.Join(client);
 
+  
+            _questRequirementTracker.LoadPlayer(heroEntity);
+            heroEntity.AcceptedQuest += HeroEntityOnAcceptedQuest;
+
             string name = heroEntity.Name;
 
-            Logger.Instance.Info("{0} has entered {1}", name, Name);
+            Logger.Instance.Info("{0} has entered the zone {1} [#{2}]", name, Name, Id);
 
         }
 
 
 
     }
+
 }

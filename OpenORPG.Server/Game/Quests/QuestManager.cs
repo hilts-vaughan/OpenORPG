@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Server.Game.Database;
 using Server.Game.Database.Models;
+using Server.Game.Database.Models.Quests;
 using Server.Game.Entities;
 using Server.Infrastructure.Logging;
 using Server.Infrastructure.Quests;
@@ -69,7 +70,7 @@ namespace Server.Game.Quests
             if (questInfo == null)
             {
                 var newEntry = new UserQuestInfo() { QuestId = quest.QuestId, State = QuestState.InProgress };
-                player.QuestInfo.Add(newEntry);
+                player.AddQuest(newEntry);
             }
             else
             {
@@ -95,16 +96,21 @@ namespace Server.Game.Quests
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Quest GetQuest(long id)
+        public QuestTable GetQuest(long id)
         {
             using (var context = new GameDatabaseContext())
             {
 
+                var quest = context.Quests.First(x => x.QuestTableId == id);
+
+                context.Entry(quest).Reference(x => x.EndMonsterRequirements).Load();
+                context.Entry(quest).Reference(x => x.EndItemRequirements).Load();
+                context.Entry(quest).Collection(x => x.RewardItems).Load();
 
 
-
+                return quest;
             }
-            return null;
+            
         }
     }
 }
