@@ -19,10 +19,13 @@ namespace Server.Game.Entities
             // Copy everything we need to into the object
             Name = monsterTemplate.Name;
 
+            MonsterTemplateId = monsterTemplate.Id;
+
         }
 
         public int OriginSpawn { get; set; }
 
+        public long MonsterTemplateId { get; private set; }
 
     }
 }

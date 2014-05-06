@@ -30,7 +30,7 @@ namespace Server.Game.Database.Models
         /// monsters requirement
         /// </summary>
         [Required, DefaultValue(0)]
-        public int MobsKilled { get; set; }
+        public long MobsKilled { get; set; }
 
         [Required]
         public virtual UserHero UserHero { get; set; }

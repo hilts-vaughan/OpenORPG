@@ -118,8 +118,8 @@ namespace Server.Game.Network.Handlers
 
 
                 //TODO: Need better tracking code here, incrementing the row needlessly here
-
-                //hero.QuestInfo.ToList().ForEach(r => context.UserQuestInfo.Remove(r));
+                // For now though, we don't care...
+                hero.QuestInfo.ToList().ForEach(r => context.UserQuestInfo.Remove(r));
 
                 //context.SaveChanges();
 
