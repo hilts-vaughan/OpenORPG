@@ -31,6 +31,7 @@
     <Content Include="assets\sprites\male_base.png" />
     <Content Include="assets\sprites\snake.png" />
     <Content Include="css\flick\images\animated-overlay.gif" />
+    <Content Include="css\flick\images\texture.png" />
     <Content Include="css\flick\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="css\flick\images\ui-bg_flat_0_eeeeee_40x100.png" />
     <Content Include="css\flick\images\ui-bg_flat_55_ffffff_40x100.png" />
