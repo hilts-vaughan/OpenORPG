@@ -552,7 +552,7 @@ button.ui-button::-moz-focus-inner {
         background: url("images/ui_dialog_titlebar.png");
         color: #B8860B;
         
-        -webkit-text-stroke: 1px rgba(255, 255, 25, 0.7);
+        -webkit-text-stroke: 1px rgba(255, 255, 25, 0.4);
 
     }
 
