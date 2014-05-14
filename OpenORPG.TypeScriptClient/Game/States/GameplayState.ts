@@ -6,11 +6,15 @@
         private currenTrack: Phaser.Sound;
         private ChatManager : ChatManager;
 
+        private inventoryWindow: InventoryWindow;
+
         constructor() {
             super();
 
             // Init
             this.ChatManager = new ChatManager();
+
+            this.inventoryWindow = new InventoryWindow();
 
         }
 

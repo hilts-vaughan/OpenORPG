@@ -173,6 +173,7 @@
     <Compile Include="Game\Network\Packets\Server\ServerLeaveChatChannelPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerQuestAcceptResult.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerQuestCompleteResultPacket.cs" />
+    <Compile Include="Game\Network\Packets\Server\ServerSendQuestOfferPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServreMobUsePowerPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerFloatingMessagePacket.cs" />
     <Compile Include="Game\Network\Packets\Direction.cs" />

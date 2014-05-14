@@ -1,4 +1,6 @@
 ﻿/// <reference path="jquery.d.ts" />
+/// <reference path="Scripts/typings/jqueryui/jqueryui.d.ts"/>
+
 /// <reference path="phaser.d.ts" />
 
 /// <reference path="Game/CharacterState.ts" />

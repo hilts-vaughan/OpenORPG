@@ -3,6 +3,8 @@ module OpenORPG {
 
     
     export class Game {
+        
+ 
 
         constructor() {
 
@@ -20,7 +22,7 @@ module OpenORPG {
         game: Phaser.Game;
 
         preload() {
-   
+        
         }
 
         create() {

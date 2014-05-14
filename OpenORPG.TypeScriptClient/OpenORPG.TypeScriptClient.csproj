@@ -19,6 +19,10 @@
   <ItemGroup>
     <Content Include="assets\fonts\advocut-webfont.svg" />
     <Content Include="assets\fonts\graphicpixel-webfont.svg" />
+    <Content Include="assets\hud\inventory.html" />
+    <Content Include="assets\hud\inventory\images\currency_display.png" />
+    <Content Include="assets\hud\inventory\images\item.png" />
+    <Content Include="assets\hud\inventory\images\item_slot.png" />
     <Content Include="assets\Maps\mobset.png" />
     <Content Include="assets\Maps\tilesheet_16.png" />
     <Content Include="assets\sprites\effects\death.png" />
@@ -26,6 +30,22 @@
     <Content Include="assets\sprites\goblin.png" />
     <Content Include="assets\sprites\male_base.png" />
     <Content Include="assets\sprites\snake.png" />
+    <Content Include="css\flick\images\animated-overlay.gif" />
+    <Content Include="css\flick\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="css\flick\images\ui-bg_flat_0_eeeeee_40x100.png" />
+    <Content Include="css\flick\images\ui-bg_flat_55_ffffff_40x100.png" />
+    <Content Include="css\flick\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="css\flick\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="css\flick\images\ui-bg_highlight-soft_100_f6f6f6_1x100.png" />
+    <Content Include="css\flick\images\ui-bg_highlight-soft_25_0073ea_1x100.png" />
+    <Content Include="css\flick\images\ui-bg_highlight-soft_50_dddddd_1x100.png" />
+    <Content Include="css\flick\images\ui-icons_0073ea_256x240.png" />
+    <Content Include="css\flick\images\ui-icons_454545_256x240.png" />
+    <Content Include="css\flick\images\ui-icons_666666_256x240.png" />
+    <Content Include="css\flick\images\ui-icons_ff0084_256x240.png" />
+    <Content Include="css\flick\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="css\flick\jquery-ui-1.10.4.custom.css" />
+    <Content Include="css\flick\jquery-ui-1.10.4.custom.min.css" />
     <Content Include="game.css" />
     <Content Include="assets\atlas\boxes\box.png" />
     <Content Include="assets\atlas\boxes\boxAlt.png" />
@@ -97,6 +117,9 @@
     <TypeScriptCompile Include="Game.ts" />
     <Content Include="index.html" />
     <Content Include="jquery-2.1.0.min.js" />
+    <Content Include="js\jquery-1.10.2.js" />
+    <Content Include="js\jquery-ui-1.10.4.custom.js" />
+    <Content Include="js\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="phaser.d.ts" />
     <Content Include="phaser.js" />
     <Content Include="phaser.min.js" />
@@ -104,6 +127,7 @@
     <TypeScriptCompile Include="Game\States\GameplayState.ts" />
     <TypeScriptCompile Include="Game\States\HeroSelectState.ts" />
     <TypeScriptCompile Include="Game\States\LoginMenuState.ts" />
+    <TypeScriptCompile Include="Game\UI\InterfaceWindow.ts" />
     <TypeScriptCompile Include="Game\World\Zone.ts" />
     <TypeScriptCompile Include="Infrastructure\DirectoryHelper.ts" />
     <TypeScriptCompile Include="Infrastructure\EffectFactory.ts" />
@@ -115,6 +139,7 @@
     <TypeScriptCompile Include="Infrastructure\Settings.ts" />
     <TypeScriptCompile Include="Infrastructure\World\GameSystem.ts" />
     <TypeScriptCompile Include="jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
@@ -140,6 +165,7 @@
     <Content Include="assets\fonts\graphicpixel-webfont.eot" />
     <Content Include="assets\fonts\graphicpixel-webfont.ttf" />
     <Content Include="assets\fonts\graphicpixel-webfont.woff" />
+    <Content Include="packages.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
