@@ -41,6 +41,7 @@ namespace Server.Game.Database
         public DbSet<NpcTemplate> Npcs { get; set; }
 
         public DbSet<UserQuestInfo> UserQuestInfo { get; set; }
+        public DbSet<UserItem> UserItems { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

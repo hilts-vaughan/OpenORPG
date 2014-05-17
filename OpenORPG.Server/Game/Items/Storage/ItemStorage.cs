@@ -61,7 +61,7 @@ namespace Server.Game.Storage
                 var gone = slot.RemoveSingle();
 
                 if (gone)
-                    _storage[slotId] = null;
+                    _storage.Remove(slotId);
 
             }
 
@@ -116,6 +116,23 @@ namespace Server.Game.Storage
             return false;
         }
 
+        public bool TryAddItemAt(Item item, long amount, long slotId)
+        {
+            if (IsSlotFree(slotId))
+            {
+                _storage.Add(slotId, new ItemSlot(item, amount));
+                return true;
+            }
+
+            return false;
+        }
+
+        bool IsSlotFree(long slotId)
+        {
+            return !_storage.ContainsKey(slotId);
+        }
+
+
         public bool IsFull
         {
             get
@@ -139,6 +156,7 @@ namespace Server.Game.Storage
             return -1;
         }
 
-      
+
+
     }
 }

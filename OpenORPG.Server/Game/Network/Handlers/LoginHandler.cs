@@ -101,6 +101,7 @@ namespace Server.Game.Network.Handlers
 
                 // Load quest info
                 context.Entry(hero).Collection(x => x.QuestInfo).Load();
+                context.Entry(hero).Collection(x => x.Inventory).Load();
 
                 hero.Name = player.Name;
                 hero.PositionX = (int)player.Position.X;
@@ -125,9 +126,9 @@ namespace Server.Game.Network.Handlers
 
                 foreach (var questInfo in player.QuestInfo)
                 {
-                    
 
-                    var item = new UserQuestInfo()
+
+                    var quest = new UserQuestInfo()
                     {
                         QuestId = questInfo.QuestId,
                         State = questInfo.State,
@@ -137,9 +138,19 @@ namespace Server.Game.Network.Handlers
 
                     };
 
-                    hero.QuestInfo.Add(item);
-                  
+                    hero.QuestInfo.Add(quest);
+
                 }
+
+
+                hero.Inventory.ToList().ForEach(r => context.UserItems.Remove(r));
+
+                foreach (var inventorySlot in player.Backpack.Storage)
+                {
+                    var x = new UserItem(inventorySlot.Value.Item.Id, inventorySlot.Value.Amount, inventorySlot.Key);
+                    hero.Inventory.Add(x);
+                }
+
 
                 context.Entry(hero).State = EntityState.Modified;
 

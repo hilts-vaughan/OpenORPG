@@ -55,7 +55,7 @@ namespace Server.Game.Entities
                 {
                     var itemTemplate = context.ItemTemplates.First(x => x.Id == inventoryItem.ItemId);
                     var item = new Item(itemTemplate);
-                    Backpack.TryAddItem(item, inventoryItem.ItemAmount);
+                    Backpack.TryAddItemAt(item, inventoryItem.ItemAmount, inventoryItem.SlotId);
                 }
 
 

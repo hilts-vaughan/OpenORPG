@@ -17,15 +17,18 @@ namespace Server.Game.Database.Models
         public long ItemId { get; set; }
         public long ItemAmount { get; set; }
 
+        public long SlotId { get; set; }
+
         /// <summary>
         /// This refers to the user that this storage belongs to
         /// </summary>
         public virtual UserHero User { get; set; }
 
-        public UserItem(long id, long value)
+        public UserItem(long id, long value, long slotId)
         {
             ItemId = id;
             ItemAmount = value;
+            SlotId = slotId;
         }
 
         public UserItem()
