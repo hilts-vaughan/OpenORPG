@@ -191,3 +191,74 @@ canvas {
 
 
 /* Inventory stuff ends here */
+
+
+
+
+
+/* Character stuff */
+
+#characterdialog {
+    padding: 0px;
+    width: 300px;
+   
+}
+
+#characterpanel {
+    height: 290px;
+}
+
+#equipmentpanel {
+    height: 290px;
+    width: 50px;
+    float: left;
+    background: rgba(47, 69, 95, 0.8);
+
+    margin: 0 auto;
+    text-align: center;
+}
+
+#statspanel {
+    height: 290px;
+    width: 230px;
+    float: left;
+    background: rgba(47, 69, 95, 0.8);
+     color: white;
+}
+
+#equipslots {
+    float: left;
+    width: 50px;
+}
+
+#characterinfo {
+    padding-top: 12px;
+    text-align: center;    
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.statrow {
+    text-align: left;
+    width: 95%;
+    padding-left: 8px;
+    padding-top: 6px;
+}
+
+
+
+.equipmentslot {
+    width: 48px;
+    height: 48px;    
+       background-image: url("assets/hud/inventory/images/item_slot.png");
+}
+
+.weaponslot {
+    background: url("assets/hud/character/images/weaponslot.png") no-repeat center;
+    width: 48px;
+    height: 48px;
+}
+
+.chestslot {
+    background: url("assets/hud/character/images/chestslot.png") no-repeat center; 
+}

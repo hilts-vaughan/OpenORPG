@@ -20,6 +20,8 @@
     <Content Include="assets\fonts\advocut-webfont.svg" />
     <Content Include="assets\fonts\graphicpixel-webfont.svg" />
     <Content Include="assets\hud\character.html" />
+    <Content Include="assets\hud\character\images\chestslot.png" />
+    <Content Include="assets\hud\character\images\weaponslot.png" />
     <Content Include="assets\hud\inventory.html" />
     <Content Include="assets\hud\inventory\images\currency_display.png" />
     <Content Include="assets\hud\inventory\images\item.png" />
@@ -171,6 +173,7 @@
     <Content Include="assets\fonts\graphicpixel-webfont.ttf" />
     <Content Include="assets\fonts\graphicpixel-webfont.woff" />
     <Content Include="packages.config" />
+    <Content Include="assets\locale\en.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

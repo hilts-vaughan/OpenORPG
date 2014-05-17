@@ -7,6 +7,7 @@
         private ChatManager : ChatManager;
 
         private inventoryWindow: InventoryWindow;
+        private characterWindow: CharacterWindow;
 
         constructor() {
             super();
@@ -15,6 +16,7 @@
             this.ChatManager = new ChatManager();
 
             this.inventoryWindow = new InventoryWindow();
+            this.characterWindow = new CharacterWindow();
 
         }
 

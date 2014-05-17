@@ -18,12 +18,7 @@ namespace Server.Game.Items.Equipment
         Head,
         Body,
         Back,
-        Neck,
-        Hands,
-        Waist,
-        Ear,
-        Ring,
-        Legs,
-        Feet
+        Feet,
+        Hands
     }
 }

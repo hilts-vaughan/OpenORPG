@@ -126,6 +126,7 @@
     <Compile Include="Game\Entities\NpcInfo.cs" />
     <Compile Include="Game\Entities\Player.cs" />
     <Compile Include="Game\Entities\StatTypes.cs" />
+    <Compile Include="Game\GameMessage.cs" />
     <Compile Include="Game\Items\Equipment\Equipment.cs" />
     <Compile Include="Game\Items\Equipment\EquipmentSlot.cs" />
     <Compile Include="Game\Items\FieldItem.cs" />

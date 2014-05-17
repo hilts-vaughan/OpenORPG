@@ -27,6 +27,11 @@ namespace Server.Game.Items
             get { return ItemTemplate.Id;  }
         }
 
+        public string Type
+        {
+            get { return GetType().Name.ToString(); }
+        }
+
         public Item(ItemTemplate itemTemplate)
         {
             ItemTemplate = itemTemplate;

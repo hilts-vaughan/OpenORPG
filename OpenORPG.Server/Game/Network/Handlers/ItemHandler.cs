@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Server.Game.Entities;
+using Server.Game.Items;
 using Server.Game.Items.Equipment;
 using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Client;
@@ -28,15 +29,32 @@ namespace Server.Game.Network.Handlers
         /// </summary>
         /// <param name="client"></param>
         /// <param name="packet"></param>
-        [PacketHandler(OpCodes.CMSG_HERO_EQUIP)]
+        [PacketHandler(OpCodes.CMSG_ITEM_USE)]
         public static void OnEquipRequest(GameClient client, ClientHeroEquipItemPacket packet)
         {
             var hero = client.HeroEntity;
+            var itemFromSlot = hero.Backpack.GetItemInfoAt(packet.SlotId).Item;
 
-            if (packet.SlotId > -1)
-                EquipFromSlotIdInInventory(packet, hero);
-            else
-                DeequipFromEquipmentSlot(packet, hero);
+            if (itemFromSlot != null)
+            {
+
+                if (itemFromSlot is Equipment)
+                {
+                    EquipFromSlotIdInInventory(packet, hero);
+                }
+
+                else if(itemFromSlot is FieldItem)
+                {
+                    // Item is probably a field item, use it like that
+                }
+
+                else
+                {
+                    // Do nothing and let the user know they can't do that right now
+                }
+
+
+            }
         }
 
         private static void DeequipFromEquipmentSlot(ClientHeroEquipItemPacket packet, Player hero)

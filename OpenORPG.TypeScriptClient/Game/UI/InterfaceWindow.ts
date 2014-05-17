@@ -45,6 +45,13 @@
 
     }
 
+    export class CharacterWindow extends InterfaceWindow {
+
+        constructor() {
+            super("assets/hud/character.html", "#characterdialog");
+        }
+
+    }
 
     export class InventoryWindow extends InterfaceWindow {
 
