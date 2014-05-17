@@ -19,6 +19,7 @@
   <ItemGroup>
     <Content Include="assets\fonts\advocut-webfont.svg" />
     <Content Include="assets\fonts\graphicpixel-webfont.svg" />
+    <Content Include="assets\hud\character.html" />
     <Content Include="assets\hud\inventory.html" />
     <Content Include="assets\hud\inventory\images\currency_display.png" />
     <Content Include="assets\hud\inventory\images\item.png" />
