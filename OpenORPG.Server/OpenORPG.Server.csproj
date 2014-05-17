@@ -162,6 +162,7 @@
     <Compile Include="Game\Network\Packets\ChannelType.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientAcceptQuestPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientChatMessagePacket.cs" />
+    <Compile Include="Game\Network\Packets\Client\ClientDropStorageRequestPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientHeroEquipItemPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientHeroSelectPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientHeroCreatePacket.cs" />

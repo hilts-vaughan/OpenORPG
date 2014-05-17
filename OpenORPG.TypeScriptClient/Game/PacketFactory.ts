@@ -70,6 +70,14 @@
        
     }
 
+    export function createStorageDropRequest(slotId: number, amount: number) {
+        return {
+            opCode: OpenORPG.OpCode.CMSG_STORAGE_DROP,
+            slotId: slotId,
+            amount: amount
+        }
+    }
+
 
 
 } 

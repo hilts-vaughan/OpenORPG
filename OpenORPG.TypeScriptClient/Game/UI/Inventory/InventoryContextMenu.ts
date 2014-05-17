@@ -27,7 +27,15 @@
                         title: "Drop",
                         uiIcon: "",
                         action: (event, ui) => {
-                            alert("Dropping " + ui.target.text());
+
+                            if ($(ui.target).hasClass("itemtext")) {
+                                ui.target = $(ui.target).parent();
+                            }
+
+                            var id: number = parseInt($(ui.target).parent().attr("slotId"));
+                            var request = PacketFactory.createStorageDropRequest(id, 1);
+
+                            NetworkManager.getInstance().sendPacket(request);
                         }
                     }
 
@@ -37,6 +45,8 @@
 
             // End of event construction here
         }
+
+
 
 
 

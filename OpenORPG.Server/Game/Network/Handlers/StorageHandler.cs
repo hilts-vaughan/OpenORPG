@@ -38,6 +38,19 @@ namespace Server.Game.Network.Handlers
 
         }
 
+        [PacketHandler(OpCodes.CMSG_STORAGE_DROP)]
+        public static void OnStorageDropRequest(GameClient client, ClientDropStorageRequestPacket packet)
+        {
+            var hero = client.HeroEntity;
+
+            for (int i = 0; i < packet.Amount; i++)
+                hero.Backpack.RemoveSingleAt(packet.SlotId);
+
+            var outboundPacket = new ServerSendHeroStoragePacket(hero.Backpack, StorageType.Inventory);
+            client.Send(outboundPacket);
+
+        }
+
 
     }
 }
