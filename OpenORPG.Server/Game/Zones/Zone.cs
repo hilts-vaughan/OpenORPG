@@ -9,6 +9,7 @@ using Server.Game.Database.Models;
 using Server.Game.Entities;
 using Server.Game.Movement;
 using Server.Game.Network.Packets;
+using Server.Game.Network.Packets.Client;
 using Server.Game.Network.Packets.Server;
 using Server.Game.Quests;
 using Server.Game.Zones.Spawns;
@@ -513,6 +514,11 @@ namespace Server.Game.Zones
             heroEntity.AcceptedQuest += HeroEntityOnAcceptedQuest;
 
             string name = heroEntity.Name;
+
+            // Send inventory and stuff
+            var outboundPacket = new ServerSendHeroStoragePacket(heroEntity.Backpack, StorageType.Inventory);
+            client.Send(outboundPacket);
+
 
             Logger.Instance.Info("{0} has entered the zone {1} [#{2}]", name, Name, Id);
 

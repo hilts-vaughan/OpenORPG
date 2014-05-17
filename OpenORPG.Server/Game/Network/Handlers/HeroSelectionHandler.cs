@@ -4,6 +4,8 @@ using System.Threading;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Network.Packets;
+using Server.Game.Network.Packets.Client;
+using Server.Game.Network.Packets.Server;
 using Server.Game.Zones;
 using Server.Infrastructure.Logging;
 using Server.Infrastructure.Network.Handlers;
@@ -70,6 +72,8 @@ namespace Server.Game.Network.Handlers
 
                     // Add to global manager
                     ChatManager.Current.Global.Join(client);
+
+            
 
                 }
                 else

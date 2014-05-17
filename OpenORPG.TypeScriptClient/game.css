@@ -99,6 +99,16 @@ canvas {
     background: url("assets/hud/inventory/images/item.png") no-repeat center;
     width: 48px;
     height: 48px;
+
+
+}
+
+.itemtext {
+    text-align: right;
+    color: white;
+    font-size: 12px;
+    padding-left: 40px;
+    position: absolute;
 }
 
 .itemslot {
@@ -128,6 +138,7 @@ canvas {
     background: url("assets/hud/inventory/images/currency_display.png") no-repeat;
     text-align: right;
     padding-right: 4px;
+    color: yellow;
 }
 
 

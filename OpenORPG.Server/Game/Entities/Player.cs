@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Server.Game.Combat;
 using Server.Game.Database;
 using Server.Game.Database.Models;
+using Server.Game.Items;
 using Server.Game.Storage;
 using Server.Infrastructure.Quests;
 using Server.Infrastructure.World;
@@ -48,6 +49,15 @@ namespace Server.Game.Entities
                     var skill = new Skill(skillTemplate);
                     Skills.Add(skill);
                 }
+
+                // Add the inventory stuff...
+                foreach (var inventoryItem in userHero.Inventory)
+                {
+                    var itemTemplate = context.ItemTemplates.First(x => x.Id == inventoryItem.ItemId);
+                    var item = new Item(itemTemplate);
+                    Backpack.TryAddItem(item, inventoryItem.ItemAmount);
+                }
+
 
                 // Add the state of the quest world to the user
                 foreach (var questEntry in userHero.QuestInfo)

@@ -40,5 +40,9 @@
         SMSG_QUEST_ACCEPT_RESULT = 28,
         SMSG_QUEST_COMPLETE_RESULT = 29,
         SMSG_SERVER_OFFER_QUEST = 30,
+        CMSG_STORAGE_MOVE_SLOT = 31,
+        SMSG_STORAGE_HERO_SEND = 32
+        
+
     }
 }

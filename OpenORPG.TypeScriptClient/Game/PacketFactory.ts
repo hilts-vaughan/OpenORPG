@@ -60,6 +60,16 @@
         }
     }
 
+    export function createStorageMoveRequest(source: number, dest: number, stype: number) {
+        return {
+            opCode: OpenORPG.OpCode.CMSG_STORAGE_MOVE_SLOT,
+            sourceSlot: source,
+            destSlot: dest,
+            type: stype
+        }
+       
+    }
+
 
 
 } 

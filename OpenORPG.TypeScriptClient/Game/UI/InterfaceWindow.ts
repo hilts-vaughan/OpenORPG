@@ -35,8 +35,8 @@
 
 
         // Close this interface window
-        close() {
-            $(this.windowName).dialog("close");
+        toggleVisibility() {
+            $(this.windowName).toggle("clip", {}, 300);
         }
 
         ready() {
@@ -52,10 +52,45 @@
         constructor() {
             super("assets/hud/inventory.html", "#inventorydialog");
 
+            // Hook into our network events
+            NetworkManager.getInstance().registerPacket(OpCode.SMSG_STORAGE_HERO_SEND, (packet) => {
+                // Do something about the inventory update
+                console.log("Inventory update recieved");
+                console.log(packet);
+                this.renderInventory(packet.itemStorage);
+            });
 
         }
 
         ready() {
+
+
+
+        }
+
+        renderInventory(inventory: any) {
+
+            $("#itemback").empty();
+
+            for (var i = 0; i < inventory.capacity; i++) {
+                var $slot = $("<div class='itemslot'/>").attr("slotId", i);
+                $("#itemback").append($slot);
+            }
+
+            for (var slotId in inventory.storage) {
+                var item = $("<div class='item'> <p class='itemtext'/>  </div>");
+
+                var gameItem = inventory.storage[slotId];
+                $('[slotId="' + slotId + '"]').append(item);
+                item.children().first().text(gameItem.amount);
+
+                // Set title
+                $(item).attr("title", "Name: " + gameItem.item.name + " | Description: " + gameItem.item.description);
+
+
+
+            }
+
 
             // Setup drag events
             $(".item").draggable({ revert: 'invalid' });
@@ -64,9 +99,24 @@
                 accept: '.item',
 
                 drop: function (ev, ui) {
+
+        
+
                     var dropped = ui.draggable;
                     var droppedOn = $(this);
+
+                    //
+                    var sourceSlotId: number = parseInt($(dropped).parent().attr("slotId"));
+                    var destSlotId: number = parseInt($(droppedOn).attr("slotId"));
+
+
+
                     $(dropped).detach().css({ top: 0, left: 0 }).appendTo(droppedOn);
+                    
+            
+                    var packet = PacketFactory.createStorageMoveRequest(sourceSlotId, destSlotId, 0);
+                    NetworkManager.getInstance().sendPacket(packet);
+
                 }
 
             });
@@ -87,6 +137,8 @@
                 }
             });
 
+            // Attach a context menu
+            var menu: InventoryContextMenu = new InventoryContextMenu($("#itemback").get(0));
 
 
         }

@@ -122,6 +122,7 @@
     <Content Include="js\jquery-1.10.2.js" />
     <Content Include="js\jquery-ui-1.10.4.custom.js" />
     <Content Include="js\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="js\jquery.ui-contextmenu.js" />
     <Content Include="phaser.d.ts" />
     <Content Include="phaser.js" />
     <Content Include="phaser.min.js" />
@@ -130,6 +131,7 @@
     <TypeScriptCompile Include="Game\States\HeroSelectState.ts" />
     <TypeScriptCompile Include="Game\States\LoginMenuState.ts" />
     <TypeScriptCompile Include="Game\UI\InterfaceWindow.ts" />
+    <TypeScriptCompile Include="Game\UI\Inventory\InventoryContextMenu.ts" />
     <TypeScriptCompile Include="Game\World\Zone.ts" />
     <TypeScriptCompile Include="Infrastructure\DirectoryHelper.ts" />
     <TypeScriptCompile Include="Infrastructure\EffectFactory.ts" />

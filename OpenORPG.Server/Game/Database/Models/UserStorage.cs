@@ -15,7 +15,7 @@ namespace Server.Game.Database.Models
         public int ItemEntryId { get; set; }
 
         public long ItemId { get; set; }
-        public long ItemValue { get; set; }
+        public long ItemAmount { get; set; }
 
         /// <summary>
         /// This refers to the user that this storage belongs to
@@ -25,7 +25,7 @@ namespace Server.Game.Database.Models
         public UserItem(long id, long value)
         {
             ItemId = id;
-            ItemValue = value;
+            ItemAmount = value;
         }
 
         public UserItem()

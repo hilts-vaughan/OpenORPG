@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using Inspire.Shared.Models.Enums;
 using Server.Game.Combat;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
@@ -45,6 +46,7 @@ namespace Server.Game.Database.Seeds
                 character.HomepointZoneY = character.PositionY;
 
                 character.Inventory.Add(new UserItem(1, 1));
+                character.Inventory.Add(new UserItem(1, 2));
 
                 // Add a basic attack to this character
                 character.Skills.Add(new UserSkill(1));
@@ -62,7 +64,7 @@ namespace Server.Game.Database.Seeds
 
             CreateTestMonsters(context);
             CreateTestQuests(context);
-
+            CreateTestItems(context);
 
             context.SaveChanges();
             context.SaveChanges();
@@ -70,6 +72,13 @@ namespace Server.Game.Database.Seeds
 
 
             base.Seed(context);
+        }
+
+        private void CreateTestItems(GameDatabaseContext context)
+        {
+            var itemTemplate = new ItemTemplate(0, "A simple test item", "Something special indeed", ItemType.Consumable,
+                500, true, 0);
+            context.ItemTemplates.Add(itemTemplate);
         }
 
         private string GetRandomName()

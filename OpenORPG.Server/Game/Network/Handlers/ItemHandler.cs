@@ -50,14 +50,14 @@ namespace Server.Game.Network.Handlers
                 hero.Equipment[equipmentIndexer] = null;
 
                 // Add back into inventory
-                hero.Backpack.AddItem(equipment);
+                var success = hero.Backpack.TryAddItem(equipment);
             }
 
 
         }
         private static void EquipFromSlotIdInInventory(ClientHeroEquipItemPacket packet, Player hero)
         {
-            var itemInInventory = hero.Backpack.GetItemAt(packet.SlotId) as Equipment;
+            var itemInInventory = hero.Backpack.GetItemInfoAt(packet.SlotId).Item as Equipment;
 
 
             if (itemInInventory != null)
