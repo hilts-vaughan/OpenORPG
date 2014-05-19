@@ -38,7 +38,7 @@ namespace Server.Game.Storage
         /// <returns></returns>
         public ItemSlot GetItemInfoAt(long slotId)
         {
-            if (slotId > _storage.Count - 1 || _storage.ContainsKey(slotId) == false)
+            if (slotId > Capacity - 1 || _storage.ContainsKey(slotId) == false)
                 return null;
 
             return _storage[slotId];

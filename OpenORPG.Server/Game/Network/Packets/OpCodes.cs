@@ -44,7 +44,9 @@
         SMSG_STORAGE_HERO_SEND = 32,
         CMSG_STORAGE_DROP = 33,
         SMSG_SEND_GAMEMESSAGE = 34,
-        CMSG_UNEQUIP_ITEM = 35
+        CMSG_UNEQUIP_ITEM = 35,
+        SMSG_EQUIPMENT_UPDATE = 36
+       
         
 
     }

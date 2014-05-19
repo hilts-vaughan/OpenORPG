@@ -13,6 +13,9 @@ namespace Server.Infrastructure.World.Systems
     public abstract class GameSystem
     {
 
+        /// <summary>
+        /// The zone this <see cref="GameSystem"/> is responsible for monitoring.
+        /// </summary>
         protected Zone Zone;
 
         protected GameSystem(Zone world)

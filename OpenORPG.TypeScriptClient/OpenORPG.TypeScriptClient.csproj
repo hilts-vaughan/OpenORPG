@@ -20,12 +20,18 @@
     <Content Include="assets\fonts\advocut-webfont.svg" />
     <Content Include="assets\fonts\graphicpixel-webfont.svg" />
     <Content Include="assets\hud\character.html" />
-    <Content Include="assets\hud\character\images\chestslot.png" />
+    <Content Include="assets\hud\character\images\headslot.png" />
+    <Content Include="assets\hud\character\images\feetslot.png" />
+    <Content Include="assets\hud\character\images\bodyslot.png" />
+    <Content Include="assets\hud\character\images\backslot.png" />
     <Content Include="assets\hud\character\images\weaponslot.png" />
+    <Content Include="assets\hud\character\images\handslot.png" />
     <Content Include="assets\hud\inventory.html" />
     <Content Include="assets\hud\inventory\images\currency_display.png" />
     <Content Include="assets\hud\inventory\images\item.png" />
     <Content Include="assets\hud\inventory\images\item_slot.png" />
+    <Content Include="assets\items\1.png" />
+    <Content Include="assets\items\2.png" />
     <Content Include="assets\Maps\mobset.png" />
     <Content Include="assets\Maps\tilesheet_16.png" />
     <Content Include="assets\sprites\effects\death.png" />
@@ -140,6 +146,7 @@
     <TypeScriptCompile Include="Infrastructure\EffectFactory.ts" />
     <TypeScriptCompile Include="Infrastructure\FontFactory.ts" />
     <TypeScriptCompile Include="Infrastructure\Font\FontDefinition.ts" />
+    <TypeScriptCompile Include="Infrastructure\GraphicsUtil.ts" />
     <TypeScriptCompile Include="Infrastructure\Items\EquipmentSlot.ts" />
     <TypeScriptCompile Include="Infrastructure\Localization\LocaleManager.ts" />
     <TypeScriptCompile Include="Infrastructure\Network\NetworkManager.ts" />

@@ -19,7 +19,7 @@
 
 body {
     background: black;
- font-family: "AdvoCut";
+    font-family: "AdvoCut";
 }
 
 canvas {
@@ -83,7 +83,6 @@ canvas {
 
 #inventorydialog {
     padding: 0px;
-
 }
 
 
@@ -99,8 +98,6 @@ canvas {
     background: url("assets/hud/inventory/images/item.png") no-repeat center;
     width: 48px;
     height: 48px;
-
-
 }
 
 .itemtext {
@@ -143,29 +140,26 @@ canvas {
 
 
 
- .ui-tooltip, .arrow:after {
+.ui-tooltip, .arrow:after {
     background: black;
     border: 2px solid white;
-  }
-  .ui-tooltip {
+}
+
+.ui-tooltip {
     padding: 10px 20px;
     color: white;
     border-radius: 20px;
     font: bold 12px "Helvetica Neue", Sans-Serif;
-
     box-shadow: 0 0 7px black;
- 
     /*
         This is the actual tooltip itself
         */
+    width: 300px;
+    height: 120px;
+    background: url("css/flick/images/texture.png");
+}
 
-      width: 300px;
-
-      height: 120px;
-             background: url("css/flick/images/texture.png");
-
-  }
-  .arrow {
+.arrow {
     width: 70px;
     height: 16px;
     overflow: hidden;
@@ -173,21 +167,24 @@ canvas {
     left: 50%;
     margin-left: -35px;
     bottom: -16px;
-  }
-  .arrow.top {
-    top: -16px;
-    bottom: auto;
-  }
-  .arrow.left {
-    left: 20%;
-  }
-  .arrow:after {
+}
 
-  }
-  .arrow.top:after {
-    bottom: -20px;
-    top: auto;
-  }
+    .arrow.top {
+        top: -16px;
+        bottom: auto;
+    }
+
+    .arrow.left {
+        left: 20%;
+    }
+
+    .arrow:after {
+    }
+
+    .arrow.top:after {
+        bottom: -20px;
+        top: auto;
+    }
 
 
 /* Inventory stuff ends here */
@@ -201,7 +198,6 @@ canvas {
 #characterdialog {
     padding: 0px;
     width: 300px;
-   
 }
 
 #characterpanel {
@@ -213,7 +209,6 @@ canvas {
     width: 50px;
     float: left;
     background: rgba(47, 69, 95, 0.8);
-
     margin: 0 auto;
     text-align: center;
 }
@@ -223,7 +218,7 @@ canvas {
     width: 230px;
     float: left;
     background: rgba(47, 69, 95, 0.8);
-     color: white;
+    color: white;
 }
 
 #equipslots {
@@ -233,7 +228,7 @@ canvas {
 
 #characterinfo {
     padding-top: 12px;
-    text-align: center;    
+    text-align: center;
     width: 100%;
     margin-bottom: 25px;
 }
@@ -249,8 +244,8 @@ canvas {
 
 .equipmentslot {
     width: 48px;
-    height: 48px;    
-       background-image: url("assets/hud/inventory/images/item_slot.png");
+    height: 48px;
+    background-image: url("assets/hud/inventory/images/item_slot.png");
 }
 
 .weaponslot {
@@ -259,6 +254,39 @@ canvas {
     height: 48px;
 }
 
-.chestslot {
-    background: url("assets/hud/character/images/chestslot.png") no-repeat center; 
+.bodyslot {
+    background: url("assets/hud/character/images/bodyslot.png") no-repeat center;
+    width: 48px;
+    height: 48px;
+}
+
+.headslot {
+    background: url("assets/hud/character/images/headslot.png") no-repeat center;
+    width: 48px;
+    height: 48px;
+}
+
+.handsslot {
+    background: url("assets/hud/character/images/handslot.png") no-repeat center;
+    width: 48px;
+    height: 48px;
+}
+
+.feetslot {
+    background: url("assets/hud/character/images/feetslot.png") no-repeat center;
+    width: 48px;
+    height: 48px;
+}
+
+
+.backslot {
+    background: url("assets/hud/character/images/backslot.png") no-repeat center;
+    width: 48px;
+    height: 48px;
+}
+
+.equipitem {
+    background: center no-repeat;
+    width: 48px;
+    height: 48px;
 }

@@ -15,4 +15,8 @@
         return baseAssetPath + "audio/sounds/";
     }
 
+    export function getItemsPath() {
+        return baseAssetPath + "items/";
+    }
+
 } 

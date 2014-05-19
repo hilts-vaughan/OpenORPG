@@ -81,7 +81,7 @@
     export function createItemuseRequest(slotId: number) {
         return {
             opCode: OpenORPG.OpCode.CMSG_ITEM_USE,
-            slot: slotId
+            slotId: slotId
         }
     }
 

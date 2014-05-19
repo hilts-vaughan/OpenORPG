@@ -182,6 +182,7 @@ namespace Server.Game.Zones
             GameSystems.Add(new SpawnGameSystem(this));
             GameSystems.Add(new CombatSystem(this));
             GameSystems.Add(new AiSystem(this));
+            GameSystems.Add(new ZoneEntityMonitor(this));
 
         }
 
@@ -502,14 +503,14 @@ namespace Server.Game.Zones
 
         }
 
-      
+
 
         protected void OnClientEnter(GameClient client, Player heroEntity)
         {
             GameClients.Add(client);
             ChatChannel.Join(client);
 
-  
+
             _questRequirementTracker.LoadPlayer(heroEntity);
             heroEntity.AcceptedQuest += HeroEntityOnAcceptedQuest;
 

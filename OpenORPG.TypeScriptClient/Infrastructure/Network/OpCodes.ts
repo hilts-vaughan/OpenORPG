@@ -32,8 +32,6 @@
         SMSG_LEAVE_CHAT_CHANNEL = 24,
         CMSG_INTERACT_REQUEST = 25,
 
-        // Quest opcodes
-
         CMSG_QUEST_REQUEST_COMPLETION = 26,
         CMSG_QUEST_ACCEPT = 27,
         SMSG_QUEST_ACCEPT_RESULT = 28,
@@ -43,7 +41,8 @@
         SMSG_STORAGE_HERO_SEND = 32,
         CMSG_STORAGE_DROP = 33,
         SMSG_SEND_GAMEMESSAGE = 34,
-        CMSG_UNEQUIP_ITEM = 35
+        CMSG_UNEQUIP_ITEM = 35,
+        SMSG_EQUIPMENT_UPDATE = 36
     }
 
 } 

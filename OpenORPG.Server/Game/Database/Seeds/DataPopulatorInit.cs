@@ -16,7 +16,7 @@ namespace Server.Game.Database.Seeds
     /// <summary>
     ///     A custom intalizer that populates the game database with mock data useful for testing, clean, good known states.
     /// </summary>
-    public class CustomInitializer : DropCreateDatabaseIfModelChanges<GameDatabaseContext> //  DropCreateDatabaseAlways<GameDatabaseContext>  
+    public class CustomInitializer : DropCreateDatabaseAlways<GameDatabaseContext>   //DropCreateDatabaseIfModelChanges<GameDatabaseContext>  // 
     {
 
 
@@ -47,7 +47,7 @@ namespace Server.Game.Database.Seeds
                 character.HomepointZoneY = character.PositionY;
 
                 character.Inventory.Add(new UserItem(1, 1, 0));
-                character.Inventory.Add(new UserItem(1, 2, 1));
+                character.Inventory.Add(new UserItem(2, 1, 1));
 
                 // Add a basic attack to this character
                 character.Skills.Add(new UserSkill(1));
@@ -105,7 +105,9 @@ namespace Server.Game.Database.Seeds
                 "Nymph",
                 "Zeta",
                 "Holo",
-                "Haruhi"
+                "Haruhi",
+                "Blank",
+                "Himeragi"
             };
 
             return names.OrderBy(s => Guid.NewGuid()).First();

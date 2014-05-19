@@ -47,9 +47,50 @@
 
     export class CharacterWindow extends InterfaceWindow {
 
-        constructor() {
-            super("assets/hud/character.html", "#characterdialog");
+        equipmentBindings = [];
+
+
+        bindEquipmentSlots() {
+            this.equipmentBindings[EquipmentSlot.Weapon] = (".weaponslot");
+            this.equipmentBindings[EquipmentSlot.Head] = (".headslot");
+            this.equipmentBindings[EquipmentSlot.Hands] = (".handsslot");
+            this.equipmentBindings[EquipmentSlot.Feet] = (".feetslot");
+            this.equipmentBindings[EquipmentSlot.Body] = (".bodyslot");
+            this.equipmentBindings[EquipmentSlot.Back] = (".backslot");
         }
+
+
+        constructor() {
+
+            super("assets/hud/character.html", "#characterdialog");
+
+            this.bindEquipmentSlots();
+
+            NetworkManager.getInstance().registerPacket(OpCode.SMSG_EQUIPMENT_UPDATE, (packet) => {
+
+                // Update all the things
+                var slot: EquipmentSlot = packet.slot;
+                var equipment: any = packet.equipment;
+
+                // Update the slot with the item you need
+                var domSlot = this.equipmentBindings[slot];
+                $(domSlot).empty();
+
+                if (equipment != null) {
+
+                    var item = $("<div class='equipitem'></div>");
+                    var image = GraphicsUtil.itemIdToImagePath(equipment.id);
+                    $(item).css('background-image', 'url(' + image + ')');
+
+                    $(domSlot).append(item);
+             
+
+                }
+
+            });
+        }
+
+
 
     }
 
@@ -89,6 +130,10 @@
 
                 var gameItem = inventory.storage[slotId];
                 $('[slotId="' + slotId + '"]').append(item);
+
+                var image = GraphicsUtil.itemIdToImagePath(gameItem.item.id);
+                $(item).css('background-image', 'url(' + image + ')');
+
                 item.children().first().text(gameItem.amount);
 
                 // Set title
@@ -107,7 +152,7 @@
 
                 drop: function (ev, ui) {
 
-        
+
 
                     var dropped = ui.draggable;
                     var droppedOn = $(this);
@@ -119,8 +164,8 @@
 
 
                     $(dropped).detach().css({ top: 0, left: 0 }).appendTo(droppedOn);
-                    
-            
+
+
                     var packet = PacketFactory.createStorageMoveRequest(sourceSlotId, destSlotId, 0);
                     NetworkManager.getInstance().sendPacket(packet);
 
