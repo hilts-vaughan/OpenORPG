@@ -78,13 +78,11 @@ canvas {
     border-style: solid;
 }
 
-
 /* Inventory stuff starts here, have fun! */
 
 #inventorydialog {
     padding: 0px;
 }
-
 
 #itemback {
     background-color: transparent;
@@ -137,9 +135,6 @@ canvas {
     padding-right: 4px;
     color: yellow;
 }
-
-
-
 
 /* Inventory stuff ends here */
 
@@ -249,13 +244,11 @@ canvas {
 /*  Ttem tooltip stuff
     */
 
-  .ui-tooltip {
-      margin: 0;
-      background: transparent;
-      border: none;
-  }
-
-
+.ui-tooltip {
+    margin: 0;
+    background: transparent;
+    border: none;
+}
 
 #itemtooltip {
     height: 180px;
@@ -332,10 +325,10 @@ img {
     background: linear-gradient(to bottom, rgba(9,58,59,0.9) 0%, rgba(9,58,59,0.9) 0%, rgba(3,26,25,0.9) 47%, rgba(9,58,59,0.9) 100%);
 }
 
-    #ItemDescription p {
-        -webkit-margin-before: 0px;
-        -webkit-margin-after: 0px;
-    }
+#ItemDescription p {
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+}
 
 #ItemStats {
     margin-top: 10px;
@@ -346,18 +339,10 @@ img {
     color: #7691A0;
 }
 
-#ItemStats .ItemType {
+#ItemStats .ItemType, .ItemDamage {
     padding: 0;
 }
 
-#ItemStats .ItemDamage {
-    padding: 0;
-}
-
-#Itemlevel {
-    margin: 0;
-}
-
-#ItemTypex {
+#Itemlevel, #ItemTypex {
     margin: 0;
 }

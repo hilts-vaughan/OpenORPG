@@ -1,11 +1,10 @@
 ﻿module OpenORPG {
-
     /*
      * This class is responsible for displaying tooltip info for items.
      * It will display some general information
      */
     export class ItemTooltipInfo {
-
+        
         data: string;
         element: HTMLElement;
         gameItem: any;
@@ -27,7 +26,6 @@
 
         ready() {
 
-
             $(this.element).tooltip({
 
                 position: {
@@ -43,7 +41,6 @@
                     }
                 },
 
-
                 items: '.item, .equipitem',
                 content: () => {
                     var context = $(this.data);
@@ -55,22 +52,12 @@
                     $(context).find("#ItemTypex").text(this.gameItem.type);
 
                     //ItemName
-
-
                     return context[2].outerHTML;
                 }
-
-
             });
 
             // Do some markup stuff here now
             // IconHolder
-
-
         }
-
-
-
     }
-
 }

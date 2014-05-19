@@ -1,5 +1,4 @@
 ﻿module OpenORPG {
-
     // This manager is used for maintaing and hooking into chat related functionality in the game
     // If it has to do with talking in the game world, you'll find it here.
     export class ChatManager {
@@ -8,7 +7,6 @@
         private _chatLogElement: string = "chatlog";
 
         constructor() {
-
             // Hook into the DOM
             $("#chatmessage").on('keypress', (event: JQueryEventObject) => {
                 if (event.which == 13) {
@@ -18,7 +16,6 @@
                     $("#chatmessage").val("");
                 }
             });
-
 
             this.setupNetworkHandlers();
         }
@@ -38,7 +35,6 @@
             network.registerPacket(OpCode.SMSG_LEAVE_CHAT_CHANNEL, (packet) => {
                 delete this._chatChannels[packet.channelId];
             });
-
 
             network.registerPacket(OpCode.SMSG_CHAT_MESSAGE, (packet) => {
                 var message = packet.message;
@@ -63,17 +59,11 @@
             if (chatChannel != null) {
                 this.addMessage(message);
             }
-
         }
 
         addMessage(message: string) {
             var chatLog = $("#chatlog");
             chatLog.val(chatLog.val() + message + "\n");
         }
-
-
-
     }
-
-
 } 
