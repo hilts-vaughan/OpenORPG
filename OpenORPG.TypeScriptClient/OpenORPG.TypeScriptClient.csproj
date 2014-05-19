@@ -140,6 +140,7 @@
     <TypeScriptCompile Include="Game\States\GameplayState.ts" />
     <TypeScriptCompile Include="Game\States\HeroSelectState.ts" />
     <TypeScriptCompile Include="Game\States\LoginMenuState.ts" />
+    <TypeScriptCompile Include="Game\UI\Character\EquipmentItemContextMenu.ts" />
     <TypeScriptCompile Include="Game\UI\InterfaceWindow.ts" />
     <TypeScriptCompile Include="Game\UI\Inventory\InventoryContextMenu.ts" />
     <TypeScriptCompile Include="Game\World\Zone.ts" />

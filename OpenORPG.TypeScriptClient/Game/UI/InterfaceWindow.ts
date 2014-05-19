@@ -83,7 +83,9 @@
                     $(item).css('background-image', 'url(' + image + ')');
 
                     $(domSlot).append(item);
-             
+                    $(item).attr("slot", slot);
+
+                    var menu = new EquipmentItemContextMenu(item.parent()[0]);
 
                 }
 

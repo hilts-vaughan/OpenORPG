@@ -167,10 +167,16 @@ namespace Server.Game.Entities
 
         public void RemoveEquipment(EquipmentSlot slot)
         {
-            if (Equipment[(int) slot] != null)
+            if (Equipment[(int)slot] != null)
             {
-                Equipment[(int) slot] = null;
-                OnEquipmentChanged(null, this, slot);
+                var success = Backpack.TryAddItem(Equipment[(int)slot]);
+
+                if (success)
+                {
+                    Equipment[(int)slot] = null;
+
+                    OnEquipmentChanged(null, this, slot);
+                }
             }
         }
 

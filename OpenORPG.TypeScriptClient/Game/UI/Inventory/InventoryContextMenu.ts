@@ -41,7 +41,7 @@
                                 ui.target = $(ui.target).parent();
                             }
 
-                            var id: number = parseInt($(ui.target).parent().attr("slotId"));
+                            var id: number = parseInt($(ui.target).attr("slot"));
                             var request = PacketFactory.createStorageDropRequest(id, 1);
 
                             NetworkManager.getInstance().sendPacket(request);
