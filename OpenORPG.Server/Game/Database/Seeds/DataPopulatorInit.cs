@@ -48,6 +48,7 @@ namespace Server.Game.Database.Seeds
 
                 character.Inventory.Add(new UserItem(1, 1, 0));
                 character.Inventory.Add(new UserItem(2, 1, 1));
+                character.Inventory.Add(new UserItem(3, 1, 2));
 
                 // Add a basic attack to this character
                 character.Skills.Add(new UserSkill(1));
@@ -89,8 +90,14 @@ namespace Server.Game.Database.Seeds
             testItem.EquipmentSlot = EquipmentSlot.Weapon;
             testItem.StrengthModifier = 999;
 
-            context.ItemTemplates.Add(testItem);
+            var testPlate = new ItemTemplate(0, "Astral Body",
+                "Providing almost perfect defense, this body piece is said to be almost unbreakable by any foe. Designed for the 'Liberators', this" +
+                "piece was designed for war with gods.", ItemType.Equipment, 0, false, 0);
+            testPlate.EquipmentSlot = EquipmentSlot.Body;
+            testPlate.VitalityModifier = 999;
 
+            context.ItemTemplates.Add(testItem);
+            context.ItemTemplates.Add(testPlate);
 
 
         }
