@@ -22,8 +22,6 @@ OpenORPG is being built up at a fast pace and this list will be changing and gro
 * Advanced UI customization
 * World statistics that can hook into various systems and record
 
-
-
 Client
 ======
 
@@ -31,22 +29,18 @@ Client
 
 * Built entirely in TypeScript and based on the ever growing and popular Phaser, the client has access to amazing tools developed by something of the best growing open-source projects.
 
-* Use HTMl and CSS to design and create good looking UIs -- no need to worry about propietary UI systems
+* Use HTMl and CSS to design and create good-looking UIs -- no need to worry about propietary UI systems
 
-* Updates are instant -- using the HTTP protocol you don't need to worry about it.
-
+* Updates are instant -- using the HTTP protocol, you don't need to worry about it.
 
 Server
 ======
 
-* Speed. We've built this server to be fast and modular. We want everyone to be able to develop on the lowest possible specifications we can. With growing technology, this has become possible modern languages such as C# 
+* **Speed**. We've built this server to be fast and modular. We want everyone to be able to develop on the lowest possible specifications we can. With growing technology, this has become possible with modern languages such as C#.
 
-* Accessible. We've made sure setup is easy and painless. Get started with little scaffolding and dive right into developing a great game.
+* **Accessible**. We've made sure setup is easy and painless. Get started with little scaffolding and dive right into developing a great game.
 
-* Object oriented! In a world like today, what else would you expect, right?
-
-
-
+* **Object oriented**! In a world like today, what else would you expect, right?
 
 Getting Started & Helping Out
 =============================
