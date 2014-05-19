@@ -16,7 +16,8 @@ namespace Server.Game
         /// A message fired off when an item cannot be used
         /// </summary>
         ItemCannotUse,
-
+        PlayerJoinedGame,
+        PlayerLeftGame
 
 
     }

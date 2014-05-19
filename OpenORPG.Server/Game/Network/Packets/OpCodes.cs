@@ -43,7 +43,8 @@
         CMSG_STORAGE_MOVE_SLOT = 31,
         SMSG_STORAGE_HERO_SEND = 32,
         CMSG_STORAGE_DROP = 33,
-        SMSG_SEND_GAMEMESSAGE = 34
+        SMSG_SEND_GAMEMESSAGE = 34,
+        CMSG_UNEQUIP_ITEM = 35
         
 
     }

@@ -76,7 +76,7 @@ namespace Server.Game.Database.Seeds
 
         private void CreateTestItems(GameDatabaseContext context)
         {
-            var itemTemplate = new ItemTemplate(0, "A simple test item", "Something special indeed", ItemType.Consumable,
+            var itemTemplate = new ItemTemplate(0, "A simple test item", "Something special indeed", ItemType.FieldItem,
                 500, true, 0);
             context.ItemTemplates.Add(itemTemplate);
         }

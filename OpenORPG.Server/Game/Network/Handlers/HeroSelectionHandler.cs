@@ -67,8 +67,7 @@ namespace Server.Game.Network.Handlers
                     Logger.Instance.Info("{0} has entered the game.", hero.Name);
                     zone.AddEntity(heroObject);
 
-                    // announce to the world
-                    ChatManager.Current.Global.SendMessage(string.Format("{0} has joined the game.", heroObject.Name));
+                
 
                     // Add to global manager
                     ChatManager.Current.Global.Join(client);

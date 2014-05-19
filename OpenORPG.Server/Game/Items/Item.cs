@@ -3,9 +3,9 @@
 namespace Server.Game.Items
 {
     /// <summary>
-    /// A game item represented in the world
+    /// A game item represented in the world.
     /// </summary>
-    public  class Item
+    public abstract class Item
     {
         protected ItemTemplate ItemTemplate;
 
@@ -24,7 +24,7 @@ namespace Server.Game.Items
 
         public long Id
         {
-            get { return ItemTemplate.Id;  }
+            get { return ItemTemplate.Id; }
         }
 
         public string Type
@@ -32,7 +32,7 @@ namespace Server.Game.Items
             get { return GetType().Name.ToString(); }
         }
 
-        public Item(ItemTemplate itemTemplate)
+        protected Item(ItemTemplate itemTemplate)
         {
             ItemTemplate = itemTemplate;
         }

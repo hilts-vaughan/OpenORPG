@@ -43,17 +43,29 @@
 
                 this.processIncomingMessage(message, id);
             });
+
+            network.registerPacket(OpCode.SMSG_SEND_GAMEMESSAGE, (packet) => {
+                var messageType = packet.messageType;
+                var args = packet.arguments;
+
+                var message: string = LocaleManager.getInstance().getString(messageType);
+                this.addMessage(message);
+            });
+
         }
 
         processIncomingMessage(message: string, id: number) {
             var chatChannel = this._chatChannels[id];
 
             if (chatChannel != null) {
-                var chatLog = $("#chatlog");
-                chatLog.val(chatLog.val() + message + "\n");
-
+                this.addMessage(message);
             }
 
+        }
+
+        addMessage(message: string) {
+            var chatLog = $("#chatlog");
+            chatLog.val(chatLog.val() + message + "\n");
         }
 
 

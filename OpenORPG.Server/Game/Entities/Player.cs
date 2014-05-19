@@ -8,7 +8,9 @@ using Server.Game.Combat;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Items;
+using Server.Game.Items.Equipment;
 using Server.Game.Storage;
+using Server.Infrastructure.Logging;
 using Server.Infrastructure.Quests;
 using Server.Infrastructure.World;
 
@@ -16,10 +18,21 @@ namespace Server.Game.Entities
 {
     public delegate void QuestEvent(UserQuestInfo userQuestInfo, Player player);
 
+    public delegate void EquipmentEvent(Equipment equipment, Player player, EquipmentSlot slot);
+
+
     public class Player : Character
     {
 
         public event QuestEvent AcceptedQuest;
+        public event EquipmentEvent EquipmentChanged;
+
+        protected virtual void OnEquipmentChanged(Equipment equipment, Player player, EquipmentSlot slot)
+        {
+            EquipmentEvent handler = EquipmentChanged;
+            if (handler != null) handler(equipment, player, slot);
+        }
+
 
         protected virtual void OnAcceptedQuest(UserQuestInfo userquestinfo, Player player)
         {
@@ -54,7 +67,7 @@ namespace Server.Game.Entities
                 foreach (var inventoryItem in userHero.Inventory)
                 {
                     var itemTemplate = context.ItemTemplates.First(x => x.Id == inventoryItem.ItemId);
-                    var item = new Item(itemTemplate);
+                    var item = ItemFactory.CreateItem(itemTemplate);
                     Backpack.TryAddItemAt(item, inventoryItem.ItemAmount, inventoryItem.SlotId);
                 }
 
@@ -119,6 +132,50 @@ namespace Server.Game.Entities
             QuestInfo.Add(questInfo);
             OnAcceptedQuest(questInfo, this);
         }
+
+        /// <summary>
+        /// Attempts to equip the given item to the character.
+        /// The item will be removed the users inventory.
+        /// </summary>
+        /// <param name="slotId">The slot in the inventory to equip the item from</param>
+        /// <returns>If the operation is not possible, false is returned. Otherwise, returns true.</returns>
+        public bool TryEquipItem(long slotId)
+        {
+            var itemInInventory = Backpack.GetItemInfoAt(slotId).Item as Equipment;
+
+
+            if (itemInInventory != null)
+            {
+                // Remove the item from the backpack
+                Backpack.RemoveItemAt(slotId);
+
+                // Assign it onto the hero
+                Equipment[(int)itemInInventory.Slot] = itemInInventory;
+
+                Logger.Instance.Info("{0} has equipped a {1}.", Name, itemInInventory.Name);
+
+                // Notify everyone who cares
+                OnEquipmentChanged(itemInInventory, this, itemInInventory.Slot);
+
+                return true;
+            }
+            else
+                Logger.Instance.Warn("{0} tried to equip an item that they did not have.", Name);
+
+            return false;
+        }
+
+        public void RemoveEquipment(EquipmentSlot slot)
+        {
+            if (Equipment[(int) slot] != null)
+            {
+                Equipment[(int) slot] = null;
+                OnEquipmentChanged(null, this, slot);
+            }
+        }
+
+
+
 
         public long UserId { get; set; }
     }

@@ -47,6 +47,7 @@ namespace Server.Game.Network.Handlers
                 else if (itemFromSlot is FieldItem)
                 {
                     // Item is probably a field item, use it like that
+                    Logger.Instance.Warn("Attempted to use a field item, not implemented as of yet.");
                 }
 
                 else
@@ -61,39 +62,18 @@ namespace Server.Game.Network.Handlers
             }
         }
 
-        private static void DeequipFromEquipmentSlot(ClientHeroUseItemPacket packet, Player hero)
+        [PacketHandler(OpCodes.CMSG_UNEQUIP_ITEM)]
+        public static void OnUnequipRequest(GameClient client, ServerUnequipItemPacket packet)
         {
-            //var equipmentIndexer = (int)packet.EquipmentSlot;
-
-            //if (hero.Equipment[equipmentIndexer] != null && !hero.Backpack.IsFull)
-            //{
-            //    // Remove equipment
-            //    var equipment = hero.Equipment[equipmentIndexer];
-            //    hero.Equipment[equipmentIndexer] = null;
-
-            //    // Add back into inventory
-            //    var success = hero.Backpack.TryAddItem(equipment);
-            //}
-
-
+            var hero = client.HeroEntity;
+            hero.RemoveEquipment(packet.Slot);
         }
+
+
         private static void EquipFromSlotIdInInventory(ClientHeroUseItemPacket packet, Player hero)
         {
-            var itemInInventory = hero.Backpack.GetItemInfoAt(packet.SlotId).Item as Equipment;
-
-
-            if (itemInInventory != null)
-            {
-                // Remove the item from the backpack
-                hero.Backpack.RemoveItemAt(packet.SlotId);
-
-                // Assign it onto the hero
-                hero.Equipment[(int)itemInInventory.Slot] = itemInInventory;
-
-                Logger.Instance.Info("{0} has equipped a {1}.", hero.Name, itemInInventory.Name);
-            }
-            else
-                Logger.Instance.Warn("{0} tried to equip an item that they did not have.", hero.Name);
+            // Attempt to equip the item
+            var success = hero.TryEquipItem(packet.SlotId);
         }
 
 

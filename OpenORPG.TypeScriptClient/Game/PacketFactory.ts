@@ -78,6 +78,19 @@
         }
     }
 
+    export function createItemuseRequest(slotId: number) {
+        return {
+            opCode: OpenORPG.OpCode.CMSG_ITEM_USE,
+            slot: slotId
+        }
+    }
+
+    export function createUnEqupRequest(slot: OpenORPG.EquipmentSlot) {
+        return {
+            opCode: OpenORPG.OpCode.CMSG_UNEQUIP_ITEM,
+            slot: slot
+        }
+    }
 
 
 } 

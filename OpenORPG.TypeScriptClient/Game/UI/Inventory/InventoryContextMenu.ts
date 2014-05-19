@@ -19,7 +19,16 @@
                         title: "Use",
                         uiIcon: "",
                         action: (event, ui) => {
-                            alert("Using " + ui.target.text());
+
+                            if ($(ui.target).hasClass("itemtext")) {
+                                ui.target = $(ui.target).parent();
+                            }
+
+                            var id: number = parseInt($(ui.target).parent().attr("slotId"));
+                            var request = PacketFactory.createItemuseRequest(id);
+
+                            NetworkManager.getInstance().sendPacket(request);
+
                         }
                     },
 
