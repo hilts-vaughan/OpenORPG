@@ -1,5 +1,4 @@
 ﻿module OpenORPG {
-
     // This manager is used for maintaing and hooking into chat related functionality in the game
     // If it has to do with talking in the game world, you'll find it here.
     export class ChatManager {
