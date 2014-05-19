@@ -84,14 +84,14 @@ namespace Server.Game.Database.Seeds
 
             // NOTICE: Creating test equipment here
             var testItem = new ItemTemplate(0, "Pendragon",
-                "A weapon with an immense about of magic radiating from the hilt. Designed as a weapon of war for the 'Liberators', this weapon leaves nothing behind when faced with a foe.",
+                "A weapon with an immense amount of magic radiating from the hilt. Designed as a weapon of war for the 'Liberators', this weapon leaves nothing behind when faced with a foe.",
                 ItemType.Equipment, 0, false, 0);
 
             testItem.EquipmentSlot = EquipmentSlot.Weapon;
             testItem.StrengthModifier = 999;
 
             var testPlate = new ItemTemplate(0, "Astral Body",
-                "Providing almost perfect defense, this body piece is said to be almost unbreakable by any foe. Designed for the 'Liberators', this" +
+                "Providing almost perfect defense, this body piece is said to be almost unbreakable by any foe. Designed for the 'Liberators', this " +
                 "piece was designed for war with gods.", ItemType.Equipment, 0, false, 0);
             testPlate.EquipmentSlot = EquipmentSlot.Body;
             testPlate.VitalityModifier = 999;
