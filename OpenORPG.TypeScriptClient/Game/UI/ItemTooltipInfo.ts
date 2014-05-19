@@ -27,7 +27,6 @@
 
         ready() {
 
-
             $(this.element).tooltip({
 
                 position: {
@@ -43,7 +42,6 @@
                     }
                 },
 
-
                 items: '.item, .equipitem',
                 content: () => {
                     var context = $(this.data);
@@ -55,22 +53,12 @@
                     $(context).find("#ItemTypex").text(this.gameItem.type);
 
                     //ItemName
-
-
                     return context[2].outerHTML;
                 }
-
-
             });
 
             // Do some markup stuff here now
             // IconHolder
-
-
         }
-
-
-
     }
-
 }
