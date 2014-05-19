@@ -1,11 +1,10 @@
 ﻿module OpenORPG {
-
     /*
      * This class is responsible for displaying tooltip info for items.
      * It will display some general information
      */
     export class ItemTooltipInfo {
-
+        
         data: string;
         element: HTMLElement;
         gameItem: any;
