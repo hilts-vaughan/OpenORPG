@@ -51,7 +51,7 @@ Server
 Getting Started & Helping Out
 =============================
 
-We're still in the early stages. If something is missing, fork us and submit a pull request. If it get benefit to everyone and does not break existing functionality, we'll be glad to include it! This is a communtiy project. 
+We're still in the early stages. If something is missing, fork us and submit a pull request. If your request is beneficial to everyone and does not break existing functionality, we'll be glad to include it! This is a communtiy project. 
 
 If you would like to request a feature, please open a GitHub issue. Every issue will recieve consideration and feedback. 
 
