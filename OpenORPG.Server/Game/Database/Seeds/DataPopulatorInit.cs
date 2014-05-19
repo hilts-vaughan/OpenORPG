@@ -8,6 +8,7 @@ using Server.Game.Combat;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Database.Models.Quests;
+using Server.Game.Items.Equipment;
 using Server.Infrastructure.Quests;
 
 namespace Server.Game.Database.Seeds
@@ -79,6 +80,19 @@ namespace Server.Game.Database.Seeds
             var itemTemplate = new ItemTemplate(0, "A simple test item", "Something special indeed", ItemType.FieldItem,
                 500, true, 0);
             context.ItemTemplates.Add(itemTemplate);
+
+            // NOTICE: Creating test equipment here
+            var testItem = new ItemTemplate(0, "Pendragon",
+                "A weapon with an immense about of magic radiating from the hilt. Designed as a weapon of war for the 'Liberators', this weapon leaves nothing behind when faced with a foe.",
+                ItemType.Equipment, 0, false, 0);
+
+            testItem.EquipmentSlot = EquipmentSlot.Weapon;
+            testItem.StrengthModifier = 999;
+
+            context.ItemTemplates.Add(testItem);
+
+
+
         }
 
         private string GetRandomName()
