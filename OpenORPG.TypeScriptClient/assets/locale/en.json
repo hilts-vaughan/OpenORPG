@@ -1,5 +1,6 @@
 ﻿{
     "ItemCannotUse": "You cannot use that item right now.",
     "PlayerJoinedGame": "{0} has joined the game.",
-    "PlayerLeftGame": "{0} has left the game."
+    "PlayerLeftGame": "{0} has left the game.",
+    "EquipmentChanged": "Your equipment has changed."
 }

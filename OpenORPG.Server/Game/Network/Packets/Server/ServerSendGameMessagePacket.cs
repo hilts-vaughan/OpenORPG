@@ -15,7 +15,7 @@ namespace Server.Game.Network.Packets.Server
         public ServerSendGameMessagePacket(GameMessage messageType, List<string> arguments = null) : this()
         {
             Arguments = arguments;
-            MessageType = messageType;
+            MessageType = messageType.ToString();
         }
 
 
@@ -30,10 +30,12 @@ namespace Server.Game.Network.Packets.Server
         /// </summary>
         public List<string> Arguments { get; set; }
 
+        //TODO: Just send the ID and let the client work it out
+
         /// <summary>
         /// The type of message to be sent
         /// </summary>
-        public GameMessage MessageType { get; set; }
+        public string MessageType { get; set; }
 
 
     }

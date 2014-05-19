@@ -26,6 +26,9 @@
         setupNetworkHandlers() {
             var network = NetworkManager.getInstance();
 
+            // Init
+            LocaleManager.getInstance();
+
             // Handle channel registration
             network.registerPacket(OpCode.SMSG_JOIN_CHANNEL, (packet) => {
                 var channel: ChatChannel = new ChatChannel(packet.channelId, packet.channelName, packet.channelType);

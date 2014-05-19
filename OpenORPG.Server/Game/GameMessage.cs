@@ -17,7 +17,8 @@ namespace Server.Game
         /// </summary>
         ItemCannotUse,
         PlayerJoinedGame,
-        PlayerLeftGame
+        PlayerLeftGame,
+        EquipmentChanged
 
 
     }

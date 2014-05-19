@@ -42,6 +42,10 @@ namespace Server.Game.Network.Handlers
                 if (itemFromSlot is Equipment)
                 {
                     EquipFromSlotIdInInventory(packet, hero);
+
+                    // Send notification
+                    var request = new ServerSendGameMessagePacket(GameMessage.EquipmentChanged);
+                    client.Send(request);
                 }
 
                 else if (itemFromSlot is FieldItem)
