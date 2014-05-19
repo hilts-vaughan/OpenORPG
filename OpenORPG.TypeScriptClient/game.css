@@ -140,52 +140,6 @@ canvas {
 
 
 
-.ui-tooltip, .arrow:after {
-    background: black;
-    border: 2px solid white;
-}
-
-.ui-tooltip {
-    padding: 10px 20px;
-    color: white;
-    border-radius: 20px;
-    font: bold 12px "Helvetica Neue", Sans-Serif;
-    box-shadow: 0 0 7px black;
-    /*
-        This is the actual tooltip itself
-        */
-    width: 300px;
-    height: 120px;
-    background: url("css/flick/images/texture.png");
-}
-
-.arrow {
-    width: 70px;
-    height: 16px;
-    overflow: hidden;
-    position: absolute;
-    left: 50%;
-    margin-left: -35px;
-    bottom: -16px;
-}
-
-    .arrow.top {
-        top: -16px;
-        bottom: auto;
-    }
-
-    .arrow.left {
-        left: 20%;
-    }
-
-    .arrow:after {
-    }
-
-    .arrow.top:after {
-        bottom: -20px;
-        top: auto;
-    }
-
 
 /* Inventory stuff ends here */
 
@@ -289,4 +243,121 @@ canvas {
     background: center no-repeat;
     width: 48px;
     height: 48px;
+}
+
+
+/*  Ttem tooltip stuff
+    */
+
+  .ui-tooltip {
+      margin: 0;
+      background: transparent;
+      border: none;
+  }
+
+
+
+#itemtooltip {
+    height: 180px;
+    width: 350px;
+    border: 1px solid #000000;
+    margin: 0;
+    display: flex;
+
+    margin: 0;
+    font: 14px Rockwell, sans-serif;
+
+}
+
+img {
+    border-radius: 5px;
+    display: block;
+    margin: auto;
+    padding-top: 15px;
+}
+
+#ItemPreview {
+    height: 100%;
+    width: 40%;
+    margin: 0;
+    float: left;
+    background: rgba(40,74,87,1);
+    background: linear-gradient(to bottom, rgba(40,74,87,0.9) 0%, rgba(40,74,87,0.9) 0%, rgba(3,38,37,0.9) 47%, rgba(12,75,77,0.9) 100%);
+    color: #FFFFFF;
+}
+
+#IconHolder {
+    height: 100px;
+    width: 115px;
+    margin: 0;
+    background-color: #C8CBCC;
+    border-radius: 10px;
+    background: center no-repeat;
+    background-size: contain;
+    image-rendering: crisp-edge;
+
+}
+
+#ItemNameContainer {
+    width: auto;
+    height: 15%;
+    text-align: center;
+    padding-top: 5px;
+    margin: 0;
+}
+
+#ItemName {
+    margin: 0;
+}
+
+#ItemIcon {
+    width: auto;
+    height: 50%;
+    padding: 5px 5px 5px 11px;
+    margin-bottom: 10px;
+}
+
+#ItemInfo {
+    padding-top: 5px;
+    text-align: center;
+    margin: 0;
+}
+
+#ItemDescription {
+    width: 60%;
+    float: right;
+    height: 99%;
+    padding: 2px 2px 0px 2px;
+    background: rgba(9,58,59,1);
+    background: linear-gradient(to bottom, rgba(9,58,59,0.9) 0%, rgba(9,58,59,0.9) 0%, rgba(3,26,25,0.9) 47%, rgba(9,58,59,0.9) 100%);
+}
+
+    #ItemDescription p {
+        -webkit-margin-before: 0px;
+        -webkit-margin-after: 0px;
+    }
+
+#ItemStats {
+    margin-top: 10px;
+    color: #FFFFFF;
+}
+
+#ItemDescription .ItemDesc {
+    color: #7691A0;
+}
+
+#ItemStats .ItemType {
+    padding: 0;
+}
+
+#ItemStats .ItemDamage {
+    padding: 0;
+}
+
+#Itemlevel {
+    margin: 0;
+}
+
+#ItemTypex {
+    margin: 0;
 }

@@ -87,6 +87,8 @@
 
                     var menu = new EquipmentItemContextMenu(item.parent()[0]);
 
+                    var tooltip: ItemTooltipInfo = new ItemTooltipInfo($(domSlot)[0], equipment);
+
                 }
 
             });
@@ -139,9 +141,9 @@
                 item.children().first().text(gameItem.amount);
 
                 // Set title
-                $(item).attr("title", "Name: " + gameItem.item.name + " | Description: " + gameItem.item.description);
+               // $(item).attr("title", "Name: " + gameItem.item.name + " | Description: " + gameItem.item.description);
 
-
+                var tooltip: ItemTooltipInfo = new ItemTooltipInfo($('[slotId="' + slotId + '"]')[0], gameItem.item);
 
             }
 
@@ -175,21 +177,7 @@
 
             });
 
-            $(this.windowName).tooltip({
-                position: {
-                    my: "center bottom-20",
-                    at: "center top",
-                    using: function (position, feedback) {
-                        $(this).css(position);
-                        $("<div>")
-                            .addClass("arrow")
-                            .addClass(feedback.vertical)
-                            .addClass(feedback.horizontal)
-                            .addClass("inventorytooltip")
-                            .appendTo(this);
-                    }
-                }
-            });
+
 
             // Attach a context menu
             var menu: InventoryContextMenu = new InventoryContextMenu($("#itemback").get(0));

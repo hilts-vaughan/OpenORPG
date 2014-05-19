@@ -30,6 +30,7 @@
     <Content Include="assets\hud\inventory\images\currency_display.png" />
     <Content Include="assets\hud\inventory\images\item.png" />
     <Content Include="assets\hud\inventory\images\item_slot.png" />
+    <Content Include="assets\hud\itemtooltip.html" />
     <Content Include="assets\items\1.png" />
     <Content Include="assets\items\2.png" />
     <Content Include="assets\items\3.png" />
@@ -143,6 +144,7 @@
     <TypeScriptCompile Include="Game\UI\Character\EquipmentItemContextMenu.ts" />
     <TypeScriptCompile Include="Game\UI\InterfaceWindow.ts" />
     <TypeScriptCompile Include="Game\UI\Inventory\InventoryContextMenu.ts" />
+    <TypeScriptCompile Include="Game\UI\ItemTooltipInfo.ts" />
     <TypeScriptCompile Include="Game\World\Zone.ts" />
     <TypeScriptCompile Include="Infrastructure\DirectoryHelper.ts" />
     <TypeScriptCompile Include="Infrastructure\EffectFactory.ts" />
