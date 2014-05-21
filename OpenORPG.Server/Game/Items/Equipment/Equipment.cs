@@ -39,16 +39,16 @@ namespace Server.Game.Items.Equipment
         /// Fetches and returns all the modifications to stats this equipment provides.
         /// </summary>
         /// <returns>Returns an array of <see cref="CharacterStat"/> representing the values.</returns>
-        public CharacterStat[] GetEquipmentModifierStats()
+        public CharacterStatCollection GetEquipmentModifierStats()
         {
-            var stats = new CharacterStat[NumberOfStats];
+            var stats = new CharacterStatCollection();
 
-            stats[(int) StatTypes.Strength].CurrentValue = ItemTemplate.StrengthModifier;
-            stats[(int)StatTypes.Dexterity].CurrentValue = ItemTemplate.DexterityModifier;
-            stats[(int)StatTypes.Intelligence].CurrentValue = ItemTemplate.IntelligenceModifier;
-            stats[(int)StatTypes.Hitpoints].CurrentValue = ItemTemplate.HitpointsModifier;
-            stats[(int)StatTypes.Luck].CurrentValue = ItemTemplate.LuckModifier;
-            stats[(int)StatTypes.Vitality].CurrentValue = ItemTemplate.VitalityModifier;
+            stats[StatTypes.Strength].CurrentValue = ItemTemplate.StrengthModifier;
+            stats[StatTypes.Dexterity].CurrentValue = ItemTemplate.DexterityModifier;
+            stats[StatTypes.Intelligence].CurrentValue = ItemTemplate.IntelligenceModifier;
+            stats[StatTypes.Hitpoints].CurrentValue = ItemTemplate.HitpointsModifier;
+            stats[StatTypes.Luck].CurrentValue = ItemTemplate.LuckModifier;
+            stats[StatTypes.Vitality].CurrentValue = ItemTemplate.VitalityModifier;
 
             return stats;
         }

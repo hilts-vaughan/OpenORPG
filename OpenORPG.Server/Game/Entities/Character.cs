@@ -47,11 +47,10 @@ namespace Server.Game.Entities
             : base(sprite)
         {
             //TODO: Be a bit more creative than this
-            Speed = 130;
+            Speed = 130;                
 
-            // We initialize the size of our stats here
-            var numberOfStats = Enum.GetNames(typeof(StatTypes)).Length;
-            CharacterStats = new CharacterStat[numberOfStats];
+            CharacterStats = new CharacterStatCollection();
+
 
             // Allocate just enough room for equipment
             var numberOfEquipmentSlots = Enum.GetNames(typeof(EquipmentSlot)).Length;
@@ -66,7 +65,9 @@ namespace Server.Game.Entities
         /// <summary>
         /// An array of stats for this character
         /// </summary>
-        public CharacterStat[] CharacterStats { get; set; }
+        public CharacterStatCollection CharacterStats { get; set; }
+
+
         public Equipment[] Equipment { get; set; }
 
         public List<Skill> Skills { get; set; }

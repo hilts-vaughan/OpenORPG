@@ -40,9 +40,9 @@ namespace Server.Game.Combat
 
 
 
-        private CharacterStat[] GetCharacterStats(Character character)
+        private CharacterStatCollection GetCharacterStats(Character character)
         {
-            var statsWithEquipmentMods = new CharacterStat[character.CharacterStats.Length];
+            var statsWithEquipmentMods = new CharacterStatCollection();
 
             // Include character stats
             statsWithEquipmentMods = CombineStats(statsWithEquipmentMods, character.CharacterStats);
@@ -59,9 +59,9 @@ namespace Server.Game.Combat
 
 
 
-        private CharacterStat[] CombineStats(CharacterStat[] first, CharacterStat[] second)
+        private CharacterStatCollection CombineStats(CharacterStatCollection first, CharacterStatCollection second)
         {
-            var stats = new CharacterStat[first.Length];
+            var stats = new CharacterStatCollection();
 
             for (int index = 0; index < first.Length; index++)
             {

@@ -42,8 +42,19 @@ namespace Server.Game.Entities
 
         public int Experience { get; set; }
 
+        /// <summary>
+        /// The amount of currency this particular player is holding.
+        /// This is used in computing
+        /// </summary>
+        public long Currency
+        {
+            get { return _currency; }
+            set { _currency = value; PropertyCollection.WriteValue("Currency", value); }
+        }
+
 
         private UserHero _hero;
+        private long _currency;
 
         public Player(string sprite, GameClient client, UserHero userHero)
             : base(sprite)
