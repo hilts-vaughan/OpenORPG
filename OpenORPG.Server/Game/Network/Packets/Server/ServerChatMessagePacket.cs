@@ -6,11 +6,12 @@ namespace Server.Game.Network.Packets
     {
         public int ChannelId;
         public string Message;
+        public string Sender;
 
-
-        public ServerChatMessagePacket(string message, int channelId)
+        public ServerChatMessagePacket(string sender, string message, int channelId)
             : this()
         {
+            Sender = sender;
             Message = message;
             ChannelId = channelId;
         }

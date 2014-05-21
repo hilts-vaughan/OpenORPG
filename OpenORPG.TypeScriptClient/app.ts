@@ -1,4 +1,5 @@
 ﻿/// <reference path="jquery.d.ts" />
+/// <reference path="underscore.d.ts" />
 /// <reference path="Scripts/typings/jqueryui/jqueryui.d.ts"/>
 
 /// <reference path="phaser.d.ts" />
@@ -10,6 +11,8 @@
 
 
 window.onload = () => {
+
+    // Setup underscore   
 
     var game = new OpenORPG.Game();
 };

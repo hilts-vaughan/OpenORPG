@@ -31,10 +31,7 @@ namespace Server.Game
 
         public void SendMessage(string message)
         {
-            foreach (var client in Clients)
-            {
-                client.Send(new ServerChatMessagePacket(message, Id));
-            }
+         
         }
 
         public void Join(GameClient client)

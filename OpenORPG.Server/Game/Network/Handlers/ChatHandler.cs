@@ -7,7 +7,7 @@ namespace Server.Game.Network.Handlers
 {
     public class ChatHandler
     {
-        private static string _chatTemplate = "[{0}]: {1}";
+        private static string _chatTemplate = "{1}";
         /// <summary>
         /// Handles incoming chat messages as they come in and processes them accordingly
         /// </summary>
@@ -25,11 +25,9 @@ namespace Server.Game.Network.Handlers
                 // Strip out any nasty HTML tags that a player might try and inject
                 packet.Message = HtmlTools.StripTagsCharArray(packet.Message);
                 
-                // Format the message accordingly
-                packet.Message = string.Format(_chatTemplate, player.Name, packet.Message);
                 
                 // Send the actual message to the user as requested
-                var newPacket = new ServerChatMessagePacket(packet.Message, channel.Id);
+                var newPacket = new ServerChatMessagePacket(player.Name, packet.Message, channel.Id);
                 channel.SendMessage(newPacket);
             }
 

@@ -26,6 +26,7 @@
     <Content Include="assets\hud\character\images\backslot.png" />
     <Content Include="assets\hud\character\images\weaponslot.png" />
     <Content Include="assets\hud\character\images\handslot.png" />
+    <Content Include="assets\hud\chat\chat_message_line.html" />
     <Content Include="assets\hud\inventory.html" />
     <Content Include="assets\hud\inventory\images\currency_display.png" />
     <Content Include="assets\hud\inventory\images\item.png" />
@@ -139,6 +140,7 @@
     <Content Include="js\jquery-ui-1.10.4.custom.js" />
     <Content Include="js\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="js\jquery.ui-contextmenu.js" />
+    <Content Include="js\underscore.js" />
     <Content Include="phaser.d.ts" />
     <Content Include="phaser.js" />
     <Content Include="phaser.min.js" />
@@ -166,6 +168,7 @@
     <TypeScriptCompile Include="Infrastructure\World\GameSystem.ts" />
     <TypeScriptCompile Include="jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
+    <TypeScriptCompile Include="underscore.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />

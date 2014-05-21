@@ -39,8 +39,9 @@
             network.registerPacket(OpCode.SMSG_CHAT_MESSAGE, (packet) => {
                 var message = packet.message;
                 var id = packet.channelId;
+                var sender = packet.sender;
 
-                this.processIncomingMessage(message, id);
+                this.processIncomingMessage(sender, message, id);
             });
 
             network.registerPacket(OpCode.SMSG_SEND_GAMEMESSAGE, (packet) => {
@@ -53,17 +54,34 @@
 
         }
 
-        processIncomingMessage(message: string, id: number) {
+        processIncomingMessage(sender : string, message: string, id: number) {
             var chatChannel = this._chatChannels[id];
 
             if (chatChannel != null) {
-                this.addMessage(message);
+                this.addMessage(message, sender + ": ");
             }
         }
 
-        addMessage(message: string) {
-            var chatLog = $("#chatlog");
-            chatLog.val(chatLog.val() + message + "\n");
+        addMessage(message: string, user: string = "") {
+
+
+            $.get("assets/hud/chat/chat_message_line.html", html => {
+                var data =
+                    {
+                        playerName: user,
+                        message: message
+                    }
+
+
+                $("#chatlog").append(_.template(html, data));
+
+                // Scroll down
+                $("#chatlog").animate({ scrollTop: $("#chatlog")[0].scrollHeight }, 1000);
+
+
+
+            });
+
         }
     }
 } 
