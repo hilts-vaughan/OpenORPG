@@ -175,7 +175,7 @@ canvas {
     width: 50px;
 }
 
-#characterinfo {
+#charactername {
     padding-top: 12px;
     text-align: center;
     width: 100%;
@@ -187,6 +187,12 @@ canvas {
     width: 95%;
     padding-left: 8px;
     padding-top: 6px;
+}
+
+.statnumber {
+    text-align: right;
+    float: right;
+    padding-right: 8px;
 }
 
 

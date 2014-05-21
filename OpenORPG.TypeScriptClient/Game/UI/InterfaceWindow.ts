@@ -49,6 +49,8 @@
 
         equipmentBindings = [];
 
+        playerInfo: PlayerInfo;
+
 
         bindEquipmentSlots() {
             this.equipmentBindings[EquipmentSlot.Weapon] = (".weaponslot");
@@ -59,12 +61,57 @@
             this.equipmentBindings[EquipmentSlot.Back] = (".backslot");
         }
 
+        /*
+         * This function is reponsible for rendering character statistics onto the form.
+         */
+        renderStats() {
 
-        constructor() {
+
+            // Render info
+            var selector = $(this.windowName).find("#statspanel").selector;
+
+            $(selector).find('#charactername').text(this.playerInfo.name);
+
+            // Remove old stat stuff
+            $(".statrow").remove();
+
+
+            var names: string[] = [];
+            for (var n in StatTypes) {
+                if (typeof StatTypes[n] === 'number') names.push(n);
+            }
+
+
+            for (var key in this.playerInfo.characterStats) {
+                var value = this.playerInfo.characterStats[key];
+
+                var content = $('<div class="statrow"></div>');
+                if (value.maximumValue > 0)
+                    $(content).html(names[key] + ': <b class="statnumber">' + value.currentValue + '/' + value.maximumValue + '</b>');
+                else
+                    $(content).html(names[key] + ': <b class="statnumber">' + value.currentValue + '</b>');
+
+                $(selector).append(content);
+
+            }
+
+
+
+
+
+        }
+
+        constructor(playerInfo: PlayerInfo) {
 
             super("assets/hud/character.html", "#characterdialog");
 
             this.bindEquipmentSlots();
+            this.playerInfo = playerInfo;
+
+            // Setup a binding to change on character state change
+            this.playerInfo.listenCharacterStatChange($.proxy(this.renderStats, this));
+ 
+
 
             NetworkManager.getInstance().registerPacket(OpCode.SMSG_EQUIPMENT_UPDATE, (packet) => {
 
@@ -141,7 +188,7 @@
                 item.children().first().text(gameItem.amount);
 
                 // Set title
-               // $(item).attr("title", "Name: " + gameItem.item.name + " | Description: " + gameItem.item.description);
+                // $(item).attr("title", "Name: " + gameItem.item.name + " | Description: " + gameItem.item.description);
 
                 var tooltip: ItemTooltipInfo = new ItemTooltipInfo($('[slotId="' + slotId + '"]')[0], gameItem.item);
 

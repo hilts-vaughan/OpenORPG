@@ -1,4 +1,7 @@
-﻿module OpenORPG {
+﻿
+module OpenORPG {
+
+
     // The gameplay state manages 
     export class GameplayState extends Phaser.State {
 
@@ -9,6 +12,9 @@
         private inventoryWindow: InventoryWindow;
         private characterWindow: CharacterWindow;
 
+        // Keep track of character info
+        private playerInfo : PlayerInfo = new PlayerInfo();
+
         constructor() {
             super();
 
@@ -16,7 +22,7 @@
             this.ChatManager = new ChatManager();
 
             this.inventoryWindow = new InventoryWindow();
-            this.characterWindow = new CharacterWindow();
+            this.characterWindow = new CharacterWindow(this.playerInfo);
 
         }
 
@@ -72,10 +78,35 @@
                     if (worldEntity.id == packet.heroId) {
                         this.game.camera.follow(worldEntity);
                         this.zone.movementSystem.attachEntity(worldEntity);
+
+                        // Init character info
+                        for (var key in entity.characterStats.stats) {
+                            var statObject = entity.characterStats.stats[key];
+                            this.playerInfo.characterStats[statObject.statType] = {currentValue: statObject.currentValue, maximumValue: statObject.maximumValue};
+                        }
+
+                        this.playerInfo.name = worldEntity.name;
+
+                        this.characterWindow.renderStats();
+
                     }
 
                 }
             });
+
+
+            // Register for stat changes
+            network.registerPacket(OpCode.SMSG_STAT_CHANGE, (packet: any) => {
+
+                // Update these, fire callback
+                this.playerInfo.characterStats[packet.stat].currentValue = packet.currentValue;
+                this.playerInfo.characterStats[packet.stat].maximumValue = packet.maximumValue;
+                
+                // Trigger callback
+                this.playerInfo.onCharacterStatChange();
+
+            });
+
         }
 
         update() {

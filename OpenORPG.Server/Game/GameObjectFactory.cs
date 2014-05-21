@@ -100,8 +100,7 @@ namespace Server.Game
             character.CharacterStats[(int)StatTypes.Dexterity].CurrentValue = template.Dexterity;
             character.CharacterStats[(int)StatTypes.Luck].CurrentValue = template.Luck;
             character.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue = template.Hitpoints;
-            character.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue = template.MaximumHitpoints;
-            character.CharacterStats[(int)StatTypes.Luck].CurrentValue = template.Luck;
+            character.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue = template.MaximumHitpoints;         
         }
 
 

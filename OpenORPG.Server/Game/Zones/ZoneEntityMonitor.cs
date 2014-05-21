@@ -57,9 +57,22 @@ namespace Server.Game.Zones
         {
             var player = tracking as Player;
             Logger.Instance.Debug("{0} has {1} changed to {2}", player.Name, statType, newValue);
+
+            //TODO: Revaluate this, right now we only broadcast hitpoint changes
+            if (statType == StatTypes.Hitpoints)
+            {
+                var zone = player.Zone;
+                var updatePacket = new ServerCharacterStatChange(statType, newValue,
+                    player.CharacterStats[statType].MaximumValue,
+                    (long)player.Id);
+
+                // Broadcast to interested parties
+                zone.SendToEveryone(updatePacket);
+            }
+
         }
 
-  
+
 
         private void NeglectPlayer(Player player)
         {

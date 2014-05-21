@@ -118,13 +118,17 @@
     <Content Include="assets\ui\wood.png" />
     <TypeScriptCompile Include="Game\Chat\ChatChannel.ts" />
     <TypeScriptCompile Include="Game\Chat\ChatManager.ts" />
+    <TypeScriptCompile Include="Game\Combat\CharacterStats.ts" />
+    <TypeScriptCompile Include="Game\Combat\StatTypes.ts" />
     <TypeScriptCompile Include="Game\Direction.ts" />
     <TypeScriptCompile Include="Game\CharacterState.ts" />
     <TypeScriptCompile Include="Game\Entities\DamageText.ts" />
     <TypeScriptCompile Include="Game\Entities\Entity.ts" />
     <TypeScriptCompile Include="Game\Entities\ZoneTrigger.ts" />
+    <TypeScriptCompile Include="Game\Items\Item.ts" />
     <TypeScriptCompile Include="Game\Movement\MovementSystem.ts" />
     <TypeScriptCompile Include="Game\PacketFactory.ts" />
+    <TypeScriptCompile Include="Game\PlayerInfo.ts" />
     <TypeScriptCompile Include="Game\Resources\SpriteManager.ts" />
     <TypeScriptCompile Include="Game\States\BootState.ts" />
     <TypeScriptCompile Include="Game.ts" />
@@ -196,7 +200,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\effects\" />
-    <Folder Include="Game\Combat\" />
+    <Folder Include="Game\Sync\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

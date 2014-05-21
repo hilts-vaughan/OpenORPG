@@ -174,6 +174,7 @@
     <Compile Include="Game\Network\Packets\Client\ClientStorageMoveSlot.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientUsePowerPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientZoneChangeRequestPacket.cs" />
+    <Compile Include="Game\Network\Packets\Server\ServerCharacterStatChange.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEntityMovementPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEntityPropertyChange.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEqupmentUpdatePacket.cs" />
