@@ -59,6 +59,7 @@
     <Content Include="css\flick\images\ui_dialog_titlebar.png" />
     <Content Include="css\flick\jquery-ui-1.10.4.custom.css" />
     <Content Include="css\flick\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="css\jquery.mCustomScrollbar.css" />
     <Content Include="game.css" />
     <Content Include="assets\atlas\boxes\box.png" />
     <Content Include="assets\atlas\boxes\boxAlt.png" />
@@ -141,6 +142,7 @@
     <Content Include="phaser.d.ts" />
     <Content Include="phaser.js" />
     <Content Include="phaser.min.js" />
+    <Content Include="Scripts\jquery.mCustomScrollbar.js" />
     <Content Include="web.config" />
     <TypeScriptCompile Include="Game\States\GameplayState.ts" />
     <TypeScriptCompile Include="Game\States\HeroSelectState.ts" />

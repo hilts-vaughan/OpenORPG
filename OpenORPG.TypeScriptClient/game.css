@@ -17,6 +17,30 @@
 }
 
 
+/*
+ *  STYLE 4
+ */
+
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 2px solid #555555;
+}
+
+
+
 body {
     background: black;
     font-family: "AdvoCut";
@@ -26,6 +50,11 @@ canvas {
     border-style: solid;
     border-width: 1px;
     border-color: white;
+}
+
+#canvasholder {
+    width: 1336px;
+    margin: 0 auto;
 }
 
 #overlay {
@@ -48,6 +77,16 @@ canvas {
     padding-top: 15px;
     line-height: 20px;
     border: none;
+    height: 220px;
+    overflow-y: scroll;
+    overflow-x: hidden;    
+}
+
+.chatline {
+    margin-bottom: 4px;
+    margin-top: 0px;
+    font-size: 12px;
+    font-family: "Rockwell";
 }
 
 #chatmessage {
@@ -187,6 +226,7 @@ canvas {
     width: 95%;
     padding-left: 8px;
     padding-top: 6px;
+    font-size: 14px;
 }
 
 .statnumber {
@@ -262,10 +302,8 @@ canvas {
     border: 1px solid #000000;
     margin: 0;
     display: flex;
-
     margin: 0;
     font: 14px Rockwell, sans-serif;
-
 }
 
 img {
@@ -294,7 +332,6 @@ img {
     background: center no-repeat;
     background-size: contain;
     image-rendering: crisp-edge;
-
 }
 
 #ItemNameContainer {
@@ -331,10 +368,10 @@ img {
     background: linear-gradient(to bottom, rgba(9,58,59,0.9) 0%, rgba(9,58,59,0.9) 0%, rgba(3,26,25,0.9) 47%, rgba(9,58,59,0.9) 100%);
 }
 
-#ItemDescription p {
-    -webkit-margin-before: 0px;
-    -webkit-margin-after: 0px;
-}
+    #ItemDescription p {
+        -webkit-margin-before: 0px;
+        -webkit-margin-after: 0px;
+    }
 
 #ItemStats {
     margin-top: 10px;

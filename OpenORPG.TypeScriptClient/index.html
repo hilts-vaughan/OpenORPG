@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <title>OpenORPG</title>
     <link href="css/flick/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css" />
+
     <script src="js/jquery-1.10.2.js"></script>
     <script src="js/jquery-ui-1.10.4.custom.js"></script>
     <link rel="stylesheet" href="game.css" type="text/css" />
@@ -16,16 +18,31 @@
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     
     <script src="js/jquery.ui-contextmenu.js"></script>
+    <script src="Scripts/jquery.mCustomScrollbar.js"></script>
+
 </head>
 
 <body>
     <div id="gameContainer">
         <div id="canvasholder">
             <div id="overlay">
-                <textarea readonly id="chatlog" name="chatlog" cols="61" rows="11"></textarea>
-                <input id="chatmessage" type="text" name="chatmessage" placeholder="Enter a message..." ><br>
+                <div readonly id="chatlog" name="chatlog">
+                    <p class="chatline">Vaughan:  Hi! How is it going? I wonder how you're doing. Haruhi is doing really well...!</p>
+                    <p class="chatline">Haruhi: Hey!</p>
+                    <p class="chatline">Vaughan:  Hi! How is it going? I wonder how you're doing. Haruhi is doing really well...!</p>
+                    <p class="chatline">Haruhi: Hey!</p>
+                    <p class="chatline">Vaughan:  Hi! How is it going? I wonder how you're doing. Haruhi is doing really well...!</p>
+                    <p class="chatline">Haruhi: Hey!</p>
+                    <p class="chatline">Vaughan:  Hi! How is it going? I wonder how you're doing. Haruhi is doing really well...!</p>
+                    <p class="chatline">Haruhi: Hey!</p>
+                    <p class="chatline">Vaughan:  Hi! How is it going? I wonder how you're doing. Haruhi is doing really well...!</p>
+                    <p class="chatline">Haruhi: Hey!</p>
+
+                </div>
+
+                <input id="chatmessage" type="text" name="chatmessage" placeholder="Enter a message..."><br>
             </div>
-            
+
             <div id="inventorydialog" title="Inventory">
             </div>
 
@@ -33,6 +50,5 @@
             </div>
         </div>
     </div>
-    <div id="controls">UI Bar can go here</div>
 </body>
 </html>

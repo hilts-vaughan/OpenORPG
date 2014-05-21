@@ -56,6 +56,13 @@ namespace Server.Game.Combat
             get { return _currentValue; }
             set
             {
+
+                if (value > _maximumValue && _maximumValue != 0)
+                    value = _maximumValue;
+
+                if (value == _currentValue)
+                    return;
+
                 if (value != _currentValue)
                 {
                     OnCurrentValueChanged(_currentValue, value, StatType);
