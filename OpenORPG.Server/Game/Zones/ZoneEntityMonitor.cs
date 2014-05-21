@@ -7,6 +7,7 @@ using Server.Game.Entities;
 using Server.Game.Items.Equipment;
 using Server.Game.Network.Packets.Client;
 using Server.Game.Network.Packets.Server;
+using Server.Infrastructure.Logging;
 using Server.Infrastructure.World;
 using Server.Infrastructure.World.Systems;
 
@@ -49,12 +50,21 @@ namespace Server.Game.Zones
         private void MonitorPlayer(Player player)
         {
             player.EquipmentChanged += PlayerOnEquipmentChanged;
+            player.CharacterStats.CurrentValueChanged += CharacterStatsOnCurrentValueChanged;
         }
 
+        private void CharacterStatsOnCurrentValueChanged(long oldValue, long newValue, StatTypes statType, Character tracking)
+        {
+            var player = tracking as Player;
+            Logger.Instance.Debug("{0} has {1} changed to {2}", player.Name, statType, newValue);
+        }
+
+  
 
         private void NeglectPlayer(Player player)
         {
             player.EquipmentChanged -= PlayerOnEquipmentChanged;
+            player.CharacterStats.CurrentValueChanged -= CharacterStatsOnCurrentValueChanged;
         }
 
         private void PlayerOnEquipmentChanged(Equipment equipment, Player player, EquipmentSlot slot)

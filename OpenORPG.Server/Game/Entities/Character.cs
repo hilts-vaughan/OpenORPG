@@ -49,7 +49,7 @@ namespace Server.Game.Entities
             //TODO: Be a bit more creative than this
             Speed = 130;                
 
-            CharacterStats = new CharacterStatCollection();
+            CharacterStats = new CharacterStatCollection(this);
 
 
             // Allocate just enough room for equipment

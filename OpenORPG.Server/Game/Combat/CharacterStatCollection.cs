@@ -14,14 +14,28 @@ namespace Server.Game.Combat
     public class CharacterStatCollection
     {
 
-        public delegate void StatValueChanged(long oldValue, long newValue, StatTypes statType);
+        public delegate void StatValueChanged(long oldValue, long newValue, StatTypes statType, Character tracking);
 
-        public event CharacterStat.StatValueChanged CurrentValueChanged;
+        public event StatValueChanged CurrentValueChanged;
 
 
-        private readonly CharacterStat[] _stats;
+        private CharacterStat[] _stats;
+        private Character _tracking;
 
         public CharacterStatCollection()
+        {
+            Setup();
+        }
+
+
+        public CharacterStatCollection(Character character)
+        {
+            Setup();
+            _tracking = character;
+        }
+
+
+        private void Setup()
         {
             // We initialize the size of our stats here
             var numberOfStats = Enum.GetNames(typeof(StatTypes)).Length;
@@ -34,6 +48,7 @@ namespace Server.Game.Combat
                 this[(StatTypes)enumValue].MaximumValueChanged += OnMaximumValueChanged;
             }
         }
+
 
 
         ~CharacterStatCollection()
@@ -79,16 +94,16 @@ namespace Server.Game.Combat
 
         protected virtual void OnCurrentValueChanged(long oldvalue, long newvalue, StatTypes stattype)
         {
-            CharacterStat.StatValueChanged handler = CurrentValueChanged;
-            if (handler != null) handler(oldvalue, newvalue, stattype);
+            StatValueChanged handler = CurrentValueChanged;
+            if (handler != null) handler(oldvalue, newvalue, stattype, _tracking);
         }
 
-        public event CharacterStat.StatValueChanged MaximumValueChanged;
+        public event StatValueChanged MaximumValueChanged;
 
         protected virtual void OnMaximumValueChanged(long oldvalue, long newvalue, StatTypes stattype)
         {
-            CharacterStat.StatValueChanged handler = MaximumValueChanged;
-            if (handler != null) handler(oldvalue, newvalue, stattype);
+            StatValueChanged handler = MaximumValueChanged;
+            if (handler != null) handler(oldvalue, newvalue, stattype, _tracking);
         }
 
 

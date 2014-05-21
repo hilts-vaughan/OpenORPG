@@ -58,7 +58,7 @@ namespace Server.Game.Combat
             {
                 if (value != _currentValue)
                 {
-                    OnMaximumValueChanged(_currentValue, value, StatType);
+                    OnCurrentValueChanged(_currentValue, value, StatType);
                 }
 
                 _currentValue = value;
@@ -69,8 +69,8 @@ namespace Server.Game.Combat
 
         public CharacterStat(long maximumValue, long currentValue, StatTypes statType)
         {
-            MaximumValue = maximumValue;
-            CurrentValue = currentValue;
+            _maximumValue = maximumValue;
+            _currentValue = currentValue;
             StatType = statType;
         }
     }
