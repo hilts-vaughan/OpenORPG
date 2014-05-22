@@ -5,6 +5,7 @@
 
         private _chatChannels: Array<ChatChannel> = new Array<ChatChannel>();
         private _chatLogElement: string = "chatlog";
+        private channelColorMap: Array<string> = new Array<string>();
 
         constructor() {
             // Hook into the DOM
@@ -14,6 +15,15 @@
                     var packet = PacketFactory.createChatPacket(0, $("#chatmessage").val());
                     NetworkManager.getInstance().sendPacket(packet);
                     $("#chatmessage").val("");
+                }
+            });
+
+            $.getJSON("assets/config/chat_color_map.json", data => {
+                var i = 0;
+                for (var key in data) {
+                    var value = data[key];
+                    this.channelColorMap[i] = value;
+                    i++;
                 }
             });
 
@@ -49,20 +59,20 @@
                 var args = packet.arguments;
 
                 var message: string = LocaleManager.getInstance().getString(messageType);
-                this.addMessage(message);
+                this.addMessage(message, "", ChannelType.System);
             });
 
         }
 
-        processIncomingMessage(sender : string, message: string, id: number) {
+        processIncomingMessage(sender: string, message: string, id: number) {
             var chatChannel = this._chatChannels[id];
 
             if (chatChannel != null) {
-                this.addMessage(message, sender + ": ");
+                this.addMessage(message, sender + ": ", id);
             }
         }
 
-        addMessage(message: string, user: string = "") {
+        addMessage(message: string, user: string = "", channel: number = ChannelType.System) {
 
 
             $.get("assets/hud/chat/chat_message_line.html", html => {
@@ -72,15 +82,16 @@
                         message: message
                     }
 
-
-                $("#chatlog").append(_.template(html, data));
+                var chatLineHtml = _.template(html, data);
+                var chatElement = $(chatLineHtml);
+                $(chatElement).css("color", this.channelColorMap[channel]);
+                $("#chatlog").append(chatElement);
 
                 // Scroll down
                 $("#chatlog").animate({ scrollTop: $("#chatlog")[0].scrollHeight }, 1000);
-
-
-
             });
+
+
 
         }
     }

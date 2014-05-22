@@ -20,7 +20,7 @@
         Trade,
         Party,
         Guild,
-        Custom,
+        System,
     }
 
 

@@ -1,0 +1,9 @@
+﻿{
+       "Global":            "orange",
+        "Zone":             "yellow",
+        "Administration":   "green",
+        "Trade":            "pink",
+        "Party":            "cyan",
+        "Guild":            "cornflowerblue",
+        "System":           "silver"
+}

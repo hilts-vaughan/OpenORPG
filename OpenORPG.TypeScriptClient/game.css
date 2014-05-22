@@ -95,8 +95,8 @@ canvas {
 }
 
 #chatmessage {
-    width: 100%;
-    background-color: rgba(122, 0, 0, 0.5);
+    width:  96%;
+    background-color: rgba(122, 0, 0, 0.6);
     outline: none;
     border: 1px solid white;
     font-family: "Rockwell";

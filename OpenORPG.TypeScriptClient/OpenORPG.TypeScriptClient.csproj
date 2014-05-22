@@ -196,6 +196,7 @@
     <Content Include="assets\fonts\graphicpixel-webfont.woff" />
     <Content Include="packages.config" />
     <Content Include="assets\locale\en.json" />
+    <Content Include="assets\config\chat_color_map.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
