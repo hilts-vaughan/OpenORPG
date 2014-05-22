@@ -520,6 +520,14 @@ namespace Server.Game.Zones
             var outboundPacket = new ServerSendHeroStoragePacket(heroEntity.Backpack, StorageType.Inventory);
             client.Send(outboundPacket);
 
+            foreach (var equipment in heroEntity.Equipment)
+            {
+                if (equipment == null)
+                    continue;
+
+                var request = new ServerEquipmentUpdatePacket(equipment, equipment.Slot);
+                heroEntity.Client.Send(request);
+            }
 
             Logger.Instance.Info("{0} has entered the zone {1} [#{2}]", name, Name, Id);
 

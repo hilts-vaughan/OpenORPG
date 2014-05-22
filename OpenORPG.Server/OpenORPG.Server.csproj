@@ -117,6 +117,7 @@
     <Compile Include="Game\Database\Models\Quests\QuestItemRequirement.cs" />
     <Compile Include="Game\Database\Models\Quests\QuestMonsterRequirement.cs" />
     <Compile Include="Game\Database\Models\Quests\QuestTable.cs" />
+    <Compile Include="Game\Database\Models\UserEquipment.cs" />
     <Compile Include="Game\Database\Models\UserQuestInfo.cs" />
     <Compile Include="Game\Database\Models\UserSkill.cs" />
     <Compile Include="Game\Database\Models\UserStorage.cs" />

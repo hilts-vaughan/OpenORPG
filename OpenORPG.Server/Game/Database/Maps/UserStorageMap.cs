@@ -27,4 +27,15 @@ namespace Server.Game.Database.Maps
 
         }
     }
+
+    public class UserEquipmentMap : EntityTypeConfiguration<UserEquipment>
+    {
+
+        public UserEquipmentMap()
+        {
+            HasKey(t => t.UserEquipmentId);
+        }
+
+    }
+
 }

@@ -102,6 +102,7 @@ namespace Server.Game.Network.Handlers
                 // Load quest info
                 context.Entry(hero).Collection(x => x.QuestInfo).Load();
                 context.Entry(hero).Collection(x => x.Inventory).Load();
+                context.Entry(hero).Collection(x => x.Equipment).Load();
 
                 hero.Name = player.Name;
                 hero.PositionX = (int)player.Position.X;
@@ -149,6 +150,23 @@ namespace Server.Game.Network.Handlers
                 {
                     var x = new UserItem(inventorySlot.Value.Item.Id, inventorySlot.Value.Amount, inventorySlot.Key);
                     hero.Inventory.Add(x);
+                }
+
+                hero.Equipment.ToList().ForEach(r => context.UserEquipments.Remove(r));
+
+                foreach (var equipmentPiece in player.Equipment)
+                {
+                    if (equipmentPiece == null)
+                        continue;
+
+                    var x = new UserEquipment()
+                    {
+                        ItemId = equipmentPiece.Id,
+                        Slot = equipmentPiece.Slot,
+                        UserEquipmentId = 0
+                    };
+
+                    hero.Equipment.Add(x);
                 }
 
 

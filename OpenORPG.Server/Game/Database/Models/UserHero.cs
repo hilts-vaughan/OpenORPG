@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Infrastructure.Quests;
@@ -24,6 +25,7 @@ namespace Server.Game.Database.Models
             Inventory = new List<UserItem>();
             Skills = new List<UserSkill>();
             QuestInfo = new List<UserQuestInfo>();
+            Equipment = new List<UserEquipment>();
         }
 
         public UserHero()
@@ -31,6 +33,7 @@ namespace Server.Game.Database.Models
             Inventory = new List<UserItem>();
             Skills = new List<UserSkill>();
             QuestInfo = new List<UserQuestInfo>();
+            Equipment = new List<UserEquipment>();
         }
 
         public int UserHeroId { get; set; }
@@ -58,6 +61,9 @@ namespace Server.Game.Database.Models
         public long HomepointZoneY { get; set; }
 
         public virtual ICollection<UserItem> Inventory { get; set; }
+
+        public virtual ICollection<UserEquipment> Equipment { get; set; } 
+
         public virtual ICollection<UserSkill> Skills { get; set; }
 
         public virtual ICollection<UserQuestInfo> QuestInfo { get; set; }

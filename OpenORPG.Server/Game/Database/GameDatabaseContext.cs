@@ -42,6 +42,7 @@ namespace Server.Game.Database
 
         public DbSet<UserQuestInfo> UserQuestInfo { get; set; }
         public DbSet<UserItem> UserItems { get; set; }
+        public DbSet<UserEquipment> UserEquipments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -52,7 +53,9 @@ namespace Server.Game.Database
             modelBuilder.Configurations.Add(new MonsterTemplateMap());
             modelBuilder.Configurations.Add(new UserStorageMap());
             modelBuilder.Configurations.Add(new UserSkillMap());
-            modelBuilder.Configurations.Add(new ItemTemplateMap());
+            modelBuilder.Configurations.Add(new UserEquipmentMap());
+
+;            modelBuilder.Configurations.Add(new ItemTemplateMap());
 
             modelBuilder.Entity<QuestTable>().HasKey(x => x.QuestTableId);
 

@@ -9,6 +9,7 @@ using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Items;
 using Server.Game.Items.Equipment;
+using Server.Game.Network.Packets.Server;
 using Server.Game.Storage;
 using Server.Infrastructure.Logging;
 using Server.Infrastructure.Quests;
@@ -88,6 +89,15 @@ namespace Server.Game.Entities
                 {
                     QuestInfo.Add(questEntry);
                 }
+
+                foreach (var eq in userHero.Equipment)
+                {
+                    var itemTemplate = context.ItemTemplates.First(x => x.Id == eq.ItemId);
+                    var equipment = ItemFactory.CreateItem(itemTemplate) as Equipment;
+                    Equipment[(int)equipment.Slot] = equipment;
+                }
+
+
 
                 UserId = userHero.UserHeroId;
                 Experience = userHero.Experience;
