@@ -7,13 +7,13 @@ module OpenORPG {
 
         private zone: Zone = null;
         private currenTrack: Phaser.Sound;
-        private ChatManager : ChatManager;
+        private ChatManager: ChatManager;
 
         private inventoryWindow: InventoryWindow;
         private characterWindow: CharacterWindow;
 
         // Keep track of character info
-        private playerInfo : PlayerInfo = new PlayerInfo();
+        private playerInfo: PlayerInfo = new PlayerInfo();
 
         constructor() {
             super();
@@ -23,6 +23,29 @@ module OpenORPG {
 
             this.inventoryWindow = new InventoryWindow();
             this.characterWindow = new CharacterWindow(this.playerInfo);
+
+            // Do some basic key bindings
+
+            $(document).on('keypress', (event: JQueryEventObject) => {
+
+                if (document.activeElement) {
+                    var x: any = document.activeElement;
+                    var id = x.id;
+
+                    if (event.which == 13) {
+
+                        if (id == "chatmessage") {
+                            console.log('focus game');
+                            $("#canvasholder").focus();
+                        } else {
+                            console.log('focus chat');
+                            $("#chatmessage").focus();
+                        }
+                    }
+                }
+
+
+            });
 
         }
 
@@ -40,8 +63,6 @@ module OpenORPG {
             // Load all our audio
             loader.audio("audio_music_town", [DirectoryHelper.getMusicPath() + "town.ogg"]);
             loader.audio("audio_effect_hit", [DirectoryHelper.getAudioEffectPath() + "hit1.ogg"]);
-
-
 
         }
 
@@ -84,7 +105,7 @@ module OpenORPG {
                         // Init character info
                         for (var key in entity.characterStats.stats) {
                             var statObject = entity.characterStats.stats[key];
-                            this.playerInfo.characterStats[statObject.statType] = {currentValue: statObject.currentValue, maximumValue: statObject.maximumValue};
+                            this.playerInfo.characterStats[statObject.statType] = { currentValue: statObject.currentValue, maximumValue: statObject.maximumValue };
                         }
 
                         this.playerInfo.name = worldEntity.name;
@@ -103,7 +124,7 @@ module OpenORPG {
                 // Update these, fire callback
                 this.playerInfo.characterStats[packet.stat].currentValue = packet.currentValue;
                 this.playerInfo.characterStats[packet.stat].maximumValue = packet.maximumValue;
-                
+
                 // Trigger callback
                 this.playerInfo.onCharacterStatChange();
 

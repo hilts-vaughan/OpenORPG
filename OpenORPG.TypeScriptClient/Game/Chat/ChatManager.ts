@@ -15,6 +15,8 @@
                     var packet = PacketFactory.createChatPacket(0, $("#chatmessage").val());
                     NetworkManager.getInstance().sendPacket(packet);
                     $("#chatmessage").val("");
+
+                    event.preventDefault();
                 }
             });
 
