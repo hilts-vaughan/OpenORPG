@@ -7,13 +7,5 @@ using Server.Game.Database.Models.Quests;
 
 namespace Server.Infrastructure.Quests.Requirements
 {
-    public interface IQuestRequirementTable
-    {
-
-        /// <summary>
-        /// The quest Id that this entry represents a requirement for.
-        /// </summary>
-        long QuestTableId { get; set; }
-
-    }
+ 
 }

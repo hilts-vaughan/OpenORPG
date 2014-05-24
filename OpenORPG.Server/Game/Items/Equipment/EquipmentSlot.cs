@@ -7,18 +7,5 @@ using Server.Game.Entities;
 
 namespace Server.Game.Items.Equipment
 {
-    /// <summary>
-    /// An enumeration of equipment slots that are available for <see cref="Character"/>s.
-    /// These are flags as combining them is possible
-    /// </summary>
-    [Flags]
-    public enum EquipmentSlot
-    {
-        Weapon,
-        Head,
-        Body,
-        Back,
-        Feet,
-        Hands
-    }
+
 }

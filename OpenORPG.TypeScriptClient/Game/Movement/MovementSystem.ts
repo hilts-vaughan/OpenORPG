@@ -220,6 +220,8 @@
                     else if (velocity.y > 0)
                         this.player.direction = Direction.South;
 
+                    this.player.playWalk(this.player.directionToString());
+
                 }
 
             } // end movement controller

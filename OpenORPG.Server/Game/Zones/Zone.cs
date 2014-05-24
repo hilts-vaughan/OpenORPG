@@ -179,7 +179,7 @@ namespace Server.Game.Zones
 
         private void AddGameSystems()
         {
-            GameSystems.Add(new SpawnGameSystem(this));
+        //    GameSystems.Add(new SpawnGameSystem(this));
             GameSystems.Add(new CombatSystem(this));
             GameSystems.Add(new AiSystem(this));
             GameSystems.Add(new ZoneEntityMonitor(this));

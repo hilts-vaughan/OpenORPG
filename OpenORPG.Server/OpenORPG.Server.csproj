@@ -108,19 +108,6 @@
     <Compile Include="Game\Combat\Enumerations\SkillType.cs" />
     <Compile Include="Game\Combat\Payloads\StatusEffectPayload.cs" />
     <Compile Include="Game\Combat\Skill.cs" />
-    <Compile Include="Game\Database\Maps\ItemTemplateMap.cs" />
-    <Compile Include="Game\Database\Maps\SkillTemplateMap.cs" />
-    <Compile Include="Game\Database\Maps\MonsterTemplateMap.cs" />
-    <Compile Include="Game\Database\Maps\UserStorageMap.cs" />
-    <Compile Include="Game\Database\Models\ContentTemplates\IStatTemplate.cs" />
-    <Compile Include="Game\Database\Models\NpcTemplate.cs" />
-    <Compile Include="Game\Database\Models\Quests\QuestItemRequirement.cs" />
-    <Compile Include="Game\Database\Models\Quests\QuestMonsterRequirement.cs" />
-    <Compile Include="Game\Database\Models\Quests\QuestTable.cs" />
-    <Compile Include="Game\Database\Models\UserEquipment.cs" />
-    <Compile Include="Game\Database\Models\UserQuestInfo.cs" />
-    <Compile Include="Game\Database\Models\UserSkill.cs" />
-    <Compile Include="Game\Database\Models\UserStorage.cs" />
     <Compile Include="Game\Entities\Character.cs" />
     <Compile Include="Game\Entities\CharacterState.cs" />
     <Compile Include="Game\Entities\Monster.cs" />
@@ -142,20 +129,8 @@
     <Compile Include="Game\Network\Handlers\QuestHandler.cs" />
     <Compile Include="Game\Network\Handlers\StorageHandler.cs" />
     <Compile Include="Game\Network\Packets\AttributeName.cs" />
-    <Compile Include="Game\Database\Maps\UserHeroMap.cs" />
-    <Compile Include="Game\Database\Maps\UserAccounConfiguration.cs" />
-    <Compile Include="Game\Database\Models\ContentTemplates\IContentTemplate.cs" />
-    <Compile Include="Game\Database\Models\ContentTemplates\ItemTemplate.cs" />
-    <Compile Include="Game\Database\Models\ContentTemplates\ItemType.cs" />
-    <Compile Include="Game\Database\Models\ContentTemplates\MapTemplate.cs" />
-    <Compile Include="Game\Database\Models\ContentTemplates\MonsterTemplate.cs" />
-    <Compile Include="Game\Database\Models\ContentTemplates\SkillTemplate.cs" />
-    <Compile Include="Game\Database\Models\UserHero.cs" />
-    <Compile Include="Game\Database\Seeds\DataPopulatorInit.cs" />
-    <Compile Include="Game\Database\GameDatabaseContext.cs" />
     <Compile Include="GameClient.cs" />
     <Compile Include="GameServer.cs" />
-    <Compile Include="Game\Database\Models\UserAccount.cs" />
     <Compile Include="Game\GameObjectFactory.cs" />
     <Compile Include="Game\Network\Authentication\Providers\DatabaseAuthenticationProvider.cs" />
     <Compile Include="Game\Network\Handlers\ChatHandler.cs" />
@@ -289,11 +264,13 @@
   <ItemGroup>
     <Folder Include="Game\Chat\" />
     <Folder Include="Game\Combat\Events\" />
-    <Folder Include="Game\Database\Maps\Quests\" />
-    <Folder Include="Game\Database\Repository\" />
     <Folder Include="Infrastructure\AI\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OpenORPG.Database\OpenORPG.Database.csproj">
+      <Project>{6647dfc1-45b7-4ab1-8817-242063cb6a8c}</Project>
+      <Name>OpenORPG.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TiledSharp\TiledSharp.csproj">
       <Project>{e4130f8d-d301-4e0c-916d-489c4a23c9b1}</Project>
       <Name>TiledSharp</Name>

@@ -1,0 +1,26 @@
+﻿body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+span {
+    font-style: italic;
+}
+
+
+body {
+  padding-top: 50px;
+}
+.starter-template {
+    margin-top: 50px;
+  padding: 40px 15px;
+  text-align: center;
+}
+
+/*
+    EDITOR CSS
+    
+    */
+
+.editor-container {
+    background-color: white;
+}

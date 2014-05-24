@@ -5,7 +5,7 @@
         // These properties are what are strongly typed
         public name: string;
         public id: number;
-        private entityType : string;
+        private entityType: string;
 
         public characterState: CharacterState;
         public direction: Direction;
@@ -60,16 +60,16 @@
             }
         }
 
-        private playIdle(direction: string) {
-            this.animations.play("idle_" + direction);
+        private playIdle(direction: string): Phaser.Animation {
+            return this.animations.play("idle_" + direction);
         }
 
         private playReadyingSkill(direction: string) {
             this.animations.play("atk_" + direction);
         }
 
-        private playWalk(direction: string) {
-            this.animations.play("walk_" + direction);
+        public playWalk(direction: string): Phaser.Animation {
+            return this.animations.play("walk_" + direction);
         }
 
 
@@ -88,7 +88,7 @@
             this.destroy();
         }
 
-        private directionToString(): string {
+        directionToString(): string {
 
             switch (this.direction) {
                 case Direction.North:
@@ -111,6 +111,8 @@
                 case "sprite":
                     this.updateSprite(value);
                     break;
+                case "characterState":
+                    break;
             }
 
 
@@ -119,7 +121,7 @@
         private updateName(name: string) {
 
             if (this.nameTagText == null) {
-                this.nameTagText = new Phaser.Text(this.game, 0, 0, name, FontFactory.getPlayerFont());              
+                this.nameTagText = new Phaser.Text(this.game, 0, 0, name, FontFactory.getPlayerFont());
                 this.nameTagText.anchor.set(0.5, 0.5);
                 this.game.world.add(this.nameTagText);
             }
@@ -149,6 +151,11 @@
 
                 for (var i = 0; i < anim.length; i++) {
                     frames.push(index + i);
+                }
+
+                if (animKey.indexOf("walk") > -1) {
+                    var element = frames.shift();
+                    frames.push(element);
                 }
 
                 this.animations.add(animKey, frames, 4, true, true);
