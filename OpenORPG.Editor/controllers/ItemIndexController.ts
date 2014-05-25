@@ -1,25 +1,31 @@
 ﻿module Items {
-    export interface Scope {
+    export class ItemIndexScope {
         items: Models.Item[];
         addNewItem: Function;
         deleteItem: Function;
+        itemTypes: Object;
+
+
     }
 
- 
 
-    export class ItemController {
+
+    export class ItemIndexController {
         private httpService: ng.IHttpService;
 
-        constructor($scope: Scope, $http: any) {
+        constructor($scope: ItemIndexScope, $http: any) {
             this.httpService = $http;
 
             this.refreshProducts($scope);
 
+
+            console.log($scope);
+
             var controller = this;
 
-            $scope.addNewItem = function () {   
+            $scope.addNewItem = function () {
                 var newProduct = new Models.Item();
-           
+
                 controller.addProduct(newProduct, function () {
                     controller.getAllProducts(function (data) {
                         $scope.items = data;
@@ -36,7 +42,12 @@
             }
     }
 
-        getAllProducts(successCallback: Function): void {           
+        editItem(itemId: number) {
+            alert("Edit " + itemId);
+        }
+
+
+        getAllProducts(successCallback: Function): void {
             this.httpService.get('/api/items').success((data, status) => {
                 successCallback(data);
             });
@@ -54,7 +65,8 @@
             });
         }
 
-        refreshProducts(scope: Scope) {
+        refreshProducts(scope: ItemIndexScope) {
+            scope.itemTypes = Models.ItemType;
             this.getAllProducts(data => {
                 scope.items = data;
             });

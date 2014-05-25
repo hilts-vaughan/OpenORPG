@@ -24,3 +24,8 @@ body {
 .editor-container {
     background-color: white;
 }
+
+.combobox {
+    margin-left: 16px;
+    margin-right: 16px;
+}

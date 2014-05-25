@@ -1,4 +1,89 @@
-﻿<div class="starter-template">
-    <h1>Weclome to OpenORPG!</h1>
-    <p class="lead">Click some of the navigation links above or take a look at the stats below to get started.</p>
+﻿<div class="starter-template jumbotron">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <p class="lead">Filters</p>
+
+            <div class="input-group">
+                <span class="input-group-addon">Name</span>
+                <input type="text" class="form-control" ng-model="search.name" placeholder="Something the items name may contain...">
+                <span class="input-group-addon">Description</span>
+                <input type="text" class="form-control" ng-model="search.description" placeholder="Something the items description may contain...">
+                <span class="input-group-addon">Notes</span>
+                <input type="text" class="form-control" ng-model="search.notes" placeholder="Something the items notes may contain...">
+            </div>
+
+            <br />
+
+            <div class="input-group">
+
+                <label>Item Type:</label>
+                <select class="combobox">
+                    <option value="All">All</option>
+                    <option value="{{v}}" ng-repeat="v in itemTypes">
+                        {{v}}
+                    </option>
+                </select>
+
+
+                <label>Item Type:</label>
+                <select class="combobox">
+                    <option value="All">All</option>
+                    <option value="{{v}}" ng-repeat="v in eqipmentSlots">
+                        {{v}}
+                    </option>
+                </select>
+
+
+
+            </div>
+
+
+
+            <br />
+
+            <p class="lead">Item Data</p>
+
+            <br />
+
+            <table class="table table-striped">
+                <thead>
+                    <tr class="text-center">
+                        <th class="text-center">Id</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="text-center" ng-repeat="item in items | filter:search:strict">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td style="max-width: 200px;">{{item.description | limitTo : 1000}}</td>
+                        <td>
+
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    Perform... <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a ng-href="#items/{{item.id}}">Edit</a></li>
+                                    <li class=""><a href="#">Delete</a></li>
+                                </ul>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+        </div>
+    </div>
+
 </div>

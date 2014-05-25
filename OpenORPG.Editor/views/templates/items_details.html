@@ -1,0 +1,79 @@
+﻿<!-- Columns are always 50% wide, on mobile and desktop -->
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="jumbotron editor-container" ng-controller="Items.ItemController">
+
+
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="item in items">
+                    [{{item.id}}] {{item.name}}
+                </li>
+            </ul>
+
+
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="panel-primary">
+
+
+
+                        <div class="panel-heading">General Settings</div>
+                        <br />
+                        <div class="row">
+
+                            <div class="col-lg-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">Name</span>
+                                    <input type="text" class="form-control" placeholder="A name for this item">
+                                </div>
+                            </div><!-- /.col-lg-6 -->
+
+
+                            <div class="col-lg-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">Name</span>
+                                    <input type="text" class="form-control" placeholder="Username">
+
+                                </div>
+                            </div><!-- /.col-lg-6 -->
+
+                            <div class="col-lg-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">Name</span>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+                            </div><!-- /.col-lg-6 -->
+
+
+
+
+                        </div><!-- /.row -->
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="panel-primary">
+
+
+
+                        <div class="panel-heading">General Settings</div>
+                        
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon">Name</span>
+                            <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                        
+
+                        
+                        
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
