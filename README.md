@@ -6,7 +6,7 @@ OpenORPG is an online roleplaying game engine that runs on the web. It uses open
 Feature List
 =============
 
-OpenORPG is being built up at a fast pace and this list will be changing and growing at a rapid pace during initial development. With all the rambling aside, OpenRPG supports the following features as of right now:
+OpenORPG is being built up at a fast pace and this list will be changing and growing at a rapid pace during initial development. With all the rambling aside, OpenORPG supports the following features as of right now:
 
 ## General Features
 
