@@ -5,7 +5,7 @@
 
 // create the module and name it scotchApp
 // also include ngRoute for all our routing needs
-var editorApp = angular.module('editorApp', ['ngRoute']);
+var editorApp = angular.module('editorApp', ['ngRoute', 'ngAnimate']);
 
 // configure our routes
 editorApp.config(function ($routeProvider) {

@@ -58,7 +58,7 @@
                 </thead>
 
                 <tbody>
-                    <tr class="text-center" ng-repeat="item in items | filter:search:strict">
+                    <tr class="text-center item-row" ng-repeat=" item in items | filter:search:strict">
                         <td>{{item.id}}</td>
                         <td>{{item.name}}</td>
                         <td style="max-width: 200px;">{{item.description | limitTo : 1000}}</td>
@@ -71,7 +71,7 @@
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a ng-href="#items/{{item.id}}">Edit</a></li>
-                                    <li class=""><a href="#">Delete</a></li>
+                                    <li class=""><a href ng-click="deleteItem(item.id)">Delete</a></li>
                                 </ul>
                             </div>
 

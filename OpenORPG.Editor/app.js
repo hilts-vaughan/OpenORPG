@@ -3,7 +3,7 @@
 // script.js
 // create the module and name it scotchApp
 // also include ngRoute for all our routing needs
-var editorApp = angular.module('editorApp', ['ngRoute']);
+var editorApp = angular.module('editorApp', ['ngRoute', 'ngAnimate']);
 
 // configure our routes
 editorApp.config(function ($routeProvider) {
@@ -130,10 +130,6 @@ var Items;
                 });
             };
         }
-        ItemIndexController.prototype.editItem = function (itemId) {
-            alert("Edit " + itemId);
-        };
-
         ItemIndexController.prototype.getAllProducts = function (successCallback) {
             this.httpService.get('/api/items').success(function (data, status) {
                 successCallback(data);

@@ -35,17 +35,17 @@
 
             $scope.deleteItem = function (productId) {
                 controller.deleteProduct(productId, function () {
+             
                     controller.getAllProducts(function (data) {
-                        $scope.items = data;
+                        $scope.items = data;                   
                     });
                 });
             }
+
+
     }
 
-        editItem(itemId: number) {
-            alert("Edit " + itemId);
-        }
-
+    
 
         getAllProducts(successCallback: Function): void {
             this.httpService.get('/api/items').success((data, status) => {
