@@ -87,6 +87,10 @@ namespace Server.Game.Zones
 
             var inventoryUpdate = new ServerSendHeroStoragePacket(player.Backpack, StorageType.Inventory);
             player.Client.Send(inventoryUpdate);
+
+            // Send notification to the client
+            var request = new ServerSendGameMessagePacket(GameMessage.EquipmentChanged);
+            player.Client.Send(request);
         }
 
 
