@@ -89,8 +89,8 @@ namespace Server.Game.Zones
             player.Client.Send(inventoryUpdate);
 
             // Send notification to the client
-            var request = new ServerSendGameMessagePacket(GameMessage.EquipmentChanged);
-            player.Client.Send(request);
+            var request2 = new ServerSendGameMessagePacket(GameMessage.EquipmentChanged);
+            player.Client.Send(request2);
         }
 
 

@@ -32,6 +32,7 @@
     <Content Include="assets\hud\inventory\images\item.png" />
     <Content Include="assets\hud\inventory\images\item_slot.png" />
     <Content Include="assets\hud\itemtooltip.html" />
+    <Content Include="assets\hud\slot.png" />
     <Content Include="assets\items\1.png" />
     <Content Include="assets\items\2.png" />
     <Content Include="assets\items\3.png" />
