@@ -45,6 +45,8 @@ body {
 
 canvas {
     cursor: url('assets/img/hand.png'), auto;
+    outline: none
+
 }
 
 #canvasholder {
@@ -52,6 +54,8 @@ canvas {
     margin: 0 auto;
     position: relative;
        cursor: url('assets/img/hand.png'), auto;
+       outline: none
+
 }
 
 #character-status {
