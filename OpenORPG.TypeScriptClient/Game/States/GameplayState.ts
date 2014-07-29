@@ -11,6 +11,7 @@ module OpenORPG {
 
         private inventoryWindow: InventoryWindow;
         private characterWindow: CharacterWindow;
+        private characterHud: CharacterStatusWidget;
 
         // Keep track of character info
         private playerInfo: PlayerInfo = new PlayerInfo();
@@ -23,6 +24,8 @@ module OpenORPG {
 
             this.inventoryWindow = new InventoryWindow();
             this.characterWindow = new CharacterWindow(this.playerInfo);
+
+            this.characterHud = new CharacterStatusWidget($("#canvasholder"));
 
 
             this.inventoryWindow.toggleVisibility();

@@ -49,6 +49,7 @@
     <Content Include="assets\sprites\goblin.png" />
     <Content Include="assets\sprites\male_base.png" />
     <Content Include="assets\sprites\snake.png" />
+    <Content Include="assets\templates\widgets\character_status.html" />
     <Content Include="css\flick\images\animated-overlay.gif" />
     <Content Include="css\flick\images\texture.png" />
     <Content Include="css\flick\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -157,6 +158,7 @@
     <TypeScriptCompile Include="Game\States\HeroSelectState.ts" />
     <TypeScriptCompile Include="Game\States\LoginMenuState.ts" />
     <TypeScriptCompile Include="Game\UI\Character\EquipmentItemContextMenu.ts" />
+    <TypeScriptCompile Include="Game\UI\HudWidget.ts" />
     <TypeScriptCompile Include="Game\UI\InterfaceWindow.ts" />
     <TypeScriptCompile Include="Game\UI\Inventory\InventoryContextMenu.ts" />
     <TypeScriptCompile Include="Game\UI\ItemTooltipInfo.ts" />
