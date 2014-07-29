@@ -21,22 +21,19 @@
  *  STYLE 4
  */
 
-::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: transparent;
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: transparent;
 }
 
-::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: transparent;
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb
-{
-	background-color: #000000;
-	border: 2px solid #555555;
+::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border: 2px solid #555555;
 }
 
 
@@ -50,6 +47,7 @@ canvas {
     border-style: solid;
     border-width: 1px;
     border-color: white;
+    cursor: url('assets/img/hand.png'), auto;
 }
 
 #canvasholder {
@@ -58,9 +56,62 @@ canvas {
     position: relative;
 }
 
+#character-status {
+    width: 300px;
+    height: 100px;
+    border: 2px solid white;
+    border-radius: 6px;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+    #character-status .labels {
+        width: 100%;
+        height: 20%;
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    #character-status .bars {
+        width: 100%;
+        height: 20%;
+        color: white;
+    }
+
+    #character-status .vital-bar {
+        width: 90%;
+        height: 20px;
+        margin: 0 auto;
+        padding-top: 4px;
+        padding-left: 5px;
+        background-color: red;
+        border: 2px solid black;
+        border-radius: 5px;
+    }
+
+
+.label-left {
+    float: left;
+    text-align: left;
+    padding-left: 15px;
+    padding-top: 5px;
+}
+
+.label-right {
+    float: right;
+    text-align: right;
+    padding-right: 15px;
+    padding-top: 5px;
+}
+
+
+
+
 #overlay {
     position: absolute;
-    bottom: 40px;
+    bottom: 70px;
     width: 390px;
     height: 270px;
     background-color: rgba(0, 0, 0, 0);
@@ -75,52 +126,79 @@ canvas {
     width: 100%;
     left: 0;
     bottom: 0;
-    height: 55px;
+    height: 70px;
     background-color: rgba(0, 0, 0, 0.6);
     color: white;
-    padding-left: 5px;
-
-     display: flex;
-    justify-content:center;
-    align-content:center;
-    flex-direction:column; /* column | row */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column; /* column | row */
 }
 
 
-#bottombar .status-bar {
-    height: 80%;
+    #bottombar .status-bar {
+        height: 70%;
+                border: 3px solid black;
+        border-radius: 3px;
+    }
 
-}
 
-#bottombar .top-bar {
-    height: 20%;
-    background-color: purple;
-    font-size: 12px;
-    padding-left: 15px;
-}
 
-#bottombar .skillbar {
-    width: 49%;
 
-    height: 100%;
-    text-align: left;
-    display: inline-block;
-   
-}
+    #bottombar .top-bar {
+        height: 20%;
+        background-color: purple;
+        font-size: 12px;
+        padding-left: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border: 3px solid black;
+        border-radius: 3px;
+    }
 
-#bottombar .menu-bar {
-    width: 49%;
-    height: 100%;
-    display: inline-block;
-}
+    #bottombar .skillbar {
+        width: 49%;
+        height: 100%;
+        text-align: left;
+        display: inline-block;
+    }
 
-#bottombar .menu-bar .icon-holder {
-    float: right;
-}
+    #bottombar .menu-bar {
+        width: 49%;
+        height: 100%;
+        display: inline-block;
+    }
+
+        #bottombar .menu-bar .icon-holder {
+            float: right;
+        }
+
+            #bottombar .menu-bar .icon-holder .menu-item {
+                width: 48px;
+                height: 48px;
+                display: inline-block;
+            }
+
+            #bottombar .menu-bar .icon-holder .menu-item-backpack {
+                background-image: url("assets/img/chest.png");
+            }
+
+            #bottombar .menu-bar .icon-holder .menu-item-equip {
+                background-image: url("assets/img/sword.png");
+            }
+
+            #bottombar .menu-bar .icon-holder .menu-item-skills {
+                background-image: url("assets/img/book.png");
+            }
+
+            #bottombar .menu-bar .icon-holder .menu-item-achievements {
+                background-image: url("assets/img/achi.png");
+            }
+
 
 .vertical-text {
-	transform: rotate(90deg);
-	transform-origin: left top 0;
+    transform: rotate(90deg);
+    transform-origin: left top 0;
     display: inline-block;
 }
 
@@ -129,7 +207,7 @@ canvas {
     height: 43px;
     text-align: left;
     display: inline-block;
-     float: left;
+    float: left;
     padding-left: 8px;
     padding-top: 5px;
     background-image: url("assets/hud/slot.png");
@@ -139,7 +217,8 @@ canvas {
 
 
 #chatlog {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0);
+    overflow: hidden;
     font-family: "AdvoCut";
     color: yellow;
     padding-left: 15px;
@@ -147,16 +226,27 @@ canvas {
     line-height: 20px;
     border: none;
     height: 220px;
+
+    padding-right: 8px;
+}
+
+#chatlog:hover {
     overflow-y: scroll;
     overflow-x: hidden;
-    padding-right: 8px;
+       background-color: rgba(0, 0, 0, 0.4);
 }
 
 .chatline {
     margin-bottom: 2px;
     margin-top: 0px;
-    font-size: 12px;
+    font-size: 14px;
     font-family: "Rockwell";
+
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
 }
 
 .chatname {
@@ -164,7 +254,7 @@ canvas {
 }
 
 #chatmessage {
-    width:  96%;
+    width: 96%;
     background-color: rgba(122, 0, 0, 0.6);
     outline: none;
     border: 1px solid white;
@@ -172,7 +262,11 @@ canvas {
     color: white;
     padding-left: 15px;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 14px;
+    height: 30px;
+    background-image: url("assets/img/chat.png");
+    background-position: center right;
+    background-repeat: no-repeat;
 }
 
 #gameContainer {

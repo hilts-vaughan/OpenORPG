@@ -195,7 +195,7 @@ namespace Server.Game.Entities
                 if (success)
                 {
                     Equipment[(int)slot] = null;
-                    Logger.Instance.Info("{0} has remove an item from the slot {1}.", slot.ToString());
+                    Logger.Instance.Info("{0} has remove an item from the slot {1}.", Name, slot.ToString());
                     OnEquipmentChanged(null, this, slot);
                 }
             }

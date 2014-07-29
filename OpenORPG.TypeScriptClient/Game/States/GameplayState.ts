@@ -24,6 +24,7 @@ module OpenORPG {
             this.inventoryWindow = new InventoryWindow();
             this.characterWindow = new CharacterWindow(this.playerInfo);
 
+
             // Do some basic key bindings
 
             $(document).on('keypress', (event: JQueryEventObject) => {
@@ -46,6 +47,7 @@ module OpenORPG {
 
 
             });
+
 
         }
 
