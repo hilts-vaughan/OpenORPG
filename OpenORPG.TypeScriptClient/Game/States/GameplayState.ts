@@ -25,6 +25,9 @@ module OpenORPG {
             this.characterWindow = new CharacterWindow(this.playerInfo);
 
 
+            this.inventoryWindow.toggleVisibility();
+            this.characterWindow.toggleVisibility();
+
             // Do some basic key bindings
 
             $(document).on('keypress', (event: JQueryEventObject) => {

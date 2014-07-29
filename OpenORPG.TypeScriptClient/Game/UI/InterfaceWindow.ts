@@ -6,10 +6,11 @@
     export class InterfaceWindow {
 
         public windowName: string;
+        public $window : Object;
 
         constructor(windowFile: string, windowName: string) {
 
-            $(windowName).dialog(
+           this.$window = $(windowName).dialog(
                 {
                     autoOpen: true,
                     resizable: false,
@@ -36,7 +37,8 @@
 
         // Close this interface window
         toggleVisibility() {
-            $(this.windowName).toggle("clip", {}, 300);
+            ($(this.$window).dialog("isOpen") == false) ? $(this.$window).dialog("open") : $(this.$window).dialog("close");
+
         }
 
         ready() {
