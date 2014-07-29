@@ -44,9 +44,6 @@ body {
 }
 
 canvas {
-    border-style: solid;
-    border-width: 1px;
-    border-color: white;
     cursor: url('assets/img/hand.png'), auto;
 }
 
@@ -54,6 +51,7 @@ canvas {
     width: 1336px;
     margin: 0 auto;
     position: relative;
+       cursor: url('assets/img/hand.png'), auto;
 }
 
 #character-status {
@@ -111,7 +109,7 @@ canvas {
 
 #overlay {
     position: absolute;
-    bottom: 70px;
+    bottom: 90px;
     width: 390px;
     height: 270px;
     background-color: rgba(0, 0, 0, 0);
@@ -126,7 +124,7 @@ canvas {
     width: 100%;
     left: 0;
     bottom: 0;
-    height: 70px;
+    height: 90px;
     background-color: rgba(0, 0, 0, 0.6);
     color: white;
     display: flex;
@@ -137,7 +135,7 @@ canvas {
 
 
     #bottombar .status-bar {
-        height: 70%;
+        height: 80%;
     }
 
 
@@ -159,12 +157,15 @@ canvas {
         height: 100%;
         text-align: left;
         display: inline-block;
+        display: none;
     }
 
     #bottombar .menu-bar {
         width: 49%;
         height: 100%;
         display: inline-block;
+        float: right;
+        margin-right: 5px;
     }
 
         #bottombar .menu-bar .icon-holder {
