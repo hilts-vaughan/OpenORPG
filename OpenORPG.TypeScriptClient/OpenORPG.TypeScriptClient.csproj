@@ -49,7 +49,9 @@
     <Content Include="assets\sprites\goblin.png" />
     <Content Include="assets\sprites\male_base.png" />
     <Content Include="assets\sprites\snake.png" />
+    <Content Include="assets\templates\widgets\bottom_bar.html" />
     <Content Include="assets\templates\widgets\character_status.html" />
+    <Content Include="assets\templates\widgets\chat.html" />
     <Content Include="css\flick\images\animated-overlay.gif" />
     <Content Include="css\flick\images\texture.png" />
     <Content Include="css\flick\images\ui-bg_flat_0_aaaaaa_40x100.png" />

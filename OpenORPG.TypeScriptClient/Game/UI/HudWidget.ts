@@ -43,5 +43,23 @@
 
     }
 
+    export class BottombarWidget extends HudWidget {
+        
+        constructor(canvas: JQuery) {
+            super(canvas, "assets/templates/widgets/bottom_bar.html");
+        }
+
+    }
+
+
+    export class ChatWidget extends HudWidget {
+
+        constructor(canvas: JQuery) {
+            super(canvas, "assets/templates/widgets/chat.html");
+        }
+
+    }
+
+
 
 }
