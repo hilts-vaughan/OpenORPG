@@ -7,7 +7,6 @@ module OpenORPG {
 
         private zone: Zone = null;
         private currenTrack: Phaser.Sound;
-        private ChatManager: ChatManager;
 
         private inventoryWindow: InventoryWindow;
         private characterWindow: CharacterWindow;
@@ -22,42 +21,19 @@ module OpenORPG {
         constructor() {
             super();
 
-            // Init
-            this.ChatManager = new ChatManager();
+
 
             this.inventoryWindow = new InventoryWindow();
             this.characterWindow = new CharacterWindow(this.playerInfo);
 
             this.characterHud = new CharacterStatusWidget($("#canvasholder"));
             this.bottomBarWidget = new BottombarWidget($("#canvasholder"));
-            this.chatWidget = new BottombarWidget($("#canvasholder"));
+            this.chatWidget = new ChatWidget($("#canvasholder"));
 
 
             this.inventoryWindow.toggleVisibility();
             this.characterWindow.toggleVisibility();
 
-            // Do some basic key bindings
-
-            $(document).on('keypress', (event: JQueryEventObject) => {
-
-                if (document.activeElement) {
-                    var x: any = document.activeElement;
-                    var id = x.id;
-
-                    if (event.which == 13) {
-
-                        if (id == "chatmessage") {
-                            console.log('focus game');
-                            $("#canvasholder").focus();
-                        } else {
-                            console.log('focus chat');
-                            $("#chatmessage").focus();
-                        }
-                    }
-                }
-
-
-            });
 
 
         }

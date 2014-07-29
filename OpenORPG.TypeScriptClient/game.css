@@ -174,15 +174,17 @@ canvas {
 
         #bottombar .menu-bar .icon-holder {
             float: right;
-            border: 3px solid white;
-            border-radius: 8px;
+
+            margin-top: 12px;
 
         }
 
             #bottombar .menu-bar .icon-holder .menu-item {
-                width: 48px;
-                height: 48px;
+                width: 40px;
+                height: 40px;
                 display: inline-block;
+                background-size: contain;
+                margin-right: 16px;
             }
 
             #bottombar .menu-bar .icon-holder .menu-item-backpack {

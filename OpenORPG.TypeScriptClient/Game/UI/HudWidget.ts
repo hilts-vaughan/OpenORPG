@@ -54,8 +54,41 @@
 
     export class ChatWidget extends HudWidget {
 
+        private chatManager : ChatManager;
+
         constructor(canvas: JQuery) {
             super(canvas, "assets/templates/widgets/chat.html");
+        }
+
+        onLoaded() {
+
+            this.chatManager = new ChatManager();
+
+            // Do some basic key bindings
+
+            $(document).on('keypress', (event: JQueryEventObject) => {
+
+                if (document.activeElement) {
+                    var x: any = document.activeElement;
+                    var id = x.id;
+
+                    if (event.which == 13) {
+
+                        if (id == "chatmessage") {
+                            console.log('focus game');
+                            $("#canvasholder").focus();
+                        } else {
+                            console.log('focus chat');
+                            $("#chatmessage").focus();
+                        }
+                    }
+                }
+
+
+            });
+
+
+
         }
 
     }
