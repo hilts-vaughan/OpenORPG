@@ -149,7 +149,7 @@ namespace Server
             ChatManager.Create();
             ZoneManager.Create();
             ContentManager.Create(PathHelper.AssetBasePath);
-            NetworkManager.Create(1234);
+            NetworkManager.Create(4488);
             NetworkManager.Current.Initialize();
             NetworkManager.Current.Connected += OnConnection;
             NetworkManager.Current.PacketRecieved += OnPacketRecieved;

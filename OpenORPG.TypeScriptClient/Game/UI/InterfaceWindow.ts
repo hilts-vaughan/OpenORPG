@@ -49,6 +49,20 @@
 
     }
 
+    /*
+     * A window that is used for displaying quest related stuff
+     */
+    export class QuestWindow extends InterfaceWindow {
+        
+        constructor(questId : number, questInfo : Object) {
+            
+            super("assets/hud/quest.html", "#characterdialog");
+
+        }
+
+
+    }
+
     export class CharacterWindow extends InterfaceWindow {
 
         equipmentBindings = [];

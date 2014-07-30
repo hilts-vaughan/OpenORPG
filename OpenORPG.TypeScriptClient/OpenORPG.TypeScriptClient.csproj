@@ -32,12 +32,14 @@
     <Content Include="assets\hud\inventory\images\item.png" />
     <Content Include="assets\hud\inventory\images\item_slot.png" />
     <Content Include="assets\hud\itemtooltip.html" />
+    <Content Include="assets\hud\quest.html" />
     <Content Include="assets\hud\slot.png" />
     <Content Include="assets\img\achi.png" />
     <Content Include="assets\img\book.png" />
     <Content Include="assets\img\chat.png" />
     <Content Include="assets\img\chest.png" />
     <Content Include="assets\img\hand.png" />
+    <Content Include="assets\img\quest_icon.png" />
     <Content Include="assets\img\sword.png" />
     <Content Include="assets\items\1.png" />
     <Content Include="assets\items\2.png" />
@@ -53,6 +55,7 @@
     <Content Include="assets\templates\widgets\character_status.html" />
     <Content Include="assets\templates\widgets\chat.html" />
     <Content Include="assets\templates\widgets\menu_tray.html" />
+    <Content Include="bubbles.css" />
     <Content Include="css\flick\images\animated-overlay.gif" />
     <Content Include="css\flick\images\texture.png" />
     <Content Include="css\flick\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -176,6 +179,7 @@
     <TypeScriptCompile Include="Infrastructure\Network\NetworkManager.ts" />
     <TypeScriptCompile Include="Infrastructure\Network\OpCodes.ts" />
     <TypeScriptCompile Include="Infrastructure\Network\Packet.ts" />
+    <TypeScriptCompile Include="Infrastructure\Quest\QuestInfo.ts" />
     <TypeScriptCompile Include="Infrastructure\Settings.ts" />
     <TypeScriptCompile Include="Infrastructure\World\GameSystem.ts" />
     <TypeScriptCompile Include="jquery.d.ts" />

@@ -27,7 +27,7 @@
 
         public static getInstance(): NetworkManager {
             if (NetworkManager._instance === null) {
-                NetworkManager._instance = new NetworkManager("localhost", 1234);
+                NetworkManager._instance = new NetworkManager("localhost", 4488);
             }
             return NetworkManager._instance;
         }

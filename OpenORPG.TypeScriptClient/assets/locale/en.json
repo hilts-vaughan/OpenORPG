@@ -5,6 +5,7 @@
     "EquipmentChanged": "Your equipment has changed.",
 
     "Hitpoints": "HEALTH",
-    "Manapoints": "MANA"
+    "Manapoints": "MANA",
+    "QuestAdded": "A new quest has been added to your quest log."
 
 }
