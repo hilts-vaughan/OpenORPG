@@ -45,17 +45,15 @@ body {
 
 canvas {
     cursor: url('assets/img/hand.png'), auto;
-    outline: none
-
+    outline: none;
 }
 
 #canvasholder {
     width: 1336px;
     margin: 0 auto;
     position: relative;
-       cursor: url('assets/img/hand.png'), auto;
-       outline: none
-
+    cursor: url('assets/img/hand.png'), auto;
+    outline: none;
 }
 
 #character-status {
@@ -88,9 +86,31 @@ canvas {
         margin: 0 auto;
         padding-top: 4px;
         padding-left: 5px;
-        background-color: red;
+        background-color: transparent;
         border: 2px solid black;
         border-radius: 5px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #character-status .vital-bar-fill {
+        width: 100%;
+        background-color: red;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        padding-left: 5px;
+        padding-top: 5px;
+
+          -webkit-border-top-right-radius: 8px;
+	-webkit-border-bottom-right-radius: 8px;
+	       -moz-border-radius-topright: 8px;
+	    -moz-border-radius-bottomright: 8px;
+	           border-top-right-radius: 8px;
+	        border-bottom-right-radius: 8px;
+	
     }
 
 
@@ -174,9 +194,7 @@ canvas {
 
         #bottombar .menu-bar .icon-holder {
             float: right;
-
             margin-top: 12px;
-
         }
 
             #bottombar .menu-bar .icon-holder .menu-item {

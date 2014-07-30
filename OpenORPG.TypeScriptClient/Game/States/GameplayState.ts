@@ -23,17 +23,17 @@ module OpenORPG {
 
 
 
+
             this.inventoryWindow = new InventoryWindow();
             this.characterWindow = new CharacterWindow(this.playerInfo);
 
-            this.characterHud = new CharacterStatusWidget($("#canvasholder"));
+            this.characterHud = new CharacterStatusWidget($("#canvasholder"), this.playerInfo);
             this.bottomBarWidget = new BottombarWidget($("#canvasholder"));
             this.chatWidget = new ChatWidget($("#canvasholder"));
 
 
             this.inventoryWindow.toggleVisibility();
-            this.characterWindow.toggleVisibility();
-
+            //this.characterWindow.toggleVisibility();
 
 
         }
@@ -99,6 +99,7 @@ module OpenORPG {
 
                         this.playerInfo.name = worldEntity.name;
 
+                        this.playerInfo.onCharacterStatChange();
                         this.characterWindow.renderStats();
 
                     }

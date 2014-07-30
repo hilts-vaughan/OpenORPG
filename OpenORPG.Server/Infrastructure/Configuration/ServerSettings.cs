@@ -5,6 +5,11 @@
     /// </summary>
     public class ServerSettings
     {
-        //TODO: This needs implementing
+
+        /// <summary>
+        /// A simple string that is broadcasted to all clients when they connect to the game world for the first time.
+        /// </summary>
+        public string MessageOfTheDay { get; set; }
+
     }
 }

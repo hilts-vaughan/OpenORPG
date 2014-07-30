@@ -20,9 +20,9 @@ namespace Server.Game.Zones
     /// 
     ///  This includes things equipment notifications, state changes and the like.
     /// </summary>
-    public class ZoneEntityMonitor : GameSystem
+    public class ZoneEntityMonitorSystem : GameSystem
     {
-        public ZoneEntityMonitor(Zone world)
+        public ZoneEntityMonitorSystem(Zone world)
             : base(world)
         {
 
