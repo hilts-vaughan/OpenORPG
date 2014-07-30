@@ -39,6 +39,13 @@
 
         private playerInfo: PlayerInfo;
 
+        onLoaded() {
+
+
+  
+
+        }
+
         constructor(canvas: JQuery, player: PlayerInfo) {
             super(canvas, "assets/templates/widgets/character_status.html");
 
@@ -72,6 +79,7 @@
                 this.container.find("#health-vital-bar .float-vital").text(hp.currentValue + "/" + hp.maximumValue);
                 this.container.find("#mana-vital-bar .float-vital").text(mp.currentValue + "/" + mp.maximumValue);
 
+                this.container.find(".label-left").text(this.playerInfo.name);
 
 
             }
