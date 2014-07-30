@@ -8,12 +8,12 @@ module OpenORPG {
         private zone: Zone = null;
         private currenTrack: Phaser.Sound;
 
-        private inventoryWindow: InventoryWindow;
-        private characterWindow: CharacterWindow;
+
 
         private characterHud: CharacterStatusWidget;
         private bottomBarWidget: BottombarWidget;
         private chatWidget : ChatWidget;
+        private menuWidget: MenuTrayWidget;
 
         // Keep track of character info
         private playerInfo: PlayerInfo = new PlayerInfo();
@@ -24,16 +24,12 @@ module OpenORPG {
 
 
 
-            this.inventoryWindow = new InventoryWindow();
-            this.characterWindow = new CharacterWindow(this.playerInfo);
+ 
 
             this.characterHud = new CharacterStatusWidget($("#canvasholder"), this.playerInfo);
             this.bottomBarWidget = new BottombarWidget($("#canvasholder"));
             this.chatWidget = new ChatWidget($("#canvasholder"));
-
-
-            this.inventoryWindow.toggleVisibility();
-            //this.characterWindow.toggleVisibility();
+            this.menuWidget = new MenuTrayWidget($("#canvasholder"), this.playerInfo);
 
 
         }
@@ -100,7 +96,7 @@ module OpenORPG {
                         this.playerInfo.name = worldEntity.name;
 
                         this.playerInfo.onCharacterStatChange();
-                        this.characterWindow.renderStats();
+       
 
                     }
 

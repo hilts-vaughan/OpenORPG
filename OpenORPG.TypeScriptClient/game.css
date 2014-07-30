@@ -56,62 +56,114 @@ canvas {
     outline: none;
 }
 
-#character-status {
-    width: 300px;
-    height: 100px;
+.rounded-container {
     border: 2px solid white;
     border-radius: 6px;
-    position: absolute;
-    top: 7px;
-    left: 7px;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-    #character-status .labels {
-        width: 100%;
-        height: 20%;
-        color: white;
-        margin-bottom: 10px;
-    }
+#menu-tray {
+    width: auto;
+    padding-right: 30px;
+    height: 60px;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    user-select: none;
+}
 
-    #character-status .bars {
-        width: 100%;
-        height: 20%;
-        color: white;
-    }
+ #menu-tray .menu-bar {
+     height: 100%;
+ }
 
-    #character-status .vital-bar {
-        width: 90%;
-        height: 20px;
-        margin: 0 auto;
-        padding-top: 4px;
-        padding-left: 5px;
-        background-color: transparent;
-        border: 2px solid black;
-        border-radius: 5px;
-        position: relative;
-        overflow: hidden;
-    }
+ 
+ #menu-tray .menu-bar .icon-holder {
+     height: 100%;
+ }
 
-    #character-status .vital-bar-fill {
-        width: 100%;
-        background-color: red;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        padding-left: 5px;
-        padding-top: 5px;
 
-          -webkit-border-top-right-radius: 8px;
-	-webkit-border-bottom-right-radius: 8px;
-	       -moz-border-radius-topright: 8px;
-	    -moz-border-radius-bottomright: 8px;
-	           border-top-right-radius: 8px;
-	        border-bottom-right-radius: 8px;
-	
-    }
+
+            #menu-tray .menu-bar .icon-holder .menu-item {
+                width: 40px;
+                height: 40px;
+                display: inline-block;
+                background-size: contain;
+       
+                margin: 12px -8px 12px 12px;
+            }
+
+            #menu-tray .menu-bar .icon-holder .menu-item-backpack {
+                background-image: url("assets/img/chest.png");
+            }
+
+            #menu-tray .menu-bar .icon-holder .menu-item-equip {
+                background-image: url("assets/img/sword.png");
+            }
+
+            #menu-tray .menu-bar .icon-holder .menu-item-skills {
+                background-image: url("assets/img/book.png");
+            }
+
+            #menu-tray .menu-bar .icon-holder .menu-item-achievements {
+                background-image: url("assets/img/achi.png");
+            }
+
+
+
+
+#character-status {
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+}
+
+
+
+#character-status .labels {
+    width: 100%;
+    height: 20%;
+    color: white;
+    margin-bottom: 10px;
+}
+
+#character-status .bars {
+    width: 100%;
+    height: 20%;
+    color: white;
+}
+
+#character-status .vital-bar {
+    width: 90%;
+    height: 20px;
+    margin: 0 auto;
+    padding-top: 4px;
+    padding-left: 5px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+#character-status .vital-bar-fill {
+    width: 100%;
+    background-color: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding-left: 5px;
+    padding-top: 5px;
+    -webkit-border-top-right-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+    -moz-border-radius-topright: 8px;
+    -moz-border-radius-bottomright: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
 
 
 .label-left {
@@ -192,34 +244,7 @@ canvas {
         margin-right: 5px;
     }
 
-        #bottombar .menu-bar .icon-holder {
-            float: right;
-            margin-top: 12px;
-        }
 
-            #bottombar .menu-bar .icon-holder .menu-item {
-                width: 40px;
-                height: 40px;
-                display: inline-block;
-                background-size: contain;
-                margin-right: 16px;
-            }
-
-            #bottombar .menu-bar .icon-holder .menu-item-backpack {
-                background-image: url("assets/img/chest.png");
-            }
-
-            #bottombar .menu-bar .icon-holder .menu-item-equip {
-                background-image: url("assets/img/sword.png");
-            }
-
-            #bottombar .menu-bar .icon-holder .menu-item-skills {
-                background-image: url("assets/img/book.png");
-            }
-
-            #bottombar .menu-bar .icon-holder .menu-item-achievements {
-                background-image: url("assets/img/achi.png");
-            }
 
 
 .vertical-text {

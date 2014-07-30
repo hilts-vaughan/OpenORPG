@@ -102,6 +102,43 @@
     }
 
 
+    export class MenuTrayWidget extends HudWidget {
+
+        private inventoryWindow: InventoryWindow;
+        private characterWindow: CharacterWindow;
+        private playerInfo : PlayerInfo;
+
+        constructor(canvas: JQuery, playerInfo : PlayerInfo) {
+            super(canvas, "assets/templates/widgets/menu_tray.html");
+            this.playerInfo = playerInfo;
+        }
+
+        onLoaded() {
+            this.inventoryWindow = new InventoryWindow();
+            this.characterWindow = new CharacterWindow(this.playerInfo);
+
+            var that = this;
+            this.playerInfo.listenCharacterStatChange(() => {
+
+                that.characterWindow.renderStats();
+
+            });
+
+            // A few events quickly to bind our menu items
+            this.container.find(".menu-item-backpack").on("click", () => {
+                that.inventoryWindow.toggleVisibility();
+            });
+
+            this.container.find(".menu-item-equip").on("click", () => {
+                that.characterWindow.toggleVisibility();
+            });
+
+
+        }
+
+    }
+
+
     export class ChatWidget extends HudWidget {
 
         private chatManager: ChatManager;

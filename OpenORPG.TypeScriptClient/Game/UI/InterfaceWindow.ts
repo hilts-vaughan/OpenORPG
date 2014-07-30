@@ -23,10 +23,12 @@
 
                 });
 
+            var that = this;
             // Get jQuery to load the static content into the page
             $.get(windowFile, data => {
                 $(windowName).html(data);
                 this.ready();
+                that.toggleVisibility();
             });
 
             this.windowName = windowName;
