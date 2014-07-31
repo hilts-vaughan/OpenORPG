@@ -57,4 +57,5 @@ Contributors
 Without all of the people listed below, OpenORPG would not be what it is today. Each individual has contributed something major, helped with design, or contributed in such a way that has shaped OpenORPG. For a full list of contributors, check the GitHub contributos tap.
 
 s0i:						Thanks for your CSS design help and your eye for clean looks
+
 Seth Jones (Helladen):		Thanks for years of service to the scene, community, and offering design input.
