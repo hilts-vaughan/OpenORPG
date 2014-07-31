@@ -60,6 +60,9 @@
 
         }
 
+        ready() {
+            $(this.windowName).prev().hide();
+        }
 
     }
 

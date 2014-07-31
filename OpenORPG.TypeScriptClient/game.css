@@ -349,6 +349,7 @@ canvas {
         height: 40px;
         font-size: 28px;
         background-color: black;
+        border: 2px solid grey;
         color: white;
         padding-top: 12px;
         text-align: center;
