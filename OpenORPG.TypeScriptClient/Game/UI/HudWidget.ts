@@ -133,6 +133,12 @@
                 that.characterWindow.toggleVisibility();
             });
 
+            this.container.find(".menu-item-skills").on("click", () => {
+                var q: QuestWindow;
+                q = new QuestWindow(0, {});
+                q.toggleVisibility();
+            });
+
 
         }
 

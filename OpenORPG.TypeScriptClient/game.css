@@ -339,11 +339,13 @@ canvas {
     height: 350px;
     background-color: rgba(9, 22, 27, 0.9);
     overflow: hidden;
+       font-family: "AdvoCut";
 }
 
     #quest-window .quest-header {
         border-radius: 33px;
-        width: 100%;
+        width: 90%;
+        margin: 10px auto;       
         height: 40px;
         font-size: 28px;
         background-color: black;
@@ -374,7 +376,7 @@ canvas {
             border: 3px solid white;
             border-radius: 12px;
             text-align: center;
-            margin-right: 30px;
+            margin-right: 5px;
         }
 
             #quest-window .action-bar .action-button:hover {
@@ -408,7 +410,7 @@ canvas {
 
 /* Inventory stuff starts here, have fun! */
 
-#inventorydialog {
+#inventorydialog, #quest-dialog {
     padding: 0px;
 }
 

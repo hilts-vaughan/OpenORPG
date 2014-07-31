@@ -56,7 +56,7 @@
         
         constructor(questId : number, questInfo : Object) {
             
-            super("assets/hud/quest.html", "#characterdialog");
+            super("assets/hud/quest.html", "#quest-dialog");
 
         }
 
