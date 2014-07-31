@@ -50,3 +50,11 @@ We're still in the early stages. If something is missing, fork us and submit a p
 If you would like to request a feature, please open a GitHub issue. Every issue will recieve consideration and feedback. 
 
 Finally, have fun and help the community grow!
+
+Contributors
+=============================
+
+Without all of the people listed below, OpenORPG would not be what it is today. Each individual has contributed something major, helped with design, or contributed in such a way that has shaped OpenORPG. For a full list of contributors, check the GitHub contributos tap.
+
+s0i:						Thanks for your CSS design help and your eye for clean looks
+Seth Jones (Helladen):		Thanks for years of service to the scene, community, and offering design input.
