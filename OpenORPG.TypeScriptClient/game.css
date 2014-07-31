@@ -299,7 +299,8 @@ canvas {
 }
 
 #chatmessage {
-    width: 96%;
+    width: 83%;
+    padding-right: 50px;
     background-color: rgba(122, 0, 0, 0.6);
     outline: none;
     border: 1px solid white;
