@@ -60,6 +60,9 @@ namespace Server.Game.Network.Handlers
 
                 }
 
+                // Attempt to perform the use of the item on self
+                itemFromSlot.UseItemOn(hero);
+
 
             }
         }

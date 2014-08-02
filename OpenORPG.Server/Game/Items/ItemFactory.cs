@@ -28,6 +28,8 @@ namespace Server.Game.Items
                     return CreateEquipmentItem(itemTemplate);
                 case ItemType.FieldItem:
                     return CreateFieldItem(itemTemplate);
+                case ItemType.Skillbook:
+                    return CreateSkillbookItem(itemTemplate);
             }
 
             throw new Exception("An item with an invalid type was provided to the factory method.");
@@ -43,6 +45,10 @@ namespace Server.Game.Items
             return new FieldItem(itemTemplate);
         }
 
+        private static SkillbookItem CreateSkillbookItem(ItemTemplate item)
+        {
+            return new SkillbookItem(item);
+        }
 
     }
 }

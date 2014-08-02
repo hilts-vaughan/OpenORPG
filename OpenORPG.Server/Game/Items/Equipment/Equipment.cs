@@ -54,6 +54,9 @@ namespace Server.Game.Items.Equipment
         }
 
 
-
+        public override void UseItemOn(Character character)
+        {
+          
+        }
     }
 }

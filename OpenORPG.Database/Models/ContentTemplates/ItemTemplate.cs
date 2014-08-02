@@ -57,6 +57,11 @@ namespace Server.Game.Database.Models.ContentTemplates
         public long DamageModifier { get; set; }
         public EquipmentSlot EquipmentSlot { get; set; }
 
+
+        /// <summary>
+        /// A skill ID that a user might learn by using this item.
+        /// </summary>
+        public long LearntSkillId { get; set; }
      
 
     }

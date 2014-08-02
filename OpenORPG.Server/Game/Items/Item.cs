@@ -1,4 +1,5 @@
 ﻿using Server.Game.Database.Models.ContentTemplates;
+using Server.Game.Entities;
 
 namespace Server.Game.Items
 {
@@ -36,6 +37,12 @@ namespace Server.Game.Items
         {
             ItemTemplate = itemTemplate;
         }
+
+        /// <summary>
+        /// Performs an item action on a character, allowing something to be performed.
+        /// </summary>
+        /// <param name="character"></param>
+        public abstract void UseItemOn(Character character);
 
 
     }

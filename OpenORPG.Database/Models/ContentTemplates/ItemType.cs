@@ -6,6 +6,7 @@
     public enum ItemType
     {
         FieldItem,
-        Equipment
+        Equipment,
+        Skillbook
     }
 }
