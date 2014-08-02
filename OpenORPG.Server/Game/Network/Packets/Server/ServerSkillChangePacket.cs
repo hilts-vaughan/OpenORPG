@@ -11,7 +11,7 @@ namespace Server.Game.Network.Packets.Server
     /// <summary>
     /// This packet is sent when a player requires knowledge of a new skill that was learned.
     /// </summary>
-    public struct ServerSkillChangePacket : IPacket
+    public class ServerSkillChangePacket : IPacket
     {
 
         public long SkillId { get; set; }

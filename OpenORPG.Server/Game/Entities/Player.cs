@@ -23,6 +23,7 @@ namespace Server.Game.Entities
 
     public delegate void EquipmentEvent(Equipment equipment, Player player, EquipmentSlot slot);
 
+    public delegate void ItemEvent(Item item, int amount, Player player);
 
     public class Player : Character
     {
@@ -30,6 +31,13 @@ namespace Server.Game.Entities
         public event QuestEvent AcceptedQuest;
         public event EquipmentEvent EquipmentChanged;
         public event SkillEvent LearnedSkill;
+        public event ItemEvent BackpackChanged;
+
+        protected virtual void OnBackpackChanged(Item item, int amount, Player player)
+        {
+            ItemEvent handler = BackpackChanged;
+            if (handler != null) handler(item, amount, player);
+        }
 
         protected virtual void OnLearnedSkill(Skill skill, Player player)
         {
@@ -167,6 +175,28 @@ namespace Server.Game.Entities
         {
             Skills.Add(skill);
 
+        }
+
+        /// <summary>
+        /// Attempts to add an item to the players backpack
+        /// </summary>
+        /// <param name="item">Attempts to add the given time</param>
+        /// <param name="amount">The amount of the item to give</param>
+        public bool AddToBackpack(Item item, int amount)
+        {
+            var r = Backpack.TryAddItem(item, amount);
+            OnBackpackChanged(item, amount, this);
+            return r;
+        }
+
+        public void RemoveFromBackpack(int slotId, int amount)
+        {
+            var item = Backpack.GetItemInfoAt(slotId);
+
+            for (int i = 0; i < amount; i++)
+                Backpack.RemoveSingleAt(slotId);
+
+            OnBackpackChanged(item.Item, amount, this);
         }
 
         /// <summary>

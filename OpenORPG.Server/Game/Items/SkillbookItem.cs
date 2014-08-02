@@ -9,6 +9,7 @@ using Server.Game.Combat;
 using Server.Game.Database;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Entities;
+using Server.Infrastructure.Logging;
 
 namespace Server.Game.Items
 {
@@ -18,7 +19,8 @@ namespace Server.Game.Items
     /// </summary>
     public class SkillbookItem : Item
     {
-        public SkillbookItem(ItemTemplate itemTemplate) : base(itemTemplate)
+        public SkillbookItem(ItemTemplate itemTemplate)
+            : base(itemTemplate)
         {
 
         }
@@ -27,10 +29,25 @@ namespace Server.Game.Items
         public override void UseItemOn(Character character)
         {
 
-            using (var context = new DbContext())
+            var player = character as Player;
+
+            if (player != null)
             {
-                var skillRepo = new SkillRepository(context);
-                var skillTemplate = skillRepo.Get(ItemTemplate.LearntSkillId);
+
+
+                using (var context = new GameDatabaseContext())
+                {
+                    var skillRepo = new SkillRepository(context);
+                    var skillTemplate = skillRepo.Get(ItemTemplate.LearntSkillId);
+
+                    player.AddSkill(new Skill(skillTemplate));
+                }
+
+            }
+
+            else
+            {
+                Logger.Instance.Warn("You cannot use a skillbook on a non-player target.");
             }
 
 

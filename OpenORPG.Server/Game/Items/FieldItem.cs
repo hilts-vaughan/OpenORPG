@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Server.Game.Database.Models.ContentTemplates;
+using Server.Game.Entities;
 
 namespace Server.Game.Items
 {
@@ -17,5 +18,10 @@ namespace Server.Game.Items
 
         }
 
+        public override void UseItemOn(Character character)
+        {
+            // Adds modifier where required
+            character.CharacterStats[StatTypes.Hitpoints].CurrentValue += 50;
+        }
     }
 }

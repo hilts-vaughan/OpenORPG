@@ -69,7 +69,7 @@ namespace Server.Game.Combat.Actions
         public float ExecutionTime { get; set; }
 
         /// <summary>
-        /// The skill template that is associated with this
+        /// The skill that is associated with this
         /// </summary>
         public Skill Skill { get; set; }
     }

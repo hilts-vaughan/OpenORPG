@@ -27,7 +27,7 @@ namespace Server.Game.Combat
             Setup();
         }
 
-        public CharacterStat[] Stats
+        private CharacterStat[] Stats
         {
             get { return _stats; }
         }

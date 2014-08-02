@@ -11,7 +11,7 @@ namespace OpenORPG.Database.DAL
     /// Uses a REDIS cached backend
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class CachedRepository<T> : DatabaseRepository<T>
+    public class CachedRepository<T> : DatabaseRepository<T> where T : class
     {
         public CachedRepository(DbContext context) : base(context)
         {
