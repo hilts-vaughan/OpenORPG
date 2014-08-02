@@ -519,7 +519,8 @@ namespace Server.Game.Zones
             // Send inventory and stuff
             var outboundPacket = new ServerSendHeroStoragePacket(heroEntity.Backpack, StorageType.Inventory);
             client.Send(outboundPacket);
-
+            
+            // Send equipment
             foreach (var equipment in heroEntity.Equipment)
             {
                 if (equipment == null)
@@ -528,6 +529,8 @@ namespace Server.Game.Zones
                 var request = new ServerEquipmentUpdatePacket(equipment, equipment.Slot);
                 heroEntity.Client.Send(request);
             }
+
+
 
             Logger.Instance.Info("{0} has entered the zone {1} [#{2}]", name, Name, Id);
 

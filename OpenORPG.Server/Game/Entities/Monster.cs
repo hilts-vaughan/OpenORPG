@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Server.Game.Database.Models.ContentTemplates;
 
 namespace Server.Game.Entities
@@ -23,6 +24,7 @@ namespace Server.Game.Entities
 
         }
 
+        [JsonIgnore]
         public int OriginSpawn { get; set; }
 
         public long MonsterTemplateId { get; private set; }

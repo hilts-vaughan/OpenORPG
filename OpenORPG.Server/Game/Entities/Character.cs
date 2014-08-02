@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Server.Game.AI;
 using Server.Game.Combat;
 using Server.Game.Items.Equipment;
@@ -68,6 +69,7 @@ namespace Server.Game.Entities
         public CharacterStatCollection CharacterStats { get; set; }
 
 
+        [JsonIgnore]
         public Equipment[] Equipment { get; set; }
 
         public List<Skill> Skills { get; set; }
@@ -83,6 +85,7 @@ namespace Server.Game.Entities
         /// 
         /// If this is null, no AI is currently running.
         /// </summary>
+        [JsonIgnore]
         public AiBase CurrentAi { get; set; }
 
         /// <summary>

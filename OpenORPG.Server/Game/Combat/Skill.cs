@@ -24,6 +24,11 @@ namespace Server.Game.Combat
         /// </summary>
         public float Cooldown { get; set; }
 
+        public long Id
+        {
+            get { return SkillTemplate.Id;  }
+        }
+
         /// <summary>
         /// Returns the skill template in use by this skill
         /// </summary>
