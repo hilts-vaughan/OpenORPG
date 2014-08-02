@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>85e89fa3-35ba-47e1-b3f8-b124d58392f6</ProjectGuid>
+    <ProjectGuid>{A367785F-DE8E-4A59-BADD-9A0526B13CCF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OpenORPG.ContentProcessor</RootNamespace>
