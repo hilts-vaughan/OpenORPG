@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Combat;
 using Server.Game.Entities;
 using Server.Game.Items.Equipment;
 using Server.Game.Network.Packets.Client;
@@ -51,6 +52,21 @@ namespace Server.Game.Zones
         {
             player.EquipmentChanged += PlayerOnEquipmentChanged;
             player.CharacterStats.CurrentValueChanged += CharacterStatsOnCurrentValueChanged;
+            player.LearnedSkill += PlayerOnLearnedSkill;
+        }
+
+        /// <summary>
+        /// This is called to synchronize this new fact to the player
+        /// </summary>
+        /// <param name="skill">The skill that was learned and to be synced</param>
+        /// <param name="player">The player that has learned this skill</param>
+        private void PlayerOnLearnedSkill(Skill skill, Player player)
+        {
+            // Notify the player that they learned this skill, send it over
+            var packet = new ServerSkillChangePacket(skill.SkillTemplate.Id);
+            player.Client.Send(packet);
+
+            Logger.Instance.Info("{0} has learned the skill {1}.", player.Name, skill.SkillTemplate.Name);
         }
 
         private void CharacterStatsOnCurrentValueChanged(long oldValue, long newValue, StatTypes statType, Character tracking)

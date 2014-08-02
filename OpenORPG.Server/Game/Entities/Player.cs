@@ -19,6 +19,8 @@ namespace Server.Game.Entities
 {
     public delegate void QuestEvent(UserQuestInfo userQuestInfo, Player player);
 
+    public delegate void SkillEvent(Skill skill, Player player);
+
     public delegate void EquipmentEvent(Equipment equipment, Player player, EquipmentSlot slot);
 
 
@@ -27,6 +29,13 @@ namespace Server.Game.Entities
 
         public event QuestEvent AcceptedQuest;
         public event EquipmentEvent EquipmentChanged;
+        public event SkillEvent LearnedSkill;
+
+        protected virtual void OnLearnedSkill(Skill skill, Player player)
+        {
+            SkillEvent handler = LearnedSkill;
+            if (handler != null) handler(skill, player);
+        }
 
         protected virtual void OnEquipmentChanged(Equipment equipment, Player player, EquipmentSlot slot)
         {
@@ -152,6 +161,12 @@ namespace Server.Game.Entities
         {
             QuestInfo.Add(questInfo);
             OnAcceptedQuest(questInfo, this);
+        }
+
+        public void AddSkill(Skill skill)
+        {
+            Skills.Add(skill);
+
         }
 
         /// <summary>
