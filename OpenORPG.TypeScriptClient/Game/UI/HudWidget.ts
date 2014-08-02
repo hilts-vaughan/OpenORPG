@@ -134,8 +134,8 @@
             });
 
             this.container.find(".menu-item-skills").on("click", () => {
-                var q: QuestWindow;
-                q = new QuestWindow(0, {});
+                var q: SkillWindow;
+                q = new SkillWindow(this.playerInfo);
                 q.toggleVisibility();
             });
 

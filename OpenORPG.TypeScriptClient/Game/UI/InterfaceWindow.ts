@@ -66,6 +66,24 @@
 
     }
 
+    export class SkillWindow extends InterfaceWindow {
+        
+        private playerInfo : PlayerInfo;
+
+        constructor(playerInfo: PlayerInfo) {
+
+            super("assets/hud/skills.html", "#skill-dialog");
+            this.playerInfo = playerInfo;
+
+        }
+
+
+        ready() {
+
+        }
+
+    }
+
     export class CharacterWindow extends InterfaceWindow {
 
         equipmentBindings = [];
