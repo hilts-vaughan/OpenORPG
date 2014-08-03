@@ -47,6 +47,7 @@ namespace Server.Game.Database.Seeds
                 character.Inventory.Add(new UserItem(1, 1, 0));
                 character.Inventory.Add(new UserItem(2, 1, 1));
                 character.Inventory.Add(new UserItem(3, 1, 2));
+                character.Inventory.Add(new UserItem(4, 1, 3));
 
                 // Add a basic attack to this character
                 character.Skills.Add(new UserSkill(1));
@@ -96,6 +97,19 @@ namespace Server.Game.Database.Seeds
 
             context.ItemTemplates.Add(testItem);
             context.ItemTemplates.Add(testPlate);
+
+
+
+
+            // Create a bunch of test equipment for the sample game
+            var bronzeSword = new ItemTemplate(0, "Bronze Sword",
+                "A basic bronze sword with just enough strength to bang up some monsters.", ItemType.Equipment, 0, false,
+                300);
+
+            bronzeSword.EquipmentSlot = EquipmentSlot.Weapon;
+            bronzeSword.DamageModifier = 6;
+
+            context.ItemTemplates.Add(bronzeSword);
 
 
         }

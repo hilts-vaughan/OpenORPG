@@ -34,6 +34,11 @@ namespace Server.Game.Database.Models.ContentTemplates
 
 
         /// <summary>
+        /// The Id of the icon on the given spritesheet to display for this item.
+        /// </summary>
+        public int IconId { get; set; }
+
+        /// <summary>
         /// The amount of time it takes for this item to be used (millisecondss)
         /// </summary>
         public int UseSpeed { get; set; }
