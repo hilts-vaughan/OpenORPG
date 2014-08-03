@@ -36,7 +36,7 @@ editorApp.config(function ($routeProvider) {
         .when('/items/:itemId',
         {
             templateUrl: 'views/templates/items_details.html',
-            controller: 'Items.itemDetailsController'
+            controller: 'Items.ItemController'
         });
 
 
@@ -45,7 +45,7 @@ editorApp.config(function ($routeProvider) {
 // create the controller and inject Angular's $scope
 editorApp.controller('mainController', function ($scope) {
     // create a message to display in our view
-    $scope.message = 'Everyone come and see how good I look!';
+    $scope.message = '(There is not anything interesting to look at right now.)';
 });
 
 editorApp.controller('aboutController', function ($scope) {

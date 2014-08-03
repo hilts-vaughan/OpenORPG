@@ -108,6 +108,7 @@ namespace Server.Game.Database.Seeds
 
             bronzeSword.EquipmentSlot = EquipmentSlot.Weapon;
             bronzeSword.DamageModifier = 6;
+            bronzeSword.IconId = 43;
 
             context.ItemTemplates.Add(bronzeSword);
 

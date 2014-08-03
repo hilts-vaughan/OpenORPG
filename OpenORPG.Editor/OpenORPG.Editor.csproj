@@ -21,6 +21,7 @@
     <Content Include="assets\css\bootstrap-theme.css" />
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\img\bg.png" />
     <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="Content\bootstrap-theme.css" />

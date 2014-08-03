@@ -1,5 +1,5 @@
 ﻿<!-- Columns are always 50% wide, on mobile and desktop -->
-<div class="row">
+<div class="item-details row">
     <div class="col-lg-12">
 
         <div class="jumbotron editor-container" ng-controller="Items.ItemController">
@@ -23,57 +23,88 @@
                         <br />
                         <div class="row">
 
-                            <div class="col-lg-4">
+                            <div class="col-lg-12">
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Name</span>
-                                    <input type="text" class="form-control" placeholder="A name for this item">
+                                    <input type="text" ng-model="item.name" class="form-control" placeholder="A name for this item" required>
                                 </div>
                             </div><!-- /.col-lg-6 -->
-
-
-                            <div class="col-lg-4">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Name</span>
-                                    <input type="text" class="form-control" placeholder="Username">
-
-                                </div>
-                            </div><!-- /.col-lg-6 -->
-
-                            <div class="col-lg-4">
-                                <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Name</span>
-                                    <input type="text" class="form-control" placeholder="Username">
-                                </div>
-                            </div><!-- /.col-lg-6 -->
-
-
 
 
                         </div><!-- /.row -->
-                    </div>
-                </div>
 
-                <div class="col-lg-6">
-                    <div class="panel-primary">
+
+                        <div class="row">
 
 
 
-                        <div class="panel-heading">General Settings</div>
-                        
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon">Name</span>
-                            <input type="text" class="form-control" placeholder="Username">
+
+                            <div class="col-lg-12">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">Name</span>
+                                    <textarea ng-model='item.description' id="textarea" placeholder="Enter a short synopsis"></textarea>
+                                </div>
+                            </div>
+
+
                         </div>
-                        
 
-                        
-                        
+
+                        <div class="row">
+
+                            <div class="col-lg-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">Name</span>
+                                    <input type="number" min="0" ng-model="item.price" class="form-control">
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-lg-3">
+                                <div class="input-group">
+
+
+                                    <span class="input-group-addon">Consumable</span>
+
+                                    <span class="input-group-addon">
+                                        <input type="checkbox" ng-model="item.consumed">
+                                    </span>
+
+                                </div><!-- /input-group -->
+                            </div>
+
+
+                            <div class="col-lg-2">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">Type</span>
+                                    <span class="input-group-addon"> <select ng-model="selectedType" ng-options="type.name for type in types"></select> </span>
+
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+
+                        <!---- Do some stuff --->
 
                     </div>
+
+                    
+ 
+
                 </div>
+        
+
             </div>
-
-
+      
         </div>
+        
+        ACTION BAR GOES HERE for saving and stuff
+
     </div>
-</div>

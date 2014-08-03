@@ -21,14 +21,14 @@ editorApp.config(function ($routeProvider) {
         controller: 'Items.ItemIndexController'
     }).when('/items/:itemId', {
         templateUrl: 'views/templates/items_details.html',
-        controller: 'Items.itemDetailsController'
+        controller: 'Items.ItemController'
     });
 });
 
 // create the controller and inject Angular's $scope
 editorApp.controller('mainController', function ($scope) {
     // create a message to display in our view
-    $scope.message = 'Everyone come and see how good I look!';
+    $scope.message = '(There is not anything interesting to look at right now.)';
 });
 
 editorApp.controller('aboutController', function ($scope) {
@@ -40,53 +40,39 @@ editorApp.controller('contactController', function ($scope) {
 });
 var Items;
 (function (Items) {
+    (function (ItemType) {
+        ItemType[ItemType["FieldItem"] = 0] = "FieldItem";
+        ItemType[ItemType["Equipment"] = 1] = "Equipment";
+        ItemType[ItemType["Skillbook"] = 2] = "Skillbook";
+    })(Items.ItemType || (Items.ItemType = {}));
+    var ItemType = Items.ItemType;
+
     var ItemController = (function () {
-        function ItemController($scope, $http) {
+        function ItemController($scope, $http, $routeParams) {
             this.httpService = $http;
 
-            this.refreshProducts($scope);
+            this.getItem($routeParams.itemId, function (item) {
+                $scope.item = item;
+
+                $scope.types = [];
+                for (var n in ItemType) {
+                    if (typeof ItemType[n] === 'number')
+                        $scope.types.push({ "name": n });
+                }
+                ;
+
+                $scope.selectedType = $scope.types[$scope.item.type];
+
+                console.log($scope);
+            });
 
             var controller = this;
 
-            $scope.addNewItem = function () {
-                var newProduct = new Models.Item();
-
-                controller.addProduct(newProduct, function () {
-                    controller.getAllProducts(function (data) {
-                        $scope.items = data;
-                    });
-                });
-            };
-
-            $scope.deleteItem = function (productId) {
-                controller.deleteProduct(productId, function () {
-                    controller.getAllProducts(function (data) {
-                        $scope.items = data;
-                    });
-                });
-            };
+            console.log($scope.types);
         }
-        ItemController.prototype.getAllProducts = function (successCallback) {
-            this.httpService.get('/api/items').success(function (data, status) {
+        ItemController.prototype.getItem = function (id, successCallback) {
+            this.httpService.get('/api/items/' + id).success(function (data, status) {
                 successCallback(data);
-            });
-        };
-
-        ItemController.prototype.addProduct = function (item, successCallback) {
-            this.httpService.post('/api/items', item).success(function () {
-                successCallback();
-            });
-        };
-
-        ItemController.prototype.deleteProduct = function (itemId, successCallback) {
-            this.httpService.delete('/api/items/' + itemId).success(function () {
-                successCallback();
-            });
-        };
-
-        ItemController.prototype.refreshProducts = function (scope) {
-            this.getAllProducts(function (data) {
-                scope.items = data;
             });
         };
         return ItemController;

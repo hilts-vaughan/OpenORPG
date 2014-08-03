@@ -1,68 +1,63 @@
 ﻿module Items {
     export interface Scope {
-        items: Models.Item[];
-        addNewItem: Function;
-        deleteItem: Function;
+        item: any;
+        types: any;
     }
 
- 
+    export enum ItemType {
+        FieldItem,
+        Equipment,
+        Skillbook
+    }
+
 
     export class ItemController {
         private httpService: ng.IHttpService;
 
-        constructor($scope: Scope, $http: any) {
+        constructor($scope: any, $http: any, $routeParams: any) {
             this.httpService = $http;
 
-            this.refreshProducts($scope);
+            this.getItem($routeParams.itemId, (item) => {
+                $scope.item = item;
+
+
+
+
+                $scope.types = [];
+                for (var n in ItemType) {
+                    if (typeof ItemType[n] === 'number')
+                        $scope.types.push({ "name": n });
+                };
+                
+
+                $scope.selectedType = $scope.types[$scope.item.type];
+
+
+                console.log($scope);
+            });
 
             var controller = this;
 
-            $scope.addNewItem = function () {   
-                var newProduct = new Models.Item();
-           
-                controller.addProduct(newProduct, function () {
-                    controller.getAllProducts(function (data) {
-                        $scope.items = data;
-                    });
-                });
-            };
 
-            $scope.deleteItem = function (productId) {
-                controller.deleteProduct(productId, function () {
-                    controller.getAllProducts(function (data) {
-                        $scope.items = data;
-                    });
-                });
-            }
-    }
+            console.log($scope.types);
 
-        getAllProducts(successCallback: Function): void {           
-            this.httpService.get('/api/items').success((data, status) => {
+        }
+
+
+
+
+        getItem(id: number, successCallback: Function): void {
+            this.httpService.get('/api/items/' + id).success((data, status) => {
                 successCallback(data);
             });
         }
 
-        addProduct(item: Models.Item, successCallback: Function): void {
-            this.httpService.post('/api/items', item).success(() => {
-                successCallback();
-            });
-        }
-
-        deleteProduct(itemId: string, successCallback: Function): void {
-            this.httpService.delete('/api/items/' + itemId).success(() => {
-                successCallback();
-            });
-        }
-
-        refreshProducts(scope: Scope) {
-            this.getAllProducts(data => {
-                scope.items = data;
-            });
-        }
-
-
     }
 
 
 
+
 }
+
+
+
