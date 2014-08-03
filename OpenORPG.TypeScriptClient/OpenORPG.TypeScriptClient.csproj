@@ -17,6 +17,24 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="assets\audio\sounds\achievement.mp3" />
+    <Content Include="assets\audio\sounds\chat.mp3" />
+    <Content Include="assets\audio\sounds\chest.mp3" />
+    <Content Include="assets\audio\sounds\death.mp3" />
+    <Content Include="assets\audio\sounds\firefox.mp3" />
+    <Content Include="assets\audio\sounds\heal.mp3" />
+    <Content Include="assets\audio\sounds\hit1.mp3" />
+    <Content Include="assets\audio\sounds\hit2.mp3" />
+    <Content Include="assets\audio\sounds\hurt.mp3" />
+    <Content Include="assets\audio\sounds\kill1.mp3" />
+    <Content Include="assets\audio\sounds\kill2.mp3" />
+    <Content Include="assets\audio\sounds\loot.mp3" />
+    <Content Include="assets\audio\sounds\noloot.mp3" />
+    <Content Include="assets\audio\sounds\npc-end.mp3" />
+    <Content Include="assets\audio\sounds\npc.mp3" />
+    <Content Include="assets\audio\sounds\npctalk.mp3" />
+    <Content Include="assets\audio\sounds\revive.mp3" />
+    <Content Include="assets\audio\sounds\teleport.mp3" />
     <Content Include="assets\fonts\advocut-webfont.svg" />
     <Content Include="assets\fonts\graphicpixel-webfont.svg" />
     <Content Include="assets\hud\character.html" />
@@ -136,6 +154,7 @@
     <TypeScriptCompile Include="Game\Chat\ChatChannel.ts" />
     <TypeScriptCompile Include="Game\Chat\ChatManager.ts" />
     <TypeScriptCompile Include="Game\Combat\CharacterStats.ts" />
+    <TypeScriptCompile Include="Game\Combat\Skill.ts" />
     <TypeScriptCompile Include="Game\Combat\StatTypes.ts" />
     <TypeScriptCompile Include="Game\Direction.ts" />
     <TypeScriptCompile Include="Game\CharacterState.ts" />
@@ -214,6 +233,33 @@
     <Content Include="packages.config" />
     <Content Include="assets\locale\en.json" />
     <Content Include="assets\config\chat_color_map.json" />
+    <Content Include="assets\gamesfiles\items\1.json" />
+    <Content Include="assets\gamesfiles\items\2.json" />
+    <Content Include="assets\gamesfiles\items\3.json" />
+    <Content Include="assets\gamesfiles\monsters\1.json" />
+    <Content Include="assets\gamesfiles\monsters\2.json" />
+    <Content Include="assets\gamesfiles\monsters\3.json" />
+    <Content Include="assets\gamesfiles\skills\1.json" />
+    <Content Include="assets\gamesfiles\skills\2.json" />
+    <Content Include="assets\audio\music\town.ogg" />
+    <Content Include="assets\audio\sounds\achievement.ogg" />
+    <Content Include="assets\audio\sounds\chat.ogg" />
+    <Content Include="assets\audio\sounds\chest.ogg" />
+    <Content Include="assets\audio\sounds\death.ogg" />
+    <Content Include="assets\audio\sounds\firefox.ogg" />
+    <Content Include="assets\audio\sounds\heal.ogg" />
+    <Content Include="assets\audio\sounds\hit1.ogg" />
+    <Content Include="assets\audio\sounds\hit2.ogg" />
+    <Content Include="assets\audio\sounds\hurt.ogg" />
+    <Content Include="assets\audio\sounds\kill1.ogg" />
+    <Content Include="assets\audio\sounds\kill2.ogg" />
+    <Content Include="assets\audio\sounds\loot.ogg" />
+    <Content Include="assets\audio\sounds\noloot.ogg" />
+    <Content Include="assets\audio\sounds\npc-end.ogg" />
+    <Content Include="assets\audio\sounds\npc.ogg" />
+    <Content Include="assets\audio\sounds\npctalk.ogg" />
+    <Content Include="assets\audio\sounds\revive.ogg" />
+    <Content Include="assets\audio\sounds\teleport.ogg" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

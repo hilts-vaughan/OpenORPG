@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Combat;
 using Server.Infrastructure.Network.Packets;
 
 namespace Server.Game.Network.Packets.Server
@@ -14,11 +15,11 @@ namespace Server.Game.Network.Packets.Server
     public class ServerSkillChangePacket : IPacket
     {
 
-        public long SkillId { get; set; }
+        public List<Skill>  Skills { get; set; }
 
-        public ServerSkillChangePacket(long skillId)
+        public ServerSkillChangePacket(List<Skill> skills)
         {
-            SkillId = skillId;
+            Skills = skills;
         }
 
         public OpCodes OpCode

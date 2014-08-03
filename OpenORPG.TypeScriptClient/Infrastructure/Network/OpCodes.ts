@@ -43,7 +43,8 @@
         SMSG_SEND_GAMEMESSAGE = 34,
         CMSG_UNEQUIP_ITEM = 35,
         SMSG_EQUIPMENT_UPDATE = 36,
-        SMSG_STAT_CHANGE = 37
+        SMSG_STAT_CHANGE = 37,
+        SMSG_SKILL_CHANGE = 38
     }
 
 } 

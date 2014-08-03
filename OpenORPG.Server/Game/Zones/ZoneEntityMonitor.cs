@@ -72,7 +72,7 @@ namespace Server.Game.Zones
         private void PlayerOnLearnedSkill(Skill skill, Player player)
         {
             // Notify the player that they learned this skill, send it over
-            var packet = new ServerSkillChangePacket(skill.SkillTemplate.Id);
+            var packet = new ServerSkillChangePacket(player.Skills);
             player.Client.Send(packet);
 
             Logger.Instance.Info("{0} has learned the skill {1}.", player.Name, skill.SkillTemplate.Name);

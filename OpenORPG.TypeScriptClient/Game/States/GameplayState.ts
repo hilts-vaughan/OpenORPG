@@ -93,6 +93,7 @@ module OpenORPG {
                             this.playerInfo.characterStats[statObject.statType] = { currentValue: statObject.currentValue, maximumValue: statObject.maximumValue };
                         }
 
+
                         this.playerInfo.name = worldEntity.name;
 
                         this.playerInfo.onCharacterStatChange();

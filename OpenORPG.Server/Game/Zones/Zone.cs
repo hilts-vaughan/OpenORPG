@@ -519,6 +519,12 @@ namespace Server.Game.Zones
             // Send inventory and stuff
             var outboundPacket = new ServerSendHeroStoragePacket(heroEntity.Backpack, StorageType.Inventory);
             client.Send(outboundPacket);
+
+            // Send skills list
+            // Notify the player that they learned this skill, send it over
+            var packet = new ServerSkillChangePacket(heroEntity.Skills);
+            heroEntity.Client.Send(packet);
+
             
             // Send equipment
             foreach (var equipment in heroEntity.Equipment)

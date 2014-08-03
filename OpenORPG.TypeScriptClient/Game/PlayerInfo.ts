@@ -8,10 +8,12 @@
      */
     export class PlayerInfo {
 
-        public name : string;
+        public name: string;
 
         // A small interface to character stats
         public characterStats: Array<CharacterStat> = new Array<CharacterStat>();
+        public characterSkills: Array<Skill> = new Array<Skill>();
+
         private characterStatsCallbacks: Array<Function> = new Array<Function>();
 
 
@@ -19,6 +21,28 @@
         private inventoryCallbacks = [];
 
         constructor() {
+
+            var that = this;
+
+            // Listen to events about player information we might care about
+            NetworkManager.getInstance().registerPacket(OpCode.SMSG_SKILL_CHANGE, (packet) => {
+
+                that.characterSkills = new Array<Skill>();
+
+                // Init character info
+                for (var key in packet.skills) {
+                    var skill = packet.skills[key];
+
+                    $.getJSON("assets/gamesfiles/skills/" + (parseInt(key) + 1) + ".json", (fSkill) => {
+                        var newSkill : any = _.extend(fSkill, skill);
+                        that.characterSkills.push(new Skill(newSkill));
+                    });
+
+
+                }
+
+
+            });
 
         }
 
