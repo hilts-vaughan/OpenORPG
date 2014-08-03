@@ -32,6 +32,7 @@ namespace OpenORPG.ContentProcessor.Extractors
                     persistable.name = monster.Name;
                     persistable.maxHp = monster.Hitpoints;
                     persistable.category = monster.VirtualCategory;
+                    persistable.sprite = monster.Sprite;
 
                     persister.Persist(persistable, "\\monsters\\{0}.json".FormatWith(monster.Id));
 
