@@ -13,15 +13,19 @@ namespace Server.Game.Items
     /// </summary>
     public class FieldItem : Item
     {
-        public FieldItem(ItemTemplate itemTemplate) : base(itemTemplate)
+        public FieldItem(ItemTemplate itemTemplate)
+            : base(itemTemplate)
         {
 
         }
 
-        public override void UseItemOn(Character character)
+        public override void UseItemOn(Character character, Character user)
         {
-            // Adds modifier where required
-            character.CharacterStats[StatTypes.Hitpoints].CurrentValue += 50;
+            // If the item can heal, apply some healing
+            if (ItemTemplate.RestoreHitpoints > 0)
+                character.CharacterStats[StatTypes.Hitpoints].CurrentValue += ItemTemplate.RestoreHitpoints;                                
         }
+
+
     }
 }

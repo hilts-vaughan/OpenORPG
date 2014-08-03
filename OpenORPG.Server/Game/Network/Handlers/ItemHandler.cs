@@ -61,8 +61,10 @@ namespace Server.Game.Network.Handlers
                 }
 
                 // Attempt to perform the use of the item on self
-                itemFromSlot.UseItemOn(hero);
+                itemFromSlot.UseItemOn(hero, hero);
 
+                if(itemFromSlot.Consumable)
+                    hero.RemoveFromBackpack((int) packet.SlotId, 1);
 
             }
         }

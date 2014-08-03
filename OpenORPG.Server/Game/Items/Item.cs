@@ -18,6 +18,11 @@ namespace Server.Game.Items
             get { return ItemTemplate.Name; }
         }
 
+        public bool Consumable
+        {
+            get { return GetType() == typeof(FieldItem) || GetType() == typeof(SkillbookItem); }
+        }
+
         public string Description
         {
             get { return ItemTemplate.Description; }
@@ -42,7 +47,7 @@ namespace Server.Game.Items
         /// Performs an item action on a character, allowing something to be performed.
         /// </summary>
         /// <param name="character"></param>
-        public abstract void UseItemOn(Character character);
+        public abstract void UseItemOn(Character character, Character user);
 
 
     }
