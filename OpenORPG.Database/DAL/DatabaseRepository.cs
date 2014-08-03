@@ -32,6 +32,11 @@ namespace OpenORPG.Database.DAL
             return _context.Set<T>().Find(id);
         }
 
+        public virtual List<T> GetAll()
+        {
+            return _context.Set<T>().ToList();
+        }
+
         public virtual T Add(T entity)
         {
             _context.Set<T>().Add(entity);
