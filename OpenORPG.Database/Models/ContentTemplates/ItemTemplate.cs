@@ -42,6 +42,10 @@ namespace Server.Game.Database.Models.ContentTemplates
         public string Name { get; set; }
         public string VirtualCategory { get; set; }
 
+        // healing related stuff
+        public long RestoreHitpoints { get; set; }
+
+
         // Below here is equipment specific stuff, this will not be used on standard items
 
         // Various available stat modifiers
