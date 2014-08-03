@@ -39,27 +39,12 @@ namespace Server.Game.Network.Handlers
             if (itemFromSlot != null)
             {
 
+                //todo: remove this special case, make it part of the 'use' section
                 if (itemFromSlot is Equipment)
                 {
-                    EquipFromSlotIdInInventory(packet, hero);
-
-        
+                    EquipFromSlotIdInInventory(packet, hero);      
                 }
-
-                else if (itemFromSlot is FieldItem)
-                {
-                    // Item is probably a field item, use it like that
-                    Logger.Instance.Warn("Attempted to use a field item, not implemented as of yet.");
-                }
-
-                else
-                {
-                    // Do nothing and let the user know they can't do that right now
-                    var message = new ServerSendGameMessagePacket(GameMessage.ItemCannotUse);
-                    client.Send(message);
-
-                }
-
+  
                 // Attempt to perform the use of the item on self
                 itemFromSlot.UseItemOn(hero, hero);
 

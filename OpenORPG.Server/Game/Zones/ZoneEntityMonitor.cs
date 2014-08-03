@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Server.Game.Combat;
 using Server.Game.Entities;
+using Server.Game.Items;
 using Server.Game.Items.Equipment;
 using Server.Game.Network.Packets.Client;
 using Server.Game.Network.Packets.Server;
@@ -53,6 +54,14 @@ namespace Server.Game.Zones
             player.EquipmentChanged += PlayerOnEquipmentChanged;
             player.CharacterStats.CurrentValueChanged += CharacterStatsOnCurrentValueChanged;
             player.LearnedSkill += PlayerOnLearnedSkill;
+            player.BackpackChanged += PlayerOnBackpackChanged;
+        }
+
+        private void PlayerOnBackpackChanged(Item item, int amount, Player player)
+        {
+            var inventoryUpdate = new ServerSendHeroStoragePacket(player.Backpack, StorageType.Inventory);
+            player.Client.Send(inventoryUpdate);
+
         }
 
         /// <summary>
@@ -101,8 +110,6 @@ namespace Server.Game.Zones
             var request = new ServerEquipmentUpdatePacket(equipment, slot);
             player.Client.Send(request);
 
-            var inventoryUpdate = new ServerSendHeroStoragePacket(player.Backpack, StorageType.Inventory);
-            player.Client.Send(inventoryUpdate);
 
             // Send notification to the client
             var request2 = new ServerSendGameMessagePacket(GameMessage.EquipmentChanged);
