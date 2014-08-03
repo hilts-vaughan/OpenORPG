@@ -61,6 +61,7 @@
     <Compile Include="DAL\CachedRepository.cs" />
     <Compile Include="DAL\DatabaseRepository.cs" />
     <Compile Include="DAL\IRepository.cs" />
+    <Compile Include="DAL\ItemRepository.cs" />
     <Compile Include="DAL\MonsterRepository.cs" />
     <Compile Include="DAL\SkillRepository.cs" />
     <Compile Include="Enums\SkillType.cs" />
