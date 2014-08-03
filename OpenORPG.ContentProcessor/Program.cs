@@ -18,12 +18,15 @@ namespace OpenORPG.ContentProcessor
 
         static void Main(string[] args)
         {
+            Console.Title = "Extracting data...";
+
             var directory = Environment.CurrentDirectory + "\\gamesfiles\\";
             Directory.CreateDirectory(directory);
             var persister = new JsonPersister(directory);
 
             // persist what we need to do
             new SkillExtractor().ProcessContent(persister);
+            new MonsterExtractor().ProcessContent(persister);
 
         }
     }

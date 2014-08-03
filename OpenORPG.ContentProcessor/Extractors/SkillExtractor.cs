@@ -16,7 +16,7 @@ namespace OpenORPG.ContentProcessor.Extractors
 
         public void ProcessContent(IContentPersister persister)
         {
-            Console.Title = "Extracting data...";
+
 
             using (var db = new GameDatabaseContext())
             {
@@ -42,9 +42,6 @@ namespace OpenORPG.ContentProcessor.Extractors
                     persister.Persist(persistable, "\\skills\\{0}.json".FormatWith(skill.Id));
 
                 }
-
-
-
 
             }
 
