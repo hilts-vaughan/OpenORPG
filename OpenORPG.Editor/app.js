@@ -171,4 +171,11 @@ var Models;
     })(Models.ItemType || (Models.ItemType = {}));
     var ItemType = Models.ItemType;
 })(Models || (Models = {}));
+var myModule = angular.module('editorAp', []);
+myModule.factory('serviceId', function () {
+    var shinyNewServiceInstance;
+
+    //factory function body that constructs shinyNewServiceInstance
+    return shinyNewServiceInstance;
+});
 //# sourceMappingURL=app.js.map
