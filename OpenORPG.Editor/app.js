@@ -3,7 +3,7 @@
 // script.js
 // create the module and name it scotchApp
 // also include ngRoute for all our routing needs
-var editorApp = angular.module('editorApp', ['ngRoute', 'ngAnimate, mgcrea.ngStrap']);
+var editorApp = angular.module('editorApp', ['ngRoute', 'ngAnimate', 'mgcrea.ngStrap']);
 
 // configure our routes
 editorApp.config(function ($routeProvider) {
@@ -48,14 +48,18 @@ var Items;
     var ItemType = Items.ItemType;
 
     var ItemController = (function () {
-        function ItemController($scope, $http, $routeParams) {
+        function ItemController($scope, $http, $routeParams, $location) {
+            var _this = this;
             this.httpService = $http;
+            this.$scope = $scope;
 
             this.getItem($routeParams.itemId, function (item) {
                 $scope.item = item;
+                $scope.id = $routeParams.itemId;
 
                 $scope.types = [];
                 for (var n in ItemType) {
+                    console.log(n);
                     if (typeof ItemType[n] === 'number')
                         $scope.types.push({ "name": n });
                 }
@@ -68,7 +72,19 @@ var Items;
 
             var controller = this;
 
+            // Setup collapse
             console.log($scope.types);
+
+            $scope.changedType = function () {
+                console.log(_this.$scope.selectedType);
+                console.log($scope.item);
+            };
+
+            $scope.save = function () {
+                _this.httpService.post('/api/items/' + $scope.id, _this.$scope.item).success(function (data) {
+                    $location.path('/items');
+                });
+            };
         }
         ItemController.prototype.getItem = function (id, successCallback) {
             this.httpService.get('/api/items/' + id).success(function (data, status) {
@@ -89,7 +105,7 @@ var Items;
     Items.ItemIndexScope = ItemIndexScope;
 
     var ItemIndexController = (function () {
-        function ItemIndexController($scope, $http) {
+        function ItemIndexController($scope, $http, $location) {
             this.httpService = $http;
 
             this.refreshProducts($scope);
@@ -98,13 +114,9 @@ var Items;
 
             var controller = this;
 
-            $scope.addNewItem = function () {
-                var newProduct = new Models.Item();
-
-                controller.addProduct(newProduct, function () {
-                    controller.getAllProducts(function (data) {
-                        $scope.items = data;
-                    });
+            $scope.newItem = function () {
+                controller.addProduct(null, function (data) {
+                    $location.path("/items/" + data.id);
                 });
             };
 
@@ -123,8 +135,8 @@ var Items;
         };
 
         ItemIndexController.prototype.addProduct = function (item, successCallback) {
-            this.httpService.post('/api/items', item).success(function () {
-                successCallback();
+            this.httpService.put('/api/items', null).success(function (data) {
+                successCallback(data);
             });
         };
 

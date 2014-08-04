@@ -43,8 +43,9 @@
 
             <br />
 
-            <p class="lead">Item Data</p>
 
+            <p class="lead">Item Data</p>
+            <button type="button" ng-click="newItem()" class="btn btn-success">New Item</button>
             <br />
 
             <table class="table table-striped">
@@ -58,20 +59,20 @@
                 </thead>
 
                 <tbody>
-                    <tr class="text-center item-row" ng-repeat=" item in items | filter:search:strict">
-                        <td>{{item.id}}</td>
+                    <tr class="item-row" ng-repeat=" item in items | filter:search:strict">
+                        <td style="width: 60px;">{{item.id}}</td>
                         <td>{{item.name}}</td>
-                        <td style="max-width: 200px;">{{item.description | limitTo : 1000}}</td>
+                        <td style="max-width: 200px;">{{item.description | limitTo : 255}}</td>
                         <td>
 
 
                             <div class="btn-group">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    Perform... <span class="caret"></span>
+                                    Edit</span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a ng-href="#items/{{item.id}}">Edit</a></li>
-                                    <li class=""><a href ng-click="deleteItem(item.id)">Delete</a></li>
+                   
                                 </ul>
                             </div>
 
@@ -80,6 +81,7 @@
                     </tr>
                 </tbody>
             </table>
+
 
 
 

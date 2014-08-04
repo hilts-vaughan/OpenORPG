@@ -12,6 +12,7 @@ namespace Server.Game.Entities
         Dexterity,
         Vitality,
         Intelligence,
-        Luck
+        Luck,
+        Mind
     }
 }

@@ -1,7 +1,7 @@
 ﻿module Items {
     export class ItemIndexScope {
         items: Models.Item[];
-        addNewItem: Function;
+        newItem: Function;
         deleteItem: Function;
         itemTypes: Object;
 
@@ -13,7 +13,7 @@
     export class ItemIndexController {
         private httpService: ng.IHttpService;
 
-        constructor($scope: ItemIndexScope, $http: any) {
+        constructor($scope: ItemIndexScope, $http: any, $location : ng.ILocationService) {
             this.httpService = $http;
 
             this.refreshProducts($scope);
@@ -23,13 +23,11 @@
 
             var controller = this;
 
-            $scope.addNewItem = function () {
-                var newProduct = new Models.Item();
+            $scope.newItem = function () {
+       
 
-                controller.addProduct(newProduct, function () {
-                    controller.getAllProducts(function (data) {
-                        $scope.items = data;
-                    });
+                controller.addProduct(null, function (data) {
+                    $location.path("/items/" + data.id);
                 });
             };
 
@@ -54,8 +52,8 @@
         }
 
         addProduct(item: Models.Item, successCallback: Function): void {
-            this.httpService.post('/api/items', item).success(() => {
-                successCallback();
+            this.httpService.put('/api/items',null).success((data) => {
+                successCallback(data);
             });
         }
 

@@ -2,14 +2,11 @@
 <div class="item-details row">
     <div class="col-lg-12">
 
+        <h1 style="padding-left: 32px;">Editing an item</h1>
+
         <div class="jumbotron editor-container" ng-controller="Items.ItemController">
 
 
-            <ul class="list-group">
-                <li class="list-group-item" ng-repeat="item in items">
-                    [{{item.id}}] {{item.name}}
-                </li>
-            </ul>
 
 
             <div class="row">
@@ -26,7 +23,7 @@
                             <div class="col-lg-12">
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Name</span>
-                                    <input type="text" ng-model="item.name" class="form-control" placeholder="A name for this item" required>
+                                    <input type="text" ng-model="item.name" ng-change="console.log(item.name)" class="form-control" placeholder="A name for this item" required>
                                 </div>
                             </div><!-- /.col-lg-6 -->
 
@@ -41,8 +38,24 @@
 
                             <div class="col-lg-12">
                                 <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Name</span>
-                                    <textarea ng-model='item.description' id="textarea" placeholder="Enter a short synopsis"></textarea>
+                                    <span class="input-group-addon">Description</span>
+                                    <textarea ng-model='item.description' id="textarea" placeholder="Enter a short description for players to see"></textarea>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        
+                        
+                        <div class="row">
+
+
+
+
+                            <div class="col-lg-12">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">Notes</span>
+                                    <textarea ng-model='item.notes' id="textarea" placeholder="Enter some short notes for other developers"></textarea>
                                 </div>
                             </div>
 
@@ -54,7 +67,7 @@
 
                             <div class="col-lg-4">
                                 <div class="input-group input-group-sm">
-                                    <span class="input-group-addon">Name</span>
+                                    <span class="input-group-addon">Price</span>
                                     <input type="number" min="0" ng-model="item.price" class="form-control">
                                 </div>
                             </div>
@@ -78,12 +91,9 @@
                             <div class="col-lg-2">
                                 <div class="input-group input-group-sm">
                                     <span class="input-group-addon">Type</span>
-                                    <span class="input-group-addon"> <select ng-model="selectedType" ng-options="type.name for type in types"></select> </span>
+                                    <span class="input-group-addon"> <select ng-model="selectedType" ng-change="changedType()" ng-options="type.name for type in types"></select> </span>
 
                                 </div>
-
-
-
                             </div>
 
                         </div>
@@ -95,16 +105,225 @@
 
                     </div>
 
-                    
- 
+
+
 
                 </div>
-        
+
+
+                <div class="col-lg-6" ng-show="item.type == 0">
+                    <div class="panel-primary">
+
+                        <div class="panel-heading">Item Settings</div>
+                        <br />
+
+
+                        <div class="col-lg-9">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon">Restore HP</span>
+                                <input type="number" min="0" ng-model="item.price" class="form-control">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-lg-3">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon">Percent?</span>
+
+                                <span class="input-group-addon">
+                                    <input type="checkbox" ng-model="item.consumed">
+                                </span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-lg-9">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon">Restore MP</span>
+                                <input type="number" min="0" ng-model="item.price" class="form-control">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-lg-3">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon">Percent?</span>
+
+                                <span class="input-group-addon">
+                                    <input type="checkbox" ng-model="item.consumed">
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-9">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon">Restore TP</span>
+                                <input type="number" min="0" ng-model="item.price" class="form-control">
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="col-lg-3">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon">Percent?</span>
+
+                                <span class="input-group-addon">
+                                    <input type="checkbox" ng-model="item.consumed">
+                                </span>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="col-lg-6" ng-show="item.type == 1">
+                    <div class="panel-primary">
+
+                        <div class="panel-heading">Equipment Settings</div>
+                        <br />
+
+
+                        <div class="row">
+
+
+
+                            <div class="col-lg-3">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">Damage</span>
+                                    <input type="number" min="0" ng-model="item.damage" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">Weapon Speed</span>
+                                    <input type="number" min="0" ng-model="item.weaponSpeed" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">Equipment Slot</span>
+                                    <span class="input-group-addon"> <select ng-model="selectedType" ng-change="changedType()" ng-options="type.name for type in types"></select> </span>
+
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                        
+                        <div class="row">
+
+                            <div class="col-lg-2">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">Wep. Type</span>
+                                    <span class="input-group-addon"> <select ng-model="selectedType" ng-change="changedType()" ng-options="type.name for type in types"></select> </span>
+
+                                </div>
+                            </div>
+
+                            <br />
+                        </div>
+
+                        <h4>Stat Modifiers</h4>
+                        <div class="row">
+
+                  
+
+                            <div class="col-lg-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">STR</span>
+                                    <input type="number" min="0" ng-model="item.str" class="form-control">
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">DEX</span>
+                                    <input type="number" min="0" ng-model="item.dex" class="form-control">
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-lg-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">VIT</span>
+                                    <input type="number" min="0" ng-model="item.vit" class="form-control">
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">INT</span>
+                                    <input type="number" min="0" ng-model="item.int" class="form-control">
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">LCK</span>
+                                    <input type="number" min="0" ng-model="item.lck" class="form-control">
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon">MND</span>
+                                    <input type="number" min="0" ng-model="item.mnd" class="form-control">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
 
             </div>
-      
+            
+
+            <button type="button" ng-click="save()" class="btn btn-success">Save</button>
+
         </div>
-        
-        ACTION BAR GOES HERE for saving and stuff
+
+
+
+
 
     </div>

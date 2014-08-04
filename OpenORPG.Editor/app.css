@@ -35,13 +35,16 @@ body {
 }
 
 
+.item-row {
+    font-size: 13px;
+}
 
 /* you can also define the transition style
    on the base class as well (.repeat-item) */
 .item-row.ng-enter,
 .item-row.ng-leave {
-    -webkit-transition: 0.5s ease all;
-    transition: 0.5s ease all;
+    -webkit-transition: 0.25s ease all;
+    transition: 0.25s ease all;
 }
 
     .item-row.ng-enter,
@@ -68,4 +71,8 @@ textarea {
 
 .container-fluid {
     background: url("assets/img/bg.png")
+}
+
+.input-group-addon {
+    min-width: 50px;
 }

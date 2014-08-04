@@ -315,6 +315,7 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="views\templates\about.html" />
     <Content Include="views\templates\dashboard.html" />
+    <Content Include="views\templates\iconpicker.html" />
     <Content Include="views\templates\items.html" />
     <Content Include="views\templates\items_details.html" />
     <Content Include="web.config" />
@@ -353,6 +354,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Server\App_Data\" />
+    <Folder Include="views\templates\items\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Server\App_Start\WebApiConfig.cs" />

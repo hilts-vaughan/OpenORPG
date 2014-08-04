@@ -87,13 +87,13 @@ namespace Server.Game.Database.Seeds
                 ItemType.Equipment, 0, false, 0);
 
             testItem.EquipmentSlot = EquipmentSlot.Weapon;
-            testItem.StrengthModifier = 999;
+            testItem.Str = 999;
 
             var testPlate = new ItemTemplate(0, "Astral Body",
                 "Providing almost perfect defense, this body piece is said to be almost unbreakable by any foe. Designed for the 'Liberators', this " +
                 "piece was designed for war with gods.", ItemType.Equipment, 0, false, 0);
             testPlate.EquipmentSlot = EquipmentSlot.Body;
-            testPlate.VitalityModifier = 999;
+            testPlate.Vit = 999;
 
             context.ItemTemplates.Add(testItem);
             context.ItemTemplates.Add(testPlate);
@@ -107,7 +107,7 @@ namespace Server.Game.Database.Seeds
                 300);
 
             bronzeSword.EquipmentSlot = EquipmentSlot.Weapon;
-            bronzeSword.DamageModifier = 6;
+            bronzeSword.Damage = 6;
             bronzeSword.IconId = 43;
 
             context.ItemTemplates.Add(bronzeSword);

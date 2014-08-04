@@ -28,6 +28,9 @@ namespace Server.Game.Database.Models.ContentTemplates
         }
 
         public string Description { get; set; }
+
+        public string Notes { get; set; }
+
         public ItemType Type { get; set; }
         public int Price { get; set; }
         public bool Consumed { get; set; }
@@ -55,15 +58,20 @@ namespace Server.Game.Database.Models.ContentTemplates
 
         // Various available stat modifiers
 
-        public long StrengthModifier { get; set; }
-        public long DexterityModifier { get; set; }
-        public long VitalityModifier { get; set; }
-        public long IntelligenceModifier { get; set; }
-        public long LuckModifier { get; set; }
+        public long Str { get; set; }
+        public long Dex { get; set; }
+        public long Vit { get; set; }
+        public long Int { get; set; }
+        public long Lck { get; set; }
+
+        public long Mnd { get; set; }
 
         public long HitpointsModifier { get; set; }
 
-        public long DamageModifier { get; set; }
+        public long Damage { get; set; }
+
+        public int WeaponSpeed { get; set; }
+
         public EquipmentSlot EquipmentSlot { get; set; }
 
 

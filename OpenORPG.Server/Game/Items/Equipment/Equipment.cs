@@ -43,12 +43,12 @@ namespace Server.Game.Items.Equipment
         {
             var stats = new CharacterStatCollection();
 
-            stats[StatTypes.Strength].CurrentValue = ItemTemplate.StrengthModifier;
-            stats[StatTypes.Dexterity].CurrentValue = ItemTemplate.DexterityModifier;
-            stats[StatTypes.Intelligence].CurrentValue = ItemTemplate.IntelligenceModifier;
+            stats[StatTypes.Strength].CurrentValue = ItemTemplate.Str;
+            stats[StatTypes.Dexterity].CurrentValue = ItemTemplate.Dex;
+            stats[StatTypes.Intelligence].CurrentValue = ItemTemplate.Int;
             stats[StatTypes.Hitpoints].CurrentValue = ItemTemplate.HitpointsModifier;
-            stats[StatTypes.Luck].CurrentValue = ItemTemplate.LuckModifier;
-            stats[StatTypes.Vitality].CurrentValue = ItemTemplate.VitalityModifier;
+            stats[StatTypes.Luck].CurrentValue = ItemTemplate.Lck;
+            stats[StatTypes.Vitality].CurrentValue = ItemTemplate.Vit;
 
             return stats;
         }
