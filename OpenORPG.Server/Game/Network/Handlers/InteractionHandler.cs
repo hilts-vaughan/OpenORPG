@@ -39,15 +39,17 @@ namespace Server.Game.Network.Handlers
             {
 
                 Logger.Instance.Debug("{0} is interacting with {1}.", hero.Name, interactWith.Name);
-                    
+
                 // Get the first quest
                 var quest = interactWith.Quests[0];
 
-                var p = new ServerSendQuestOfferPacket(quest.QuestId);
-                hero.Client.Send(p);
+                if (QuestManager.Instance.CanPlayerGetQuest(quest, hero))
+                {
+                    var p = new ServerSendQuestOfferPacket(quest.QuestId);
+                    hero.Client.Send(p);
+                }
 
 
-        
             }
 
 
