@@ -38,6 +38,11 @@ namespace Server.Game.Items
             get { return GetType().Name.ToString(); }
         }
 
+        public long IconId
+        {
+            get { return ItemTemplate.IconId; }
+        }
+
         protected Item(ItemTemplate itemTemplate)
         {
             ItemTemplate = itemTemplate;

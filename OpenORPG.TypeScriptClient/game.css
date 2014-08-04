@@ -351,28 +351,28 @@ canvas {
         overflow: hidden;
     }
 
-#skill-window .header {
-    width: 90%;
-    margin: 0 auto;
-    background-color: black;
-    border: 2px solid lightgray;
-    color: white;
-    text-align: center;
-    padding: 12px 12px 12px 12px;
-    margin-top: 12px;
-    margin-bottom: 24px;
-}
+    #skill-window .header {
+        width: 90%;
+        margin: 0 auto;
+        background-color: black;
+        border: 2px solid lightgray;
+        color: white;
+        text-align: center;
+        padding: 12px 12px 12px 12px;
+        margin-top: 12px;
+        margin-bottom: 24px;
+    }
 
 
-#skill-window .skill-item {
-    width: 48px;
-    height: 48px;
-    display: inline-block;
-    box-sizing: border-box;
-    border: 1px solid gray;
-    background-color:  rgba(9, 22, 27, 1);
-    margin: 0;
-}
+    #skill-window .skill-item {
+        width: 48px;
+        height: 48px;
+        display: inline-block;
+        box-sizing: border-box;
+        border: 1px solid gray;
+        background-color: rgba(9, 22, 27, 1);
+        margin: 0;
+    }
 
 
 /*
@@ -472,16 +472,19 @@ canvas {
 
 .item {
     background: url("assets/hud/inventory/images/item.png") no-repeat center;
-    width: 48px;
-    height: 48px;
+    width: 34px;
+    height: 34px;
+    margin: 6px 6px 6px 6px;
+    background-repeat: no-repeat;
 }
 
 .itemtext {
-    text-align: right;
-    color: white;
-    font-size: 12px;
-    padding-left: 40px;
+    color: yellow;
+    font-size: 14px;
     position: absolute;
+    right: 0;
+    top: 0;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .itemslot {
@@ -489,6 +492,7 @@ canvas {
     width: 48px;
     height: 48px;
     display: inline-block;
+    position: relative;
 }
 
 .itemcurrencycontainer {
@@ -663,13 +667,14 @@ img {
 }
 
 #IconHolder {
-    height: 100px;
-    width: 115px;
-    margin: 0;
+    height: 34px;
+    width: 34px;
     background-color: #C8CBCC;
     border-radius: 10px;
     background: center no-repeat;
-    background-size: contain;
+        margin-right: 0 auto;
+    margin-top: 34px;
+
     image-rendering: crisp-edge;
 }
 

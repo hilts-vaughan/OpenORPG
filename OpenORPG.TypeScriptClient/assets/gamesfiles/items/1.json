@@ -1,1 +1,1 @@
-{"id":1,"name":"A simple test item","type":"FieldItem","equipSlot":0,"description":"Something special indeed","restoreHp":0}
+{"id":1,"name":"Potion","type":"FieldItem","equipSlot":0,"description":"Potion","restoreHp":5,"iconId":0}

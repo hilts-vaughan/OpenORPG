@@ -37,6 +37,7 @@ namespace OpenORPG.ContentProcessor.Extractors
                     persistable.equipSlot = item.EquipmentSlot;
                     persistable.description = item.Description;
                     persistable.restoreHp = item.RestoreHp;
+                    persistable.iconId = item.IconId;
 
                     persister.Persist(persistable, "\\items\\{0}.json".FormatWith(item.Id));
 

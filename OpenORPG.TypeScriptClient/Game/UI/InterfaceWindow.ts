@@ -244,13 +244,13 @@
             }
 
             for (var slotId in inventory.storage) {
-                var item = $("<div class='item'> <p class='itemtext'/>  </div>");
+                var item = $("<div class='item'> <div class='itemtext'/>  </div>");
 
                 var gameItem = inventory.storage[slotId];
                 $('[slotId="' + slotId + '"]').append(item);
 
-                var image = GraphicsUtil.itemIdToImagePath(gameItem.item.id);
-                $(item).css('background-image', 'url(' + image + ')');
+                var image = GraphicsUtil.getIconCssFromId(gameItem.item.iconId);                
+                $(item).css('background', image);
 
                 item.children().first().text(gameItem.amount);
 

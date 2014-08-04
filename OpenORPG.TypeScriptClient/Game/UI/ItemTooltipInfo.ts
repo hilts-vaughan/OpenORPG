@@ -45,8 +45,8 @@
                 content: () => {
                     var context = $(this.data);
 
-                    var image = GraphicsUtil.itemIdToImagePath(this.gameItem.id);
-                    $(context).find("#IconHolder").css('background-image', 'url(' + image + ')');
+                    var image = GraphicsUtil.getIconCssFromId(this.gameItem.iconId);
+                    $(context).find("#IconHolder").css('background', image);
                     $(context).find("#ItemName").text(this.gameItem.name);
                     $(context).find(".ItemDesc").text(this.gameItem.description);
                     $(context).find("#ItemTypex").text(this.gameItem.type);
