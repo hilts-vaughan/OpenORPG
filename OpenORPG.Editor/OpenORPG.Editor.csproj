@@ -328,6 +328,7 @@
     <TypeScriptCompile Include="Scripts\angular-route.d.ts" />
     <TypeScriptCompile Include="Scripts\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\jquery.d.ts" />
+    <TypeScriptCompile Include="services\ItemService.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

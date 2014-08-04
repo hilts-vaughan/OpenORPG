@@ -92,5 +92,12 @@
         }
     }
 
+    export function createQuestAcceptRequest(questId: number) {
+        return {
+            opCode: OpenORPG.OpCode.CMSG_QUEST_ACCEPT,
+            questId: questId
+        }
+    }
+
 
 } 

@@ -6,6 +6,6 @@
 
     "Hitpoints": "HEALTH",
     "Manapoints": "MANA",
-    "QuestAdded": "A new quest has been added to your quest log."
+    "NewQuest": "A new quest has been added to your quest log."
 
 }

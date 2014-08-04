@@ -14,17 +14,14 @@ namespace Server.Game.Network.Packets.Server
             get { return OpCodes.SMSG_SERVER_OFFER_QUEST; }
         }
 
-        public string Name { get; set; }
+        public long QuestId { get; set; }
 
-        public string Description { get; set; }
-
-        public bool CanGet { get; set; }
-
-        public ServerSendQuestOfferPacket(string name, string description, bool canGet) : this()
+        public ServerSendQuestOfferPacket(long questId)
+            : this()
         {
-            Name = name;
-            Description = description;
-            CanGet = canGet;
+            QuestId = questId;
         }
+
+
     }
 }

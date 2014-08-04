@@ -54,6 +54,7 @@
     <Compile Include="Extractors\IContentExtractor.cs" />
     <Compile Include="Extractors\ItemExtractor.cs" />
     <Compile Include="Extractors\MonsterExtractor.cs" />
+    <Compile Include="Extractors\QuestExtractor.cs" />
     <Compile Include="Extractors\SkillExtractor.cs" />
     <Compile Include="Persistence\IContentPersister.cs" />
     <Compile Include="Persistence\JsonPersister.cs" />

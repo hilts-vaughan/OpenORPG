@@ -117,6 +117,12 @@ module OpenORPG {
 
             });
 
+            network.registerPacket(OpCode.SMSG_SERVER_OFFER_QUEST, (packet: any) => {
+                var q: QuestWindow = new QuestWindow(packet.questId, null);
+                q.toggleVisibility();
+
+            });
+
         }
 
         update() {

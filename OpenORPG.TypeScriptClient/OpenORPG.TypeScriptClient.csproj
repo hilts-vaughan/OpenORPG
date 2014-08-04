@@ -261,6 +261,7 @@
     <Content Include="assets\audio\sounds\npctalk.ogg" />
     <Content Include="assets\audio\sounds\revive.ogg" />
     <Content Include="assets\audio\sounds\teleport.ogg" />
+    <Content Include="assets\gamesfiles\quests\1.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

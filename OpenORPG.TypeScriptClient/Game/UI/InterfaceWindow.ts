@@ -43,6 +43,10 @@
 
         }
 
+        close() {
+            $(this.$window).dialog("close");
+        }
+
         ready() {
 
         }
@@ -53,15 +57,39 @@
      * A window that is used for displaying quest related stuff
      */
     export class QuestWindow extends InterfaceWindow {
-        
+        private id : number;
+
         constructor(questId : number, questInfo : Object) {
-            
+
+            this.id = questId;
             super("assets/hud/quest.html", "#quest-dialog");
 
         }
 
         ready() {
             $(this.windowName).prev().hide();
+
+            // Load the quest info and get ready
+            $.getJSON("assets/gamesfiles/quests/" + this.id + ".json", (data) => {
+
+                $(this.windowName).find("#description").text(data.description);
+                $(this.windowName).find(".quest-header").text(data.name);
+
+            });
+
+            var that = this;
+
+            $(this.windowName).find("#accept-button").click(() => {
+                var packet = PacketFactory.createQuestAcceptRequest(that.id);
+                NetworkManager.getInstance().sendPacket(packet);
+                that.close();
+            });
+
+            $(this.windowName).find("#decline-button").click(() => {
+                that.close();
+            });
+
+
         }
 
     }

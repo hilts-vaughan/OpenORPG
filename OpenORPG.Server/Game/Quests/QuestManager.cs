@@ -7,6 +7,7 @@ using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.Quests;
 using Server.Game.Entities;
+using Server.Game.Network.Packets.Server;
 using Server.Infrastructure.Logging;
 using Server.Infrastructure.Quests;
 
@@ -77,6 +78,9 @@ namespace Server.Game.Quests
                 questInfo.State = QuestState.InProgress;
             }
 
+            var message = new ServerSendGameMessagePacket(GameMessage.NewQuest);
+            player.Client.Send(message);
+
             Logger.Instance.Info("{0} has been given the quest {1} [#{2}]", player.Name, quest.Name, quest.QuestId);
         }
 
@@ -110,7 +114,7 @@ namespace Server.Game.Quests
 
                 return quest;
             }
-            
+
         }
     }
 }

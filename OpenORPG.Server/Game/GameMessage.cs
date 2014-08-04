@@ -18,7 +18,8 @@ namespace Server.Game
         ItemCannotUse,
         PlayerJoinedGame,
         PlayerLeftGame,
-        EquipmentChanged
+        EquipmentChanged,
+        NewQuest
 
 
     }

@@ -2,6 +2,7 @@
 using Server.Game.Entities;
 using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Client;
+using Server.Game.Network.Packets.Server;
 using Server.Game.Quests;
 using Server.Game.Zones;
 using Server.Infrastructure.Logging;
@@ -42,9 +43,11 @@ namespace Server.Game.Network.Handlers
                 // Get the first quest
                 var quest = interactWith.Quests[0];
 
-                // Give the player the quest if it's at all possible
-                if (QuestManager.Instance.CanPlayerGetQuest(quest, hero))
-                    QuestManager.Instance.GivePlayerQuest(quest, hero);
+                var p = new ServerSendQuestOfferPacket(quest.QuestId);
+                hero.Client.Send(p);
+
+
+        
             }
 
 

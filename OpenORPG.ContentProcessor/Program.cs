@@ -33,6 +33,7 @@ namespace OpenORPG.ContentProcessor
             new SkillExtractor().ProcessContent(persister);
             new MonsterExtractor().ProcessContent(persister);
             new ItemExtractor().ProcessContent(persister);
+            new QuestExtractor().ProcessContent(persister);
 
         }
     }
