@@ -51,7 +51,14 @@ namespace Server.Game.Database.Models.ContentTemplates
         public string VirtualCategory { get; set; }
 
         // healing related stuff
-        public long RestoreHitpoints { get; set; }
+        public long RestoreHp { get; set; }
+        public bool HpPercent { get; set; }
+
+        public long RestoreMp { get; set; }
+        public bool MpPercent { get; set; }
+
+        public long RestoreTp { get; set; }
+        public bool TpPercent { get; set; }
 
 
         // Below here is equipment specific stuff, this will not be used on standard items
