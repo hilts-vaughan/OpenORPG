@@ -584,6 +584,7 @@ canvas {
     width: 48px;
     height: 48px;
     background-image: url("assets/hud/inventory/images/item_slot.png");
+    overflow: hidden;
 }
 
 .weaponslot {
@@ -625,8 +626,9 @@ canvas {
 
 .equipitem {
     background: center no-repeat;
-    width: 48px;
-    height: 48px;
+    width: 34px;
+    height: 34px;
+    margin: 8px auto;
 }
 
 

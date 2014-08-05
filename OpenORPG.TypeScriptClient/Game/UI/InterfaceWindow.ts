@@ -193,8 +193,8 @@
                 if (equipment != null) {
 
                     var item = $("<div class='equipitem'></div>");
-                    var image = GraphicsUtil.itemIdToImagePath(equipment.id);
-                    $(item).css('background-image', 'url(' + image + ')');
+                    var image = GraphicsUtil.getIconCssFromId(equipment.iconId);
+                    $(item).css('background', image);
 
                     $(domSlot).append(item);
                     $(item).attr("slot", slot);
