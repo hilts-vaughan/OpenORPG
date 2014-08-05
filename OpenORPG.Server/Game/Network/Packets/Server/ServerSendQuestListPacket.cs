@@ -18,6 +18,9 @@ namespace Server.Game.Network.Packets.Server
         }
 
 
-        public OpCodes OpCode { get; private set; }
+        public OpCodes OpCode
+        {
+            get { return OpCodes.SMSG_QUEST_SEND_LIST; }
+        }
     }
 }

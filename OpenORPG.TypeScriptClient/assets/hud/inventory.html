@@ -1,12 +1,10 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <link rel="stylesheet" type="text/css" href="../../game.css">
-    <title>Inventory</title>
-</head>
+﻿
+<div ng-controller="inventoryController">
 
 
-<body>
+
+
+
     <div id="itemback">
 
 
@@ -14,13 +12,9 @@
 
 
 
-    <div class="itemcurrencycontainer">
-        <div class="currencydisplay">8907g</div>
+    <div class="itemcurrencycontainer" ng-click="die()">
+        <div class="currencydisplay" ng-bind="gold"></div>
     </div>
 
 
-</body>
-
-
-
-</html>
+</div>

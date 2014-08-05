@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="game">
 <head>
     <meta charset="utf-8" />
     <title>OpenORPG</title>
@@ -11,47 +11,65 @@
     <link rel="stylesheet" href="game.css" type="text/css" />
     <link rel="stylesheet" href="bubbles.css" type="text/css" />
     <script src="phaser.js"></script>
-    <script src="app.js"></script>
+
     <script src="jquery-2.1.0.min.js"></script>
- 
+
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    
+
     <script src="js/jquery.ui-contextmenu.js"></script>
     <script src="js/underscore.js"></script>
     <script src="Scripts/jquery.mCustomScrollbar.js"></script>
 
+
+
+
+
+
+
+
 </head>
 
-<body>
-    <div id="gameContainer">
-        <div id="canvasholder" tabindex="0">
+    <body >
+        
+        {{x}}
 
-      
+        <div id="gameContainer">
+            <div id="canvasholder" tabindex="0">
 
 
 
 
-            <div id="inventorydialog" title="Inventory">
+
+
+                <div id="inventorydialog" title="Inventory">
+                </div>
+
+                <div id="characterdialog" title="Character">
+                </div>
+
+                <div id="quest-dialog" title="Quest">
+
+                </div>
+
+                <div id="skill-dialog" title="Skills">
+
+                </div>
+
+                <div id="quest-list-dialog" title="Quests">
+
+                </div>
+
             </div>
-
-            <div id="characterdialog" title="Character">
-            </div>
-            
-            <div id="quest-dialog" title="Quest">
-                
-            </div>
-            
-            <div id="skill-dialog" title="Skills">
-                
-            </div>
-            
-            <div id="quest-list-dialog" title="Quests">
-
-            </div>
-
         </div>
-    </div>
-</body>
+
+
+        <!---Inject angularJS-->
+        <script src="Scripts/angular.js"></script>
+        <script src="Scripts/angular-animate.js"></script>
+        <script src="Scripts/angular-route.js"></script>
+        <script src="app.js"></script>
+
+    </body>
 </html>

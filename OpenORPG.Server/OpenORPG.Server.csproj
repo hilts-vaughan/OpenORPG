@@ -160,6 +160,7 @@
     <Compile Include="Game\Network\Packets\Server\ServerQuestCompleteResultPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerSendGameMessagePacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerSendHeroInventoryPacket.cs" />
+    <Compile Include="Game\Network\Packets\Server\ServerSendQuestListPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerSendQuestOfferPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerSkillChangePacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerUnequipItemPacket.cs" />

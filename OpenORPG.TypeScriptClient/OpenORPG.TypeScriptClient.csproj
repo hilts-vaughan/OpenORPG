@@ -503,6 +503,8 @@
     <TypeScriptCompile Include="Infrastructure\Settings.ts" />
     <TypeScriptCompile Include="Infrastructure\World\GameSystem.ts" />
     <TypeScriptCompile Include="jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angular.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
     <TypeScriptCompile Include="underscore.d.ts" />
   </ItemGroup>

@@ -6,11 +6,11 @@
     export class InterfaceWindow {
 
         public windowName: string;
-        public $window : Object;
+        public $window: Object;
 
         constructor(windowFile: string, windowName: string) {
 
-           this.$window = $(windowName).dialog(
+            this.$window = $(windowName).dialog(
                 {
                     autoOpen: true,
                     resizable: false,
@@ -30,6 +30,16 @@
                 $(windowName).html(data);
                 this.ready();
                 that.toggleVisibility();
+
+                angular.element(document).injector().invoke(function ($compile) {
+                    var container = $(that.windowName);
+                    var scope = angular.element(container).scope();
+                    $compile(container)(scope);
+                    scope.$apply();
+                });
+
+
+
             });
 
             this.windowName = windowName;
@@ -50,12 +60,15 @@
 
         ready() {
 
+
+
+
         }
 
     }
 
     export class QuestListWindow extends InterfaceWindow {
-        
+
         constructor() {
             super("assets/hud/quest_list.html", "#quest-list-dialog");
         }
@@ -66,9 +79,9 @@
      * A window that is used for displaying quest related stuff
      */
     export class QuestWindow extends InterfaceWindow {
-        private id : number;
+        private id: number;
 
-        constructor(questId : number, questInfo : Object) {
+        constructor(questId: number, questInfo: Object) {
 
             this.id = questId;
             super("assets/hud/quest.html", "#quest-dialog");
@@ -104,8 +117,8 @@
     }
 
     export class SkillWindow extends InterfaceWindow {
-        
-        private playerInfo : PlayerInfo;
+
+        private playerInfo: PlayerInfo;
 
         constructor(playerInfo: PlayerInfo) {
 
@@ -186,7 +199,7 @@
 
             // Setup a binding to change on character state change
             this.playerInfo.listenCharacterStatChange($.proxy(this.renderStats, this));
- 
+
 
 
             NetworkManager.getInstance().registerPacket(OpCode.SMSG_EQUIPMENT_UPDATE, (packet) => {
@@ -225,6 +238,9 @@
 
         // Create our inventory window
         constructor() {
+
+
+
             super("assets/hud/inventory.html", "#inventorydialog");
 
             // Hook into our network events
@@ -258,7 +274,7 @@
                 var gameItem = inventory.storage[slotId];
                 $('[slotId="' + slotId + '"]').append(item);
 
-                var image = GraphicsUtil.getIconCssFromId(gameItem.item.iconId);                
+                var image = GraphicsUtil.getIconCssFromId(gameItem.item.iconId);
                 $(item).css('background', image);
 
                 item.children().first().text(gameItem.amount);
