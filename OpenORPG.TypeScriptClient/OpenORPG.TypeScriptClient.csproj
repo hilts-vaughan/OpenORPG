@@ -51,6 +51,7 @@
     <Content Include="assets\hud\inventory\images\item_slot.png" />
     <Content Include="assets\hud\itemtooltip.html" />
     <Content Include="assets\hud\quest.html" />
+    <Content Include="assets\hud\quest_list.html" />
     <Content Include="assets\hud\skills.html" />
     <Content Include="assets\hud\slot.png" />
     <Content Include="assets\iconsheet.png" />
