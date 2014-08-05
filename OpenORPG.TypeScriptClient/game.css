@@ -492,7 +492,7 @@ canvas {
     width: 48px;
     height: 48px;
     display: inline-block;
-    position: relative;
+
 }
 
 .itemcurrencycontainer {
@@ -672,9 +672,8 @@ img {
     background-color: #C8CBCC;
     border-radius: 10px;
     background: center no-repeat;
-        margin-right: 0 auto;
+    margin: 0 auto;
     margin-top: 34px;
-
     image-rendering: crisp-edge;
 }
 
