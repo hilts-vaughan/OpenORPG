@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Server.Game.Combat;
+using Server.Game.Database.Models;
 using Server.Game.Entities;
 using Server.Game.Items;
 using Server.Game.Items.Equipment;
@@ -55,6 +56,13 @@ namespace Server.Game.Zones
             player.CharacterStats.CurrentValueChanged += CharacterStatsOnCurrentValueChanged;
             player.LearnedSkill += PlayerOnLearnedSkill;
             player.BackpackChanged += PlayerOnBackpackChanged;
+            player.AcceptedQuest += PlayerOnAcceptedQuest;
+        }
+
+        private void PlayerOnAcceptedQuest(UserQuestInfo userQuestInfo, Player player)
+        {
+            var questUpdate = new ServerSendQuestListPacket(player.QuestInfo);
+            player.Client.Send(questUpdate);
         }
 
         private void PlayerOnBackpackChanged(Item item, int amount, Player player)

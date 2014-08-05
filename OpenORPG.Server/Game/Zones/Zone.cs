@@ -525,6 +525,9 @@ namespace Server.Game.Zones
             var packet = new ServerSkillChangePacket(heroEntity.Skills);
             heroEntity.Client.Send(packet);
 
+            var questUpdate = new ServerSendQuestListPacket(heroEntity.QuestInfo);
+            heroEntity.Client.Send(questUpdate);
+
             
             // Send equipment
             foreach (var equipment in heroEntity.Equipment)
