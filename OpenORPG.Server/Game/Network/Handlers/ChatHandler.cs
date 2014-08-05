@@ -7,7 +7,7 @@ namespace Server.Game.Network.Handlers
 {
     public class ChatHandler
     {
-        private static string _chatTemplate = "{1}";
+
         /// <summary>
         /// Handles incoming chat messages as they come in and processes them accordingly
         /// </summary>
