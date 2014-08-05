@@ -213,7 +213,11 @@ namespace Server.Game.Entities
             if (itemInInventory != null)
             {
                 // Remove the item from the backpack
-                RemoveFromBackpack((int) slotId, 1);
+                RemoveFromBackpack((int)slotId, 1);
+
+                // If there's something in that slot already, remove it add it
+                if (Equipment[(int)itemInInventory.Slot] != null)
+                    AddToBackpack(Equipment[(int)itemInInventory.Slot], 1);
 
                 // Assign it onto the hero
                 Equipment[(int)itemInInventory.Slot] = itemInInventory;

@@ -7,7 +7,6 @@ namespace Server.Game.Network.Handlers
 {
     public class ChatHandler
     {
-
         /// <summary>
         /// Handles incoming chat messages as they come in and processes them accordingly
         /// </summary>
