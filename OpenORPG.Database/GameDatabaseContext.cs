@@ -34,7 +34,7 @@ namespace Server.Game.Database
         public DbSet<MonsterTemplate> MonsterTemplates { get; set; }
         public DbSet<SkillTemplate> SkillTemplates { get; set; }
         public DbSet<ItemTemplate> ItemTemplates { get; set; }
-        public DbSet<QuestTable> Quests { get; set; }
+        public DbSet<QuestTemplate> Quests { get; set; }
 
         public DbSet<NpcTemplate> Npcs { get; set; }
 
@@ -55,7 +55,7 @@ namespace Server.Game.Database
 
 ;            modelBuilder.Configurations.Add(new ItemTemplateMap());
 
-            modelBuilder.Entity<QuestTable>().HasKey(x => x.QuestTableId);
+            modelBuilder.Entity<QuestTemplate>().HasKey(x => x.QuestTableId);
 
 
             modelBuilder.Entity<QuestItemRequirementTable>().HasKey(x => x.QuestTableId).HasRequired(x => x.Quest).WithOptional(x => x.EndItemRequirements).WillCascadeOnDelete(true);

@@ -100,7 +100,7 @@ namespace Server.Game.Quests
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public QuestTable GetQuest(long id)
+        public QuestTemplate GetQuest(long id)
         {
             using (var context = new GameDatabaseContext())
             {

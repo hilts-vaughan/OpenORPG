@@ -16,14 +16,14 @@ namespace Server.Game.Database.Models
 
         public NpcTemplate()
         {
-            Quests = new List<QuestTable>();
+            Quests = new List<QuestTemplate>();
         }
 
 
         /// <summary>
         /// A quest that this NPC can have
         /// </summary
-        public virtual ICollection<QuestTable> Quests { get; set; }
+        public virtual ICollection<QuestTemplate> Quests { get; set; }
 
         /// <summary>
         /// Tne Id of the shop this Npc will run. This will be 0 if the Npc does not run a shop.

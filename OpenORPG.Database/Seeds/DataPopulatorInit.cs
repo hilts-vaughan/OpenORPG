@@ -154,7 +154,7 @@ namespace Server.Game.Database.Seeds
                 MonsterAmount = 5
             };
 
-            var quest = new QuestTable()
+            var quest = new QuestTemplate()
             {
                 Name = "Overthrow the Goblins",
                 Description = "We've got a goblin problem going around. Think you can help us out? I reckon knocking out at least 5 of them should give them a spook.",
@@ -172,7 +172,7 @@ namespace Server.Game.Database.Seeds
             var npc = new NpcTemplate();
             npc.Name = "Forest Explorer";
             npc.Sprite = "forestnpc";
-            npc.Quests = new List<QuestTable>();
+            npc.Quests = new List<QuestTemplate>();
             npc.Quests.Add(quest);
 
             context.Npcs.Add(npc);

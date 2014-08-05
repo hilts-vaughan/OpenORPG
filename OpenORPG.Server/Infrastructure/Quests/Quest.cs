@@ -43,7 +43,7 @@ namespace Server.Infrastructure.Quests
         /// Creates an instance of a quest given the accordingly table containing the information.
         /// </summary>
         /// <param name="questTable"></param>
-        public Quest(QuestTable questTable)
+        public Quest(QuestTemplate questTable)
         {
             Name = questTable.Name;
             Description = questTable.Description;
@@ -57,7 +57,7 @@ namespace Server.Infrastructure.Quests
 
         }
 
-        private void LoadRewards(QuestTable questTable)
+        private void LoadRewards(QuestTemplate questTable)
         {
             QuestRewards = new List<IQuestReward>();
             QuestRewards.Add(new ExperienceQuestReward(questTable.RewardExp));
@@ -143,12 +143,12 @@ namespace Server.Infrastructure.Quests
         }
 
 
-        private void LoadStartRequirements(QuestTable questTable)
+        private void LoadStartRequirements(QuestTemplate questTable)
         {
             StartRequirements = new List<IQuestRequirement>();
         }
 
-        private void LoadFinishRequirements(QuestTable questTable)
+        private void LoadFinishRequirements(QuestTemplate questTable)
         {
             FinishRequirements = new List<IQuestRequirement>();
 

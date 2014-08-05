@@ -22,7 +22,7 @@ namespace Server.Game.Database.Models.Quests
         public long QuestTableId { get; set; }
 
 
-        public virtual QuestTable Quest { get; set; }
+        public virtual QuestTemplate Quest { get; set; }
 
         [Required]
         public long ItemId { get; set; }

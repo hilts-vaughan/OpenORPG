@@ -8,7 +8,7 @@ using Server.Game.Database.Models.Quests;
 
 namespace OpenORPG.Database.DAL
 {
-    public class QuestRepository : DatabaseRepository<QuestTable>
+    public class QuestRepository : DatabaseRepository<QuestTemplate>
     {
         public QuestRepository(DbContext context) : base(context)
         {

@@ -23,7 +23,7 @@ namespace Server.Game.Database.Models.Quests
         /// </summary>
         public long MonsterAmount { get; set; }
 
-        public QuestTable Quest { get; set; }
+        public QuestTemplate Quest { get; set; }
 
     }
 }
