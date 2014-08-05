@@ -16,12 +16,13 @@
                     resizable: false,
                     modal: false,
                     width: 'auto',
-
                     open: function () { $(this).parent().css("padding", "0px"); $(this).parent().css("background", "transparent"); }
 
 
 
                 });
+
+
 
             var that = this;
             // Get jQuery to load the static content into the page
@@ -49,6 +50,14 @@
 
         ready() {
 
+        }
+
+    }
+
+    export class QuestListWindow extends InterfaceWindow {
+        
+        constructor() {
+            super("assets/hud/quest_list.html", "#quest-list-dialog");
         }
 
     }

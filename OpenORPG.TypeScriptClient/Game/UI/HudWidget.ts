@@ -106,6 +106,8 @@
 
         private inventoryWindow: InventoryWindow;
         private characterWindow: CharacterWindow;
+        private questListWindow : QuestListWindow;
+
         private playerInfo : PlayerInfo;
 
         constructor(canvas: JQuery, playerInfo : PlayerInfo) {
@@ -116,6 +118,7 @@
         onLoaded() {
             this.inventoryWindow = new InventoryWindow();
             this.characterWindow = new CharacterWindow(this.playerInfo);
+            this.questListWindow = new QuestListWindow();
 
             var that = this;
             this.playerInfo.listenCharacterStatChange(() => {
@@ -131,6 +134,10 @@
 
             this.container.find(".menu-item-equip").on("click", () => {
                 that.characterWindow.toggleVisibility();
+            });
+
+            this.container.find(".menu-item-achievements").on("click", () => {
+                that.questListWindow.toggleVisibility();
             });
 
             this.container.find(".menu-item-skills").on("click", () => {

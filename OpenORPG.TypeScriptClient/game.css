@@ -524,8 +524,12 @@ canvas {
 
 /* Inventory stuff starts here, have fun! */
 
-#inventorydialog, #quest-dialog, #skill-dialog {
+#inventorydialog, #quest-dialog, #skill-dialog, #quest-list-dialog {
     padding: 0px;
+}
+
+#quest-list-dialog {
+    font-family: "AdvoCut";
 }
 
 #itemback {
