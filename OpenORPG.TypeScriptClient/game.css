@@ -365,6 +365,13 @@ canvas {
             margin-bottom: 0px;
         }
 
+        #quest-list-window .quest-list h4 {
+            padding-left: 15px;
+            margin-bottom: 0px;
+            color: yellow;
+            margin: 17px -12px 0px -6px;
+        }
+
         #quest-list-window .quest-list ul {
             list-style-type: none;
             -webkit-padding-start: 12px;
@@ -381,32 +388,32 @@ canvas {
             white-space: nowrap;
         }
 
-        .quest-list-selected {
-                     background-color: rgba(22, 122, 111, 0.7);
-        }
+.quest-list-selected {
+    background-color: rgba(22, 122, 111, 0.7);
+}
 
-            #quest-list-window .quest-list li:hover {
-                background-color: rgba(255, 255, 255, 0.1);
-            }
-
-
+#quest-list-window .quest-list li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
 
-    #quest-list-window .quest-content {
-        width: 265px;
-        color: white;
-        padding: 30px 30px 30px 30px;
-        float: right;
+
+
+#quest-list-window .quest-content {
+    width: 265px;
+    color: white;
+    padding: 30px 30px 30px 30px;
+    float: right;
+}
+
+    #quest-list-window .quest-content h2 {
+        text-align: center;
     }
 
-        #quest-list-window .quest-content h2 {
-            text-align: center;
-        }
-
-        #quest-list-window .quest-content .description {
-            width: 95%;
-            font-size: 16px;
-        }
+    #quest-list-window .quest-content .description {
+        width: 95%;
+        font-size: 16px;
+    }
 
 #skill-window {
     width: 480px;
