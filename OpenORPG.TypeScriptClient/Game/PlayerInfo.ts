@@ -54,6 +54,13 @@
 
         onCharacterStatChange() {
             this.characterStatsCallbacks.forEach(this.callCallback);
+
+            var $body = angular.element(document.body);   // 1
+            var $rootScope: any = $body.scope();
+            $rootScope.$watch('playerInfo', function () {
+                $rootScope.$apply();
+            }, true);
+
         }
 
 

@@ -11,12 +11,19 @@
 
 
 var app = angular.module('game', [])
-    .controller('inventoryController', ['$scope', function ($scope) {
-        $scope.gold = 4000;
+    .controller('inventoryController', [
+        '$scope', '$rootScope', function ($scope, $rootScope) {
+            $scope.gold = 4000;
 
+            $scope.die = () => {
+                debugger;
+            };
 
-    }])
-    .controller('MyCtrl2', ['$scope', function ($scope) {
+        }
+    ])
+
+    .controller('HudNetworkController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+
 
     }]);
 

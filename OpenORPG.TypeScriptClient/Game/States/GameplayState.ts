@@ -12,7 +12,7 @@ module OpenORPG {
 
         private characterHud: CharacterStatusWidget;
         private bottomBarWidget: BottombarWidget;
-        private chatWidget : ChatWidget;
+        private chatWidget: ChatWidget;
         private menuWidget: MenuTrayWidget;
 
         // Keep track of character info
@@ -21,10 +21,19 @@ module OpenORPG {
         constructor() {
             super();
 
+            var that = this;
+
+            var $body = angular.element(document.body);   // 1
+            var $rootScope: any = $body.scope();
+            $rootScope = $rootScope.$root;
+            $rootScope.$apply(function () {               // 3
+                $rootScope.playerInfo = that.playerInfo;
+            });
+
+           
 
 
 
- 
 
             this.characterHud = new CharacterStatusWidget($("#canvasholder"), this.playerInfo);
             this.bottomBarWidget = new BottombarWidget($("#canvasholder"));
@@ -94,10 +103,21 @@ module OpenORPG {
                         }
 
 
-                        this.playerInfo.name = worldEntity.name;
+                     
 
                         this.playerInfo.onCharacterStatChange();
-       
+
+
+          
+
+                        this.playerInfo.name = worldEntity.name;
+
+
+                        var $body = angular.element(document.body);   // 1
+                        var $rootScope: any = $body.scope();
+                        $rootScope = $rootScope.$root;
+                        $rootScope.$apply();
+
 
                     }
 
