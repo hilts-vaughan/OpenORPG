@@ -10,12 +10,6 @@
             var that = this;
             var network = NetworkManager.getInstance();
 
-            NetworkManager.getInstance().registerPacket(OpCode.SMSG_CHAT_MESSAGE, (packet) => {
-                that.playerInfo.name = packet.message;
-                that.updateAngularScope();
-            });
-
-
             // Register for stat changes
             network.registerPacket(OpCode.SMSG_STAT_CHANGE, (packet: any) => {
 

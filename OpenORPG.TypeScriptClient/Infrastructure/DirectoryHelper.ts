@@ -19,4 +19,8 @@
         return baseAssetPath + "items/";
     }
 
+    export function getGameFilesPath() {
+        return baseAssetPath + "gamesfiles/";
+    }
+
 } 

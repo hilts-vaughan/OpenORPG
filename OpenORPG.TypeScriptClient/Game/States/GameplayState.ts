@@ -14,6 +14,7 @@ module OpenORPG {
         private bottomBarWidget: BottombarWidget;
         private chatWidget: ChatWidget;
         private menuWidget: MenuTrayWidget;
+        private questWindow: QuestWindow = new QuestWindow();
 
         // Keep track of character info
         private playerInfo: PlayerInfo = new PlayerInfo();
@@ -104,12 +105,12 @@ module OpenORPG {
                         }
 
 
-                     
+
 
                         this.playerInfo.onCharacterStatChange();
 
 
-          
+
 
                         this.playerInfo.name = worldEntity.name;
 
@@ -128,9 +129,7 @@ module OpenORPG {
 
 
             network.registerPacket(OpCode.SMSG_SERVER_OFFER_QUEST, (packet: any) => {
-                var q: QuestWindow = new QuestWindow(packet.questId, null);
-                q.toggleVisibility();
-
+                this.questWindow.presentQuest(packet.questId);
             });
 
         }

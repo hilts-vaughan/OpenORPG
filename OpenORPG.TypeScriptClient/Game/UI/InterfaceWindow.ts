@@ -58,6 +58,13 @@
             $(this.$window).dialog("close");
         }
 
+
+        open() {
+          $(this.$window).dialog("open");
+        }
+
+
+
         ready() {
 
 
@@ -81,14 +88,21 @@
     export class QuestWindow extends InterfaceWindow {
         private id: number;
 
-        constructor(questId: number, questInfo: Object) {
-
-            this.id = questId;
+        constructor() {
             super("assets/hud/quest.html", "#quest-dialog");
 
         }
 
-        ready() {
+        presentQuest(questId: number) {
+            this.id = questId;
+            this.render();
+            this.open();
+        }
+
+        ready() {     
+        }
+
+        render() {
             $(this.windowName).prev().hide();
 
             // Load the quest info and get ready
@@ -111,8 +125,8 @@
                 that.close();
             });
 
-
         }
+
 
     }
 
