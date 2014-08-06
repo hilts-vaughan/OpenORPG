@@ -11,7 +11,7 @@
 
             <ul>
 
-                <li ng-repeat="quest in playerInfo.quests">
+                <li ng-repeat="quest in playerInfo.quests" ng-click="selectQuest($index)">
                     {{quest.name}}
                 </li>
 
@@ -22,9 +22,9 @@
         </div>
 
         <div class="quest-content">
-            <h2>Overthrow the Goblins</h2>
+            <h2>{{selectedQuest.name}}</h2>
 
-            <div class="description">We've got a goblin problem going around. Think you can help us out? I reckon knocking out at least 5 of them should give them a spook.</div>
+            <div class="description">{{selectedQuest.description}}</div>
         </div>
 
 

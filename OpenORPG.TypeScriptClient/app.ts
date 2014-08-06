@@ -24,10 +24,12 @@ module OpenORPG {
         ])
 
         .controller('QuestListController', ['$scope', function($scope) {
-          
+
+            $scope.selectQuest = function(index) {
+                $scope.selectedQuest = $scope.playerInfo.quests[index];
+            };
 
 
-              
         }])
 
         .controller('CharacterWindowController', [
