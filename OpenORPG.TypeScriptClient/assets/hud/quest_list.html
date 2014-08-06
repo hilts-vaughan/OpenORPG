@@ -11,7 +11,7 @@
 
             <ul>
 
-                <li ng-repeat="quest in playerInfo.quests" ng-click="selectQuest($index)">
+                <li ng-repeat="quest in playerInfo.quests" ng-click="selectQuest($index)" ng-class="{'quest-list-selected': selectedIndex == $index}">
                     {{quest.name}}
                 </li>
 

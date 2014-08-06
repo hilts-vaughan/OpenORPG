@@ -381,6 +381,10 @@ canvas {
             white-space: nowrap;
         }
 
+        .quest-list-selected {
+                     background-color: rgba(22, 122, 111, 0.7);
+        }
+
             #quest-list-window .quest-list li:hover {
                 background-color: rgba(255, 255, 255, 0.1);
             }

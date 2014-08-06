@@ -27,6 +27,7 @@ module OpenORPG {
 
             $scope.selectQuest = function(index) {
                 $scope.selectedQuest = $scope.playerInfo.quests[index];
+                $scope.selectedIndex = index;
             };
 
 
