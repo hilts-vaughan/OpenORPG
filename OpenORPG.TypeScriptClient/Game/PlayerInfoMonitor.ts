@@ -35,7 +35,21 @@
                 this.updateAngularScope();
             });
 
+            network.registerPacket(OpCode.SMSG_QUEST_SEND_LIST, (packet) => {
 
+                this.playerInfo.quests = [];
+
+                _.each(packet.quests, (value : any) => {
+
+                    $.getJSON("assets/gamesfiles/quests/" + value.questId + ".json", (data) => {
+                        this.playerInfo.quests.push(data);
+                        this.updateAngularScope();
+                    });
+
+                });
+
+
+            });
 
 
         }

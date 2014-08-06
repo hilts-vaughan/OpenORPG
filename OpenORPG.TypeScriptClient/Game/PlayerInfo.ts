@@ -18,6 +18,9 @@
 
 
         public inventory: any[];
+        public quests: any[];
+
+
         private inventoryCallbacks = [];
 
         constructor() {

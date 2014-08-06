@@ -1,71 +1,33 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <link rel="stylesheet" type="text/css" href="../../game.css">
-    <title>Skill Window</title>
-</head>
+﻿
+
+    <div id="quest-list-window" class="rounded-container" ng-controller="QuestListController">
+
+    <div class="contentwrapper">
 
 
-<body>
+        <div class="quest-list">
 
-    <div id="quest-list-window" class="rounded-container">
+            <h3>Quests</h3>
 
-        <div class="contentwrapper">
-   
+            <ul>
 
-            <div class="quest-list">
-
-                <h3>Quests</h3>
-
-                <ul>
-
-                    <li>
-                        Overthrow the Goblins!
-                    </li>
-                    
-                    <li>
-                        Overthrow the Goblins!
-                    </li>
-                    
-                    <li>
-                        Overthrow the Goblins!
-                    </li>
-                    
-                    
-                    <li>
-                        Overthrow the Goblins!
-                    </li>
-                    
-                    <li>
-                        Overthrow the Goblins!
-                    </li>
-                    
-                    <li>
-                        Overthrow the Goblins!
-                    </li>
+                <li ng-repeat="quest in playerInfo.quests">
+                    {{quest.name}}
+                </li>
 
 
-                </ul>
 
-            </div>
-            
-            <div class="quest-content">
-                <h2>Overthrow the Goblins</h2>
-                
-                <div class="description">We've got a goblin problem going around. Think you can help us out? I reckon knocking out at least 5 of them should give them a spook.</div>
-            </div>
-
+            </ul>
 
         </div>
 
+        <div class="quest-content">
+            <h2>Overthrow the Goblins</h2>
+
+            <div class="description">We've got a goblin problem going around. Think you can help us out? I reckon knocking out at least 5 of them should give them a spook.</div>
+        </div>
+
+
     </div>
 
-
-
-
-
-</body>
-
-
-
-</html>
+</div>

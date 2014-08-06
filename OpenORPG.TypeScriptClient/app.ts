@@ -22,6 +22,14 @@ module OpenORPG {
 
             }
         ])
+
+        .controller('QuestListController', ['$scope', function($scope) {
+          
+
+
+              
+        }])
+
         .controller('CharacterWindowController', [
             '$scope', function ($scope) {
 
