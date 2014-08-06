@@ -17,6 +17,7 @@ module OpenORPG {
 
         // Keep track of character info
         private playerInfo: PlayerInfo = new PlayerInfo();
+        private playerMonitor: PlayerInfoMontior;
 
         constructor() {
             super();
@@ -30,8 +31,8 @@ module OpenORPG {
                 $rootScope.playerInfo = that.playerInfo;
             });
 
-           
 
+            this.playerMonitor = new PlayerInfoMontior(this.playerInfo);
 
 
 
@@ -125,17 +126,6 @@ module OpenORPG {
             });
 
 
-            // Register for stat changes
-            network.registerPacket(OpCode.SMSG_STAT_CHANGE, (packet: any) => {
-
-                // Update these, fire callback
-                this.playerInfo.characterStats[packet.stat].currentValue = packet.currentValue;
-                this.playerInfo.characterStats[packet.stat].maximumValue = packet.maximumValue;
-
-                // Trigger callback
-                this.playerInfo.onCharacterStatChange();
-
-            });
 
             network.registerPacket(OpCode.SMSG_SERVER_OFFER_QUEST, (packet: any) => {
                 var q: QuestWindow = new QuestWindow(packet.questId, null);

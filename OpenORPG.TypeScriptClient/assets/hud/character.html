@@ -1,64 +1,51 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <link rel="stylesheet" type="text/css" href="../../game.css">
-    <title>Character</title>
-</head>
+﻿
+<div id="characterpanel" ng-controller="CharacterWindowController">
+
+    <div id="equipmentpanel">
 
 
-<body>
+        <div id="equipslots">
 
-
-    <div id="characterpanel">
-
-        <div id="equipmentpanel">
-
-
-            <div id="equipslots">
-
-                <div class="equipmentslot">
-                    <div class="weaponslot"></div>
-                </div>
-
-
-                <div class="equipmentslot">
-                    <div class="headslot"></div>
-                </div>
-
-                <div class="equipmentslot">
-                    <div class="bodyslot"></div>
-                </div>
-
-
-                <div class="equipmentslot">
-                    <div class="backslot"></div>
-                </div>
-
-                <div class="equipmentslot">
-                    <div class="handsslot"></div>
-                </div>
-
-                <div class="equipmentslot">
-                    <div class="feetslot"></div>
-                </div>
-
+            <div class="equipmentslot">
+                <div class="weaponslot"></div>
             </div>
 
 
+            <div class="equipmentslot">
+                <div class="headslot"></div>
+            </div>
+
+            <div class="equipmentslot">
+                <div class="bodyslot"></div>
+            </div>
 
 
+            <div class="equipmentslot">
+                <div class="backslot"></div>
+            </div>
+
+            <div class="equipmentslot">
+                <div class="handsslot"></div>
+            </div>
+
+            <div class="equipmentslot">
+                <div class="feetslot"></div>
+            </div>
 
         </div>
 
-        <div id="statspanel">
-            <div id="charactername">Vaughan Hilts</div>         
+
+
+
+
+    </div>
+
+    <div id="statspanel">
+        <div id="charactername">{{playerInfo.name}}</div>
+        <div class="statrow" ng-repeat="stat in playerInfo.characterStats">
+            {{getStatNameFromIndex($index)}}: <b class="statnumber">{{stat.currentValue}}/{{stat.maximumValue}}</b>
         </div>
 
     </div>
 
-
-</body>
-
-
-
-</html>
+</div>

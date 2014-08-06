@@ -9,36 +9,54 @@
 
 /// <reference path="Game/Direction.ts" />
 
+module OpenORPG {
 
-var app = angular.module('game', [])
-    .controller('inventoryController', [
-        '$scope', '$rootScope', function ($scope, $rootScope) {
-            $scope.gold = 4000;
-
-            $scope.die = () => {
-                debugger;
-            };
-
-        }
-    ])
-
-    .controller('HudNetworkController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    var app = angular.module('game', [])
+        .controller('inventoryController', [
+            '$scope', '$rootScope', function ($scope, $rootScope) {
+                $scope.gold = 4000;
 
 
-    }]);
 
 
-app.directive('openDialog', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, elem, attr, ctrl) {
-            var dialogId = '#' + attr.openDialog;
-            elem.bind('click', function (e) {
-                $(dialogId).dialog('open');
-            });
-        }
-    };
-});
+
+            }
+        ])
+        .controller('CharacterWindowController', [
+            '$scope', function ($scope) {
+
+                // We can do some cool stuff here if we want to, but otherwise we're ok 
+
+                $scope.getStatNameFromIndex = index => {
+
+                    var names: string[] = [];
+                    for (var n in StatTypes) {
+                        if (typeof StatTypes[n] === 'number') names.push(n);
+                    }
+
+                    return names[index];
+                };
+
+            }
+        ]);
+
+
+
+    app.directive('openDialog', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, elem, attr, ctrl) {
+                var dialogId = '#' + attr.openDialog;
+                elem.bind('click', function (e) {
+                    $(dialogId).dialog('open');
+                });
+            }
+        };
+    });
+
+
+}
+
 
 window.onload = () => {
 

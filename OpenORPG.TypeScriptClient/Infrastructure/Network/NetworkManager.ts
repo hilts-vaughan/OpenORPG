@@ -38,7 +38,11 @@
         }
 
         public registerPacket(opCode: OpCode, callback: (packet: any) => void) {
-            this._packetCallbacks[opCode] = callback;
+
+            if (!this._packetCallbacks[opCode])
+                this._packetCallbacks[opCode] = [];
+
+            this._packetCallbacks[opCode].push(callback);
         }
 
         public connect() {
@@ -63,9 +67,11 @@
         // Parses an incoming message accordingly
         private parseMessage(response: MessageEvent) {
             var packet: any = JSON.parse(response.data);
-            if (this._packetCallbacks[packet.opCode] != undefined)
-                this._packetCallbacks[packet.opCode](packet);
-            else
+            if (this._packetCallbacks[packet.opCode] != undefined) {
+                _.forEach(this._packetCallbacks[packet.opCode], (value : Function) => {
+                    value(packet);
+                });
+            } else
                 console.log("Packet with opCode " + packet.OpCode + " was recieved but not handled.");
         }
 

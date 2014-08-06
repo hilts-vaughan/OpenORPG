@@ -167,6 +167,7 @@
     <TypeScriptCompile Include="Game\Movement\MovementSystem.ts" />
     <TypeScriptCompile Include="Game\PacketFactory.ts" />
     <TypeScriptCompile Include="Game\PlayerInfo.ts" />
+    <TypeScriptCompile Include="Game\PlayerInfoMonitor.ts" />
     <TypeScriptCompile Include="Game\Resources\SpriteManager.ts" />
     <TypeScriptCompile Include="Game\States\BootState.ts" />
     <TypeScriptCompile Include="Game.ts" />

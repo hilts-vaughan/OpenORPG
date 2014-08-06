@@ -5,6 +5,7 @@
         Dexterity,
         Vitality,
         Intelligence,
-        Luck
+        Luck,
+        Mind
     }
 }

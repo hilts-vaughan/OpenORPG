@@ -121,11 +121,6 @@
             this.questListWindow = new QuestListWindow();
 
             var that = this;
-            this.playerInfo.listenCharacterStatChange(() => {
-
-                that.characterWindow.renderStats();
-
-            });
 
             // A few events quickly to bind our menu items
             this.container.find(".menu-item-backpack").on("click", () => {

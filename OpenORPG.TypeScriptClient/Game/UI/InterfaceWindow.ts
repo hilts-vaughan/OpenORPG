@@ -198,7 +198,7 @@
             this.playerInfo = playerInfo;
 
             // Setup a binding to change on character state change
-            this.playerInfo.listenCharacterStatChange($.proxy(this.renderStats, this));
+            //this.playerInfo.listenCharacterStatChange($.proxy(this.renderStats, this));
 
 
 
