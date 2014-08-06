@@ -28,6 +28,11 @@ namespace Server.Game.Database.Models.ContentTemplates
             
         }
 
+        /// <summary>
+        /// The icon index this skill will represent visually
+        /// </summary>
+        public int IconId { get; set; }
+
         public SkillType SkillType { get; set; }
         public SkillTargetType  SkillTargetType { get; set; }
         public SkillActivationType SkillActivationType { get; set; }
