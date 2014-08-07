@@ -33,14 +33,14 @@
 
                 this.playerInfo.quests = [];
 
-                _.each(packet.quests, (value : any) => {
+                _.each(packet.quests, (value: any) => {
 
-                    $.getJSON("assets/gamesfiles/quests/" + value.questId + ".json", (data) => {
+                    ContentManager.getInstance().getContent(ContentType.Quest, value.questId, (data) => {
                         this.playerInfo.quests.push(data);
                         this.updateAngularScope();
                     });
 
-                });
+            });
 
 
             });
@@ -52,20 +52,20 @@
          * Updates the angular rootscope with the latest data after modifying the rootscope.
          */
         private updateAngularScope() {
-            var $body = angular.element(document.body);   // 1    
+        var $body = angular.element(document.body);   // 1    
 
-            var service = $body.injector().get('$timeout');
-            var $rootScope: any = $body.scope();
+        var service = $body.injector().get('$timeout');
+        var $rootScope: any = $body.scope();
 
-            var phase = $rootScope.$root.$$phase;
-            if (phase == '$apply' || phase == '$digest') {
-            } else {
-                $rootScope.$apply();
-            }
-
-
-
+        var phase = $rootScope.$root.$$phase;
+        if (phase == '$apply' || phase == '$digest') {
+        } else {
+            $rootScope.$apply();
         }
+
+
+
+    }
 
 
 

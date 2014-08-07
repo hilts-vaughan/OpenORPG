@@ -60,7 +60,7 @@
 
 
         open() {
-          $(this.$window).dialog("open");
+            $(this.$window).dialog("open");
         }
 
 
@@ -99,7 +99,7 @@
             this.open();
         }
 
-        ready() {     
+        ready() {
         }
 
         /*
@@ -109,10 +109,10 @@
             $(this.windowName).prev().hide();
 
             // Load the quest info and get ready
-            $.getJSON("assets/gamesfiles/quests/" + this.id + ".json", (data) => {
+            ContentManager.getInstance().getContent(ContentType.Quest, this.id, (quest) => {
 
-                $(this.windowName).find("#description").text(data.description);
-                $(this.windowName).find(".quest-header").text(data.name);
+                $(this.windowName).find("#description").text(quest.description);
+                $(this.windowName).find(".quest-header").text(quest.name);
 
             });
 

@@ -36,7 +36,7 @@
                 for (var key in packet.skills) {
                     var skill = packet.skills[key];
 
-                    $.getJSON("assets/gamesfiles/skills/" + (parseInt(key) + 1) + ".json", (fSkill) => {
+                    ContentManager.getInstance().getContent(ContentType.Skill, (parseInt(key) + 1), (fSkill) => {
                         var newSkill : any = _.extend(fSkill, skill);
                         that.characterSkills.push(new Skill(newSkill));
                     });

@@ -490,6 +490,9 @@
     <TypeScriptCompile Include="Game\UI\Inventory\InventoryContextMenu.ts" />
     <TypeScriptCompile Include="Game\UI\ItemTooltipInfo.ts" />
     <TypeScriptCompile Include="Game\World\Zone.ts" />
+    <TypeScriptCompile Include="Infrastructure\Content\ContentCache.ts" />
+    <TypeScriptCompile Include="Infrastructure\Content\ContentManager.ts" />
+    <TypeScriptCompile Include="Infrastructure\Content\ContentType.ts" />
     <TypeScriptCompile Include="Infrastructure\DirectoryHelper.ts" />
     <TypeScriptCompile Include="Infrastructure\EffectFactory.ts" />
     <TypeScriptCompile Include="Infrastructure\FontFactory.ts" />
