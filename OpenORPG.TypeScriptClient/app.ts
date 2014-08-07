@@ -43,8 +43,7 @@ module OpenORPG {
                     return 0;
 
                 var percent = (vital.currentValue / vital.maximumValue) * 100;
-
-                console.log(percent);
+     
                 return percent;
             }
 

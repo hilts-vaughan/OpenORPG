@@ -29,6 +29,11 @@ namespace Server.Game.Combat
             get { return SkillTemplate.Id;  }
         }
 
+        public long IconId
+        {
+            get { return SkillTemplate.IconId; }
+        }
+
         /// <summary>
         /// Returns the skill template in use by this skill
         /// </summary>

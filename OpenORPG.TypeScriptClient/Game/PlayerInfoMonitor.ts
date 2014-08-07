@@ -40,7 +40,30 @@
                         this.updateAngularScope();
                     });
 
+                });
+
+
             });
+
+
+            // skills monitoring
+
+            // Listen to events about player information we might care about
+            network.registerPacket(OpCode.SMSG_SKILL_CHANGE, (packet) => {
+
+                // Init character info
+                for (var key in packet.skills) {
+                    var skill = packet.skills[key];
+
+                    ContentManager.getInstance().getContent(ContentType.Skill, (parseInt(key) + 1), (fSkill) => {
+                        var newSkill: any = _.extend(fSkill, skill);
+                        this.playerInfo.characterSkills.push(newSkill);
+                    });
+
+                    // Add some logging
+                    console.log("Updating skills: ");
+                    console.log(this.playerInfo.characterSkills);
+                }
 
 
             });
@@ -52,20 +75,20 @@
          * Updates the angular rootscope with the latest data after modifying the rootscope.
          */
         private updateAngularScope() {
-        var $body = angular.element(document.body);   // 1    
+            var $body = angular.element(document.body);   // 1    
 
-        var service = $body.injector().get('$timeout');
-        var $rootScope: any = $body.scope();
+            var service = $body.injector().get('$timeout');
+            var $rootScope: any = $body.scope();
 
-        var phase = $rootScope.$root.$$phase;
-        if (phase == '$apply' || phase == '$digest') {
-        } else {
-            $rootScope.$apply();
+            var phase = $rootScope.$root.$$phase;
+            if (phase == '$apply' || phase == '$digest') {
+            } else {
+                $rootScope.$apply();
+            }
+
+
+
         }
-
-
-
-    }
 
 
 
