@@ -58,7 +58,7 @@
                     var skill = packet.skills[key];
 
                     ContentManager.getInstance().getContent(ContentType.Skill, (parseInt(key) + 1), (fSkill) => {
-                        var newSkill: any = _.extend(fSkill, skill);
+                        var newSkill: any = _.extend(skill, fSkill);
                         this.playerInfo.characterSkills.push(newSkill);
 
                         // Add some logging
