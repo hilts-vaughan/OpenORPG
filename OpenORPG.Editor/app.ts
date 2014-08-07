@@ -23,11 +23,6 @@ editorApp.config(function ($routeProvider) {
             controller: 'aboutController'
         })
 
-    // route for the contact page
-        .when('/contact', {
-            templateUrl: 'pages/contact.html',
-            controller: 'contactController'
-        })
         .when('/items', {
             templateUrl: 'views/templates/items.html',
             controller: 'Items.ItemIndexController'

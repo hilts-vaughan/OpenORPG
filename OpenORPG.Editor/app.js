@@ -13,9 +13,6 @@ editorApp.config(function ($routeProvider) {
     }).when('/about', {
         templateUrl: 'views/templates/about.html',
         controller: 'aboutController'
-    }).when('/contact', {
-        templateUrl: 'pages/contact.html',
-        controller: 'contactController'
     }).when('/items', {
         templateUrl: 'views/templates/items.html',
         controller: 'Items.ItemIndexController'

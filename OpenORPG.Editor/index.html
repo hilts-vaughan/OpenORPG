@@ -41,7 +41,10 @@
                 <ul class="nav navbar-nav" ng-controller="headerController">
                     <li ng-class="{ active: isActive('/')}"><a href=" #">Dashboard</a></li>
                     <li ng-class="{ active: isActive('/items')}" ><a href="#items">Items & Equipment</a></li>
-                    <li><a href="#contact">Monsters</a></li>
+                    <li ng-class="{ active: isActive('/skills')}"><a href="#skills">Skills</a></li>
+                    <li ng-class="{ active: isActive('/monsters')}"><a href="#monsters">Monsters</a></li>
+                    <li ng-class="{ active: isActive('/quests')}"><a href="#quests">Quests</a></li>
+                    <li ng-class="{ active: isActive('/about')}"><a href="#about">About</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
