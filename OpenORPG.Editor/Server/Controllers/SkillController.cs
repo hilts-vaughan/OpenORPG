@@ -18,25 +18,25 @@ namespace OpenORPG.Editor.Server.Controllers
     {
         [HttpGet]
         [Route("{id:int}")]
-        public ItemTemplate GetSkillById(int id)
+        public SkillTemplate GetSkillById(int id)
         {
 
             using (var context = new GameDatabaseContext())
             {
                 var repo = new SkillRepository(context);
-                repo.Get(id);
+                return repo.Get(id);
             }
         }
 
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<ItemTemplate> GetSkills()
+        public IEnumerable<SkillTemplate> GetSkills()
         {
             using (var context = new GameDatabaseContext())
             {
                 var repo = new SkillRepository(context);
-                repo.GetAll();
+                return repo.GetAll();
             }
         }
 

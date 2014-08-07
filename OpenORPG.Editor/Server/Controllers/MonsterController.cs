@@ -18,25 +18,25 @@ namespace OpenORPG.Editor.Server.Controllers
     {
         [HttpGet]
         [Route("{id:int}")]
-        public ItemTemplate GetMonsterById(int id)
+        public MonsterTemplate GetMonsterById(int id)
         {
 
             using (var context = new GameDatabaseContext())
             {
                 var repo = new MonsterRepository(context);
-                repo.Get(id);
+                return repo.Get(id);
             }
         }
 
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<ItemTemplate> GetMonsters()
+        public IEnumerable<MonsterTemplate> GetMonsters()
         {
             using (var context = new GameDatabaseContext())
             {
                 var repo = new MonsterRepository(context);
-                repo.GetAll();
+                return repo.GetAll();
             }
         }
 

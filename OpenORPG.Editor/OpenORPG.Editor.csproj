@@ -363,6 +363,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Server\Controllers\ItemController.cs" />
+    <Compile Include="Server\Controllers\MonsterController.cs" />
+    <Compile Include="Server\Controllers\SkillController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
