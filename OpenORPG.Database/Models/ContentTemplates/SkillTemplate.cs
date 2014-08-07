@@ -33,6 +33,12 @@ namespace Server.Game.Database.Models.ContentTemplates
         /// </summary>
         public int IconId { get; set; }
 
+        /// <summary>
+        /// This is a numeric value of the cost to cast a specific spell. A character
+        /// must have at least this amount of cost to be able to perform a given skill.
+        /// </summary>
+        public int SkillCost { get; set; }
+
         public SkillType SkillType { get; set; }
         public SkillTargetType  SkillTargetType { get; set; }
         public SkillActivationType SkillActivationType { get; set; }

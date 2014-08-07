@@ -31,6 +31,18 @@ editorApp.controller('mainController', function ($scope) {
     $scope.message = '(There is not anything interesting to look at right now.)';
 });
 
+editorApp.controller('headerController', function ($scope, $location) {
+    $scope.isActive = function (viewLocation) {
+        if (viewLocation == "/")
+            if ($location.path() == viewLocation)
+                return true;
+            else
+                return false;
+
+        return $location.path().indexOf(viewLocation) == 0;
+    };
+});
+
 editorApp.controller('aboutController', function ($scope) {
     $scope.message = 'Look! I am an about page.';
 });
