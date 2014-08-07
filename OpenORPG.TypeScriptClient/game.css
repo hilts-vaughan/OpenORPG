@@ -163,6 +163,9 @@ canvas {
         -moz-border-radius-bottomright: 8px;
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
+         
+        transition: width 0.75s;
+
     }
 
 

@@ -50,26 +50,6 @@
         }
 
 
-        listenCharacterStatChange(callback: Function) {
-            this.characterStatsCallbacks.push(callback);
-        }
-
-
-        onCharacterStatChange() {
-            this.characterStatsCallbacks.forEach(this.callCallback);
-
-    
-
-        }
-
-
-
-
-        callCallback(element: Function) {
-            element();
-        }
-
-
 
 
     }

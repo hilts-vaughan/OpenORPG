@@ -1,22 +1,22 @@
-﻿<div id="character-status" class="rounded-container">
+﻿<div id="character-status" class="rounded-container" ng-controller="CharacterStatusController">
 
     <div class="labels">
 
-        <div class="label-left"></div>
-        <div class="label-right">Adventurer</div>
+        <div class="label-left">{{playerInfo.name}}</div>
+        <div class="label-right"></div>
 
     </div>
 
     <div class="bars">
-        
+
         <div id="health-vital-bar" class="vital-bar">
-            <span class="vital-bar-fill"></span>
-            <span class="float-vital" style="position: absolute; right: 0"></span>
+            <span class="vital-bar-fill" ng-style="{width: getVitalPercent(0) + '%'}"></span>
+            <span class="float-vital" style="position: absolute; right: 0">{{getVitalLabel(0)}}</span>
         </div>
-        
+
         <div id="mana-vital-bar" class="vital-bar">
-            <span class="vital-bar-fill" style="background-color: blue"></span>
-            <span class="float-vital" style="position: absolute; right: 0"></span>
+            <span class="vital-bar-fill" style="background-color: blue" ng-style="{width: getVitalPercent(1) + '%'}"></span>
+            <span class="float-vital" style="position: absolute; right: 0">{{getVitalLabel(1)}}</span>
         </div>
 
     </div>

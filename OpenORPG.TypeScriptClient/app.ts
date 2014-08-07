@@ -23,15 +23,44 @@ module OpenORPG {
             }
         ])
 
-        .controller('QuestListController', ['$scope', function($scope) {
+        .controller('QuestListController', ['$scope', function ($scope) {
 
-            $scope.selectQuest = function(index) {
+            $scope.selectQuest = function (index) {
                 $scope.selectedQuest = $scope.playerInfo.quests[index];
                 $scope.selectedIndex = index;
             };
 
 
         }])
+
+
+        .controller('CharacterStatusController', ['$scope', function ($scope) {
+
+            $scope.getVitalPercent = function (type: number) {
+                var vital = this.playerInfo.characterStats[type];
+
+                if (!vital)
+                    return 0;
+
+                var percent = (vital.currentValue / vital.maximumValue) * 100;
+
+                console.log(percent);
+                return percent;
+            }
+
+            $scope.getVitalLabel = function (type: number) {
+
+                var vital = this.playerInfo.characterStats[type];
+
+                if (!vital)
+                    return "0";
+
+                return vital.currentValue.toString() + "/" + vital.maximumValue.toString();
+            }
+
+        }])
+
+
 
         .controller('CharacterWindowController', [
             '$scope', function ($scope) {

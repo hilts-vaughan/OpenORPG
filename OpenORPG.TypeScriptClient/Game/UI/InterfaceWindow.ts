@@ -102,6 +102,9 @@
         ready() {     
         }
 
+        /*
+         * We stick with jQuery here for legacy reasons. No need to change stuff that isn't broken.
+         */
         render() {
             $(this.windowName).prev().hide();
 

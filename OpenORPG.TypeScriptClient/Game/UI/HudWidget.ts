@@ -17,6 +17,15 @@
             $.get(templatePath, data => {
                 that.container = $(data);
                 $(canvas).append(that.container);
+
+                angular.element(document).injector().invoke($compile => {
+                    var container = that.container;
+                    var scope = angular.element(container).scope();
+                    $compile(container)(scope);
+                    scope.$apply();
+                });
+
+
                 that.onLoaded();
             });
 
@@ -42,48 +51,12 @@
         onLoaded() {
 
 
-  
+
 
         }
 
         constructor(canvas: JQuery, player: PlayerInfo) {
             super(canvas, "assets/templates/widgets/character_status.html");
-
-
-            // Listen for the stat change event so that we can refresh the HUD
-            this.playerInfo = player;
-            this.playerInfo.listenCharacterStatChange(() => {
-
-
-                var hpContainer = this.container.find("#health-vital-bar .vital-bar-fill");
-                var mpContainer = this.container.find("#mana-vital-bar .vital-bar-fill");
-
-                hpContainer.text(LocaleManager.getInstance().getString("Hitpoints"));
-                mpContainer.text(LocaleManager.getInstance().getString("Manapoints"));
-
-                var hp = this.playerInfo.characterStats[StatTypes.Hitpoints];
-                var mp = this.playerInfo.characterStats[StatTypes.Intelligence];
-
-                var hpPercent = (hp.currentValue / hp.maximumValue) * 100;
-                var mpPercent = (mp.currentValue / mp.maximumValue) * 100;
-
-                    hpContainer.animate({
-                        "width": hpPercent + "%"
-                    }, 500);
-
-                mpContainer.animate({
-                    "width": mpPercent + "%"
-                }, 500);
-
-
-                this.container.find("#health-vital-bar .float-vital").text(hp.currentValue + "/" + hp.maximumValue);
-                this.container.find("#mana-vital-bar .float-vital").text(mp.currentValue + "/" + mp.maximumValue);
-
-                this.container.find(".label-left").text(this.playerInfo.name);
-
-
-            }
-                );
 
 
         }
@@ -106,11 +79,11 @@
 
         private inventoryWindow: InventoryWindow;
         private characterWindow: CharacterWindow;
-        private questListWindow : QuestListWindow;
+        private questListWindow: QuestListWindow;
 
-        private playerInfo : PlayerInfo;
+        private playerInfo: PlayerInfo;
 
-        constructor(canvas: JQuery, playerInfo : PlayerInfo) {
+        constructor(canvas: JQuery, playerInfo: PlayerInfo) {
             super(canvas, "assets/templates/widgets/menu_tray.html");
             this.playerInfo = playerInfo;
         }

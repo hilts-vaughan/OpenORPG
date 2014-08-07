@@ -106,12 +106,6 @@ module OpenORPG {
 
 
 
-
-                        this.playerInfo.onCharacterStatChange();
-
-
-
-
                         this.playerInfo.name = worldEntity.name;
 
 
