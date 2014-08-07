@@ -163,9 +163,7 @@ canvas {
         -moz-border-radius-bottomright: 8px;
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
-         
         transition: width 0.75s;
-
     }
 
 
@@ -420,7 +418,7 @@ canvas {
 
 #skill-window {
     width: 480px;
-    height: 400px;
+    height: 300px;
     background-color: rgba(9, 22, 27, 0.9);
     overflow: hidden;
 }
@@ -428,31 +426,128 @@ canvas {
     #skill-window .contentwrapper {
         width: 480px;
         height: 100%;
-        overflow: hidden;
+        overflow: overlay;
     }
 
-    #skill-window .header {
-        width: 90%;
-        margin: 0 auto;
-        background-color: black;
-        border: 2px solid lightgray;
+
+
+
+    #skill-window .quest-list {
+        width: 120px;
+        height: auto;
+        padding-right: 12px;
+        float: left;
         color: white;
-        text-align: center;
-        padding: 12px 12px 12px 12px;
-        margin-top: 12px;
-        margin-bottom: 24px;
+        text-align: left;
     }
 
+        #skill-window .quest-list h3 {
+            padding-left: 15px;
+            margin-bottom: 0px;
+            padding-bottom: 4px;
+            font-size: 18px;
+            border-bottom: 2px solid lightgray;
+        }
 
-    #skill-window .skill-item {
-        width: 48px;
-        height: 48px;
+        #skill-window .quest-list h4 {
+            font-size: 14px;
+            color: lightblue;
+            margin: 17px -12px 0px 16px;
+        }
+
+            #skill-window .quest-list h4:hover {
+                color: yellow;
+            }
+
+        #skill-window .quest-list ul {
+            list-style-type: none;
+            -webkit-padding-start: 12px;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        #skill-window .quest-list li {
+            color: white;
+            font-size: 14px;
+            text-align: left;
+            line-height: 28px;
+            width: auto;
+            white-space: nowrap;
+        }
+
+.skill-selected {
+    background-color: #02e8dc;
+}
+
+#skill-window .skillrow:hover {
+    color: yellow;
+}
+
+
+
+
+#skill-window .quest-content {
+    width: 345px;
+    color: white;
+    min-height: 100%;
+    padding-top: 15px;
+    float: right;
+    overflow: scroll;
+    border-left: 2px solid lightgray;
+}
+
+#skill-window .skillrow {
+    width: 75%;
+    padding-left: 10px;
+    position: relative;
+
+}
+
+    #skill-window .skillrow .skillinfo {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+            padding-bottom: 5px;
+    }
+
+    #skill-window .skillrow .skillname {
+        position: absolute;
+        bottom: 0;
+        padding-bottom: 5px;
+        left: 55px;
+        
+    }
+
+    #skill-window .skillrow .skillicon {
+        width: 34px;
+        height: 34px;
         display: inline-block;
-        box-sizing: border-box;
-        border: 1px solid gray;
-        background-color: rgba(9, 22, 27, 1);
-        margin: 0;
+            padding-bottom: 0px;
     }
+
+
+#skill-window .header {
+    width: 90%;
+    margin: 0 auto;
+    background-color: black;
+    border: 2px solid lightgray;
+    color: white;
+    text-align: center;
+    padding: 12px 12px 12px 12px;
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+
+#skill-window .skill-item {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px solid gray;
+    background-color: rgba(9, 22, 27, 1);
+    margin: 0;
+}
 
 
 /*
@@ -540,10 +635,11 @@ canvas {
 
 #inventorydialog, #quest-dialog, #skill-dialog, #quest-list-dialog {
     padding: 0px;
+        font-family: "AdvoCut";
 }
 
 #quest-list-dialog {
-    font-family: "AdvoCut";
+
 }
 
 #itemback {

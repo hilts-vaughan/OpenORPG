@@ -8,28 +8,28 @@
 
 <body>
 
-    <div id="skill-window" class="rounded-container">
+    <div id="skill-window" class="rounded-container" ng-controller="SkillListController ">
 
         <div class="contentwrapper">
 
-            <div class="header">
-                All Skills
-            </div>
 
-            <div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div>
+            <div class="quest-list">
 
-            <div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div>
+                <h3>All Skills</h3>
 
-            <div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div>
-
-            <div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div>
-
-            <div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div>
-
-            <div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div><div class="skill-item"></div>
+                <h4>White Magic</h4>
+                <h4>Combat Skills</h4>
+                <h4>Blue Magic</h4>
+                <h4>Rune Magic</h4>
+                <h4>Ancient Magic</h4>
 
 
             </div>
+
+            <div class="quest-content">
+                <div class="skillrow" ng-repeat="skill in playerInfo.characterSkills"> <span class="skillicon" ng-style="{ background: getIcon($index) }"></span> <span class="skillname"> {{skill.name}} </span> <span class="skillinfo">(12)&nbsp;&nbsp;&nbsp;{{skill.cooldown}}</span> </div>
+            </div>
+
 
         </div>
 

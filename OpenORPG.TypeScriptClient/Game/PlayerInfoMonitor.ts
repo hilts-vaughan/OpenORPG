@@ -51,6 +51,8 @@
             // Listen to events about player information we might care about
             network.registerPacket(OpCode.SMSG_SKILL_CHANGE, (packet) => {
 
+                this.playerInfo.characterSkills = [];
+
                 // Init character info
                 for (var key in packet.skills) {
                     var skill = packet.skills[key];
@@ -58,11 +60,13 @@
                     ContentManager.getInstance().getContent(ContentType.Skill, (parseInt(key) + 1), (fSkill) => {
                         var newSkill: any = _.extend(fSkill, skill);
                         this.playerInfo.characterSkills.push(newSkill);
+
+                        // Add some logging
+                        console.log("Updating skills: ");
+                        console.log(this.playerInfo.characterSkills);
                     });
 
-                    // Add some logging
-                    console.log("Updating skills: ");
-                    console.log(this.playerInfo.characterSkills);
+             
                 }
 
 

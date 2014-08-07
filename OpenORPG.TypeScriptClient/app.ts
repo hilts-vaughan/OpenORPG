@@ -34,6 +34,17 @@ module OpenORPG {
         }])
 
 
+        .controller('SkillListController', ['$scope', function ($scope) {
+
+            $scope.getIcon = function(index : number) {
+                var skill = $scope.playerInfo.characterSkills[index];
+                var icon = GraphicsUtil.getIconCssFromId(skill.iconId);
+
+                return icon;
+            };
+
+        }])
+
         .controller('CharacterStatusController', ['$scope', function ($scope) {
 
             $scope.getVitalPercent = function (type: number) {
