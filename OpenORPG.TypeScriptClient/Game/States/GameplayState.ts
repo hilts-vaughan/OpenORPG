@@ -35,7 +35,7 @@ module OpenORPG {
 
             this.playerMonitor = new PlayerInfoMontior(this.playerInfo);
 
-
+       
 
             this.characterHud = new CharacterStatusWidget($("#canvasholder"), this.playerInfo);
             this.bottomBarWidget = new BottombarWidget($("#canvasholder"));
@@ -70,12 +70,12 @@ module OpenORPG {
         create() {
             // Start our physics systems
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
+            this.zone = new Zone(this.game);
 
             var network = NetworkManager.getInstance();
             network.registerPacket(OpCode.SMSG_ZONE_CHANGED, (packet: any) => {
 
-                if (this.zone != null)
-                    this.zone.clearZone();
+                this.zone.clearZone();
 
                 // Stop current music and all sound effects
                 this.game.sound.stopAll();
@@ -84,8 +84,8 @@ module OpenORPG {
                 this.currenTrack = this.game.add.audio("audio_music_town", 0.5, true, true);
                 this.currenTrack.play();
 
+                this.zone.initLocalZone(packet.zoneId);
 
-                this.zone = new Zone(this.game, packet.zoneId);
 
                 for (var entityKey in packet.entities) {
                     var entity = packet.entities[entityKey];

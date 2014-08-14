@@ -10,7 +10,7 @@
         // Internal lists for usage later
         private _toRemove: any = [];
         private _toAdd: any = [];
-        private _toUpdate: any  = [];
+        private _toUpdate: any = [];
 
         private entityLayer: Phaser.TilemapLayer;
         private entityGroup: Phaser.Group;
@@ -22,13 +22,25 @@
 
         public movementSystem: MovementSystem;
 
-        constructor(game: Phaser.Game, mapId: number) {
+        constructor(game: Phaser.Game) {
             this.game = game;
-            this._mapId = mapId;
+
 
             Zone.current = this;
 
+
+            this.setupNetworkHandlers();
+
+
+
+        }
+
+        public initLocalZone(mapId: number) {
+
             // Setup tilemap
+            var game = this.game;
+            this._mapId = mapId;
+
             this.tileMap = game.add.tilemap("map_" + mapId);
             this.tileMap.addTilesetImage("tilesheet");
 
@@ -53,16 +65,20 @@
 
             this.generateCollisionMap();
 
+            // Create systems
+            if (this.movementSystem == null) {
 
-            // Create our systems as we need them
-            this.movementSystem = new MovementSystem(this, null);
-            var combatSystem = new CombatSystem(this, null);
-            this.systems.push(this.movementSystem);
-            this.systems.push(combatSystem);
+                // Create our systems as we need them
+                this.movementSystem = new MovementSystem(this, null);
+                var combatSystem = new CombatSystem(this, null);
+                this.systems.push(this.movementSystem);
+                this.systems.push(combatSystem);
+            }
 
-            this.setupNetworkHandlers();
 
-
+            this.systems.forEach((system : GameSystem) => {
+                system.initZone();
+            });
 
         }
 
@@ -92,12 +108,14 @@
                 var entity = this.entities[entityKey];
                 entity.destroy();
 
-
                 entity.destroyNamePlate();
 
                 // remove from list
                 delete this.entities[entityKey];
             }
+
+            // Create
+            this.entities = new Array<Entity>();
 
             for (var bucketKey in this.bucket) {
                 var layer = this.bucket[bucketKey];
@@ -105,14 +123,11 @@
             }
 
             // Destroy our tilemap
-            this.tileMap.destroy();
-            this.entityGroup.destroy(true);
+            if (this.tileMap != null)
+                this.tileMap.destroy();
 
-
-            for (var systemKey in this.systems) {
-                var system = this.systems[systemKey];
-                system.destroy();
-            }
+            if (this.tileMap != null)
+                this.entityGroup.destroy(true);
 
 
 
@@ -201,7 +216,8 @@
             }
 
             // Re sort our entities
-            this.entityGroup.sort('y', Phaser.Group.SORT_ASCENDING);
+            if (this.entityGroup != null)
+                this.entityGroup.sort('y', Phaser.Group.SORT_ASCENDING);
 
         }
 
