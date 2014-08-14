@@ -168,6 +168,9 @@
                 var value = this._toRemove[toRemove];
                 var entity = this.entities[value];
 
+                Logger.debug("Entity was removed from the current zone");
+                Logger.debug(entity);
+
                 entity.destroy();
                 entity.destroyNamePlate();
                 delete this.entities[value];
@@ -177,6 +180,8 @@
                 var valueA = this._toAdd[toAdd];
 
                 var entityA = Zone.current.addNetworkEntityToZone(valueA);
+                Logger.debug("Entity was added to the current zone");
+                Logger.debug(entityA);
 
                 // Apply the fade effect
                 EffectFactory.fadeEntityIn(entityA);

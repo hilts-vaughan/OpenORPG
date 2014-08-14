@@ -262,9 +262,7 @@
 
             // Hook into our network events
             NetworkManager.getInstance().registerPacket(OpCode.SMSG_STORAGE_HERO_SEND, (packet) => {
-                // Do something about the inventory update
-                console.log("Inventory update recieved");
-                console.log(packet);
+                // Do something about the inventory update   
                 this.renderInventory(packet.itemStorage);
             });
 

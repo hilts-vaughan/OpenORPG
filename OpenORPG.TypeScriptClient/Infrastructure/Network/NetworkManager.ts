@@ -68,11 +68,12 @@
         private parseMessage(response: MessageEvent) {
             var packet: any = JSON.parse(response.data);
             if (this._packetCallbacks[packet.opCode] != undefined) {
-                _.forEach(this._packetCallbacks[packet.opCode], (value : Function) => {
+                _.forEach(this._packetCallbacks[packet.opCode], (value: Function) => {
                     value(packet);
                 });
             } else
-                console.log("Packet with opCode " + packet.OpCode + " was recieved but not handled.");
+                Logger.warn("A packet with the ID of " + packet.opCode + " received but not handled");
+                
         }
 
 

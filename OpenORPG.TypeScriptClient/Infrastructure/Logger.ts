@@ -5,35 +5,35 @@
 
      log.setLevel(window["log4javascript"]["Level"]["ALL"]);        
      var consoleLogger = new window["log4javascript"]["BrowserConsoleAppender"]();
-     var popUpLayout = new window["log4javascript"]["PatternLayout"]("%d{HH:mm:ss} %-5p - %m%n");
+     var popUpLayout = new window["log4javascript"]["PatternLayout"]("%d{HH:mm:ss} %-5p - %m");
      consoleLogger.setLayout(popUpLayout);
      consoleLogger.setThreshold(window["log4javascript"]["Level"]["TRACE"]);
      log.addAppender(consoleLogger);
 
      log.debug("Logging system has been booted up succesfully");
 
-     export function trace(...params) {
+     export function trace(params : any) {
          log.trace(params);
      }   
 
-     export function debug(...params) {
-         log.debug(params);
+     export function debug(params : any) {
+         log.debug(<Object> params);
      }
 
-     export function info(...params) {
-         log.info(params);
+     export function info(x : any) {
+         log.info(x);
      }
 
-     export function warn(...params) {
-         log.warn(params);
+     export function warn(x : any) {
+         log.warn(x);
      }
 
-     export function error(...params) {
-         log.error(params);
+     export function error(x : any) {
+         log.error(x);
      }
 
-     export function fatal(...params) {
-         log.fatal(params);
+     export function fatal(x : any) {
+         log.fatal(x);
      }
 
 

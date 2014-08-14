@@ -18,6 +18,7 @@
                 this.playerInfo.characterStats[packet.stat].maximumValue = packet.maximumValue;
 
                 this.updateAngularScope();
+
             });
 
             // Hook into our network events
@@ -27,6 +28,8 @@
                 this.playerInfo.inventory.push.apply(this.playerInfo.inventory, packet.itemStorage);
 
                 this.updateAngularScope();
+
+                Logger.info("PlayerInfoMonitor - The player inventory has been updated.");
             });
 
             network.registerPacket(OpCode.SMSG_QUEST_SEND_LIST, (packet) => {
@@ -62,8 +65,9 @@
                         this.playerInfo.characterSkills.push(newSkill);
 
                         // Add some logging
-                        console.log("Updating skills: ");
-                        console.log(this.playerInfo.characterSkills);
+                     
+                        Logger.info("PlayerInfoMonitor - Player skills have been updated.");
+                        Logger.info(this.playerInfo.characterSkills);
                     });
 
              

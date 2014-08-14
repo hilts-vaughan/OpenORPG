@@ -13,7 +13,7 @@
             // Connect
             var network = NetworkManager.getInstance();
 
-            console.log("Preparing boot state...");
+            Logger.info("Booting the game...");
 
             network.onConnectionCallback = () => {
                 this.game.state.add("mainmenu", new LoginMenuState());
