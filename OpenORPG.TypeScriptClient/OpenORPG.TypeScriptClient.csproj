@@ -480,6 +480,7 @@
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\jquery.mCustomScrollbar.js" />
+    <Content Include="Scripts\log4javascript.js" />
     <Content Include="web.config" />
     <TypeScriptCompile Include="Game\States\GameplayState.ts" />
     <TypeScriptCompile Include="Game\States\HeroSelectState.ts" />
@@ -500,6 +501,7 @@
     <TypeScriptCompile Include="Infrastructure\GraphicsUtil.ts" />
     <TypeScriptCompile Include="Infrastructure\Items\EquipmentSlot.ts" />
     <TypeScriptCompile Include="Infrastructure\Localization\LocaleManager.ts" />
+    <TypeScriptCompile Include="Infrastructure\Logger.ts" />
     <TypeScriptCompile Include="Infrastructure\Network\NetworkManager.ts" />
     <TypeScriptCompile Include="Infrastructure\Network\OpCodes.ts" />
     <TypeScriptCompile Include="Infrastructure\Network\Packet.ts" />

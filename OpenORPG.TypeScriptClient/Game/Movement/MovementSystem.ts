@@ -40,7 +40,7 @@
         constructor(zone: Zone, player: Entity) {
             super(zone);
 
-            // Setup our key presses
+            // Setup our key presses and do sonly once
             this.meleeKey = zone.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
             this.meleeKey.onDown.add(this.sendMeleeSkill, this);
 

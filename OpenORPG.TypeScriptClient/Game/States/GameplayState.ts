@@ -23,6 +23,8 @@ module OpenORPG {
         constructor() {
             super();
 
+            Logger.trace("GameplayState - Creating object and setting up handlers");
+
             var that = this;
 
             var $body = angular.element(document.body);   // 1
