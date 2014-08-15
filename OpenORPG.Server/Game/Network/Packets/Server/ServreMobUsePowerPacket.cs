@@ -14,12 +14,12 @@ namespace Server.Game.Network.Packets
 
     public struct ServerSkillUseResult : IPacket
     {
-        public ServerSkillUseResult(ulong userId, ulong targetId, long damage)
-            : this()
+        public ServerSkillUseResult(ulong userId, ulong targetId, long damage, long skillId) : this()
         {
             UserId = userId;
             TargetId = targetId;
             Damage = damage;
+            SkillId = skillId;
         }
 
         /// <summary>
@@ -38,6 +38,11 @@ namespace Server.Game.Network.Packets
         /// This is used for client display purposes only.
         /// </summary>
         public long Damage { get; set;  }
+
+        /// <summary>
+        /// The skill that was performed
+        /// </summary>
+        public long SkillId { get; set; }
 
         public OpCodes OpCode
         {

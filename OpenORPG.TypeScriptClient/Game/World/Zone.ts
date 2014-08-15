@@ -3,6 +3,8 @@
 
         public game: Phaser.Game;
         private _mapId: number;
+        private playerInfo : PlayerInfo;
+
         public tileMap: Phaser.Tilemap;
 
         private static current: Zone;
@@ -21,10 +23,11 @@
         public systems: Array<GameSystem> = new Array<GameSystem>();
 
         public movementSystem: MovementSystem;
+        public combatSystem : CombatSystem;
 
-        constructor(game: Phaser.Game) {
+        constructor(game: Phaser.Game, playerInfo : PlayerInfo) {
             this.game = game;
-
+            this.playerInfo = playerInfo;        
 
             Zone.current = this;
 
@@ -70,9 +73,9 @@
 
                 // Create our systems as we need them
                 this.movementSystem = new MovementSystem(this, null);
-                var combatSystem = new CombatSystem(this, null);
+                this.combatSystem = new CombatSystem(this, null, this.playerInfo);
                 this.systems.push(this.movementSystem);
-                this.systems.push(combatSystem);
+                this.systems.push(this.combatSystem);
             }
 
 

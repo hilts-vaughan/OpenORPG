@@ -12,7 +12,7 @@
 
         // A small interface to character stats
         public characterStats: Array<CharacterStat> = new Array<CharacterStat>();
-        public characterSkills: any[];
+        public characterSkills: Array<Skill> = new Array<Skill>();
 
         private characterStatsCallbacks: Array<Function> = new Array<Function>();
 
@@ -26,7 +26,7 @@
         constructor() {
 
             var that = this;
-            this.characterSkills = [];
+         
 
 
         }

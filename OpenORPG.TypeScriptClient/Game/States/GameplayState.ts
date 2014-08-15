@@ -72,7 +72,7 @@ module OpenORPG {
         create() {
             // Start our physics systems
             this.game.physics.startSystem(Phaser.Physics.ARCADE);
-            this.zone = new Zone(this.game);
+            this.zone = new Zone(this.game, this.playerInfo);
 
             var network = NetworkManager.getInstance();
             network.registerPacket(OpCode.SMSG_ZONE_CHANGED, (packet: any) => {
@@ -99,6 +99,7 @@ module OpenORPG {
                     if (worldEntity.id == packet.heroId) {
                         this.game.camera.follow(worldEntity);
                         this.zone.movementSystem.attachEntity(worldEntity);
+                        this.zone.combatSystem.attachTo(worldEntity);
 
                         // Init character info
                         for (var key in entity.characterStats.stats) {

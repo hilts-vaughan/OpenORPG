@@ -20,7 +20,7 @@
         }
 
         initZone() {
-            
+
         }
 
         render() {
@@ -36,8 +36,9 @@
         private interactKey: Phaser.Key;
 
         private player: Entity;
+        private playerInfo: PlayerInfo;
 
-        constructor(zone: Zone, player: Entity) {
+        constructor(zone: Zone, player: Entity, playerInfo: PlayerInfo) {
             super(zone);
 
             // Setup our key presses and do sonly once
@@ -47,13 +48,31 @@
             this.interactKey = zone.game.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
             this.interactKey.onDown.add(this.sendInteraction, this);
 
+            this.playerInfo = playerInfo;
 
             // Setup our network events
             var network = NetworkManager.getInstance();
             network.registerPacket(OpCode.SMSG_SKILL_USE_RESULT, (packet: any) => {
                 // Play animation on the client
                 var user = this.parent.entities[packet.userId];
-                user.playSkillAnimation();
+
+                if (user != null) {
+                    user.playSkillAnimation();
+
+                    // reset the skill cooldown if required
+                    if (user.id == this.player.id) {
+                        var skillId = packet.skillId;
+                        var skill = <Skill> _.find(this.playerInfo.characterSkills, (s: Skill) => {
+                            return s.id == skillId;
+                        });
+
+                        if (skill)
+                            skill.resetCooldown();
+                        else
+                            Logger.error("Attempted to reset cooldown for skill " + skillId + " but the player did not possess the skill.");
+
+                    }
+                }
 
                 // Do stuff to the victim
                 var victim = this.parent.entities[packet.targetId];
@@ -67,6 +86,8 @@
                 // Play hit effect
                 var effect = this.parent.game.add.audio("audio_effect_hit", 0.3, false, true);
                 effect.play();
+
+
 
             });
 
@@ -97,7 +118,9 @@
 
         update() {
 
-            // Poll for our input here
+            this.playerInfo.characterSkills.forEach((skill: Skill) => {
+                skill.cooldown = Math.max(0, skill.cooldown - this.parent.game.time.elapsed / 1000);
+            });
 
         }
 
@@ -133,7 +156,7 @@
 
             this.timerToken = setInterval(this.generateMovementTicket, MovementSystem.MOVEMENT_TICKET_FREQUENCY);
 
-     
+
         }
 
         initZone() {
@@ -141,7 +164,7 @@
             this.topZoneTrigger = new ZoneTrigger(this.parent.game, 0, 0, this.parent.tileMap.widthInPixels, this.parent.tileMap.tileHeight, this.topCallback, this.parent);
             this.bottomZoneTrigger = new ZoneTrigger(this.parent.game, 0, this.parent.tileMap.heightInPixels - 32, this.parent.tileMap.widthInPixels, this.parent.tileMap.tileHeight, this.bottomCallback, this.parent);
             this.leftZoneTrigger = new ZoneTrigger(this.parent.game, 0, 0, this.parent.tileMap.tileWidth, this.parent.tileMap.heightInPixels, this.leftCallback, this.parent);
-            this.rightZoneTrigger = new ZoneTrigger(this.parent.game, this.parent.tileMap.widthInPixels - 32, 0, this.parent.tileMap.tileWidth, this.parent.tileMap.heightInPixels, this.rightCallback, this.parent);            
+            this.rightZoneTrigger = new ZoneTrigger(this.parent.game, this.parent.tileMap.widthInPixels - 32, 0, this.parent.tileMap.tileWidth, this.parent.tileMap.heightInPixels, this.rightCallback, this.parent);
         }
 
         render() {
@@ -207,7 +230,7 @@
                     velocity.add(0, 120);
                 }
 
-                if(velocity.isZero()) {
+                if (velocity.isZero()) {
                     if (!this.player.body.velocity.isZero())
                         this.generateMovementTicket(true);
                     this.player.body.velocity.setTo(0, 0);

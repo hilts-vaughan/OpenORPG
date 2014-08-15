@@ -100,7 +100,7 @@ namespace Server.Game.Combat
             if (result.TargetId != -1)
             {
                 var packet = new ServerSkillUseResult(action.ExecutingCharacter.Id, (ulong)result.TargetId,
-                    result.Damage);
+                    result.Damage, action.Skill.Id);
                 Zone.SendToEntitiesInRange(packet, action.ExecutingCharacter);
             }
         }

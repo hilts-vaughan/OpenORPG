@@ -10,6 +10,10 @@
             var that = this;
             var network = NetworkManager.getInstance();
 
+            setInterval(() => {
+                this.updateAngularScope();
+            }, 1000);
+
             // Register for stat changes
             network.registerPacket(OpCode.SMSG_STAT_CHANGE, (packet: any) => {
 
@@ -61,8 +65,8 @@
                     var skill = packet.skills[key];
 
                     ContentManager.getInstance().getContent(ContentType.Skill, (parseInt(key) + 1), (fSkill) => {
-                        var newSkill: any = _.extend(skill, fSkill);
-                        this.playerInfo.characterSkills.push(newSkill);
+                        fSkill.cooldown = skill.cooldown;                        
+                        this.playerInfo.characterSkills.push(new Skill(fSkill));
 
                         // Add some logging
                      
