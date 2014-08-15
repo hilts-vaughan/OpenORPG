@@ -13,5 +13,7 @@ namespace Server.Infrastructure.Logging
         void Critical(string message, params Object[] objects);
         void Info(string message, params Object[] objects);
         void Debug(string message, params Object[] objects);
+
+        void Trace(string trace, params Object[] objects);
     }
 }

@@ -49,7 +49,7 @@ namespace Server
         /// </para>
         public void Send<T>(T packet) where T : IPacket
         {
-            Logger.Instance.Debug("GameClient.Send({0})", packet.GetType().Name);
+            Logger.Instance.Trace("GameClient.Send [{0}]({1})", Connection.ToString(), packet.GetType().Name);
             Connection.Send(packet);
         }
     }

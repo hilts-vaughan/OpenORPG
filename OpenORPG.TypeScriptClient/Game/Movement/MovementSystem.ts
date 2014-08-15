@@ -79,19 +79,24 @@
 
                 // If this packet is delayed, we might get a null reference
                 if (victim != null) {
-                    var victimDamageText = new DamageText(victim, packet.damage);
-                    EffectFactory.pulseDamage(victim);
+                    this.applyToVictim(victim, packet.damage);
+                } else {
+                    Logger.warn("CombatSystem - Attempted to apply skill sequence to victim but no longer existed");
                 }
-
-                // Play hit effect
-                var effect = this.parent.game.add.audio("audio_effect_hit", 0.3, false, true);
-                effect.play();
-
 
 
             });
 
 
+        }
+
+        private applyToVictim(victim: Entity, damage: number) {
+            var victimDamageText = new DamageText(victim, damage);
+            EffectFactory.pulseDamage(victim);
+
+            // Play hit effect
+            var effect = this.parent.game.add.audio("audio_effect_hit", 0.3, false, true);
+            effect.play();
         }
 
         public attachTo(player: Entity) {
@@ -176,9 +181,7 @@
         private topCallback() {
             // We make sure to force a movement update before all of these
             MovementSystem.current.generateMovementTicket(true);
-
-            var network = NetworkManager.getInstance();
-            network.sendPacket(PacketFactory.createZoneRequestChange(Direction.North));
+            this.sendZoneChangeRequest(Direction.North);
         }
 
         private bottomCallback() {
@@ -186,25 +189,25 @@
             MovementSystem.current.generateMovementTicket(true);
 
             var network = NetworkManager.getInstance();
-            network.sendPacket(PacketFactory.createZoneRequestChange(Direction.South));
+            this.sendZoneChangeRequest(Direction.South);
         }
 
         private rightCallback() {
             // We make sure to force a movement update before all of these
             MovementSystem.current.generateMovementTicket(true);
-
-            var network = NetworkManager.getInstance();
-            network.sendPacket(PacketFactory.createZoneRequestChange(Direction.East));
+            this.sendZoneChangeRequest(Direction.East);
         }
 
         private leftCallback() {
             // We make sure to force a movement update before all of these
             MovementSystem.current.generateMovementTicket(true);
-
-            var network = NetworkManager.getInstance();
-            network.sendPacket(PacketFactory.createZoneRequestChange(Direction.West));
+            this.sendZoneChangeRequest(Direction.West);
         }
 
+       private sendZoneChangeRequest(direction: Direction) {
+           var network = NetworkManager.getInstance();
+           network.sendPacket(PacketFactory.createZoneRequestChange(direction));
+       }
 
         update() {
             // If we're not viewing anything, quit
@@ -281,17 +284,22 @@
             var position: any = packet.position;
             var entity: Entity = this.parent.entities[id];
 
-            // Set a direction
-            entity.direction = packet.direction;
+            if (entity) {
 
-            var properties =
+                // Set a direction
+                entity.direction = packet.direction;
+
+                var properties =
                 {
                     x: position.x,
                     y: position.y
                 }
 
-            // Start the tween immediately
-            this.parent.game.add.tween(entity).to(properties, MovementSystem.MOVEMENT_TICKET_FREQUENCY + 50, Phaser.Easing.Linear.None, true);
+                // Start the tween immediately
+                this.parent.game.add.tween(entity).to(properties, MovementSystem.MOVEMENT_TICKET_FREQUENCY + 50, Phaser.Easing.Linear.None, true);
+            } else {
+                Logger.warn("MovementSystem - Attempted to move and tween a non-existant entity. It probably moved.");
+            }
 
 
         }

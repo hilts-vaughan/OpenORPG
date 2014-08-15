@@ -47,8 +47,13 @@ namespace Server.Infrastructure.Logging
 
         public void Debug(string message, params object[] objects)
         {
-            foreach (ILogger logger in _loggers)
+            foreach (var logger in _loggers)
                 logger.Debug(message, objects);
+        }
+
+        public void Trace(string message, params object[] objects)
+        {
+            _loggers.ForEach(x => x.Trace(message, objects));
         }
 
         public void AddLogger(ILogger logger)

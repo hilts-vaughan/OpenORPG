@@ -6,6 +6,7 @@
         Info,
         Warn,
         Error,
-        Critical
+        Critical,
+        Trace
     }
 }

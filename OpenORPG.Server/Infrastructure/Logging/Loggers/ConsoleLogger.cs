@@ -17,7 +17,8 @@ namespace Server.Infrastructure.Logging.Loggers
                 {LogLevel.Warn, ConsoleColor.Yellow},
                 {LogLevel.Debug, ConsoleColor.White},
                 {LogLevel.Error, ConsoleColor.Red},
-                {LogLevel.Critical, ConsoleColor.Red}
+                {LogLevel.Critical, ConsoleColor.Red}, 
+                {LogLevel.Trace, ConsoleColor.Cyan}
             };
 
         public void Warn(string message, params Object[] objects)
@@ -38,6 +39,11 @@ namespace Server.Infrastructure.Logging.Loggers
         public void Debug(string message, params Object[] objects)
         {
             LogAction(LogLevel.Debug, message, objects);
+        }
+
+        public void Trace(string message, params object[] objects)
+        {
+            LogAction(LogLevel.Trace, message, objects);
         }
 
         public void Info(string message, params Object[] objects)   

@@ -1,5 +1,9 @@
 ﻿module OpenORPG {
 
+    /*
+     * A representation of a skill on the client side. Contains properties that the client might need to render and view
+     * information about.
+     */
     export class Skill {
 
         get id(): number {
@@ -18,7 +22,21 @@
             return this.template.iconId;
         }
 
+        get description(): string {
+            return this.template.description;
+        }
+
+
+        get type(): string {
+            return this.template.type;
+        }
+
+        get castTime(): number {
+            return this.template.castTime;
+        }
+
         public cooldown: number;
+
 
 
         /*
@@ -32,7 +50,9 @@
         }
 
         /*
-         * Resets the given cooldown timer to the alloted value.
+         * Resets the given cooldown timer to the alloted value on the internal representation.
+         * This should only be called once the client has acknowledge a server side order. Otherwise,
+         * the server will reject the skill request.
          */
         resetCooldown() {
             this.cooldown = this.cooldownTime;
