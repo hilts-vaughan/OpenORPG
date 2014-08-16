@@ -26,6 +26,9 @@
             alpha: 0.7
         };
 
+        entity.tint = 0;
+        entity.alpha = 1;
+
         // Pulse the damage output
         return entity.game.add.tween(entity).to(properties, 250, Phaser.Easing.Linear.None, true, 0, 1 , true);
     }
