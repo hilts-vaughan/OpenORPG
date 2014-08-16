@@ -64,13 +64,12 @@ namespace Server.Game.Zones
 
         private void PlayerOnLevelChanged(int newValue, int oldValue, Player player)
         {
-            var packet = new ServerSendGameMessagePacket(GameMessage.LevelUp, new List<string>()
+            // Send a notification to everyone in the zone
+            player.Zone.ChatChannel.SendMessage(GameMessage.LevelUp, new List<string>()
             {
                 (player.Name).ToString(),
                 player.Level.ToString()
             });
-
-            player.Client.Send(packet);
         }
 
         private void PlayerOnExperienceChanged(int newValue, int oldValue, Player player)
