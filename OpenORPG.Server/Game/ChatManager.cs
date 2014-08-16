@@ -29,9 +29,16 @@ namespace Server.Game
             }
         }
 
-        public void SendMessage(string message)
+
+        /// <summary>
+        /// Sends a system message to everyone in the current zone.
+        /// </summary>
+        /// <param name="gameMessage"></param>
+        /// <param name="args"></param>
+        public void SendMessage(GameMessage gameMessage, List<string> args)
         {
-         
+            var packet = new ServerSendGameMessagePacket(gameMessage, args);
+            Clients.ForEach(x => x.Send(packet));
         }
 
         public void Join(GameClient client)

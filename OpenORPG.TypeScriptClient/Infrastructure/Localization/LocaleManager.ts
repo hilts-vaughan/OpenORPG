@@ -13,8 +13,12 @@
             this.setLocale(locale);            
         }
 
-        public getString(messageType: string) {
-            return this.currentLocaleData[messageType];
+        public getString(messageType: string, args : Array<string> ) {
+            var str = this.currentLocaleData[messageType];
+
+            for (var i = 0; i < args.length; i++)
+                str = str.replace("{" + i + "}", args[i]);
+            return str;
         }
 
         public setLocale(locale : string) {

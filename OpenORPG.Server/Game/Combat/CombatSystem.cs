@@ -141,6 +141,11 @@ namespace Server.Game.Combat
 
             if (victim is Monster)
             {
+                victim.Zone.ChatChannel.SendMessage(GameMessage.MonsterDies, new List<string>()
+                {
+                    victim.Name
+                });
+
                 Zone.RemoveEntity(victim);
             }
 

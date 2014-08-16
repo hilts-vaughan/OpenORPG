@@ -19,7 +19,9 @@ namespace Server.Game
         PlayerJoinedGame,
         PlayerLeftGame,
         EquipmentChanged,
-        NewQuest
+        NewQuest,
+        MonsterDies,
+        GainExperience
 
 
     }

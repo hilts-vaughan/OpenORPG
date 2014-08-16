@@ -6,6 +6,8 @@
 
     "Hitpoints": "HEALTH",
     "Manapoints": "MANA",
-    "NewQuest": "A new quest has been added to your quest log."
+    "NewQuest": "A new quest has been added to your quest log.",
+    "MonsterDies": "The {0} falls to the ground.",
+    "GainExperience": "You gain {0} XP points."
 
 }

@@ -60,7 +60,7 @@
                 var messageType = packet.messageType;
                 var args = packet.arguments;
 
-                var message: string = LocaleManager.getInstance().getString(messageType);
+                var message: string = LocaleManager.getInstance().getString(messageType, args);
                 this.addMessage(message, "", ChannelType.System);
             });
 
