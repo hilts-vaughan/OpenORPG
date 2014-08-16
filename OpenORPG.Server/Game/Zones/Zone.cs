@@ -183,7 +183,7 @@ namespace Server.Game.Zones
             GameSystems.Add(new CombatSystem(this));
             GameSystems.Add(new AiSystem(this));
             GameSystems.Add(new ZoneEntityMonitorSystem(this));
-
+            GameSystems.Add(new LevelService(this));
         }
 
 

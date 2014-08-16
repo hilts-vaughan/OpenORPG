@@ -59,16 +59,32 @@ namespace Server.Game.Zones
             player.BackpackChanged += PlayerOnBackpackChanged;
             player.AcceptedQuest += PlayerOnAcceptedQuest;
             player.ExperienceChanged += PlayerOnExperienceChanged;
+            player.LevelChanged += PlayerOnLevelChanged;
+        }
+
+        private void PlayerOnLevelChanged(int newValue, int oldValue, Player player)
+        {
+            var packet = new ServerSendGameMessagePacket(GameMessage.LevelUp, new List<string>()
+            {
+                (player.Name).ToString(),
+                player.Level.ToString()
+            });
+
+            player.Client.Send(packet);
         }
 
         private void PlayerOnExperienceChanged(int newValue, int oldValue, Player player)
         {
-            var packet = new ServerSendGameMessagePacket(GameMessage.GainExperience, new List<string>()
+            if (newValue > oldValue)
             {
-                (newValue - oldValue).ToString()
-            });
 
-            player.Client.Send(packet);
+                var packet = new ServerSendGameMessagePacket(GameMessage.GainExperience, new List<string>()
+                {
+                    (newValue - oldValue).ToString()
+                });
+
+                player.Client.Send(packet);
+            }
         }
 
         private void PlayerOnAcceptedQuest(UserQuestInfo userQuestInfo, Player player)
@@ -123,6 +139,11 @@ namespace Server.Game.Zones
         {
             player.EquipmentChanged -= PlayerOnEquipmentChanged;
             player.CharacterStats.CurrentValueChanged -= CharacterStatsOnCurrentValueChanged;
+            player.LearnedSkill -= PlayerOnLearnedSkill;
+            player.BackpackChanged -= PlayerOnBackpackChanged;
+            player.AcceptedQuest -= PlayerOnAcceptedQuest;
+            player.ExperienceChanged -= PlayerOnExperienceChanged;
+            player.LevelChanged -= PlayerOnLevelChanged;
         }
 
         private void PlayerOnEquipmentChanged(Equipment equipment, Player player, EquipmentSlot slot)

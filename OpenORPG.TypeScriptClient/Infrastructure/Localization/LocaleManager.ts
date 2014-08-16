@@ -17,7 +17,7 @@
             var str = this.currentLocaleData[messageType];
 
             for (var i = 0; i < args.length; i++)
-                str = str.replace("{" + i + "}", args[i]);
+                str = str.split("{" + i + "}").join(args[i]);
             return str;
         }
 

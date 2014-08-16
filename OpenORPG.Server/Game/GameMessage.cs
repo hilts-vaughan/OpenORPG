@@ -21,7 +21,8 @@ namespace Server.Game
         EquipmentChanged,
         NewQuest,
         MonsterDies,
-        GainExperience
+        GainExperience,
+        LevelUp
 
 
     }

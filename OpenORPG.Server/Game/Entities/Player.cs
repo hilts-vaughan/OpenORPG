@@ -206,6 +206,12 @@ namespace Server.Game.Entities
 
         public List<UserQuestInfo> QuestInfo { get; set; }
 
+        public void PerformLevelUp()
+        {
+            Level++;
+            Experience = 0;
+        }
+
         public void AddQuest(UserQuestInfo questInfo)
         {
             QuestInfo.Add(questInfo);
