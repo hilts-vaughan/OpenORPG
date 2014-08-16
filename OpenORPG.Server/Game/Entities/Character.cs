@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using Newtonsoft.Json;
 using OpenORPG.Database.Enums;
 using Server.Game.AI;
 using Server.Game.Combat;
+using Server.Game.Combat.Effects;
 using Server.Game.Items.Equipment;
 using Server.Game.Network.Packets.Server;
 using Server.Infrastructure.World;
@@ -62,6 +64,7 @@ namespace Server.Game.Entities
 
 
             Skills = new List<Skill>();
+            ActiveStatusEffects = new List<StatusEffect>();
         }
 
         private void OnHitpointsChanged(long oldValue, long newValue, StatTypes statType)
@@ -75,6 +78,8 @@ namespace Server.Game.Entities
         /// An array of stats for this character
         /// </summary>
         public CharacterStatCollection CharacterStats { get; set; }
+
+        public ObservableCollection<StatusEffect> ActiveStatusEffects { get; private set; }
 
 
         [JsonIgnore]
