@@ -147,15 +147,22 @@ namespace Server.Game.Combat
                 });
 
                 Zone.RemoveEntity(victim);
-                
+
 
                 // Aware EXP if needed
                 var player = aggressor as Player;
                 if (player != null)
-                    player.Experience += 250;
+                    player.Experience += GetExperienceRelative(player, victim);
 
             }
 
+        }
+
+        private int GetExperienceRelative(Character killer, Character victim)
+        {
+            var levelDifference = killer.Level - victim.Level;
+            var expPenalty = levelDifference * 25;
+            return Math.Max(200 - expPenalty, 0);
         }
 
         private void OnCharacterRemoved(Character character)
