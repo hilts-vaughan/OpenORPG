@@ -58,7 +58,7 @@ namespace Server.Game.Combat.Actions
                 case SkillType.None:
                 case SkillType.Enhancing:
                 case SkillType.Elemental:
-                    var damagePayload = new DamagePayload(ExecutingCharacter);
+                    var damagePayload = new DamagePayload(ExecutingCharacter, 5);
                     target.ApplyDamage(damagePayload);
                     return new CombatActionResult((long)target.Id, damagePayload.DamageInflicted);   
             }

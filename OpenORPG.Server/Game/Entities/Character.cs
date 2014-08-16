@@ -58,9 +58,16 @@ namespace Server.Game.Entities
             var numberOfEquipmentSlots = Enum.GetNames(typeof(EquipmentSlot)).Length;
             Equipment = new Equipment[numberOfEquipmentSlots];
 
+            CharacterStats[StatTypes.Hitpoints].CurrentValueChanged += OnHitpointsChanged;
 
 
             Skills = new List<Skill>();
+        }
+
+        private void OnHitpointsChanged(long oldValue, long newValue, StatTypes statType)
+        {
+            if (newValue <= 0)
+                OnKilled(_lastCharacterToHitMe, this);
         }
 
 
@@ -124,12 +131,13 @@ namespace Server.Game.Entities
             get { return CharacterStats[(int)StatTypes.Hitpoints].CurrentValue > 0; }
         }
 
+        private Character _lastCharacterToHitMe;
+
         public void ApplyDamage(DamagePayload damagePayload)
         {
 
-            // If we're already dead, don't bother
-            if (!IsAlive)
-                return;
+            _lastCharacterToHitMe = damagePayload.Aggressor;
+      
 
             // Applies the actual damage to this character
             damagePayload.Apply(this);
@@ -138,8 +146,8 @@ namespace Server.Game.Entities
             if (CharacterStats[(int)StatTypes.Hitpoints].CurrentValue <= 0)
             {
                 CharacterStats[(int)StatTypes.Hitpoints].CurrentValue = 0;
-                OnKilled(damagePayload.Aggressor, this);
             }
+
 
         }
 

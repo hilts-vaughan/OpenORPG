@@ -38,6 +38,7 @@ namespace OpenORPG.ContentProcessor.Extractors
                     persistable.description = skill.Description;
                     persistable.damage = skill.Damage;
                     persistable.type = skill.SkillType;
+                    persistable.iconId = skill.IconId;
 
                     persister.Persist(persistable, "\\skills\\{0}.json".FormatWith(skill.Id));
 

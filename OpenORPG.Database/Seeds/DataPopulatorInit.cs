@@ -141,8 +141,10 @@ namespace Server.Game.Database.Seeds
             var attack = new SkillTemplate(SkillType.None, SkillTargetType.Enemy, SkillActivationType.Immediate, 0, 1, "Slay mighty foes!", 1, "Attack");
             context.SkillTemplates.Add(attack);
 
-            var banish = new SkillTemplate(SkillType.Elemental, SkillTargetType.Enemy, SkillActivationType.Immediate, 0,
-                long.MaxValue, "Eradicates a foe.", 2, "Banish");
+            var banish = new SkillTemplate(SkillType.Elemental, SkillTargetType.Enemy, SkillActivationType.Target, 0,
+                99999, "Eradicates a foe.", 2, "Banish");
+            banish.IconId = 112;
+            banish.CooldownTime = 10;
             context.SkillTemplates.Add(banish);
         }
 

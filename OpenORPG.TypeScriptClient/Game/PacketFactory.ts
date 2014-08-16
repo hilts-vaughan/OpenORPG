@@ -99,5 +99,12 @@
         }
     }
 
+    export function createTargetNotification(targetId: number) {
+        return {
+            opCode: OpenORPG.OpCode.CMSG_ENTITY_TARGET,
+            entityId: targetId
+        }
+    }
+
 
 } 

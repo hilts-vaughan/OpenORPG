@@ -62,6 +62,10 @@ namespace Server.Game.Quests
 
         private void CharacterOnKilled(Character aggressor, Character victim)
         {
+            // if we don't know who killed this monster, it's not important
+            if (aggressor == null)
+                return;
+
             var killerId = aggressor.Id;
             var monster = victim as Monster;
             var player = aggressor as Player;

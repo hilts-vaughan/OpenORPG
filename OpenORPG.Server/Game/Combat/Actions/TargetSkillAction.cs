@@ -32,7 +32,9 @@ namespace Server.Game.Combat.Actions
                 var damage = CombatUtility.ComputeDamage(ExecutingCharacter, target, Skill);
 
                 //TODO: Come up with a better solution than this; this is a bit ugly
-                target.CharacterStats[StatTypes.Hitpoints].CurrentValue -= damage;
+                target.ApplyDamage(new DamagePayload(ExecutingCharacter, damage));
+
+                return new CombatActionResult((long) target.Id, damage);
             }
 
             // -1 means status failed

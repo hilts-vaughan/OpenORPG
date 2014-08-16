@@ -131,6 +131,9 @@
 
             this.targetEntity = entity;
 
+            var packet = PacketFactory.createTargetNotification(this.targetEntity.id);
+            NetworkManager.getInstance().sendPacket(packet);
+
         }
 
         private applyToVictim(victim: Entity, damage: number) {

@@ -40,6 +40,13 @@ module OpenORPG {
                     return icon;
                 };
 
+                $scope.useSkill = (skill: Skill) => {
+                    if (skill.cooldown <= 0 ) {
+                        var packet = PacketFactory.createSkillUsePacket(skill.id, -1);
+                        NetworkManager.getInstance().sendPacket(packet);
+                    }
+                };
+
             }
         ])
         .controller('CharacterStatusController', [
@@ -76,22 +83,22 @@ module OpenORPG {
 
 
         .controller('CharacterWindowController', [
-        '$scope', function ($scope) {
+            '$scope', function ($scope) {
 
-            // We can do some cool stuff here if we want to, but otherwise we're ok 
+                // We can do some cool stuff here if we want to, but otherwise we're ok 
 
-            $scope.getStatNameFromIndex = index => {
+                $scope.getStatNameFromIndex = index => {
 
-                var names: string[] = [];
-                for (var n in StatTypes) {
-                    if (typeof StatTypes[n] === 'number') names.push(n);
-                }
+                    var names: string[] = [];
+                    for (var n in StatTypes) {
+                        if (typeof StatTypes[n] === 'number') names.push(n);
+                    }
 
-                return names[index];
-            };
+                    return names[index];
+                };
 
-        }
-    ]);
+            }
+        ]);
 
 
 

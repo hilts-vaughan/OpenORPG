@@ -151,6 +151,7 @@
     <Compile Include="Game\Network\Packets\Client\ClientQuestRequestCompletionPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientRequestInteractionPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientStorageMoveSlot.cs" />
+    <Compile Include="Game\Network\Packets\Client\ClientTargetEntityPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientUsePowerPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientZoneChangeRequestPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerCharacterStatChange.cs" />

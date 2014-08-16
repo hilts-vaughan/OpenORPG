@@ -26,7 +26,7 @@
             alpha: 0.7
         };
 
-        entity.tint = 0;
+        entity.tint = 0xFFFFFF;
         entity.alpha = 1;
 
         // Pulse the damage output

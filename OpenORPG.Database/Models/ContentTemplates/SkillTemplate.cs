@@ -47,6 +47,10 @@ namespace Server.Game.Database.Models.ContentTemplates
 
         public SkillCategory SkillCategory { get; set; }
 
+        public ElementalType ElementalType { get; set; }        
+
+        
+
         /// <summary>
         /// The amount of time (seconds) it takes to perform this skill
         /// 

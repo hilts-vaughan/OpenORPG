@@ -1,1 +1,1 @@
-{"id":2,"name":"Banish","castTime":0,"cooldownTime":1,"description":"Eradicates a foe.","damage":9223372036854775807,"type":"Damage"}
+{"id":2,"name":"Banish","castTime":0,"cooldownTime":10,"description":"Eradicates a foe.","damage":99999,"type":"Elemental","iconId":112}

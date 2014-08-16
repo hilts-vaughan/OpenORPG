@@ -17,62 +17,20 @@ namespace Server.Game.Combat
     {
         public long DamageInflicted { get; set; }
 
-        public DamagePayload(Character aggressor)
+        public DamagePayload(Character aggressor, int damage)
             : base(aggressor)
         {
-
+            DamageInflicted = damage;
         }
 
         public override void Apply(Character victim)
         {
-            // Get the final stats from both our targets
-            var aggressorFinalStats = GetCharacterStats(Aggressor);
-            var victimFinalStats = GetCharacterStats(victim);
-
-            // Compute the damage using a basic formula for now (STR * 2) - VIT
-            var damageToDeal = (aggressorFinalStats[(int)StatTypes.Strength].CurrentValue * 2 - victimFinalStats[(int)StatTypes.Vitality].CurrentValue);
-
-            victim.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue -= damageToDeal;
-
-            DamageInflicted = damageToDeal;
+            victim.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue = victim.CharacterStats[StatTypes.Hitpoints].CurrentValue - DamageInflicted;
         }
 
 
 
-        private CharacterStatCollection GetCharacterStats(Character character)
-        {
-            var statsWithEquipmentMods = new CharacterStatCollection();
-
-            // Include character stats
-            statsWithEquipmentMods = CombineStats(statsWithEquipmentMods, character.CharacterStats);
-
-            // Get inclusive equipment stats
-            foreach (var equip in character.Equipment)
-            {
-                if (equip != null)
-                    statsWithEquipmentMods = CombineStats(equip.GetEquipmentModifierStats(), statsWithEquipmentMods);
-            }
-
-            return statsWithEquipmentMods;
-        }
-
-
-
-        private CharacterStatCollection CombineStats(CharacterStatCollection first, CharacterStatCollection second)
-        {
-            var stats = new CharacterStatCollection();
-
-            for (int index = 0; index < first.Length; index++)
-            {
-                var stat = first[index];
-                var stat2 = second[index];
-
-                stats[index].CurrentValue = stat.CurrentValue + stat2.CurrentValue;
-                stats[index].MaximumValue = stat.MaximumValue + stat2.MaximumValue;
-            }
-
-            return stats;
-        }
+  
 
 
     }

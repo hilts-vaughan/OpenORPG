@@ -43,10 +43,11 @@ namespace Server.Game.Combat
             {
                 if (value != _maximumValue)
                 {
+                    _maximumValue = value;
                     OnMaximumValueChanged(_maximumValue, value, StatType);
                 }
 
-                _maximumValue = value;
+            
             }
         }
 
@@ -65,10 +66,11 @@ namespace Server.Game.Combat
 
                 if (value != _currentValue)
                 {
+                    _currentValue = value;
                     OnCurrentValueChanged(_currentValue, value, StatType);
                 }
 
-                _currentValue = value;
+              
             }
         }
 

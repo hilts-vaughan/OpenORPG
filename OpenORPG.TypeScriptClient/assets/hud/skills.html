@@ -13,7 +13,7 @@
         <div class="contentwrapper">
 
 
-            <div class="quest-list">
+            <div class="quest-list unselectable">
 
                 <h3>All Skills</h3>
 
@@ -27,7 +27,7 @@
             </div>
 
             <div class="quest-content">
-                <div class="skillrow" ng-repeat="skill in playerInfo.characterSkills"> <span class="skillicon" ng-style="{ background: getIcon($index) }"></span> <span class="skillname"> {{skill.name}} </span> <span class="skillinfo">(12)&nbsp;&nbsp;&nbsp;{{skill.cooldown | skillFormatter}}</span> </div>
+                <div class="skillrow unselectable" ng-dblclick="useSkill(skill)" ng-repeat="skill in playerInfo.characterSkills"> <span class="skillicon" ng-style="{ background: getIcon($index) }"></span> <span class="skillname"> {{skill.name}} </span> <span class="skillinfo">(12)&nbsp;&nbsp;&nbsp;{{skill.cooldown | skillFormatter}}</span> </div>
             </div>
 
 

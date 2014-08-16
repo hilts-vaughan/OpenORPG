@@ -504,6 +504,13 @@ canvas {
 
 }
 
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+
     #skill-window .skillrow .skillinfo {
         position: absolute;
         right: 0;
