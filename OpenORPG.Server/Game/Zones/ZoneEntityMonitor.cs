@@ -60,6 +60,7 @@ namespace Server.Game.Zones
             player.AcceptedQuest += PlayerOnAcceptedQuest;
             player.ExperienceChanged += PlayerOnExperienceChanged;
             player.LevelChanged += PlayerOnLevelChanged;
+            player.ActiveStatusEffects
         }
 
         private void PlayerOnLevelChanged(int newValue, int oldValue, Player player)

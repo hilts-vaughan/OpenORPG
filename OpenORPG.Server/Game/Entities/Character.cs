@@ -79,7 +79,7 @@ namespace Server.Game.Entities
         /// </summary>
         public CharacterStatCollection CharacterStats { get; set; }
 
-        public ObservableCollection<StatusEffect> ActiveStatusEffects { get; private set; }
+        public StatusEffectCollection ActiveStatusEffects { get; private set; }
 
 
         [JsonIgnore]

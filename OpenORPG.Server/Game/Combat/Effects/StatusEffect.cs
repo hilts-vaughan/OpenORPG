@@ -28,6 +28,19 @@ namespace Server.Game.Combat.Effects
             Duration = duration;
         }
 
+        /// <summary>
+        /// This method is called when the effect is initially applied to a <see cref="Character"/>.
+        /// </summary>
+        /// <param name="player"></param>
+        public void OnApplyEffect(Character character)
+        {
+            
+        }
+
+        public void OnRemoveEffect(Character character)
+        {
+            
+        }
 
 
     }
