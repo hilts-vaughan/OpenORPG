@@ -85,6 +85,8 @@
 
         }
 
+    
+
         public addNetworkEntityToZone(entity: any): Entity {
             var worldEntity = new Entity(this.game, 0, 0);
             worldEntity.mergeWith(entity);
@@ -100,6 +102,9 @@
             }
 
             this._toAdd.push(worldEntity.id);
+
+            // Allow adding hooks where needed
+            this.systems.forEach((system: GameSystem) => system.onEntityAdded(worldEntity));
 
             return worldEntity;
         }
@@ -174,6 +179,9 @@
                 Logger.debug("Entity was removed from the current zone");
                 Logger.debug(entity);
 
+                // Allow any unhooking that needs to be done first
+                this.systems.forEach((system: GameSystem) => system.onEntityRemoved(entity));
+
                 entity.destroy();
                 entity.destroyNamePlate();
                 delete this.entities[value];
@@ -185,6 +193,8 @@
                 var entityA = Zone.current.addNetworkEntityToZone(valueA);
                 Logger.debug("Entity was added to the current zone");
                 Logger.debug(entityA);
+
+
 
                 // Apply the fade effect
                 EffectFactory.fadeEntityIn(entityA);

@@ -2,6 +2,8 @@
 
     export class Entity extends Phaser.Sprite {
 
+        private targetIcon: Phaser.Sprite;
+
         // These properties are what are strongly typed
         public name: string;
         public id: number;
@@ -25,10 +27,23 @@
             this.game.physics.enable(this, Phaser.Physics.ARCADE, true);
             this.body.collideWorldBounds = true;
 
-            // Disable smoothing on the sprite
+            // Disable smoothing on the sprite so pixel art looks good.
+            // This could be changed if you were using smoother gradient assets
             this.smoothed = false;
 
+            // Input is enabled so we can have subscriptions on entities for systems            
+            this.inputEnabled = true;
 
+            // Setup target icon
+            this.targetIcon = game.add.sprite(0, -32, "target_icon");
+            this.targetIcon.x = this.targetIcon.width / 2;
+            this.targetIcon.anchor.set(0, 0.5);
+            this.targetIcon.visible = false;
+            this.targetIcon.scale.set(0.75, 0.75);
+            this.addChild(this.targetIcon);
+
+            // Start the 'bounce' effect
+            EffectFactory.bounceSprite(this.targetIcon);
 
         }
 
@@ -80,6 +95,14 @@
 
         render() {
             this.game.debug.body(this);
+        }
+
+        performSelection() {
+            this.targetIcon.visible = true;
+        }
+
+        performDeselection() {
+            this.targetIcon.visible = false;
         }
 
         destroyNamePlate() {

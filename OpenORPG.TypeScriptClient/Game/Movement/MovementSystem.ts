@@ -27,6 +27,21 @@
 
         }
 
+        /*
+         * This method is invoked when an entity has become added to the current zone for ease of
+         * feedback for clients that are subscribing. 
+         */
+        onEntityAdded(entity: Entity) {
+            
+        }
+
+        /*
+         * This method is invoked when an entity has become removed from the current zone for ease of
+         * feedback for clients that are subscribing.
+         */
+        onEntityRemoved(entity: Entity) {
+            
+        }
 
     }
 
@@ -36,6 +51,7 @@
         private interactKey: Phaser.Key;
 
         private player: Entity;
+        private targetEntity : Entity;
         private playerInfo: PlayerInfo;
 
         constructor(zone: Zone, player: Entity, playerInfo: PlayerInfo) {
@@ -87,6 +103,33 @@
 
             });
 
+
+        }
+
+        onEntityAdded(entity: Entity) {
+            entity.events.onInputDown.add(this.handleSelection, this);
+        }
+
+        onEntityRemoved(entity: Entity) {
+            entity.events.onInputDown.remove(this.handleSelection, this);
+        }
+
+        /*
+         * This method is called when an entity has been selected.
+         * The system will handle what will happen.
+         */
+        private handleSelection(entity : Entity) {
+            this.selectTarget(entity);
+        }
+
+        private selectTarget(entity: Entity) {
+            // Select our new target
+            entity.performSelection();
+
+            if (this.targetEntity != null)
+                this.targetEntity.performDeselection();
+
+            this.targetEntity = entity;
 
         }
 

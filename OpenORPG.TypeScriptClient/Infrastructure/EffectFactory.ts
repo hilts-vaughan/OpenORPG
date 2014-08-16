@@ -30,5 +30,14 @@
         return entity.game.add.tween(entity).to(properties, 250, Phaser.Easing.Linear.None, true, 0, 1 , true);
     }
 
+    export function bounceSprite(sprite: Phaser.Sprite) {
+
+        var properties = {
+            y: sprite.y + 8
+        };
+
+        return sprite.game.add.tween(sprite).to(properties, 500, Phaser.Easing.Linear.None, true, 0, 1000000, true);
+    }
+
 
 } 

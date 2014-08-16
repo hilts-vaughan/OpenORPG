@@ -143,10 +143,10 @@
                     if (event.which == 13) {
 
                         if (id == "chatmessage") {
-                            console.log('focus game');
+                            Logger.trace("ChatWidget - Focused game");
                             $("#canvasholder").focus();
                         } else {
-                            console.log('focus chat');
+                            Logger.trace("ChatWidget - Focused chat");
                             $("#chatmessage").focus();
                         }
                     }

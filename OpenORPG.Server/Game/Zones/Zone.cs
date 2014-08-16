@@ -528,7 +528,7 @@ namespace Server.Game.Zones
             var questUpdate = new ServerSendQuestListPacket(heroEntity.QuestInfo);
             heroEntity.Client.Send(questUpdate);
 
-            
+
             // Send equipment
             foreach (var equipment in heroEntity.Equipment)
             {

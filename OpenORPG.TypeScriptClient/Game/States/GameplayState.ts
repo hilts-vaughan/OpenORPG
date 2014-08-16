@@ -57,6 +57,7 @@ module OpenORPG {
             loader.tilemap("map_2", "assets/Maps/2.json", null, Phaser.Tilemap.TILED_JSON);
 
             loader.image("tilesheet", "assets/Maps/tilesheet_16.png");
+            loader.image("target_icon", "assets/img/target_selector.png");
 
             // Load all our audio
             loader.audio("audio_music_town", [DirectoryHelper.getMusicPath() + "town.ogg"]);

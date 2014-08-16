@@ -62,6 +62,7 @@
     <Content Include="assets\img\hand.png" />
     <Content Include="assets\img\quest_icon.png" />
     <Content Include="assets\img\sword.png" />
+    <Content Include="assets\img\target_selector.png" />
     <Content Include="assets\items\1.png" />
     <Content Include="assets\items\2.png" />
     <Content Include="assets\items\3.png" />
