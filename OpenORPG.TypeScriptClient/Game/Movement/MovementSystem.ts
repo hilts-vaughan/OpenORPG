@@ -166,10 +166,10 @@
 
         initZone() {
             // Setup our zone trigger if it is at all possible
-            this.topZoneTrigger = new ZoneTrigger(this.parent.game, 0, 0, this.parent.tileMap.widthInPixels, this.parent.tileMap.tileHeight, this.topCallback, this.parent);
-            this.bottomZoneTrigger = new ZoneTrigger(this.parent.game, 0, this.parent.tileMap.heightInPixels - 32, this.parent.tileMap.widthInPixels, this.parent.tileMap.tileHeight, this.bottomCallback, this.parent);
-            this.leftZoneTrigger = new ZoneTrigger(this.parent.game, 0, 0, this.parent.tileMap.tileWidth, this.parent.tileMap.heightInPixels, this.leftCallback, this.parent);
-            this.rightZoneTrigger = new ZoneTrigger(this.parent.game, this.parent.tileMap.widthInPixels - 32, 0, this.parent.tileMap.tileWidth, this.parent.tileMap.heightInPixels, this.rightCallback, this.parent);
+            this.topZoneTrigger = new ZoneTrigger(this.parent.game, 0, 0, this.parent.tileMap.widthInPixels, this.parent.tileMap.tileHeight, this.topCallback.bind(this), this.parent);
+            this.bottomZoneTrigger = new ZoneTrigger(this.parent.game, 0, this.parent.tileMap.heightInPixels - 32, this.parent.tileMap.widthInPixels, this.parent.tileMap.tileHeight, this.bottomCallback.bind(this), this.parent);
+            this.leftZoneTrigger = new ZoneTrigger(this.parent.game, 0, 0, this.parent.tileMap.tileWidth, this.parent.tileMap.heightInPixels, this.leftCallback.bind(this), this.parent);
+            this.rightZoneTrigger = new ZoneTrigger(this.parent.game, this.parent.tileMap.widthInPixels - 32, 0, this.parent.tileMap.tileWidth, this.parent.tileMap.heightInPixels, this.rightCallback.bind(this), this.parent);
         }
 
         render() {
