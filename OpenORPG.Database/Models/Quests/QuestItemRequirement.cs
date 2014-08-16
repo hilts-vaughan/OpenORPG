@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenORPG.Database.Enums;
 using Server.Game.Database.Models.ContentTemplates;
 
 namespace Server.Game.Database.Models.Quests

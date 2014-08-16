@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Http;
 using Inspire.Shared.Models.Enums;
 using OpenORPG.Database.DAL;
+using OpenORPG.Database.Enums;
 using Server.Game.Database;
 using Server.Game.Database.Models.ContentTemplates;
 
@@ -65,7 +66,7 @@ namespace OpenORPG.Editor.Server.Controllers
 
                 var repo = new SkillRepository(context);
                 var skill =
-                    repo.Add(new SkillTemplate(SkillType.Damage, SkillTargetType.Enemy, SkillActivationType.Immediate, 0,
+                    repo.Add(new SkillTemplate(SkillType.Elemental, SkillTargetType.Enemy, SkillActivationType.Immediate, 0,
                         0, "", 0, "New Skill"));
 
                 return Ok(skill);

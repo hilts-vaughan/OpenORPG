@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using OpenORPG.Database.Enums;
 using Server.Game.AI;
 using Server.Game.Combat;
 using Server.Game.Items.Equipment;
@@ -48,7 +49,7 @@ namespace Server.Game.Entities
             : base(sprite)
         {
             //TODO: Be a bit more creative than this
-            Speed = 130;                
+            Speed = 130;
 
             CharacterStats = new CharacterStatCollection(this);
 
@@ -87,6 +88,13 @@ namespace Server.Game.Entities
         /// </summary>
         [JsonIgnore]
         public AiBase CurrentAi { get; set; }
+
+        public ulong TargetId { get; private set; }
+
+        public void SelectTarget(Character target)
+        {
+            TargetId = target.Id;
+        }
 
         /// <summary>
         /// The current state of this character is stored here

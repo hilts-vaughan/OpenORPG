@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using Inspire.Shared.Models.Enums;
+using OpenORPG.Database.Enums;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Database.Models.Quests;
@@ -51,6 +52,7 @@ namespace Server.Game.Database.Seeds
 
                 // Add a basic attack to this character
                 character.Skills.Add(new UserSkill(1));
+                character.Skills.Add(new UserSkill(2));
 
                 character.Strength = 5;
                 character.Hitpoints = 100;
@@ -136,10 +138,10 @@ namespace Server.Game.Database.Seeds
 
         private void CreateTestSkills(GameDatabaseContext context)
         {
-            var attack = new SkillTemplate(SkillType.Damage, SkillTargetType.Enemy, SkillActivationType.Immediate, 0, 1, "Slay mighty foes!", 1, "Attack");
+            var attack = new SkillTemplate(SkillType.None, SkillTargetType.Enemy, SkillActivationType.Immediate, 0, 1, "Slay mighty foes!", 1, "Attack");
             context.SkillTemplates.Add(attack);
 
-            var banish = new SkillTemplate(SkillType.Damage, SkillTargetType.Enemy, SkillActivationType.Immediate, 0,
+            var banish = new SkillTemplate(SkillType.Elemental, SkillTargetType.Enemy, SkillActivationType.Immediate, 0,
                 long.MaxValue, "Eradicates a foe.", 2, "Banish");
             context.SkillTemplates.Add(banish);
         }

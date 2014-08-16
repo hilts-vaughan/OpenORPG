@@ -10,7 +10,6 @@ namespace Server.Game.Combat
 {
     /// <summary>
     /// An attack payload is an attack that is ready to be applied to any entity.
-    /// A payload does all the computations for damage and application of status effects.
     /// 
     /// Any combat damage should be applied via a payload so subsystems can track this.
     /// </summary>

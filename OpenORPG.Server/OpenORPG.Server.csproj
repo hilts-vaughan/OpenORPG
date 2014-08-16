@@ -93,6 +93,7 @@
     <Compile Include="Game\Combat\ActionExecutor.cs" />
     <Compile Include="Game\Combat\ActionGenerator.cs" />
     <Compile Include="Game\Combat\Actions\ImmediateSkillAction.cs" />
+    <Compile Include="Game\Combat\Actions\TargetSkillAction.cs" />
     <Compile Include="Game\Combat\AgressionTracker.cs" />
     <Compile Include="Game\Combat\CharacterStatCollection.cs" />
     <Compile Include="Game\Combat\CombatActionResult.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Game\Combat\Enumerations\SkillActivationType.cs" />
     <Compile Include="Game\Combat\Enumerations\SkillTargetType.cs" />
     <Compile Include="Game\Combat\Enumerations\SkillType.cs" />
+    <Compile Include="Game\Combat\Payloads\SkillAttackPayload.cs" />
     <Compile Include="Game\Combat\Payloads\StatusEffectPayload.cs" />
     <Compile Include="Game\Combat\Skill.cs" />
     <Compile Include="Game\Entities\Character.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenORPG.Database.Enums;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Entities;
 using Server.Utils.Math;
@@ -53,13 +54,13 @@ namespace Server.Game.Combat.Actions
             switch (Skill.SkillTemplate.SkillType)
             {
                 case SkillType.Healing:
-                    break;
-                case SkillType.Damage:
+                case SkillType.Enfeebling:
+                case SkillType.None:
+                case SkillType.Enhancing:
+                case SkillType.Elemental:
                     var damagePayload = new DamagePayload(ExecutingCharacter);
                     target.ApplyDamage(damagePayload);
-                    return new CombatActionResult((long)target.Id, damagePayload.DamageInflicted);
-                case SkillType.Special:
-                    break;
+                    return new CombatActionResult((long)target.Id, damagePayload.DamageInflicted);   
             }
 
             return new CombatActionResult(-1, 0);

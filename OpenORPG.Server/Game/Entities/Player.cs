@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using OpenORPG.Database.Enums;
 using Server.Game.Combat;
 using Server.Game.Database;
 using Server.Game.Database.Models;

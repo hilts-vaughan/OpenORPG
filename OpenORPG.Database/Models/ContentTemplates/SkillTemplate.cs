@@ -1,4 +1,6 @@
 ﻿
+using OpenORPG.Database.Enums;
+
 namespace Server.Game.Database.Models.ContentTemplates
 {
     /// <summary>
@@ -43,6 +45,7 @@ namespace Server.Game.Database.Models.ContentTemplates
         public SkillTargetType  SkillTargetType { get; set; }
         public SkillActivationType SkillActivationType { get; set; }
 
+        public SkillCategory SkillCategory { get; set; }
 
         /// <summary>
         /// The amount of time (seconds) it takes to perform this skill

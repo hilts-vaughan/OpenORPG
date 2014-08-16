@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Inspire.Shared.Models.Enums;
+using OpenORPG.Database.Enums;
 
 namespace Server.Game.Database.Models.ContentTemplates
 {
