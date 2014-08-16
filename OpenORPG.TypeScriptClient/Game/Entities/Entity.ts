@@ -7,7 +7,10 @@
         // These properties are what are strongly typed
         public name: string;
         public id: number;
+        public experience: number;
+        public level : number;
         private entityType: string;
+
 
         public characterState: CharacterState;
         public direction: Direction;

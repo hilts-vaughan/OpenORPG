@@ -147,6 +147,13 @@ namespace Server.Game.Combat
                 });
 
                 Zone.RemoveEntity(victim);
+                
+
+                // Aware EXP if needed
+                var player = aggressor as Player;
+                if (player != null)
+                    player.Experience += 250;
+
             }
 
         }

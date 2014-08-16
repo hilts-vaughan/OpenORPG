@@ -41,7 +41,7 @@ module OpenORPG {
                 };
 
                 $scope.useSkill = (skill: Skill) => {
-                    if (skill.cooldown <= 0 ) {
+                    if (skill.cooldown <= 0) {
                         var packet = PacketFactory.createSkillUsePacket(skill.id, -1);
                         NetworkManager.getInstance().sendPacket(packet);
                     }
@@ -75,6 +75,38 @@ module OpenORPG {
 
             }
         ])
+        .controller('BottomBarController', [
+            '$scope', function ($scope) {
+
+                $scope.getExpPercent = function (type: number) {
+
+                    if (!this.playerInfo.player)
+                        return 0;
+
+                    var exp = this.playerInfo.player.experience;
+
+                    if (!exp)
+                        return 0;
+
+                    var percent = (exp / (this.playerInfo.player.level * 500) ) * 100;
+
+                    return percent;
+                }
+
+
+                $scope.getExpLabel = function () {
+
+                    if (!this.playerInfo.player)
+                        return "";
+
+                    return this.playerInfo.player.experience + "/" + this.playerInfo.player.level * 500;
+
+                }
+
+            }
+        ])
+
+
         .filter("skillFormatter", () => {
             return (input: number) => {
                 return Math.max(Math.ceil(input), 0) + "s";

@@ -19,7 +19,7 @@
 
         public inventory: any[];
         public quests: any[];
-
+        public player : Entity;
 
         private inventoryCallbacks = [];
 

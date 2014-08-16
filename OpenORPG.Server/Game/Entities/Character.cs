@@ -84,7 +84,7 @@ namespace Server.Game.Entities
 
         public int ZoneId { get; set; }
 
-        public int Level { get; set; }
+        public virtual int Level { get; set; }
 
         /// <summary>
         /// The current AI this Character will be running. 
@@ -132,6 +132,7 @@ namespace Server.Game.Entities
         }
 
         private Character _lastCharacterToHitMe;
+        private int _level;
 
         public void ApplyDamage(DamagePayload damagePayload)
         {

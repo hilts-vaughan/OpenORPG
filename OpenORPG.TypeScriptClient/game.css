@@ -134,7 +134,7 @@ canvas {
         color: white;
     }
 
-    #character-status .vital-bar {
+    .vital-bar {
         width: 90%;
         height: 20px;
         margin: 0 auto;
@@ -147,7 +147,7 @@ canvas {
         overflow: hidden;
     }
 
-    #character-status .vital-bar-fill {
+    .vital-bar-fill {
         width: 100%;
         background-color: red;
         position: absolute;

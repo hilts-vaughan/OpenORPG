@@ -1,10 +1,11 @@
-﻿<div id="bottombar">
+﻿<div id="bottombar" ng-controller="BottomBarController">
 
-    <div class="top-bar">
-        XP: 50%  1000/2000
+
+
+    <div id="mana-vital-bar" class="vital-bar" style="width: 100%; margin: 0;">
+        <span class="vital-bar-fill" style="background-color: purple" ng-style="{width: getExpPercent() + '%'}"></span>
+        <span class="float-vital" style="position: relative; margin: 0 auto; text-align: center;">XP: {{getExpLabel()}}</span>
     </div>
-
-
 
 
 

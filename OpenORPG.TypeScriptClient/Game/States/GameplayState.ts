@@ -101,6 +101,7 @@ module OpenORPG {
                         this.game.camera.follow(worldEntity);
                         this.zone.movementSystem.attachEntity(worldEntity);
                         this.zone.combatSystem.attachTo(worldEntity);
+                        this.playerInfo.player = worldEntity;
 
                         // Init character info
                         for (var key in entity.characterStats.stats) {

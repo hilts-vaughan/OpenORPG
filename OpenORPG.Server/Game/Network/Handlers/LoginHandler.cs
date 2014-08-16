@@ -117,7 +117,8 @@ namespace Server.Game.Network.Handlers
                 hero.Luck = (int)player.CharacterStats[(int)StatTypes.Luck].CurrentValue;
                 hero.Vitality = (int)player.CharacterStats[(int)StatTypes.Vitality].CurrentValue;
                 hero.MaximumHitpoints = (int)player.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue;
-
+                hero.Experience = player.Experience;
+                hero.Level = player.Level;
 
                 //TODO: Need better tracking code here, incrementing the row needlessly here
                 // For now though, we don't care...

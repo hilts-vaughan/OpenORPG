@@ -26,6 +26,8 @@ namespace Server.Game.Entities
 
     public delegate void ItemEvent(Item item, int amount, Player player);
 
+    public delegate void ValueChanged(int newValue, int oldValue, Player player);
+
     public class Player : Character
     {
 
@@ -33,6 +35,22 @@ namespace Server.Game.Entities
         public event EquipmentEvent EquipmentChanged;
         public event SkillEvent LearnedSkill;
         public event ItemEvent BackpackChanged;
+        public event ValueChanged ExperienceChanged;
+        public event ValueChanged LevelChanged;
+
+        protected virtual void OnLevelChanged(int newvalue, int oldvalue, Player player)
+        {
+            ValueChanged handler = LevelChanged;
+            if (handler != null) handler(newvalue, oldvalue, player);
+        }
+
+        protected virtual void OnExperienceChanged(int newvalue, int oldvalue, Player player)
+        {
+            ValueChanged handler = ExperienceChanged;
+            if (handler != null) handler(newvalue, oldvalue, player);
+        }
+
+
 
         protected virtual void OnBackpackChanged(Item item, int amount, Player player)
         {
@@ -59,7 +77,27 @@ namespace Server.Game.Entities
             if (handler != null) handler(userquestinfo, player);
         }
 
-        public int Experience { get; set; }
+        public int Experience
+        {
+            get { return _experience; }
+            set
+            {
+                int oldValue = _experience;
+                _experience = value;
+                PropertyCollection.WriteValue("Experience", value);
+                OnExperienceChanged(_experience, oldValue, this);
+            }
+        }
+
+        public override int Level
+        {
+            get { return _level1; }
+            set
+            {
+                int oldValue = _level1; _level1 = value; PropertyCollection.WriteValue("Level", value);
+                OnLevelChanged(_level1, oldValue, this);
+            }
+        }
 
         /// <summary>
         /// The amount of currency this particular player is holding.
@@ -74,6 +112,8 @@ namespace Server.Game.Entities
 
         private UserHero _hero;
         private long _currency;
+        private int _experience;
+        private int _level1;
 
         public Player(string sprite, GameClient client, UserHero userHero)
             : base(sprite)

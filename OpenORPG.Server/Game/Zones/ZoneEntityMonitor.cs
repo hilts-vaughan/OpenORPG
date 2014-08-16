@@ -58,6 +58,17 @@ namespace Server.Game.Zones
             player.LearnedSkill += PlayerOnLearnedSkill;
             player.BackpackChanged += PlayerOnBackpackChanged;
             player.AcceptedQuest += PlayerOnAcceptedQuest;
+            player.ExperienceChanged += PlayerOnExperienceChanged;
+        }
+
+        private void PlayerOnExperienceChanged(int newValue, int oldValue, Player player)
+        {
+            var packet = new ServerSendGameMessagePacket(GameMessage.GainExperience, new List<string>()
+            {
+                (newValue - oldValue).ToString()
+            });
+
+            player.Client.Send(packet);
         }
 
         private void PlayerOnAcceptedQuest(UserQuestInfo userQuestInfo, Player player)
