@@ -46,7 +46,7 @@ namespace OpenORPG.Database.Enums
         /// <summary>
         /// The player flags is any player, regardless of being an ally or not
         /// </summary>
-        Players = 1,
+        Self = 1,
 
         /// <summary>
         /// The ally flag is for any ally member
@@ -57,6 +57,11 @@ namespace OpenORPG.Database.Enums
         /// The enemy flag is for any enemy
         /// </summary>
         Enemy = 4,
+
+        /// <summary>
+        /// The anyone flag is for any passerbyer
+        /// </summary>
+        Anyone = 8
     }
 
     public enum SkillActivationType

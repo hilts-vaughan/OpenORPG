@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenORPG.Database.Enums;
 using Server.Game.Combat.Actions;
+using Server.Game.Combat.Targeting;
 using Server.Game.Database;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Entities;
@@ -20,6 +22,7 @@ namespace Server.Game.Combat
     {
 
         private ActionGenerator _actionGenerator;
+        private TargetValidator _targetValidator;
 
         /// <summary>
         /// A list of pending actions for this system to perform.
@@ -30,6 +33,7 @@ namespace Server.Game.Combat
             : base(world)
         {
             _actionGenerator = new ActionGenerator();
+            _targetValidator = new TargetValidator();
         }
 
 
@@ -209,6 +213,18 @@ namespace Server.Game.Combat
             // Check that this skill is usable
             if (!skill.CanUse())
                 return;
+
+            // Verify if the target is OK
+            if (skill.SkillTemplate.SkillActivationType == SkillActivationType.Target)
+            {
+                var target = Zone.ZoneCharacters.FirstOrDefault(x => x.Id == requestingHero.TargetId);
+
+                if (target == null || !_targetValidator.IsTargetValid(skill, requestingHero, target))
+                {
+                    Logger.Instance.Warn("{0} attempted to use a skill with an invalid target.", requestingHero);
+                    return;
+                } 
+            }
 
             // Skill is good, execute!
             var action = _actionGenerator.GenerateActionFromSkill(skill, targetId, requestingHero);

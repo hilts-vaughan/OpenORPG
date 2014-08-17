@@ -155,7 +155,7 @@ namespace Server.Game.Database.Seeds
             fire.IconId = 45;
             context.SkillTemplates.Add(fire);
 
-            var heal = new SkillTemplate(SkillType.Healing, SkillTargetType.Players, SkillActivationType.Target, 1, 10,
+            var heal = new SkillTemplate(SkillType.Healing, SkillTargetType.Self | SkillTargetType.Ally, SkillActivationType.Target, 1, 10,
                 "Restores a small amount of HP to a character.", 4, "Cure");
             heal.CooldownTime = 9;
             heal.IconId = 99;

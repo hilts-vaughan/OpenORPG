@@ -114,6 +114,7 @@
     <Compile Include="Game\Combat\Payloads\StatusEffectPayload.cs" />
     <Compile Include="Game\Combat\Skill.cs" />
     <Compile Include="Game\Combat\StatusEffectService.cs" />
+    <Compile Include="Game\Combat\Targeting\TargetValidator.cs" />
     <Compile Include="Game\Entities\Character.cs" />
     <Compile Include="Game\Entities\CharacterState.cs" />
     <Compile Include="Game\Entities\Monster.cs" />
