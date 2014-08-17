@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenORPG.Database.Enums;
 using Server.Game.Combat;
+using Server.Game.Combat.Effects;
 using Server.Game.Database.Models;
 using Server.Game.Entities;
 using Server.Game.Items;
@@ -59,8 +60,12 @@ namespace Server.Game.Zones
             player.BackpackChanged += PlayerOnBackpackChanged;
             player.AcceptedQuest += PlayerOnAcceptedQuest;
             player.ExperienceChanged += PlayerOnExperienceChanged;
-            player.LevelChanged += PlayerOnLevelChanged;
-            player.ActiveStatusEffects
+            player.LevelChanged += PlayerOnLevelChanged;            
+        }
+
+        private void ActiveStatusEffectsOnEffectAdded(Player player, StatusEffect effect)
+        {
+            throw new NotImplementedException();
         }
 
         private void PlayerOnLevelChanged(int newValue, int oldValue, Player player)

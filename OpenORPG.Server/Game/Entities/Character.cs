@@ -62,9 +62,8 @@ namespace Server.Game.Entities
 
             CharacterStats[StatTypes.Hitpoints].CurrentValueChanged += OnHitpointsChanged;
 
-
             Skills = new List<Skill>();
-            ActiveStatusEffects = new List<StatusEffect>();
+            ActiveStatusEffects = new StatusEffectCollection();
         }
 
         private void OnHitpointsChanged(long oldValue, long newValue, StatTypes statType)

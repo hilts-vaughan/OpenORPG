@@ -98,6 +98,8 @@
     <Compile Include="Game\Combat\CharacterStatCollection.cs" />
     <Compile Include="Game\Combat\CombatActionResult.cs" />
     <Compile Include="Game\Combat\CombatUtility.cs" />
+    <Compile Include="Game\Combat\Effects\StatusEffect.cs" />
+    <Compile Include="Game\Combat\Effects\StatusEffectCollection.cs" />
     <Compile Include="Game\Combat\LevelService.cs" />
     <Compile Include="Game\Combat\Payloads\DamagePayload.cs" />
     <Compile Include="Game\Combat\Actions\ICombatAction.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Game\Combat\Payloads\SkillAttackPayload.cs" />
     <Compile Include="Game\Combat\Payloads\StatusEffectPayload.cs" />
     <Compile Include="Game\Combat\Skill.cs" />
+    <Compile Include="Game\Combat\StatusEffectService.cs" />
     <Compile Include="Game\Entities\Character.cs" />
     <Compile Include="Game\Entities\CharacterState.cs" />
     <Compile Include="Game\Entities\Monster.cs" />

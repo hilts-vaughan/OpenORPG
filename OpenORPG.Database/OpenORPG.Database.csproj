@@ -81,6 +81,7 @@
     <Compile Include="Models\ContentTemplates\MapTemplate.cs" />
     <Compile Include="Models\ContentTemplates\MonsterTemplate.cs" />
     <Compile Include="Models\ContentTemplates\SkillTemplate.cs" />
+    <Compile Include="Models\ContentTemplates\StatusEffectTemplate.cs" />
     <Compile Include="Models\NpcTemplate.cs" />
     <Compile Include="Models\Quests\QuestItemRequirement.cs" />
     <Compile Include="Models\Quests\QuestMonsterRequirement.cs" />

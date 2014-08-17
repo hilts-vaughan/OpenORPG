@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Server.Game.Combat.Effects
 {
+    /// <summary>
+    /// A collection of status effects that is capable of
+    /// </summary>
     public class StatusEffectCollection : IEnumerable<StatusEffect>
     {
 
@@ -28,7 +31,7 @@ namespace Server.Game.Combat.Effects
             if (handler != null) handler(effect);
         }
 
-        private List<StatusEffect> _effects = new List<StatusEffect>(); 
+        private List<StatusEffect> _effects = new List<StatusEffect>();
 
         public StatusEffectCollection()
         {
