@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenORPG.Database.Enums;
 using Server.Game.Combat.Actions;
-using Server.Game.Combat.Targeting;
+using Server.Game.Combat.Validators.Skills;
 using Server.Game.Database;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Entities;
@@ -210,25 +210,11 @@ namespace Server.Game.Combat
                 return;
             }
 
-            // Check that this skill is usable
-            if (!skill.CanUse())
+
+            var target = Zone.ZoneCharacters.FirstOrDefault(x => x.Id == requestingHero.TargetId);
+
+            if (!SkillValidationUtility.CanPerformSkill(requestingHero, target, skill))
                 return;
-
-            // Check if enough of a skill resource is available
-            if (requestingHero.CharacterStats[StatTypes.SkillResource].CurrentValue < skill.SkillTemplate.SkillCost)
-                return;
-
-            // Verify if the target is OK
-            if (skill.SkillTemplate.SkillActivationType == SkillActivationType.Target)
-            {
-                var target = Zone.ZoneCharacters.FirstOrDefault(x => x.Id == requestingHero.TargetId);
-
-                if (target == null || !_targetValidator.IsTargetValid(skill, requestingHero, target))
-                {
-                    Logger.Instance.Warn("{0} attempted to use a skill with an invalid target.", requestingHero);
-                    return;
-                } 
-            }
 
             // Skill is good, execute!
             var action = _actionGenerator.GenerateActionFromSkill(skill, targetId, requestingHero);

@@ -114,7 +114,12 @@
     <Compile Include="Game\Combat\Payloads\StatusEffectPayload.cs" />
     <Compile Include="Game\Combat\Skill.cs" />
     <Compile Include="Game\Combat\StatusEffectService.cs" />
-    <Compile Include="Game\Combat\Targeting\TargetValidator.cs" />
+    <Compile Include="Game\Combat\Validators\Skills\SkillCooldownValidator.cs" />
+    <Compile Include="Game\Combat\Validators\Skills\SkillResourceCostValidator.cs" />
+    <Compile Include="Game\Combat\Validators\Skills\SkillTargetInRangeValidator.cs" />
+    <Compile Include="Game\Combat\Validators\Skills\SkillTargetValidator.cs" />
+    <Compile Include="Game\Combat\Validators\Skills\SkillValidationContainer.cs" />
+    <Compile Include="Game\Combat\Validators\Skills\SkillValidationFactory.cs" />
     <Compile Include="Game\Entities\Character.cs" />
     <Compile Include="Game\Entities\CharacterState.cs" />
     <Compile Include="Game\Entities\Monster.cs" />
@@ -251,6 +256,9 @@
     <Compile Include="Utils\HtmlTools.cs" />
     <Compile Include="Utils\Math\Vector2.cs" />
     <Compile Include="Utils\Math\MathHelper.cs" />
+    <Compile Include="Utils\SpecificationPattern\AndSpecification.cs" />
+    <Compile Include="Utils\SpecificationPattern\ISpecification.cs" />
+    <Compile Include="Utils\SpecificationPattern\SpecificationExtensions.cs" />
     <Compile Include="WorldServer.cs" />
   </ItemGroup>
   <ItemGroup>

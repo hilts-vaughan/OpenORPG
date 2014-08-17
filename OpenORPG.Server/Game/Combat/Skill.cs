@@ -56,7 +56,7 @@ namespace Server.Game.Combat
         /// Determines whether or not the skill is usable
         /// </summary>
         /// <returns></returns>
-        public bool CanUse()
+        public bool IsNotOnCooldown()
         {
             return Cooldown <= 0;
         }

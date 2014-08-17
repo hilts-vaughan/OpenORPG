@@ -24,4 +24,5 @@ namespace Server.Utils.SpecificationPattern
               this._specificationTwo.IsSatisfiedBy(entity));
         }
     }  
+
 }

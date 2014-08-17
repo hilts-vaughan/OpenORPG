@@ -1,31 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenORPG.Database.Enums;
+﻿using OpenORPG.Database.Enums;
 using Server.Game.Entities;
+using Server.Utils.SpecificationPattern;
 
-namespace Server.Game.Combat.Targeting
+namespace Server.Game.Combat.Validators.Skills
 {
     /// <summary>
     /// A class designed to validate whether a given skill and target is valid
     /// </summary>
-    public class TargetValidator
+    public class TargetValidator : ISpecification<SkillValidationContainer>
     {
+
         /// <summary>
         /// Given a target, user and skill; determines whether or not it's possible to use a skill on the target.
         /// </summary>
-        /// <param name="skill">The skill that we want to test against</param>
-        /// <param name="user">The user of the skill</param>
-        /// <param name="target">The proposed target of the skill</param>
+        /// <param name="entity"></param>
         /// <returns></returns>
-        public bool IsTargetValid(Skill skill, Character user, Character target)
+        public bool IsSatisfiedBy(SkillValidationContainer entity)
         {
-            var flags = skill.SkillTemplate.SkillTargetType;
+            var flags = entity.Skill.SkillTemplate.SkillTargetType;
             var canTarget = true;
 
             // Next, we simply filter based on flags
+            var user = entity.User;
+            var target = entity.Target;
+
 
             if (flags.HasFlag(SkillTargetType.Self))
                 canTarget &= IsSelf(target, user);
@@ -45,6 +43,7 @@ namespace Server.Game.Combat.Targeting
             return canTarget;
         }
 
+
         private bool IsAlly(Character target, Character user)
         {
             //TODO: Implement some actual ally logic here when parties are implemented; for now it's assumed nobody is your ally since there are none
@@ -62,5 +61,6 @@ namespace Server.Game.Combat.Targeting
         }
 
 
+    
     }
 }

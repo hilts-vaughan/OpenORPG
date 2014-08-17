@@ -43,6 +43,12 @@ namespace Server.Game.Database.Models.ContentTemplates
         /// </summary>
         public int SkillCost { get; set; }
 
+
+        /// <summary>
+        /// The distance this skill can target
+        /// </summary>
+        public int Distance { get; set; }
+
         public SkillType SkillType { get; set; }
         public SkillTargetType  SkillTargetType { get; set; }
         public SkillActivationType SkillActivationType { get; set; }
