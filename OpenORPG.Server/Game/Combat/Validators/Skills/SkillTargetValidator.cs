@@ -18,7 +18,7 @@ namespace Server.Game.Combat.Validators.Skills
         public bool IsSatisfiedBy(SkillValidationContainer entity)
         {
             var flags = entity.Skill.SkillTemplate.SkillTargetType;
-            var canTarget = true;
+            var canTarget = false;
 
             // Next, we simply filter based on flags
             var user = entity.User;
@@ -26,13 +26,13 @@ namespace Server.Game.Combat.Validators.Skills
 
 
             if (flags.HasFlag(SkillTargetType.Self))
-                canTarget &= IsSelf(target, user);
+                canTarget |= IsSelf(target, user);
 
             if (flags.HasFlag(SkillTargetType.Enemy))
-                canTarget &= IsTargetEnemy(target, user);
+                canTarget |= IsTargetEnemy(target, user);
 
             if (flags.HasFlag(SkillTargetType.Ally))
-                canTarget &= IsAlly(target, user);
+                canTarget |= IsAlly(target, user);
 
 
 
