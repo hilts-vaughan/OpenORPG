@@ -9,7 +9,7 @@ namespace Server.Game.Combat
 {
     
     /// <summary>
-    /// Provides information about the result and outcome of an <see cref="ICombatAction"/> that
+    /// Provides information about the result and outcome of an <see cref="CombatAction"/> that
     /// was applied.
     /// </summary>
     public struct CombatActionResult

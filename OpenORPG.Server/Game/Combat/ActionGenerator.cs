@@ -26,9 +26,9 @@ namespace Server.Game.Combat
             return new ImmediateSkillAction(user, skill);
         }
 
-        public ICombatAction GenerateActionFromSkill(Skill skill, long targetId, Character requestingHero)
+        public CombatAction GenerateActionFromSkill(Skill skill, long targetId, Character requestingHero)
         {
-            ICombatAction action = null;
+            CombatAction action = null;
             var skillTemplate = skill.SkillTemplate;
 
             switch (skillTemplate.SkillActivationType)
@@ -46,9 +46,10 @@ namespace Server.Game.Combat
             return action;
         }
 
-        private ICombatAction CreateTargetSkillAction(Skill skill, Character requestingHero)
+        private CombatAction CreateTargetSkillAction(Skill skill, Character requestingHero)
         {
-            return new TargetSkillAction(requestingHero, skill);
+            // We have to pass the ID in to lock in the casting choice ahead of time or the user might change their choice later
+            return new TargetSkillAction(requestingHero, skill, requestingHero.TargetId);
         }
     }
 }

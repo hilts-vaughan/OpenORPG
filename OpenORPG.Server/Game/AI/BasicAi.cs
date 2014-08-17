@@ -65,8 +65,8 @@ namespace Server.Game.AI
 
                     FaceVictim();
 
-
-                    Character.UseSkill(1, (long)victim.Id);
+                    Character.SelectTarget(victim);
+                    Character.UseSkill(1, (int) victim.TargetId);
                 }
                 else
                 {

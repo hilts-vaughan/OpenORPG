@@ -183,7 +183,7 @@ namespace Server.Game.Entities
         {
             var combatSystem = Zone.GetGameSystem<CombatSystem>();
             if (combatSystem != null)
-                combatSystem.ProcessCombatRequest(this, skillId, targetId);
+                combatSystem.ProcessCombatRequest(this, skillId, (int) targetId);
         }
 
 

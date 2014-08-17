@@ -22,18 +22,16 @@ namespace Server.Game.Combat
     {
 
         private ActionGenerator _actionGenerator;
-        private TargetValidator _targetValidator;
 
         /// <summary>
         /// A list of pending actions for this system to perform.
         /// </summary>
-        private readonly List<ICombatAction> _pendingActions = new List<ICombatAction>();
+        private readonly List<CombatAction> _pendingActions = new List<CombatAction>();
 
         public CombatSystem(Zone world)
             : base(world)
         {
             _actionGenerator = new ActionGenerator();
-            _targetValidator = new TargetValidator();
         }
 
 
@@ -44,6 +42,7 @@ namespace Server.Game.Combat
             // Perform any skills that may be pending in the queue
             PerformPendingSkills(frameTime);
 
+            // Decrease cooldowns as required
             foreach (var c in Zone.ZoneCharacters)
             {
                 DecreaseCooldowns(frameTime, c);
@@ -59,7 +58,7 @@ namespace Server.Game.Combat
 
         private void PerformPendingSkills(float frameTime)
         {
-            var toRemove = new List<ICombatAction>();
+            var toRemove = new List<CombatAction>();
 
             foreach (var pendingAction in _pendingActions)
             {
@@ -77,36 +76,48 @@ namespace Server.Game.Combat
             toRemove.ForEach(x => _pendingActions.Remove(x));
         }
 
-        private void ActivateSkill(ICombatAction pendingAction)
+        private void ActivateSkill(CombatAction pendingAction)
         {
             // Execute the skill and reset the character state
-            var result = pendingAction.PerformAction(GetCombatCharactersInRange());
+            var results = pendingAction.PerformAction(GetCombatCharactersInRange());
             pendingAction.ExecutingCharacter.CharacterState = CharacterState.Idle;
 
-            SendActionResult(pendingAction, result);
+            SendActionResult(pendingAction, results);
 
-            CalculateAgression(pendingAction, result);
+            CalculateAggression(pendingAction, results);
 
             // Force skill onto cooldown
-            pendingAction.Skill.EnableCooldown();
+            pendingAction.Skill.ResetCooldown();
         }
 
-        private void CalculateAgression(ICombatAction pendingAction, CombatActionResult result)
+        private void CalculateAggression(CombatAction pendingAction, List<CombatActionResult> results)
         {
             // Increase aggro as required
-            var victim = Zone.ZoneCharacters.FirstOrDefault(x => x.Id == (ulong)result.TargetId);
-            if (victim != null && victim.CurrentAi != null)
-                victim.CurrentAi.AgressionTracker.IncreaseAgression(pendingAction.ExecutingCharacter, 1);
+            foreach (var result in results)
+            {
+
+
+                var victim = Zone.ZoneCharacters.FirstOrDefault(x => x.Id == (ulong)result.TargetId);
+                if (victim != null && victim.CurrentAi != null)
+                    victim.CurrentAi.AgressionTracker.IncreaseAgression(pendingAction.ExecutingCharacter, 1);
+            }
+
         }
 
-        private void SendActionResult(ICombatAction action, CombatActionResult result)
+        private void SendActionResult(CombatAction action, List<CombatActionResult> results)
         {
-            if (result.TargetId != -1)
+
+            foreach (var result in results)
             {
-                var packet = new ServerSkillUseResult(action.ExecutingCharacter.Id, (ulong)result.TargetId,
-                    result.Damage, action.Skill.Id);
-                Zone.SendToEntitiesInRange(packet, action.ExecutingCharacter);
+                if (result.TargetId != -1)
+                {
+                    var packet = new ServerSkillUseResult(action.ExecutingCharacter.Id, (ulong)result.TargetId,
+                        result.Damage, action.Skill.Id);
+                    Zone.SendToEntitiesInRange(packet, action.ExecutingCharacter);
+                }
+
             }
+
         }
 
 
@@ -192,7 +203,7 @@ namespace Server.Game.Combat
         /// </summary>
         /// <param name="requestingHero"></param>
         /// <param name="skillRequest"></param>
-        public void ProcessCombatRequest(Character requestingHero, long skillId, long targetId)
+        public void ProcessCombatRequest(Character requestingHero, long skillId, int targetId)
         {
 
 
@@ -211,7 +222,7 @@ namespace Server.Game.Combat
             }
 
 
-            var target = Zone.ZoneCharacters.FirstOrDefault(x => x.Id == requestingHero.TargetId);
+            var target = Zone.ZoneCharacters.FirstOrDefault(x => (int)x.Id == targetId);
 
             if (!SkillValidationUtility.CanPerformSkill(requestingHero, target, skill))
                 return;

@@ -24,7 +24,8 @@ namespace OpenORPG.Database.Enums
         Enfeebling,
         Enhancing,
         Healing,
-        Divine
+        Divine,
+        Physical
     }
 
     /// <summary>

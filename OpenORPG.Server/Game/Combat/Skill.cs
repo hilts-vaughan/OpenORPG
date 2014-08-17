@@ -47,7 +47,7 @@ namespace Server.Game.Combat
         /// <summary>
         /// Sets the cooldown time to maximum amount possible
         /// </summary>
-        public void EnableCooldown()
+        public void ResetCooldown()
         {
             Cooldown = _skillTemplate.CooldownTime;
         }

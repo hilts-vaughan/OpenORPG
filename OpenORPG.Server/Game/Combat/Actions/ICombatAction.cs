@@ -10,23 +10,58 @@ namespace Server.Game.Combat.Actions
     /// 
     /// This includes attacking, healing, magic and items that are used.
     /// </summary>
-    public interface ICombatAction
+    public abstract class CombatAction
     {
+
+        
+        protected CombatAction(Character executingCharacter, Skill skill)
+        {
+            ExecutingCharacter = executingCharacter;
+            Skill = skill;
+        }
+
         /// <summary>
         /// Executes the action in the context of all possible combat characters.
         /// </summary>
-        CombatActionResult PerformAction(IEnumerable<Character> combatCharacters);
+        public abstract List<CombatActionResult> PerformAction(IEnumerable<Character> combatCharacters);
+
+        protected List<CombatActionResult> ExecuteSkill(IEnumerable<Character> targets)
+        {
+            var results = new List<CombatActionResult>();
+
+            //TODO: Implement some kind of fall off for AoE attacks so that damage isn't all the same
+            foreach (var target in targets)
+            {
+                var damage = CombatUtility.ComputeDamage(ExecutingCharacter, target, Skill);
+                var damagePayload = new DamagePayload(ExecutingCharacter, damage);
+                target.ApplyDamage(damagePayload);
+
+                var result = new CombatActionResult((long) target.Id, damage);
+                results.Add(result);
+            }
+
+            return results;
+        }
+
+
+        /// <summary>
+        /// Allows an action to specify a custom behaviour when 
+        /// </summary>
+        /// <param name="combatCharacters"></param>
+        /// <returns></returns>
+        protected abstract IEnumerable<Character> AcquireTargets(IEnumerable<Character> combatCharacters);
 
         /// <summary>
         /// The character that will be executing the action in the context.
         /// </summary>
-        Character ExecutingCharacter{ get; set; }
+        public Character ExecutingCharacter{ get; set; }
 
-        Skill Skill { get; set; }
+        public Skill Skill { get; set; }
+            
         /// <summary>
         /// The amount of time remaining before an execution for this skill is possible
         /// </summary>
-        float ExecutionTime { get; set; }
+        public float ExecutionTime { get; set; }
 
     }
 }

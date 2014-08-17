@@ -12,38 +12,29 @@ namespace Server.Game.Combat.Actions
     /// <summary>
     /// Performs logic for a skill that requires a target. This is used for most ranged spells.
     /// </summary>
-    public class TargetSkillAction : ICombatAction
+    public class TargetSkillAction : CombatAction
     {
-        public TargetSkillAction(Character executingCharacter, Skill skill)
+        public TargetSkillAction(Character executingCharacter, Skill skill, ulong targetId) : base(executingCharacter, skill)
         {
-            ExecutingCharacter = executingCharacter;
-            Skill = skill;
+            TargetId = targetId;
         }
 
-        public CombatActionResult PerformAction(IEnumerable<Character> combatCharacters)
+        public ulong TargetId { get; private set; }
+
+        public override List<CombatActionResult> PerformAction(IEnumerable<Character> combatCharacters)
+        {
+            var targets = AcquireTargets(combatCharacters);
+            var results = ExecuteSkill(targets);
+            return results;
+        }
+
+
+        protected override IEnumerable<Character> AcquireTargets(IEnumerable<Character> combatCharacters)
         {
             // Find our target in the list
-            var target = combatCharacters.FirstOrDefault(x => x.Id == ExecutingCharacter.TargetId);
-
-            if (target != null)
-            {
-                // This is the base damage computed as per the base engine; this does not take into account scripts
-                // that may further impact things
-                var damage = CombatUtility.ComputeDamage(ExecutingCharacter, target, Skill);
-
-                //TODO: Come up with a better solution than this; this is a bit ugly
-                target.ApplyDamage(new DamagePayload(ExecutingCharacter, damage));
-
-                return new CombatActionResult((long) target.Id, damage);
-            }
-
-            // -1 means status failed
-            Logger.Instance.Warn("{0} attempted to use a skill on a target but had no target.", ExecutingCharacter.Name);
-            return new CombatActionResult(-1, 0);
+            var target = combatCharacters.Where(x => x.Id == TargetId).ToList();
+            return target;
         }
 
-        public Character ExecutingCharacter { get; set; }
-        public Skill Skill { get; set; }
-        public float ExecutionTime { get; set; }
     }
 }

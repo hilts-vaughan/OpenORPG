@@ -18,7 +18,7 @@ namespace Server.Game.Network.Handlers
         public static void OnHeroSkillUse(GameClient client, ClientUseSkillPacket packet)
         {
             var hero = client.HeroEntity;
-            hero.UseSkill(packet.SkillId, packet.TargetId);
+            hero.UseSkill(packet.SkillId, (long) hero.TargetId);
         }
 
         [PacketHandler(OpCodes.CMSG_ENTITY_TARGET)]

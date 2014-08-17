@@ -15,21 +15,25 @@ namespace Server.Game.Combat.Actions
     /// A target is not required as activation is based solely on the activation.
     /// This is used for melee attacks and simple skills that execute around an area of a user.
     /// </summary>
-    public class ImmediateSkillAction : ICombatAction
+    public class ImmediateSkillAction : CombatAction
     {
-
-        public ImmediateSkillAction(Character executingCharacter, Skill skill)
+        public ImmediateSkillAction(Character executingCharacter, Skill skill) : base(executingCharacter, skill)
         {
-            ExecutingCharacter = executingCharacter;
-            Skill = skill;
         }
 
 
-
-        public CombatActionResult PerformAction(IEnumerable<Character> combatCharacters)
+        public override List<CombatActionResult> PerformAction(IEnumerable<Character> combatCharacters)
         {
-            var validTargets = Skill.SkillTemplate.SkillTargetType;
+ 
+            // Grab a nearby target that is valid
+            var targets = AcquireTargets(combatCharacters);
+            var results = ExecuteSkill(targets);
+            return results;
 
+        }
+
+        protected override IEnumerable<Character> AcquireTargets(IEnumerable<Character> combatCharacters)
+        {
             float highestDistance = float.MaxValue;
             Character target = null;
 
@@ -43,35 +47,8 @@ namespace Server.Game.Combat.Actions
                     target = character;
                 }
             }
-
-            if (target == null)
-                return new CombatActionResult(-1, 0);
-
-            if (!CombatUtility.CanSee(ExecutingCharacter, target))
-                return new CombatActionResult(-1, 0);
-
-            // Depending on the skill type, apply a payload or operation
-            switch (Skill.SkillTemplate.SkillType)
-            {
-                case SkillType.Healing:
-                case SkillType.Enfeebling:
-                case SkillType.None:
-                case SkillType.Enhancing:
-                case SkillType.Elemental:
-                    var damagePayload = new DamagePayload(ExecutingCharacter, 5);
-                    target.ApplyDamage(damagePayload);
-                    return new CombatActionResult((long)target.Id, damagePayload.DamageInflicted);   
-            }
-
-            return new CombatActionResult(-1, 0);
+            return new List<Character>() { target };
         }
 
-        public Character ExecutingCharacter { get; set; }
-        public float ExecutionTime { get; set; }
-
-        /// <summary>
-        /// The skill that is associated with this
-        /// </summary>
-        public Skill Skill { get; set; }
     }
 }
