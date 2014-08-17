@@ -99,8 +99,16 @@ namespace Server.Game
             character.CharacterStats[(int)StatTypes.Intelligence].CurrentValue = template.Intelligence;
             character.CharacterStats[(int)StatTypes.Dexterity].CurrentValue = template.Dexterity;
             character.CharacterStats[(int)StatTypes.Luck].CurrentValue = template.Luck;
+            character.CharacterStats[StatTypes.Mind].CurrentValue = template.Mind;
+
             character.CharacterStats[(int)StatTypes.Hitpoints].CurrentValue = template.Hitpoints;
-            character.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue = template.MaximumHitpoints;         
+            character.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue = template.MaximumHitpoints;
+
+            character.CharacterStats[(int)StatTypes.SkillResource].CurrentValue = template.SkillResource;
+            character.CharacterStats[(int)StatTypes.SkillResource].MaximumValue = template.MaximumSkillResource;         
+
+
+
         }
 
 

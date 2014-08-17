@@ -214,6 +214,10 @@ namespace Server.Game.Combat
             if (!skill.CanUse())
                 return;
 
+            // Check if enough of a skill resource is available
+            if (requestingHero.CharacterStats[StatTypes.SkillResource].CurrentValue < skill.SkillTemplate.SkillCost)
+                return;
+
             // Verify if the target is OK
             if (skill.SkillTemplate.SkillActivationType == SkillActivationType.Target)
             {

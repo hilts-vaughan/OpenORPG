@@ -117,6 +117,11 @@ namespace Server.Game.Network.Handlers
                 hero.Luck = (int)player.CharacterStats[(int)StatTypes.Luck].CurrentValue;
                 hero.Vitality = (int)player.CharacterStats[(int)StatTypes.Vitality].CurrentValue;
                 hero.MaximumHitpoints = (int)player.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue;
+                hero.Mind = (int) player.CharacterStats[StatTypes.Mind].CurrentValue;
+
+                hero.SkillResource = (int) player.CharacterStats[StatTypes.SkillResource].CurrentValue;
+                hero.MaximumSkillResource = (int) player.CharacterStats[StatTypes.SkillResource].MaximumValue;
+
                 hero.Experience = player.Experience;
                 hero.Level = player.Level;
 

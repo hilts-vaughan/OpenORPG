@@ -59,6 +59,10 @@ namespace Server.Game.Database.Seeds
                 character.Strength = 5;
                 character.Hitpoints = 100;
                 character.MaximumHitpoints = 100;
+
+                character.SkillResource = 100;
+                character.MaximumSkillResource = 100;
+
                 character.Level = 1;
                 character.Experience = 0;
 

@@ -47,6 +47,9 @@ namespace Server.Game.Database.Models
         public int Gold { get; set; }
         public int Hitpoints { get; set; }
         public int MaximumHitpoints { get; set; }
+        public int SkillResource { get; set; }
+        public int MaximumSkillResource { get; set; }
+        public int Mind { get; set; }
         public int Luck { get; set; }
 
 

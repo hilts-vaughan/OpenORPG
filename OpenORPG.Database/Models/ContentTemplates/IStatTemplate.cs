@@ -12,8 +12,14 @@ namespace Server.Game.Database.Models.ContentTemplates
         int Dexterity { get; set; }
         int Vitality { get; set; }
         int Intelligence { get; set; }
-        int Hitpoints { get; set; }
+        int Hitpoints { get; set; }        
         int MaximumHitpoints { get; set; }
+
+        int SkillResource { get; set; }
+
+        int MaximumSkillResource { get; set; }
+
+        int Mind { get; set; }
 
         int Luck { get; set; }
     }
