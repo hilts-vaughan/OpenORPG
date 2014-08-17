@@ -581,6 +581,8 @@
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="assets\gamesfiles\items\4.json" />
+    <Content Include="assets\gamesfiles\skills\3.json" />
+    <Content Include="assets\gamesfiles\skills\4.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

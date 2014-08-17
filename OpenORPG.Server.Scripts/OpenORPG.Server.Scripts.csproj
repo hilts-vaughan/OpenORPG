@@ -41,7 +41,18 @@
   <ItemGroup>
     <Compile Include="Combat\Effects\IStatusEffect.cs" />
     <Compile Include="Combat\ICombatScript.cs" />
+    <Compile Include="Combat\ISkillScript.cs" />
+    <Compile Include="Combat\StatusEffectScript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenORPG.Server\OpenORPG.Server.csproj">
+      <Project>{79a11015-b16c-4a65-adc4-fb8406dae5dd}</Project>
+      <Name>OpenORPG.Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Combat\Skills\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

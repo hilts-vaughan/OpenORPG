@@ -47,7 +47,7 @@ namespace Server.Game.Database.Models.ContentTemplates
 
         public SkillCategory SkillCategory { get; set; }
 
-        public ElementalType ElementalType { get; set; }        
+        public SkillAttribute SkillAttribute{ get; set; }        
 
         
 

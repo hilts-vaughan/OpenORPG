@@ -29,10 +29,14 @@ namespace Server.Game.Combat
                 case SkillType.Elemental:
                     damageModifier += GetElementalModifier(user);
                     break;
+                case SkillType.Healing:
+                    damageModifier += GetHealingModifier(user);
+                    damageModifier *= -1;
+                    break;
             }
 
             // Grab the damage modifier
-            damageModifier = Math.Round(damageModifier, 1, MidpointRounding.AwayFromZero);
+            damageModifier = Math.Round(damageModifier, 3, MidpointRounding.AwayFromZero);
 
             var totalDamage = skill.SkillTemplate.Damage * damageModifier;
 
@@ -43,6 +47,12 @@ namespace Server.Game.Combat
         {
             var stats = GetCharacterStats(user);
             return stats[StatTypes.Intelligence].CurrentValue / 10f;
+        }
+
+        private static float GetHealingModifier(Character user)
+        {
+            var stats = GetCharacterStats(user);
+            return stats[StatTypes.Mind].CurrentValue / 5f;
         }
 
 

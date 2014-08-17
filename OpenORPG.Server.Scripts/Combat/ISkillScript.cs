@@ -40,7 +40,7 @@ namespace OpenORPG.Server.Scripts.Combat
         /// <returns></returns>
         public virtual int OnComputeDamage(Character attacker, Character victim, int damage)
         {
-            
+            return damage;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace OpenORPG.Server.Scripts.Combat
         /// <param name="victim"></param>
         public virtual void OnSkillFinished(Character attacker, Character victim)
         {
-            
+
         }
 
 

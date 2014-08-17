@@ -6,6 +6,12 @@
 
             var style = FontFactory.getDamageFont();
 
+            if (damage < 0) {
+                damage *= -1;
+                style.fill = "#00CC00";
+            }
+
+
             // Setup the important things here
             super(entity.game, 0, 0, damage.toString(), style);
 

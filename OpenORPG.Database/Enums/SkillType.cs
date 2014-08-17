@@ -2,7 +2,7 @@
 
 namespace OpenORPG.Database.Enums
 {
-    public enum ElementalType
+    public enum SkillAttribute
     {
         Fire,
         Ice,
@@ -23,7 +23,8 @@ namespace OpenORPG.Database.Enums
         Elemental,
         Enfeebling,
         Enhancing,
-        Healing
+        Healing,
+        Divine
     }
 
     /// <summary>
@@ -32,8 +33,9 @@ namespace OpenORPG.Database.Enums
     public enum SkillCategory
     {
         Weapon,
-        Black,
-        White,
+        BlackMagic,
+        WhiteMagic,
+        Ability,
         Ninjutsu
     }
 

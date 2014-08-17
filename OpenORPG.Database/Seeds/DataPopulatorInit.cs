@@ -53,6 +53,8 @@ namespace Server.Game.Database.Seeds
                 // Add a basic attack to this character
                 character.Skills.Add(new UserSkill(1));
                 character.Skills.Add(new UserSkill(2));
+                character.Skills.Add(new UserSkill(3));
+                character.Skills.Add(new UserSkill(4));
 
                 character.Strength = 5;
                 character.Hitpoints = 100;
@@ -146,6 +148,19 @@ namespace Server.Game.Database.Seeds
             banish.IconId = 112;
             banish.CooldownTime = 10;
             context.SkillTemplates.Add(banish);
+
+            var fire = new SkillTemplate(SkillType.Elemental, SkillTargetType.Enemy, SkillActivationType.Target, 3, 5,
+                "Deals a small amount of fire damage to a foe.", 3, "Fire");
+            fire.CooldownTime = 5;
+            fire.IconId = 45;
+            context.SkillTemplates.Add(fire);
+
+            var heal = new SkillTemplate(SkillType.Healing, SkillTargetType.Players, SkillActivationType.Target, 1, 10,
+                "Restores a small amount of HP to a character.", 4, "Cure");
+            heal.CooldownTime = 9;
+            heal.IconId = 99;
+            context.SkillTemplates.Add(heal);
+
         }
 
         private void CreateTestQuests(GameDatabaseContext context)

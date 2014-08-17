@@ -20,7 +20,7 @@ namespace OpenORPG.Server.Scripts.Combat
         /// <param name="target"></param>
         public virtual void OnTick(Character target)
         {
-            
+
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace OpenORPG.Server.Scripts.Combat
         /// <returns></returns>
         public virtual int OnCalculateSkillDamage(Character afflictedCharacter, Character target, Skill skill, int damage)
         {
-                        
+            return damage;
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace OpenORPG.Server.Scripts.Combat
         public virtual int OnCalculateDamageTaken(Character afflictedCharacter, Character aggressor, Skill skill,
             int damage)
         {
-            
+            return damage;
         }
 
 
