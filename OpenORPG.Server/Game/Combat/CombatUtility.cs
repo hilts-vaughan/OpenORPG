@@ -33,6 +33,9 @@ namespace Server.Game.Combat
                     damageModifier += GetHealingModifier(user);
                     damageModifier *= -1;
                     break;
+                case SkillType.Physical:
+                    damageModifier += GetPhysicalModifier(user);
+                    break;                    
             }
 
             // Grab the damage modifier
@@ -41,6 +44,12 @@ namespace Server.Game.Combat
             var totalDamage = skill.SkillTemplate.Damage * damageModifier;
 
             return (int)totalDamage;
+        }
+
+        private static double GetPhysicalModifier(Character user)
+        {
+            var stats = GetCharacterStats(user);
+            return stats[StatTypes.Strength].CurrentValue/1.5f;
         }
 
         private static float GetElementalModifier(Character user)

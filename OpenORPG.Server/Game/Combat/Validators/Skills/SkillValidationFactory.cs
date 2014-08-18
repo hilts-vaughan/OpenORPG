@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenORPG.Database.Enums;
 using Server.Game.Entities;
 using Server.Utils.SpecificationPattern;
 
@@ -28,7 +29,8 @@ namespace Server.Game.Combat.Validators.Skills
             result &= EvaluateRequirementsForAllSkillTypes(container);
 
             // If your skill has a target, apply the below validators
-            result &= EvaluateRequirementsForTargetSkillTypes(container);
+            if (skill.SkillTemplate.SkillActivationType == SkillActivationType.Target)
+                result &= EvaluateRequirementsForTargetSkillTypes(container);
 
             return result;
         }

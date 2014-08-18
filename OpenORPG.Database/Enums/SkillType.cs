@@ -19,7 +19,6 @@ namespace OpenORPG.Database.Enums
     /// </summary>
     public enum SkillType
     {
-        None,
         Elemental,
         Enfeebling,
         Enhancing,

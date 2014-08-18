@@ -144,7 +144,7 @@ namespace Server.Game.Database.Seeds
 
         private void CreateTestSkills(GameDatabaseContext context)
         {
-            var attack = new SkillTemplate(SkillType.None, SkillTargetType.Enemy, SkillActivationType.Immediate, 0, 1, "Slay mighty foes!", 1, "Attack");
+            var attack = new SkillTemplate(SkillType.Physical, SkillTargetType.Enemy, SkillActivationType.Immediate, 0, 1, "Slay mighty foes!", 1, "Attack");
             context.SkillTemplates.Add(attack);
 
             var banish = new SkillTemplate(SkillType.Elemental, SkillTargetType.Enemy, SkillActivationType.Target, 0,

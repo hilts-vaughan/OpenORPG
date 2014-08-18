@@ -45,6 +45,11 @@ namespace Server.Game.Database.Models.ContentTemplates
 
 
         /// <summary>
+        /// The script you want to attach to this skill
+        /// </summary>
+        public string Script { get; set; }
+
+        /// <summary>
         /// The distance this skill can target
         /// </summary>
         public int Distance { get; set; }
