@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Server.Game.Combat;
+﻿using Server.Game.Combat;
 using Server.Game.Entities;
 
-namespace OpenORPG.Server.Scripts.Combat
+namespace Server.Infrastructure.Scripting.Combat
 {
     /// <summary>
     /// This is an interface in which all skill scripts will optionally over-ride when
     /// </summary>
-    public abstract class SkillScript
+    public class SkillScript
     {
         private readonly Skill _skill;
 
-        protected SkillScript(Skill skill)
+        public SkillScript(Skill skill)
         {
             _skill = skill;
         }
@@ -50,9 +45,14 @@ namespace OpenORPG.Server.Scripts.Combat
         /// </summary>
         /// <param name="attacker"></param>
         /// <param name="victim"></param>
-        public virtual void OnSkillFinished(Character attacker, Character victim)
+        public virtual void OnSkillFinished(Character attacker)
         {
 
+        }
+
+        public virtual void OnDamageFinished(Character attack, Character victim, int damageDealt)
+        {
+            
         }
 
 

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Entities;
+using Server.Infrastructure.Scripting;
+using Server.Infrastructure.Scripting.Combat;
 
 namespace Server.Game.Combat
 {
@@ -26,10 +28,14 @@ namespace Server.Game.Combat
 
         public long Id
         {
-            get { return SkillTemplate.Id;  }
+            get { return SkillTemplate.Id; }
         }
 
-       
+        /// <summary>
+        /// 
+        /// </summary>
+        public SkillScript Script { get; private set; }
+
         /// <summary>
         /// Returns the skill template in use by this skill
         /// </summary>
@@ -42,6 +48,7 @@ namespace Server.Game.Combat
         public Skill(SkillTemplate skillTemplate)
         {
             _skillTemplate = skillTemplate;
+            Script = ScriptLoader.Instance.GetSkillScript(this);
         }
 
         /// <summary>

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Server.Game.Combat;
+﻿using Server.Game.Combat;
 using Server.Game.Entities;
 
-namespace OpenORPG.Server.Scripts.Combat
+namespace Server.Infrastructure.Scripting.Combat
 {
     /// <summary>
     /// Provides a way of extending the behavior of a basic status effect from the game core. 
     /// </summary>
-    public abstract class StatusEffectScript
+    public class StatusEffectScript
     {
 
         /// <summary>

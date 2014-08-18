@@ -32,20 +32,34 @@ namespace Server.Game.Combat.Actions
             //TODO: Implement some kind of fall off for AoE attacks so that damage isn't all the same
             foreach (var target in targets)
             {
+                if (target == null)
+                    continue;
+
+                // Compute the damage from normal means
                 var damage = CombatUtility.ComputeDamage(ExecutingCharacter, target, Skill);
+
+                // Now allow scripts to intercept the damage as a whole and do what they'd like to it
+                // Most scripts will choose to simply return this but sometimes modifications will be made
+                damage = Skill.Script.OnComputeDamage(ExecutingCharacter, target, damage);
+
                 var damagePayload = new DamagePayload(ExecutingCharacter, damage);
                 target.ApplyDamage(damagePayload);
+
+                // If it's important to do something like apply an effect, let the script do it
+                Skill.Script.OnDamageFinished(ExecutingCharacter, target, damage);
 
                 var result = new CombatActionResult((long) target.Id, damage);
                 results.Add(result);
             }
+
+            Skill.Script.OnSkillFinished(ExecutingCharacter);
 
             return results;
         }
 
 
         /// <summary>
-        /// Allows an action to specify a custom behaviour when 
+        /// Allows an action to specify a custom behavior when 
         /// </summary>
         /// <param name="combatCharacters"></param>
         /// <returns></returns>
