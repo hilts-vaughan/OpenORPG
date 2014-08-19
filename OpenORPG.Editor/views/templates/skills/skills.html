@@ -1,0 +1,29 @@
+﻿<div class="starter-template jumbotron">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <p class="lead">Filters</p>
+
+            <div class="input-group">
+                <span class="input-group-addon">Name</span>
+                <input type="text" class="form-control" ng-model="search.name" placeholder="Something the skills name may contain...">
+                <span class="input-group-addon">Description</span>
+                <input type="text" class="form-control" ng-model="search.description" placeholder="Something the skills description may contain...">
+                <span class="input-group-addon">Notes</span>
+                <input type="text" class="form-control" ng-model="search.notes" placeholder="Something the skills notes may contain...">
+            </div>
+
+   
+            <br />
+
+
+            <!---Includes an index view here for us to use for viewing data, the actual data needs to be seeded from the main view though--->
+            <content-index-directive index-container="itemContainer" filter="search"> <content-index-directive />
+
+
+
+        </div>
+    </div>
+
+</div>

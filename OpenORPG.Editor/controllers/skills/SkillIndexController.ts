@@ -22,14 +22,14 @@
 
             var controller = this;
 
-            $scope.itemContainer = new IndexContainer<Models.Item>();
+            $scope.itemContainer = new IndexContainer<any>();
             $scope.itemContainer.type = "skills";
 
             $scope.newItem = function () {
 
 
                 controller.addProduct(null, function (data) {
-                    $location.path("/items/" + data.id);
+                    $location.path("/skills/" + data.id);
                 });
             };
 

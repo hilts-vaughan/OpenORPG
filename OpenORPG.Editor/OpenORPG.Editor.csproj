@@ -317,14 +317,17 @@
     <Content Include="views\templates\dashboard.html" />
     <Content Include="views\templates\iconpicker.html" />
     <Content Include="views\templates\index_table.html" />
-    <Content Include="views\templates\items.html" />
-    <Content Include="views\templates\items_details.html" />
+    <Content Include="views\templates\items\items.html" />
+    <Content Include="views\templates\items\items_details.html" />
+    <Content Include="views\templates\skills\skills.html" />
+    <Content Include="views\templates\skills\skill_details.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="controllers\ItemController.ts" />
     <TypeScriptCompile Include="controllers\ItemIndexController.ts" />
+    <TypeScriptCompile Include="controllers\skills\SkillController.ts" />
     <TypeScriptCompile Include="controllers\skills\SkillIndexController.ts" />
     <TypeScriptCompile Include="directives\ContentIndexDirective.ts" />
     <TypeScriptCompile Include="models\IndexContainer.ts" />
@@ -359,7 +362,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Server\App_Data\" />
-    <Folder Include="views\templates\items\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Server\App_Start\WebApiConfig.cs" />

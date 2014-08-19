@@ -24,24 +24,24 @@ editorApp.config(function ($routeProvider) {
         })
 
         .when('/skills', {
-            templateUrl: 'views/templates/skills.html',
-            controller: 'Controllers.SkillIndexScope'
+            templateUrl: 'views/templates/skills/skills.html',
+            controller: 'Controllers.SkillIndexController'
         })
 
-        .when('/skills/:itemId',
+        .when('/skills/:id',
         {
-            templateUrl: 'views/templates/skill_details.html',
+            templateUrl: 'views/templates/skills/skill_details.html',
             controller: 'Controllers.SkillController'
         })
 
         .when('/items', {
-            templateUrl: 'views/templates/items.html',
+            templateUrl: 'views/templates/items/items.html',
             controller: 'Items.ItemIndexController'
         })
 
         .when('/items/:itemId',
         {
-            templateUrl: 'views/templates/items_details.html',
+            templateUrl: 'views/templates/items/items_details.html',
             controller: 'Items.ItemController'
         });
 

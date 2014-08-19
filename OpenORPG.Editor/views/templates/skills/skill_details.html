@@ -1,0 +1,152 @@
+﻿<!-- Columns are always 50% wide, on mobile and desktop -->
+<div class="item-details row">
+    <div class="col-lg-12">
+
+        <h1 style="padding-left: 32px;">Editing a skill</h1>
+
+        <div class="jumbotron editor-container">
+
+
+
+
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="panel-primary">
+
+
+
+                        <div class="panel-heading">General Settings</div>
+                        <br />
+                        
+                        
+                        <form>
+
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon">Name</span>
+                                        <input type="text" ng-model="skill.name" ng-change="console.log(skill.name)" class="form-control" placeholder="A name for this item" required>
+                                    </div>
+                                </div><!-- /.col-lg-6 -->
+
+
+                            </div><!-- /.row -->
+
+
+                            <div class="row">
+
+
+
+
+                                <div class="col-lg-12">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon">Description</span>
+                                        <textarea ng-model='skill.description' id="textarea" placeholder="Enter a short description for players to see"></textarea>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="row">
+
+
+
+
+                                <div class="col-lg-12">
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon">Notes</span>
+                                        <textarea ng-model='skill.notes' id="textarea" placeholder="Enter some short notes for other developers"></textarea>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-lg-12">
+
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon">Skill Type</span>
+                                        <select>
+                                            <option>Default</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon">Target   Type</span>
+                                        <select>
+                                            <option>Default</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="input-group input-group-sm">
+                                        <span class="input-group-addon">Resource Cost</span>
+                                        <input type="number"> </>
+                                    </div>
+                                    
+                                    <div class="input-group input-group-sm">
+                                        
+                                        <span class="input-group-addon">Resource Cost</span>
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" ng-model="item.tpPercent">
+                                        </span>
+
+                                        <span class="input-group-addon">Resource Cost</span>
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" ng-model="item.tpPercent">
+                                        </span>
+                                        
+                                        <span class="input-group-addon">Resource Cost</span>
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" ng-model="item.tpPercent">
+                                        </span>
+                                        
+                                        <span class="input-group-addon">Resource Cost</span>
+                                        <span class="input-group-addon">
+                                            <input type="checkbox" ng-model="item.tpPercent">
+                                        </span>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+                        </form>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+            <button type="button" ng-click="save()" class="btn btn-success">Save</button>
+
+        </div>
+
+
+
+
+
+    </div>
