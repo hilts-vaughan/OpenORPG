@@ -316,6 +316,7 @@
     <Content Include="views\templates\about.html" />
     <Content Include="views\templates\dashboard.html" />
     <Content Include="views\templates\iconpicker.html" />
+    <Content Include="views\templates\index_table.html" />
     <Content Include="views\templates\items.html" />
     <Content Include="views\templates\items_details.html" />
     <Content Include="web.config" />
@@ -324,6 +325,9 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="controllers\ItemController.ts" />
     <TypeScriptCompile Include="controllers\ItemIndexController.ts" />
+    <TypeScriptCompile Include="controllers\skills\SkillIndexController.ts" />
+    <TypeScriptCompile Include="directives\ContentIndexDirective.ts" />
+    <TypeScriptCompile Include="models\IndexContainer.ts" />
     <TypeScriptCompile Include="models\Item.ts" />
     <TypeScriptCompile Include="Scripts\angular-route.d.ts" />
     <TypeScriptCompile Include="Scripts\angular.d.ts" />

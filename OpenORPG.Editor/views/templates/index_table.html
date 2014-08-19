@@ -1,0 +1,36 @@
+﻿<button type="button" ng-click="newItem()" class="btn btn-success">New...</button>
+<br />
+
+<table class="table table-striped">
+    <thead>
+        <tr class="text-center">
+            <th class="text-center">ID</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Description</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr class="item-row" ng-repeat=" item in container.items | filter:search:strict">
+            <td style="width: 60px;">{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td style="max-width: 200px;">{{item.description | limitTo : 255}}</td>
+            <td>
+
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Edit</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a ng-href="#{{$parent.container.type}}/{{item.id}}">Edit</a></li>
+
+                    </ul>
+                </div>
+
+
+            </td>
+        </tr>
+    </tbody>
+</table>

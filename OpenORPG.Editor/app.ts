@@ -23,6 +23,17 @@ editorApp.config(function ($routeProvider) {
             controller: 'aboutController'
         })
 
+        .when('/skills', {
+            templateUrl: 'views/templates/skills.html',
+            controller: 'Controllers.SkillIndexScope'
+        })
+
+        .when('/skills/:itemId',
+        {
+            templateUrl: 'views/templates/skill_details.html',
+            controller: 'Controllers.SkillController'
+        })
+
         .when('/items', {
             templateUrl: 'views/templates/items.html',
             controller: 'Items.ItemIndexController'
@@ -36,6 +47,7 @@ editorApp.config(function ($routeProvider) {
 
 
 });
+
 
 // create the controller and inject Angular's $scope
 editorApp.controller('mainController', function ($scope) {
