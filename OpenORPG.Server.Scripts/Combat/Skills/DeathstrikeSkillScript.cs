@@ -16,8 +16,7 @@ namespace OpenORPG.Server.Scripts.Combat.Skills
     [GameScript("Skill_Deathstrike")]
     public class DeathstrikeSkillScript : SkillScript
     {
-        public DeathstrikeSkillScript(Skill skill)
-            : base(skill)
+        public DeathstrikeSkillScript()
         {
         }
 

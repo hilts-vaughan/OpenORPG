@@ -116,7 +116,7 @@ namespace Server.Game.Database.Seeds
 
             bronzeSword.EquipmentSlot = EquipmentSlot.Weapon;
             bronzeSword.Damage = 6;
-            bronzeSword.IconId = 43;
+            bronzeSword.IconId = 43;            
 
             context.ItemTemplates.Add(bronzeSword);
 
@@ -157,6 +157,7 @@ namespace Server.Game.Database.Seeds
                 "Deals a small amount of fire damage to a foe.", 3, "Fire");
             fire.CooldownTime = 5;
             fire.IconId = 45;
+            fire.Script = "Skill_Deathstrike";
             context.SkillTemplates.Add(fire);
 
             var heal = new SkillTemplate(SkillType.Healing, SkillTargetType.Self | SkillTargetType.Ally, SkillActivationType.Target, 1, 10,

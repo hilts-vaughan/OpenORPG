@@ -8,9 +8,14 @@ namespace Server.Infrastructure.Scripting.Combat
     /// </summary>
     public class SkillScript
     {
-        private readonly Skill _skill;
+        private  Skill _skill;
 
-        public SkillScript(Skill skill)
+        public SkillScript()
+        {
+
+        }
+
+        public void Init(Skill skill)
         {
             _skill = skill;
         }

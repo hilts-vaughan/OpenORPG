@@ -58,6 +58,8 @@ namespace Server.Game.Database.Models.ContentTemplates
         public SkillTargetType  SkillTargetType { get; set; }
         public SkillActivationType SkillActivationType { get; set; }
 
+        public string Rawr { get; set; }
+
         public SkillCategory SkillCategory { get; set; }
 
         public SkillAttribute SkillAttribute{ get; set; }        
