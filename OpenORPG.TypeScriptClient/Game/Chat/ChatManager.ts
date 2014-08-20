@@ -4,18 +4,27 @@
     export class ChatManager {
 
         private _chatChannels: Array<ChatChannel> = new Array<ChatChannel>();
+        private commandParser = new CommandParser();
+        private chatCommandHandler: ChatCommandHandler = new ChatCommandHandler();
+
         private _chatLogElement: string = "chatlog";
         private channelColorMap: Array<string> = new Array<string>();
 
         constructor() {
             // Hook into the DOM
-            $("#chatmessage").on('keypress', (event: JQueryEventObject) => {
+            $(document).on('keypress', "#chatmessage", (event: JQueryEventObject) => {
                 if (event.which == 13) {
 
-                    var packet = PacketFactory.createChatPacket(0, $("#chatmessage").val());
-                    NetworkManager.getInstance().sendPacket(packet);
-                    $("#chatmessage").val("");
+                    var message: string = $("#chatmessage").val();
+                    var command: CommandType = this.commandParser.parseMessageType(message);
 
+                    if (command == CommandType.UnknownCommand) {
+                        this.sendMessageToServer(message);
+                    } else {
+                        this.chatCommandHandler.handleCommand(command, message);
+                    }
+
+                    $("#chatmessage").val(""); // clear chat box
                     event.preventDefault();
                 }
             });
@@ -30,6 +39,11 @@
             });
 
             this.setupNetworkHandlers();
+        }
+
+        sendMessageToServer(message: string) {
+            var packet = PacketFactory.createChatPacket(0, message);
+            NetworkManager.getInstance().sendPacket(packet);
         }
 
         setupNetworkHandlers() {
@@ -63,6 +77,13 @@
                 var message: string = LocaleManager.getInstance().getString(messageType, args);
                 this.addMessage(message, "", ChannelType.System);
             });
+
+
+            // Setup our handlers for doing stuff here; not sure how we'll support more broad commands as of yet
+            this.chatCommandHandler.registerCallback(CommandType.Echo, (args: Array<string>) => {
+                this.addMessage(args.join(" "), "", ChannelType.System);
+            }
+                );
 
         }
 

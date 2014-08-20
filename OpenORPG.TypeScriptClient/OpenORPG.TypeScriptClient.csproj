@@ -155,7 +155,10 @@
     <Content Include="assets\ui\scroll.png" />
     <Content Include="assets\ui\wood.png" />
     <TypeScriptCompile Include="Game\Chat\ChatChannel.ts" />
+    <TypeScriptCompile Include="Game\Chat\ChatCommandHandler.ts" />
     <TypeScriptCompile Include="Game\Chat\ChatManager.ts" />
+    <TypeScriptCompile Include="Game\Chat\CommandType.ts" />
+    <TypeScriptCompile Include="Game\Chat\CommandParser.ts" />
     <TypeScriptCompile Include="Game\Combat\CharacterStats.ts" />
     <TypeScriptCompile Include="Game\Combat\Skill.ts" />
     <TypeScriptCompile Include="Game\Combat\StatTypes.ts" />

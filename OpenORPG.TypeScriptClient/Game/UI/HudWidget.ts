@@ -122,7 +122,7 @@
 
     export class ChatWidget extends HudWidget {
 
-        private chatManager: ChatManager;
+
 
         constructor(canvas: JQuery) {
             super(canvas, "assets/templates/widgets/chat.html");
@@ -130,7 +130,7 @@
 
         onLoaded() {
 
-            this.chatManager = new ChatManager();
+      
 
             // Do some basic key bindings
 

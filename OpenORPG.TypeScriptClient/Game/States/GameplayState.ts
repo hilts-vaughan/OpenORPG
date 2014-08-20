@@ -15,6 +15,7 @@ module OpenORPG {
         private chatWidget: ChatWidget;
         private menuWidget: MenuTrayWidget;
         private questWindow: QuestWindow = new QuestWindow();
+        private chatManager: ChatManager;
 
         // Keep track of character info
         private playerInfo: PlayerInfo = new PlayerInfo();
@@ -36,7 +37,7 @@ module OpenORPG {
 
 
             this.playerMonitor = new PlayerInfoMontior(this.playerInfo);
-
+            this.chatManager = new ChatManager();
        
 
             this.characterHud = new CharacterStatusWidget($("#canvasholder"), this.playerInfo);
