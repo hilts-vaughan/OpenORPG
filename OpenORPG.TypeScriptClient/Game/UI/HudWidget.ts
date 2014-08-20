@@ -80,6 +80,7 @@
         private inventoryWindow: InventoryWindow;
         private characterWindow: CharacterWindow;
         private questListWindow: QuestListWindow;
+        private settingsWindow : SettingsWindow;
 
         private playerInfo: PlayerInfo;
 
@@ -92,6 +93,7 @@
             this.inventoryWindow = new InventoryWindow();
             this.characterWindow = new CharacterWindow(this.playerInfo);
             this.questListWindow = new QuestListWindow();
+            this.settingsWindow = new SettingsWindow();
 
             var that = this;
 
@@ -106,6 +108,10 @@
 
             this.container.find(".menu-item-achievements").on("click", () => {
                 that.questListWindow.toggleVisibility();
+            });
+
+            this.container.find(".menu-item-settings").on("click", () => {
+                that.settingsWindow.toggleVisibility();
             });
 
             this.container.find(".menu-item-skills").on("click", () => {

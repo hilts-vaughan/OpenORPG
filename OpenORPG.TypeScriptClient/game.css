@@ -108,6 +108,10 @@ canvas {
                 background-image: url("assets/img/achi.png");
             }
 
+                 #menu-tray .menu-bar .icon-holder .menu-item-settings {
+                background-image: url("assets/img/settings.png");
+            }
+
 
 
 
@@ -420,6 +424,13 @@ canvas {
 #skill-window {
     width: 480px;
     height: 300px;
+    background-color: rgba(9, 22, 27, 1);
+    overflow: hidden;
+}
+
+#setting-window {
+    width: 480px;
+    height: 300px;
     background-color: rgba(9, 22, 27, 0.9);
     overflow: hidden;
 }
@@ -656,7 +667,7 @@ canvas {
 
 /* Inventory stuff starts here, have fun! */
 
-#inventorydialog, #quest-dialog, #skill-dialog, #quest-list-dialog {
+#inventorydialog, #quest-dialog, #skill-dialog, #quest-list-dialog, #settings-dialog {
     padding: 0px;
         font-family: "AdvoCut";
 }
@@ -936,3 +947,78 @@ img {
 #Itemlevel, #ItemTypex {
     margin: 0;
 }
+
+
+
+
+
+
+
+
+
+.tabs input[type=radio] {
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+      }
+      .tabs {
+        width: 650px;
+        float: none;
+        list-style: none;
+        position: relative;
+        padding: 0;
+        margin: 0 auto;
+      }
+      .tabs li{
+        float: left;
+      }
+      .tabs label {
+          display: block;
+          padding: 10px 20px;
+          border-radius: 2px 2px 0 0;
+          color: gray;
+          font-size: 14px;
+          font-weight: normal; 
+          background: rgba(255,255,255,0.1);
+          cursor: pointer;
+          position: relative;
+          top: 5px;
+          -webkit-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+          -o-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
+      }
+      .tabs label:hover {
+        background: rgba(255,255,255,0.05);
+      }
+       
+      [id^=tab]:checked + label {
+        background: black;
+        color: white;
+ 
+      }
+       
+      [id^=tab]:checked ~ [id^=tab-content] {
+          display: block;
+      }
+      .tab-content{
+        z-index: 2;
+        display: none;
+        text-align: left;
+        width: 100%;
+        font-size: 20px;
+        line-height: 140%;
+        padding-top: 10px;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 15px;
+        color: white;
+        position: absolute;
+        top: 39px;
+        left: 0;
+        box-sizing: border-box;
+        -webkit-animation-duration: 0.5s;
+        -o-animation-duration: 0.5s;
+        -moz-animation-duration: 0.5s;
+        animation-duration: 0.5s;
+          height: 250px;
+      }

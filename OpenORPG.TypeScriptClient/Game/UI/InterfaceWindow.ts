@@ -82,6 +82,14 @@
 
     }
 
+    export class SettingsWindow extends InterfaceWindow {
+        
+        constructor() {
+            super("assets/hud/settings.html", "#settings-dialog");
+        }
+
+    }
+
     /*
      * A window that is used for displaying quest related stuff
      */

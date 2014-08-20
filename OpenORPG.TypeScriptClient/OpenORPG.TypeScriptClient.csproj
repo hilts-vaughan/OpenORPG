@@ -52,6 +52,7 @@
     <Content Include="assets\hud\itemtooltip.html" />
     <Content Include="assets\hud\quest.html" />
     <Content Include="assets\hud\quest_list.html" />
+    <Content Include="assets\hud\settings.html" />
     <Content Include="assets\hud\skills.html" />
     <Content Include="assets\hud\slot.png" />
     <Content Include="assets\iconsheet.png" />
@@ -62,6 +63,7 @@
     <Content Include="assets\img\hand.png" />
     <Content Include="assets\img\quest_icon.png" />
     <Content Include="assets\img\sword.png" />
+    <Content Include="assets\img\settings.png" />
     <Content Include="assets\img\target_selector.png" />
     <Content Include="assets\items\1.png" />
     <Content Include="assets\items\2.png" />
