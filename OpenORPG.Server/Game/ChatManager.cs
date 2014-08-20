@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Server.Game.Entities;
 using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Server;
 
@@ -25,8 +26,19 @@ namespace Server.Game
         {
             foreach (var client in Clients)
             {
-                client.Send(messagePacket);
+                SendToClient(messagePacket, client);
             }
+        }
+
+        private static void SendToClient(ServerChatMessagePacket messagePacket, GameClient client)
+        {
+            client.Send(messagePacket);
+        }
+
+        public void SendMessageToAllBut(ServerChatMessagePacket messagePacket, Player player)
+        {
+            foreach (var client in Clients.Where(x => x.HeroEntity.Id != player.Id))
+                SendToClient(messagePacket, client);
         }
 
 

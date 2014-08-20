@@ -55,6 +55,8 @@ namespace Server.Game.Chat
 
         /// <summary>
         /// Handles a message from an external service, a bit of a dirty hack but it works.
+        /// 
+        /// Returns whether or not a command was parsed
         /// //TODO: Refactor me to be more decoupled from the actual handlers and be more resilent
         /// </summary>
         /// <param name="player"></param>
