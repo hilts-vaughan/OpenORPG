@@ -21,8 +21,7 @@
          */
         private generateMessageLookup() : void {
             this.addCommandToLookup("/echo", CommandType.Echo);
-            this.addCommandToLookup("/fps", CommandType.Fps);
-            this.addCommandToLookup("/logout", CommandType.Logout);
+            this.addCommandToLookup("/fps", CommandType.Fps);            
         }
 
         /*

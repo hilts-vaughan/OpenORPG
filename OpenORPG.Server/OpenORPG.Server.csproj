@@ -90,6 +90,10 @@
     <Compile Include="Game\AI\BasicAi.cs" />
     <Compile Include="Game\AI\Fight\CombatAi.cs" />
     <Compile Include="Game\ChatManager.cs" />
+    <Compile Include="Game\Chat\ChatService.cs" />
+    <Compile Include="Game\Chat\CommandParser.cs" />
+    <Compile Include="Game\Chat\Handlers\ChatHandlerAttribute.cs" />
+    <Compile Include="Game\Chat\Handlers\CommandHandler.User.cs" />
     <Compile Include="Game\Combat\ActionExecutor.cs" />
     <Compile Include="Game\Combat\ActionGenerator.cs" />
     <Compile Include="Game\Combat\Actions\ImmediateSkillAction.cs" />
@@ -286,7 +290,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Game\Chat\" />
     <Folder Include="Game\Combat\Events\" />
     <Folder Include="Infrastructure\AI\" />
   </ItemGroup>

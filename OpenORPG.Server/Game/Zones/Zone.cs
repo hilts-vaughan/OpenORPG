@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Server.Game.AI;
+using Server.Game.Chat;
 using Server.Game.Combat;
 using Server.Game.Database.Models;
 using Server.Game.Entities;
@@ -184,6 +185,7 @@ namespace Server.Game.Zones
             GameSystems.Add(new AiSystem(this));
             GameSystems.Add(new ZoneEntityMonitorSystem(this));
             GameSystems.Add(new LevelService(this));
+            GameSystems.Add(new ChatService(this));
         }
 
 
