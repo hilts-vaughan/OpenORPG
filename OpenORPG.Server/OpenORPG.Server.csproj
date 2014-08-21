@@ -287,15 +287,6 @@
     </None>
     <None Include="packages.config" />
     <Content Include="Infrastructure\Scripting\README.TXT" />
-    <Content Include="web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <None Include="web.Debug.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
-    <None Include="web.Release.config">
-      <DependentUpon>web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Game\Combat\Events\" />

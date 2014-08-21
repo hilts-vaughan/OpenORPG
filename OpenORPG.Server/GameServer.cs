@@ -36,6 +36,8 @@ namespace Server
         public GameServer()
         {
             SetupPacketHandlers();
+            var x = typeof(System.Data.Entity.SqlServer.SqlProviderServices);
+
         }
 
         /// <summary>
