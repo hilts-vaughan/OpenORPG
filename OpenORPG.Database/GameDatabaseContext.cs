@@ -43,6 +43,7 @@ namespace Server.Game.Database
         }
     }
 
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class GameDatabaseContext : DbContext
     {
         static GameDatabaseContext()
