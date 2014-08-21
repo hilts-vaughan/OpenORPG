@@ -132,6 +132,9 @@ module OpenORPG {
                 this.questWindow.presentQuest(packet.questId);
             });
 
+
+            // Ready! Tell the server to bring it on
+            network.sendPacket(PacketFactory.createGameLoadedPacket());
         }
 
         update() {

@@ -25,6 +25,20 @@ using TiledSharp;
 
 namespace Server.Game.Zones
 {
+
+    public class ZoneLoginItem
+    {
+        public Player Player { get; set; }
+
+        public bool Ready { get; set; }
+
+        public ZoneLoginItem(Player player)
+        {
+            Player = player;
+            Ready = false;
+        }
+    }
+
     public class GameClientCollection : IEnumerable<GameClient>
     {
         private readonly List<GameClient> _internalList;
@@ -283,9 +297,30 @@ namespace Server.Game.Zones
             return (T)GameSystems.First(sys => sys.GetType() == typeof(T));
         }
 
+        List<Player> _pendingLogin = new List<Player>();
+
+        public void QueueLogin(Player player)
+        {
+            _pendingLogin.Add(player);
+
+            // Assign the world so we know where they belong
+            player.Zone = this;
+        }
+
+        public void TryAndAddPlayer(Player player)
+        {
+            //TODO: We should probably clean this up if they're idle too long or disconnect
+
+            var found = _pendingLogin.FirstOrDefault(x => x.Id == player.Id);
+
+            if (found != null)
+                AddEntity(player);
+            else
+                Logger.Instance.Warn("Attempted to login a player that wasn't waiting in queue.");
+        }
+
         public void AddEntity(Entity entity)
         {
-            // Assign the world
             entity.Zone = this;
             _toAdd.Add(entity);
             NotifySystemsAdd(entity);
@@ -362,11 +397,17 @@ namespace Server.Game.Zones
 
             }
 
-
             _toRemove.Clear();
             _toAdd.Clear();
 
             SyncEntityProperties();
+
+
+            // Add new players if we need to
+            foreach (var item in _pendingLogin)
+            {
+
+            }
 
             // Update each game system
             GameSystems.ForEach(x => x.Update((float)deltaTime.TotalSeconds));

@@ -46,7 +46,8 @@
         SMSG_STAT_CHANGE = 37,
         SMSG_SKILL_CHANGE = 38,
         SMSG_QUEST_SEND_LIST = 39,
-        CMSG_ENTITY_TARGET = 40
+        CMSG_ENTITY_TARGET = 40,
+        CMSG_GAME_LOADED = 41
        
     }
 

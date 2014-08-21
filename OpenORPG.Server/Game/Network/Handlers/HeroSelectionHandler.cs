@@ -63,12 +63,10 @@ namespace Server.Game.Network.Handlers
                     var response = new ServerHeroSelectResponsePacket(HeroStatus.OK);
                     client.Send(response);
 
-                    Thread.Sleep(500);
+                    // Here, we should queue the player for login
 
                     Logger.Instance.Info("{0} has entered the game.", hero.Name);
-                    zone.AddEntity(heroObject);
-
-                
+                    zone.QueueLogin(heroObject);                    
 
                     // Add to global manager
                     ChatManager.Current.Global.Join(client);
@@ -122,6 +120,15 @@ namespace Server.Game.Network.Handlers
             client.Send(new ServerHeroCreateResponsePacket(HeroStatus.OK));
 
             SendHeroList(client);
+        }
+
+        [PacketHandler(OpCodes.CMSG_GAME_LOADED)]
+        public static void OnCharacterCreate(GameClient client, ClientLoadingFinishedPacket packet)
+        {
+            var player = client.HeroEntity;
+            var zone = player.Zone;
+
+            zone.TryAndAddPlayer(player);
         }
 
         public static void SendHeroList(GameClient client)
