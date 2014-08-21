@@ -3,8 +3,6 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Core.Common;
 using System.Data.Entity.Migrations.History;
-using System.Data.SQLite;
-using System.Data.SQLite.EF6;
 using System.Reflection;
 using MySql.Data.Entity;
 using Server.Game.Database.Maps;
