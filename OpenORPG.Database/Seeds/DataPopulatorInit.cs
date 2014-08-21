@@ -15,7 +15,7 @@ namespace Server.Game.Database.Seeds
     /// <summary>
     ///     A custom initializer that populates the game database with mock data useful for testing, clean, good known states.
     /// </summary>
-    public class CustomInitializer : DropCreateDatabaseIfModelChanges<GameDatabaseContext>  // DropCreateDatabaseAlways<GameDatabaseContext>   //  // 
+    public class CustomInitializer : DropCreateDatabaseAlways<GameDatabaseContext>  // DropCreateDatabaseAlways<GameDatabaseContext>   //  // 
     {
 
 
