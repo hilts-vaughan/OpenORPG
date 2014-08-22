@@ -22,7 +22,7 @@ namespace Server.Utils
 
         public static string MapExtension
         {
-            get { return ".TMX"; }
+            get { return ".tmx"; }
         }
 
 
@@ -36,7 +36,7 @@ namespace Server.Utils
 
         public static string SpritesPath
         {
-            get { return "sprites"; }
+            get { return "sprites" + Path.PathSeparator; }
         }
     }
 }
