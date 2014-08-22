@@ -36,7 +36,7 @@ namespace Server.Utils
 
         public static string SpritesPath
         {
-            get { return "sprites" + Path.PathSeparator; }
+            get { return "sprites" + Path.DirectorySeparatorChar; }
         }
     }
 }
