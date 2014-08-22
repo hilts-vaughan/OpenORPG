@@ -114,7 +114,7 @@ namespace Server
         private void StartZones()
         {
 
-            var mapPath = PathHelper.AssetBasePath + PathHelper.MapPath;
+            var mapPath = Path.Combine(PathHelper.AssetBasePath, PathHelper.MapPath);
             int count = 0;
             try
             {
