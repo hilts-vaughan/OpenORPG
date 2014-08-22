@@ -46,19 +46,19 @@ namespace Server
         private void SetupPacketHandlers()
         {
             ReflectionHelper.GetMethodsWithAttritube<PacketHandlerAttribute>((method, attribute) =>
-                {
-                    OpCodes opCode = attribute.OpCode;
+            {
+                OpCodes opCode = attribute.OpCode;
 
-                    Type packetType = method.GetParameters()[1].ParameterType;
-                    Delegate del =
-                        Delegate.CreateDelegate(typeof(Action<,>).MakeGenericType(typeof(GameClient), packetType),
-                                                method);
-                    var handler =
-                        (IPacketHandler)
-                        Activator.CreateInstance(typeof(PacketHandler<>).MakeGenericType(packetType), del);
+                Type packetType = method.GetParameters()[1].ParameterType;
+                Delegate del =
+                    Delegate.CreateDelegate(typeof(Action<,>).MakeGenericType(typeof(GameClient), packetType),
+                                            method);
+                var handler =
+                    (IPacketHandler)
+                    Activator.CreateInstance(typeof(PacketHandler<>).MakeGenericType(packetType), del);
 
-                    _packetHandlers.Add(opCode, handler);
-                });
+                _packetHandlers.Add(opCode, handler);
+            });
         }
 
         public void Update()
@@ -80,7 +80,7 @@ namespace Server
                 IPacketHandler handler = _packetHandlers[task.Packet.OpCode];
                 handler.Invoke(task.Client, task.Packet);
             }
-         
+
 
         }
 
@@ -114,7 +114,7 @@ namespace Server
         private void StartZones()
         {
 
-            var mapPath = PathHelper.AssetBasePath + PathHelper.MapPath;
+            var mapPath = Path.Combine(PathHelper.AssetBasePath, PathHelper.MapPath);
             int count = 0;
             try
             {
