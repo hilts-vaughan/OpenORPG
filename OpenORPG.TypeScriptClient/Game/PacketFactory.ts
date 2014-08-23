@@ -46,8 +46,8 @@
 
     export function createInteractionRequest() {
          return {
-             opCode: OpenORPG.OpCode.CMSG_INTERACT_REQUEST,
-             data: "Something to fill up space"
+            opCode: OpenORPG.OpCode.CMSG_INTERACT_REQUEST,
+            data: "Something to fill up space"
         }
     }
 
@@ -67,7 +67,7 @@
             destSlot: dest,
             type: stype
         }
-       
+
     }
 
     export function createStorageDropRequest(slotId: number, amount: number) {
@@ -103,6 +103,13 @@
         return {
             opCode: OpenORPG.OpCode.CMSG_ENTITY_TARGET,
             entityId: targetId
+        }
+    }
+
+    export function createGameLoadedPacket() {
+        return {
+            opCode: OpenORPG.OpCode.CMSG_GAME_LOADED,
+            payload: "OK"
         }
     }
 
