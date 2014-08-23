@@ -32,7 +32,7 @@
          * feedback for clients that are subscribing. 
          */
         onEntityAdded(entity: Entity) {
-            
+
         }
 
         /*
@@ -40,7 +40,7 @@
          * feedback for clients that are subscribing.
          */
         onEntityRemoved(entity: Entity) {
-            
+
         }
 
     }
@@ -51,7 +51,7 @@
         private interactKey: Phaser.Key;
 
         private player: Entity;
-        private targetEntity : Entity;
+        private targetEntity: Entity;
         private playerInfo: PlayerInfo;
 
         constructor(zone: Zone, player: Entity, playerInfo: PlayerInfo) {
@@ -118,8 +118,12 @@
          * This method is called when an entity has been selected.
          * The system will handle what will happen.
          */
-        private handleSelection(entity : Entity) {
-            this.selectTarget(entity);
+        private handleSelection(entity: Entity) {
+            if (this.targetEntity == entity) {
+                this.targetEntity.performDeselection();
+                this.targetEntity = null;
+            } else
+                this.selectTarget(entity);
         }
 
         private selectTarget(entity: Entity) {
@@ -250,10 +254,10 @@
             this.sendZoneChangeRequest(Direction.West);
         }
 
-       private sendZoneChangeRequest(direction: Direction) {
-           var network = NetworkManager.getInstance();
-           network.sendPacket(PacketFactory.createZoneRequestChange(direction));
-       }
+        private sendZoneChangeRequest(direction: Direction) {
+            var network = NetworkManager.getInstance();
+            network.sendPacket(PacketFactory.createZoneRequestChange(direction));
+        }
 
         update() {
             // If we're not viewing anything, quit
@@ -336,10 +340,10 @@
                 entity.direction = packet.direction;
 
                 var properties =
-                {
-                    x: position.x,
-                    y: position.y
-                }
+                    {
+                        x: position.x,
+                        y: position.y
+                    }
 
                 // Start the tween immediately
                 this.parent.game.add.tween(entity).to(properties, MovementSystem.MOVEMENT_TICKET_FREQUENCY + 50, Phaser.Easing.Linear.None, true);
