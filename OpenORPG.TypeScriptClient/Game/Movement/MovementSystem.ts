@@ -181,7 +181,7 @@
 
     export class MovementSystem extends GameSystem {
 
-        private static MOVEMENT_TICKET_FREQUENCY: number = 500;
+        private static MOVEMENT_TICKET_FREQUENCY: number = 200;
         private static current: MovementSystem = null;
 
         private timerToken: number;
