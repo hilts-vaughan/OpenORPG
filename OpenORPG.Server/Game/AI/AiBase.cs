@@ -180,7 +180,7 @@ namespace Server.Game.AI
             Current = newPosition;
 
 
-            if (_acc > 0.5f)
+            if (_acc > 0.2f)
             {
                 _acc = 0f;
                 Character.Position = Current;
