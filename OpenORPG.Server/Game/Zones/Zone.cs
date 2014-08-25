@@ -88,8 +88,7 @@ namespace Server.Game.Zones
 
         private Rectangle topZoneArea, bottomZoneArea, leftZoneArea, rightZoneArea;
 
-        // A simple tracker for tracking player quests
-        private QuestRequirementTracker _questRequirementTracker = new QuestRequirementTracker();
+       
 
         public Zone(long id)
         {
@@ -331,9 +330,6 @@ namespace Server.Game.Zones
             foreach (GameSystem system in GameSystems)
                 system.OnEntityAdded(entity);
 
-            if (entity is Monster)
-                _questRequirementTracker.OnMonsterAdded(entity as Monster);
-
 
         }
 
@@ -342,8 +338,7 @@ namespace Server.Game.Zones
             foreach (GameSystem system in GameSystems)
                 system.OnEntityRemoved(entity);
 
-            if (entity is Monster)
-                _questRequirementTracker.OnMonsterRemoved(entity as Monster);
+ 
         }
 
         /// <summary>
@@ -527,10 +522,6 @@ namespace Server.Game.Zones
         public ChatChannel ChatChannel { get; set; }
 
 
-        private void HeroEntityOnAcceptedQuest(UserQuestInfo userquestinfo, Player player)
-        {
-            _questRequirementTracker.NotifyBeginTracking(userquestinfo, player);
-        }
 
 
         protected void OnClientLeave(GameClient client)
@@ -538,8 +529,7 @@ namespace Server.Game.Zones
             // Get the player
             var player = client.HeroEntity;
 
-            player.AcceptedQuest -= HeroEntityOnAcceptedQuest;
-            _questRequirementTracker.UnloadPlayer(player);
+
 
             GameClients.Remove(client);
             ChatChannel.Leave(client);
@@ -553,9 +543,6 @@ namespace Server.Game.Zones
             GameClients.Add(client);
             ChatChannel.Join(client);
 
-
-            _questRequirementTracker.LoadPlayer(heroEntity);
-            heroEntity.AcceptedQuest += HeroEntityOnAcceptedQuest;
 
             string name = heroEntity.Name;
 
