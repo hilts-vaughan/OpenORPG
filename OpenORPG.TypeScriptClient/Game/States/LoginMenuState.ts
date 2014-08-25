@@ -20,7 +20,7 @@
 
             });
 
-            if (Settings.autoLoginSet()) {
+            if (Settings.getInstance().autoLoginSet) {
                 var options = this.game.net.getQueryString("username");
   
 
