@@ -16,15 +16,17 @@ namespace Server.Infrastructure.Quests
     /// </summary>
     public class Quest
     {
+
         /// <summary>
-        /// A list of starting requirements before this quest can be offered
+        /// A list of steps that a user must take part in in order to finish a quest.
+        /// </summary>
+        public List<QuestStep> Steps { get; private set; }
+
+        /// <summary>
+        /// A list of starting requirements before this quest can be offered to a particular user.
         /// </summary>
         public List<IQuestRequirement> StartRequirements { get; private set; }
 
-        /// <summary>
-        /// A list of requirements to finish this quest
-        /// </summary>
-        public List<IQuestRequirement> FinishRequirements { get; private set; }
 
         /// <summary>
         /// A list of rewards this quest may give upon completion. 
@@ -53,7 +55,6 @@ namespace Server.Infrastructure.Quests
 
             // Load up requirements
             LoadStartRequirements(questTable);
-            LoadFinishRequirements(questTable);
             LoadRewards(questTable);
 
         }
@@ -91,11 +92,9 @@ namespace Server.Infrastructure.Quests
             if (!canGive)
                 return false;
 
-            // Take all the requirements if they have been given their rewards
-            TakeAllRequirements(player);
 
             // Mark this quest as complete
-            questInfo.State = QuestState.Finished;            
+            questInfo.State = QuestState.Finished;
 
 
             return true;
@@ -121,11 +120,6 @@ namespace Server.Infrastructure.Quests
         }
 
 
-        private void TakeAllRequirements(Player player)
-        {
-            foreach (var requirement in FinishRequirements)
-                requirement.TakeRequirements(player);
-        }
 
         /// <summary>
         /// Runs through all the requirements and verifies whether or not
@@ -137,8 +131,8 @@ namespace Server.Infrastructure.Quests
         {
             bool validated = true;
 
-            foreach (var requirement in FinishRequirements)
-                validated = validated & requirement.HasRequirements(player);
+            foreach (var step in Steps)
+                validated &= step.IsRequirementsMet(player);
 
             return validated;
         }
@@ -149,26 +143,6 @@ namespace Server.Infrastructure.Quests
             StartRequirements = new List<IQuestRequirement>();
         }
 
-        private void LoadFinishRequirements(QuestTemplate questTable)
-        {
-            FinishRequirements = new List<IQuestRequirement>();
-
-            // If we have some monster requirements
-            if (questTable.EndMonsterRequirements != null)
-            {
-                var monsterRequirements = new QuestMonstersKilledRequirement(questTable.EndMonsterRequirements);
-                FinishRequirements.Add(monsterRequirements);
-            }
-
-            // Check for item requirements
-            if (questTable.EndItemRequirements != null)
-            {
-                var itemRequirements = new QuestHasItemRequirement(questTable.EndItemRequirements);
-                FinishRequirements.Add(itemRequirements);
-            }
-
-
-        }
 
 
     }

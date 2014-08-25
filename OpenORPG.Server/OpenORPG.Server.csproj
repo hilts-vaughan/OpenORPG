@@ -249,13 +249,15 @@
     <Compile Include="Infrastructure\Pathfinding\GraphNode.cs" />
     <Compile Include="Infrastructure\Quests\IQuestProvider.cs" />
     <Compile Include="Infrastructure\Quests\Quest.cs" />
-    <Compile Include="Infrastructure\Quests\QuestState.cs" />
+    <Compile Include="Infrastructure\Quests\QuestStep.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirement.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirementTable.cs" />
+    <Compile Include="Infrastructure\Quests\Requirements\QuestCompletedRequirement.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\QuestHasItemRequirement.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\QuestMonstersKilledRequirement.cs" />
     <Compile Include="Infrastructure\Quests\Rewards\ExperienceQuestReward.cs" />
     <Compile Include="Infrastructure\Quests\Rewards\IQuestReward.cs" />
+    <Compile Include="Infrastructure\Quests\Rewards\ItemQuestReward.cs" />
     <Compile Include="Infrastructure\Scripting\Combat\SkillScript.cs" />
     <Compile Include="Infrastructure\Scripting\Combat\StatusEffectScript.cs" />
     <Compile Include="Infrastructure\Scripting\GameScriptAttribute.cs" />
