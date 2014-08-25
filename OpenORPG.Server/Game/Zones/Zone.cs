@@ -199,6 +199,7 @@ namespace Server.Game.Zones
             GameSystems.Add(new ZoneEntityMonitorSystem(this));
             GameSystems.Add(new LevelService(this));
             GameSystems.Add(new ChatService(this));
+            GameSystems.Add(new QuestService(this));
         }
 
 

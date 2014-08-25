@@ -54,7 +54,10 @@ namespace Server.Game.Quests
 
         private void OnPlayerAdded(Player player)
         {
+            // Track stuff that quest requirements might need updating on
             player.AcceptedQuest += PlayerOnAcceptedQuest;
+         
+
             _questRequirementTracker.LoadPlayer(player);
         }
 

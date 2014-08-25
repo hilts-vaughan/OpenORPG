@@ -16,6 +16,20 @@ namespace Server.Game.Storage
     /// </summary>
     public class ItemStorage
     {
+        public delegate void ItemEvent(Item item, long slotId, long amount);
+
+        /// <summary>
+        /// This event is triggered when an item is added to this storage.
+        /// </summary>
+        public event ItemEvent ItemAdded;
+
+        protected virtual void OnItemAdded(Item item, long slotid, long amount)
+        {
+            ItemEvent handler = ItemAdded;
+            if (handler != null) handler(item, slotid, amount);
+        }
+
+
         private Dictionary<long, ItemSlot> _storage = new Dictionary<long, ItemSlot>();
 
         public Dictionary<long, ItemSlot> Storage
@@ -108,9 +122,8 @@ namespace Server.Game.Storage
         {
             var freeSlot = GetNextFreeSlotId();
             if (freeSlot > -1)
-            {
-                _storage.Add(freeSlot, new ItemSlot(item, amount));
-                return true;
+            {                
+                return TryAddItemAt(item, amount, freeSlot);
             }
 
             return false;
@@ -121,6 +134,10 @@ namespace Server.Game.Storage
             if (IsSlotFree(slotId))
             {
                 _storage.Add(slotId, new ItemSlot(item, amount));
+                
+                // Trigger an event
+                OnItemAdded(item, slotId, amount);
+
                 return true;
             }
 
