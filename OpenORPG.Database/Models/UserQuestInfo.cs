@@ -16,11 +16,16 @@ namespace Server.Game.Database.Models
     [Table("user_quest_info")]
     public class UserQuestInfo
     {
+        public UserQuestInfo()
+        {
+            State = QuestState.InProgress;            
+        }
+
         [Key]
         [Required]
         public long UserQuestInfoId { get; set; }
 
-        public long QuestId { get; set; }
+        public int QuestId { get; set; }
 
         /// <summary>
         /// This marks the current state of a quest for a user.

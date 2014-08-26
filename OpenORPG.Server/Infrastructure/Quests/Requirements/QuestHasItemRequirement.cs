@@ -20,7 +20,8 @@ namespace Server.Infrastructure.Quests.Requirements
         }
 
         public QuestItemRequirementTable RequirementInfo { get; set; }
-        public QuestProgress GeQuestProgress(Player player)
+
+        public QuestProgress GetQuestProgress(Player player)
         {
             //TODO Implement this progress amount properly
             return new QuestProgress(0, 0);

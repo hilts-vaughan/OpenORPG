@@ -25,7 +25,7 @@ namespace Server.Infrastructure.Quests.Requirements
         /// Evaluates given the current context the current progress of a particular objective.
         /// </summary>
         /// <returns></returns>
-        QuestProgress GeQuestProgress(Player player);
+        QuestProgress GetQuestProgress(Player player);
 
     }
 

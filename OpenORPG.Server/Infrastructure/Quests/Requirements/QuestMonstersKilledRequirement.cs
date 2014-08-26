@@ -18,23 +18,19 @@ namespace Server.Infrastructure.Quests.Requirements
 
         public QuestMonsterRequirementTable RequirementInfo { get; set; }
 
-        public QuestProgress GeQuestProgress(Player player)
+        public QuestProgress GetQuestProgress(Player player)
         {
-            var quest = player.QuestInfo.First(x => x.QuestId == RequirementInfo.QuestStep.Quest.QuestTemplateId);
-            return new QuestProgress(quest.MobsKilled, RequirementInfo.MonsterAmount);
+            return new QuestProgress(0, RequirementInfo.MonsterAmount);
         }
 
         public bool HasRequirements(Player player)
         {
-            var quest = player.QuestInfo.First(x => x.QuestId == RequirementInfo.QuestStep.Quest.QuestTemplateId);
-            return quest.MobsKilled == RequirementInfo.MonsterAmount;
+            return false;
         }
 
         public void TakeRequirements(Player player)
         {
-            // Reset the mob count in case this quest can be repeated
-            var quest = player.QuestInfo.First(x => x.QuestId == RequirementInfo.QuestStep.Quest.QuestTemplateId);
-            quest.MobsKilled = 0;
+          
         }
 
     }

@@ -76,7 +76,7 @@ namespace Server.Infrastructure.Quests
         public bool TryCompleteQuest(Player player)
         {
             // Verify the player actually has this quest
-            var questInfo = player.QuestInfo.FirstOrDefault(x => x.QuestId == QuestId);
+            var questInfo = player.QuestLog.GetQuestLogEntry(QuestId);
 
             if (questInfo == null)
                 return false;

@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Server.Game.Database.Models;
+using Server.Game.Quests;
 using Server.Infrastructure.Network.Packets;
 
 namespace Server.Game.Network.Packets.Server
 {
     public struct ServerSendQuestListPacket : IPacket
     {
-        public List<UserQuestInfo> Quests { get; private set; }
+        public QuestLog QuestLog { get; private set; }
 
-        public ServerSendQuestListPacket(List<UserQuestInfo> quests) : this()
+        public ServerSendQuestListPacket(QuestLog questLog) : this()
         {
-            Quests = quests;
+            QuestLog = questLog;
         }
-
 
         public OpCodes OpCode
         {

@@ -23,7 +23,7 @@ namespace Server.Infrastructure.Quests.Requirements
 
         public bool HasRequirements(Player player)
         {
-            var quest = player.QuestInfo.FirstOrDefault(x => x.QuestId == QuestId);
+            var quest = player.QuestLog.FirstOrDefault(x => x.Quest.QuestId == QuestId);
 
             if (quest != null)
                 return quest.State == QuestState.Finished;

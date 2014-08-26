@@ -11,6 +11,7 @@ using Server.Game.Database.Models;
 using Server.Game.Items;
 using Server.Game.Items.Equipment;
 using Server.Game.Network.Packets.Server;
+using Server.Game.Quests;
 using Server.Game.Storage;
 using Server.Infrastructure.Logging;
 using Server.Infrastructure.Quests;
@@ -18,8 +19,6 @@ using Server.Infrastructure.World;
 
 namespace Server.Game.Entities
 {
-    public delegate void QuestEvent(UserQuestInfo userQuestInfo, Player player);
-
     public delegate void SkillEvent(Skill skill, Player player);
 
     public delegate void EquipmentEvent(Equipment equipment, Player player, EquipmentSlot slot);
@@ -31,7 +30,7 @@ namespace Server.Game.Entities
     public class Player : Character
     {
 
-        public event QuestEvent AcceptedQuest;
+ 
         public event EquipmentEvent EquipmentChanged;
         public event SkillEvent LearnedSkill;
         public event ItemEvent BackpackChanged;
@@ -68,13 +67,6 @@ namespace Server.Game.Entities
         {
             EquipmentEvent handler = EquipmentChanged;
             if (handler != null) handler(equipment, player, slot);
-        }
-
-
-        protected virtual void OnAcceptedQuest(UserQuestInfo userquestinfo, Player player)
-        {
-            QuestEvent handler = AcceptedQuest;
-            if (handler != null) handler(userquestinfo, player);
         }
 
         public int Experience
@@ -121,7 +113,9 @@ namespace Server.Game.Entities
             Client = client;
             Backpack = new ItemStorage();
             Bank = new ItemStorage();
-            QuestInfo = new List<UserQuestInfo>();
+
+            // Allow extraction of the quest information
+            QuestLog = new QuestLog(userHero.QuestInfo);
 
             using (var context = new GameDatabaseContext())
             {
@@ -142,11 +136,7 @@ namespace Server.Game.Entities
                 }
 
 
-                // Add the state of the quest world to the user
-                foreach (var questEntry in userHero.QuestInfo)
-                {
-                    QuestInfo.Add(questEntry);
-                }
+           
 
                 foreach (var eq in userHero.Equipment)
                 {
@@ -202,9 +192,9 @@ namespace Server.Game.Entities
         /// <summary>
         /// A bank is a players storage, usually it can hold a lot more than the standard backpack.
         /// </summary>
-        public ItemStorage Bank { get; set; }
+        public ItemStorage Bank { get; private set; }
 
-        public List<UserQuestInfo> QuestInfo { get; set; }
+        public QuestLog QuestLog { get; private set; }
 
         public void PerformLevelUp()
         {
@@ -212,11 +202,6 @@ namespace Server.Game.Entities
             Experience = 0;
         }
 
-        public void AddQuest(UserQuestInfo questInfo)
-        {
-            QuestInfo.Add(questInfo);
-            OnAcceptedQuest(questInfo, this);
-        }
 
         public void AddSkill(Skill skill)
         {

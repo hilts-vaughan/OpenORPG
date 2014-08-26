@@ -131,18 +131,16 @@ namespace Server.Game.Network.Handlers
 
                 //context.SaveChanges();
 
-                foreach (var questInfo in player.QuestInfo)
+                foreach (var entry in player.QuestLog)
                 {
 
 
                     var quest = new UserQuestInfo()
                     {
-                        QuestId = questInfo.QuestId,
-                        State = questInfo.State,
-                        UserQuestInfoId = questInfo.UserQuestInfoId,
-                        UserHero = hero,
-                        MobsKilled = questInfo.MobsKilled
-
+                        QuestId = entry.QuestInfo.QuestId,
+                        State = entry.State,
+                        UserQuestInfoId = entry.QuestInfo.UserQuestInfoId,
+                        UserHero = hero
                     };
 
                     hero.QuestInfo.Add(quest);

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Server.Game.Database.Models;
 using Server.Game.Entities;
 using Server.Infrastructure.Logging;
+using Server.Infrastructure.Quests;
 
 namespace Server.Game.Quests
 {
@@ -30,16 +31,15 @@ namespace Server.Game.Quests
             _requirementInfo.Add((long)player.Id, new List<MonsterKillInfo>());
 
 
-            foreach (var questInfo in player.QuestInfo)
+            foreach (var questEntry in player.QuestLog)
             {
-                MonitorQuest(player, questInfo);
+                MonitorQuest(player, questEntry.Quest);
             }
         }
 
-        private void MonitorQuest(Player player, UserQuestInfo questInfo)
+        private void MonitorQuest(Player player, Quest quest)
         {
-            var list = _requirementInfo[(long)player.Id];
-            var quest = QuestManager.Instance.GetQuest(questInfo.QuestId);
+            var list = _requirementInfo[(long)player.Id];           
             //var info = new MonsterKillInfo(quest.QuestTableId, quest.EndMonsterRequirements.MonsterId,
             //    quest.EndMonsterRequirements.MonsterAmount);
             // list.Add(info);
@@ -77,16 +77,19 @@ namespace Server.Game.Quests
                     // If we know they match, find the according quest in the user
                     if (killInfo.MonsterId == monster.MonsterTemplateId)
                     {
-                        foreach (var questInfo in player.QuestInfo)
+                        foreach (var questInfo in player.QuestLog)
                         {
-                            if (questInfo.QuestId == killInfo.QuestId)
+                            if (questInfo.Quest.QuestId == killInfo.QuestId)
                             {
-                                questInfo.MobsKilled++;
+                                //questInfo.MobsKilled++;
 
-                                if (questInfo.MobsKilled > killInfo.MonsterAmount)
-                                    questInfo.MobsKilled = killInfo.MonsterAmount;
+                                //if (questInfo.MobsKilled > killInfo.MonsterAmount)
+                                  //  questInfo.MobsKilled = killInfo.MonsterAmount;
 
-                                Logger.Instance.Debug("{0} has killed an objective mob. Total count: {1}", player.Name, questInfo.MobsKilled);
+                                // Logger.Instance.Debug("{0} has killed an objective mob. Total count: {1}", player.Name, questInfo.MobsKilled);
+
+                                //TODO: We should trigger a refresh of quest objectives if we can                                
+
 
                             }
                         }
@@ -100,9 +103,9 @@ namespace Server.Game.Quests
         }
 
 
-        public void NotifyBeginTracking(UserQuestInfo userQuestInfo, Player player)
+        public void NotifyBeginTracking(Quest quest, Player player)
         {
-            MonitorQuest(player, userQuestInfo);
+            MonitorQuest(player, quest);
         }
 
     }

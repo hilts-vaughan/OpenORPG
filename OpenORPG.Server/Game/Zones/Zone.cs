@@ -556,7 +556,7 @@ namespace Server.Game.Zones
             var packet = new ServerSkillChangePacket(heroEntity.Skills);
             heroEntity.Client.Send(packet);
 
-            var questUpdate = new ServerSendQuestListPacket(heroEntity.QuestInfo);
+            var questUpdate = new ServerSendQuestListPacket(heroEntity.QuestLog);
             heroEntity.Client.Send(questUpdate);
 
 

@@ -58,7 +58,9 @@ namespace Server.Game.Zones
             player.CharacterStats.CurrentValueChanged += CharacterStatsOnCurrentValueChanged;
             player.LearnedSkill += PlayerOnLearnedSkill;
             player.BackpackChanged += PlayerOnBackpackChanged;
-            player.AcceptedQuest += PlayerOnAcceptedQuest;
+            
+            //TODO: Renable me
+            //player.AcceptedQuest += PlayerOnAcceptedQuest;
             player.ExperienceChanged += PlayerOnExperienceChanged;
             player.LevelChanged += PlayerOnLevelChanged;            
         }
@@ -94,7 +96,7 @@ namespace Server.Game.Zones
 
         private void PlayerOnAcceptedQuest(UserQuestInfo userQuestInfo, Player player)
         {
-            var questUpdate = new ServerSendQuestListPacket(player.QuestInfo);
+            var questUpdate = new ServerSendQuestListPacket(player.QuestLog);
             player.Client.Send(questUpdate);
         }
 
@@ -146,7 +148,11 @@ namespace Server.Game.Zones
             player.CharacterStats.CurrentValueChanged -= CharacterStatsOnCurrentValueChanged;
             player.LearnedSkill -= PlayerOnLearnedSkill;
             player.BackpackChanged -= PlayerOnBackpackChanged;
-            player.AcceptedQuest -= PlayerOnAcceptedQuest;
+
+            
+            //TODO: Re-enable me
+            //player.AcceptedQuest -= PlayerOnAcceptedQuest;
+            
             player.ExperienceChanged -= PlayerOnExperienceChanged;
             player.LevelChanged -= PlayerOnLevelChanged;
         }

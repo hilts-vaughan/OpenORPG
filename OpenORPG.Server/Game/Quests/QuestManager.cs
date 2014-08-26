@@ -40,9 +40,9 @@ namespace Server.Game.Quests
         public bool CanPlayerGetQuest(Quest quest, Player player)
         {
             // If the player has the quest completed already, decline
-            foreach (var questInfo in player.QuestInfo)
+            foreach (var entry in player.QuestLog)
             {
-                if (questInfo.QuestId == quest.QuestId && questInfo.State != QuestState.Available)
+                if (entry.Quest.QuestId == quest.QuestId && entry.State != QuestState.Available)
                     return false;
             }
 
@@ -66,19 +66,11 @@ namespace Server.Game.Quests
         /// <param name="player"></param>
         public void GivePlayerQuest(Quest quest, Player player)
         {
-            var questInfo = player.QuestInfo.FirstOrDefault(x => x.QuestId == quest.QuestId);
 
-            // If the user already has this quest, reset the flag... otherwise add it
-            if (questInfo == null)
-            {
-                var newEntry = new UserQuestInfo() { QuestId = quest.QuestId, State = QuestState.InProgress };
-                player.AddQuest(newEntry);
-            }
-            else
-            {
-                questInfo.State = QuestState.InProgress;
-            }
+            // Attempt to give a quest to the player
+            player.QuestLog.TryAddQuest(quest);
 
+            // Send a notification to let them know
             var message = new ServerSendGameMessagePacket(GameMessage.NewQuest);
             player.Client.Send(message);
 
