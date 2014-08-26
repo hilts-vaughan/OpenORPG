@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 namespace OpenORPG.Database.Models.Quests.Rewards
 {
 
+    [Table("quest_rewards")]
     public abstract class QuestReward
     {
 

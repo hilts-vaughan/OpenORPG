@@ -112,6 +112,7 @@
   <ItemGroup>
     <Folder Include="DAL\Caches\" />
     <Folder Include="Maps\Quests\" />
+    <Folder Include="Models\Stats\" />
     <Folder Include="Repository\" />
   </ItemGroup>
   <ItemGroup>

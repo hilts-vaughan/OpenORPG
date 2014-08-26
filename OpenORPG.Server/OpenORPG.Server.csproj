@@ -207,6 +207,7 @@
     <Compile Include="Game\Items\Item.cs" />
     <Compile Include="Game\Items\Storage\ItemStorage.cs" />
     <Compile Include="Game\NPC\Discussion.cs" />
+    <Compile Include="Game\Quests\QuestList.cs" />
     <Compile Include="Game\Quests\QuestManager.cs" />
     <Compile Include="Game\Quests\QuestRequirementTracker.cs" />
     <Compile Include="Game\Quests\QuestService.cs" />
