@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Server.Game.Database.Models
     /// <summary>
     /// A stateful and meaningful way of storing the progress of quests in the world for heroes.
     /// </summary>
+    [Table("user_quest_info")]
     public class UserQuestInfo
     {
         [Key]

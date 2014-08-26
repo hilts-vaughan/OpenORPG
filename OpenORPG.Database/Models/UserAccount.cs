@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Server.Game.Database.Models
 {
     /// <summary>
     ///     The user account contains information pertaining to a particular account
     /// </summary>
+    [Table("user_account")]
     public class UserAccount
     {
         public UserAccount(string username, string password, string email)
