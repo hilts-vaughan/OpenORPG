@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Server.Game.Database.Models.ContentTemplates;
 
 namespace Server.Game.Database.Models
@@ -9,6 +10,7 @@ namespace Server.Game.Database.Models
     /// <summary>
     ///     A UserHero contains information pertaining to a particular hero; a <see cref="UserAccount" /> may contain several of these
     /// </summary>
+    [Table("user_characters")]
     public class UserHero : IStatTemplate
     {
         public UserHero(UserAccount account, int positionX, int positionY, long id, string name)

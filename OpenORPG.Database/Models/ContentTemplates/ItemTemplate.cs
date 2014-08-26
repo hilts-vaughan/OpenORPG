@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using Inspire.Shared.Models.Enums;
 using OpenORPG.Database.Enums;
 
@@ -8,6 +9,7 @@ namespace Server.Game.Database.Models.ContentTemplates
     /// <summary>
     ///     An item template
     /// </summary>
+    [Table("item_templates")]
     public class ItemTemplate : IContentTemplate
     {
         public ItemTemplate(long id, string name, string description, ItemType type, int price, bool consumed,

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace Server.Game.Database.Models
 {
+
+    [Table("user_inventory")]
     public class UserItem
     {
      

@@ -1,5 +1,8 @@
-﻿namespace Server.Game.Database.Models.ContentTemplates
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Server.Game.Database.Models.ContentTemplates
 {
+    [Table("monster_template")]
     public class MonsterTemplate : IContentTemplate, IStatTemplate
     {
         public long Id { get; set; }

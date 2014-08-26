@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenORPG.Database.Models.Quests
 {
-    [Table("QuestRequirements")]
+    [Table("quest_requirements")]
     public abstract class QuestRequirement
     {
 
