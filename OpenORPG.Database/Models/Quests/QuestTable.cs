@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenORPG.Database.Enums;
+using OpenORPG.Database.Models.Quests;
 using Server.Game.Database.Models.ContentTemplates;
 
 namespace Server.Game.Database.Models.Quests
@@ -20,7 +21,7 @@ namespace Server.Game.Database.Models.Quests
         ///  A unique ID for this quest
         /// </summary>
 
-        public long QuestTableId { get; set; }
+        public long QuestTemplateId { get; set; }
 
 
 
@@ -42,10 +43,7 @@ namespace Server.Game.Database.Models.Quests
 
         public virtual ICollection<ItemTemplate> RewardItems { get; set; }
 
-        public virtual QuestItemRequirementTable EndItemRequirements { get; set; }
-
-
-        public virtual QuestMonsterRequirementTable EndMonsterRequirements { get; set; }
+        public virtual ICollection<QuestStepsTable> QuestSteps { get; set; } 
 
         public virtual NpcTemplate QuestStarter { get; set; }
 

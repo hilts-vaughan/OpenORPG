@@ -106,10 +106,10 @@ namespace Server.Game.Quests
             using (var context = new GameDatabaseContext())
             {
 
-                var quest = context.Quests.First(x => x.QuestTableId == id);
+                var quest = context.Quests.First(x => x.QuestTemplateId == id);
 
-                context.Entry(quest).Reference(x => x.EndMonsterRequirements).Load();
-                context.Entry(quest).Reference(x => x.EndItemRequirements).Load();
+                //context.Entry(quest).Reference(x => x.EndMonsterRequirements).Load();
+                //context.Entry(quest).Reference(x => x.EndItemRequirements).Load();
                 context.Entry(quest).Collection(x => x.RewardItems).Load();
 
 

@@ -5,6 +5,7 @@ using System.Data.Entity.Core.Common;
 using System.Data.Entity.Migrations.History;
 using System.Reflection;
 using MySql.Data.Entity;
+using OpenORPG.Database.Models.Quests;
 using Server.Game.Database.Maps;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
@@ -70,13 +71,21 @@ namespace Server.Game.Database
         public DbSet<MonsterTemplate> MonsterTemplates { get; set; }
         public DbSet<SkillTemplate> SkillTemplates { get; set; }
         public DbSet<ItemTemplate> ItemTemplates { get; set; }
+
+        // quest related stuff
+
         public DbSet<QuestTemplate> Quests { get; set; }
+        
+        //public DbSet<QuestRequirement> QuestRequirements { get; set; }
+
 
         public DbSet<NpcTemplate> Npcs { get; set; }
 
         public DbSet<UserQuestInfo> UserQuestInfo { get; set; }
         public DbSet<UserItem> UserItems { get; set; }
         public DbSet<UserEquipment> UserEquipments { get; set; }
+
+        
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -93,11 +102,10 @@ namespace Server.Game.Database
 
 ;            modelBuilder.Configurations.Add(new ItemTemplateMap());
 
-            modelBuilder.Entity<QuestTemplate>().HasKey(x => x.QuestTableId);
+            modelBuilder.Entity<QuestTemplate>().HasKey(x => x.QuestTemplateId);
 
 
-            modelBuilder.Entity<QuestItemRequirementTable>().HasKey(x => x.QuestTableId).HasRequired(x => x.Quest).WithOptional(x => x.EndItemRequirements).WillCascadeOnDelete(true);
-            modelBuilder.Entity<QuestMonsterRequirementTable>().HasKey(x => x.QuestTableId).HasRequired(x => x.Quest).WithOptional(x => x.EndMonsterRequirements).WillCascadeOnDelete(true);
+  
 
 
 

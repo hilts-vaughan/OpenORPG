@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using Inspire.Shared.Models.Enums;
 using OpenORPG.Database.Enums;
+using OpenORPG.Database.Models.Quests;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Database.Models.Quests;
@@ -173,7 +174,6 @@ namespace Server.Game.Database.Seeds
             var items = context.ItemTemplates.Where(x => x.Id == 1).ToList();
             var monsterReq = new QuestMonsterRequirementTable()
             {
-                QuestTableId = 1,
                 MonsterId = 2,
                 MonsterAmount = 5
             };
@@ -184,9 +184,13 @@ namespace Server.Game.Database.Seeds
                 Description = "We've got a goblin problem going around. Think you can help us out? I reckon knocking out at least 5 of them should give them a spook.",
                 RewardCurrency = 0,
                 RewardExp = 100,
-                QuestTableId = 1,
-                EndMonsterRequirements = monsterReq
+                QuestTemplateId = 1,
+                QuestSteps = new List<QuestStepsTable>()
             };
+
+            var step = new QuestStepsTable();
+            step.Requirements.Add(monsterReq);
+            quest.QuestSteps.Add(step);
 
             context.Quests.Add(quest);
 

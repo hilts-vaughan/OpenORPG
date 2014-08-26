@@ -158,7 +158,7 @@ namespace Server
             NetworkManager.Current.Disconnected += OnDisconnected;
         }
 
-        private static void ResetOnlineFlags()
+        private static void ResetOnlineFlags() 
         {
             using (var context = new GameDatabaseContext())
             {

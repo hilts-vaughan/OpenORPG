@@ -40,9 +40,9 @@ namespace Server.Game.Quests
         {
             var list = _requirementInfo[(long)player.Id];
             var quest = QuestManager.Instance.GetQuest(questInfo.QuestId);
-            var info = new MonsterKillInfo(quest.QuestTableId, quest.EndMonsterRequirements.MonsterId,
-                quest.EndMonsterRequirements.MonsterAmount);
-            list.Add(info);
+            //var info = new MonsterKillInfo(quest.QuestTableId, quest.EndMonsterRequirements.MonsterId,
+            //    quest.EndMonsterRequirements.MonsterAmount);
+            // list.Add(info);
         }
 
         public void UnloadPlayer(Player player)

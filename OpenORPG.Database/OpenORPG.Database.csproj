@@ -94,6 +94,8 @@
     <Compile Include="Models\NpcTemplate.cs" />
     <Compile Include="Models\Quests\QuestItemRequirement.cs" />
     <Compile Include="Models\Quests\QuestMonsterRequirement.cs" />
+    <Compile Include="Models\Quests\QuestRequirement.cs" />
+    <Compile Include="Models\Quests\QuestStepsTable.cs" />
     <Compile Include="Models\Quests\QuestTable.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserEquipment.cs" />

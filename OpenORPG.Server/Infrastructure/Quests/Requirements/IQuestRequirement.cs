@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenORPG.Database.Enums;
+using OpenORPG.Database.Models.Quests;
 using Server.Game.Entities;
 
 namespace Server.Infrastructure.Quests.Requirements
@@ -11,7 +12,7 @@ namespace Server.Infrastructure.Quests.Requirements
     /// <summary>
     /// A quest requirement interface that specifices a concrete implementation for a requirement   
     /// </summary>
-    public interface IQuestRequirement<T> where T : IQuestRequirementTable
+    public interface IQuestRequirement<T> where T : QuestRequirement
     {
 
         /// <summary>

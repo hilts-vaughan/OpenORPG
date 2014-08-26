@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenORPG.Database.Models.Quests;
 using Server.Game.Database.Models.Quests;
 using Server.Game.Entities;
 

@@ -73,8 +73,8 @@ namespace Server.Game
 
                 foreach (var quest in template.Quests)
                 {
-                    context.Entry(quest).Reference(x => x.EndMonsterRequirements);
-                    context.Entry(quest).Reference(x => x.EndItemRequirements);
+                    //context.Entry(quest).Reference(x => x.EndMonsterRequirements);
+                    //context.Entry(quest).Reference(x => x.EndItemRequirements);
                     context.Entry(quest).Collection(x => x.RewardItems);
                 }
 

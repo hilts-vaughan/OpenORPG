@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Server.Game.Database.Models;
 using Server.Game.Entities;
+using Server.Game.Items;
+using Server.Game.Storage;
 using Server.Game.Zones;
 using Server.Infrastructure.World;
 using Server.Infrastructure.World.Systems;
@@ -19,6 +21,9 @@ namespace Server.Game.Quests
     {
         // A simple tracker for tracking player quests
         private QuestRequirementTracker _questRequirementTracker = new QuestRequirementTracker();
+
+        // These are lookup tables for event handlers; do not modify
+        private Dictionary<Player, ItemStorage.ItemEvent> _backpackActions = new Dictionary<Player, ItemStorage.ItemEvent>();
 
         public QuestService(Zone world)
             : base(world)
@@ -56,14 +61,29 @@ namespace Server.Game.Quests
         {
             // Track stuff that quest requirements might need updating on
             player.AcceptedQuest += PlayerOnAcceptedQuest;
-         
+
+            // Add a player backpack event
+            ItemStorage.ItemEvent action = (item, slotId, amount) => BackpackOnItemAdded(player, item, slotId, amount);
+            player.Backpack.ItemAdded += action;
+            _backpackActions.Add(player, action);
+
 
             _questRequirementTracker.LoadPlayer(player);
+        }
+
+        private void BackpackOnItemAdded(Player player, Item item, long slotId, long amount)
+        {
+            // Send an update if it's required
         }
 
         private void OnPlayerRemoved(Player player)
         {
             player.AcceptedQuest -= PlayerOnAcceptedQuest;
+            
+            // Remove items from handlers where required
+            player.Backpack.ItemAdded -= _backpackActions[player];
+
+
             _questRequirementTracker.UnloadPlayer(player);
         }
 

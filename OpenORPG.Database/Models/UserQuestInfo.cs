@@ -32,6 +32,11 @@ namespace Server.Game.Database.Models
         [Required, DefaultValue(0)]
         public long MobsKilled { get; set; }
 
+        /// <summary>
+        /// The quest progress ID that the user has moved along to.
+        /// </summary>
+        public long QuestProgress { get; set; }
+
         [Required]
         public virtual UserHero UserHero { get; set; }
 
