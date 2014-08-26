@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Server.Game.Database.Models.Quests;
 
 namespace Server.Game.Database.Models
 {
+    [Table("npc_template")]
     public class NpcTemplate
     {
 

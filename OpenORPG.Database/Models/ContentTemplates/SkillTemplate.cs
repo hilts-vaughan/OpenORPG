@@ -1,4 +1,5 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
 using OpenORPG.Database.Enums;
 
 namespace Server.Game.Database.Models.ContentTemplates
@@ -6,6 +7,7 @@ namespace Server.Game.Database.Models.ContentTemplates
     /// <summary>
     ///     A skill template represents a given skill in the database
     /// </summary>
+    [Table("skill_template")]
     public class SkillTemplate : IContentTemplate
     {
  
