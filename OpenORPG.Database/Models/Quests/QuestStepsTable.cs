@@ -10,6 +10,11 @@ namespace OpenORPG.Database.Models.Quests
     public class QuestStepsTable
     {
 
+        public QuestStepsTable()
+        {
+            Requirements = new List<QuestRequirement>();
+        }
+
 
         public int QuestStepsTableId { get; set; }
 
