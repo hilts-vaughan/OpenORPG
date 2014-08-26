@@ -20,6 +20,13 @@ namespace Server.Infrastructure.Quests.Requirements
         /// this requirement properly.
         /// </summary>
         T RequirementInfo { get; set; }
+
+        /// <summary>
+        /// Evaluates given the current context the current progress of a particular objective.
+        /// </summary>
+        /// <returns></returns>
+        QuestProgress GeQuestProgress(Player player);
+
     }
 
     public interface IQuestRequirement

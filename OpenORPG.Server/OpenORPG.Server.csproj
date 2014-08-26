@@ -207,6 +207,7 @@
     <Compile Include="Game\Items\Item.cs" />
     <Compile Include="Game\Items\Storage\ItemStorage.cs" />
     <Compile Include="Game\NPC\Discussion.cs" />
+    <Compile Include="Game\Quests\QuestEntry.cs" />
     <Compile Include="Game\Quests\QuestList.cs" />
     <Compile Include="Game\Quests\QuestManager.cs" />
     <Compile Include="Game\Quests\QuestRequirementTracker.cs" />
@@ -252,7 +253,7 @@
     <Compile Include="Infrastructure\Pathfinding\GraphNode.cs" />
     <Compile Include="Infrastructure\Quests\IQuestProvider.cs" />
     <Compile Include="Infrastructure\Quests\Quest.cs" />
-    <Compile Include="Infrastructure\Quests\QuestRewardSet.cs" />
+    <Compile Include="Infrastructure\Quests\QuestProgress.cs" />
     <Compile Include="Infrastructure\Quests\QuestStep.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirement.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirementTable.cs" />
@@ -298,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Game\Combat\Events\" />
+    <Folder Include="Game\Quests\Counters\" />
     <Folder Include="Infrastructure\AI\" />
   </ItemGroup>
   <ItemGroup>
