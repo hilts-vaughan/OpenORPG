@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenORPG.Database.Models.Quests.Rewards;
 using Server.Game.Entities;
 
 namespace Server.Infrastructure.Quests.Rewards
@@ -10,14 +11,10 @@ namespace Server.Infrastructure.Quests.Rewards
     /// <summary>
     /// A concrete implementation of a quest reward that gives out experience points.
     /// </summary>
-    public class ExperienceQuestReward : IQuestReward
+    public class ExperienceQuestReward : IQuestReward, IQuestReward<QuestRewardExperience>
     {
-        public int ExperienceReward { get; set; }
 
-        public ExperienceQuestReward(int experienceReward)
-        {
-            ExperienceReward = experienceReward;
-        }
+   
 
         public bool CanGive(Player player)
         {
@@ -26,7 +23,9 @@ namespace Server.Infrastructure.Quests.Rewards
 
         public void Give(Player player)
         {
-            player.Experience += ExperienceReward;
+            player.Experience += RewardInfo.Amount;
         }
+
+        public QuestRewardExperience RewardInfo { get; set; }
     }
 }

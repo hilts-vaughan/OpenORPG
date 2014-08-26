@@ -75,8 +75,7 @@ namespace Server.Game.Database
         // quest related stuff
 
         public DbSet<QuestTemplate> Quests { get; set; }
-        
-        //public DbSet<QuestRequirement> QuestRequirements { get; set; }
+                
 
 
         public DbSet<NpcTemplate> Npcs { get; set; }

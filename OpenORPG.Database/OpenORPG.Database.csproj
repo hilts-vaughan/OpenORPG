@@ -92,11 +92,14 @@
     <Compile Include="Models\ContentTemplates\SkillTemplate.cs" />
     <Compile Include="Models\ContentTemplates\StatusEffectTemplate.cs" />
     <Compile Include="Models\NpcTemplate.cs" />
-    <Compile Include="Models\Quests\QuestItemRequirement.cs" />
-    <Compile Include="Models\Quests\QuestMonsterRequirement.cs" />
-    <Compile Include="Models\Quests\QuestRequirement.cs" />
+    <Compile Include="Models\Quests\Requirements\QuestItemRequirement.cs" />
+    <Compile Include="Models\Quests\Requirements\QuestMonsterRequirement.cs" />
+    <Compile Include="Models\Quests\Requirements\QuestRequirement.cs" />
     <Compile Include="Models\Quests\QuestStepsTable.cs" />
     <Compile Include="Models\Quests\QuestTable.cs" />
+    <Compile Include="Models\Quests\Rewards\QuestRewardExperience.cs" />
+    <Compile Include="Models\Quests\Rewards\QuestRewardItem.cs" />
+    <Compile Include="Models\Quests\Rewards\QuestRewardTable.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserEquipment.cs" />
     <Compile Include="Models\UserHero.cs" />

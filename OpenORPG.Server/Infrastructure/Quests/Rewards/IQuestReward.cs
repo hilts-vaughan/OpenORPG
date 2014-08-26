@@ -3,11 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenORPG.Database.Models.Quests.Rewards;
 using Server.Game.Entities;
 
 namespace Server.Infrastructure.Quests.Rewards
 {
-   
+
+    public interface IQuestReward<T> where T : QuestReward
+    {
+
+        /// <summary>
+        /// A quest requirement table containing information regarding what will be required to check
+        /// this requirement properly.
+        /// </summary>
+        T RewardInfo { get; set; }
+    }
+
     public interface IQuestReward
     {
 

@@ -7,11 +7,12 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenORPG.Database.Enums;
 using OpenORPG.Database.Models.Quests;
+using OpenORPG.Database.Models.Quests.Rewards;
 using Server.Game.Database.Models.ContentTemplates;
 
 namespace Server.Game.Database.Models.Quests
 {
-    [Table("quests")]
+    [Table("quest_template")]
     public class QuestTemplate
     {
         public QuestTemplate()
@@ -45,7 +46,9 @@ namespace Server.Game.Database.Models.Quests
 
         public virtual ICollection<ItemTemplate> RewardItems { get; set; }
 
-        public virtual ICollection<QuestStepsTable> QuestSteps { get; set; } 
+        public virtual ICollection<QuestStepsTable> QuestSteps { get; set; }
+
+        public virtual ICollection<QuestReward> Rewards { get; set; } 
 
         public virtual NpcTemplate QuestStarter { get; set; }
 

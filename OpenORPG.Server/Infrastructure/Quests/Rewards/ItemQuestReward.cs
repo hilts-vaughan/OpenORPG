@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenORPG.Database.DAL;
+using OpenORPG.Database.Models.Quests.Rewards;
 using Server.Game.Database;
 using Server.Game.Entities;
 using Server.Game.Items;
@@ -13,10 +14,9 @@ namespace Server.Infrastructure.Quests.Rewards
     /// <summary>
     /// A reward that gives a user an item for the completion of the quest
     /// </summary>
-    public class ItemQuestReward : IQuestReward
+    public class ItemQuestReward : IQuestReward, IQuestReward<QuestRewardItem>
     {
-        public int ItemId { get; set; }
-        public int Amount { get; set; }
+
 
         public ItemQuestReward()
         {
@@ -34,12 +34,13 @@ namespace Server.Infrastructure.Quests.Rewards
             using (var context = new GameDatabaseContext())
             {
                 var repo = new ItemRepository(context);
-                var template = repo.Get(ItemId);
+                var template = repo.Get(RewardInfo.ItemId);
 
                 var item = ItemFactory.CreateItem(template);
-                player.AddToBackpack(item, Amount);
+                player.AddToBackpack(item, RewardInfo.Amount);
             }          
         }
 
+        public QuestRewardItem RewardInfo { get; set; }
     }
 }

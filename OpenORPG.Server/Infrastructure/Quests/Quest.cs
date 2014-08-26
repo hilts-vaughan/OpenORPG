@@ -62,7 +62,9 @@ namespace Server.Infrastructure.Quests
         private void LoadRewards(QuestTemplate questTable)
         {
             QuestRewards = new List<IQuestReward>();
-            QuestRewards.Add(new ExperienceQuestReward(questTable.RewardExp));
+            
+            // Load from the template
+
         }
 
         /// <summary>
