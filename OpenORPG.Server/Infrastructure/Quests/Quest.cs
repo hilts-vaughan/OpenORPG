@@ -33,7 +33,7 @@ namespace Server.Infrastructure.Quests
         /// </summary>
         public List<IQuestReward> QuestRewards { get; private set; }
 
-        public long QuestId { get; private set; }
+        public int QuestId { get; private set; }
 
         public string Name { get; private set; }
 
@@ -56,6 +56,21 @@ namespace Server.Infrastructure.Quests
             // Load up requirements
             LoadStartRequirements(questTable);
             LoadRewards(questTable);
+
+            Steps = new List<QuestStep>();
+
+            foreach (var step in questTable.QuestSteps)
+            {
+                var newStep = new QuestStep();
+
+                foreach (var requirement in step.Requirements)
+                {
+                    var concreteRequirement = QuestRequirementFactory.GetConcreteQuestRequirement(requirement);
+                    newStep.Requirements.Add(concreteRequirement);
+                }
+
+                Steps.Add(newStep);
+            }
 
         }
 

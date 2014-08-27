@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenORPG.Database.Enums;
+using OpenORPG.Database.Models.Quests;
 
 namespace Server.Game.Database.Models
 {
@@ -16,14 +17,16 @@ namespace Server.Game.Database.Models
     [Table("user_quest_info")]
     public class UserQuestInfo
     {
+
         public UserQuestInfo()
         {
             State = QuestState.InProgress;            
+            RequirementProgress = new List<UserQuestRequirements>();
         }
 
         [Key]
         [Required]
-        public long UserQuestInfoId { get; set; }
+        public int UserQuestInfoId { get; set; }
 
         public int QuestId { get; set; }
 
@@ -33,16 +36,7 @@ namespace Server.Game.Database.Models
         /// Since quests that are finished are possible to repeat, this flag could be a few different things.
         /// </summary>
         public QuestState State { get; set; }
-
-        /// <summary>
-        /// A simple integer used to track the amount of mobs kill in relation to the
-        /// monsters requirement.
-        /// 
-        /// This could be eventually replaced with something a bit more generic
-        /// </summary>
-        [Required, DefaultValue(0)]
-        public long MobsKilled { get; set; }
-
+  
         /// <summary>
         /// The quest progress ID that the user has moved along to.
         /// </summary>
@@ -50,6 +44,9 @@ namespace Server.Game.Database.Models
 
         [Required]
         public virtual UserHero UserHero { get; set; }
+
+        [Required]
+        public List<UserQuestRequirements> RequirementProgress { get; set; } 
 
     }
 }

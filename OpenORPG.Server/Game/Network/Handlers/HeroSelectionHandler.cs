@@ -47,6 +47,13 @@ namespace Server.Game.Network.Handlers
                     context.Entry(hero).Collection(a => a.Skills).Load();
                     context.Entry(hero).Collection(a => a.Inventory).Load();
                     context.Entry(hero).Collection(a => a.QuestInfo).Load();
+
+                    // Load up our set of requirements from the table
+                    foreach (var x in hero.QuestInfo)
+                        context.Entry(x).Collection(a => a.RequirementProgress).Load();
+
+
+
                     context.Entry(hero).Collection(a => a.Equipment).Load();
                 }
 
@@ -66,12 +73,12 @@ namespace Server.Game.Network.Handlers
                     // Here, we should queue the player for login
 
                     Logger.Instance.Info("{0} has entered the game.", hero.Name);
-                    zone.QueueLogin(heroObject);                    
+                    zone.QueueLogin(heroObject);
 
                     // Add to global manager
                     ChatManager.Current.Global.Join(client);
 
-            
+
 
                 }
                 else

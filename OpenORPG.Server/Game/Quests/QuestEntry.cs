@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenORPG.Database.Enums;
 using Server.Game.Database.Models;
 using Server.Infrastructure.Quests;
+using Server.Infrastructure.Quests.Requirements;
 
 namespace Server.Game.Quests
 {
@@ -14,6 +15,13 @@ namespace Server.Game.Quests
     /// </summary>
     public class QuestLogEntry
     {
+
+        private readonly List<int> _requirementProgress = new List<int>();
+
+        public List<int> GetProgress()
+        {
+            return _requirementProgress;
+        } 
 
         public delegate void QuestLogEntryEvent(QuestLogEntry sender);
 
@@ -34,14 +42,32 @@ namespace Server.Game.Quests
             _quest = quest;
             _questInfo = questInfo;
 
+            // Reset stuff with a progress of zero
+            for (int i = 0; i < CurrentStep.Requirements.Count; i++)
+                _requirementProgress.Add(0);
+
+            for (int i = 0; i < _questInfo.RequirementProgress.Count - 1; i++)
+                _requirementProgress[i] = _questInfo.RequirementProgress[i].Progress;
+
+         
+       
         }
 
         public void AdvanceStep()
         {
             // Increment the progress flag and let subscribers know about this
             _questInfo.QuestProgress++;
+
+            // Reset the requirement progress flags
+            _requirementProgress.Clear();
+           
+            // Reset stuff with a progress of zero
+            for(int i = 0; i < CurrentStep.Requirements.Count; i++)
+                _requirementProgress.Add(0);
+
             OnProgressAdvanced();
         }
+
 
 
         public QuestState State
@@ -68,7 +94,7 @@ namespace Server.Game.Quests
         {
             get
             {
-                if (_quest.Steps.Count - 1 > _questInfo.QuestProgress)
+                if (_questInfo.QuestProgress > _quest.Steps.Count - 1)
                     return null;
 
                 return _quest.Steps[_questInfo.QuestProgress];

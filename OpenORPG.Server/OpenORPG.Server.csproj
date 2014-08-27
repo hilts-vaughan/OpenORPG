@@ -254,6 +254,8 @@
     <Compile Include="Infrastructure\Quests\IQuestProvider.cs" />
     <Compile Include="Infrastructure\Quests\Quest.cs" />
     <Compile Include="Infrastructure\Quests\QuestProgress.cs" />
+    <Compile Include="Infrastructure\Quests\QuestRequirementFactory.cs" />
+    <Compile Include="Infrastructure\Quests\QuestRequirementProgress.cs" />
     <Compile Include="Infrastructure\Quests\QuestStep.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirement.cs" />
     <Compile Include="Infrastructure\Quests\Requirements\IQuestRequirementTable.cs" />
@@ -263,6 +265,7 @@
     <Compile Include="Infrastructure\Quests\Rewards\ExperienceQuestReward.cs" />
     <Compile Include="Infrastructure\Quests\Rewards\IQuestReward.cs" />
     <Compile Include="Infrastructure\Quests\Rewards\ItemQuestReward.cs" />
+    <Compile Include="Infrastructure\Quests\Trackers\IQuestRequirementTracker.cs" />
     <Compile Include="Infrastructure\Scripting\Combat\SkillScript.cs" />
     <Compile Include="Infrastructure\Scripting\Combat\StatusEffectScript.cs" />
     <Compile Include="Infrastructure\Scripting\GameScriptAttribute.cs" />

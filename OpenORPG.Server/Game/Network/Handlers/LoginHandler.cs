@@ -1,5 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using OpenORPG.Database.Models.Quests;
+using OpenORPG.Database.Models.Quests.Rewards;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Entities;
@@ -9,6 +12,7 @@ using Server.Game.Network.Authentication.Providers;
 using Server.Game.Network.Packets;
 using Server.Infrastructure.Logging;
 using Server.Infrastructure.Network.Handlers;
+using Server.Infrastructure.Quests;
 
 namespace Server.Game.Network.Handlers
 {
@@ -101,6 +105,17 @@ namespace Server.Game.Network.Handlers
 
                 // Load quest info
                 context.Entry(hero).Collection(x => x.QuestInfo).Load();
+
+                foreach (var x in hero.QuestInfo)
+                {
+                    context.Entry(x).Collection(a => a.RequirementProgress).Load();
+
+                    var l = x.RequirementProgress.ToList();
+                    foreach(var n in l)
+                        context.Entry(n).State = EntityState.Deleted;                    
+
+                }
+
                 context.Entry(hero).Collection(x => x.Inventory).Load();
                 context.Entry(hero).Collection(x => x.Equipment).Load();
 
@@ -117,31 +132,60 @@ namespace Server.Game.Network.Handlers
                 hero.Luck = (int)player.CharacterStats[(int)StatTypes.Luck].CurrentValue;
                 hero.Vitality = (int)player.CharacterStats[(int)StatTypes.Vitality].CurrentValue;
                 hero.MaximumHitpoints = (int)player.CharacterStats[(int)StatTypes.Hitpoints].MaximumValue;
-                hero.Mind = (int) player.CharacterStats[StatTypes.Mind].CurrentValue;
+                hero.Mind = (int)player.CharacterStats[StatTypes.Mind].CurrentValue;
 
-                hero.SkillResource = (int) player.CharacterStats[StatTypes.SkillResource].CurrentValue;
-                hero.MaximumSkillResource = (int) player.CharacterStats[StatTypes.SkillResource].MaximumValue;
+                hero.SkillResource = (int)player.CharacterStats[StatTypes.SkillResource].CurrentValue;
+                hero.MaximumSkillResource = (int)player.CharacterStats[StatTypes.SkillResource].MaximumValue;
 
                 hero.Experience = player.Experience;
                 hero.Level = player.Level;
 
                 //TODO: Need better tracking code here, incrementing the row needlessly here
+
+
+
+
                 // For now though, we don't care...
                 hero.QuestInfo.ToList().ForEach(r => context.UserQuestInfo.Remove(r));
-
+     
+                context.SaveChanges();
                 //context.SaveChanges();
 
                 foreach (var entry in player.QuestLog)
                 {
 
 
-                    var quest = new UserQuestInfo()
+
+
+                    var temp = new List<UserQuestRequirements>();
+
+                    for (int index = 0; index < entry.GetProgress().Count; index++)
                     {
-                        QuestId = entry.QuestInfo.QuestId,
-                        State = entry.State,
-                        UserQuestInfoId = entry.QuestInfo.UserQuestInfoId,
-                        UserHero = hero
-                    };
+                        var x = entry.GetProgress()[index];
+
+                        var questRequirementProgress = new UserQuestRequirements()
+                        {
+                            Progress = x
+                        };
+
+                        if (entry.QuestInfo.RequirementProgress.Count - 1 >= index)
+                            questRequirementProgress.UserQuestRequirementId =
+                                entry.QuestInfo.RequirementProgress[index].QuestInfo.UserQuestInfoId;
+
+                        temp.Add(questRequirementProgress);
+                    }
+                                 
+
+                    var quest = new UserQuestInfo()
+                   {
+                       QuestId = entry.QuestInfo.QuestId,
+                       State = entry.State,
+                       UserQuestInfoId = entry.QuestInfo.UserQuestInfoId,
+                       UserHero = hero,
+                       RequirementProgress = temp
+                   };
+
+
 
                     hero.QuestInfo.Add(quest);
 

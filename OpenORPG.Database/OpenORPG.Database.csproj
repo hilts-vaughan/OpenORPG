@@ -100,10 +100,11 @@
     <Compile Include="Models\Quests\Rewards\QuestRewardExperience.cs" />
     <Compile Include="Models\Quests\Rewards\QuestRewardItem.cs" />
     <Compile Include="Models\Quests\Rewards\QuestRewardTable.cs" />
+    <Compile Include="Models\Quests\UserQuestRequirements.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserEquipment.cs" />
     <Compile Include="Models\UserHero.cs" />
-    <Compile Include="Models\UserQuestInfo.cs" />
+    <Compile Include="Models\Quests\UserQuestInfo.cs" />
     <Compile Include="Models\UserSkill.cs" />
     <Compile Include="Models\UserStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -19,6 +19,11 @@ namespace Server.Infrastructure.Quests
         /// </summary>
         public List<IQuestRequirement> Requirements { get; set; }
 
+        public QuestStep()
+        {
+            Requirements = new List<IQuestRequirement>();
+        }
+
 
         public bool IsRequirementsMet(Player player)
         {

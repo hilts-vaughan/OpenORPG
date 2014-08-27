@@ -73,9 +73,14 @@ namespace Server.Game
 
                 foreach (var quest in template.Quests)
                 {
-                    //context.Entry(quest).Reference(x => x.EndMonsterRequirements);
-                    //context.Entry(quest).Reference(x => x.EndItemRequirements);
-                    context.Entry(quest).Collection(x => x.RewardItems);
+
+                    context.Entry(quest).Collection(x => x.RewardItems).Load();
+                    context.Entry(quest).Collection(x => x.QuestSteps).Load();
+
+                    // Load up our set of requirements from the table
+                    foreach (var x in quest.QuestSteps)
+                        context.Entry(x).Collection(a => a.Requirements).Load();
+
                 }
 
 

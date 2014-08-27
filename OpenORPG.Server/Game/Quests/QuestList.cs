@@ -33,17 +33,13 @@ namespace Server.Game.Quests
 
         public QuestLog(IEnumerable<UserQuestInfo> questInfoesInfos)
         {
-            using (var context = new GameDatabaseContext())
+
+            foreach (var questInfo in questInfoesInfos)
             {
-                var repo = new QuestRepository(context);
-
-                foreach (var questInfo in questInfoesInfos)
-                {
-                    var entry = new QuestLogEntry(new Quest(repo.Get(questInfo.QuestId)), questInfo);
-                    AddEntry(entry);
-                }
-
+                var entry = new QuestLogEntry(new Quest(QuestManager.Instance.GetQuest(questInfo.QuestId)), questInfo);
+                AddEntry(entry);
             }
+
         }
 
 
@@ -57,7 +53,9 @@ namespace Server.Game.Quests
             var questEntry = GetQuestLogEntry(quest.QuestId);
             if (questEntry == null)
             {
-                var entry = new QuestLogEntry(quest, new UserQuestInfo());
+                var info = new UserQuestInfo();
+                info.QuestId = quest.QuestId;
+                var entry = new QuestLogEntry(quest, info);
                 AddEntry(entry);
                 OnQuestAccepted(entry);
                 return true;

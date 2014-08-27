@@ -24,7 +24,7 @@ namespace Server.Game.Database.Models.Quests
         ///  A unique ID for this quest
         /// </summary>
 
-        public long QuestTemplateId { get; set; }
+        public int QuestTemplateId { get; set; }
 
 
 
