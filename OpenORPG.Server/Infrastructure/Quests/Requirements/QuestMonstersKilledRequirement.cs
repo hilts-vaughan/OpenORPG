@@ -9,7 +9,7 @@ using Server.Game.Entities;
 
 namespace Server.Infrastructure.Quests.Requirements
 {
-    public class QuestMonstersKilledRequirement : IQuestRequirement<QuestMonsterRequirementTable>, IQuestRequirement
+    public class QuestMonstersKilledRequirement : QuestRequirement<QuestMonsterRequirementTable>, IQuestRequirement
     {
         public QuestMonstersKilledRequirement(QuestMonsterRequirementTable requirementInfo)
         {
@@ -18,13 +18,13 @@ namespace Server.Infrastructure.Quests.Requirements
 
         public QuestMonsterRequirementTable RequirementInfo { get; set; }
 
-        public QuestProgress GetQuestProgress(Player player)
+        public override QuestProgress GetQuestProgress(Player player)
         {
             return new QuestProgress(0, RequirementInfo.MonsterAmount);
         }
 
-        public bool HasRequirements(Player player)
-        {
+        public bool HasRequirements(Player player, int progress)
+        {        
             return false;
         }
 

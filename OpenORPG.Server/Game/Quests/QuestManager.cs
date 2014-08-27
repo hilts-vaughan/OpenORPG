@@ -49,7 +49,7 @@ namespace Server.Game.Quests
             // Check if the player
             foreach (var requirement in quest.StartRequirements)
             {
-                if (!requirement.HasRequirements(player))
+                if (!requirement.HasRequirements(player, 0))
                     return false;
             }
 

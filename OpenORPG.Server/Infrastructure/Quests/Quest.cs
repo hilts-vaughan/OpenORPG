@@ -96,12 +96,8 @@ namespace Server.Infrastructure.Quests
             if (questInfo == null)
                 return false;
 
-            bool requirementsMet = AreAllRequirementsMet(player);
-
-            // Fail fast if requirements are not met
-            if (!requirementsMet)
+            if (questInfo.CurrentStep != null)
                 return false;
-
 
             // Give the rewards as necessary
             bool canGive = TryGiveRewards(player);
@@ -137,22 +133,6 @@ namespace Server.Infrastructure.Quests
         }
 
 
-
-        /// <summary>
-        /// Runs through all the requirements and verifies whether or not
-        /// they have all been met.
-        /// </summary>
-        /// <param name="player">The player to compare all the requirements against</param>
-        /// <returns></returns>
-        private bool AreAllRequirementsMet(Player player)
-        {
-            bool validated = true;
-
-            foreach (var step in Steps)
-                validated &= step.IsRequirementsMet(player);
-
-            return validated;
-        }
 
 
         private void LoadStartRequirements(QuestTemplate questTable)

@@ -46,7 +46,7 @@ namespace Server.Game.Quests
             for (int i = 0; i < CurrentStep.Requirements.Count; i++)
                 _requirementProgress.Add(0);
 
-            for (int i = 0; i < _questInfo.RequirementProgress.Count - 1; i++)
+            for (int i = 0; i < _questInfo.RequirementProgress.Count; i++)
                 _requirementProgress[i] = _questInfo.RequirementProgress[i].Progress;
 
          
@@ -101,7 +101,15 @@ namespace Server.Game.Quests
             }
         }
 
-
+        /// <summary>
+        /// Increases the progress by the given value amount
+        /// </summary>
+        /// <param name="i"></param>
+        /// <param name="value"></param>
+        public void IncrementProgress(int i, int value)
+        {
+            this._requirementProgress[i] += value;
+        }
 
     }
 }

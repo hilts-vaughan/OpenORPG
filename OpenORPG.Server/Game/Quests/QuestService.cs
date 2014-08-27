@@ -6,6 +6,7 @@ using Server.Game.Items;
 using Server.Game.Storage;
 using Server.Game.Zones;
 using Server.Infrastructure.Logging;
+using Server.Infrastructure.Quests.Trackers;
 using Server.Infrastructure.World;
 using Server.Infrastructure.World.Systems;
 
@@ -24,9 +25,15 @@ namespace Server.Game.Quests
         private Dictionary<Player, ItemStorage.ItemEvent> _backpackActions = new Dictionary<Player, ItemStorage.ItemEvent>();
         private Dictionary<Player, ItemStorage.ItemEvent> questActions = new Dictionary<Player, ItemStorage.ItemEvent>();
 
+        private List<MonsterKillCountQuestRequirementTracker> _questRequirementTrackers = new List<MonsterKillCountQuestRequirementTracker>();
+
         public QuestService(Zone world)
             : base(world)
         {
+
+            // Create some trackers here as required
+            _questRequirementTrackers.Add(new MonsterKillCountQuestRequirementTracker(world));
+
         }
 
 
@@ -39,8 +46,7 @@ namespace Server.Game.Quests
         public override void OnEntityAdded(Entity entity)
         {
 
-            if (entity is Monster)
-                _questRequirementTracker.OnMonsterAdded(entity as Monster);
+            _questRequirementTrackers.ForEach(x => x.OnEntityAdded(entity));
 
             if (entity is Player)
                 OnPlayerAdded(entity as Player);
@@ -48,8 +54,7 @@ namespace Server.Game.Quests
 
         public override void OnEntityRemoved(Entity entity)
         {
-            if (entity is Monster)
-                _questRequirementTracker.OnMonsterRemoved(entity as Monster);
+            _questRequirementTrackers.ForEach(x => x.OnEntityRemoved(entity));
 
             if (entity is Player)
                 OnPlayerRemoved(entity as Player);
@@ -108,7 +113,7 @@ namespace Server.Game.Quests
         {
             if (entry.CurrentStep != null)
             {
-                var requirementsMet = entry.CurrentStep.IsRequirementsMet(player);
+                var requirementsMet = entry.CurrentStep.IsRequirementsMet(player, entry.GetProgress());
 
                 if (requirementsMet)
                 {

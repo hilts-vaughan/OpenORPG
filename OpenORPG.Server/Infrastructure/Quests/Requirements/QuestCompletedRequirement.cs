@@ -21,7 +21,7 @@ namespace Server.Infrastructure.Quests.Requirements
             QuestId = questId;
         }
 
-        public bool HasRequirements(Player player)
+        public bool HasRequirements(Player player, int progress)
         {
             var quest = player.QuestLog.FirstOrDefault(x => x.Quest.QuestId == QuestId);
 

@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 using OpenORPG.Database.Enums;
 using OpenORPG.Database.Models.Quests;
 using Server.Game.Entities;
+using Server.Game.Quests;
 
 namespace Server.Infrastructure.Quests.Requirements
 {
     /// <summary>
     /// A quest requirement interface that specifices a concrete implementation for a requirement   
     /// </summary>
-    public interface IQuestRequirement<T> where T : QuestRequirement
+    public abstract class QuestRequirement<T> where T : QuestRequirement
     {
+ 
 
         /// <summary>
         /// A quest requirement table containing information regarding what will be required to check
@@ -25,7 +27,8 @@ namespace Server.Infrastructure.Quests.Requirements
         /// Evaluates given the current context the current progress of a particular objective.
         /// </summary>
         /// <returns></returns>
-        QuestProgress GetQuestProgress(Player player);
+        public abstract QuestProgress GetQuestProgress(Player player);
+       
 
     }
 
@@ -37,7 +40,7 @@ namespace Server.Infrastructure.Quests.Requirements
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        bool HasRequirements(Player player);
+        bool HasRequirements(Player player, int progress);
 
         /// <summary>
         /// This method is called directly after a succesful call of HasRequirements returning true.

@@ -265,7 +265,8 @@
     <Compile Include="Infrastructure\Quests\Rewards\ExperienceQuestReward.cs" />
     <Compile Include="Infrastructure\Quests\Rewards\IQuestReward.cs" />
     <Compile Include="Infrastructure\Quests\Rewards\ItemQuestReward.cs" />
-    <Compile Include="Infrastructure\Quests\Trackers\IQuestRequirementTracker.cs" />
+    <Compile Include="Infrastructure\Quests\Trackers\MonsterKillCountQuestRequirementTracker.cs" />
+    <Compile Include="Infrastructure\Quests\Trackers\QuestRequirementTracker.cs" />
     <Compile Include="Infrastructure\Scripting\Combat\SkillScript.cs" />
     <Compile Include="Infrastructure\Scripting\Combat\StatusEffectScript.cs" />
     <Compile Include="Infrastructure\Scripting\GameScriptAttribute.cs" />

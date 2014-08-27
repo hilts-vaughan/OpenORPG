@@ -25,12 +25,15 @@ namespace Server.Infrastructure.Quests
         }
 
 
-        public bool IsRequirementsMet(Player player)
+        public bool IsRequirementsMet(Player player, List<int> progress)
         {
             bool requirementsMet = true;
 
-            foreach (var requirement in Requirements)
-                requirementsMet &= requirement.HasRequirements(player);
+            for (int index = 0; index < Requirements.Count; index++)
+            {
+                var requirement = Requirements[index];
+                requirementsMet &= requirement.HasRequirements(player, progress[index]);
+            }
 
             return requirementsMet;
         }
