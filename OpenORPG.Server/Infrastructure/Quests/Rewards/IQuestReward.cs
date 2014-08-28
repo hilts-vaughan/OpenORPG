@@ -9,8 +9,13 @@ using Server.Game.Entities;
 namespace Server.Infrastructure.Quests.Rewards
 {
 
-    public interface IQuestReward<T> where T : QuestReward
+    public abstract class QuestRewardGame<T> where T : QuestReward
     {
+
+        public QuestRewardGame(T info)
+        {
+            RewardInfo = info;
+        }
 
         /// <summary>
         /// A quest requirement table containing information regarding what will be required to check

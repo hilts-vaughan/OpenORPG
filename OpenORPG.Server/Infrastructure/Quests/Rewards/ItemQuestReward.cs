@@ -14,13 +14,12 @@ namespace Server.Infrastructure.Quests.Rewards
     /// <summary>
     /// A reward that gives a user an item for the completion of the quest
     /// </summary>
-    public class ItemQuestReward : IQuestReward, IQuestReward<QuestRewardItem>
+    public class ItemQuestReward : QuestRewardGame<QuestRewardItem>, IQuestReward
     {
-
-
-        public ItemQuestReward()
+        public ItemQuestReward(QuestRewardItem rewardInfo)
+            : base(rewardInfo)
         {
-
+            RewardInfo = rewardInfo;
         }
 
         public bool CanGive(Player player)

@@ -19,13 +19,13 @@ namespace Server.Game.Quests
     public class QuestService : GameSystem
     {
         // A simple tracker for tracking player quests
-        private QuestRequirementTracker _questRequirementTracker = new QuestRequirementTracker();
+        private QuestRequirementTrackerObsolete _questRequirementTrackerObsolete = new QuestRequirementTrackerObsolete();
 
         // These are lookup tables for event handlers; do not modify
         private Dictionary<Player, ItemStorage.ItemEvent> _backpackActions = new Dictionary<Player, ItemStorage.ItemEvent>();
         private Dictionary<Player, ItemStorage.ItemEvent> questActions = new Dictionary<Player, ItemStorage.ItemEvent>();
 
-        private List<MonsterKillCountQuestRequirementTracker> _questRequirementTrackers = new List<MonsterKillCountQuestRequirementTracker>();
+        private List<IQuestRequirementTracker> _questRequirementTrackers = new List<IQuestRequirementTracker>();
 
         public QuestService(Zone world)
             : base(world)
@@ -33,6 +33,30 @@ namespace Server.Game.Quests
 
             // Create some trackers here as required
             _questRequirementTrackers.Add(new MonsterKillCountQuestRequirementTracker(world));
+
+            // Hook up event handlers
+            _questRequirementTrackers.ForEach(x => x.ProgressChanged += OnProgressChanged);
+
+        }
+
+        private void OnProgressChanged(Player player, QuestLogEntry entry, int index, int progress)
+        {
+            // We can choose to give rewards here when all requirements have suddenly been met
+            var step = entry.CurrentStep;
+            
+            if (step.IsRequirementsMet(player, entry.GetProgress()))
+            {
+                // Advance the step and take any requirements
+                step.TakeRequirements(player);
+                entry.AdvanceStep();   
+            }
+
+            // If there's no more steps possible to get through, give the reward
+            if (entry.CurrentStep == null)
+            {
+                // Attempt to complete the quest
+                var success = entry.Quest.TryCompleteQuest(player);
+            }
 
         }
 
@@ -65,7 +89,6 @@ namespace Server.Game.Quests
         {
             // Track stuff that quest requirements might need updating on
             QuestLog.QuestLogEvent questAction = (entry) => QuestInfoOnQuestAccepted(entry, player);
-
             player.QuestLog.QuestAccepted += questAction;
 
             // Add a player backpack event
@@ -74,7 +97,7 @@ namespace Server.Game.Quests
             _backpackActions.Add(player, action);
 
 
-            _questRequirementTracker.LoadPlayer(player);
+            _questRequirementTrackerObsolete.LoadPlayer(player);
         }
 
         private void BackpackOnItemAdded(Player player, Item item, long slotId, long amount)
@@ -96,9 +119,9 @@ namespace Server.Game.Quests
 
             // Remove items from handlers where required
             player.Backpack.ItemAdded -= _backpackActions[player];
+            _backpackActions.Remove(player);
 
-
-            _questRequirementTracker.UnloadPlayer(player);
+            _questRequirementTrackerObsolete.UnloadPlayer(player);
         }
 
 

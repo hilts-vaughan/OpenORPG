@@ -26,10 +26,7 @@ namespace Server.Game.Database.Models.Quests
 
         public int QuestTemplateId { get; set; }
 
-
-
         public string Name { get; set; }
-
 
         /// <summary>
         /// A quick description of the quest
@@ -37,14 +34,8 @@ namespace Server.Game.Database.Models.Quests
         public string Description { get; set; }
 
         public bool CanRepeat { get; set; }
-
-        public int RewardExp { get; set; }
-
-        public long RewardCurrency { get; set; }
-
+ 
         public QuestType QuestType { get; set; }
-
-        public virtual ICollection<ItemTemplate> RewardItems { get; set; }
 
         public virtual ICollection<QuestStepsTable> QuestSteps { get; set; }
 

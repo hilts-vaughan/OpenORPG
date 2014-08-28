@@ -6,6 +6,7 @@ using System.Linq;
 using Inspire.Shared.Models.Enums;
 using OpenORPG.Database.Enums;
 using OpenORPG.Database.Models.Quests;
+using OpenORPG.Database.Models.Quests.Rewards;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Database.Models.Quests;
@@ -175,22 +176,27 @@ namespace Server.Game.Database.Seeds
             var monsterReq = new QuestMonsterRequirementTable()
             {
                 MonsterId = 2,
-                MonsterAmount = 5
+                MonsterAmount = 2
             };
 
             var quest = new QuestTemplate()
             {
                 Name = "Overthrow the Goblins",
                 Description = "We've got a goblin problem going around. Think you can help us out? I reckon knocking out at least 5 of them should give them a spook.",
-                RewardCurrency = 0,
-                RewardExp = 100,
                 QuestTemplateId = 1,
-                QuestSteps = new List<QuestStepsTable>()
+                QuestSteps = new List<QuestStepsTable>(),
+                Rewards = new List<QuestReward>()
             };
 
             var step = new QuestStepsTable();
             step.Requirements.Add(monsterReq);
+
             quest.QuestSteps.Add(step);
+
+            // Setup a reward
+            var reward = new QuestRewardExperience() {Amount = 5000};
+            quest.Rewards.Add(reward);
+
 
             context.Quests.Add(quest);
 

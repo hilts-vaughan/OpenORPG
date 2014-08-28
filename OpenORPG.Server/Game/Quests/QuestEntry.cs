@@ -16,22 +16,21 @@ namespace Server.Game.Quests
     public class QuestLogEntry
     {
 
+        public delegate void QuestLogProgressEvent(QuestLogEntry entry, int index, int progress);
+        public event QuestLogProgressEvent ProgressUpdate;
+
+        protected virtual void OnProgressUpdate(QuestLogEntry entry, int index, int progress)
+        {
+            QuestLogProgressEvent handler = ProgressUpdate;
+            if (handler != null) handler(entry, index, progress);
+        }
+
         private readonly List<int> _requirementProgress = new List<int>();
 
         public List<int> GetProgress()
         {
             return _requirementProgress;
         } 
-
-        public delegate void QuestLogEntryEvent(QuestLogEntry sender);
-
-        public event QuestLogEntryEvent ProgressAdvanced;
-
-        protected virtual void OnProgressAdvanced()
-        {
-            QuestLogEntryEvent handler = ProgressAdvanced;
-            if (handler != null) handler(this);
-        }
 
 
         private Quest _quest;
@@ -62,10 +61,14 @@ namespace Server.Game.Quests
             _requirementProgress.Clear();
            
             // Reset stuff with a progress of zero
-            for(int i = 0; i < CurrentStep.Requirements.Count; i++)
-                _requirementProgress.Add(0);
+            if (CurrentStep != null)
+            {
 
-            OnProgressAdvanced();
+                for (int i = 0; i < CurrentStep.Requirements.Count; i++)
+                    _requirementProgress.Add(0);
+            }
+            
+
         }
 
 
@@ -106,9 +109,11 @@ namespace Server.Game.Quests
         /// </summary>
         /// <param name="i"></param>
         /// <param name="value"></param>
-        public void IncrementProgress(int i, int value)
+        public int IncrementProgress(int i, int value)
         {
-            this._requirementProgress[i] += value;
+            _requirementProgress[i] += value;            
+            OnProgressUpdate(this, i, value);
+            return _requirementProgress[i];
         }
 
     }

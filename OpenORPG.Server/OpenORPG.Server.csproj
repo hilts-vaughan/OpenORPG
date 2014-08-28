@@ -211,6 +211,7 @@
     <Compile Include="Game\Quests\QuestList.cs" />
     <Compile Include="Game\Quests\QuestManager.cs" />
     <Compile Include="Game\Quests\QuestRequirementTracker.cs" />
+    <Compile Include="Game\Quests\QuestRequirementTrackerX.cs" />
     <Compile Include="Game\Quests\QuestService.cs" />
     <Compile Include="Game\World\Systems\DebugMonitorSystem.cs" />
     <Compile Include="Game\Zones\Spawns\MonsterSpawnSet.cs" />

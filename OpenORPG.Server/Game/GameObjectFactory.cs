@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using Server.Game.AI;
 using Server.Game.Combat;
 using Server.Game.Database;
@@ -74,8 +75,9 @@ namespace Server.Game
                 foreach (var quest in template.Quests)
                 {
 
-                    context.Entry(quest).Collection(x => x.RewardItems).Load();
+                    
                     context.Entry(quest).Collection(x => x.QuestSteps).Load();
+                    context.Entry(quest).Collection(x => x.Rewards).Load();
 
                     // Load up our set of requirements from the table
                     foreach (var x in quest.QuestSteps)

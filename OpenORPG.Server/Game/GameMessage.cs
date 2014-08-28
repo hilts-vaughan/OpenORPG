@@ -22,7 +22,9 @@ namespace Server.Game
         NewQuest,
         MonsterDies,
         GainExperience,
-        LevelUp
+        LevelUp,
+        QuestCompleted,
+        QuestCannotGiveReward
 
 
     }

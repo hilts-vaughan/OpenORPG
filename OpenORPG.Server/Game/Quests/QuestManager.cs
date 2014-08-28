@@ -100,7 +100,7 @@ namespace Server.Game.Quests
 
                 var quest = context.Quests.First(x => x.QuestTemplateId == id);
 
-                context.Entry(quest).Collection(x => x.RewardItems).Load();
+                context.Entry(quest).Collection(x => x.Rewards).Load();
                 context.Entry(quest).Collection(x => x.QuestSteps).Load();
 
                 // Load up our set of requirements from the table

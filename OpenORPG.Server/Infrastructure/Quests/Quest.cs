@@ -77,8 +77,12 @@ namespace Server.Infrastructure.Quests
         private void LoadRewards(QuestTemplate questTable)
         {
             QuestRewards = new List<IQuestReward>();
-            
-            // Load from the template
+
+            foreach (var reward in questTable.Rewards)
+            {
+                var concreteReward = QuestRequirementFactory.GetConcreteQuestReward(reward);
+                QuestRewards.Add(concreteReward);
+            }
 
         }
 

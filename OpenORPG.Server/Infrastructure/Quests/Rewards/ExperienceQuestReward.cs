@@ -11,10 +11,13 @@ namespace Server.Infrastructure.Quests.Rewards
     /// <summary>
     /// A concrete implementation of a quest reward that gives out experience points.
     /// </summary>
-    public class ExperienceQuestReward : IQuestReward, IQuestReward<QuestRewardExperience>
+    public class ExperienceQuestReward : QuestRewardGame<QuestRewardExperience>, IQuestReward
     {
-
-   
+        public ExperienceQuestReward(QuestRewardExperience rewardInfo)
+            : base(rewardInfo)
+        {
+            RewardInfo = rewardInfo;
+        }
 
         public bool CanGive(Player player)
         {

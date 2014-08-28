@@ -73,7 +73,8 @@ namespace Server.Infrastructure.Quests.Trackers
                         {
                             if (monsterReq.RequirementInfo.MonsterId == monster.MonsterTemplateId)
                             {
-                                entry.IncrementProgress(i, 1);
+                                var newValue = entry.IncrementProgress(i, 1);
+                                OnProgressChanged(player, entry, i, newValue);
                                 Logger.Instance.Info("Incrementing kill counter");
                             }
                         }

@@ -24,13 +24,13 @@ namespace Server.Infrastructure.Quests.Requirements
         }
 
         public bool HasRequirements(Player player, int progress)
-        {        
-            return false;
+        {
+            return progress >= RequirementInfo.MonsterAmount;
         }
 
         public void TakeRequirements(Player player)
         {
-          
+          // Just a simple monster counter, there's no need to reset this
         }
 
     }

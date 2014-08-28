@@ -5,7 +5,9 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using OpenORPG.Database.Models.Quests;
+using OpenORPG.Database.Models.Quests.Rewards;
 using Server.Infrastructure.Quests.Requirements;
+using Server.Infrastructure.Quests.Rewards;
 
 namespace Server.Infrastructure.Quests
 {
@@ -27,6 +29,24 @@ namespace Server.Infrastructure.Quests
             @switch[requirement.GetType()]();
             return result;
         }
+
+
+        public static IQuestReward GetConcreteQuestReward<T>(T reward) 
+            where T : QuestReward
+        {
+            IQuestReward result = null;
+
+            var @switch = new Dictionary<Type, Action>
+            {
+                {
+                    typeof (QuestRewardExperience), () => result = new ExperienceQuestReward(reward as QuestRewardExperience) }               
+            };
+
+            @switch[reward.GetType()]();
+            return result;
+
+        }
+
 
 
     }
