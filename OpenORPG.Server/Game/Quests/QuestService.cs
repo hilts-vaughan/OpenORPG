@@ -18,9 +18,7 @@ namespace Server.Game.Quests
     /// A service responsible for tracking quest related criteria. 
     /// </summary>
     public class QuestService : GameSystem
-    {
-        // A simple tracker for tracking player quests
-        private QuestRequirementTrackerObsolete _questRequirementTrackerObsolete = new QuestRequirementTrackerObsolete();
+    {        
 
         // These are lookup tables for event handlers; do not modify
         private Dictionary<Player, ItemStorage.ItemEvent> _backpackActions = new Dictionary<Player, ItemStorage.ItemEvent>();
@@ -126,41 +124,12 @@ namespace Server.Game.Quests
 
         private void OnPlayerAdded(Player player)
         {
-            // Track stuff that quest requirements might need updating on
-            QuestLog.QuestLogEvent questAction = (entry) => QuestInfoOnQuestAccepted(entry, player);
-            player.QuestLog.QuestAccepted += questAction;
-
-            // Add a player backpack event
-            ItemStorage.ItemEvent action = (item, slotId, amount) => BackpackOnItemAdded(player, item, slotId, amount);
-            player.Backpack.ItemAdded += action;
-            _backpackActions.Add(player, action);
-
-
-            _questRequirementTrackerObsolete.LoadPlayer(player);
+   
         }
-
-        private void BackpackOnItemAdded(Player player, Item item, long slotId, long amount)
-        {
-
-        }
-
-        private void QuestInfoOnQuestAccepted(QuestLogEntry entry, Player player)
-        {
-            //_questRequirementTracker.NotifyBeginTracking(entry., player);
-        }
-
-
 
         private void OnPlayerRemoved(Player player)
         {
-            //TODO: Players will need to be registered here for certain stuff
-            //player.AcceptedQuest -= PlayerOnAcceptedQuest;
 
-            // Remove items from handlers where required
-            player.Backpack.ItemAdded -= _backpackActions[player];
-            _backpackActions.Remove(player);
-
-            _questRequirementTrackerObsolete.UnloadPlayer(player);
         }
 
 
