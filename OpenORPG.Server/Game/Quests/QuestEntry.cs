@@ -71,7 +71,10 @@ namespace Server.Game.Quests
 
         }
 
-
+        public bool IsLastStep
+        {
+            get { return _questInfo.QuestProgress > _quest.Steps.Count;  }
+        }
 
         public QuestState State
         {

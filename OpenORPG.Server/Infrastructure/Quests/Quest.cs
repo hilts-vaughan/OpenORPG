@@ -120,10 +120,7 @@ namespace Server.Infrastructure.Quests
 
         private bool TryGiveRewards(Player player)
         {
-            bool validate = true;
-
-            foreach (var reward in QuestRewards)
-                validate = validate & reward.CanGive(player);
+            var validate = CanGiveReward(player);
 
             // If we can't give something away for some reason...
             if (!validate)
@@ -136,7 +133,14 @@ namespace Server.Infrastructure.Quests
             return true;
         }
 
+        public bool CanGiveReward(Player player)
+        {
+            bool validate = true;
 
+            foreach (var reward in QuestRewards)
+                validate = validate & reward.CanGive(player);
+            return validate;
+        }
 
 
         private void LoadStartRequirements(QuestTemplate questTable)

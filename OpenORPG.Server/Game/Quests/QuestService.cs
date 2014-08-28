@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Server.Game.Database.Models;
 using Server.Game.Entities;
 using Server.Game.Items;
+using Server.Game.Network.Packets.Server;
 using Server.Game.Storage;
 using Server.Game.Zones;
 using Server.Infrastructure.Logging;
@@ -43,12 +44,36 @@ namespace Server.Game.Quests
         {
             // We can choose to give rewards here when all requirements have suddenly been met
             var step = entry.CurrentStep;
-            
+
             if (step.IsRequirementsMet(player, entry.GetProgress()))
             {
-                // Advance the step and take any requirements
-                step.TakeRequirements(player);
-                entry.AdvanceStep();   
+                if (!entry.IsLastStep)
+                {
+                    // Advance the step and take any requirements
+                    step.TakeRequirements(player);
+                    entry.AdvanceStep();
+                }
+
+                    // If is last step, only advance if we can give reward
+                else
+                {
+                    var canGiveRewards = entry.Quest.CanGiveReward(player);
+                    
+                    if (canGiveRewards)
+                    {
+                        step.TakeRequirements(player);
+                        entry.AdvanceStep();
+                    }
+
+                    else
+                    {
+                        // Let them know for some reason the rewards were not met
+                        var message = new ServerSendGameMessagePacket(GameMessage.QuestCannotGiveReward);
+                        player.Client.Send(message);
+                    }
+
+                }
+
             }
 
             // If there's no more steps possible to get through, give the reward
@@ -56,6 +81,20 @@ namespace Server.Game.Quests
             {
                 // Attempt to complete the quest
                 var success = entry.Quest.TryCompleteQuest(player);
+
+                if (success)
+                {
+                    var message = new ServerSendGameMessagePacket(GameMessage.QuestCompleted, new List<string>() { entry.Quest.Name});
+                    player.Client.Send(message);
+                }
+                
+                else
+                {
+                    var message = new ServerSendGameMessagePacket(GameMessage.QuestCannotGiveReward);
+                    player.Client.Send(message);
+                }
+
+
             }
 
         }
@@ -102,7 +141,7 @@ namespace Server.Game.Quests
 
         private void BackpackOnItemAdded(Player player, Item item, long slotId, long amount)
         {
-         
+
         }
 
         private void QuestInfoOnQuestAccepted(QuestLogEntry entry, Player player)
@@ -143,7 +182,7 @@ namespace Server.Game.Quests
                     entry.AdvanceStep();
                     Logger.Instance.Info("Advancing step in quest #{0}; player met requirements", player, entry.Quest.QuestId);
                 }
-                
+
             }
 
         }

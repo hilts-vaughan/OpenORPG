@@ -9,6 +9,8 @@
     "NewQuest": "A new quest has been added to your quest log.",
     "MonsterDies": "The {0} falls to the ground.",
     "GainExperience": "You gain {0} experience points.",
-    "LevelUp": "{0} has gained a level! {0} is now level {1}."
+    "LevelUp": "{0} has gained a level! {0} is now level {1}.",
+    "QuestCompleted": "You have completed the quest {0}.",
+    "QuestCannotGiveReward": "You are unable to complete the quest at this time. Make sure you can recieve your reward."
 
 }
