@@ -65,6 +65,12 @@ namespace Server.Game.Zones
             player.LevelChanged += PlayerOnLevelChanged;            
         }
 
+        private void PlayerOnBackpackChanged(Player player)
+        {
+            var inventoryUpdate = new ServerSendHeroStoragePacket(player.Backpack, StorageType.Inventory);
+            player.Client.Send(inventoryUpdate);
+        }
+
         private void ActiveStatusEffectsOnEffectAdded(Player player, StatusEffect effect)
         {
             throw new NotImplementedException();
@@ -99,14 +105,7 @@ namespace Server.Game.Zones
             var questUpdate = new ServerSendQuestListPacket(player.QuestLog);
             player.Client.Send(questUpdate);
         }
-
-        private void PlayerOnBackpackChanged(Item item, int amount, Player player)
-        {
-            var inventoryUpdate = new ServerSendHeroStoragePacket(player.Backpack, StorageType.Inventory);
-            player.Client.Send(inventoryUpdate);
-
-        }
-
+    
         /// <summary>
         /// This is called to synchronize this new fact to the player
         /// </summary>

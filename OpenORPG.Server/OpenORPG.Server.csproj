@@ -210,8 +210,6 @@
     <Compile Include="Game\Quests\QuestEntry.cs" />
     <Compile Include="Game\Quests\QuestList.cs" />
     <Compile Include="Game\Quests\QuestManager.cs" />
-    <Compile Include="Game\Quests\QuestRequirementTracker.cs" />
-    <Compile Include="Game\Quests\QuestRequirementTrackerX.cs" />
     <Compile Include="Game\Quests\QuestService.cs" />
     <Compile Include="Game\World\Systems\DebugMonitorSystem.cs" />
     <Compile Include="Game\Zones\Spawns\MonsterSpawnSet.cs" />
@@ -266,6 +264,7 @@
     <Compile Include="Infrastructure\Quests\Rewards\ExperienceQuestReward.cs" />
     <Compile Include="Infrastructure\Quests\Rewards\IQuestReward.cs" />
     <Compile Include="Infrastructure\Quests\Rewards\ItemQuestReward.cs" />
+    <Compile Include="Infrastructure\Quests\Trackers\ItemRequirementTracker.cs" />
     <Compile Include="Infrastructure\Quests\Trackers\MonsterKillCountQuestRequirementTracker.cs" />
     <Compile Include="Infrastructure\Quests\Trackers\QuestRequirementTracker.cs" />
     <Compile Include="Infrastructure\Scripting\Combat\SkillScript.cs" />
@@ -304,7 +303,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Game\Combat\Events\" />
-    <Folder Include="Game\Quests\Counters\" />
     <Folder Include="Infrastructure\AI\" />
   </ItemGroup>
   <ItemGroup>

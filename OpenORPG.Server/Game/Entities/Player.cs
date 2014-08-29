@@ -23,7 +23,7 @@ namespace Server.Game.Entities
 
     public delegate void EquipmentEvent(Equipment equipment, Player player, EquipmentSlot slot);
 
-    public delegate void ItemEvent(Item item, int amount, Player player);
+    public delegate void PlayerEvent(Player player);
 
     public delegate void ValueChanged(int newValue, int oldValue, Player player);
 
@@ -33,9 +33,18 @@ namespace Server.Game.Entities
  
         public event EquipmentEvent EquipmentChanged;
         public event SkillEvent LearnedSkill;
-        public event ItemEvent BackpackChanged;
+
+        public event PlayerEvent BackpackChanged;
+
+        protected virtual void OnBackpackChanged(Player player)
+        {
+            PlayerEvent handler = BackpackChanged;
+            if (handler != null) handler(player);
+        }
+
         public event ValueChanged ExperienceChanged;
         public event ValueChanged LevelChanged;
+
 
         protected virtual void OnLevelChanged(int newvalue, int oldvalue, Player player)
         {
@@ -49,13 +58,6 @@ namespace Server.Game.Entities
             if (handler != null) handler(newvalue, oldvalue, player);
         }
 
-
-
-        protected virtual void OnBackpackChanged(Item item, int amount, Player player)
-        {
-            ItemEvent handler = BackpackChanged;
-            if (handler != null) handler(item, amount, player);
-        }
 
         protected virtual void OnLearnedSkill(Skill skill, Player player)
         {
@@ -151,11 +153,18 @@ namespace Server.Game.Entities
                 Experience = userHero.Experience;
                 Level = userHero.Level;
 
+                Backpack.StorageChanged += BackpackOnStorageChanged;
+
             }
 
 
             // Store the user hero internally
             _hero = userHero;
+        }
+
+        private void BackpackOnStorageChanged(object sender, EventArgs eventArgs)
+        {
+           OnBackpackChanged(this);
         }
 
         public long HomepointZoneId
@@ -209,27 +218,7 @@ namespace Server.Game.Entities
 
         }
 
-        /// <summary>
-        /// Attempts to add an item to the players backpack
-        /// </summary>
-        /// <param name="item">Attempts to add the given time</param>
-        /// <param name="amount">The amount of the item to give</param>
-        public bool AddToBackpack(Item item, int amount)
-        {
-            var r = Backpack.TryAddItem(item, amount);
-            OnBackpackChanged(item, amount, this);
-            return r;
-        }
-
-        public void RemoveFromBackpack(int slotId, int amount)
-        {
-            var item = Backpack.GetItemInfoAt(slotId);
-
-            for (int i = 0; i < amount; i++)
-                Backpack.RemoveSingleAt(slotId);
-
-            OnBackpackChanged(item.Item, amount, this);
-        }
+ 
 
         /// <summary>
         /// Attempts to equip the given item to the character.
@@ -245,11 +234,11 @@ namespace Server.Game.Entities
             if (itemInInventory != null)
             {
                 // Remove the item from the backpack
-                RemoveFromBackpack((int)slotId, 1);
+                Backpack.RemoveItemAt(slotId);
 
                 // If there's something in that slot already, remove it add it
                 if (Equipment[(int)itemInInventory.Slot] != null)
-                    AddToBackpack(Equipment[(int)itemInInventory.Slot], 1);
+                    Backpack.TryAddItem((Equipment[(int)itemInInventory.Slot]));
 
                 // Assign it onto the hero
                 Equipment[(int)itemInInventory.Slot] = itemInInventory;
@@ -271,7 +260,8 @@ namespace Server.Game.Entities
         {
             if (Equipment[(int)slot] != null)
             {
-                var success = AddToBackpack(Equipment[(int)slot], 1);
+                var success = Backpack.TryAddItem((Equipment[(int) slot]));
+              
 
                 if (success)
                 {

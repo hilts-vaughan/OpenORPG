@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using OpenORPG.Database.Enums;
@@ -119,5 +120,11 @@ namespace Server.Game.Quests
             return _requirementProgress[i];
         }
 
+        public int SetProgress(int i, int value)
+        {
+            _requirementProgress[i] = value;
+            OnProgressUpdate(this, i, value);
+            return _requirementProgress[i];
+        }
     }
 }

@@ -14,14 +14,26 @@ namespace Server.Game.Storage
     /// 
     /// This includes things like backpacks and storage banks.
     /// </summary>
+  
+    public delegate void ItemEvent(Item item, long slotId, long amount);
+    
     public class ItemStorage
     {
-        public delegate void ItemEvent(Item item, long slotId, long amount);
+     
 
         /// <summary>
         /// This event is triggered when an item is added to this storage.
         /// </summary>
         public event ItemEvent ItemAdded;
+
+        public event EventHandler StorageChanged;
+
+        protected virtual void OnStorageChanged()
+        {
+            EventHandler handler = StorageChanged;
+            if (handler != null) handler(this, EventArgs.Empty);
+        }
+
 
         protected virtual void OnItemAdded(Item item, long slotid, long amount)
         {
@@ -65,6 +77,7 @@ namespace Server.Game.Storage
         public void RemoveItemAt(long slotId)
         {
             _storage.Remove(slotId);
+            OnStorageChanged();
         }
 
         public void RemoveSingleAt(long slotId)
@@ -75,8 +88,10 @@ namespace Server.Game.Storage
                 var gone = slot.RemoveSingle();
 
                 if (gone)
+                {
                     _storage.Remove(slotId);
-
+                    OnStorageChanged();
+                }
             }
 
         }
@@ -100,6 +115,7 @@ namespace Server.Game.Storage
             {
                 _storage.Add(destSlot, source);
                 _storage.Remove(sourceSlot);
+                OnStorageChanged();
                 return true;
             }
 
@@ -137,6 +153,7 @@ namespace Server.Game.Storage
                 
                 // Trigger an event
                 OnItemAdded(item, slotId, amount);
+                OnStorageChanged();
 
                 return true;
             }
@@ -174,6 +191,11 @@ namespace Server.Game.Storage
         }
 
 
+
+        public long CountItems(long itemId)
+        {
+            return _storage.Values.Where(slot => slot.Item.Id == itemId).Sum(slot => slot.Amount);
+        }
 
     }
 }

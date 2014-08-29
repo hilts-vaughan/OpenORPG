@@ -20,9 +20,7 @@ namespace Server.Game.Quests
     public class QuestService : GameSystem
     {        
 
-        // These are lookup tables for event handlers; do not modify
-        private Dictionary<Player, ItemStorage.ItemEvent> _backpackActions = new Dictionary<Player, ItemStorage.ItemEvent>();
-        private Dictionary<Player, ItemStorage.ItemEvent> questActions = new Dictionary<Player, ItemStorage.ItemEvent>();
+
 
         private List<IQuestRequirementTracker> _questRequirementTrackers = new List<IQuestRequirementTracker>();
 
@@ -37,6 +35,7 @@ namespace Server.Game.Quests
             _questRequirementTrackers.ForEach(x => x.ProgressChanged += OnProgressChanged);
 
         }
+
 
         private void OnProgressChanged(Player player, QuestLogEntry entry, int index, int progress)
         {
@@ -131,32 +130,6 @@ namespace Server.Game.Quests
         {
 
         }
-
-
-
-        /// <summary>
-        /// Checks a specified log entry (typically after performing an action that might be reflect progress changes)
-        /// and affects the state accordingly.
-        /// </summary>
-        /// <param name="player"></param>
-        /// <param name="entry"></param>
-        private void CheckQuestEntryProgress(Player player, QuestLogEntry entry)
-        {
-            if (entry.CurrentStep != null)
-            {
-                var requirementsMet = entry.CurrentStep.IsRequirementsMet(player, entry.GetProgress());
-
-                if (requirementsMet)
-                {
-                    entry.AdvanceStep();
-                    Logger.Instance.Info("Advancing step in quest #{0}; player met requirements", player, entry.Quest.QuestId);
-                }
-
-            }
-
-        }
-
-
 
     }
 }

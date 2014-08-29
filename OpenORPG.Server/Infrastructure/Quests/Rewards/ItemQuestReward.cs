@@ -36,7 +36,7 @@ namespace Server.Infrastructure.Quests.Rewards
                 var template = repo.Get(RewardInfo.ItemId);
 
                 var item = ItemFactory.CreateItem(template);
-                player.AddToBackpack(item, RewardInfo.Amount);
+                player.Backpack.TryAddItem(item, RewardInfo.Amount);
             }          
         }
 

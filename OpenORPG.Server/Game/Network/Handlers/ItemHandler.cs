@@ -49,7 +49,7 @@ namespace Server.Game.Network.Handlers
                 itemFromSlot.UseItemOn(hero, hero);
 
                 if(itemFromSlot.Consumable)
-                    hero.RemoveFromBackpack((int) packet.SlotId, 1);
+                    hero.Backpack.RemoveItemAt((int) packet.SlotId);
 
             }
         }

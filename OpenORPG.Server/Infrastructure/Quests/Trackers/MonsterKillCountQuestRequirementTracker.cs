@@ -58,38 +58,22 @@ namespace Server.Infrastructure.Quests.Trackers
             if (player == null)
                 return;
 
-            foreach (var entry in player.QuestLog.GetActiveQuestLogEntries())
+            foreach (var activeRequirement in GetQuestEntryWithRequirementType<QuestMonstersKilledRequirement>(player))
             {
-                var step = entry.CurrentStep;
+                // Fetch our results from our tuple
+                var entry = activeRequirement.Item1;
+                var requirement = activeRequirement.Item2;
+                var i = activeRequirement.Item3;
 
-                if (step != null)
+                if (requirement.RequirementInfo.MonsterId == monster.MonsterTemplateId)
                 {
-                    for (int i = 0; i < step.Requirements.Count; i++)
-                    {
-                        var requirement = step.Requirements[i];
-                        var monsterReq = requirement as QuestMonstersKilledRequirement;
-
-                        if (monsterReq != null)
-                        {
-                            if (monsterReq.RequirementInfo.MonsterId == monster.MonsterTemplateId)
-                            {
-                                var newValue = entry.IncrementProgress(i, 1);
-                                OnProgressChanged(player, entry, i, newValue);
-                                Logger.Instance.Info("Incrementing kill counter");
-                            }
-                        }
-
-                    }
-
+                    var newValue = entry.IncrementProgress(i, 1);
+                    OnProgressChanged(player, entry, i, newValue);
+                    Logger.Instance.Info("Incrementing kill counter");
                 }
-
             }
 
-
         }
-
-
-
 
     }
 }
