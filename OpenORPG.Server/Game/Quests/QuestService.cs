@@ -20,8 +20,6 @@ namespace Server.Game.Quests
     public class QuestService : GameSystem
     {        
 
-
-
         private List<IQuestRequirementTracker> _questRequirementTrackers = new List<IQuestRequirementTracker>();
 
         public QuestService(Zone world)
@@ -30,6 +28,7 @@ namespace Server.Game.Quests
 
             // Create some trackers here as required
             _questRequirementTrackers.Add(new MonsterKillCountQuestRequirementTracker(world));
+            _questRequirementTrackers.Add(new ItemRequirementTracker(world));
 
             // Hook up event handlers
             _questRequirementTrackers.ForEach(x => x.ProgressChanged += OnProgressChanged);

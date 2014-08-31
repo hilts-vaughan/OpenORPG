@@ -13,6 +13,9 @@ using Server.Infrastructure.World;
 
 namespace Server.Infrastructure.Quests.Trackers
 {
+    /// <summary>
+    /// A class that is instanced to keep track of various monster killing events for quest book keeping purposes. 
+    /// </summary>
     public class MonsterKillCountQuestRequirementTracker : QuestRequirementTracker<QuestMonsterRequirementTable>
     {
         public MonsterKillCountQuestRequirementTracker(Zone zone)
