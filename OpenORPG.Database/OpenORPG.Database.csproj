@@ -91,6 +91,7 @@
     <Compile Include="Models\ContentTemplates\MonsterTemplate.cs" />
     <Compile Include="Models\ContentTemplates\SkillTemplate.cs" />
     <Compile Include="Models\ContentTemplates\StatusEffectTemplate.cs" />
+    <Compile Include="Models\Events\IReceiver.cs" />
     <Compile Include="Models\NpcTemplate.cs" />
     <Compile Include="Models\Quests\Requirements\QuestItemRequirement.cs" />
     <Compile Include="Models\Quests\Requirements\QuestMonsterRequirement.cs" />

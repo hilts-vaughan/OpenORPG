@@ -206,7 +206,11 @@
     <Compile Include="Game\Network\PacketTask.cs" />
     <Compile Include="Game\Items\Item.cs" />
     <Compile Include="Game\Items\Storage\ItemStorage.cs" />
-    <Compile Include="Game\NPC\Discussion.cs" />
+    <Compile Include="Game\NPC\Events\Commands\EventGiveItemCommand.cs" />
+    <Compile Include="Game\NPC\Events\Commands\EventShowTextCommand.cs" />
+    <Compile Include="Game\NPC\Events\NpcEventCommand.cs" />
+    <Compile Include="Game\NPC\Events\NpcEventInvoker.cs" />
+    <Compile Include="Game\NPC\Events\NpcEventReciever.cs" />
     <Compile Include="Game\Quests\QuestEntry.cs" />
     <Compile Include="Game\Quests\QuestList.cs" />
     <Compile Include="Game\Quests\QuestManager.cs" />

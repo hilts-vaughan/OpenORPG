@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Game.NPC
+namespace OpenORPG.Database.Models.Events
 {
-    class Discussion
+    public interface IReceiver
     {
     }
 }
