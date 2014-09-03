@@ -22,10 +22,12 @@ namespace OpenORPG.Toolkit.Content
             using (var db = new GameDatabaseContext())
             {
                 var monsterRepository = new MonsterRepository(db);
+                var itemRepo = new ItemRepository(db);
 
                 var @switch = new Dictionary<Type, Action>
             {                
-                  { typeof (MonsterTemplate), () => result = new List<IContentTemplate>(monsterRepository.GetAll().ToList()) }               
+                  { typeof (MonsterTemplate), () => result = new List<IContentTemplate>(monsterRepository.GetAll().ToList()) },
+                  { typeof (ItemTemplate), () => result = new List<IContentTemplate>(itemRepo.GetAll().ToList()) }     
             };
 
                 @switch[type]();

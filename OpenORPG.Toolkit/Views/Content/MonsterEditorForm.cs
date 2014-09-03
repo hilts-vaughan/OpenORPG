@@ -3,56 +3,47 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenORPG.Database.DAL;
 using Server.Game.Database;
 using Server.Game.Database.Models.ContentTemplates;
-using WeifenLuo.WinFormsUI.Docking;
 
-namespace OpenORPG.Toolkit.Views
+namespace OpenORPG.Toolkit.Views.Content
 {
-    public partial class MonsterEditorForm : DockContent
+    public partial class MonsterEditorForm : BaseContentForm
     {
-        // The currently stored template
-        private MonsterTemplate _monsterTemplate;
 
-        public MonsterEditorForm(MonsterTemplate monsterTemplate)
+
+        public MonsterEditorForm()
+        {
+            InitializeComponent();
+        }
+
+        public MonsterEditorForm(MonsterTemplate template)   
         {
             InitializeComponent();
 
-            _monsterTemplate = monsterTemplate;
+            SetContentTemplate(template);
 
-            SetupBindings();
+            textNotes.DataBindings.Add("Text", ContentTemplate, "Notes");
+            textName.DataBindings.Add("Text", ContentTemplate, "Name");
+            textDescription.DataBindings.Add("Text", ContentTemplate, "Description");
+            numericLevel.DataBindings.Add("Value", ContentTemplate, "Level");
 
         }
 
-        private void SetupBindings()
-        {
-            textNotes.DataBindings.Add("Text", _monsterTemplate, "Notes");
-            textName.DataBindings.Add("Text", _monsterTemplate, "Name");
-            textDescription.DataBindings.Add("Text", _monsterTemplate, "Description");
-            numericLevel.DataBindings.Add("Value", _monsterTemplate, "Level");
-        }
-
-        private void MonsterEditorForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-        
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        protected override void Save()
         {
             using (var db = new GameDatabaseContext())
             {
+                var ContentTemplate = this.ContentTemplate as MonsterTemplate;
                 var repository = new MonsterRepository(db);
-                repository.Update(_monsterTemplate, _monsterTemplate.Id);
-            }
-
-            Close();
+                repository.Update(ContentTemplate, ContentTemplate.Id);
+            }           
+        
+            base.Save();
         }
-  
 
 
     }

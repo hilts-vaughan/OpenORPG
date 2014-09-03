@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenORPG.Toolkit.Views.Authentication;
+using OpenORPG.Toolkit.Views.Content;
 using Server.Game.Database.Models.ContentTemplates;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -18,11 +19,13 @@ namespace OpenORPG.Toolkit.Views
         public MainForm()
         {
             InitializeComponent();
+        
+            dockPanel1.Theme = new VS2012LightTheme();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+          
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -49,6 +52,13 @@ namespace OpenORPG.Toolkit.Views
             var form = new ContentSelectionForm(type);
             form.ShowDialog();
             return form.SelectedTemplate;
+        }
+
+        private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var template = (ItemTemplate)PresentContentForm(typeof(ItemTemplate));
+            var monster = new ItemEditorForm(template);
+            monster.Show(dockPanel1);
         }
 
 

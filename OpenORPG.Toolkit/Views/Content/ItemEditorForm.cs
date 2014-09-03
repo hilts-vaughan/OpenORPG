@@ -3,28 +3,33 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using OpenORPG.Database.DAL;
+using Server.Game.Database;
 using Server.Game.Database.Models.ContentTemplates;
-using WeifenLuo.WinFormsUI.Docking;
 
-namespace OpenORPG.Toolkit.Views.Auth
+namespace OpenORPG.Toolkit.Views.Content
 {
-    public partial class ItemEditorForm : DockContent
+    public partial class ItemEditorForm : OpenORPG.Toolkit.Views.Content.BaseContentForm
     {
-        private ItemTemplate _itemTemplate;
-
         public ItemEditorForm(ItemTemplate itemTemplate)
         {
-            _itemTemplate = itemTemplate;
             InitializeComponent();
+            SetContentTemplate(itemTemplate);
 
-            propertyGrid1.SelectedObject = _itemTemplate;
+            propertyGrid1.SelectedObject = ContentTemplate;
         }
 
-
-
+        protected override void Save()
+        {
+            using (var db = new GameDatabaseContext())
+            {
+                var ContentTemplate = this.ContentTemplate as ItemTemplate;
+                var repository = new ItemRepository(db);
+                repository.Update(ContentTemplate, ContentTemplate.Id);
+            }      
+            base.Save();
+        }
     }
 }

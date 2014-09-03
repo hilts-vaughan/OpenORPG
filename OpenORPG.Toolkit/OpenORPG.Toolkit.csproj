@@ -40,9 +40,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="OpenORPG.Toolkit">
-      <HintPath>obj\Debug\OpenORPG.Toolkit.exe</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -54,8 +51,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WeifenLuo.WinFormsUI.Docking">
-      <HintPath>..\packages\DockPanelSuite.2.9.0.0\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=3.0.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DockPanelSuite.3.0.0-alpha8\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -90,11 +88,23 @@
     <Compile Include="Views\ContentSelectionForm.Designer.cs">
       <DependentUpon>ContentSelectionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Content\BaseContentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Content\BaseContentForm.Designer.cs">
+      <DependentUpon>BaseContentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Content\ItemEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Content\ItemEditorForm.Designer.cs">
       <DependentUpon>ItemEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\MonsterEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Content\MonsterEditorForm.Designer.cs">
+      <DependentUpon>MonsterEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\IMainFormView.cs" />
     <Compile Include="Views\Auth\LoginForm.cs">
@@ -106,12 +116,6 @@
     </Compile>
     <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\MonsterEditorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Content\MonsterEditorForm.Designer.cs">
-      <DependentUpon>MonsterEditorForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Controls\AttributeListControl.resx">
       <DependentUpon>AttributeListControl.cs</DependentUpon>
@@ -134,17 +138,20 @@
     <EmbeddedResource Include="Views\ContentSelectionForm.resx">
       <DependentUpon>ContentSelectionForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Content\ItemEditorForm.resx">
-      <DependentUpon>ItemEditorForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Content\BaseContentForm.resx">
+      <DependentUpon>BaseContentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Auth\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Content\ItemEditorForm.resx">
+      <DependentUpon>ItemEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Content\MonsterEditorForm.resx">
       <DependentUpon>MonsterEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -165,9 +172,6 @@
       <Project>{6647dfc1-45b7-4ab1-8817-242063cb6a8c}</Project>
       <Name>OpenORPG.Database</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="license.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
