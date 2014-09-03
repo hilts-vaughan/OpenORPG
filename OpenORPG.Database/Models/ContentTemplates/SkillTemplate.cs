@@ -12,7 +12,7 @@ namespace Server.Game.Database.Models.ContentTemplates
     {
  
 
-        public SkillTemplate(SkillType skillType, SkillTargetType skillTargetType, SkillActivationType skillActivationType, float castTime, long damage, string description, long id, string name)
+        public SkillTemplate(SkillType skillType, SkillTargetType skillTargetType, SkillActivationType skillActivationType, float castTime, long damage, string description, int id, string name)
         {
             SkillType = skillType;
             SkillTargetType = skillTargetType;
@@ -87,7 +87,7 @@ namespace Server.Game.Database.Models.ContentTemplates
 
         public string Description { get; set; }
         
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string VirtualCategory { get; set; }
     

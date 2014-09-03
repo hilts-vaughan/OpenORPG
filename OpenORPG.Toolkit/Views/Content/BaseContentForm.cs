@@ -7,17 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
 
-namespace OpenORPG.Toolkit.Views
+namespace OpenORPG.Toolkit.Views.Content
 {
-    public partial class MonsterEditorForm : DockContent
+    public partial class BaseContentForm : Form
     {
-        public MonsterEditorForm()
+        public BaseContentForm()
         {
             InitializeComponent();
         }
-
-      
     }
 }

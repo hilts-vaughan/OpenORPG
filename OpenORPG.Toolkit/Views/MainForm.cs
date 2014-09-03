@@ -8,11 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenORPG.Toolkit.Views.Authentication;
+using Server.Game.Database.Models.ContentTemplates;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace OpenORPG.Toolkit.Views
 {
-    public partial class MainForm : Form 
+    public partial class MainForm : Form
     {
         public MainForm()
         {
@@ -21,13 +22,33 @@ namespace OpenORPG.Toolkit.Views
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-        
+
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
             var loginForm = new LoginForm();
-            loginForm.ShowDialog();
+            loginForm.ShowDialog();          
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var aboutForm = new AboutForm();
+            aboutForm.ShowDialog();
+        }
+
+        private void monstersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var template = (MonsterTemplate) PresentContentForm(typeof(MonsterTemplate));
+            var monster = new MonsterEditorForm(template);
+            monster.Show(dockPanel1);
+        }
+
+        private IContentTemplate PresentContentForm(Type type)
+        {
+            var form = new ContentSelectionForm(type);
+            form.ShowDialog();
+            return form.SelectedTemplate;
         }
 
 

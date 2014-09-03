@@ -12,7 +12,7 @@ namespace Server.Game.Database.Models.ContentTemplates
     [Table("item_templates")]
     public class ItemTemplate : IContentTemplate
     {
-        public ItemTemplate(long id, string name, string description, ItemType type, int price, bool consumed,
+        public ItemTemplate(int id, string name, string description, ItemType type, int price, bool consumed,
                             int useSpeed)
         {
             Id = id;
@@ -49,7 +49,7 @@ namespace Server.Game.Database.Models.ContentTemplates
         /// </summary>
         public int UseSpeed { get; set; }
 
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string VirtualCategory { get; set; }
 
@@ -89,7 +89,10 @@ namespace Server.Game.Database.Models.ContentTemplates
         /// A skill ID that a user might learn by using this item.
         /// </summary>
         public int LearntSkillId { get; set; }
-     
 
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

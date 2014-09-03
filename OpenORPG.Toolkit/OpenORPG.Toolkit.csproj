@@ -32,10 +32,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="OpenORPG.Toolkit">
       <HintPath>obj\Debug\OpenORPG.Toolkit.exe</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,6 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentType.cs" />
+    <Compile Include="Content\ContentTypeResolver.cs" />
     <Compile Include="Controls\AttributeListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -67,10 +78,22 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Auth\ItemEditorForm.cs">
+    <Compile Include="Views\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Auth\ItemEditorForm.Designer.cs">
+    <Compile Include="Views\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ContentSelectionForm.Designer.cs">
+      <DependentUpon>ContentSelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\ItemEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Content\ItemEditorForm.Designer.cs">
       <DependentUpon>ItemEditorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\IMainFormView.cs" />
@@ -84,10 +107,10 @@
     <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\MonsterEditorForm.cs">
+    <Compile Include="Views\Content\MonsterEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\MonsterEditorForm.Designer.cs">
+    <Compile Include="Views\Content\MonsterEditorForm.Designer.cs">
       <DependentUpon>MonsterEditorForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Controls\AttributeListControl.resx">
@@ -105,7 +128,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Views\Auth\ItemEditorForm.resx">
+    <EmbeddedResource Include="Views\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ContentSelectionForm.resx">
+      <DependentUpon>ContentSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Content\ItemEditorForm.resx">
       <DependentUpon>ItemEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Auth\LoginForm.resx">
@@ -114,7 +143,7 @@
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\MonsterEditorForm.resx">
+    <EmbeddedResource Include="Views\Content\MonsterEditorForm.resx">
       <DependentUpon>MonsterEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

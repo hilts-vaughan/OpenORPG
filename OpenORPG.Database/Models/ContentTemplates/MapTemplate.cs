@@ -5,7 +5,7 @@
     /// </summary>
     public class MapTemplate : IContentTemplate
     {
-        public MapTemplate(long id, string name, string virtualCategory)
+        public MapTemplate(int id, string name, string virtualCategory)
         {
             Id = id;
             Name = name;
@@ -13,7 +13,7 @@
         }
 
 
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string VirtualCategory { get; set; }
     }

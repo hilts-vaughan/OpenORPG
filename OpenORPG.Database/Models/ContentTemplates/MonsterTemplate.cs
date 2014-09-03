@@ -5,13 +5,16 @@ namespace Server.Game.Database.Models.ContentTemplates
     [Table("monster_template")]
     public class MonsterTemplate : IContentTemplate, IStatTemplate
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string VirtualCategory { get; set; }
         public string Sprite { get; set; }
     
         public int Level { get; set; }
 
+        public string Notes { get; set; }
+
+        public string Description { get; set; }
 
         public int Strength { get; set; }
         public int Dexterity { get; set; }
@@ -23,5 +26,10 @@ namespace Server.Game.Database.Models.ContentTemplates
         public int MaximumSkillResource { get; set; }
         public int Mind { get; set; }
         public int Luck { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
