@@ -5,16 +5,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Database.Models.Quests;
 
 namespace Server.Game.Database.Models
 {
     [Table("npc_template")]
-    public class NpcTemplate
+    public class NpcTemplate : IContentTemplate
     {
 
         [Key, Required]
-        public int NpcId { get; set; }
+        public int Id { get; set; }
 
         public NpcTemplate()
         {
@@ -38,9 +39,16 @@ namespace Server.Game.Database.Models
         /// </summary>
         public string Name { get; set; }
 
+        public string VirtualCategory { get; set; }
+
         /// <summary>
         /// The sprite this Npc will use
         /// </summary>
         public string Sprite { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

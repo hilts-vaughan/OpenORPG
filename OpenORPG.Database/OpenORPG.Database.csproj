@@ -72,6 +72,7 @@
     <Compile Include="DAL\IRepository.cs" />
     <Compile Include="DAL\ItemRepository.cs" />
     <Compile Include="DAL\MonsterRepository.cs" />
+    <Compile Include="DAL\NpcRepository.cs" />
     <Compile Include="DAL\QuestRepository.cs" />
     <Compile Include="DAL\SkillRepository.cs" />
     <Compile Include="Enums\QuestType.cs" />

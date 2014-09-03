@@ -65,7 +65,7 @@ namespace Server.Game
         {
             using (var context = new GameDatabaseContext())
             {
-                var template = context.Npcs.FirstOrDefault(x => x.NpcId == id);
+                var template = context.Npcs.FirstOrDefault(x => x.Id == id);
 
                 if (template == null)
                     throw new Exception("Creating an NPC with the given Id is invalid.");          
