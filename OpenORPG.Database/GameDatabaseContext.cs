@@ -101,7 +101,7 @@ namespace Server.Game.Database
 
 ;            modelBuilder.Configurations.Add(new ItemTemplateMap());
 
-            modelBuilder.Entity<QuestTemplate>().HasKey(x => x.QuestTemplateId);
+            modelBuilder.Entity<QuestTemplate>().HasKey(x => x.Id);
 
 
   

@@ -28,15 +28,15 @@ namespace OpenORPG.ContentProcessor.Extractors
                     // Save out properties we want to a new object and then persist
                     dynamic persistable = new ExpandoObject();
 
-                    Console.WriteLine("Processing quest with ID {0}", item.QuestTemplateId);
+                    Console.WriteLine("Processing quest with ID {0}", item.Id);
 
-                    persistable.id = item.QuestTemplateId;
+                    persistable.id = item.Id;
                     persistable.name = item.Name;
                     persistable.description = item.Description;
 
 
 
-                    persister.Persist(persistable, "\\quests\\{0}.json".FormatWith(item.QuestTemplateId));
+                    persister.Persist(persistable, "\\quests\\{0}.json".FormatWith(item.Id));
 
                 }
 

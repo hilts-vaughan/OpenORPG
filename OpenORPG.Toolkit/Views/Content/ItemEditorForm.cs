@@ -29,6 +29,7 @@ namespace OpenORPG.Toolkit.Views.Content
                 var repository = new ItemRepository(db);
                 repository.Update(ContentTemplate, ContentTemplate.Id);
             }      
+
             base.Save();
         }
     }

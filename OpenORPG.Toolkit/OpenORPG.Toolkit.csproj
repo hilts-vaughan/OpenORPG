@@ -106,6 +106,18 @@
     <Compile Include="Views\Content\MonsterEditorForm.Designer.cs">
       <DependentUpon>MonsterEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Content\QuestEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Content\QuestEditorForm.Designer.cs">
+      <DependentUpon>QuestEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\SkillEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Content\SkillEditorForm.Designer.cs">
+      <DependentUpon>SkillEditorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\IMainFormView.cs" />
     <Compile Include="Views\Auth\LoginForm.cs">
       <SubType>Form</SubType>
@@ -131,6 +143,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
@@ -172,6 +185,9 @@
       <Project>{6647dfc1-45b7-4ab1-8817-242063cb6a8c}</Project>
       <Name>OpenORPG.Database</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\rpg\I_Book.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

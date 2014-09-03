@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using OpenORPG.Toolkit.Views.Authentication;
 using OpenORPG.Toolkit.Views.Content;
 using Server.Game.Database.Models.ContentTemplates;
+using Server.Game.Database.Models.Quests;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace OpenORPG.Toolkit.Views
@@ -56,8 +57,22 @@ namespace OpenORPG.Toolkit.Views
 
         private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var template = (ItemTemplate)PresentContentForm(typeof(ItemTemplate));
+            var template = (ItemTemplate) PresentContentForm(typeof(ItemTemplate));
             var monster = new ItemEditorForm(template);
+            monster.Show(dockPanel1);
+        }
+
+        private void skillsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var template = (SkillTemplate)PresentContentForm(typeof(SkillTemplate));
+            var monster = new SkillEditorForm(template);
+            monster.Show(dockPanel1);
+        }
+
+        private void questsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var template = (QuestTemplate)PresentContentForm(typeof(QuestTemplate));
+            var monster = new QuestEditorForm(template);
             monster.Show(dockPanel1);
         }
 

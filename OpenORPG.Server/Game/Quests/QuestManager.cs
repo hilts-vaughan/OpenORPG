@@ -98,7 +98,7 @@ namespace Server.Game.Quests
             using (var context = new GameDatabaseContext())
             {
 
-                var quest = context.Quests.First(x => x.QuestTemplateId == id);
+                var quest = context.Quests.First(x => x.Id == id);
 
                 context.Entry(quest).Collection(x => x.Rewards).Load();
                 context.Entry(quest).Collection(x => x.QuestSteps).Load();

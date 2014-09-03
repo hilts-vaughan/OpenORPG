@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenORPG.Database.DAL;
 using Server.Game.Database;
 using Server.Game.Database.Models.ContentTemplates;
+using Server.Game.Database.Models.Quests;
 
 namespace OpenORPG.Toolkit.Content
 {
@@ -23,11 +24,16 @@ namespace OpenORPG.Toolkit.Content
             {
                 var monsterRepository = new MonsterRepository(db);
                 var itemRepo = new ItemRepository(db);
+                var skillRepo = new SkillRepository(db);
+                var questRepo = new QuestRepository(db);
+
 
                 var @switch = new Dictionary<Type, Action>
             {                
                   { typeof (MonsterTemplate), () => result = new List<IContentTemplate>(monsterRepository.GetAll().ToList()) },
-                  { typeof (ItemTemplate), () => result = new List<IContentTemplate>(itemRepo.GetAll().ToList()) }     
+                  { typeof (ItemTemplate), () => result = new List<IContentTemplate>(itemRepo.GetAll().ToList()) },
+                  { typeof (SkillTemplate), () => result = new List<IContentTemplate>(skillRepo.GetAll().ToList()) },     
+                  { typeof (QuestTemplate), () => result = new List<IContentTemplate>(questRepo.GetAll().ToList()) }     
             };
 
                 @switch[type]();

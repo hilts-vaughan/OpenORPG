@@ -183,7 +183,7 @@ namespace Server.Game.Database.Seeds
             {
                 Name = "Overthrow the Goblins",
                 Description = "We've got a goblin problem going around. Think you can help us out? I reckon knocking out at least 5 of them should give them a spook.",
-                QuestTemplateId = 1,
+                Id = 1,
                 QuestSteps = new List<QuestStepsTable>(),
                 Rewards = new List<QuestReward>()
             };

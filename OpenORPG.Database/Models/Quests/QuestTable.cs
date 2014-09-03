@@ -13,20 +13,21 @@ using Server.Game.Database.Models.ContentTemplates;
 namespace Server.Game.Database.Models.Quests
 {
     [Table("quest_template")]
-    public class QuestTemplate
+    public class QuestTemplate : IContentTemplate
     {
         public QuestTemplate()
         {
       
         }
 
-        /// <summary>
-        ///  A unique ID for this quest
-        /// </summary>
+ 
 
-        public int QuestTemplateId { get; set; }
-
+        [Key]
+        public int Id { get; set; }
+        
         public string Name { get; set; }
+        
+        public string VirtualCategory { get; set; }
 
         /// <summary>
         /// A quick description of the quest
@@ -43,8 +44,9 @@ namespace Server.Game.Database.Models.Quests
 
         public virtual NpcTemplate QuestStarter { get; set; }
 
-
-     
-
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

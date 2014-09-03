@@ -50,7 +50,7 @@ namespace Server.Infrastructure.Quests
         {
             Name = questTable.Name;
             Description = questTable.Description;
-            QuestId = questTable.QuestTemplateId;
+            QuestId = questTable.Id;
             CanRepeat = questTable.CanRepeat;
 
             // Load up requirements
