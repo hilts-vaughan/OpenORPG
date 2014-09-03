@@ -82,6 +82,20 @@ namespace OpenORPG.Database.Enums
 
     }
 
+
+    public enum StatTypes
+    {
+        Hitpoints,
+        SkillResource,
+        Strength,
+        Dexterity,
+        Vitality,
+        Intelligence,
+        Luck,
+        Mind
+    }
+
+
     /// <summary>
     /// An enumeration of equipment slots that are available for <see cref="Character"/>s.
     /// These are flags as combining them is possible

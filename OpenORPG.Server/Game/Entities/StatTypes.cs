@@ -5,15 +5,5 @@ using System.Text;
 
 namespace Server.Game.Entities
 {
-    public enum StatTypes
-    {
-        Hitpoints,
-        SkillResource,
-        Strength,
-        Dexterity,
-        Vitality,
-        Intelligence,
-        Luck,
-        Mind
-    }
+
 }

@@ -2,6 +2,7 @@
 using System.CodeDom;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
+using OpenORPG.Database.Enums;
 using Server.Game.AI;
 using Server.Game.Combat;
 using Server.Game.Database;

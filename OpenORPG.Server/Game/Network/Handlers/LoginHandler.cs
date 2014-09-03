@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using OpenORPG.Database.Enums;
 using OpenORPG.Database.Models.Quests;
 using OpenORPG.Database.Models.Quests.Rewards;
 using Server.Game.Database;

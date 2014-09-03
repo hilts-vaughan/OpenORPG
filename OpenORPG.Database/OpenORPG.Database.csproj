@@ -110,6 +110,7 @@
     <Compile Include="Models\UserStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seeds\DataPopulatorInit.cs" />
+    <Compile Include="TreeNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DAL\Caches\" />
