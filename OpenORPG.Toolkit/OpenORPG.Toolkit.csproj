@@ -65,6 +65,12 @@
     <Compile Include="Controls\AttributeListControl.Designer.cs">
       <DependentUpon>AttributeListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\EventPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EventPageControl.Designer.cs">
+      <DependentUpon>EventPageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\FieldControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -138,6 +144,9 @@
     <EmbeddedResource Include="Controls\AttributeListControl.resx">
       <DependentUpon>AttributeListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EventPageControl.resx">
+      <DependentUpon>EventPageControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\SpriteSelectControl.resx">
       <DependentUpon>SpriteSelectControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -168,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Content\MonsterEditorForm.resx">
       <DependentUpon>MonsterEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Content\NpcEditorForm.resx">
+      <DependentUpon>NpcEditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
