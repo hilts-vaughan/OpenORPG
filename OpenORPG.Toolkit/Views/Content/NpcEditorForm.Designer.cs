@@ -40,9 +40,11 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.eventPageControl1 = new OpenORPG.Toolkit.Controls.EventPageControl();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -157,12 +159,21 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.eventPageControl1);
             this.groupBox4.Location = new System.Drawing.Point(397, 25);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(751, 407);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Conditional Display";
+            // 
+            // eventPageControl1
+            // 
+            this.eventPageControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eventPageControl1.Location = new System.Drawing.Point(3, 16);
+            this.eventPageControl1.Name = "eventPageControl1";
+            this.eventPageControl1.Size = new System.Drawing.Size(745, 388);
+            this.eventPageControl1.TabIndex = 0;
             // 
             // NpcEditorForm
             // 
@@ -175,6 +186,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -193,5 +205,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.GroupBox groupBox4;
+        private Controls.EventPageControl eventPageControl1;
     }
 }
