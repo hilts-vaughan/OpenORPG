@@ -12,7 +12,7 @@ namespace OpenORPG.Toolkit.Controls
 {
     public partial class EventPageControl : UserControl
     {
-        public TreeNode<NpcEventCommand>
+        //public TreeNode<NpcEventCommand> Events;
 
 
         public EventPageControl()
