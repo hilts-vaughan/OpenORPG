@@ -20,11 +20,11 @@ namespace Server.Game.Items
 
         }
 
-        public override void UseItemOn(Character character, Character user)
+        public override void UseItemOn(Character user, Character target)
         {
             // If the item can heal, apply some healing
             if (ItemTemplate.RestoreHp > 0)
-                character.CharacterStats[StatTypes.Hitpoints].CurrentValue += ItemTemplate.RestoreHp;                                
+                target.CharacterStats[StatTypes.Hitpoints].CurrentValue += ItemTemplate.RestoreHp;                                
         }
 
 

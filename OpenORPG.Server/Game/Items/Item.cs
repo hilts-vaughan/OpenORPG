@@ -51,8 +51,9 @@ namespace Server.Game.Items
         /// <summary>
         /// Performs an item action on a character, allowing something to be performed.
         /// </summary>
-        /// <param name="character"></param>
-        public abstract void UseItemOn(Character character, Character user);
+        /// <param name="user">A parameter representing the user of the item</param>
+        /// <param name="target">A parameter representing the target of the item. For self use items, the target will be the user.</param>
+        public abstract void UseItemOn(Character user, Character target);
 
 
     }

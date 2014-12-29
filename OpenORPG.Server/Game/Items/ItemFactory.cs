@@ -18,7 +18,7 @@ namespace Server.Game.Items
         /// <summary>
         /// Creates an item based on the item templates type.
         /// </summary>
-        /// <param name="itemTemplate"></param>
+        /// <param name="itemTemplate"><The <see cref="ItemTemplate"/> in which will be used to construct the physical item object./param>
         /// <returns></returns>
         public static Item CreateItem(ItemTemplate itemTemplate)
         {
