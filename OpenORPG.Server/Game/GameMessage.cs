@@ -24,7 +24,8 @@ namespace Server.Game
         GainExperience,
         LevelUp,
         QuestCompleted,
-        QuestCannotGiveReward
+        QuestCannotGiveReward,
+        ItemCannotBeUsed,
 
 
     }

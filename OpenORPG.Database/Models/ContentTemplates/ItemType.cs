@@ -7,6 +7,7 @@
     {
         FieldItem,
         Equipment,
-        Skillbook
+        Skillbook,
+        KeyItem
     }
 }

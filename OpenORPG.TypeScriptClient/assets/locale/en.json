@@ -3,6 +3,7 @@
     "PlayerJoinedGame": "{0} has joined the game.",
     "PlayerLeftGame": "{0} has left the game.",
     "EquipmentChanged": "Your equipment has changed.",
+    "ItemCannotBeUsed": "You cannot use this item right now.",
 
     "Hitpoints": "HEALTH",
     "Manapoints": "MANA",
