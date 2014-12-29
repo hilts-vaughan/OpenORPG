@@ -23,6 +23,12 @@ namespace Server.Infrastructure.Quests.Requirements
         /// </summary>
         T RequirementInfo { get; set; }
 
+        public string Type
+        {
+            get { return typeof (T).Name; }
+        }
+
+
         /// <summary>
         /// Evaluates given the current context the current progress of a particular objective.
         /// </summary>

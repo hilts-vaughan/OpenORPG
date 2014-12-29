@@ -22,6 +22,10 @@ namespace Server.Infrastructure.Quests.Requirements
 
         public QuestItemRequirementTable RequirementInfo { get; set; }
 
+
+            //HACK: Used to add this to the client packet data
+            public QuestItemRequirementTable Info { get { return RequirementInfo; } }
+
         public override QuestProgress GetQuestProgress(Player player)
         {
             //TODO Implement this progress amount properly

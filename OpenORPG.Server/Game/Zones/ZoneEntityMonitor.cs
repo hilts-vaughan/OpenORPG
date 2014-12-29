@@ -60,9 +60,16 @@ namespace Server.Game.Zones
             player.BackpackChanged += PlayerOnBackpackChanged;
             
             //TODO: Renable me
-            //player.AcceptedQuest += PlayerOnAcceptedQuest;
+            player.AcceptedQuest += PlayerOnAcceptedQuest;
+            
             player.ExperienceChanged += PlayerOnExperienceChanged;
             player.LevelChanged += PlayerOnLevelChanged;            
+        }
+
+        private void PlayerOnAcceptedQuest(Player player)
+        {
+            var questUpdate = new ServerSendQuestListPacket(player.QuestLog);
+            player.Client.Send(questUpdate);
         }
 
         private void PlayerOnBackpackChanged(Player player)
@@ -100,11 +107,7 @@ namespace Server.Game.Zones
             }
         }
 
-        private void PlayerOnAcceptedQuest(UserQuestInfo userQuestInfo, Player player)
-        {
-            var questUpdate = new ServerSendQuestListPacket(player.QuestLog);
-            player.Client.Send(questUpdate);
-        }
+     
     
         /// <summary>
         /// This is called to synchronize this new fact to the player
@@ -150,7 +153,7 @@ namespace Server.Game.Zones
 
             
             //TODO: Re-enable me
-            //player.AcceptedQuest -= PlayerOnAcceptedQuest;
+            player.AcceptedQuest -= PlayerOnAcceptedQuest;
             
             player.ExperienceChanged -= PlayerOnExperienceChanged;
             player.LevelChanged -= PlayerOnLevelChanged;

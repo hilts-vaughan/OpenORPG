@@ -37,13 +37,18 @@
             });
 
             network.registerPacket(OpCode.SMSG_QUEST_SEND_LIST, (packet) => {
-
+           
                 this.playerInfo.quests = [];
 
-                _.each(packet.quests, (value: any) => {
+                Logger.debug("PlayerInfoMonitor - Dumping new quest data...");
+                Logger.debug(packet.questLog);
+                _.each(packet.questLog, (value: any) => {
 
-                    ContentManager.getInstance().getContent(ContentType.Quest, value.questId, (data) => {
-                        this.playerInfo.quests.push(data);
+                    ContentManager.getInstance().getContent(ContentType.Quest, value.quest.questId, (data) => {
+                        // Copy the state over for usage
+                        data.state = value.state;
+
+                        this.playerInfo.quests.push(data);                                              
                         this.updateAngularScope();
                     });
 

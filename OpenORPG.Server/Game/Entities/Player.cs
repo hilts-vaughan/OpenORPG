@@ -34,6 +34,15 @@ namespace Server.Game.Entities
         public event EquipmentEvent EquipmentChanged;
         public event SkillEvent LearnedSkill;
 
+        public event PlayerEvent AcceptedQuest;
+
+        protected virtual void OnAcceptedQuest(Player player)
+        {
+            PlayerEvent handler = AcceptedQuest;
+            if (handler != null) handler(player);
+        }
+
+
         public event PlayerEvent BackpackChanged;
 
         protected virtual void OnBackpackChanged(Player player)
@@ -154,13 +163,19 @@ namespace Server.Game.Entities
                 Level = userHero.Level;
 
                 Backpack.StorageChanged += BackpackOnStorageChanged;
-
+                QuestLog.QuestAccepted += QuestLogOnQuestAccepted;
             }
 
 
             // Store the user hero internally
             _hero = userHero;
         }
+
+        private void QuestLogOnQuestAccepted(QuestLogEntry entry)
+        {
+            OnAcceptedQuest(this);
+        }
+
 
         private void BackpackOnStorageChanged(object sender, EventArgs eventArgs)
         {
@@ -276,5 +291,6 @@ namespace Server.Game.Entities
 
 
         public long UserId { get; set; }
+    
     }
 }

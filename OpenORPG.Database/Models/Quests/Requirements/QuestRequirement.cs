@@ -10,7 +10,7 @@ namespace OpenORPG.Database.Models.Quests
     [Table("quest_requirements")]
     public abstract class QuestRequirement
     {
-
+        
         public virtual QuestStepsTable QuestStep { get; set; }
 
         public int QuestRequirementId { get; set; }

@@ -16,8 +16,12 @@
         public getString(messageType: string, args : Array<string> ) {
             var str = this.currentLocaleData[messageType];
 
-            for (var i = 0; i < args.length; i++)
-                str = str.split("{" + i + "}").join(args[i]);
+            // If the arguments are presented, use them
+            if (args) {
+                for (var i = 0; i < args.length; i++)
+                    str = str.split("{" + i + "}").join(args[i]);
+            }
+
             return str;
         }
 

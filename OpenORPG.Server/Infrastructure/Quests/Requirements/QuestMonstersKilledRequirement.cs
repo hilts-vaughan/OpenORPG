@@ -14,9 +14,14 @@ namespace Server.Infrastructure.Quests.Requirements
         public QuestMonstersKilledRequirement(QuestMonsterRequirementTable requirementInfo)
         {
             RequirementInfo = requirementInfo;
+
         }
 
+      
         public QuestMonsterRequirementTable RequirementInfo { get; set; }
+
+        //HACK: Used to add this to the client packet data
+        public QuestMonsterRequirementTable Info { get { return RequirementInfo; } }
 
         public override QuestProgress GetQuestProgress(Player player)
         {

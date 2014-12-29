@@ -1,6 +1,4 @@
-﻿
-
-    <div id="quest-list-window" class="rounded-container" ng-controller="QuestListController">
+﻿<div id="quest-list-window" class="rounded-container" ng-controller="QuestListController">
 
     <div class="contentwrapper">
 
@@ -11,22 +9,25 @@
             <h4>In Progress</h4>
 
             <ul>
-
-                <li ng-repeat="quest in playerInfo.quests" ng-click="selectQuest($index)" ng-class="{'quest-list-selected': selectedIndex == $index}">
+                <li ng-repeat="quest in playerInfo.quests" ng-click="selectQuest($index)" ng-show="quest.state == 1" ng-class="{'quest-list-selected': selectedIndex == $index}">
                     {{quest.name}}
                 </li>
-
-
-
             </ul>
-            
+
             <h4 style='color: limegreen'>Complete</h4>
+
+            <ul>
+                <li ng-repeat="quest in playerInfo.quests" ng-click="selectQuest($index)" ng-show="quest.state == 2" ng-class="{'quest-list-selected': selectedIndex == $index}">
+                    {{quest.name}}
+                </li>
+            </ul>
+
 
         </div>
 
         <div class="quest-content">
             <h2>{{selectedQuest.name}}</h2>
-  
+
             <div class="description">{{selectedQuest.description}}</div>
         </div>
 
