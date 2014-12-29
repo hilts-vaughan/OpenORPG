@@ -49,6 +49,9 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entities.EF6.6.8.3\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
+    <Reference Include="OpenORPG.Toolkit">
+      <HintPath>obj\Debug\OpenORPG.Toolkit.exe</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -91,6 +94,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReflectionUtility.cs" />
     <Compile Include="Views\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +136,12 @@
     </Compile>
     <Compile Include="Views\Content\QuestEditorForm.Designer.cs">
       <DependentUpon>QuestEditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\Quests\QuestRewardEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Content\Quests\QuestRewardEditor.Designer.cs">
+      <DependentUpon>QuestRewardEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Content\SkillEditorForm.cs">
       <SubType>Form</SubType>
@@ -190,6 +200,12 @@
     <EmbeddedResource Include="Views\Content\NpcEditorForm.resx">
       <DependentUpon>NpcEditorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Content\QuestEditorForm.resx">
+      <DependentUpon>QuestEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Content\Quests\QuestRewardEditor.resx">
+      <DependentUpon>QuestRewardEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -217,6 +233,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="icons\rpg\I_Book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

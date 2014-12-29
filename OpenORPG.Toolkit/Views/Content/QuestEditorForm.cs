@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Windows.Forms;
 using OpenORPG.Database.DAL;
+using OpenORPG.Database.Models.Quests.Rewards;
 using Server.Game.Database;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Database.Models.Quests;
@@ -18,8 +21,9 @@ namespace OpenORPG.Toolkit.Views.Content
         {           
             InitializeComponent();
             SetContentTemplate(questTemplate);
-        
+
         }
+
 
         protected override void Save()
         {
