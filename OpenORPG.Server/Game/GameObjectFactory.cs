@@ -65,6 +65,7 @@ namespace Server.Game
         {
             using (var context = new GameDatabaseContext())
             {
+                id = 1;
                 var template = context.Npcs.FirstOrDefault(x => x.Id == id);
 
                 if (template == null)

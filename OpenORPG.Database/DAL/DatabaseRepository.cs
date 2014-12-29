@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Database.Models.ContentTemplates;
 
 namespace OpenORPG.Database.DAL
 {
@@ -34,7 +35,10 @@ namespace OpenORPG.Database.DAL
 
         public virtual List<T> GetAll()
         {
-            return _context.Set<T>().ToList();
+            var set = _context.Set<T>();
+            var itemSet = _context.Set<ItemTemplate>().ToList();
+
+            return set.ToList();
         }
 
         public virtual T Add(T entity)

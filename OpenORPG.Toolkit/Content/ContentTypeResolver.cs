@@ -29,6 +29,7 @@ namespace OpenORPG.Toolkit.Content
                 var questRepo = new QuestRepository(db);
                 var npcRepo = new NpcRepository(db);
 
+                itemRepo.Get(1);
 
                 var @switch = new Dictionary<Type, Action>
             {                
