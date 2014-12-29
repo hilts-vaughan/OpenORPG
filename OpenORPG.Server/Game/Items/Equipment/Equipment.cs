@@ -55,6 +55,11 @@ namespace Server.Game.Items.Equipment
         }
 
 
+        public override bool Consumable
+        {
+            get { return false; }
+        }
+
         public override void UseItemOn(Character user, Character target)
         {
           

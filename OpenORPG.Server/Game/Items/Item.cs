@@ -18,10 +18,7 @@ namespace Server.Game.Items
             get { return ItemTemplate.Name; }
         }
 
-        public bool Consumable
-        {
-            get { return GetType() == typeof(FieldItem) || GetType() == typeof(SkillbookItem); }
-        }
+        public abstract bool Consumable { get; }
 
         public string Description
         {

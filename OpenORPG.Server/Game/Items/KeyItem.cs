@@ -21,6 +21,11 @@ namespace Server.Game.Items
         }
 
 
+        public override bool Consumable
+        {
+            get { return false; }
+        }
+
         public override void UseItemOn(Character character, Character user)
         {
             var player = character as Player;

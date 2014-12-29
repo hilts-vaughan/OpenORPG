@@ -20,6 +20,11 @@ namespace Server.Game.Items
 
         }
 
+        public override bool Consumable
+        {
+            get { return true; }
+        }
+
         public override void UseItemOn(Character user, Character target)
         {
             // If the item can heal, apply some healing
