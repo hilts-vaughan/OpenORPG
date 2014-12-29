@@ -29,10 +29,14 @@ module OpenORPG {
                     $scope.selectedIndex = index;
 
                     //TODO: We need to make this take all requirements into account; not just the first
-                    $scope.localizeRequirement($scope.selectedQuest.currentStep.requirements[0]);
+                    if ($scope.selectedQuest.state == 1) {
+                        $scope.localizeRequirement($scope.selectedQuest.currentStep.requirements[0]);
+                    } else {
+                        $scope.currentTask = ""; // set blank
+                    }
                 };
 
-                $scope.localizeRequirement = function(requirement) {
+                $scope.localizeRequirement = function (requirement) {
                     formatter.getFormattedRequirement(requirement.type, requirement.info, (result) => {
                         $scope.currentTask = result;
                     });

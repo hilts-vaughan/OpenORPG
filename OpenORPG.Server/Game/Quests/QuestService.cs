@@ -82,6 +82,9 @@ namespace Server.Game.Quests
                 {
                     var message = new ServerSendGameMessagePacket(GameMessage.QuestCompleted, new List<string>() { entry.Quest.Name});
                     player.Client.Send(message);
+
+                    var questUpdate = new ServerSendQuestListPacket(player.QuestLog);
+                    player.Client.Send(questUpdate);
                 }
                 
                 else

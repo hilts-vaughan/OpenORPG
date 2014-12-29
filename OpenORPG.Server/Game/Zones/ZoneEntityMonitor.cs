@@ -60,8 +60,9 @@ namespace Server.Game.Zones
             player.BackpackChanged += PlayerOnBackpackChanged;
             
             //TODO: Renable me
-            player.AcceptedQuest += PlayerOnAcceptedQuest;
             
+            player.AcceptedQuest += PlayerOnAcceptedQuest;          
+
             player.ExperienceChanged += PlayerOnExperienceChanged;
             player.LevelChanged += PlayerOnLevelChanged;            
         }
