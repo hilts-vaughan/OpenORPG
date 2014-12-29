@@ -24,6 +24,10 @@ module OpenORPG {
 
                 var formatter: RequirementFormatter = new RequirementFormatter();
 
+                $scope.$on('QuestsChanged', (event, data) => {
+                    $scope.selectQuest($scope.selectedIndex);
+                });
+
                 $scope.selectQuest = function (index) {
                     $scope.selectedQuest = $scope.playerInfo.quests[index];
                     $scope.selectedIndex = index;

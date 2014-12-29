@@ -49,7 +49,8 @@
                         data.state = value.state;
                         data.currentStep = value.currentStep;
 
-                        this.playerInfo.quests.push(data);                                              
+                        this.playerInfo.quests.push(data);
+                        this.broadcastEvent('QuestsChanged');                                  
                         this.updateAngularScope();
                     });
 
@@ -103,9 +104,15 @@
             } else {
                 $rootScope.$apply();
             }
+        }
 
+        private broadcastEvent(eventName: string) {
+            var $body = angular.element(document.body);
+            var $rootScope: any = $body.scope();
 
-
+            // Send event
+            $rootScope.$broadcast(eventName);
+            this.updateAngularScope();
         }
 
 
