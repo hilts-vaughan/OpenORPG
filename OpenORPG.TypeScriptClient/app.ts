@@ -22,11 +22,21 @@ module OpenORPG {
         .controller('QuestListController', [
             '$scope', function ($scope) {
 
+                var formatter: RequirementFormatter = new RequirementFormatter();
+
                 $scope.selectQuest = function (index) {
                     $scope.selectedQuest = $scope.playerInfo.quests[index];
                     $scope.selectedIndex = index;
+
+                    //TODO: We need to make this take all requirements into account; not just the first
+                    $scope.localizeRequirement($scope.selectedQuest.currentStep.requirements[0]);
                 };
 
+                $scope.localizeRequirement = function(requirement) {
+                    formatter.getFormattedRequirement(requirement.type, requirement.info, (result) => {
+                        $scope.currentTask = result;
+                    });
+                };
 
             }
         ])

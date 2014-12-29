@@ -47,6 +47,7 @@
                     ContentManager.getInstance().getContent(ContentType.Quest, value.quest.questId, (data) => {
                         // Copy the state over for usage
                         data.state = value.state;
+                        data.currentStep = value.currentStep;
 
                         this.playerInfo.quests.push(data);                                              
                         this.updateAngularScope();

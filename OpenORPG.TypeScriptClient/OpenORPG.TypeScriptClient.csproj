@@ -496,6 +496,10 @@
     <TypeScriptCompile Include="Game\UI\InterfaceWindow.ts" />
     <TypeScriptCompile Include="Game\UI\Inventory\InventoryContextMenu.ts" />
     <TypeScriptCompile Include="Game\UI\ItemTooltipInfo.ts" />
+    <TypeScriptCompile Include="Game\UI\Quest\IQuestRequirementFormatter.ts" />
+    <TypeScriptCompile Include="Game\UI\Quest\ItemRequirementFormatter.ts" />
+    <TypeScriptCompile Include="Game\UI\Quest\MonstersKilledFormatter.ts" />
+    <TypeScriptCompile Include="Game\UI\Quest\RequirementFormatter.ts" />
     <TypeScriptCompile Include="Game\World\Zone.ts" />
     <TypeScriptCompile Include="Infrastructure\Content\ContentCache.ts" />
     <TypeScriptCompile Include="Infrastructure\Content\ContentManager.ts" />

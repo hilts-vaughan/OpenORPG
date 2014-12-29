@@ -11,6 +11,16 @@
     "GainExperience": "You gain {0} experience points.",
     "LevelUp": "{0} has gained a level! {0} is now level {1}.",
     "QuestCompleted": "You have completed the quest {0}.",
-    "QuestCannotGiveReward": "You are unable to complete the quest at this time. Make sure you can recieve your reward."
+    "QuestCannotGiveReward": "You are unable to complete the quest at this time. Make sure you can recieve your reward.",
+
+
+
+
+
+    "QuestMonstersKilledRequirement": "Slay {1} {0}'s.",
+    "QuestHasItemRequirement": "Obtain {1} of {0}",
+    "RequirementFormatterMissing": "The formatter for this quest is missing. Contact a developer."
+
+
 
 }

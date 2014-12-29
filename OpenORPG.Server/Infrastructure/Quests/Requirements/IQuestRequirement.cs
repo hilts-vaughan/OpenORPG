@@ -25,7 +25,7 @@ namespace Server.Infrastructure.Quests.Requirements
 
         public string Type
         {
-            get { return typeof (T).Name; }
+            get { return GetType().Name; }
         }
 
 
