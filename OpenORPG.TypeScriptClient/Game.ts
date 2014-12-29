@@ -12,7 +12,7 @@ module OpenORPG {
 
             var width = $("#gameContainer").width();
             var height = $("#canvasholder").height();
-            this.game = new Phaser.Game(1336, 768, Phaser.CANVAS, 'canvasholder', null, true, false);
+            this.game = new Phaser.Game(1600, 900, Phaser.CANVAS, 'canvasholder', null, true, false);
   
 
 

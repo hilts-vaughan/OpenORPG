@@ -9,58 +9,112 @@
 <body>
 
     <div id="setting-window" class="rounded-container" ng-controller="SkillListController ">
+        
+        <div class="tab-wrapper">
+            <ul class="tabs">
+                <li>
+                    <input type="radio" checked name="tabs" id="tab1">
+                    <label for="tab1">General</label>
+                    <div id="tab-content1" class="tab-content animated fadeIn">
+                      
+                        <div style="float: left">
+                            <span>Game Language: </span>
+                            <select>
+                                <option>English</option>
+                                <option>800x600</option>
+                                <option>800x600</option>
+                            </select>
+                        </div>
 
-        <ul class="tabs">
-            <li>
-                <input type="radio" checked name="tabs" id="tab1">
-                <label for="tab1">General</label>
-                <div id="tab-content1" class="tab-content animated fadeIn">
-                    ... 2
-                </div>
-            </li>
-            <li>
-                <input type="radio" name="tabs" id="tab2">
-                <label for="tab2">Video</label>
-                <div id="tab-content2" class="tab-content animated fadeIn">
-                    ... 3
-                </div>
-            </li>
-            <li>
-                <input type="radio" name="tabs" id="tab3">
-                <label for="tab3">Audio</label>
-                <div id="tab-content3" class="tab-content animated fadeIn">
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" name="tabs" id="tab2">
+                    <label for="tab2">Video</label>
+                    <div id="tab-content2" class="tab-content animated fadeIn">
+
+                        <div style="float: left">
+                            <span>Game Resolution: </span>
+                            <select>
+                                <option>800x600</option>
+                                <option>800x600</option>
+                                <option>800x600</option>
+                            </select>
+                        </div>
+       
+
+                        <div style="float: right;">
+                            <span>Scale to fullscreen</span>
+                            <span class="squaredThree">
+                                <input type="checkbox" value="None" id="squaredThree" name="check" checked />
+                                <label for="squaredThree"></label>
+                            </span>
+                        </div>
+                        
+                        
+                        
+                        <div style="clear: both; float: left; margin-top: 50px;">
+                            <span>Game Resolution: </span>
+                            <select>
+                                <option>800x600</option>
+                                <option>800x600</option>
+                                <option>800x600</option>
+                            </select>
+                        </div>
+
+                        <div style="float: right; margin-top: 10px;">
+                            <span>Allow particle effects</span>
+                            <span class="squaredThree">
+                                <input type="checkbox" value="None" id="squaredThree" name="check" checked />
+                                <label for="squaredThree"></label>
+                            </span>
+                        </div>
 
 
-              
-                    <span>Play background music</span>
-                    <span class="squaredThree">
-                        <input type="checkbox" value="None" id="squaredThree" name="check" checked />
-                        <label for="squaredThree"></label>
-                    </span>
-                    
-                    
-                    <br/>
-
-                    <span>Play background music</span>
-                    <span class="squaredThree">
-                        <input type="checkbox" value="None" id="squaredThree" name="check" checked />
-                        <label for="squaredThree"></label>
-                    </span>
-                    
-                    <br />
-         
-                    <span>Play background music</span>
-                    <span class="squaredThree">
-                        <input type="checkbox" value="None" id="squaredThree" name="check" checked />
-                        <label for="squaredThree"></label>
-                    </span>
 
 
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" name="tabs" id="tab3">
+                    <label for="tab3">Audio</label>
+                    <div id="tab-content3" class="tab-content animated fadeIn">
 
-                </div>
-            </li>
-        </ul>
+                        <span>Play background music</span>
+                        <span class="squaredThree">
+                            <input type="checkbox" value="None" id="squaredThree" name="check" checked />
+                            <label for="squaredThree"></label>
+                        </span>
 
+
+                        <br />
+
+                        <span>Play background music</span>
+                        <span class="squaredThree">
+                            <input type="checkbox" value="None" id="squaredThree" name="check" checked />
+                            <label for="squaredThree"></label>
+                        </span>
+
+                        <br />
+
+                        <span>Play background music</span>
+                        <span class="squaredThree">
+                            <input type="checkbox" value="None" id="squaredThree" name="check" checked />
+                            <label for="squaredThree"></label>
+                        </span>
+
+
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="strip-wrapper">
+            <button class="btn-custom">Save Changes</button>
+            <button class="btn-custom">Discard Changes</button>
+            <button class="btn-custom">Reset Default</button>
+
+        </div>
 
     </div>
 

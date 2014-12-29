@@ -443,12 +443,23 @@ canvas {
     font-size: 12px;
 }
 
-    #skill-window .contentwrapper {
+#setting-window .tab-wrapper {
+    height: 90%;
+}
+
+#setting-window .strip-wrapper {
+    height: 10%;
+    color: white;
+    padding-left: 10px;
+}
+
+  #skill-window .contentwrapper {
         width: 480px;
         height: 100%;
         overflow: overlay;
-    }
+ }
 
+$
 
 
 
@@ -1013,7 +1024,7 @@ img {
         z-index: 2;
         display: none;
         text-align: left;
-        width: 100%;
+        width: 73%;
         font-size: 16px;
         line-height: 140%;
         padding-top: 10px;
@@ -1028,7 +1039,8 @@ img {
         -o-animation-duration: 0.5s;
         -moz-animation-duration: 0.5s;
         animation-duration: 0.5s;
-          height: 250px;
+          height: 225px;
+          padding-right: 12px;
       }
 
 input[type=checkbox].css-checkbox {
@@ -1115,3 +1127,48 @@ input[type=checkbox].css-checkbox {
 }
 
 /* end .squaredThree */
+
+
+
+.btn-custom {
+  background: gray;
+  border-radius: 4px;
+  font-family: Arial;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.btn-custom:hover {
+    opacity: 0.9;
+}
+
+select {
+  background-color: gray;
+  background-repeat:no-repeat;
+  background-position: right 10px top 15px;
+  background-size: 16px 16px;
+  color:white;
+  padding: 3px 3px 3px 3px;
+  width:auto;
+  font-family:arial,tahoma;
+  font-size:16px;
+  font-weight:bold;
+  color:#fff;
+  text-align:center;
+  text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
+  border-radius:3px;
+  -webkit-border-radius:3px;
+  -webkit-appearance: none;
+  border:0;
+  outline:0;
+  -webkit-transition:0.3s ease all;
+	   -moz-transition:0.3s ease all;
+	    -ms-transition:0.3s ease all;
+	     -o-transition:0.3s ease all;
+	        transition:0.3s ease all;
+}
+
+select:focus, select:active {
+  border:0;
+  outline:0;
+}
