@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace Server.Game.Database.Models.Quests
     {
         public QuestTemplate()
         {
-      
+            Rewards = new List<QuestReward>();
+            QuestSteps = new List<QuestStepsTable>();      
         }
 
  
@@ -40,7 +42,7 @@ namespace Server.Game.Database.Models.Quests
 
         public virtual ICollection<QuestStepsTable> QuestSteps { get; set; }
 
-        public virtual ICollection<QuestReward> Rewards { get; set; } 
+        public virtual List<QuestReward> Rewards { get; set; } 
 
         public virtual NpcTemplate QuestStarter { get; set; }
 

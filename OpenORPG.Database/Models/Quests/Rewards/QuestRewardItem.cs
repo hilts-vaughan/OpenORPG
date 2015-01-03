@@ -14,5 +14,9 @@ namespace OpenORPG.Database.Models.Quests.Rewards
 
         public byte Amount { get; set; }
 
+        public override string DisplayString
+        {
+            get { return string.Format("Item Reward: (ID: {0}, Amount: {1})", ItemId, Amount); }
+        }
     }
 }

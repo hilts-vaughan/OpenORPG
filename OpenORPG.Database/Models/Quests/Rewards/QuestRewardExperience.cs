@@ -14,5 +14,9 @@ namespace OpenORPG.Database.Models.Quests.Rewards
  
         public int Amount { get; set; }
 
+        public override string DisplayString
+        {
+            get { return string.Format("EXP: {0}", Amount); }
+        }
     }
 }

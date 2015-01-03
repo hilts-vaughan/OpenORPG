@@ -18,21 +18,26 @@ namespace OpenORPG.Toolkit.Views.Content
     public partial class QuestEditorForm : OpenORPG.Toolkit.Views.Content.BaseContentForm
     {
         public QuestEditorForm(QuestTemplate questTemplate)
-        {           
+        {
             InitializeComponent();
             SetContentTemplate(questTemplate);
-
+            questRewardEditor1.Template = questTemplate;
         }
 
 
         protected override void Save()
         {
+            var ContentTemplate = this.ContentTemplate as QuestTemplate;
+
+            // Persist rewards
+            ContentTemplate.Rewards = questRewardEditor1.Rewards;
+
             using (var db = new GameDatabaseContext())
             {
-                var ContentTemplate = this.ContentTemplate as QuestTemplate;
+
                 var repository = new QuestRepository(db);
                 repository.Update(ContentTemplate, ContentTemplate.Id);
-            }      
+            }
 
             base.Save();
         }

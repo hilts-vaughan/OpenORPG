@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,12 @@ namespace OpenORPG.Database.Models.Quests.Rewards
     public abstract class QuestReward
     {
 
+        [Browsable(false)]
         public int QuestRewardId { get; set; }
+
+        [NotMapped] 
+        public abstract string DisplayString { get; }
+
 
     }
 }
