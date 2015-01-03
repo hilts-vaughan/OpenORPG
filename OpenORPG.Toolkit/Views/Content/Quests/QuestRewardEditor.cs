@@ -17,13 +17,14 @@ namespace OpenORPG.Toolkit.Views.Content.Quests
         {
             InitializeComponent();
 
-            if (!DesignMode)
-            {
-                //PopulateContextMenu();
-            }
+            bool designMode = (LicenseManager.UsageMode == LicenseUsageMode.Designtime);
+
+            if (!designMode)
+                PopulateContextMenu();
+
         }
 
-      
+
 
 
         private void PopulateContextMenu()
