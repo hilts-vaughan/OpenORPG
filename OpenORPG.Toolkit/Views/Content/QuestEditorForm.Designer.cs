@@ -37,10 +37,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.questRewardEditor1 = new OpenORPG.Toolkit.Views.Content.Quests.QuestRewardEditor();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -118,7 +116,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.questRewardEditor1);
             this.groupBox2.Location = new System.Drawing.Point(351, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(339, 325);
@@ -135,14 +132,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Quest Steps";
             // 
-            // questRewardEditor1
-            // 
-            this.questRewardEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.questRewardEditor1.Location = new System.Drawing.Point(3, 16);
-            this.questRewardEditor1.Name = "questRewardEditor1";
-            this.questRewardEditor1.Size = new System.Drawing.Size(333, 306);
-            this.questRewardEditor1.TabIndex = 0;
-            // 
             // QuestEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,7 +140,6 @@
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -167,6 +155,5 @@
         private System.Windows.Forms.CheckBox checkRepeat;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private Quests.QuestRewardEditor questRewardEditor1;
     }
 }
