@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using OpenORPG.Database.Enums;
+using OpenORPG.Database.Models;
 using Server.Game.Combat;
 using Server.Game.Database;
 using Server.Game.Database.Models;
@@ -30,7 +31,7 @@ namespace Server.Game.Entities
     public class Player : Character
     {
 
- 
+
         public event EquipmentEvent EquipmentChanged;
         public event SkillEvent LearnedSkill;
 
@@ -103,6 +104,45 @@ namespace Server.Game.Entities
         }
 
         /// <summary>
+        /// Given a key, retrieves that value from a users set of keys. If the value cannot be found, an empty string will be returned instead.
+        /// </summary>
+        /// <param name="key">The key to search for within the collection of flags</param>
+        /// <returns></returns>
+        public string GetFlagKey(string key)
+        {
+            var flags = _hero.Flags;
+            var flag = flags.FirstOrDefault(x => x.Key == key);
+
+            if (flag != null)
+                return flag.Value;
+            return "";
+        }
+
+        /// <summary>
+        /// Given a key and value, updates the value of the player state. If the value cannot be found,
+        /// it will be created and then value will be set to the specified parameter.
+        /// </summary>
+        /// <param name="key">The key for the flag to be set</param>
+        /// <param name="value">The value for the flag to be set</param>
+        /// <returns></returns>
+        public void SetFlagKey(string key, string value)
+        {
+            var flags = _hero.Flags;
+            var flag = flags.FirstOrDefault(x => x.Key == key);
+
+            if (flag != null)
+                flag.Value = value;
+            else            
+                flags.Add(new UserFlag() {Key = key, Value = value});                                      
+        }
+
+        /// <summary>
+        /// A read-only collection of all the user flags. Do not attempt to modify this directly.
+        /// </summary>
+        public ICollection<UserFlag> Flags { get { return _hero.Flags; } }
+
+
+        /// <summary>
         /// The amount of currency this particular player is holding.
         /// This is used in computing
         /// </summary>
@@ -147,7 +187,7 @@ namespace Server.Game.Entities
                 }
 
 
-           
+
 
                 foreach (var eq in userHero.Equipment)
                 {
@@ -179,7 +219,7 @@ namespace Server.Game.Entities
 
         private void BackpackOnStorageChanged(object sender, EventArgs eventArgs)
         {
-           OnBackpackChanged(this);
+            OnBackpackChanged(this);
         }
 
         public long HomepointZoneId
@@ -233,7 +273,7 @@ namespace Server.Game.Entities
 
         }
 
- 
+
 
         /// <summary>
         /// Attempts to equip the given item to the character.
@@ -275,8 +315,8 @@ namespace Server.Game.Entities
         {
             if (Equipment[(int)slot] != null)
             {
-                var success = Backpack.TryAddItem((Equipment[(int) slot]));
-              
+                var success = Backpack.TryAddItem((Equipment[(int)slot]));
+
 
                 if (success)
                 {
@@ -291,6 +331,6 @@ namespace Server.Game.Entities
 
 
         public long UserId { get; set; }
-    
+
     }
 }

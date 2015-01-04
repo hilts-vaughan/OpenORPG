@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using OpenORPG.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
 
 namespace Server.Game.Database.Models
@@ -27,6 +28,7 @@ namespace Server.Game.Database.Models
             Skills = new List<UserSkill>();
             QuestInfo = new List<UserQuestInfo>();
             Equipment = new List<UserEquipment>();
+            Flags = new List<UserFlag>();
         }
 
         public UserHero()
@@ -35,6 +37,7 @@ namespace Server.Game.Database.Models
             Skills = new List<UserSkill>();
             QuestInfo = new List<UserQuestInfo>();
             Equipment = new List<UserEquipment>();
+            Flags = new List<UserFlag>();
         }
 
         public int UserHeroId { get; set; }
@@ -71,6 +74,8 @@ namespace Server.Game.Database.Models
         public virtual ICollection<UserSkill> Skills { get; set; }
 
         public virtual ICollection<UserQuestInfo> QuestInfo { get; set; }
+
+        public virtual ICollection<UserFlag> Flags { get; set; } 
 
         public DateTime? CreationDate { get; set; }
 

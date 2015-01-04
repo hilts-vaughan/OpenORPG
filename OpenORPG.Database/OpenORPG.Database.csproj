@@ -105,6 +105,7 @@
     <Compile Include="Models\Quests\UserQuestRequirements.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserEquipment.cs" />
+    <Compile Include="Models\UserFlag.cs" />
     <Compile Include="Models\UserHero.cs" />
     <Compile Include="Models\Quests\UserQuestInfo.cs" />
     <Compile Include="Models\UserSkill.cs" />

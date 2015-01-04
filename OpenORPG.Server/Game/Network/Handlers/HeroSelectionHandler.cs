@@ -47,6 +47,7 @@ namespace Server.Game.Network.Handlers
                     context.Entry(hero).Collection(a => a.Skills).Load();
                     context.Entry(hero).Collection(a => a.Inventory).Load();
                     context.Entry(hero).Collection(a => a.QuestInfo).Load();
+                    context.Entry(hero).Collection(a => a.Flags).Load();
 
                     // Load up our set of requirements from the table
                     foreach (var x in hero.QuestInfo)
