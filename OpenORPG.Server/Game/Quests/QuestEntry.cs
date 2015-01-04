@@ -55,12 +55,15 @@ namespace Server.Game.Quests
 
         public void AdvanceStep()
         {
+
+
             // Increment the progress flag and let subscribers know about this
             _questInfo.QuestProgress++;
 
             // Reset the requirement progress flags
             _requirementProgress.Clear();
-           
+                   
+
             // Reset stuff with a progress of zero
             if (CurrentStep != null)
             {

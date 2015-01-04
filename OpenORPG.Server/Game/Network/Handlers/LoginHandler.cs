@@ -119,6 +119,7 @@ namespace Server.Game.Network.Handlers
 
                 context.Entry(hero).Collection(x => x.Inventory).Load();
                 context.Entry(hero).Collection(x => x.Equipment).Load();
+                context.Entry(hero).Collection(x => x.Flags).Load();
 
                 hero.Name = player.Name;
                 hero.PositionX = (int)player.Position.X;
@@ -140,6 +141,8 @@ namespace Server.Game.Network.Handlers
 
                 hero.Experience = player.Experience;
                 hero.Level = player.Level;
+
+                hero.Flags = player.Flags;
 
                 //TODO: Need better tracking code here, incrementing the row needlessly here
 

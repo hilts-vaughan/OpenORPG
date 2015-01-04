@@ -8,6 +8,8 @@ using Server.Game.Database.Models.Quests;
 using Server.Game.Entities;
 using Server.Infrastructure.Quests.Requirements;
 using Server.Infrastructure.Quests.Rewards;
+using Server.Infrastructure.Scripting;
+using Server.Infrastructure.Scripting.Quests;
 
 namespace Server.Infrastructure.Quests
 {
@@ -42,6 +44,8 @@ namespace Server.Infrastructure.Quests
         public bool CanRepeat { get; private set; }
 
 
+        public QuestScript Script { get; private set; }
+
         /// <summary>
         /// Creates an instance of a quest given the accordingly table containing the information.
         /// </summary>
@@ -71,6 +75,8 @@ namespace Server.Infrastructure.Quests
 
                 Steps.Add(newStep);
             }
+
+            Script = ScriptLoader.Instance.GetQuestScript(this);
 
         }
 
@@ -113,6 +119,7 @@ namespace Server.Infrastructure.Quests
             // Mark this quest as complete
             questInfo.State = QuestState.Finished;
 
+            Script.OnQuestEnded(player);
 
             return true;
 

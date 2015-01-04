@@ -37,7 +37,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(432, 21);
+            this.groupBox1.Size = new System.Drawing.Size(617, 21);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filters";
@@ -46,9 +46,9 @@
             // 
             this.listContent.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.listContent.FormattingEnabled = true;
-            this.listContent.Location = new System.Drawing.Point(0, 28);
+            this.listContent.Location = new System.Drawing.Point(0, 50);
             this.listContent.Name = "listContent";
-            this.listContent.Size = new System.Drawing.Size(432, 368);
+            this.listContent.Size = new System.Drawing.Size(617, 368);
             this.listContent.TabIndex = 1;
             this.listContent.DoubleClick += new System.EventHandler(this.listContent_DoubleClick);
             // 
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(432, 396);
+            this.ClientSize = new System.Drawing.Size(617, 418);
             this.ControlBox = false;
             this.Controls.Add(this.listContent);
             this.Controls.Add(this.groupBox1);

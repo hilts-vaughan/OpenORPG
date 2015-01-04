@@ -67,7 +67,7 @@ namespace Server.Game.Quests
 
         private void AddEntry(QuestLogEntry entry)
         {
-            _quests.Add(entry);
+            _quests.Add(entry);            
         }
 
 

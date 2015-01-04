@@ -131,11 +131,23 @@
     <Compile Include="Views\Content\QuestEditorForm.Designer.cs">
       <DependentUpon>QuestEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Content\Quests\QuestRequirementsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Content\Quests\QuestRequirementsDialog.Designer.cs">
+      <DependentUpon>QuestRequirementsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Content\Quests\QuestRewardEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Views\Content\Quests\QuestRewardEditor.Designer.cs">
       <DependentUpon>QuestRewardEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\Quests\QuestStepEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Content\Quests\QuestStepEditor.Designer.cs">
+      <DependentUpon>QuestStepEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Content\SkillEditorForm.cs">
       <SubType>Form</SubType>
@@ -197,8 +209,14 @@
     <EmbeddedResource Include="Views\Content\QuestEditorForm.resx">
       <DependentUpon>QuestEditorForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Content\Quests\QuestRequirementsDialog.resx">
+      <DependentUpon>QuestRequirementsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Content\Quests\QuestRewardEditor.resx">
       <DependentUpon>QuestRewardEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Content\Quests\QuestStepEditor.resx">
+      <DependentUpon>QuestStepEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

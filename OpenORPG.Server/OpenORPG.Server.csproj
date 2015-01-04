@@ -275,6 +275,7 @@
     <Compile Include="Infrastructure\Scripting\Combat\SkillScript.cs" />
     <Compile Include="Infrastructure\Scripting\Combat\StatusEffectScript.cs" />
     <Compile Include="Infrastructure\Scripting\GameScriptAttribute.cs" />
+    <Compile Include="Infrastructure\Scripting\Quests\QuestScript.cs" />
     <Compile Include="Infrastructure\Scripting\ScriptLoader.cs" />
     <Compile Include="Infrastructure\Synchronization\ISyncSerializer.cs" />
     <Compile Include="Infrastructure\Synchronization\SyncAttribute.cs" />

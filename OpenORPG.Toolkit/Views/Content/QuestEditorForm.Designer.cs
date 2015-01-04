@@ -36,11 +36,13 @@
             this.textName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.questRewardEditor1 = new OpenORPG.Toolkit.Views.Content.Quests.QuestRewardEditor();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.questStepEditor1 = new OpenORPG.Toolkit.Views.Content.Quests.QuestStepEditor();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -126,15 +128,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Rewards";
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Location = new System.Drawing.Point(696, 18);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(339, 325);
-            this.groupBox3.TabIndex = 19;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Quest Steps";
-            // 
             // questRewardEditor1
             // 
             this.questRewardEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -142,6 +135,24 @@
             this.questRewardEditor1.Name = "questRewardEditor1";
             this.questRewardEditor1.Size = new System.Drawing.Size(333, 306);
             this.questRewardEditor1.TabIndex = 1;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.questStepEditor1);
+            this.groupBox3.Location = new System.Drawing.Point(696, 18);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(339, 325);
+            this.groupBox3.TabIndex = 19;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Quest Steps";
+            // 
+            // questStepEditor1
+            // 
+            this.questStepEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.questStepEditor1.Location = new System.Drawing.Point(3, 16);
+            this.questStepEditor1.Name = "questStepEditor1";
+            this.questStepEditor1.Size = new System.Drawing.Size(333, 306);
+            this.questStepEditor1.TabIndex = 0;
             // 
             // QuestEditorForm
             // 
@@ -152,6 +163,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -168,5 +180,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private Quests.QuestRewardEditor questRewardEditor1;
+        private Quests.QuestStepEditor questStepEditor1;
     }
 }

@@ -22,6 +22,13 @@ namespace OpenORPG.Toolkit.Views.Content
             InitializeComponent();
             SetContentTemplate(questTemplate);
             questRewardEditor1.Template = questTemplate;
+            questStepEditor1.Template = questTemplate;
+
+            // Do some data binding where possible
+            textName.DataBindings.Add("Text", ContentTemplate, "Name");
+            textDescription.DataBindings.Add("Text", ContentTemplate, "Description");
+            checkRepeat.DataBindings.Add("Checked", ContentTemplate, "CanRepeat");
+
         }
 
 

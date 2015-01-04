@@ -19,8 +19,10 @@ namespace OpenORPG.Database.Models.Quests
         [Required]
         public long ItemAmount { get; set; }
 
- 
 
-
+        public override string DisplayString
+        {
+            get { return string.Format("Collect {0} of ID {1}", ItemAmount, ItemId); }
+        }
     }
 }

@@ -23,7 +23,13 @@ namespace OpenORPG.Database.Models.Quests
 
         public virtual QuestTemplate Quest { get; set; }
 
-        public virtual ICollection<QuestRequirement> Requirements { get; set; } 
+        /// <summary>
+        /// This is an internally used name which is used to display in the editors.
+        /// It doesn't actually need to be used in the game but helps classify things.
+        /// </summary>
+        public string Name { get; set; }
+
+        public virtual List<QuestRequirement> Requirements { get; set; } 
 
     }
 }

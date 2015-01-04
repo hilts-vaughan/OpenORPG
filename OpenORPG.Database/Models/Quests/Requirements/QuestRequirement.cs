@@ -14,5 +14,9 @@ namespace OpenORPG.Database.Models.Quests
         public virtual QuestStepsTable QuestStep { get; set; }
 
         public int QuestRequirementId { get; set; }
+
+        [NotMapped]
+        public abstract string DisplayString { get; }
+
     }
 }

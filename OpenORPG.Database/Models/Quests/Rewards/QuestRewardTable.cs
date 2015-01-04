@@ -13,7 +13,7 @@ namespace OpenORPG.Database.Models.Quests.Rewards
     public abstract class QuestReward
     {
 
-        [Browsable(false)]
+
         public int QuestRewardId { get; set; }
 
         [NotMapped] 

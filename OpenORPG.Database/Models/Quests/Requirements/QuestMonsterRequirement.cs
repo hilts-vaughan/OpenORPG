@@ -19,5 +19,9 @@ namespace OpenORPG.Database.Models.Quests
         /// </summary>
         public long MonsterAmount { get; set; }
 
+        public override string DisplayString
+        {
+            get { return string.Format("Kill {1} of ID {0}", MonsterId, MonsterAmount); }
+        }
     }
 }

@@ -214,6 +214,7 @@ namespace Server.Game.Entities
         private void QuestLogOnQuestAccepted(QuestLogEntry entry)
         {
             OnAcceptedQuest(this);
+            entry.Quest.Script.OnQuestStarted(this);
         }
 
 

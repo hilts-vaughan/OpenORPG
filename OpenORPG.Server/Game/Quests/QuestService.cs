@@ -38,8 +38,12 @@ namespace Server.Game.Quests
 
         private void OnProgressChanged(Player player, QuestLogEntry entry, int index, int progress)
         {
+
+
             // We can choose to give rewards here when all requirements have suddenly been met
             var step = entry.CurrentStep;
+
+            entry.Quest.Script.OnQuestStepCompleted(player, step);
 
             if (step.IsRequirementsMet(player, entry.GetProgress()))
             {
