@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Database;
 using Server.Game.Database.Models.ContentTemplates;
 
 namespace OpenORPG.Database.DAL
@@ -17,41 +18,42 @@ namespace OpenORPG.Database.DAL
     /// <typeparam name="T">The type of entity that is being looked up within the database</typeparam>
     public class DatabaseRepository<T> : IRepository<T> where T : class
     {
-        private DbContext _context;
+        protected GameDatabaseContext Context;
 
-        public DatabaseRepository(DbContext context)
+        public DatabaseRepository(GameDatabaseContext context)
         {
             if(context == null)
                 throw new NullReferenceException("A context cannot be null; require a valid reference to make queries");
 
-            _context = context;
+            Context = context;
         }
 
 
         public virtual T Get(int id)
         {
-            return _context.Set<T>().Find(id);
+            return Context.Set<T>().Find(id);
         }
 
         public virtual List<T> GetAll()
         {
-            var set = _context.Set<T>();
-            var itemSet = _context.Set<ItemTemplate>().ToList();
+            var set = Context.Set<T>().ToList();
+            
+            PostGet(set);
 
             return set.ToList();
         }
 
         public virtual T Add(T entity)
         {
-            _context.Set<T>().Add(entity);
-            _context.SaveChanges();
+            Context.Set<T>().Add(entity);
+            Context.SaveChanges();
             return entity;
         }
 
         public virtual void Delete(T entity)
         {
-            _context.Set<T>().Remove(entity);
-            _context.SaveChanges();
+            Context.Set<T>().Remove(entity);
+            Context.SaveChanges();
         }
 
         public virtual T Update(T entity, int key)
@@ -60,16 +62,25 @@ namespace OpenORPG.Database.DAL
             if (entity == null)
                 return null;
 
-            T existing = _context.Set<T>().Find(key);
+            T existing = Context.Set<T>().Find(key);
             if (existing != null)
             {
-                _context.Entry(existing).CurrentValues.SetValues(entity);
-                _context.SaveChanges();
+                Context.Entry(existing).CurrentValues.SetValues(entity);
+                PostUpdate(entity, key);
+                Context.SaveChanges();
             }
             return existing;
         }
 
+        protected virtual void PostUpdate(T entity, int key)
+        {
+            
+        }
 
+        protected virtual void PostGet(List<T> entities)
+        {
+
+        }
 
     }
 }

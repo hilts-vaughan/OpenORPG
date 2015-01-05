@@ -40,9 +40,9 @@ namespace Server.Game.Database.Models.Quests
  
         public QuestType QuestType { get; set; }
 
-        public virtual List<QuestStepsTable> QuestSteps { get; set; }
+        public virtual ICollection<QuestStepsTable> QuestSteps { get; set; }
 
-        public virtual List<QuestReward> Rewards { get; set; } 
+        public virtual ICollection<QuestReward> Rewards { get; set; } 
 
         public virtual NpcTemplate QuestStarter { get; set; }
 

@@ -34,7 +34,6 @@ namespace OpenORPG.Toolkit.Views.Content.Quests
             {                
                 // Do some binding  
                 _requirements = new BindingList<QuestRequirement>(value);
-                _requirements.Add(new QuestMonsterRequirementTable());
 
                 listRequirements.DataSource = _requirements;
                 listRequirements.DisplayMember = "DisplayString";

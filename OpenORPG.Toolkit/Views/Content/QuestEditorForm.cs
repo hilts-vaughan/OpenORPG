@@ -38,6 +38,8 @@ namespace OpenORPG.Toolkit.Views.Content
 
             // Persist rewards
             ContentTemplate.Rewards = questRewardEditor1.Rewards;
+            ContentTemplate.QuestSteps = questStepEditor1.Steps;
+
 
             using (var db = new GameDatabaseContext())
             {

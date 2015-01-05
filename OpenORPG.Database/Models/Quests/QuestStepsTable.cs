@@ -29,7 +29,7 @@ namespace OpenORPG.Database.Models.Quests
         /// </summary>
         public string Name { get; set; }
 
-        public virtual List<QuestRequirement> Requirements { get; set; } 
+        public virtual ICollection<QuestRequirement> Requirements { get; set; } 
 
     }
 }

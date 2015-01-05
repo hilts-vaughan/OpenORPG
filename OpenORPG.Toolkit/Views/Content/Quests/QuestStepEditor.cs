@@ -34,13 +34,23 @@ namespace OpenORPG.Toolkit.Views.Content.Quests
 
         }
 
+        public List<QuestStepsTable> Steps
+        {
+            get { return new List<QuestStepsTable>(_steps); }
+        }
 
         public QuestTemplate Template
         {
             set
             {
                 _template = value;
-                _steps = new BindingList<QuestStepsTable>(value.QuestSteps);
+                
+           
+                _steps = new BindingList<QuestStepsTable>();
+
+                foreach (var x in value.QuestSteps)
+                    _steps.Add(x);
+
 
                 listSteps.DataSource = _steps;
                 listSteps.DisplayMember = "Name";
@@ -56,13 +66,19 @@ namespace OpenORPG.Toolkit.Views.Content.Quests
         private void buttonEdit_Click(object sender, EventArgs e)
         {
             var dialog = new QuestRequirementsDialog();
-            dialog.Requirements = GetCurrentQuestStepsTable().Requirements;
+            dialog.Requirements = new List<QuestRequirement>(GetCurrentQuestStepsTable().Requirements);
             dialog.ShowDialog();
         }
 
         private QuestStepsTable GetCurrentQuestStepsTable()
         {
             return _steps[listSteps.SelectedIndex];
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            var step = GetCurrentQuestStepsTable();
+            _steps.Remove(step);
         }
 
 

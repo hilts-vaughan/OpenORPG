@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Game.Database;
 
 namespace OpenORPG.Database.DAL
 {
@@ -13,7 +14,7 @@ namespace OpenORPG.Database.DAL
     /// <typeparam name="T"></typeparam>
     public class CachedRepository<T> : DatabaseRepository<T> where T : class
     {
-        public CachedRepository(DbContext context) : base(context)
+        public CachedRepository(GameDatabaseContext context) : base(context)
         {
 
         }

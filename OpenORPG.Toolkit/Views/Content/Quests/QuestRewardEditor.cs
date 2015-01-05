@@ -32,7 +32,11 @@ namespace OpenORPG.Toolkit.Views.Content.Quests
         {
             set { _template = value;
 
-                _rewards = new BindingList<QuestReward>(value.Rewards);
+                _rewards = new BindingList<QuestReward>();
+
+                foreach (var reward in value.Rewards)
+                    _rewards.Add(reward);
+
                 listRewards.DataSource = _rewards;
               
                 listRewards.DisplayMember = "DisplayString";
