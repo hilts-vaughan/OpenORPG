@@ -26,16 +26,17 @@ namespace OpenORPG.Toolkit.Views
             var templates = GetContentTemplates();
             listContent.DataSource = templates;
 
+            // An anonymous function for generating TreeNodes based on the given path
             Func<
-    IEnumerable<IEnumerable<string>>,
-    IEnumerable<TreeNode>>
-        buildTreeNode = null;
+                IEnumerable<IEnumerable<string>>,
+                IEnumerable<TreeNode>>
+            buildTreeNode = null;
+
             buildTreeNode = xss =>
                 xss
                     .ToLookup(xs => xs.FirstOrDefault(), xs => xs.Skip(1))
                     .Where(xs => xs.Key != null)
                     .Select(xs => new TreeNode(xs.Key, buildTreeNode(xs).ToArray()));
-
 
 
             var lines = GetUniqueContentCategories(templates);
@@ -63,13 +64,18 @@ namespace OpenORPG.Toolkit.Views
 
             foreach (var template in contentTemplates)
             {
-                if(!string.IsNullOrEmpty(template.VirtualCategory))
+                if (!string.IsNullOrEmpty(template.VirtualCategory))
                     categorySet.Add(template.VirtualCategory);
-            }                
+            }
 
             return categorySet.AsEnumerable();
         }
 
+        /// <summary>
+        /// Given a set of templates, traverses the tree listing for nodes that match up to the virtual category.
+        /// Then, they are created, setup and placed as a child of this parent node.
+        /// </summary>
+        /// <param name="contentTemplates"></param>
         private void AddContentTemplateNodes(IEnumerable<IContentTemplate> contentTemplates)
         {
 
@@ -85,10 +91,8 @@ namespace OpenORPG.Toolkit.Views
                 newNode.ImageKey = "page_lightning.png";
                 newNode.SelectedImageKey = "page_lightning.png";
                 newNode.Tag = template;
-                
 
                 connectedNode.Nodes.Add(newNode);
-
             }
 
         }
