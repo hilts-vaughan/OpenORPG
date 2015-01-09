@@ -48,6 +48,7 @@
             // 
             // treeView1
             // 
+            this.treeView1.AllowDrop = true;
             this.treeView1.ContextMenuStrip = this.contextMenu;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.ImageKey = "folder.png";
@@ -57,7 +58,10 @@
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(617, 418);
             this.treeView1.TabIndex = 3;
+            this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+            this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
+            this.treeView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
             // 
             // contextMenu
             // 
@@ -71,7 +75,7 @@
             // 
             this.contextAddFolder.Image = ((System.Drawing.Image)(resources.GetObject("contextAddFolder.Image")));
             this.contextAddFolder.Name = "contextAddFolder";
-            this.contextAddFolder.Size = new System.Drawing.Size(152, 22);
+            this.contextAddFolder.Size = new System.Drawing.Size(142, 22);
             this.contextAddFolder.Text = "Add Folder";
             this.contextAddFolder.Click += new System.EventHandler(this.contextAddFolder_Click);
             // 
@@ -79,7 +83,7 @@
             // 
             this.contextAddContent.Image = ((System.Drawing.Image)(resources.GetObject("contextAddContent.Image")));
             this.contextAddContent.Name = "contextAddContent";
-            this.contextAddContent.Size = new System.Drawing.Size(152, 22);
+            this.contextAddContent.Size = new System.Drawing.Size(142, 22);
             this.contextAddContent.Text = "Add Content";
             this.contextAddContent.Click += new System.EventHandler(this.contextAddContent_Click);
             // 

@@ -166,10 +166,15 @@ namespace OpenORPG.Toolkit.Views
 
         private IContentTemplate GetTemplateFromNode()
         {
-            if (treeView1.SelectedNode == null)
+            return GetTemplateFromGivenNode(treeView1.SelectedNode);
+        }
+
+        private IContentTemplate GetTemplateFromGivenNode(TreeNode node)
+        {
+            if (node == null)
                 return null;
 
-            return (IContentTemplate) treeView1.SelectedNode.Tag;
+            return (IContentTemplate)node.Tag;
         }
 
         private void contextAddFolder_Click(object sender, EventArgs e)
@@ -208,6 +213,59 @@ namespace OpenORPG.Toolkit.Views
             if (template != null)
                 parentNode = parentNode.Parent;
             return parentNode;
+        }
+
+        private void treeView1_DragDrop(object sender, DragEventArgs e)
+        {
+            // Retrieve the client coordinates of the drop location.
+            Point targetPoint = treeView1.PointToClient(new Point(e.X, e.Y));
+
+            // Retrieve the node at the drop location.
+            TreeNode targetNode = treeView1.GetNodeAt(targetPoint);
+
+            // Retrieve the node that was dragged.
+            TreeNode draggedNode = (TreeNode)e.Data.GetData(typeof(TreeNode));
+
+            // Confirm that the node at the drop location is not 
+            // the dragged node and that target node isn't null
+            // (for example if you drag outside the control)
+            if (!draggedNode.Equals(targetNode) && targetNode != null)
+            {
+
+                var template = GetTemplateFromGivenNode(targetNode);
+
+                // If this isn't a parent, go up one
+                if (template != null)
+                    targetNode = targetNode.Parent;
+
+                // Remove the node from its current 
+                // location and add it to the node at the drop location.
+                draggedNode.Remove();
+                targetNode.Nodes.Add(draggedNode);
+
+                // Expand the node at the location 
+                // to show the dropped node.
+                targetNode.Expand();
+
+                // Update the dragged node VirtualCategory
+                //TODO: Update VirtualCategory AND save it to the database (this is important!)
+
+            }
+
+            // Force a rebuild
+            //RefreshTree();
+
+        }
+
+        private void treeView1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+            
+        }
+
+        private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            DoDragDrop(e.Item, DragDropEffects.Move);
         }
 
      
