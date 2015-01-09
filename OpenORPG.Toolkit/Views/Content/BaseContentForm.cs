@@ -25,7 +25,7 @@ namespace OpenORPG.Toolkit.Views.Content
         }
 
         public void SetContentTemplate(object template)
-        {
+        {                        
             ContentTemplate = template;
             var binding = DataBindings.Add("Text", ContentTemplate, "Name");
             binding.Format += BindingOnFormat;

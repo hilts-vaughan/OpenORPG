@@ -160,6 +160,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Auth\LoginForm.Designer.cs" />
+    <Compile Include="Views\InputHelper.cs" />
     <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -14,7 +14,6 @@ namespace Server.Game.Database.Maps
 
             // Properties
             Property(t => t.Name)
-                .IsRequired()
                 .HasMaxLength(45);
 
             Property(t => t.SkillType)

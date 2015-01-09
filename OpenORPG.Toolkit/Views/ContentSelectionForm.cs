@@ -22,15 +22,22 @@ namespace OpenORPG.Toolkit.Views
             _contentType = contentType;
             InitializeComponent();
 
+            RefreshTree();
+        }
+
+        private void RefreshTree()
+        {
+
+            treeView1.Nodes.Clear();
+            
             // Bind
             var templates = GetContentTemplates();
-            listContent.DataSource = templates;
 
             // An anonymous function for generating TreeNodes based on the given path
             Func<
                 IEnumerable<IEnumerable<string>>,
                 IEnumerable<TreeNode>>
-            buildTreeNode = null;
+                buildTreeNode = null;
 
             buildTreeNode = xss =>
                 xss
@@ -43,14 +50,18 @@ namespace OpenORPG.Toolkit.Views
 
             var tree =
                 buildTreeNode(lines
-                    .Select(x => new[] { "Content", }.Concat(x.Split('/').Skip(1))));
+                    .Select(x => new[] {"Content",}.Concat(x.Split('/').Skip(1))));
 
             foreach (var node in tree)
                 treeView1.Nodes.Add(node);
 
+            // This is a safety in case there's no nodes within the virtual categories
+            if (treeView1.Nodes.Count == 0)
+                treeView1.Nodes.Add(new TreeNode("Content"));
+
             AddContentTemplateNodes(templates);
 
-            treeView1.ExpandAll();
+            //treeView1.ExpandAll();
         }
 
         /// <summary>
@@ -81,6 +92,7 @@ namespace OpenORPG.Toolkit.Views
 
             foreach (var template in contentTemplates)
             {
+
                 var connectedNode = GetNodeFromPath(treeView1.Nodes[0], template.VirtualCategory);
 
                 // Just go to the root if we can't find anywhere for you
@@ -91,7 +103,7 @@ namespace OpenORPG.Toolkit.Views
                 newNode.ImageKey = "page_lightning.png";
                 newNode.SelectedImageKey = "page_lightning.png";
                 newNode.Tag = template;
-
+          
                 connectedNode.Nodes.Add(newNode);
             }
 
@@ -121,19 +133,84 @@ namespace OpenORPG.Toolkit.Views
             return null;
         }
 
+        private string GetNodePathWithoutContent(TreeNode node)
+        {
+            return node.FullPath.TrimStart(("Content").ToCharArray());
+        }
+
         private List<IContentTemplate> GetContentTemplates()
         {
             return ContentTypeResolver.GetContentTemplateFromType(_contentType);
         }
 
-        private void listContent_DoubleClick(object sender, EventArgs e)
-        {
-            var item = (IContentTemplate)listContent.SelectedItem;
-            SelectedTemplate = item;
-            Close();
-        }
+
 
         public IContentTemplate SelectedTemplate { get; private set; }
+
+        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            var item = GetTemplateFromNode();
+
+            if (item != null)
+            {
+                SelectedTemplate = item;
+                Close();
+            }
+            else
+            {
+                // Do something here if we want to act on a folder node, for now there's no need.
+            }
+
+        
+        }
+
+        private IContentTemplate GetTemplateFromNode()
+        {
+            if (treeView1.SelectedNode == null)
+                return null;
+
+            return (IContentTemplate) treeView1.SelectedNode.Tag;
+        }
+
+        private void contextAddFolder_Click(object sender, EventArgs e)
+        {
+            var parentNode = GetNearestFolderNode();
+
+            if (parentNode == null)
+                return;
+
+            string newName = "";
+            var result = InputHelper.ShowInputDialog(ref newName);
+
+            if (!string.IsNullOrEmpty(newName) && result == DialogResult.OK)
+            {
+                var newFolder = new TreeNode(newName);
+                parentNode.Nodes.Add(newFolder);
+            }
+        }
+
+
+        private void contextAddContent_Click(object sender, EventArgs e)
+        {
+            var parentNode = GetNearestFolderNode();
+            if (parentNode == null)
+                return;
+            ContentTypeResolver.AddContentWithVirtualCategory(_contentType, GetNodePathWithoutContent(parentNode));
+            RefreshTree();
+        }
+
+        private TreeNode GetNearestFolderNode()
+        {
+            var template = GetTemplateFromNode();
+            var parentNode = treeView1.SelectedNode;
+
+            // If it's a content, go searching for the parent node.
+            if (template != null)
+                parentNode = parentNode.Parent;
+            return parentNode;
+        }
+
+     
 
 
     }

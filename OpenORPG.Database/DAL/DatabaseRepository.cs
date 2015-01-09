@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -46,7 +48,21 @@ namespace OpenORPG.Database.DAL
         public virtual T Add(T entity)
         {
             Context.Set<T>().Add(entity);
-            Context.SaveChanges();
+            try
+            {
+                Context.SaveChanges();
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+            } 
+
             return entity;
         }
 
@@ -54,7 +70,7 @@ namespace OpenORPG.Database.DAL
         {
             Context.Set<T>().Remove(entity);
             Context.SaveChanges();
-        }
+        }   
 
         public virtual T Update(T entity, int key)
         {
