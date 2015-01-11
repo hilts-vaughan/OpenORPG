@@ -59,9 +59,11 @@ namespace OpenORPG.Toolkit.Views
             if (treeView1.Nodes.Count == 0)
                 treeView1.Nodes.Add(new TreeNode("Content"));
 
+
             AddContentTemplateNodes(templates);
 
-            //treeView1.ExpandAll();
+            // Expand root node for UX reasons
+            treeView1.Nodes[0].Expand();
         }
 
         /// <summary>
