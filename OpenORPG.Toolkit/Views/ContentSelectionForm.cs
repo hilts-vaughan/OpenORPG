@@ -247,14 +247,28 @@ namespace OpenORPG.Toolkit.Views
                 // to show the dropped node.
                 targetNode.Expand();
 
-                // Update the dragged node VirtualCategory
-                //TODO: Update VirtualCategory AND save it to the database (this is important!)
+                var targetTemplate = GetTemplateFromGivenNode(draggedNode);
+
+                // Update the new category; we do some cleanup on the resulting string here.
+                // It mostly formats it as needed. Some helper utilities might be called for at a later
+                // date to make this easier to work with than it is now.
+
+                var newPath = GetNodePathWithoutContent(draggedNode);
+                var trimmedPath = newPath.Substring(0, newPath.IndexOf(draggedNode.Text));
+                trimmedPath = trimmedPath.Replace("\\", "/").Trim();
+                trimmedPath = trimmedPath.Remove(trimmedPath.Length - 1);
+                targetTemplate.VirtualCategory = trimmedPath;
+
+                ContentTypeResolver.ForceUpdate(targetTemplate.GetType(), targetTemplate);
+
+                // Force a rebuild; there might be easier ways to handle this as it's a real pain to have to do this every time you move.
+                // NOTE: Disabled for now as it's probably not actually neeeded...
+                //RefreshTree();
+
 
             }
 
-            // Force a rebuild
-            //RefreshTree();
-
+     
         }
 
         private void treeView1_DragEnter(object sender, DragEventArgs e)

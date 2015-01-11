@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using OpenORPG.Database.DAL;
 using Server.Game.Database;
 using Server.Game.Database.Models;
@@ -16,6 +18,34 @@ namespace OpenORPG.Toolkit.Content
     /// </summary>
     public static class ContentTypeResolver
     {
+        public static void ForceUpdate<T>(Type t, T template) where T : class, IContentTemplate
+        {
+
+            using (var context = new GameDatabaseContext())
+            {
+                var monsterRepository = new MonsterRepository(context);
+                var itemRepo = new ItemRepository(context);
+                var skillRepo = new SkillRepository(context);
+                var questRepo = new QuestRepository(context);
+                var npcRepo = new NpcRepository(context);
+
+                var @switch = new Dictionary<Type, Action>
+            {                
+                  { typeof (MonsterTemplate), () => monsterRepository.Update(template as MonsterTemplate, template.Id) },
+                  { typeof (ItemTemplate), () => itemRepo.Update(template as ItemTemplate, template.Id)},
+                  { typeof (SkillTemplate), () => skillRepo.Update(template as SkillTemplate, template.Id) },     
+                  { typeof (QuestTemplate), () => questRepo.Update(template as QuestTemplate, template.Id) },
+                  { typeof (NpcTemplate), () => npcRepo.Update(template as NpcTemplate, template.Id) }   
+            };
+
+                @switch[t]();
+
+
+            }
+
+
+
+        }
 
         public static void AddContentWithVirtualCategory(Type type, string category)
         {
@@ -31,7 +61,6 @@ namespace OpenORPG.Toolkit.Content
                 var questRepo = new QuestRepository(db);
                 var npcRepo = new NpcRepository(db);
 
-                itemRepo.Get(1);
 
                 string NewName = "New Content";
                 var @switch = new Dictionary<Type, Action>
@@ -62,7 +91,6 @@ namespace OpenORPG.Toolkit.Content
                 var questRepo = new QuestRepository(db);
                 var npcRepo = new NpcRepository(db);
 
-                itemRepo.Get(1);
 
                 var @switch = new Dictionary<Type, Action>
             {                
