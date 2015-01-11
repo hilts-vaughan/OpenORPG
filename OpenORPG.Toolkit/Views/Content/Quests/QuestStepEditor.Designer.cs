@@ -33,6 +33,7 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonRemove = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonRename = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +43,7 @@
             this.listSteps.FormattingEnabled = true;
             this.listSteps.Location = new System.Drawing.Point(0, 0);
             this.listSteps.Name = "listSteps";
-            this.listSteps.Size = new System.Drawing.Size(364, 381);
+            this.listSteps.Size = new System.Drawing.Size(435, 381);
             this.listSteps.TabIndex = 0;
             // 
             // flowLayoutPanel1
@@ -50,10 +51,11 @@
             this.flowLayoutPanel1.Controls.Add(this.buttonAdd);
             this.flowLayoutPanel1.Controls.Add(this.buttonRemove);
             this.flowLayoutPanel1.Controls.Add(this.buttonEdit);
+            this.flowLayoutPanel1.Controls.Add(this.buttonRename);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 379);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(364, 32);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(435, 32);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // buttonAdd
@@ -86,6 +88,16 @@
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
             // 
+            // buttonRename
+            // 
+            this.buttonRename.Location = new System.Drawing.Point(326, 3);
+            this.buttonRename.Name = "buttonRename";
+            this.buttonRename.Size = new System.Drawing.Size(102, 23);
+            this.buttonRename.TabIndex = 3;
+            this.buttonRename.Text = "Rename";
+            this.buttonRename.UseVisualStyleBackColor = true;
+            this.buttonRename.Click += new System.EventHandler(this.buttonRename_Click);
+            // 
             // QuestStepEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -93,7 +105,7 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.listSteps);
             this.Name = "QuestStepEditor";
-            this.Size = new System.Drawing.Size(364, 411);
+            this.Size = new System.Drawing.Size(435, 411);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -106,5 +118,6 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Button buttonEdit;
+        private System.Windows.Forms.Button buttonRename;
     }
 }

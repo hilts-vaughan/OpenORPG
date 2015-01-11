@@ -81,6 +81,18 @@ namespace OpenORPG.Toolkit.Views.Content.Quests
             _steps.Remove(step);
         }
 
+        private void buttonRename_Click(object sender, EventArgs e)
+        {
+            if (listSteps.SelectedItem != null)
+            {
+                string name = "";
+                InputHelper.ShowInputDialog(ref name);
+                GetCurrentQuestStepsTable().Name = name;
+                
+                _steps.ResetBindings();
+            }
+        }
+
 
     }
 }

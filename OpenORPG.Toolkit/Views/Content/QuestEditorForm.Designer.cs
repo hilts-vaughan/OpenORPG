@@ -50,7 +50,7 @@
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Size = new System.Drawing.Size(1049, 357);
+            this.panel1.Size = new System.Drawing.Size(1140, 357);
             // 
             // groupBox1
             // 
@@ -141,7 +141,7 @@
             this.groupBox3.Controls.Add(this.questStepEditor1);
             this.groupBox3.Location = new System.Drawing.Point(696, 18);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(339, 325);
+            this.groupBox3.Size = new System.Drawing.Size(441, 325);
             this.groupBox3.TabIndex = 19;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Quest Steps";
@@ -151,13 +151,13 @@
             this.questStepEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.questStepEditor1.Location = new System.Drawing.Point(3, 16);
             this.questStepEditor1.Name = "questStepEditor1";
-            this.questStepEditor1.Size = new System.Drawing.Size(333, 306);
+            this.questStepEditor1.Size = new System.Drawing.Size(435, 306);
             this.questStepEditor1.TabIndex = 0;
             // 
             // QuestEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(1049, 409);
+            this.ClientSize = new System.Drawing.Size(1140, 409);
             this.Name = "QuestEditorForm";
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
