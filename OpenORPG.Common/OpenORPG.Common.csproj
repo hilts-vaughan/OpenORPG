@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BD4BDE0B-5907-4C9F-A297-00CB80B0AEB8}</ProjectGuid>
+    <ProjectGuid>{13C7C389-73F1-49AD-BB83-1B8805AFABEA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenORPG.Server.Scripts</RootNamespace>
-    <AssemblyName>OpenORPG.Server.Scripts</AssemblyName>
+    <RootNamespace>OpenORPG.Common</RootNamespace>
+    <AssemblyName>OpenORPG.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\OpenORPG.Server\bin\x86\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -39,20 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Combat\Skills\DeathstrikeSkillScript.cs" />
+    <Compile Include="Dialog\Conditions\IDialogCondition.cs" />
+    <Compile Include="Dialog\Conditions\MinimumLevelDialogCondition.cs" />
+    <Compile Include="Dialog\DialogLink.cs" />
+    <Compile Include="Dialog\DialogNode.cs" />
+    <Compile Include="Entity\ICharacterContract.cs" />
+    <Compile Include="JsonCustomResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OpenORPG.Common\OpenORPG.Common.csproj">
-      <Project>{13c7c389-73f1-49ad-bb83-1b8805afabea}</Project>
-      <Name>OpenORPG.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenORPG.Server\OpenORPG.Server.csproj">
-      <Project>{79a11015-b16c-4a65-adc4-fb8406dae5dd}</Project>
-      <Name>OpenORPG.Server</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

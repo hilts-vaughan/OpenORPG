@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenORPG.TypeScriptClient",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenORPG.Toolkit", "OpenORPG.Toolkit\OpenORPG.Toolkit.csproj", "{C2084DD3-27C2-4EC8-86BA-AD82C5E01C5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenORPG.Common", "OpenORPG.Common\OpenORPG.Common.csproj", "{13C7C389-73F1-49AD-BB83-1B8805AFABEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Client|Any CPU = Debug Client|Any CPU
@@ -143,6 +145,21 @@ Global
 		{C2084DD3-27C2-4EC8-86BA-AD82C5E01C5C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C2084DD3-27C2-4EC8-86BA-AD82C5E01C5C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C2084DD3-27C2-4EC8-86BA-AD82C5E01C5C}.Release|x86.ActiveCfg = Release|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Debug Client|Any CPU.ActiveCfg = Debug|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Debug Client|Any CPU.Build.0 = Debug|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Debug Client|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Debug Client|Mixed Platforms.Build.0 = Debug|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Debug Client|x86.ActiveCfg = Debug|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{13C7C389-73F1-49AD-BB83-1B8805AFABEA}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using OpenORPG.Common.Entity;
 using OpenORPG.Database.Enums;
 using Server.Game.AI;
 using Server.Game.Combat;
@@ -14,6 +15,7 @@ using Server.Game.Items.Equipment;
 using Server.Game.Network.Packets.Server;
 using Server.Infrastructure.World;
 using Server.Utils.Math;
+
 
 namespace Server.Game.Entities
 {
@@ -25,7 +27,7 @@ namespace Server.Game.Entities
     /// <param name="victim"></param>
     public delegate void CharacterKilled(Character aggressor, Character victim);
 
-    public class Character : Entity
+    public class Character : Entity, ICharacterContract
     {
 
         // Events are up here

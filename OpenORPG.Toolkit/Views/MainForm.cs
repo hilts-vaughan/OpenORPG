@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using OpenORPG.Common.Dialog;
 using OpenORPG.Toolkit.Views.Authentication;
 using OpenORPG.Toolkit.Views.Content;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Database.Models.Quests;
+using Server.Infrastructure.Dialog;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace OpenORPG.Toolkit.Views
@@ -27,7 +33,8 @@ namespace OpenORPG.Toolkit.Views
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-          
+
+
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
