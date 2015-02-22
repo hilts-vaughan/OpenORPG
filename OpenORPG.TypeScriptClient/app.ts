@@ -36,7 +36,7 @@ module OpenORPG {
                     if ($scope.selectedQuest.state == 1) {
                         $scope.localizeRequirements($scope.selectedQuest.currentStep.requirements);
                     } else {
-                        $scope.currentTask = ""; // set blank
+                        $scope.currentTask = LocaleManager.getInstance().getString("QuestCompletedFormatter", []);                        
                     }
                 };
 
