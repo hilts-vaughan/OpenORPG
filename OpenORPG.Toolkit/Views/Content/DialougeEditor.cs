@@ -110,6 +110,7 @@ namespace OpenORPG.Toolkit.Views.Content
         {
             var treeNode = new TreeNode(node.Name);
             treeNode.ImageKey = "script.png";
+            treeNode.SelectedImageKey = treeNode.ImageKey;
             treeNode.Tag = node;
             return treeNode;
         }
@@ -118,6 +119,7 @@ namespace OpenORPG.Toolkit.Views.Content
         {
             var treeNode = new TreeNode(link.Name);
             treeNode.ImageKey = "link.png";
+            treeNode.SelectedImageKey = treeNode.ImageKey;
             treeNode.Tag = link;
             return treeNode;
         }
