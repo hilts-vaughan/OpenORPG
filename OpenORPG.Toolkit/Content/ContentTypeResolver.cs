@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenORPG.Database.DAL;
+using OpenORPG.Database.Models.ContentTemplates;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 using Server.Game.Database.Models.ContentTemplates;
@@ -28,6 +29,7 @@ namespace OpenORPG.Toolkit.Content
                 var skillRepo = new SkillRepository(context);
                 var questRepo = new QuestRepository(context);
                 var npcRepo = new NpcRepository(context);
+                var dialogRepo = new DialogRepository(context);
 
                 var @switch = new Dictionary<Type, Action>
             {                
@@ -35,7 +37,9 @@ namespace OpenORPG.Toolkit.Content
                   { typeof (ItemTemplate), () => itemRepo.Update(template as ItemTemplate, template.Id)},
                   { typeof (SkillTemplate), () => skillRepo.Update(template as SkillTemplate, template.Id) },     
                   { typeof (QuestTemplate), () => questRepo.Update(template as QuestTemplate, template.Id) },
-                  { typeof (NpcTemplate), () => npcRepo.Update(template as NpcTemplate, template.Id) }   
+                  { typeof (NpcTemplate), () => npcRepo.Update(template as NpcTemplate, template.Id) },
+                  { typeof (DialogTemplate), () => dialogRepo.Update(template as DialogTemplate, template.Id) }   
+
             };
 
                 @switch[t]();
@@ -60,6 +64,8 @@ namespace OpenORPG.Toolkit.Content
                 var skillRepo = new SkillRepository(db);
                 var questRepo = new QuestRepository(db);
                 var npcRepo = new NpcRepository(db);
+                var dialogRepo = new DialogRepository(db);
+
 
 
                 string NewName = "New Content";
@@ -69,7 +75,8 @@ namespace OpenORPG.Toolkit.Content
                   { typeof (ItemTemplate), () => itemRepo.Add(new ItemTemplate() { VirtualCategory = category, Name = NewName }  ) },
                   { typeof (SkillTemplate), () => skillRepo.Add(new SkillTemplate()  { VirtualCategory = category, Name = NewName } ) },     
                   { typeof (QuestTemplate), () => questRepo.Add(new QuestTemplate()  { VirtualCategory = category, Name = NewName } ) },
-                  { typeof (NpcTemplate), () => npcRepo.Add(new NpcTemplate()  { VirtualCategory = category, Name = NewName } ) }   
+                  { typeof (NpcTemplate), () => npcRepo.Add(new NpcTemplate()  { VirtualCategory = category, Name = NewName } ) },
+                  { typeof (DialogTemplate), () => dialogRepo.Add(new DialogTemplate()  { VirtualCategory = category, Name = NewName } ) }
             };
 
                 @switch[type]();
@@ -90,7 +97,7 @@ namespace OpenORPG.Toolkit.Content
                 var skillRepo = new SkillRepository(db);
                 var questRepo = new QuestRepository(db);
                 var npcRepo = new NpcRepository(db);
-
+                var dialogRepo = new DialogRepository(db);
 
                 var @switch = new Dictionary<Type, Action>
             {                
@@ -98,7 +105,9 @@ namespace OpenORPG.Toolkit.Content
                   { typeof (ItemTemplate), () => result = new List<IContentTemplate>(itemRepo.GetAll().ToList()) },
                   { typeof (SkillTemplate), () => result = new List<IContentTemplate>(skillRepo.GetAll().ToList()) },     
                   { typeof (QuestTemplate), () => result = new List<IContentTemplate>(questRepo.GetAll().ToList()) },
-                  { typeof (NpcTemplate), () => result = new List<IContentTemplate>(npcRepo.GetAll().ToList()) }   
+                  { typeof (NpcTemplate), () => result = new List<IContentTemplate>(npcRepo.GetAll().ToList()) },
+                  { typeof (DialogTemplate), () => result = new List<IContentTemplate>(dialogRepo.GetAll().ToList()) }   
+
             };
 
                 @switch[type]();

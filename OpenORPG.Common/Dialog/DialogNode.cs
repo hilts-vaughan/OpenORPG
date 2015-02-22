@@ -40,7 +40,7 @@ namespace Server.Infrastructure.Dialog
             get { return _links; }
         }
 
-
+       
         private void AddDialogLink(DialogLink link)
         {
             
