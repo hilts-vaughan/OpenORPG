@@ -41,8 +41,6 @@ namespace OpenORPG.Toolkit.Views.Content
             else
                 _rootDialogNode = GetFromJson(template.JsonPayload);
 
-            _rootDialogNode.Links.Add(new DialogLink());
-
             GenerateTree();
         }
 
@@ -108,7 +106,7 @@ namespace OpenORPG.Toolkit.Views.Content
 
         private TreeNode CreateTreeNodeFromDialogNode(DialogNode node)
         {
-            var treeNode = new TreeNode(node.Name);
+            var treeNode = new TreeNode(node.Name + ": " + TruncateLongString(node.Text, 40));
             treeNode.ImageKey = "script.png";
             treeNode.SelectedImageKey = treeNode.ImageKey;
             treeNode.Tag = node;
@@ -117,13 +115,21 @@ namespace OpenORPG.Toolkit.Views.Content
 
         private TreeNode CreateTreeNodeFromDialogLink(DialogLink link)
         {
-            var treeNode = new TreeNode(link.Name);
+            var treeNode = new TreeNode(link.Name + ": " + TruncateLongString(link.Text, 40));
             treeNode.ImageKey = "link.png";
             treeNode.SelectedImageKey = treeNode.ImageKey;
             treeNode.Tag = link;
             return treeNode;
         }
+        private  string TruncateLongString(string str, int maxLength)
+        {
+            var returnStr = str == null ? "" : str.Substring(0, Math.Min(str.Length, maxLength));
 
+            if (str != null && str.Length > maxLength)
+                returnStr += "...";
+
+            return returnStr;
+        }
 
         protected override void Save()
         {
