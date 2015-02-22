@@ -13,6 +13,8 @@ namespace OpenORPG.Common.Dialog
 
         public DialogNode NextNode { get; set; }
 
+        public string Script { get; set; }
+
         /// <summary>
         /// Represents a list of conditions that must be fulfilled in order for this link to be usable
         /// </summary>

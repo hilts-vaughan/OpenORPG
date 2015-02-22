@@ -45,6 +45,8 @@ namespace OpenORPG.Toolkit.Views.Content
 
             GenerateTree();
 
+            textName.DataBindings.Add("Text", ContentTemplate, "Name");
+
             // Make sure nodes can be updated
             txtText.LostFocus += TxtTextOnTextChanged;
             txtComment.LostFocus += TxtTextOnTextChanged;
@@ -186,6 +188,8 @@ namespace OpenORPG.Toolkit.Views.Content
             txtComment.DataBindings.Clear();
             txtText.DataBindings.Clear();
             listConditions.DataBindings.Clear();
+            textScript.DataBindings.Clear();
+
 
             // Bind the elements
             txtComment.DataBindings.Add("Text", dialogElement, "Name");
@@ -196,10 +200,13 @@ namespace OpenORPG.Toolkit.Views.Content
             if (link != null)
             {
                 listConditions.DataSource = link.DialogConditions;
+                textScript.DataBindings.Add("Text", link, "Script");
                 groupConditions.Enabled = true;
+                textScript.Enabled = true;
             }
             else
             {
+                textScript.Enabled = false;
                 groupConditions.Enabled = false;
             }
 
@@ -295,6 +302,8 @@ namespace OpenORPG.Toolkit.Views.Content
                 listConditions.DataSource = link.DialogConditions;
             listConditions.Update();
         }
+
+
 
 
 

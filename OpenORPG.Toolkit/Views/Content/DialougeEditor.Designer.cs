@@ -47,6 +47,10 @@
             this.contextConditionMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addConditionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeConditionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textScript = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.contextDialogMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -56,6 +60,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textName);
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.groupConditions);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.treeDialog);
@@ -67,10 +73,10 @@
             this.treeDialog.Dock = System.Windows.Forms.DockStyle.Right;
             this.treeDialog.ImageKey = "script.png";
             this.treeDialog.ImageList = this.imageList1;
-            this.treeDialog.Location = new System.Drawing.Point(251, 0);
+            this.treeDialog.Location = new System.Drawing.Point(605, 0);
             this.treeDialog.Name = "treeDialog";
             this.treeDialog.SelectedImageIndex = 0;
-            this.treeDialog.Size = new System.Drawing.Size(815, 466);
+            this.treeDialog.Size = new System.Drawing.Size(461, 466);
             this.treeDialog.TabIndex = 0;
             this.treeDialog.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeDialog_AfterSelect);
             // 
@@ -122,29 +128,32 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.textScript);
             this.groupBox1.Controls.Add(this.txtText);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtComment);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 35);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(233, 179);
+            this.groupBox1.Size = new System.Drawing.Size(233, 425);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General";
             // 
             // txtText
             // 
-            this.txtText.Location = new System.Drawing.Point(9, 64);
+            this.txtText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtText.Location = new System.Drawing.Point(9, 89);
             this.txtText.Multiline = true;
             this.txtText.Name = "txtText";
-            this.txtText.Size = new System.Drawing.Size(218, 109);
+            this.txtText.Size = new System.Drawing.Size(218, 330);
             this.txtText.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 48);
+            this.label2.Location = new System.Drawing.Point(6, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 4;
@@ -169,9 +178,9 @@
             // groupConditions
             // 
             this.groupConditions.Controls.Add(this.listConditions);
-            this.groupConditions.Location = new System.Drawing.Point(12, 204);
+            this.groupConditions.Location = new System.Drawing.Point(251, 35);
             this.groupConditions.Name = "groupConditions";
-            this.groupConditions.Size = new System.Drawing.Size(233, 256);
+            this.groupConditions.Size = new System.Drawing.Size(348, 425);
             this.groupConditions.TabIndex = 2;
             this.groupConditions.TabStop = false;
             this.groupConditions.Text = "Conditions";
@@ -183,7 +192,7 @@
             this.listConditions.FormattingEnabled = true;
             this.listConditions.Location = new System.Drawing.Point(3, 16);
             this.listConditions.Name = "listConditions";
-            this.listConditions.Size = new System.Drawing.Size(227, 237);
+            this.listConditions.Size = new System.Drawing.Size(342, 406);
             this.listConditions.TabIndex = 4;
             // 
             // contextConditionMenu
@@ -210,6 +219,38 @@
             this.removeConditionToolStripMenuItem.Text = "Remove Condition";
             this.removeConditionToolStripMenuItem.Click += new System.EventHandler(this.removeConditionToolStripMenuItem_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 9);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Dialog Name:";
+            // 
+            // textName
+            // 
+            this.textName.Location = new System.Drawing.Point(95, 8);
+            this.textName.Name = "textName";
+            this.textName.Size = new System.Drawing.Size(501, 20);
+            this.textName.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Script:";
+            // 
+            // textScript
+            // 
+            this.textScript.Location = new System.Drawing.Point(66, 47);
+            this.textScript.Name = "textScript";
+            this.textScript.Size = new System.Drawing.Size(161, 20);
+            this.textScript.TabIndex = 6;
+            // 
             // DialogEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -219,6 +260,7 @@
             this.Text = "DialougeEditor";
             this.Controls.SetChildIndex(this.panel1, 0);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.contextDialogMenu.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -247,5 +289,9 @@
         private System.Windows.Forms.ContextMenuStrip contextConditionMenu;
         private System.Windows.Forms.ToolStripMenuItem addConditionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeConditionToolStripMenuItem;
+        private System.Windows.Forms.TextBox textName;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textScript;
     }
 }
