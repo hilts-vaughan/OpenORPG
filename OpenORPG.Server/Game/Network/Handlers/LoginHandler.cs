@@ -112,8 +112,8 @@ namespace Server.Game.Network.Handlers
                     context.Entry(x).Collection(a => a.RequirementProgress).Load();
 
                     var l = x.RequirementProgress.ToList();
-                    foreach(var n in l)
-                        context.Entry(n).State = EntityState.Deleted;                    
+                    foreach (var n in l)
+                        context.Entry(n).State = EntityState.Deleted;
 
                 }
 
@@ -151,7 +151,7 @@ namespace Server.Game.Network.Handlers
 
                 // For now though, we don't care...
                 hero.QuestInfo.ToList().ForEach(r => context.UserQuestInfo.Remove(r));
-     
+
                 context.SaveChanges();
                 //context.SaveChanges();
 
@@ -163,9 +163,9 @@ namespace Server.Game.Network.Handlers
 
                     var temp = new List<UserQuestRequirements>();
 
-                    for (int index = 0; index < entry.GetProgress().Count; index++)
+                    for (int index = 0; index < entry.Progress.Count; index++)
                     {
-                        var x = entry.GetProgress()[index];
+                        var x = entry.Progress[index];
 
                         var questRequirementProgress = new UserQuestRequirements()
                         {
@@ -178,7 +178,7 @@ namespace Server.Game.Network.Handlers
 
                         temp.Add(questRequirementProgress);
                     }
-                                 
+
 
                     var quest = new UserQuestInfo()
                    {
@@ -186,7 +186,8 @@ namespace Server.Game.Network.Handlers
                        State = entry.State,
                        UserQuestInfoId = entry.QuestInfo.UserQuestInfoId,
                        UserHero = hero,
-                       RequirementProgress = temp
+                       RequirementProgress = temp,
+                       QuestProgress = entry.QuestInfo.QuestProgress
                    };
 
 

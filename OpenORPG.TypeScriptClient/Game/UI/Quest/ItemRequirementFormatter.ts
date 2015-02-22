@@ -4,7 +4,7 @@
 
          private infoType: string = "QuestHasItemRequirement";
 
-         getLocalizedString(info: any, callback: Function) {
+         getLocalizedString(info: any, progress : number, callback: Function) {
 
              var itemId: string = info.itemId;
              var itemAmount: string = info.itemAmount;

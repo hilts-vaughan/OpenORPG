@@ -28,5 +28,6 @@ namespace Server.Game
         ItemCannotBeUsed,
 
 
+        QuestLogUpdated
     }
 }

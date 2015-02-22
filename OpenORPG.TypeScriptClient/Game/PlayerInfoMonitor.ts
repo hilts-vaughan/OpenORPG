@@ -48,6 +48,15 @@
                         // Copy the state over for usage
                         data.state = value.state;
                         data.currentStep = value.currentStep;
+                        data.questInfo = {};
+
+                        // Push up our progress levels to accordingly
+                        _.each(value.progress, (progressLevel, index) => {
+                            data.questInfo.requirementProgress = [];
+                            data.questInfo.requirementProgress.push({ progress: progressLevel });
+                        });
+
+               
 
                         this.playerInfo.quests.push(data);
                         this.broadcastEvent('QuestsChanged');                                  
@@ -60,6 +69,19 @@
             });
 
 
+            // An update for quest progress stuff
+            network.registerPacket(OpCode.SMSG_QUEST_PROGRESS_UPDATE, (packet) => {
+                var updatedQuest = _.find(this.playerInfo.quests, (quest: any) => {
+                    return quest.id == packet.questId;
+                });
+
+                // Update the progress indiciator; trigger a UI refresh
+                updatedQuest.questInfo.requirementProgress[packet.requirementIndex].progress = packet.progress;
+
+                this.broadcastEvent('QuestsChanged');
+                this.updateAngularScope();
+
+            });
             // skills monitoring
 
             // Listen to events about player information we might care about

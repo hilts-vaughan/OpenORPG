@@ -5,7 +5,7 @@
          Allows custom logic to be applied where required
      */
     export interface  IQuestRequirementFormatter {
-        getLocalizedString(info : any, callback);
+        getLocalizedString(info : any, progress : number, callback);
     }
 
 }

@@ -17,10 +17,10 @@
             this.formatters["QuestMonstersKilledRequirement"] = new MonstersKilledFormatter();
             this.formatters["QuestHasItemRequirement"] = new ItemRequirementFormatter();
         }
-
-        getFormattedRequirement(type: string, info: any, callback: Function) {            
+            
+        getFormattedRequirement(type: string, info: any, progress : number, callback: Function) {            
             if (this.formatters[type]) {
-                this.formatters[type].getLocalizedString(info, (result) => {
+                this.formatters[type].getLocalizedString(info, progress, (result) => {
                     callback(result);
                 });
             } else {

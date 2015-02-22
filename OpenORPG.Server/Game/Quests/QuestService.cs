@@ -39,19 +39,31 @@ namespace Server.Game.Quests
         private void OnProgressChanged(Player player, QuestLogEntry entry, int index, int progress)
         {
 
+                        
 
             // We can choose to give rewards here when all requirements have suddenly been met
             var step = entry.CurrentStep;
 
+            // Update the user about their progress
+            var progressUpdate = new ServerQuestProgressUpdate(entry.QuestInfo.QuestId, index, progress);
+            player.Client.Send(progressUpdate);
+
             entry.Quest.Script.OnQuestStepCompleted(player, step);
 
-            if (step.IsRequirementsMet(player, entry.GetProgress()))
+            if (step.IsRequirementsMet(player, entry.Progress))
             {
                 if (!entry.IsLastStep)
                 {
                     // Advance the step and take any requirements
                     step.TakeRequirements(player);
                     entry.AdvanceStep();
+
+                    var message = new ServerSendGameMessagePacket(GameMessage.QuestLogUpdated, new List<string>() { entry.Quest.Name });
+                    player.Client.Send(message);                    
+
+                    var questUpdate = new ServerSendQuestListPacket(player.QuestLog);
+                    player.Client.Send(questUpdate);
+
                 }
 
                     // If is last step, only advance if we can give reward

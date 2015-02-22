@@ -31,14 +31,16 @@
             this.components = new System.ComponentModel.Container();
             this.listRequirements = new System.Windows.Forms.ListBox();
             this.contextStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
             this.contextNewRequirement = new System.Windows.Forms.ToolStripMenuItem();
             this.contextRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
+            this.contextRequirements = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // listRequirements
             // 
+            this.listRequirements.ContextMenuStrip = this.contextRequirements;
             this.listRequirements.Dock = System.Windows.Forms.DockStyle.Left;
             this.listRequirements.FormattingEnabled = true;
             this.listRequirements.Location = new System.Drawing.Point(0, 0);
@@ -54,6 +56,18 @@
             this.contextStrip.Name = "contextStrip";
             this.contextStrip.Size = new System.Drawing.Size(118, 48);
             // 
+            // contextNewRequirement
+            // 
+            this.contextNewRequirement.Name = "contextNewRequirement";
+            this.contextNewRequirement.Size = new System.Drawing.Size(117, 22);
+            this.contextNewRequirement.Text = "New...";
+            // 
+            // contextRemove
+            // 
+            this.contextRemove.Name = "contextRemove";
+            this.contextRemove.Size = new System.Drawing.Size(117, 22);
+            this.contextRemove.Text = "Remove";
+            // 
             // propertyGrid1
             // 
             this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -62,17 +76,10 @@
             this.propertyGrid1.Size = new System.Drawing.Size(398, 267);
             this.propertyGrid1.TabIndex = 2;
             // 
-            // contextNewRequirement
+            // contextRequirements
             // 
-            this.contextNewRequirement.Name = "contextNewRequirement";
-            this.contextNewRequirement.Size = new System.Drawing.Size(152, 22);
-            this.contextNewRequirement.Text = "New...";
-            // 
-            // contextRemove
-            // 
-            this.contextRemove.Name = "contextRemove";
-            this.contextRemove.Size = new System.Drawing.Size(152, 22);
-            this.contextRemove.Text = "Remove";
+            this.contextRequirements.Name = "contextRequirements";
+            this.contextRequirements.Size = new System.Drawing.Size(61, 4);
             // 
             // QuestRequirementsDialog
             // 
@@ -99,5 +106,6 @@
         private System.Windows.Forms.PropertyGrid propertyGrid1;
         private System.Windows.Forms.ToolStripMenuItem contextNewRequirement;
         private System.Windows.Forms.ToolStripMenuItem contextRemove;
+        private System.Windows.Forms.ContextMenuStrip contextRequirements;
     }
 }

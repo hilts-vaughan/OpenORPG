@@ -33,7 +33,7 @@ namespace OpenORPG.Toolkit.Views.Content
 
         private void BindingOnFormat(object sender, ConvertEventArgs convertEventArgs)
         {
-            convertEventArgs.Value = ContentTemplate.GetType().Name + " - " + ContentTemplate;
+            convertEventArgs.Value = ContentTemplate + " - " + ContentTemplate.GetType().Name;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

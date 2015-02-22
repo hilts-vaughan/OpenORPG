@@ -34,16 +34,24 @@ module OpenORPG {
 
                     //TODO: We need to make this take all requirements into account; not just the first
                     if ($scope.selectedQuest.state == 1) {
-                        $scope.localizeRequirement($scope.selectedQuest.currentStep.requirements[0]);
+                        $scope.localizeRequirements($scope.selectedQuest.currentStep.requirements);
                     } else {
                         $scope.currentTask = ""; // set blank
                     }
                 };
 
-                $scope.localizeRequirement = function (requirement) {
-                    formatter.getFormattedRequirement(requirement.type, requirement.info, (result) => {
-                        $scope.currentTask = result;
-                    });
+                $scope.localizeRequirements = function (requirements) {
+
+                    $scope.currentTask = " ";
+
+                    _.each(requirements, (requirement: any, index : number) => {       
+                        formatter.getFormattedRequirement(requirement.type, requirement.info, $scope.selectedQuest.questInfo.requirementProgress[index].progress, (result) => {
+                            $scope.currentTask += result;
+                        });
+                    });           
+
+                  
+
                 };
 
             }

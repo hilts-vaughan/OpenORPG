@@ -28,9 +28,12 @@ namespace Server.Game.Quests
 
         private readonly List<int> _requirementProgress = new List<int>();
 
-        public List<int> GetProgress()
+        public List<int> Progress
         {
-            return _requirementProgress;
+            get
+            {
+                return _requirementProgress;
+            }
         } 
 
 
@@ -42,15 +45,18 @@ namespace Server.Game.Quests
             _quest = quest;
             _questInfo = questInfo;
 
-            // Reset stuff with a progress of zero
-            for (int i = 0; i < CurrentStep.Requirements.Count; i++)
-                _requirementProgress.Add(0);
+            if (_questInfo.State == QuestState.InProgress)
+            {
+                // Add an entry for each current requirement
+                for (int i = 0; i < CurrentStep.Requirements.Count; i++)
+                    _requirementProgress.Add(0);
 
-            for (int i = 0; i < _questInfo.RequirementProgress.Count; i++)
-                _requirementProgress[i] = _questInfo.RequirementProgress[i].Progress;
+                // Copy over the new values of our quest tracking
+                for (int i = 0; i < _questInfo.RequirementProgress.Count; i++)
+                    _requirementProgress[i] = _questInfo.RequirementProgress[i].Progress;
+            }
 
-         
-       
+
         }
 
         public void AdvanceStep()

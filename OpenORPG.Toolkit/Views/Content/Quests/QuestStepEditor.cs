@@ -68,6 +68,7 @@ namespace OpenORPG.Toolkit.Views.Content.Quests
             var dialog = new QuestRequirementsDialog();
             dialog.Requirements = new List<QuestRequirement>(GetCurrentQuestStepsTable().Requirements);
             dialog.ShowDialog();
+            GetCurrentQuestStepsTable().Requirements = dialog.Requirements;
         }
 
         private QuestStepsTable GetCurrentQuestStepsTable()

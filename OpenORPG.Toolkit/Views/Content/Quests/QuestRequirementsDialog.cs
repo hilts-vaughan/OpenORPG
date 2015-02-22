@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenORPG.Database.Models.Quests;
+using OpenORPG.Database.Models.Quests.Rewards;
 
 namespace OpenORPG.Toolkit.Views.Content.Quests
 {
@@ -23,7 +24,7 @@ namespace OpenORPG.Toolkit.Views.Content.Quests
 
             if (!designMode)
             {
-                //contextNewRequirement
+               PopulateContextMenu();
             }
 
         }
@@ -40,6 +41,44 @@ namespace OpenORPG.Toolkit.Views.Content.Quests
                 listRequirements.ValueMember = "QuestRequirementId";
 
                 listRequirements.SelectedIndexChanged += ListRequirementsOnSelectedIndexChanged;
+            }
+
+            get
+            {
+                return new List<QuestRequirement>(_requirements);
+            }
+        }
+
+
+
+        private void PopulateContextMenu()
+        {
+            // We need all the quest rewards to populate our context menu
+            var subclasses = ReflectionUtility.GetAllTypesWithSubclass<QuestRequirement>();
+
+            foreach (var subclass in subclasses)
+            {
+                var toolstripItem = new ToolStripMenuItem(subclass.Name);
+                toolstripItem.Tag = subclass;
+                toolstripItem.Click += ToolstripItemOnClick;
+                contextRequirements.Items.Add(toolstripItem);
+            }
+
+        }
+
+        private void ToolstripItemOnClick(object sender, EventArgs eventArgs)
+        {
+            var toolStripMenuItem = sender as ToolStripMenuItem;
+
+            if (toolStripMenuItem != null)
+            {
+                var type = (Type) toolStripMenuItem.Tag;
+                _requirements.Add((QuestRequirement) Activator.CreateInstance(type));
+            }
+            else
+            {
+                throw new ArgumentNullException("tag",
+                    "The specific tag was not populated with the expected type of QuestRequirement");
             }
         }
 
