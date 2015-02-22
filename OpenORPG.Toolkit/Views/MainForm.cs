@@ -12,6 +12,7 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using OpenORPG.Common.Dialog;
+using OpenORPG.Database.Models.ContentTemplates;
 using OpenORPG.Toolkit.Views.Authentication;
 using OpenORPG.Toolkit.Views.Content;
 using Server.Game.Database.Models;
@@ -89,6 +90,13 @@ namespace OpenORPG.Toolkit.Views
             var template = (NpcTemplate) PresentContentForm(typeof(NpcTemplate));
             var monster = new NpcEditorForm(template);
             monster.Show(dockPanel1);
+        }
+
+        private void dialougeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var template = (DialogTemplate)PresentContentForm(typeof(DialogTemplate));
+            var form = new DialogEditor(template);
+            form.Show(dockPanel1);
         }
 
 

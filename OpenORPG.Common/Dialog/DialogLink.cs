@@ -6,12 +6,12 @@ using Server.Infrastructure.Dialog;
 
 namespace OpenORPG.Common.Dialog
 {
-    public class DialogLink
+    public class DialogLink : IDialogNodeElement
     {
 
 
 
-        public DialogNode NextNode { get; private set; }
+        public DialogNode NextNode { get; set; }
 
         /// <summary>
         /// Represents a list of conditions that must be fulfilled in order for this link to be usable
@@ -22,11 +22,12 @@ namespace OpenORPG.Common.Dialog
         {
             Text = text;
             NextNode = nextNode;
+            Name = "New Link";
         }
 
         public DialogLink()
         {
-            
+            Name = "New Link";
         }
 
         public void AddCondition(IDialogCondition condition)
@@ -44,8 +45,7 @@ namespace OpenORPG.Common.Dialog
             return _dialogConditions.All(x => x.Verify(player));
         }
 
-        public string Text { get; private set; }
-
-
+        public string Name { get; set; }
+        public string Text { get; set; }
     }
 }

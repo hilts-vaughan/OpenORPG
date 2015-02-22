@@ -10,26 +10,28 @@ namespace Server.Infrastructure.Dialog
     /// <summary>
     /// A single dialog node used in NPC dialog to represent a conversation. Dialog can often offer various services
     /// </summary>
-    public class DialogNode
+    public class DialogNode : IDialogNodeElement
     {
         /// <summary>
         /// A list of internal dialog links that can be chosen from this tree.
         /// </summary>
         private List<DialogLink> _links = new List<DialogLink>();
 
-        /// <summary>
-        /// A string representing the text this node will represent
-        /// </summary>
-        public string Text { get; private set; }
+        public string Name { get; set; }
+
+        public string Text { get; set; }
+
+
 
         public DialogNode(string text)
         {
             Text = text;
+            Name = "New Node";
         }
 
         public DialogNode()
         {
-            
+            Name = "New Node";
         }
 
         /// <summary>

@@ -43,6 +43,7 @@
     <Compile Include="Dialog\Conditions\MinimumLevelDialogCondition.cs" />
     <Compile Include="Dialog\DialogLink.cs" />
     <Compile Include="Dialog\DialogNode.cs" />
+    <Compile Include="Dialog\IDialogNodeElement.cs" />
     <Compile Include="Entity\ICharacterContract.cs" />
     <Compile Include="JsonCustomResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

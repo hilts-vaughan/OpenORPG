@@ -5,6 +5,7 @@ using System.Data.Entity.Core.Common;
 using System.Data.Entity.Migrations.History;
 using System.Reflection;
 using MySql.Data.Entity;
+using OpenORPG.Database.Models.ContentTemplates;
 using OpenORPG.Database.Models.Quests;
 using Server.Game.Database.Maps;
 using Server.Game.Database.Models;
@@ -72,6 +73,9 @@ namespace Server.Game.Database
         public DbSet<SkillTemplate> SkillTemplates { get; set; }
         public DbSet<ItemTemplate> ItemTemplates { get; set; }
 
+        public DbSet<DialogTemplate> DialogTemplates { get; set; }
+
+
         // quest related stuff
 
         public DbSet<QuestTemplate> Quests { get; set; }
@@ -83,6 +87,7 @@ namespace Server.Game.Database
         public DbSet<UserQuestInfo> UserQuestInfo { get; set; }
         public DbSet<UserItem> UserItems { get; set; }
         public DbSet<UserEquipment> UserEquipments { get; set; }
+
 
         
 

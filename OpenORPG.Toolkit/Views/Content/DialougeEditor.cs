@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using OpenORPG.Common.Dialog;
 using OpenORPG.Database.DAL;
 using OpenORPG.Database.Models.ContentTemplates;
 using Server.Game.Database;
@@ -34,8 +35,15 @@ namespace OpenORPG.Toolkit.Views.Content
             InitializeComponent();
             SetContentTemplate(template);
 
-            // Set reference
-            _rootDialogNode = GetFromJson(template.JsonPayload);
+            // Set reference if it's available
+            if (string.IsNullOrEmpty(template.JsonPayload))
+                _rootDialogNode = new DialogNode("Default");
+            else
+                _rootDialogNode = GetFromJson(template.JsonPayload);
+
+            _rootDialogNode.Links.Add(new DialogLink());
+
+            GenerateTree();
         }
 
         private DialogNode GetFromJson(string json)
@@ -49,11 +57,69 @@ namespace OpenORPG.Toolkit.Views.Content
                 MessageBox.Show("The payload returned from the server was corrupt.");
                 Close();
             }
+
+            return null;
         }
 
         private string ToJson()
         {
             return JsonConvert.SerializeObject(_rootDialogNode, jsonSerializerSettings);
+        }
+
+
+        private void GenerateTree()
+        {
+            treeDialog.Nodes.Clear();
+
+            var root = CreateTreeNodeFromDialogNode(_rootDialogNode);
+            treeDialog.Nodes.Add(root);
+
+            // Using a recursive approach, we'll generate our tree in the best way we can
+            RecurisveAdd(root, _rootDialogNode);
+        }
+
+        /// <summary>
+        /// Using a recursive approach, generates the hierachy of links and dialog to be navigated
+        /// via a tree.
+        /// </summary>
+        /// <param name="treeNode"></param>
+        /// <param name="node"></param>
+        private void RecurisveAdd(TreeNode treeNode, DialogNode node)
+        {
+            foreach (var childLink in node.Links)
+            {
+                // Create a link node from the child
+                var linkNode = CreateTreeNodeFromDialogLink(childLink);
+                treeNode.Nodes.Add(linkNode);
+
+                // If it has a parent, we should go down that rabbit hole, too
+                var linkChildNode = childLink.NextNode;
+                if (linkChildNode != null)
+                {
+                    var childTreeNode = CreateTreeNodeFromDialogNode(linkChildNode);
+                    linkNode.Nodes.Add(childTreeNode);
+
+                    RecurisveAdd(childTreeNode, linkChildNode);
+                }
+
+            }
+        }
+
+
+        private TreeNode CreateTreeNodeFromDialogNode(DialogNode node)
+        {
+            var treeNode = new TreeNode(node.Name);
+            treeNode.ImageKey = "script.png";
+            treeNode.Tag = node;
+            return treeNode;
+        }
+
+        private TreeNode CreateTreeNodeFromDialogLink(DialogLink link)
+        {
+            var treeNode = new TreeNode(link.Name);
+            treeNode.ImageKey = "link.png";
+            treeNode.Tag = link;
+            return treeNode;
         }
 
 
@@ -81,6 +147,78 @@ namespace OpenORPG.Toolkit.Views.Content
             }
 
             base.Save();
+        }
+
+        private void treeDialog_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // Perform some binding here to the properties we have
+            var dialogElement = e.Node.Tag as IDialogNodeElement;
+
+            if (dialogElement == null)
+            {
+                MessageBox.Show("The selected element was not of the proper type. This is a bug. Contact a developer");
+                return;
+            }
+
+
+            txtComment.DataBindings.Clear();
+            txtText.DataBindings.Clear();
+
+            // Bind the elements
+            txtComment.DataBindings.Add("Text", dialogElement, "Name");
+            txtText.DataBindings.Add("Text", dialogElement, "Text");
+        }
+
+        private void addLinkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var node = treeDialog.SelectedNode.Tag as DialogNode;
+
+            if (node == null)
+            {
+                MessageBox.Show("Links can only be placed on dialog nodes. ");
+                return;
+            }
+
+            // Add a new link to the node
+            node.Links.Add(new DialogLink());
+            GenerateTree();
+
+        }
+
+        private void addNodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var link = treeDialog.SelectedNode.Tag as DialogLink;
+
+            if (link == null)
+            {
+                MessageBox.Show("Nodes can only be placed on dialog links, with the exception of the root.");
+                return;
+            }
+
+            // Add a new link to the node
+            link.NextNode = new DialogNode();
+            GenerateTree();
+        }
+
+        private void removeSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var link = treeDialog.SelectedNode.Tag as DialogLink;
+            var node = treeDialog.SelectedNode.Tag as DialogNode;
+
+            // We're working with a link
+            if (link != null)
+            {
+                // Just simply erase the next parent
+                link.NextNode = null;
+            }
+
+            // We're working with a node
+            if (node != null)
+            {
+                throw new NotSupportedException("The deletion of script nodes is not supported yet");
+            }
+
+            GenerateTree();            
         }
 
 
