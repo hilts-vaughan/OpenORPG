@@ -5,7 +5,7 @@ namespace OpenORPG.Common.Dialog.Conditions
     /// <summary>
     /// A public contract specifying in which cases a certain <see ref="DialogLink"/> may be available.
     /// </summary>
-    public interface IDialogCondition
+    public abstract class IDialogCondition
     {
 
         /// <summary>
@@ -13,7 +13,7 @@ namespace OpenORPG.Common.Dialog.Conditions
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        bool Verify(ICharacterContract player);
+        public abstract bool Verify(ICharacterContract player);
 
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using OpenORPG.Common.Dialog;
+using OpenORPG.Common.Dialog.Conditions;
 using OpenORPG.Database.DAL;
 using OpenORPG.Database.Models.ContentTemplates;
 using Server.Game.Database;
@@ -27,7 +28,8 @@ namespace OpenORPG.Toolkit.Views.Content
         private JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings
         {
             PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            TypeNameHandling = TypeNameHandling.Auto
         };
 
         public DialogEditor(DialogTemplate template)
@@ -42,6 +44,18 @@ namespace OpenORPG.Toolkit.Views.Content
                 _rootDialogNode = GetFromJson(template.JsonPayload);
 
             GenerateTree();
+
+            // Make sure nodes can be updated
+            txtText.LostFocus += TxtTextOnTextChanged;
+            txtComment.LostFocus += TxtTextOnTextChanged;
+            txtText.GotFocus += TxtTextOnTextChanged;
+            txtComment.GotFocus += TxtTextOnTextChanged;
+        }
+
+        private void TxtTextOnTextChanged(object sender, EventArgs eventArgs)
+        {
+            var node = treeDialog.SelectedNode.Tag as IDialogNodeElement;
+            treeDialog.SelectedNode.Text = (node.Name + ": " + TruncateLongString(node.Text, 40));
         }
 
         private DialogNode GetFromJson(string json)
@@ -121,7 +135,7 @@ namespace OpenORPG.Toolkit.Views.Content
             treeNode.Tag = link;
             return treeNode;
         }
-        private  string TruncateLongString(string str, int maxLength)
+        private string TruncateLongString(string str, int maxLength)
         {
             var returnStr = str == null ? "" : str.Substring(0, Math.Min(str.Length, maxLength));
 
@@ -171,10 +185,24 @@ namespace OpenORPG.Toolkit.Views.Content
 
             txtComment.DataBindings.Clear();
             txtText.DataBindings.Clear();
+            listConditions.DataBindings.Clear();
 
             // Bind the elements
             txtComment.DataBindings.Add("Text", dialogElement, "Name");
             txtText.DataBindings.Add("Text", dialogElement, "Text");
+
+            // If we're looking at a link, bind properly and allow editing
+            var link = dialogElement as DialogLink;
+            if (link != null)
+            {
+                listConditions.DataSource = link.DialogConditions;
+                groupConditions.Enabled = true;
+            }
+            else
+            {
+                groupConditions.Enabled = false;
+            }
+
         }
 
         private void addLinkToolStripMenuItem_Click(object sender, EventArgs e)
@@ -226,7 +254,46 @@ namespace OpenORPG.Toolkit.Views.Content
                 throw new NotSupportedException("The deletion of script nodes is not supported yet");
             }
 
-            GenerateTree();            
+            GenerateTree();
+        }
+
+        private void addConditionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Add condition
+            var link = treeDialog.SelectedNode.Tag as DialogLink;
+
+            var dialog = new DialogConditionSelectionForm();
+            dialog.ShowDialog();
+
+            //TODO: Something other than minimum level requirement
+            if (dialog.Condition != null)
+                link.DialogConditions.Add(dialog.Condition);
+
+            UpdateConditionList();
+        }
+
+        private void removeConditionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            if (listConditions.SelectedIndex < 0)
+                return;
+
+            // Remove condition
+            var link = treeDialog.SelectedNode.Tag as DialogLink;
+            link.DialogConditions.RemoveAt(listConditions.SelectedIndex);
+
+            UpdateConditionList();
+
+        }
+
+        private void UpdateConditionList()
+        {
+            var link = treeDialog.SelectedNode.Tag as DialogLink;
+            listConditions.DataSource = null;
+            listConditions.Update();
+            if (link != null)
+                listConditions.DataSource = link.DialogConditions;
+            listConditions.Update();
         }
 
 

@@ -31,26 +31,32 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogEditor));
             this.treeDialog = new System.Windows.Forms.TreeView();
+            this.contextDialogMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addLinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.removeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtComment = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.contextDialogMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addLinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addNodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.removeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupConditions = new System.Windows.Forms.GroupBox();
+            this.listConditions = new System.Windows.Forms.ListBox();
+            this.contextConditionMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addConditionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeConditionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.contextDialogMenu.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupConditions.SuspendLayout();
+            this.contextConditionMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.groupBox2);
+            this.panel1.Controls.Add(this.groupConditions);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.treeDialog);
             this.panel1.Size = new System.Drawing.Size(1066, 466);
@@ -67,6 +73,45 @@
             this.treeDialog.Size = new System.Drawing.Size(815, 466);
             this.treeDialog.TabIndex = 0;
             this.treeDialog.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeDialog_AfterSelect);
+            // 
+            // contextDialogMenu
+            // 
+            this.contextDialogMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addLinkToolStripMenuItem,
+            this.addNodeToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.removeSelectedToolStripMenuItem});
+            this.contextDialogMenu.Name = "contextDialogMenu";
+            this.contextDialogMenu.Size = new System.Drawing.Size(165, 76);
+            // 
+            // addLinkToolStripMenuItem
+            // 
+            this.addLinkToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addLinkToolStripMenuItem.Image")));
+            this.addLinkToolStripMenuItem.Name = "addLinkToolStripMenuItem";
+            this.addLinkToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.addLinkToolStripMenuItem.Text = "Add Link";
+            this.addLinkToolStripMenuItem.Click += new System.EventHandler(this.addLinkToolStripMenuItem_Click);
+            // 
+            // addNodeToolStripMenuItem
+            // 
+            this.addNodeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNodeToolStripMenuItem.Image")));
+            this.addNodeToolStripMenuItem.Name = "addNodeToolStripMenuItem";
+            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.addNodeToolStripMenuItem.Text = "Add Node";
+            this.addNodeToolStripMenuItem.Click += new System.EventHandler(this.addNodeToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
+            // 
+            // removeSelectedToolStripMenuItem
+            // 
+            this.removeSelectedToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("removeSelectedToolStripMenuItem.Image")));
+            this.removeSelectedToolStripMenuItem.Name = "removeSelectedToolStripMenuItem";
+            this.removeSelectedToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.removeSelectedToolStripMenuItem.Text = "Remove Selected";
+            this.removeSelectedToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedToolStripMenuItem_Click);
             // 
             // imageList1
             // 
@@ -121,53 +166,49 @@
             this.txtComment.Size = new System.Drawing.Size(161, 20);
             this.txtComment.TabIndex = 0;
             // 
-            // groupBox2
+            // groupConditions
             // 
-            this.groupBox2.Location = new System.Drawing.Point(12, 204);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(233, 256);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Properties";
+            this.groupConditions.Controls.Add(this.listConditions);
+            this.groupConditions.Location = new System.Drawing.Point(12, 204);
+            this.groupConditions.Name = "groupConditions";
+            this.groupConditions.Size = new System.Drawing.Size(233, 256);
+            this.groupConditions.TabIndex = 2;
+            this.groupConditions.TabStop = false;
+            this.groupConditions.Text = "Conditions";
             // 
-            // contextDialogMenu
+            // listConditions
             // 
-            this.contextDialogMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addLinkToolStripMenuItem,
-            this.addNodeToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.removeSelectedToolStripMenuItem});
-            this.contextDialogMenu.Name = "contextDialogMenu";
-            this.contextDialogMenu.Size = new System.Drawing.Size(165, 76);
+            this.listConditions.ContextMenuStrip = this.contextConditionMenu;
+            this.listConditions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listConditions.FormattingEnabled = true;
+            this.listConditions.Location = new System.Drawing.Point(3, 16);
+            this.listConditions.Name = "listConditions";
+            this.listConditions.Size = new System.Drawing.Size(227, 237);
+            this.listConditions.TabIndex = 4;
             // 
-            // addLinkToolStripMenuItem
+            // contextConditionMenu
             // 
-            this.addLinkToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addLinkToolStripMenuItem.Image")));
-            this.addLinkToolStripMenuItem.Name = "addLinkToolStripMenuItem";
-            this.addLinkToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.addLinkToolStripMenuItem.Text = "Add Link";
-            this.addLinkToolStripMenuItem.Click += new System.EventHandler(this.addLinkToolStripMenuItem_Click);
+            this.contextConditionMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addConditionToolStripMenuItem,
+            this.removeConditionToolStripMenuItem});
+            this.contextConditionMenu.Name = "contextConditionMenu";
+            this.contextConditionMenu.Size = new System.Drawing.Size(174, 48);
             // 
-            // addNodeToolStripMenuItem
+            // addConditionToolStripMenuItem
             // 
-            this.addNodeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNodeToolStripMenuItem.Image")));
-            this.addNodeToolStripMenuItem.Name = "addNodeToolStripMenuItem";
-            this.addNodeToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.addNodeToolStripMenuItem.Text = "Add Node";
-            this.addNodeToolStripMenuItem.Click += new System.EventHandler(this.addNodeToolStripMenuItem_Click);
+            this.addConditionToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addConditionToolStripMenuItem.Image")));
+            this.addConditionToolStripMenuItem.Name = "addConditionToolStripMenuItem";
+            this.addConditionToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.addConditionToolStripMenuItem.Text = "Add Condition";
+            this.addConditionToolStripMenuItem.Click += new System.EventHandler(this.addConditionToolStripMenuItem_Click);
             // 
-            // toolStripSeparator1
+            // removeConditionToolStripMenuItem
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
-            // 
-            // removeSelectedToolStripMenuItem
-            // 
-            this.removeSelectedToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("removeSelectedToolStripMenuItem.Image")));
-            this.removeSelectedToolStripMenuItem.Name = "removeSelectedToolStripMenuItem";
-            this.removeSelectedToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.removeSelectedToolStripMenuItem.Text = "Remove Selected";
-            this.removeSelectedToolStripMenuItem.Click += new System.EventHandler(this.removeSelectedToolStripMenuItem_Click);
+            this.removeConditionToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("removeConditionToolStripMenuItem.Image")));
+            this.removeConditionToolStripMenuItem.Name = "removeConditionToolStripMenuItem";
+            this.removeConditionToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.removeConditionToolStripMenuItem.Text = "Remove Condition";
+            this.removeConditionToolStripMenuItem.Click += new System.EventHandler(this.removeConditionToolStripMenuItem_Click);
             // 
             // DialogEditor
             // 
@@ -178,16 +219,18 @@
             this.Text = "DialougeEditor";
             this.Controls.SetChildIndex(this.panel1, 0);
             this.panel1.ResumeLayout(false);
+            this.contextDialogMenu.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.contextDialogMenu.ResumeLayout(false);
+            this.groupConditions.ResumeLayout(false);
+            this.contextConditionMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupConditions;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TreeView treeDialog;
         private System.Windows.Forms.TextBox txtText;
@@ -200,5 +243,9 @@
         private System.Windows.Forms.ToolStripMenuItem addNodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem removeSelectedToolStripMenuItem;
+        private System.Windows.Forms.ListBox listConditions;
+        private System.Windows.Forms.ContextMenuStrip contextConditionMenu;
+        private System.Windows.Forms.ToolStripMenuItem addConditionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeConditionToolStripMenuItem;
     }
 }

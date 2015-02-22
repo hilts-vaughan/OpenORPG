@@ -4,16 +4,29 @@ namespace OpenORPG.Common.Dialog.Conditions
 {
     public class MinimumLevelDialogCondition : IDialogCondition
     {
-        private int _level;
+
+        public int Level { get; set; }
+
 
         public MinimumLevelDialogCondition(int level)
         {
-           _level = level;
+            Level = level;
         }
 
-        public bool Verify(ICharacterContract player)
+        public MinimumLevelDialogCondition()
         {
-            return player.Level >= _level;
+            
+        }
+
+        public override bool Verify(ICharacterContract player)
+        {
+            return player.Level >= Level;
+        }
+
+        public override string ToString()
+        {
+           return "Minimum Level Requirement: " + Level;
+
         }
     }
 }

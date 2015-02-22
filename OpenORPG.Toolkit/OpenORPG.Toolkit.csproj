@@ -112,6 +112,12 @@
     <Compile Include="Views\Content\BaseContentForm.Designer.cs">
       <DependentUpon>BaseContentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Content\DialogConditionSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Content\DialogConditionSelectionForm.Designer.cs">
+      <DependentUpon>DialogConditionSelectionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Content\DialougeEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Auth\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Content\DialogConditionSelectionForm.resx">
+      <DependentUpon>DialogConditionSelectionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Content\DialougeEditor.resx">
       <DependentUpon>DialougeEditor.cs</DependentUpon>

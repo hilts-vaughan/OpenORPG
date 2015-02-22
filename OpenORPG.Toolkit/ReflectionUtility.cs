@@ -20,5 +20,15 @@ namespace OpenORPG.Toolkit
             return subclasses;
         }
 
+        public static IEnumerable<Type> GetAllTypesThatImplement<T>()
+        {
+            var type = typeof(T);
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p) && !p.IsInterface);
+
+            return types;
+        }
+
     }
 }

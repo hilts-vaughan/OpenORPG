@@ -30,10 +30,13 @@ namespace OpenORPG.Common.Dialog
             Name = "New Link";
         }
 
-        public void AddCondition(IDialogCondition condition)
+
+        public List<IDialogCondition> DialogConditions
         {
-            _dialogConditions.Add(condition);
+            get { return _dialogConditions; }
+            set { _dialogConditions = value; }
         }
+
 
         /// <summary>
         /// Computes whether or not this dialog link will visible to an interacting player given the conditions imposed
