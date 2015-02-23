@@ -684,6 +684,117 @@ $
         border-color: #333333 transparent;
     }
 
+
+    /*  Dialog related stuff here
+        */
+
+
+    /*
+    Quest window stuff begins here
+ */
+
+#dialog-window {
+    width: 600px;
+    height: 370px;
+    background-color: rgba(9, 22, 27, 0.9);
+    overflow: hidden;
+    font-family: "AdvoCut";
+}
+
+
+
+    #dialog-window .quest-header {
+        border-radius: 33px;
+        width: 90%;
+        margin: 10px auto;
+        height: 40px;
+        font-size: 28px;
+        background-color: black;
+        border: 2px solid grey;
+        color: white;
+        padding-top: 12px;
+        text-align: center;
+    }
+
+    #dialog-window .chat-bubble {
+        width: 90%;
+        margin-left: 10px;
+        background-color: #333333;
+        height: 40%;
+        font-size: 18px;
+        color: white;
+        border: 3px solid #4d5353;
+    }
+
+    #dialog-window .action-bar {
+        margin: 0 auto;
+        text-align: right;
+        margin-top: -35px;
+        height: 75px;
+    }
+
+    
+    #dialog-window .action-wrapper {
+        text-align: right;
+        width: 100%;
+    }
+
+    #dialog-window .next-arrow {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        margin-bottom: 5px;
+        margin-right: 5px;
+        color: yellow;
+    }
+
+    #dialog-window .next-arrow:hover {
+        color: orange;
+    }
+
+        #dialog-window .action-bar .action-button {
+            padding: 5px 10px 5px 10px;
+            color: yellow;
+            background-color: #910600;
+            border: 2px solid white;
+            border-radius: 12px;
+            text-align: center;
+            margin-right: 5px;
+            font-size: 14px;
+            display: inline-block;
+            width: 200px;
+        }
+
+            #dialog-window .action-bar .action-button:hover {
+                opacity: 0.8;
+            }
+
+            #dialog-window .action-bar .action-button:active {
+                position: relative;
+                top: 3px;
+                border-color: black;
+                box-shadow: none;
+            }
+
+    #dialog-window .quest-giver {
+        background-image: url("assets/img/quest_icon.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: absolute;
+        z-index: 2;
+        left: 60px;
+        top: 280px;
+        width: 46px;
+        height: 70px;
+    }
+
+
+
+    #dialog-window .chat-bubble:after {
+        border-color: #333333 transparent;
+    }
+
+
 /* Inventory stuff starts here, have fun! */
 
 #inventorydialog, #quest-dialog, #skill-dialog, #quest-list-dialog, #settings-dialog {
