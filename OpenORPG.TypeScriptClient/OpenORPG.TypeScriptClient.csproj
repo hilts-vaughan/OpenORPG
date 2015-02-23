@@ -45,6 +45,7 @@
     <Content Include="assets\hud\character\images\weaponslot.png" />
     <Content Include="assets\hud\character\images\handslot.png" />
     <Content Include="assets\hud\chat\chat_message_line.html" />
+    <Content Include="assets\hud\dialog.html" />
     <Content Include="assets\hud\inventory.html" />
     <Content Include="assets\hud\inventory\images\currency_display.png" />
     <Content Include="assets\hud\inventory\images\item.png" />

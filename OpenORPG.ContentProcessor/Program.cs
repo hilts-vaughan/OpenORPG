@@ -16,7 +16,7 @@ namespace OpenORPG.ContentProcessor
     {
         
 
-        static void Main(string[] args)
+        static void Main(string[] args) 
         {
             Console.Title = "Extracting data...";
 
@@ -34,6 +34,8 @@ namespace OpenORPG.ContentProcessor
             new MonsterExtractor().ProcessContent(persister);
             new ItemExtractor().ProcessContent(persister);
             new QuestExtractor().ProcessContent(persister);
+            new DialogExtractor().ProcessContent(persister);
+
 
         }
     }
