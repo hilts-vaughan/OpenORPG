@@ -65,7 +65,6 @@ namespace Server.Game
         {
             using (var context = new GameDatabaseContext())
             {
-                id = 1;
                 var template = context.Npcs.FirstOrDefault(x => x.Id == id);
 
                 if (template == null)
@@ -73,6 +72,7 @@ namespace Server.Game
 
                 // Load up the quests this NPC will have
                 context.Entry(template).Collection(x => x.Quests).Load();
+                context.Entry(template).Reference(x => x.ConversationAvailableTemplate).Load();
 
                 foreach (var quest in template.Quests)
                 {
@@ -80,6 +80,7 @@ namespace Server.Game
                     
                     context.Entry(quest).Collection(x => x.QuestSteps).Load();
                     context.Entry(quest).Collection(x => x.Rewards).Load();
+                    
 
                     // Load up our set of requirements from the table
                     foreach (var x in quest.QuestSteps)

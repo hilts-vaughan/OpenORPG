@@ -113,5 +113,12 @@
         }
     }
 
+    export function createDialogLink(index: number) {
+        return {
+            opCode: OpenORPG.OpCode.CMSG_DIALOG_LINK_SELECTION,
+            linkId: index
+        }
+    }
+
 
 } 

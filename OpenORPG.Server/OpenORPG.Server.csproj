@@ -132,6 +132,8 @@
     <Compile Include="Game\Combat\Validators\Skills\SkillTargetValidator.cs" />
     <Compile Include="Game\Combat\Validators\Skills\SkillValidationContainer.cs" />
     <Compile Include="Game\Combat\Validators\Skills\SkillValidationFactory.cs" />
+    <Compile Include="Game\Dialog\DialogService.cs" />
+    <Compile Include="Game\Dialog\NpcDialogEntry.cs" />
     <Compile Include="Game\Entities\Character.cs" />
     <Compile Include="Game\Entities\CharacterState.cs" />
     <Compile Include="Game\Entities\Monster.cs" />
@@ -166,6 +168,7 @@
     <Compile Include="Game\Network\Packets\ChannelType.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientAcceptQuestPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientChatMessagePacket.cs" />
+    <Compile Include="Game\Network\Packets\Client\ClientDialogLinkSelectionPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientDropStorageRequestPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientHeroEquipItemPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientHeroSelectPacket.cs" />
@@ -179,6 +182,7 @@
     <Compile Include="Game\Network\Packets\Client\ClientUsePowerPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientZoneChangeRequestPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerCharacterStatChange.cs" />
+    <Compile Include="Game\Network\Packets\Server\ServerDialogPresentPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEntityMovementPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEntityPropertyChange.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEqupmentUpdatePacket.cs" />
@@ -228,6 +232,7 @@
     <Compile Include="Infrastructure\Content\AssetLoaders\XmlLoader.cs" />
     <Compile Include="Infrastructure\Content\AssetReader.cs" />
     <Compile Include="Infrastructure\Cryptography\HashHelper.cs" />
+    <Compile Include="Infrastructure\Dialog\DialogProvider.cs" />
     <Compile Include="Infrastructure\Logging\ILogger.cs" />
     <Compile Include="Infrastructure\Logging\Logger.cs" />
     <Compile Include="Infrastructure\Logging\Loggers\ConsoleLogger.cs" />

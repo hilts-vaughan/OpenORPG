@@ -75,6 +75,23 @@ module OpenORPG {
 
             }
         ])
+
+
+        .controller('DialogController', [
+            '$scope', function ($scope) {
+
+                // Respond to a dialog change
+                $scope.$on('DialogChanged', (event, data) => {
+                    $scope.selectQuest($scope.selectedIndex);
+                });
+
+                $scope.getIcon = function (index: number) {
+      
+                };
+
+            }
+        ])
+
         .controller('CharacterStatusController', [
             '$scope', function ($scope) {
 

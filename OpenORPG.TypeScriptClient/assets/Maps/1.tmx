@@ -22596,24 +22596,9 @@
   </object>
  </objectgroup>
  <objectgroup name="NpcSpawns">
-  <object name="Quest NPC" type="NpcSpawn" x="160" y="480" width="32" height="32">
-   <properties>
-    <property name="NpcId" value="2"/>
-   </properties>
-  </object>
-  <object name="Guard" type="NpcSpawn" x="800" y="608" width="32" height="32">
-   <properties>
-    <property name="NpcId" value="3"/>
-   </properties>
-  </object>
-  <object name="Guard" type="NpcSpawn" x="1344" y="192" width="32" height="32">
-   <properties>
-    <property name="NpcId" value="4"/>
-   </properties>
-  </object>
   <object name="Guard" type="NpcSpawn" x="864" y="160" width="32" height="32">
    <properties>
-    <property name="NpcId" value="5"/>
+    <property name="NpcId" value="2"/>
    </properties>
   </object>
  </objectgroup>

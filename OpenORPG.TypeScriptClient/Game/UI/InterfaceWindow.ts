@@ -82,6 +82,7 @@
 
     }
 
+
     export class SettingsWindow extends InterfaceWindow {
         
         constructor() {
@@ -89,6 +90,53 @@
         }
 
     }
+
+
+    export class DialogWindow extends InterfaceWindow {
+
+        //jQuery it up.. oh god this needs a cleaning in the worst way
+        //
+
+        presentDialog(text: string, links: Array<string>) {
+            this.render(text, links);
+            this.open();
+        }
+
+        constructor() {
+            super("assets/hud/dialog.html", "#dialog-window");
+        }
+
+        render(text : string, links : Array<string>) {
+
+            $(this.windowName).find("#description").text(text);
+
+            $(this.windowName).find(".action-bar").children().remove();
+
+            links.forEach((link, index) => {
+                var x : JQuery =  $("<span class='action-button'></span>");
+                x.data("link", index);
+                x.text(link);
+
+                $(".action-bar").append(x);
+
+
+
+         
+            });
+
+
+            $(this.windowName).find(".action-button").click((event: JQueryEventObject) => {
+                var element = $(event.target);
+                var index: number = element.index();
+                var packet = PacketFactory.createDialogLink(index);
+                NetworkManager.getInstance().sendPacket(packet);
+            });
+
+        }
+
+    }
+
+
 
     /*
      * A window that is used for displaying quest related stuff

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Server.Game.Dialog;
 using Server.Game.Entities;
 using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Client;
@@ -13,6 +14,20 @@ namespace Server.Game.Network.Handlers
 {
     public static class InteractionHandler
     {
+
+        [PacketHandler(OpCodes.CMSG_DIALOG_LINK_SELECTION)]
+        public static void OnPlayerDialogLinkSelection(GameClient client, ClientDialogLinkSelectionPacket packet)
+        {
+            var player = client.HeroEntity;
+
+            // You can only do this idle
+            if (player == null || player.CharacterState != CharacterState.Idle)
+                return;
+    
+            // You have to be near the NPC to actually interact with it
+            player.Zone.GetGameSystem<DialogService>().AdvanceDialog(player, GetNearestInteractable(player), packet.LinkId);
+
+        }
 
         /// <summary>
         /// This handler is invoked when a client makes a request with the action key to interact with
@@ -29,7 +44,7 @@ namespace Server.Game.Network.Handlers
             var hero = client.HeroEntity;
 
             // It's only possible to interact with things standing still
-            if (hero == null && hero.CharacterState == CharacterState.Idle)
+            if (hero == null || hero.CharacterState != CharacterState.Idle)
                 return;
 
             // Get who to interact with
@@ -40,15 +55,26 @@ namespace Server.Game.Network.Handlers
 
                 Logger.Instance.Debug("{0} is interacting with {1}.", hero.Name, interactWith.Name);
 
-                // Get the first quest            
-                var quest = interactWith.Quests[0];
-
-                if (QuestManager.Instance.CanPlayerGetQuest(quest, hero))
+                // Get the first quest and offer it if it's available
+                if (interactWith.Quests.Count > 0)
                 {
-                    var p = new ServerSendQuestOfferPacket(quest.QuestId);
-                    hero.Client.Send(p);
-                }
+                    var quest = interactWith.Quests[0];
 
+                    if (QuestManager.Instance.CanPlayerGetQuest(quest, hero))
+                    {
+                        var p = new ServerSendQuestOfferPacket(quest.QuestId);
+                        hero.Client.Send(p);
+                    }
+                }                
+                else
+                {
+                    // Offer up a dialog if at all possible since they asked.
+                    // You can be in multiple dialogs at once, it does not matter
+                    if (interactWith.DialogTemplate != null)
+                    {
+                        hero.Zone.GetGameSystem<DialogService>().BeginDialog(hero, interactWith);
+                    }
+                }
 
 
             }

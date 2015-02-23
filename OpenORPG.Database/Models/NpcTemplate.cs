@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenORPG.Database.Models.ContentTemplates;
 using Server.Game.Database.Models.ContentTemplates;
 using Server.Game.Database.Models.Quests;
 
@@ -22,6 +23,10 @@ namespace Server.Game.Database.Models
             Quests = new List<QuestTemplate>();
         }
 
+        /// <summary>
+        /// Represents a dialog template that this NPC can offer
+        /// </summary>
+        public DialogTemplate ConversationAvailableTemplate { get; set; }
 
         /// <summary>
         /// A quest that this NPC can have

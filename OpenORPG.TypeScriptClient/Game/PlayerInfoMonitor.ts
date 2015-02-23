@@ -11,7 +11,7 @@
             var network = NetworkManager.getInstance();
 
             setInterval(() => {
-                this.updateAngularScope();
+                AngularInterop.updateAngularScope();
             }, 1000);
 
             // Register for stat changes
@@ -21,7 +21,7 @@
                 this.playerInfo.characterStats[packet.stat].currentValue = packet.currentValue;
                 this.playerInfo.characterStats[packet.stat].maximumValue = packet.maximumValue;
 
-                this.updateAngularScope();
+                AngularInterop.updateAngularScope();
 
             });
 
@@ -31,7 +31,7 @@
                 this.playerInfo.inventory = [];
                 this.playerInfo.inventory.push.apply(this.playerInfo.inventory, packet.itemStorage);
 
-                this.updateAngularScope();
+                AngularInterop.updateAngularScope();
 
                 Logger.info("PlayerInfoMonitor - The player inventory has been updated.");
             });
@@ -59,8 +59,8 @@
                
 
                         this.playerInfo.quests.push(data);
-                        this.broadcastEvent('QuestsChanged');                                  
-                        this.updateAngularScope();
+                        AngularInterop.broadcastEvent('QuestsChanged');                                  
+                        AngularInterop.updateAngularScope();
                     });
 
                 });
@@ -78,8 +78,8 @@
                 // Update the progress indiciator; trigger a UI refresh
                 updatedQuest.questInfo.requirementProgress[packet.requirementIndex].progress = packet.progress;
 
-                this.broadcastEvent('QuestsChanged');
-                this.updateAngularScope();
+                AngularInterop.broadcastEvent('QuestsChanged');
+                AngularInterop.updateAngularScope();
 
             });
             // skills monitoring
@@ -112,30 +112,6 @@
 
         }
 
-        /**
-         * Updates the angular rootscope with the latest data after modifying the rootscope.
-         */
-        private updateAngularScope() {
-            var $body = angular.element(document.body);   // 1    
-
-            var service = $body.injector().get('$timeout');
-            var $rootScope: any = $body.scope();
-
-            var phase = $rootScope.$root.$$phase;
-            if (phase == '$apply' || phase == '$digest') {
-            } else {
-                $rootScope.$apply();
-            }
-        }
-
-        private broadcastEvent(eventName: string) {
-            var $body = angular.element(document.body);
-            var $rootScope: any = $body.scope();
-
-            // Send event
-            $rootScope.$broadcast(eventName);
-            this.updateAngularScope();
-        }
 
 
 

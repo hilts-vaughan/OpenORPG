@@ -758,8 +758,9 @@ $
             background-color: #910600;
             border: 2px solid white;
             border-radius: 12px;
-            text-align: center;
+            text-align: left;
             margin-right: 5px;
+            margin-bottom: 5px;
             font-size: 14px;
             display: inline-block;
             width: 200px;

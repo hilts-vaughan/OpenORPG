@@ -184,11 +184,11 @@ namespace OpenORPG.Toolkit.Views.Content
                 return;
             }
 
-
+            listConditions.DataBindings.Clear();
+            listConditions.DataSource = null;
             listConditions.Items.Clear();
             txtComment.DataBindings.Clear();
             txtText.DataBindings.Clear();
-            listConditions.DataBindings.Clear();
             textScript.DataBindings.Clear();
 
 

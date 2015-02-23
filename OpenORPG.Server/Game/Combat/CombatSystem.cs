@@ -121,24 +121,7 @@ namespace Server.Game.Combat
         }
 
 
-        public override void OnEntityAdded(Entity entity)
-        {
-            if (entity is Character)
-                OnCharacterAdded(entity as Character);
-        }
-
-        public override void OnEntityRemoved(Entity entity)
-        {
-            if (entity is Character)
-                OnCharacterRemoved(entity as Character);
-        }
-
-
-        private void OnCharacterAdded(Character character)
-        {
-            character.Killed += CharacterOnKilled;
-        }
-
+       
         private void CharacterOnKilled(Character aggressor, Character victim)
         {
             if (victim is Player)
@@ -183,6 +166,25 @@ namespace Server.Game.Combat
         private void OnCharacterRemoved(Character character)
         {
             character.Killed -= CharacterOnKilled;
+        }
+
+
+        private void OnCharacterAdded(Character character)
+        {
+            character.Killed += CharacterOnKilled;
+        }
+
+
+        public override void OnEntityAdded(Entity entity)
+        {
+            if (entity is Character)
+                OnCharacterAdded(entity as Character);
+        }
+
+        public override void OnEntityRemoved(Entity entity)
+        {
+            if (entity is Character)
+                OnCharacterRemoved(entity as Character);
         }
 
 

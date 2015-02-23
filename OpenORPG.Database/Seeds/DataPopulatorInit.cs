@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using Inspire.Shared.Models.Enums;
 using OpenORPG.Database.Enums;
+using OpenORPG.Database.Models.ContentTemplates;
 using OpenORPG.Database.Models.Quests;
 using OpenORPG.Database.Models.Quests.Rewards;
 using Server.Game.Database.Models;
@@ -17,7 +18,7 @@ namespace Server.Game.Database.Seeds
     /// <summary>
     ///     A custom initializer that populates the game database with mock data useful for testing, clean, good known states.
     /// </summary>
-    public class CustomInitializer : DropCreateDatabaseIfModelChanges<GameDatabaseContext>  // DropCreateDatabaseAlways<GameDatabaseContext>   //  // 
+    public class CustomInitializer : DropCreateDatabaseIfModelChanges<GameDatabaseContext>    //  //    DropCreateDatabaseAlways<GameDatabaseContext>
     {
 
 
@@ -73,12 +74,25 @@ namespace Server.Game.Database.Seeds
                 context.Accounts.Add(account);
             }
 
+            // Create test dialog
+            DialogTemplate dialogTemplate = new DialogTemplate();
+            dialogTemplate.Name = "Introduction to World";
+            dialogTemplate.JsonPayload =
+                "{\"$id\":\"1\",\"Name\":\"Root\",\"Text\":\"Welcome to Port Windurst! If I can help you out with anything, please ask.\",\"Links\":[{\"$id\":\"2\",\"NextNode\":{\"$id\":\"3\",\"Name\":\"Reply\",\"Text\":\"I\'ve restored your vitals completely.\",\"Links\":[]},\"Script\":null,\"DialogConditions\":[{\"$id\":\"4\",\"$type\":\"OpenORPG.Common.Dialog.Conditions.MinimumLevelDialogCondition, OpenORPG.Common\",\"Level\":9}],\"Name\":\"Healing\",\"Text\":\"I need healing.\"},{\"$id\":\"5\",\"NextNode\":{\"$id\":\"6\",\"Name\":\"Reply\",\"Text\":\"Actually, maybe... What would you like to know?\",\"Links\":[{\"$id\":\"7\",\"NextNode\":null,\"Script\":null,\"DialogConditions\":[],\"Name\":\"Ask\",\"Text\":\"Ask about Lancaster.\"},{\"$id\":\"8\",\"NextNode\":{\"$id\":\"9\",\"Name\":\"Reply\",\"Text\":\"Oh, the minister? Yeah, I heard some odd stuff about him... they say he\'s been keeping some secrets, that one.\",\"Links\":[]},\"Script\":null,\"DialogConditions\":[],\"Name\":\"Ask\",\"Text\":\"Ask about Minister Winrix\"}]},\"Script\":null,\"DialogConditions\":[],\"Name\":\"Rumours:\",\"Text\":\"Have you heard any rumours?\"},{\"$id\":\"10\",\"NextNode\":null,\"Script\":null,\"DialogConditions\":[],\"Name\":\"Leave\",\"Text\":\"Thanks for stopping by, have a good day!\"}]}";
+            dialogTemplate.VirtualCategory = "Beginner";
+
+            context.DialogTemplates.Add(dialogTemplate);
+
+            context.SaveChanges();
+
             CreateTestMonsters(context);
             CreateTestQuests(context);
             CreateTestItems(context);
 
+ 
             context.SaveChanges();
-            context.SaveChanges();
+
+           
 
 
 
@@ -210,6 +224,15 @@ namespace Server.Game.Database.Seeds
             npc.Quests.Add(quest);
 
             context.Npcs.Add(npc);
+
+            // Generate someone for conversations where possible
+            var guideNpc = new NpcTemplate();
+            guideNpc.Name = "Kasaroro";
+            guideNpc.Sprite = "villagegirl";
+            guideNpc.ConversationAvailableTemplate = context.DialogTemplates.First(x => x.Id == 1);
+
+            context.Npcs.Add(guideNpc);
+
 
         }
 

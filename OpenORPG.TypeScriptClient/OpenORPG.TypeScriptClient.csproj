@@ -492,6 +492,7 @@
     <TypeScriptCompile Include="Game\States\GameplayState.ts" />
     <TypeScriptCompile Include="Game\States\HeroSelectState.ts" />
     <TypeScriptCompile Include="Game\States\LoginMenuState.ts" />
+    <TypeScriptCompile Include="Game\UI\AngularInterop.ts" />
     <TypeScriptCompile Include="Game\UI\Character\EquipmentItemContextMenu.ts" />
     <TypeScriptCompile Include="Game\UI\HudWidget.ts" />
     <TypeScriptCompile Include="Game\UI\InterfaceWindow.ts" />

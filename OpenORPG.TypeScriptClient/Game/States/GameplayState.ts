@@ -14,7 +14,11 @@ module OpenORPG {
         private bottomBarWidget: BottombarWidget;
         private chatWidget: ChatWidget;
         private menuWidget: MenuTrayWidget;
+
         private questWindow: QuestWindow = new QuestWindow();
+        private dialogWindow: DialogWindow = new DialogWindow();
+
+
         private chatManager: ChatManager;
 
         // Keep track of character info
@@ -130,6 +134,10 @@ module OpenORPG {
 
             network.registerPacket(OpCode.SMSG_SERVER_OFFER_QUEST, (packet: any) => {
                 this.questWindow.presentQuest(packet.questId);
+            });
+
+            network.registerPacket(OpCode.SMSG_DIALOG_PRESENT, (packet: any) => {
+                this.dialogWindow.presentDialog(packet.message, packet.links);
             });
 
 

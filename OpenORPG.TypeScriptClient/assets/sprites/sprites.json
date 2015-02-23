@@ -4,5 +4,6 @@
 	"entity_sprite_goblin": "goblin",
 	"entity_sprite_elemental_fire": "elemental_fire",
 	"effect_death": "effects/death",
-	"entity_sprite_forestnpc": "forestnpc"
+	"entity_sprite_forestnpc": "forestnpc",
+	"entity_sprite_villagegirl": "villagegirl"
 }

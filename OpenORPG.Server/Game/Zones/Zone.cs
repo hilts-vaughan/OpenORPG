@@ -7,6 +7,7 @@ using Server.Game.AI;
 using Server.Game.Chat;
 using Server.Game.Combat;
 using Server.Game.Database.Models;
+using Server.Game.Dialog;
 using Server.Game.Entities;
 using Server.Game.Movement;
 using Server.Game.Network.Packets;
@@ -193,6 +194,8 @@ namespace Server.Game.Zones
 
         private void AddGameSystems()
         {
+            // Add all our various require systems to deal with logic
+
             GameSystems.Add(new SpawnGameSystem(this));
             GameSystems.Add(new CombatSystem(this));
             GameSystems.Add(new AiSystem(this));
@@ -200,6 +203,7 @@ namespace Server.Game.Zones
             GameSystems.Add(new LevelService(this));
             GameSystems.Add(new ChatService(this));
             GameSystems.Add(new QuestService(this));
+            GameSystems.Add(new DialogService(this));
         }
 
 

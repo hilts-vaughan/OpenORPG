@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using OpenORPG.Database.Models.ContentTemplates;
 using Server.Game.Database.Models;
 using Server.Game.Network.Packets.Server;
 using Server.Infrastructure.Quests;
@@ -17,20 +19,28 @@ namespace Server.Game.Entities
     /// </summary>
     public class Npc : Entity, IQuestProvider
     {
+        private NpcTemplate _npcTemplate;
 
         public Npc(NpcTemplate npcTemplate)
             : base(npcTemplate.Sprite)
         {
             Name = npcTemplate.Name;
 
+            // Persist
+            _npcTemplate = npcTemplate;
 
             Quests = new List<Quest>();
-            foreach (var questEntry in npcTemplate.Quests)
+            foreach (var questEntry in _npcTemplate.Quests)
             {
                 var quest = new Quest(questEntry);
                 Quests.Add(quest);
-            }
+            }            
 
+        }
+
+        public DialogTemplate DialogTemplate
+        {
+            get { return _npcTemplate.ConversationAvailableTemplate;  }
         }
 
         public List<Quest> Quests { get; set; }
