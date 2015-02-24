@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,12 +79,28 @@ namespace Server.Game.Dialog
             Logger.Instance.Info("{0} is advancing dialog.", player);
 
             string message = "The conversation ends.";
-            ICollection<string> links = new Collection<string>();
+            ICollection<ExpandoObject> links = new Collection<ExpandoObject>();
  
             if (newNode != null)
             {
                 message = newNode.Text;
-                links = newNode.Links.Where(x => x.IsAvailable(player)).Select(x => x.Text).ToList();
+
+                for (int i = 0; i < newNode.Links.Count; i++)
+                {
+                    var link = newNode.Links[i];
+
+                    if (link.IsAvailable(player))
+                    {
+                        dynamic entry = new ExpandoObject();
+                        entry.link = link.Text;
+                        entry.index = i;
+
+                        links.Add(entry);
+
+                    }
+
+                }
+
             }
 
             var packet = new ServerDialogPresentPacket(message, links);

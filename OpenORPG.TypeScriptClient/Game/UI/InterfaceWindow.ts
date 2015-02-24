@@ -106,7 +106,7 @@
             super("assets/hud/dialog.html", "#dialog-window");
         }
 
-        render(text : string, links : Array<string>) {
+        render(text : string, links : Array<any>) {
 
             $(this.windowName).find("#description").text(text);
 
@@ -114,8 +114,8 @@
 
             links.forEach((link, index) => {
                 var x : JQuery =  $("<span class='action-button'></span>");
-                x.data("link", index);
-                x.text(link);
+                x.data("link", link.index);
+                x.text(link.link);
 
                 $(".action-bar").append(x);
 
@@ -127,7 +127,8 @@
 
             $(this.windowName).find(".action-button").click((event: JQueryEventObject) => {
                 var element = $(event.target);
-                var index: number = element.index();
+                var index: number = parseInt(element.data("link"));
+
                 var packet = PacketFactory.createDialogLink(index);
                 NetworkManager.getInstance().sendPacket(packet);
             });

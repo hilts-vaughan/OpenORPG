@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,10 @@ namespace Server.Game.Network.Packets.Server
 
         public string Message { get; private set; }
 
-        public ICollection<String> Links { get; private set; }
+        public ICollection<ExpandoObject> Links { get; private set; }
 
-        public ServerDialogPresentPacket(string message, ICollection<string> links) : this()
+        public ServerDialogPresentPacket(string message, ICollection<ExpandoObject> links)
+            : this()
         {
             Message = message;
             Links = links;
