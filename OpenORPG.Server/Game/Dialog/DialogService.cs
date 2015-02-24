@@ -83,10 +83,10 @@ namespace Server.Game.Dialog
             if (newNode != null)
             {
                 message = newNode.Text;
-                links = newNode.Links.Select(x => x.Text).ToList();
+                links = newNode.Links.Where(x => x.IsAvailable(player)).Select(x => x.Text).ToList();
             }
 
-            var packet = new ServerDialogPresentPacket(newNode.Text, links);
+            var packet = new ServerDialogPresentPacket(message, links);
             player.Client.Send(packet);
         }
 
