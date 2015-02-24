@@ -81,8 +81,19 @@ namespace OpenORPG.Toolkit.Views.Content
         }
 
 
-        private void GenerateTree()
+        private void GenerateTree(IDialogNodeElement elemenetToExpandOn = null)
         {
+
+            if (elemenetToExpandOn == null)
+            {
+                var selectedItem = treeDialog.SelectedNode;
+
+                if (selectedItem == null)
+                    elemenetToExpandOn = _rootDialogNode;
+                else
+                    elemenetToExpandOn = (IDialogNodeElement) selectedItem.Tag;
+            }
+
             treeDialog.Nodes.Clear();
 
             var root = CreateTreeNodeFromDialogNode(_rootDialogNode);
@@ -90,6 +101,18 @@ namespace OpenORPG.Toolkit.Views.Content
 
             // Using a recursive approach, we'll generate our tree in the best way we can
             RecurisveAdd(root, _rootDialogNode);
+        
+        
+            // Perform a deep search for the node
+            var select = FindTreeNodeWithElement(elemenetToExpandOn, root);
+
+            // Expand all and select it
+            if (select != null)
+            {
+                treeDialog.SelectedNode = select;
+                select.ExpandAll();
+            }
+
         }
 
         /// <summary>
@@ -119,6 +142,78 @@ namespace OpenORPG.Toolkit.Views.Content
             }
         }
 
+        private DialogLink FindOwningLink(DialogNode searchFor, DialogNode currentNode)
+        {
+            foreach (var link in currentNode.Links)
+            {
+                if (link.NextNode == searchFor)
+                    return link;
+
+                DialogLink result = null;
+                if (link.NextNode != null)
+                    result = FindOwningLink(searchFor, link.NextNode);
+
+                if (result != null)
+                    return result;
+            }
+
+            return null;
+        }
+
+        private DialogNode FindParentDialogNode(DialogNode nodeToFindParent, DialogNode currentNode, DialogNode previousNode)
+        {
+
+            if (currentNode == nodeToFindParent)
+                return previousNode;
+
+            foreach (var link in currentNode.Links)
+            {
+
+                if (link.NextNode != null)
+                {
+                    DialogNode result = null;
+                    result = FindParentDialogNode(nodeToFindParent, link.NextNode, currentNode);
+
+                    if (result != null)
+                        return result;
+
+                }
+
+            }
+
+            return null;
+        }
+        
+        private TreeNode FindTreeNodeWithElement(IDialogNodeElement elementToFind, TreeNode currentNode)
+        {
+            if (currentNode.Tag == elementToFind)
+                return currentNode;
+
+            var dialogNode = currentNode.Tag as DialogNode;
+
+            for (int index = 0; index < dialogNode.Links.Count; index++)
+            {
+                var link = dialogNode.Links[index];
+
+                if (link == elementToFind)
+                    return currentNode.Nodes[index].Nodes[0];
+
+                TreeNode result;
+
+                if (link.NextNode != null)
+                {
+                    result = FindTreeNodeWithElement(elementToFind, currentNode.Nodes[index].Nodes[0]);
+
+                    if (result != null)
+                        return result;
+                }
+            }
+
+            return null;
+
+        }
+
+        //private DialogNode 
 
         private TreeNode CreateTreeNodeFromDialogNode(DialogNode node)
         {
@@ -239,6 +334,12 @@ namespace OpenORPG.Toolkit.Views.Content
                 return;
             }
 
+            if (link.NextNode != null)
+            {
+                MessageBox.Show("There is already a node for this link.");
+                return;
+            }
+
             // Add a new link to the node
             link.NextNode = new DialogNode();
             GenerateTree();
@@ -252,14 +353,25 @@ namespace OpenORPG.Toolkit.Views.Content
             // We're working with a link
             if (link != null)
             {
-                // Just simply erase the next parent
-                link.NextNode = null;
+                if (link.NextNode != null)
+                {
+                    var parentNode = FindParentDialogNode(link.NextNode, _rootDialogNode, _rootDialogNode);
+
+                    if (parentNode != null)
+                    {
+                        var i = parentNode.Links.IndexOf(link);
+                        parentNode.Links.RemoveAt(i);
+                    }
+
+                }
             }
 
             // We're working with a node
             if (node != null)
             {
-                throw new NotSupportedException("The deletion of script nodes is not supported yet");
+                // Find owning link
+                var owningLink = FindOwningLink(node, _rootDialogNode);
+                owningLink.NextNode = null;
             }
 
             GenerateTree();
