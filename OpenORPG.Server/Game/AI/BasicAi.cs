@@ -49,7 +49,7 @@ namespace Server.Game.AI
             if (!Character.IsAlive)
                 return;
 
-            //TODO: If there is agression and a target is close by
+            // If there is agression and a target is close by
             if (AgressionTracker.HasAgression())
             {
                 var victim = GetVictim();

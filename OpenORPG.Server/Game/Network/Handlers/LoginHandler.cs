@@ -101,7 +101,6 @@ namespace Server.Game.Network.Handlers
         {
             using (var context = new GameDatabaseContext())
             {
-                //TODO: Matching by a name might not be the best, but we'll run with it for now
                 var hero = context.Characters.First(x => x.UserHeroId == player.UserId);
 
                 // Load quest info

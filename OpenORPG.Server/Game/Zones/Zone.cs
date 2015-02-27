@@ -173,7 +173,6 @@ namespace Server.Game.Zones
         public bool CanLeave(Direction direction, Player player)
         {
 
-            //TODO: Please don't hard-code me
             var playerRect = new Rectangle(player.X + player.Body.OffsetX, player.Y + player.Body.OffsetY,
                 player.Body.Width, player.Body.Height);
 

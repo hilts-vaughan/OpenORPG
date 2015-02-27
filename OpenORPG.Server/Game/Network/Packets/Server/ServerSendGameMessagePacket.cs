@@ -30,8 +30,6 @@ namespace Server.Game.Network.Packets.Server
         /// </summary>
         public List<string> Arguments { get; set; }
 
-        //TODO: Just send the ID and let the client work it out
-
         /// <summary>
         /// The type of message to be sent
         /// </summary>

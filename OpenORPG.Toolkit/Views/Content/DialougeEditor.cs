@@ -385,7 +385,6 @@ namespace OpenORPG.Toolkit.Views.Content
             var dialog = new DialogConditionSelectionForm();
             dialog.ShowDialog();
 
-            //TODO: Something other than minimum level requirement
             if (dialog.Condition != null)
                 link.DialogConditions.Add(dialog.Condition);
 

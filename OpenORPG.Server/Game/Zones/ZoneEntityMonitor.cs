@@ -59,7 +59,6 @@ namespace Server.Game.Zones
             player.LearnedSkill += PlayerOnLearnedSkill;
             player.BackpackChanged += PlayerOnBackpackChanged;
             
-            //TODO: Renable me
             
             player.AcceptedQuest += PlayerOnAcceptedQuest;          
 
