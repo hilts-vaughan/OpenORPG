@@ -27,7 +27,7 @@ namespace Server.Game.Entities
     /// <param name="victim"></param>
     public delegate void CharacterKilled(Character aggressor, Character victim);
 
-    public class Character : Entity, ICharacterContract
+    public class Character : Entity
     {
 
         // Events are up here

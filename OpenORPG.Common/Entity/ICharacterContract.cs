@@ -9,5 +9,13 @@ namespace OpenORPG.Common.Entity
     public interface ICharacterContract
     {
         int Level { get; set; }
+
+        /// <summary>
+        /// Verifies that the character contract
+        /// </summary>
+        /// <param name="questId"></param>
+        /// <param name="step"></param>
+        /// <returns></returns>
+        bool IsOnQuestStep(int questId, int step);
     }
 }

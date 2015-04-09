@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using OpenORPG.Common.Entity;
 using OpenORPG.Database.Enums;
 using OpenORPG.Database.Models;
 using Server.Game.Combat;
@@ -28,7 +29,7 @@ namespace Server.Game.Entities
 
     public delegate void ValueChanged(int newValue, int oldValue, Player player);
 
-    public class Player : Character
+    public class Player : Character, ICharacterContract
     {
 
 
@@ -101,6 +102,11 @@ namespace Server.Game.Entities
                 int oldValue = _level1; _level1 = value; PropertyCollection.WriteValue("Level", value);
                 OnLevelChanged(_level1, oldValue, this);
             }
+        }
+
+        public bool IsOnQuestStep(int questId, int step)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

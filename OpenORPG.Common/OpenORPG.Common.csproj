@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Dialog\Conditions\IDialogCondition.cs" />
     <Compile Include="Dialog\Conditions\MinimumLevelDialogCondition.cs" />
+    <Compile Include="Dialog\Conditions\QuestProgressDialogCondition.cs" />
     <Compile Include="Dialog\DialogLink.cs" />
     <Compile Include="Dialog\DialogNode.cs" />
     <Compile Include="Dialog\IDialogNodeElement.cs" />
