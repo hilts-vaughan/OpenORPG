@@ -90,6 +90,7 @@
         public addNetworkEntityToZone(entity: any): Entity {
             var worldEntity = new Entity(this.game, 0, 0);
             worldEntity.mergeWith(entity);
+            worldEntity.initAsNetworkable();
 
             this.entities[worldEntity.id] = worldEntity;
             this.entityGroup.addChild(worldEntity);
@@ -198,6 +199,7 @@
 
                 // Apply the fade effect
                 EffectFactory.fadeEntityIn(entityA);
+
             }
 
             for (var toUpdate in this._toUpdate) {

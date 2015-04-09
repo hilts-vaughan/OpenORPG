@@ -17,7 +17,7 @@
             alpha: 0
         }
 
-       return game.add.tween(gameObject).to(properties, 1000, Phaser.Easing.Linear.None, true);
+       return game.add.tween(gameObject).to(properties, 1200, Phaser.Easing.Linear.None, true);
     }
 
     export function pulseDamage(entity: OpenORPG.Entity) {

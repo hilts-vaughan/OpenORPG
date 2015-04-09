@@ -333,22 +333,15 @@
             var id: number = packet.id;
             var position: any = packet.position;
             var entity: Entity = this.parent.entities[id];
+         
 
             if (entity) {
 
                 // Set a direction
-                entity.direction = packet.direction;
+                entity.interpolator.addData(position.x, position.y, packet.direction);
 
-                var properties =
-                    {
-                        x: position.x,
-                        y: position.y
-                    }
-
-                // Start the tween immediately
-                this.parent.game.add.tween(entity).to(properties, MovementSystem.MOVEMENT_TICKET_FREQUENCY + 50, Phaser.Easing.Linear.None, true);
             } else {
-                Logger.warn("MovementSystem - Attempted to move and tween a non-existant entity. It probably moved.");
+                Logger.warn("MovementSystem - Attempted to move and tween a non-existant entity. It probably moved zones.");
             }
 
 

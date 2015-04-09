@@ -16,8 +16,8 @@
             super(entity.game, 0, 0, damage.toString(), style);
 
             this.anchor.set(0.5, 0.5);
-            this.position.setTo(entity.width / 2 + entity.x, entity.y);
-            this.game.add.existing(this);
+            this.position.setTo(entity.width/2, -10);
+            entity.addChild(this);
 
             var effect = EffectFactory.floatAndFadeAway(entity.game, this);
 

@@ -3,12 +3,13 @@
     export class Entity extends Phaser.Sprite {
 
         private targetIcon: Phaser.Sprite;
+        public interpolator: EntityInterpolator;
 
         // These properties are what are strongly typed
         public name: string;
         public id: number;
         public experience: number;
-        public level : number;
+        public level: number;
         private entityType: string;
 
 
@@ -52,6 +53,9 @@
 
         update() {
 
+            if (this.interpolator != null)
+                this.interpolator.update();
+
             if (this.nameTagText != null)
                 this.nameTagText.position.setTo(this.x + this.texture.width / 2, this.y);
 
@@ -65,9 +69,16 @@
                 return;
             }
 
+
+
             switch (this.characterState) {
                 case CharacterState.Idle:
-                    this.playIdle(directionString);
+
+                    // If we're networked and currently interpolating, we will always prefer to play the movement string
+                    if (this.interpolator.isIdle())
+                        this.playIdle(directionString);
+                    else
+                        this.playWalk(directionString);
                     break;
                 case CharacterState.UsingSkill:
                     this.playReadyingSkill(directionString);
@@ -94,6 +105,10 @@
         public playSkillAnimation() {
             var direction = this.directionToString();
             this.skillAnimation = this.animations.play("atk_" + direction, 12, false);
+        }
+
+        public initAsNetworkable() {
+            this.interpolator = new EntityInterpolator(this);
         }
 
         render() {

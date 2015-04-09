@@ -169,6 +169,7 @@
     <TypeScriptCompile Include="Game\CharacterState.ts" />
     <TypeScriptCompile Include="Game\Entities\DamageText.ts" />
     <TypeScriptCompile Include="Game\Entities\Entity.ts" />
+    <TypeScriptCompile Include="Game\Entities\EntityInterpolator.ts" />
     <TypeScriptCompile Include="Game\Entities\ZoneTrigger.ts" />
     <TypeScriptCompile Include="Game\Items\Item.ts" />
     <TypeScriptCompile Include="Game\Movement\MovementSystem.ts" />
