@@ -79,21 +79,47 @@ namespace Server
                 LoginHandler.Logout(client);
             }
 
+
+            HandlePackets();
+        }
+
+
+        /// <summary>
+        /// Handles all the queued packets up to this point in time.
+        /// </summary>
+        private void HandlePackets()
+        {
+
+
             PacketTask task;
 
             if (_packetTasks.Count > 0)
-            {
                 Logger.Instance.Trace("Packets found; attempting to parse them...");
-            }
+
 
             while (_packetTasks.TryDequeue(out task))
             {
-                IPacketHandler handler = _packetHandlers[task.Packet.OpCode];
-                handler.Invoke(task.Client, task.Packet);
+            
+
+                try
+                {
+                    IPacketHandler handler = _packetHandlers[task.Packet.OpCode];
+                    handler.Invoke(task.Client, task.Packet);
+                }
+
+                catch (Exception exception)
+                {
+                    Logger.Instance.Error("An exception occured while attempting to handle a user packet. " +
+                                          "\n Exception: {0}\nPacket Payload: {1}\nClient Responsible: {2}", exception, task.Packet, task.Client);
+                }
+
+
             }
 
 
+
         }
+
 
         public void Run()
         {
