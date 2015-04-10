@@ -12,6 +12,8 @@
 module OpenORPG {
 
     var app = angular.module('game', [])
+
+
         .controller('inventoryController', [
             '$scope', '$rootScope', function ($scope, $rootScope) {
                 $scope.gold = 4000;
@@ -19,6 +21,30 @@ module OpenORPG {
 
             }
         ])
+
+        .controller('SettingsController', [
+            '$scope', '$rootScope', function ($scope, $rootScope) {
+
+                $scope.settings = $.extend({}, Settings.getInstance());
+
+                $scope.save = function() {
+                    $.extend(Settings.getInstance(), $scope.settings);
+                    Settings.getInstance().flush();
+                    Settings.getInstance().save();
+                }
+
+                $scope.discard = function() {
+                    $scope.settings = $.extend({}, Settings.getInstance());
+                }
+
+                $scope.reset = function() {
+                    Settings.getInstance().reset();
+                }
+
+            }
+        ])
+
+
         .controller('QuestListController', [
             '$scope', function ($scope) {
 

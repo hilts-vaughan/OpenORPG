@@ -8,15 +8,16 @@
 
 <body>
 
-    <div id="setting-window" class="rounded-container" ng-controller="SkillListController ">
+    <div id="setting-window" class="rounded-container" ng-controller="SettingsController ">
         
         <div class="tab-wrapper">
             <ul class="tabs">
+
                 <li>
                     <input type="radio" checked name="tabs" id="tab1">
                     <label for="tab1">General</label>
                     <div id="tab-content1" class="tab-content animated fadeIn">
-                      
+
                         <div style="float: left">
                             <span>Game Language: </span>
                             <select>
@@ -28,6 +29,7 @@
 
                     </div>
                 </li>
+
                 <li>
                     <input type="radio" name="tabs" id="tab2">
                     <label for="tab2">Video</label>
@@ -41,7 +43,7 @@
                                 <option>800x600</option>
                             </select>
                         </div>
-       
+
 
                         <div style="float: right;">
                             <span>Scale to fullscreen</span>
@@ -50,9 +52,9 @@
                                 <label for="squaredThree"></label>
                             </span>
                         </div>
-                        
-                        
-                        
+
+
+
                         <div style="clear: both; float: left; margin-top: 50px;">
                             <span>Game Resolution: </span>
                             <select>
@@ -80,37 +82,59 @@
                     <label for="tab3">Audio</label>
                     <div id="tab-content3" class="tab-content animated fadeIn">
 
-                        <span>Play background music</span>
-                        <span class="squaredThree">
-                            <input type="checkbox" value="None" id="squaredThree" name="check" checked />
-                            <label for="squaredThree"></label>
-                        </span>
-
-
-                        <br />
-
-                        <span>Play background music</span>
-                        <span class="squaredThree">
-                            <input type="checkbox" value="None" id="squaredThree" name="check" checked />
-                            <label for="squaredThree"></label>
-                        </span>
-
-                        <br />
-
-                        <span>Play background music</span>
-                        <span class="squaredThree">
-                            <input type="checkbox" value="None" id="squaredThree" name="check" checked />
-                            <label for="squaredThree"></label>
-                        </span>
-
+                                               
+                        <b>Volume: </b> <b>{{settings.volume}}</b><b>%</b>
+                        <input class="slider" type="range" min="0" max="100" ng-model="settings.volume" />
+                        
 
 
                     </div>
                 </li>
+
+
+                <li>
+                    <input type="radio" checked name="tabs" id="tab4">
+                    <label for="tab4">Debug</label>
+                    <div id="tab-content1" class="tab-content animated fadeIn">
+
+
+                        <span>Display interpolation paths</span>
+                        <span class="squaredThree">
+                            <input type="checkbox" ng-model="settings.debugShowInterpolationPaths" id="debugShowInterpolationPaths" name="check" checked />
+                            <label for="debugShowInterpolationPaths"></label>
+                        </span>
+
+
+                        <br />
+                        
+                        <span>Show debug bodies</span>
+                        <span class="squaredThree">
+                            <input type="checkbox" ng-model="settings.debugShowBodies" id="debugShowBodies" name="check" checked />
+                            <label for="debugShowBodies"></label>
+                        </span>
+
+
+                        <br />
+
+                        
+                        <span>Force WebGL  (experimental, requires restart)</span>
+                        <span class="squaredThree">
+                            <input type="checkbox" ng-model="settings.debugForceWebGl" id="debugForceWebGl" name="check" checked />
+                            <label for="debugForceWebGl"></label>
+                        </span>
+
+
+                        <br />
+                        
+
+                    </div>
+                </li>
+
+
             </ul>
         </div>
         <div class="strip-wrapper">
-            <button class="btn-custom">Save Changes</button>
+            <button ng-click="save()" class="btn-custom">Save Changes</button>
             <button class="btn-custom">Discard Changes</button>
             <button class="btn-custom">Reset Default</button>
 

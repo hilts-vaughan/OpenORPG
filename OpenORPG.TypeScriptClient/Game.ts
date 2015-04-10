@@ -9,11 +9,15 @@ module OpenORPG {
 
         constructor() {
 
-            // Init our game
+            // Choose the technology based on the settings
+            var tech: Number = Phaser.CANVAS;
+
+            if (Settings.getInstance().debugForceWebGl)
+                tech = Phaser.WEBGL;
 
             var width = $("#gameContainer").width();
             var height = $("#canvasholder").height();
-            this.game = new Phaser.Game(1600, 900, Phaser.CANVAS, 'canvasholder', this, true, false);
+            this.game = new Phaser.Game(1600, 900, tech, 'canvasholder', this, true, false);
               
             
 
@@ -42,6 +46,10 @@ module OpenORPG {
         updateSettings() {
             var settings: Settings = Settings.getInstance();
             this.game.sound.mute = !settings.playBGM;
+
+            // Phaser uses a range between 0 and 1 for audio, we need to scale it down
+            this.game.sound.volume = settings.volume / 100;
+
         }
 
     }
