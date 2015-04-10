@@ -231,6 +231,13 @@ namespace Server.Game.Database.Seeds
             guideNpc.Sprite = "villagegirl";
             guideNpc.ConversationAvailableTemplate = context.DialogTemplates.First(x => x.Id == 1);
 
+            var guard_generic = new NpcTemplate();
+            guard_generic.Name = "City Guard";
+            guard_generic.Sprite = "forestnpc";
+            guard_generic.ConversationAvailableTemplate = guideNpc.ConversationAvailableTemplate;
+
+
+            context.Npcs.Add(guard_generic);
             context.Npcs.Add(guideNpc);
 
 

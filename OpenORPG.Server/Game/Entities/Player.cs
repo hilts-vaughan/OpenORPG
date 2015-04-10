@@ -142,6 +142,8 @@ namespace Server.Game.Entities
                 flags.Add(new UserFlag() {Key = key, Value = value});                                      
         }
 
+        
+
         /// <summary>
         /// A read-only collection of all the user flags. Do not attempt to modify this directly.
         /// </summary>

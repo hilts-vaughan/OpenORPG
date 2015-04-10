@@ -60,6 +60,8 @@ module OpenORPG {
 
             loader.tilemap("map_1", "assets/Maps/1.json", null, Phaser.Tilemap.TILED_JSON);
             loader.tilemap("map_2", "assets/Maps/2.json", null, Phaser.Tilemap.TILED_JSON);
+            loader.tilemap("map_3", "assets/Maps/3.json", null, Phaser.Tilemap.TILED_JSON);
+
 
             loader.image("tilesheet", "assets/Maps/tilesheet_16.png");
             loader.image("target_icon", "assets/img/target_selector.png");

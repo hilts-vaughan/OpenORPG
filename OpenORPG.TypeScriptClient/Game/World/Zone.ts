@@ -170,7 +170,7 @@
             }
 
             for (var entityKey in this.entities) {
-                var entity = this.entities[entityKey];
+                var entity = this.entities[entityKey];  
                 entity.render();
             }
 

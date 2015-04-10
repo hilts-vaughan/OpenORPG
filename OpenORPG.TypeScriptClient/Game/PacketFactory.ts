@@ -29,6 +29,14 @@
         }
     }
 
+    export function createTeleportRequest(px: number, py: number) {
+        return {
+            opCode: OpenORPG.OpCode.CMSG_CLICK_WARP_REQUEST,
+            x: Math.round(px),
+            y: Math.round(py)
+        }
+    }
+
     export function createZoneRequestChange(dir: OpenORPG.Direction): any {
         return {
             opCode: OpenORPG.OpCode.CMMSG_ZONE_CHANGE,

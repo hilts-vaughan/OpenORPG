@@ -595,6 +595,7 @@
     <Content Include="assets\gamesfiles\items\4.json" />
     <Content Include="assets\gamesfiles\skills\3.json" />
     <Content Include="assets\gamesfiles\skills\4.json" />
+    <Content Include="assets\Maps\3.json" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

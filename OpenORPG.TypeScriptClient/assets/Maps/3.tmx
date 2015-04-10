@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="70" height="70" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="DownExitPoint" value="1"/>
+  <property name="LeftExitPoint" value="2"/>
+  <property name="RightExitPoint" value="1"/>
+ </properties>
+ <tileset firstgid="1" source="Z:/Development/Archived Projects/BrowserQuest/BrowserQuest-master/tools/maps/tmx/tilesheet_.tsx"/>
+ <layer name="base" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztlwuOgzAMRCHqYcgd6P2P0T3KCi1oXW+SQuLJhx2kUYXaYvtl7ITHNE0PiqIoiqIoiqIoiqIoiupETzdNq/v5PISOo+MtoJi52vLxu5Y930Xc+8yc9f9j0pxa85Drl8o7J2ddayrG9t3X/L4+rbl8YhLyjd9r1Vfod/pzde8eearvkD181S+xNfzE60pvvObfmmX9q7g/03NXVMrGu79rlzMnUv6SPgvFC7G0YnNcub5JzZEr/kn1QWq/s/JJiEtJP8X8ElLqKsnhzJyu2U/epf1SQ0c/vebz9dTgsu2VuWeVUkmfWHrFgovMrTaX0JxuzUXvk+hzlWag1wQxe0s9jDxX6RkWej9C7Ukl66fPEZZMjmdqn8h4vXGROXuVp3XvSJ/IeCgmpTWk3lcs+gftCRSX2DMtZrBkvZ0FQu9HI3GxnDOShX4/+q9+0fNFCu2VEi6xc5T1+W40vyD8d9Y7PXORa3msJ4qJjtc7l1YiF3IhF3IZlUkJlxacazHJrQP1/Jp1W3NpnS+5jMXlzGxpXVNPXO42hyz2BtT+05LPyFyQbEbmQr/UZTIqFzQTKy5oNjU4oLgg2LTggeBizYZc+uFRWguCdQ4b695F5k0u2FzvxGVE/qPmOgKTWL53ikVRFEX1qW8cdT3K
+  </data>
+ </layer>
+ <layer name="objects" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJzt18sJgEAMBcBFsFE/NYg1qD1YjIW54G3x6mbBGXjnPJJTUgIAAAAAAAAAAAAAAIDvDDljdIkKxi6lqcjcRbeKd/bvqaXVu2y5w17kqNhrybOuImsDe4kWfRcAAB5/+SMBAKAlN5FHFOU=
+  </data>
+ </layer>
+ <layer name="Entities" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgiD/r25IQAEAAAAAAAAAAAAAAAAAAAAAAACvBkyQAAE=
+  </data>
+ </layer>
+ <layer name="walls" width="70" height="70">
+  <data encoding="base64" compression="zlib">
+   eJztmclu1EAQhg2ykeAOt+Qe4BC4s8M8wLAFXoD9TeAZgGeAPAIMEtw4QZAIXDixSCQ5UyVcSqlpz7irq+wWU5/0a+J4ppe/F1e7qspxHMdxHMdxHMdxHMcZmvWmqs6DLoAugi5Frk80eeUu+sypxwJs+2XQNdB10PtDVXUzcn08sc1Y7ilWDi8vdn2jkdVjAXmyAboLugf6Bu18ELk+CzoXGd+u+YXlXmHl8PJi1/eb/XrG9uZw2/aHPdowhe9cjYwvfYbzC72+JejblHnDvR5yPaIvRxJ+fycyvvQZzi/0+pGwbeRN3zHQXo8xX17VVfUB9BH0BvSulpWdyzRhDLTX4w70eRe0F/T9O1z/AH0CbQu9mbW+kt5GypnNuZcLX48SYt4cgLIOgn7Vf+9vJ7Yd+7vV+kr6zMohbQX3vhh4Q32REK6no/D3MVDd/m+no19dwv7+DPr4u94vh4TfQe/xXupel4LUlxX43WrEl5CwX10KPVkExTqn2zppf+szBn2w9sUCiqEwXpi0ddL+pjUGEl/CsUKsfFlv/o0HKa6csPpy9oQYkrJWgrFCLHyheUHxBY//KK6k9RPbn3KQ+rIa/G6NPftPKvjDzxsUX/D4j6D1o+kJouXLmcy4KFbHRtN93rCaJ4Rk7pMvX4P2aHkT279CrOYJIZkvXTEvQjFjzl5DZ9PJnDK099kQrbiOk7sHx9apdh2L0IpfOLltnjcfiTWF9ToPrfiFozHHF8X4tJdZrSWt+IWYKT0jaM50nT1f17Z7TM5z+jboMbTvSdtuLU8IfvYMvbF8RiPS5xG29SnoGej5nDOxBvy9BcnyGY1I5yG29QXoJWhTeCaW1odttqwLsYwBrBji3D7UuwFNhmiz9Dn9v+caU31Zllxjii/LlGtM8aX0XKOmNyl7WOm5Rk1vUudLybnG3PcbnBRfSs81ap6XUsspOdc4pi9IqbnGsX0pLdeIaJ+vc957E2PnGhHt87Uk3i0t12hBan9KyjVaIvGllFyjJanrqJRcozVSX8bMNQ6BRlxHDJVr5PSJjySS9GHsXCOnT3wkkXbbh8g1lkgJucYSWYZco4RlyDVKWIZco5Qxc42bhXriOI6jyR9ka9gS
+  </data>
+ </layer>
+ <objectgroup name="MobSpawns" opacity="0.9">
+  <object name="Mob Spawn" type="MobSpawn" x="1376" y="992" width="480" height="416">
+   <properties>
+    <property name="MobId" value="1"/>
+    <property name="MobMax" value="12"/>
+    <property name="MobRepeats" value="True"/>
+    <property name="MobSpawnTime" value="60"/>
+    <property name="MobStrays" value="True"/>
+   </properties>
+  </object>
+  <object name="Mob Spawn" type="MobSpawn" x="224" y="640" width="32" height="32">
+   <properties>
+    <property name="MobId" value="3"/>
+    <property name="MobMax" value="3"/>
+    <property name="MobRepeats" value="True"/>
+    <property name="MobSpawnTime" value="900"/>
+    <property name="MobStrays" value="True"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="NpcSpawns">
+  <object name="Guard" type="NpcSpawn" x="800" y="608" width="32" height="32">
+   <properties>
+    <property name="NpcId" value="2"/>
+   </properties>
+  </object>
+  <object name="Guard_Warn" type="NpcSpawn" x="480" y="1472" width="32" height="32" rotation="90">
+   <properties>
+    <property name="NpcId" value="3"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

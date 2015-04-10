@@ -57,6 +57,16 @@ namespace Server.Game.Network.Handlers
 
         }
 
+        [PacketHandler(OpCodes.CMSG_CLICK_WARP_REQUEST)]
+        public static void OnClickWarpRequest(GameClient client, ClientClickWarpRequest packet)
+        {
+            var player = client.HeroEntity;
+            var zone = client.HeroEntity.Zone;
+
+            player.Teleport(new Vector2(packet.X, packet.Y));
+
+        }
+
         [PacketHandler(OpCodes.CMMSG_ZONE_CHANGE)]
         public static void OnZoneChangeRequest(GameClient client, ClientZoneChangeRequestPacket packet)
         {

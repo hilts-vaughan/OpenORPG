@@ -168,6 +168,7 @@
     <Compile Include="Game\Network\Packets\ChannelType.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientAcceptQuestPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientChatMessagePacket.cs" />
+    <Compile Include="Game\Network\Packets\Client\ClientClickWarpRequest.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientDialogLinkSelectionPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientDropStorageRequestPacket.cs" />
     <Compile Include="Game\Network\Packets\Client\ClientHeroEquipItemPacket.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Game\Network\Packets\Server\ServerDialogPresentPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEntityMovementPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEntityPropertyChange.cs" />
+    <Compile Include="Game\Network\Packets\Server\ServerEntityTeleportPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerEqupmentUpdatePacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerLeaveChatChannelPacket.cs" />
     <Compile Include="Game\Network\Packets\Server\ServerQuestAcceptResult.cs" />

@@ -169,6 +169,24 @@ namespace Server.Game.Entities
 
         }
 
+        /// <summary>
+        /// Moves a character to the specified location instantly, performs no interpolation and assumes
+        /// that the latest position is up to date.
+        /// </summary>
+        /// <param name="location"></param>
+        public void Teleport(Vector2 location)
+        {
+            _position = location;
+
+            // Send the packet to notify everyone who cares
+            if (Zone != null)
+            {
+                var teleportPacket = new ServerEntityTeleportPacket(location, Id);
+                Zone.SendToEveryone(teleportPacket);
+            }
+
+        }
+
         private void SyncPosition()
         {
             // We only need to bother syncing if we're attached somewhere yet

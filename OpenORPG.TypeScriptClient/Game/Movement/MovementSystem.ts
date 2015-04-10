@@ -205,9 +205,35 @@
             MovementSystem.current = this;
 
             var network = NetworkManager.getInstance();
+
             network.registerPacket(OpCode.SMSG_ENTITY_MOVE, (packet: any) => {
                 this.handleEntityMove(packet);
             });
+
+            network.registerPacket(OpCode.SMSG_ENTITY_TELEPORT, (packet: any) => {
+                var entity: Entity = this.parent.entities[packet.id];
+
+                // Reset the interpolator, set the position
+                entity.interpolator.reset();
+                entity.x = packet.position.x;
+                entity.y = packet.position.y;
+
+            });
+
+            this.parent.game.input.onDown.add(() => {
+                
+                var mouseData = {
+                    x: this.parent.game.input.activePointer.worldX,
+                    y: this.parent.game.input.activePointer.worldY
+                }
+
+                // Something was clicked, check if ALT was hit and teleport if needed
+                if (this.parent.game.input.keyboard.isDown(Phaser.Keyboard.ALT)) {
+                    var packet = PacketFactory.createTeleportRequest(mouseData.x, mouseData.y);
+                    NetworkManager.getInstance().sendPacket(packet);
+                }
+
+            }, this);
 
             this.timerToken = setInterval(this.generateMovementTicket, MovementSystem.MOVEMENT_TICKET_FREQUENCY);
 
