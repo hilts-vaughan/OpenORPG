@@ -65,21 +65,26 @@ namespace Server
 
         public void Update()
         {
-
+         
 
             long ms = _stopwatch.ElapsedMilliseconds;
-            ZoneManager.Instance.Update(ms / 1000d);
-
-            _stopwatch.Restart();
-
-
-            GameClient client;
-            while (_logoutQueue.TryDequeue(out client))
+         
+            // It's not time to use delta time just 
+            if (ms > 0)
             {
-                LoginHandler.Logout(client);
+
+                _stopwatch.Restart();
+                ZoneManager.Instance.Update(ms/1000d);
+
+
+                GameClient client;
+                while (_logoutQueue.TryDequeue(out client))
+                {
+                    LoginHandler.Logout(client);
+                }
             }
 
-
+            // We can handle packets without knowledge of delta times
             HandlePackets();
         }
 
