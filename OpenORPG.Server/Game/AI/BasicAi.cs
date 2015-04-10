@@ -212,7 +212,7 @@ namespace Server.Game.AI
             var gridPoint = GetTileGridPoints();
 
             var newX = gridPoint.X + _random.Next(-MaxWanderX, MaxWanderX + 1);
-            var newY = gridPoint.Y + _random.Next(-MaxWnaderY, MaxWnaderY + 1);
+            var newY = gridPoint.Y + _random.Next(-MaxWanderX, MaxWanderX + 1);
 
             var searcher = new AStarSearcher(Character.Zone.TileMap, new Point(newX, newY),
                 new Point(gridPoint.X, gridPoint.Y));

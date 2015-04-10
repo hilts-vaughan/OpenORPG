@@ -121,10 +121,10 @@ namespace Server.Game.AI
             var node = DestinationNodes.Peek();
             var velocity = new Vector2(Character.Speed * deltaTime, Character.Speed * deltaTime);
 
-            if (Math.Abs(node.Y - Current.Y) < 0.0001f)
+            if (Math.Abs(node.Y - Current.Y) < 0.000001f)
                 velocity.Y = 0;
 
-            if (Math.Abs(node.X - Current.X) < 0.0001f)
+            if (Math.Abs(node.X - Current.X) < 0.000001f)
                 velocity.X = 0;
 
 
