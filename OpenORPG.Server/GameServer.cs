@@ -142,7 +142,7 @@ namespace Server
 
                 // At least 5ms must have pased, or it's not worth updating.
                 // This also helps prevent a bug where elapsed time would be 0 if the server wasn't doing enough heavy lifting
-                if (_updateGovernorWatch.ElapsedMilliseconds > 5)
+                if (_updateGovernorWatch.ElapsedMilliseconds > 0)
                 {
                     _updateGovernorWatch.Restart();
                     Update();
