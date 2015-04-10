@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Server.Game.Entities;
 using Server.Game.Network.Packets;
@@ -93,6 +94,10 @@ namespace Server.Game.Zones
 
         public void Update(double deltaTime)
         {
+            
+            // If the delta time is ever zero, we get some really bad BUGS
+            Debug.Assert(deltaTime > 0, "Delta time is required to always be above zero.");
+
             ProcessQueue();
 
             foreach (Zone item in _zones)
