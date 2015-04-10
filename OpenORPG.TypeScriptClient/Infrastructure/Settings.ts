@@ -6,11 +6,20 @@
         private settingsNamespace = "orpg_settings";
 
         // Some setting properties can go here
-        public autoLoginSet: boolean;
+        public autoLoginSet: boolean = true;
         public savedUsername: string;
         public savedPassword: string;
 
-        public playBGM : boolean;
+        public playBGM: boolean = true;
+        public playSE : boolean = true;
+
+        // Debug related flags
+        public debugShowBodies: boolean;
+        public debugShowInterpolationPaths: boolean;
+        public debugShowPlayerInfo : boolean;
+
+        private _handler: Function;
+        private _context : any;
 
         constructor() {
             var settings = localStorage[this.settingsNamespace];
@@ -21,8 +30,13 @@
                 this.save();
             } else {
                 // Copy the entire settings into here
-
-                _.extend(this, JSON.parse(settings));
+                _.extend(this, JSON.parse(settings, (key, value) => {
+                    if (typeof value == "function" || value == this._context) {
+                        return undefined;
+                    }
+                    return value;
+                }));
+                this.save();
             }
         }
 
@@ -32,6 +46,16 @@
                 Settings._instance = new Settings();
             }
             return Settings._instance;
+        }
+
+        
+        onChange(handler: Function, context : any) {            
+            this._handler = handler;
+            this._context = context;
+        }
+
+        flush() {
+            this._handler.call(this._context);
         }
 
         /*

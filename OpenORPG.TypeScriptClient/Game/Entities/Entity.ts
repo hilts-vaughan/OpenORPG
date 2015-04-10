@@ -112,11 +112,17 @@
         }
 
         render() {
-            
-            // this.game.debug.body(this);
 
-            if (this.interpolator != null)
-                this.interpolator.render();
+
+            if (Settings.getInstance().debugShowBodies)
+                this.game.debug.body(this);
+
+            // Begins drawing a path for an interpolator
+            if (Settings.getInstance().debugShowInterpolationPaths) {
+                if (this.interpolator != null)
+                    this.interpolator.render();
+            }
+
 
         }
 
