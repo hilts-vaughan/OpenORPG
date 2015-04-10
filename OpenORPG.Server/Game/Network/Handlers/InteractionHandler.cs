@@ -28,7 +28,10 @@ namespace Server.Game.Network.Handlers
             var interactable = GetNearestInteractable(player);
 
 
+            if(interactable != null)
+                player.Zone.GetGameSystem<DialogService>().AdvanceDialog(player, interactable, packet.LinkId);
             else
+                client.Send(new ServerSendGameMessagePacket(GameMessage.InteractableTooFar));
         }
 
         /// <summary>
