@@ -521,7 +521,14 @@ namespace Server.Game.Zones
         /// </summary>
         public ChatChannel ChatChannel { get; set; }
 
-
+        /// <summary>
+        /// Returns true when the zone has no players, otherwise false.
+        /// This is typically used to protect systems from performing costly updates when nobody is actually occupying a zone.
+        /// </summary>
+        public bool IsEmpty
+        {
+            get { return GameClients.Any(); }
+        }
 
 
         protected void OnClientLeave(GameClient client)

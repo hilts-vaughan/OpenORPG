@@ -63,13 +63,18 @@ module OpenORPG {
         public render() {
 
             // Render the shapes as required
-            this._states.forEach( (state : InterpolatorState) => {
+            this._states.forEach((state: InterpolatorState) => {
                 this._entity.game.debug.geom(new Phaser.Circle(state._x, state._y, 10));
             });
 
         }
 
         public update() {
+
+            if (this._entity.game == null) {
+                Logger.warn("An interpolator from a dead entity was left behind. Ignoring...");
+                return;
+            }
 
             // If we're done interpolation, look for more work
             if (this._currentMovementTween == null || !this._currentMovementTween.isRunning) {
@@ -113,8 +118,11 @@ module OpenORPG {
 
                     // Add tween completion callback
                     this._currentMovementTween.onComplete.addOnce(() => {
-                        this._currentMovementTween.stop();
-                        this._currentMovementTween = null;
+                        if (this._currentMovementTween != null) {
+                            this._currentMovementTween.stop();
+                            this._currentMovementTween = null;                            
+                        }
+
                         this.update();
                     });
 
@@ -138,7 +146,6 @@ module OpenORPG {
         }
 
         private forceFlush() {
-            debugger;
 
             if (this._currentMovementTween != null) {
                 this._currentMovementTween.stop();
@@ -157,6 +164,25 @@ module OpenORPG {
             while (this._states.length) {
                 this._states.pop();
             }
+
+        }
+
+
+        /**
+         * Resets the interpolator and all state assosciated with it. Allows for clean startsup
+         */
+        reset() {
+
+            if (this._currentMovementTween != null) {
+                this._currentMovementTween.stop();
+                this._currentMovementTween = null;
+            }
+
+            // Remove all elements
+            while (this._states.length) {
+                this._states.pop();
+            }
+
 
         }
 

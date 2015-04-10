@@ -21,7 +21,7 @@ namespace Server.Game.Network.Handlers
     /// </summary>
     public class MovementHandler
     {
-        private const int LenianceFactor = 100;
+        private const int LenianceFactor = 150;
 
         [PacketHandler(OpCodes.CMSG_MOVEMENT_REQUEST)]
         public static void OnChatMessage(GameClient client, ClientMovementRequestPacket packet)
@@ -39,8 +39,11 @@ namespace Server.Game.Network.Handlers
             // Ignore packets claiming to make large leaps and bounds
             if (distance > LenianceFactor)
             {
-                Logger.Instance.Debug("Ignoring movement request");
-                // Probably changing maps, so just ignore it
+                
+                Logger.Instance.Warn("The player moved far too much in one frame. Could be lag or a sign of hacking. Attempting to move back");
+                
+                // Send the player back to their old position, correcting them
+                player.Teleport(player.Position);
                 return;
                 //client.Connection.Disconnect("Hacking Attempt: Movement pulse exceeded");
             }
