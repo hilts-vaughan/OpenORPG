@@ -9,7 +9,7 @@ namespace Server.Infrastructure.Logging.Loggers
     /// </summary>
     public class ConsoleLogger : ILogger
     {
-        public static LogLevel Level = LogLevel.Trace;
+        public static LogLevel Level = LogLevel.Debug;
 
         private Dictionary<LogLevel, ConsoleColor> _colors = new Dictionary<LogLevel, ConsoleColor>()
             {

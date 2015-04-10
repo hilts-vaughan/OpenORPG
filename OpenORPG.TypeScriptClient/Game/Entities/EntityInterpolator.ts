@@ -28,8 +28,11 @@ module OpenORPG {
 
         /**
          * A maximum amount of packets that can be queued up before being forced to releases
-         */
-        private _maxDelay: number = 200;
+           This is roughly 1 * backTime ms behind. 
+        
+           When set to 10, this is a full second behind (which is quite a lot) 
+        */
+        private _maxDelay: number = 10;
 
         private _threshold: number = 1;
 
