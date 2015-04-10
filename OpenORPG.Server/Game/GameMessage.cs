@@ -26,6 +26,7 @@ namespace Server.Game
         QuestCompleted,
         QuestCannotGiveReward,
         ItemCannotBeUsed,
+        InteractableTooFar,
 
 
         QuestLogUpdated

@@ -25,8 +25,10 @@ namespace Server.Game.Network.Handlers
                 return;
     
             // You have to be near the NPC to actually interact with it
-            player.Zone.GetGameSystem<DialogService>().AdvanceDialog(player, GetNearestInteractable(player), packet.LinkId);
+            var interactable = GetNearestInteractable(player);
 
+
+            else
         }
 
         /// <summary>
@@ -65,7 +67,7 @@ namespace Server.Game.Network.Handlers
                         var p = new ServerSendQuestOfferPacket(quest.QuestId);
                         hero.Client.Send(p);
                     }
-                }                
+                }
                 else
                 {
                     // Offer up a dialog if at all possible since they asked.
