@@ -29,8 +29,6 @@ namespace Server.Game.AI
         private Random _random = new Random();
 
         private const int MaxWanderX = 4;
-        private const int MaxWnaderY = 4;
-
 
 
         public WanderAi(Character character)

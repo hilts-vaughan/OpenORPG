@@ -77,6 +77,11 @@ namespace Server.Game.Zones
             _internalList.Remove(client);
             client.Zone = null;
         }
+
+        public bool IsEmpty
+        {
+            get { return _internalList.Count == 0; }
+        }
     }
 
     /// <summary>
@@ -527,7 +532,7 @@ namespace Server.Game.Zones
         /// </summary>
         public bool IsEmpty
         {
-            get { return GameClients.Any(); }
+            get { return GameClients.IsEmpty; }
         }
 
 
