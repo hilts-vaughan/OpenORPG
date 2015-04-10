@@ -86,7 +86,7 @@
     }
 
     reset() {
-        localStorage[this.settingsNamespace] = null;
+        localStorage.removeItem(this.settingsNamespace);
         this.attemptLoad();
     }
 
