@@ -20,8 +20,7 @@ namespace Server.Game.Network.Handlers
         {
             var player = client.HeroEntity;
 
-            // You can only do this idle
-            if (player == null || player.CharacterState != CharacterState.Idle)
+            if (player == null)
                 return;
     
             // You have to be near the NPC to actually interact with it
