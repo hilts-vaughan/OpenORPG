@@ -75,7 +75,7 @@ namespace Server.Game.Combat.Actions
         /// <summary>
         /// The amount of time remaining before an execution for this skill is possible
         /// </summary>
-        public float ExecutionTime { get; set; }
+        public double ExecutionTime { get; set; }
 
     }
 }

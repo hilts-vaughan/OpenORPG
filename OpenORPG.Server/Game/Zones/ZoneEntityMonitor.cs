@@ -33,7 +33,7 @@ namespace Server.Game.Zones
 
         }
 
-        public override void Update(float frameTime)
+        public override void Update(double frameTime)
         {
             // Do nothing on purpose, this system has no business doing anything but firing off dumb updates
         }

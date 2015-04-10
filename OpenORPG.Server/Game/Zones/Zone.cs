@@ -368,8 +368,9 @@ namespace Server.Game.Zones
             NotifySystemsRemove(entity);
         }
 
+        private double _timer = 0f;
 
-        public void Update(TimeSpan deltaTime)
+        public void Update(double deltaTime)
         {
 
 
@@ -402,14 +403,9 @@ namespace Server.Game.Zones
             SyncEntityProperties();
 
 
-            // Add new players if we need to
-            foreach (var item in _pendingLogin)
-            {
-
-            }
 
             // Update each game system
-            GameSystems.ForEach(x => x.Update((float)deltaTime.TotalSeconds));
+            GameSystems.ForEach(x => x.Update(deltaTime));
         }
 
         private void ProcessAddedEntity(Entity entity)

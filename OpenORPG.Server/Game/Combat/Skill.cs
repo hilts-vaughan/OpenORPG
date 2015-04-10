@@ -24,7 +24,7 @@ namespace Server.Game.Combat
         /// 
         /// A value of '0' implies the skill is ready to use.
         /// </summary>
-        public float Cooldown { get; set; }
+        public double Cooldown { get; set; }
 
         public long Id
         {

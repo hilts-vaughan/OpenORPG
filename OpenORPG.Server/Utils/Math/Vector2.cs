@@ -89,6 +89,12 @@ namespace Server.Utils.Math
             this.Y = value;
         }
 
+        public Vector2(double value, double d)
+        {
+            this.X = (float) value;
+            this.Y = (float) d;
+        }
+
         #endregion Constructors
 
 

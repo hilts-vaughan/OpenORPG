@@ -91,7 +91,7 @@ namespace Server.Game.Zones
             return _zones.FirstOrDefault(z => z.Id == id);
         }
 
-        public void Update(TimeSpan deltaTime)
+        public void Update(double deltaTime)
         {
             ProcessQueue();
 

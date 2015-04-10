@@ -115,7 +115,7 @@ namespace Server.Game.Quests
         }
 
 
-        public override void Update(float frameTime)
+        public override void Update(double frameTime)
         {
 
 

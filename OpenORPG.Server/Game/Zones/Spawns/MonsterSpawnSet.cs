@@ -29,7 +29,7 @@ namespace Server.Game.Zones.Spawns
             LastSpawnTime = spawnTime + 1;
         }
 
-        public Monster TrySpawn(float time)
+        public Monster TrySpawn(double time)
         {
             LastSpawnTime += time;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Policy;
 using Server.Infrastructure.Math;
 
 namespace Server.Infrastructure.Pathfinding
@@ -11,10 +12,20 @@ namespace Server.Infrastructure.Pathfinding
             Parent = parent;
         }
 
-        public int F { get; set; }
-        public int G { get; set; }
-        public int H { get; set; }
-        public GraphNode Parent { get; set; }
-        public Point Position { get; set; }
+        //NOTE: We don't use auto-properties here since this is a hotspot of code.
+        // It actual takes a fairly hefty penalty hit using auto properties here, so we just don't
+
+        public int F;
+        public int G;
+        public int H;
+        public GraphNode Parent;
+        public readonly Point Position;
+
+
+
+        public override int GetHashCode()
+        {
+            return (F + G + H)*(Position.X - Position.Y);
+        }
     }
 }

@@ -33,6 +33,8 @@ namespace Server
         private readonly Dictionary<OpCodes, IPacketHandler> _packetHandlers = new Dictionary<OpCodes, IPacketHandler>();
         private readonly Stopwatch _stopwatch = new Stopwatch();
 
+        private readonly Stopwatch _updateGovernorWatch = new Stopwatch();
+
         public GameServer()
         {
             SetupPacketHandlers();
@@ -63,8 +65,11 @@ namespace Server
 
         public void Update()
         {
-            TimeSpan delta = _stopwatch.Elapsed;
-            ZoneManager.Instance.Update(delta);
+
+
+            long ms = _stopwatch.ElapsedMilliseconds;
+            ZoneManager.Instance.Update(ms / 1000d);
+
             _stopwatch.Restart();
 
 
@@ -75,6 +80,12 @@ namespace Server
             }
 
             PacketTask task;
+
+            if (_packetTasks.Count > 0)
+            {
+                Logger.Instance.Trace("Packets found; attempting to parse them...");
+            }
+
             while (_packetTasks.TryDequeue(out task))
             {
                 IPacketHandler handler = _packetHandlers[task.Packet.OpCode];
@@ -96,15 +107,21 @@ namespace Server
 
             // Start our stopwatch
             _stopwatch.Start();
+            _updateGovernorWatch.Start();
 
             Logger.Instance.Info("Game server has started succesfully.");
 
             while (true)
             {
-                Update();
 
-                //TODO: Remove when having a CPU core sucked up is acceptable
-                Thread.Sleep(1);
+                // At least 5ms must have pased, or it's not worth updating.
+                // This also helps prevent a bug where elapsed time would be 0 if the server wasn't doing enough heavy lifting
+                if (_updateGovernorWatch.ElapsedMilliseconds > 5)
+                {
+                    _updateGovernorWatch.Restart();
+                    Update();
+                }
+
             }
         }
 
@@ -158,7 +175,7 @@ namespace Server
             NetworkManager.Current.Disconnected += OnDisconnected;
         }
 
-        private static void ResetOnlineFlags() 
+        private static void ResetOnlineFlags()
         {
             using (var context = new GameDatabaseContext())
             {

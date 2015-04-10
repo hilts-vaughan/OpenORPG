@@ -18,7 +18,7 @@ namespace Server.Game.Combat
         {
         }
 
-        public override void Update(float frameTime)
+        public override void Update(double frameTime)
         {
 
         }

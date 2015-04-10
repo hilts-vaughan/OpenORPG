@@ -185,7 +185,7 @@
 
     export class MovementSystem extends GameSystem {
 
-        private static MOVEMENT_TICKET_FREQUENCY: number = 200;
+        private static MOVEMENT_TICKET_FREQUENCY: number = 100;
         private static current: MovementSystem = null;
 
         private timerToken: number;
@@ -284,8 +284,7 @@
                 }
 
                 if (velocity.isZero()) {
-                    if (!this.player.body.velocity.isZero())
-                        this.generateMovementTicket(true);
+                    this.generateMovementTicket(true);
                     this.player.body.velocity.setTo(0, 0);
                 }
 

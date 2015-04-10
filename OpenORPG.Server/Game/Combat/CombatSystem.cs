@@ -36,7 +36,7 @@ namespace Server.Game.Combat
 
 
 
-        public override void Update(float frameTime)
+        public override void Update(double frameTime)
         {
 
             // Perform any skills that may be pending in the queue
@@ -50,13 +50,13 @@ namespace Server.Game.Combat
 
         }
 
-        private static void DecreaseCooldowns(float frameTime, Character character)
+        private static void DecreaseCooldowns(double frameTime, Character character)
         {
             foreach (var skill in character.Skills)
                 skill.Cooldown -= frameTime;
         }
 
-        private void PerformPendingSkills(float frameTime)
+        private void PerformPendingSkills(double frameTime)
         {
             var toRemove = new List<CombatAction>();
 

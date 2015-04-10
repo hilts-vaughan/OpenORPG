@@ -22,7 +22,7 @@ namespace Server.Infrastructure.Pathfinding
     public class AStarSearcher
     {
         private List<GraphNode> _openList = new List<GraphNode>();
-        private List<GraphNode> _closedList = new List<GraphNode>();
+        private HashSet<Point> _closedList = new HashSet<Point>();
 
         private List<Point> _waypoints = new List<Point>();
 
@@ -49,6 +49,14 @@ namespace Server.Infrastructure.Pathfinding
         /// <returns></returns>
         public List<Point> GeneratePath(bool diagonal = true)
         {
+
+            // Check for whether it's even possible first, and then return early if it's not
+            var adjPoint = GetAdjacentCell(_end.Position.X, _end.Position.Y);
+            if(adjPoint == new Point(-1, -1))
+                return new List<Point>();
+
+            // Otherwise, begin the A* search
+
             // Start at the beginning
             _openList.Add(_start);
             _current = _start;
@@ -66,7 +74,7 @@ namespace Server.Infrastructure.Pathfinding
                     break;
 
                 _openList.Remove(_current);
-                _closedList.Add(_current);
+                _closedList.Add(_current.Position);
 
                 if (diagonal)
                 {
@@ -110,8 +118,26 @@ namespace Server.Infrastructure.Pathfinding
             if (adjacentCell == new Point(-1, -1))
                 return;
 
-            // Ignore stuff on the closed list
-            if (_closedList.Any(n => n.Position == adjacentCell))
+
+
+            /**
+             * 
+             *      1) A* requires searching the entire god damn map sometimes; runs on the same thread; will search every node to find a path just to find out that it's not traversable
+
+                    2) If the path-finding leads to somewhere that is ultimately not reachable, the code will stutter horribly and die.
+
+                    Optimizations:
+
+                    1) Make sure we don't bother path finding to a place that is unreachable
+                    2) Remove linearity from closedList; replace it with something more high speed (O(1), hash set?)
+             * 
+             *      #2 was implemented here, gains are huge as is vs. a linear search
+             * 
+             * 
+             */
+
+            // Ignore stuff on the closed list; hash set for performance reasons
+            if (_closedList.Contains(adjacentCell))
                 return;
 
             var adjacentNode = _openList.SingleOrDefault(n => n.Position == adjacentCell);

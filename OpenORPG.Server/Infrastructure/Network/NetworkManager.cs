@@ -33,12 +33,17 @@ namespace Server.Infrastructure.Network
         public void Initialize()
         {
             _server = new WebSocketServer(_port, "ws://localhost:" + _port + "/");
+            
+            // Nagle is a good algorithm, but not for games. Disable it.
+            _server.ListenerSocket.NoDelay = true;
+
             _server.Start(OnConfig);
         }
 
         private void OnConfig(IWebSocketConnection socket)
         {
             var connection = new Connection(socket, _packetSerializer);
+
 
             socket.OnOpen += () => Connected(connection);
             socket.OnClose += () => Disconnected(connection);

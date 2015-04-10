@@ -168,6 +168,12 @@
             for (var system in this.systems) {
                 this.systems[system].render();
             }
+
+            for (var entityKey in this.entities) {
+                var entity = this.entities[entityKey];
+                entity.render();
+            }
+
         }
 
         public update() {

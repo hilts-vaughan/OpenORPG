@@ -24,7 +24,7 @@ namespace Server.Game.AI
     /// </summary>
     public class WanderAi : AiBase
     {
-        private float _idleTimer = 0f;
+        private double _idleTimer = 0f;
         private const float WanderTime = 5f;
         private Random _random = new Random();
 
@@ -44,7 +44,7 @@ namespace Server.Game.AI
 
         }
 
-        public override void PerformUpdate(float deltaTime)
+        public override void PerformUpdate(double deltaTime)
         {
             if (!Character.IsAlive)
                 return;
@@ -66,7 +66,7 @@ namespace Server.Game.AI
                     FaceVictim();
 
                     Character.SelectTarget(victim);
-                    Character.UseSkill(1, (int) victim.TargetId);
+                    Character.UseSkill(1, (int)victim.TargetId);
                 }
                 else
                 {
@@ -218,9 +218,14 @@ namespace Server.Game.AI
 
             var searcher = new AStarSearcher(Character.Zone.TileMap, new Point(newX, newY),
                 new Point(gridPoint.X, gridPoint.Y));
+
+
             var results = searcher.GeneratePath(true);
 
+
             var destList = new List<Vector2>();
+
+
 
             // If it's even possible
             if (results.Count > 0)

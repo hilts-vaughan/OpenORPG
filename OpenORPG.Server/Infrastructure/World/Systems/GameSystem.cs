@@ -29,7 +29,7 @@ namespace Server.Infrastructure.World.Systems
         /// Updates the system and gives it a time slice to do any work it might need to do
         /// </summary>
         /// <param name="frameTime"></param>
-        public abstract void Update(float frameTime);
+        public abstract void Update(double frameTime);
 
         /// <summary>
         /// This method is automatically called when an entity is added to the system.

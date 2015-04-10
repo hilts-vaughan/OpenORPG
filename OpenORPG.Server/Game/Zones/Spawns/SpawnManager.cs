@@ -75,7 +75,7 @@ namespace Server.Game.Zones.Spawns
             }
         }
 
-        public override void Update(float frameTime)
+        public override void Update(double frameTime)
         {
             for (int index = 0; index < _spawnSets.Count; index++)
             {

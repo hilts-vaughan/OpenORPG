@@ -32,7 +32,7 @@ namespace Server.Game.AI
         protected Vector2 Start = Vector2.Zero;
         protected Vector2 Current = Vector2.Zero;
 
-        private float _acc = 0f;
+        private double _acc = 0f;
 
         public AgressionTracker AgressionTracker { get; set; }
 
@@ -112,9 +112,9 @@ namespace Server.Game.AI
         /// Handles the logic for this <see cref="Character"/> that needs to be performed.
         /// </summary>
         /// <param name="deltaTime"></param>
-        public abstract void PerformUpdate(float deltaTime);
+        public abstract void PerformUpdate(double deltaTime);
 
-        protected void WalkPath(float deltaTime)
+        protected void WalkPath(double deltaTime)
         {
 
             // Perform a destination movement
@@ -180,7 +180,7 @@ namespace Server.Game.AI
             Current = newPosition;
 
 
-            if (_acc > 0.2f)
+            if (_acc > 0.1f)
             {
                 _acc = 0f;
                 Character.Position = Current;

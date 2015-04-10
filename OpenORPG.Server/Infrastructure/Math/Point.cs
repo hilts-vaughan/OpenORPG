@@ -91,6 +91,7 @@ namespace Server.Infrastructure.Math
 
         public override int GetHashCode()
         {
+            // This isn't super fast, but it's simple. For the purpose of the graphing, it works quite well
             return X ^ Y;
         }
 

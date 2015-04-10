@@ -54,7 +54,7 @@ namespace Server.Game.Network.Handlers
             // Move the player and set direction
             player.Direction = packet.Direction;
             player.Position = requestedPosition;
-            
+
         }
 
         [PacketHandler(OpCodes.CMMSG_ZONE_CHANGE)]

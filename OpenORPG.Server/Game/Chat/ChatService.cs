@@ -23,7 +23,7 @@ namespace Server.Game.Chat
         {
         }
 
-        public override void Update(float frameTime)
+        public override void Update(double frameTime)
         {
 
         }

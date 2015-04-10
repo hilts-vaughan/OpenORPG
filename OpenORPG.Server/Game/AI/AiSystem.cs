@@ -17,7 +17,7 @@ namespace Server.Game.AI
 
         }
 
-        public override void Update(float frameTime)
+        public override void Update(double frameTime)
         {
             foreach (var c in Zone.ZoneCharacters)
             {

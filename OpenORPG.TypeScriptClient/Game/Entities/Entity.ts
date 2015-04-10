@@ -113,6 +113,10 @@
 
         render() {
             this.game.debug.body(this);
+
+            if (this.interpolator != null)
+                this.interpolator.render();
+
         }
 
         performSelection() {
