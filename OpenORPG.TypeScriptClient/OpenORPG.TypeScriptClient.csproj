@@ -9,7 +9,6 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -188,7 +187,6 @@
     <Content Include="js\underscore.js" />
     <Content Include="phaser.d.ts" />
     <Content Include="phaser.js" />
-    <Content Include="phaser.min.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-cookies.js" />
@@ -522,6 +520,8 @@
     <TypeScriptCompile Include="Infrastructure\Settings.ts" />
     <TypeScriptCompile Include="Infrastructure\World\GameSystem.ts" />
     <TypeScriptCompile Include="jquery.d.ts" />
+    <TypeScriptCompile Include="p2.d.ts" />
+    <TypeScriptCompile Include="pixi.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
@@ -531,7 +531,6 @@
     <TypeScriptCompile Include="app.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="phaser.map" />
     <Content Include="assets\Maps\1.json" />
     <Content Include="assets\Maps\1.tmx" />
     <Content Include="assets\Maps\2.json" />
