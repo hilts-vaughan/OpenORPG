@@ -65,16 +65,16 @@ namespace Server
 
         public void Update()
         {
-         
+
 
             long ms = _stopwatch.ElapsedMilliseconds;
-         
+
             // It's not time to use delta time just 
             if (ms > 0)
             {
 
                 _stopwatch.Restart();
-                ZoneManager.Instance.Update(ms/1000d);
+                ZoneManager.Instance.Update(ms / 1000d);
 
 
                 GameClient client;
@@ -82,6 +82,11 @@ namespace Server
                 {
                     LoginHandler.Logout(client);
                 }
+            }
+
+            if (ms > 16)
+            {
+                Logger.Instance.Warn("Server is running at less than 60 FPS. It might be clogged down.");
             }
 
             // We can handle packets without knowledge of delta times
@@ -104,7 +109,7 @@ namespace Server
 
             while (_packetTasks.TryDequeue(out task))
             {
-            
+
 
                 try
                 {
@@ -144,15 +149,7 @@ namespace Server
 
             while (true)
             {
-
-                // At least 5ms must have pased, or it's not worth updating.
-                // This also helps prevent a bug where elapsed time would be 0 if the server wasn't doing enough heavy lifting
-                if (_updateGovernorWatch.ElapsedMilliseconds > 0)
-                {
-                    _updateGovernorWatch.Restart();
-                    Update();
-                }
-
+                Update();
             }
         }
 
