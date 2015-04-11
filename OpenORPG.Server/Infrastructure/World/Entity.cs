@@ -80,8 +80,10 @@ namespace Server.Infrastructure.World
         /// <returns>Returns true if the entity is in view, otherwise false.</returns>
         public bool IsInView(Entity entity)
         {
-            const int viewWidth = 1920;
-            const int viewHeight = 1080;
+            //TODO: Correct this: Entities will snap out of view
+
+            const int viewWidth = 2000;
+            const int viewHeight = 1200;
 
             var sourceRectangle = new Rectangle(Position.X - (viewWidth / 2), Position.Y - (viewHeight / 2), viewWidth * 2, viewHeight * 2);
             var destinationRectangle = new Rectangle(entity.Position.X, entity.Position.Y, 1, 1);

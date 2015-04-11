@@ -110,13 +110,15 @@ module OpenORPG {
                     // If the distance is small, a teleport is in order and we continue on. This prevents small little hiccups
                     if ( distance < this._threshold) {
                         this._entity.x = tweenData.x;
-                        this._entity.y = tweenData.y;
-                        //Logger.debug("Left early...");
+                        this._entity.y = tweenData.y;                        
                         return;
                     }
 
-                    if (distance > 100) {
-                        debugger;
+                    // Bring into the view faster if we're lagging behind severely
+                    if (distance > 64) {
+                        this._entity.x = tweenData.x;
+                        this._entity.y = tweenData.y;
+                        return;
                     }
 
                     // Kick off a new tween for the data
