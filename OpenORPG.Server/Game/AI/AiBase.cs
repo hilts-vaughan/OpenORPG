@@ -178,27 +178,7 @@ namespace Server.Game.AI
             if (velocity.Y < 0)
                 Character.Direction = Direction.North;
 
-
             Current = newPosition;
-
-
-            if ( (_acc > 0.2f && _acc < 500f) || (_acc > 500.2f) )
-            {
-                Debug.Fail("1s delay? desu desu");
-            }
-
-            if (_acc > 0.1f)
-            {
-                
-                // Need a bit more logging...
-                Logger.Instance.Debug("Sending entity update after {0}s.\nOld Position: {1}\nNew Position:{2}\nDistance: {3}\n",
-                    _acc, Character.Position, Current, Vector2.Distance(Current, Character.Position));
-
-                _acc = 0f;
-                Character.Position = Current;
-            }
-
-
 
             if (velocity.X == 0 && velocity.Y == 0)
             {
