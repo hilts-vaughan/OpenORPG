@@ -13,7 +13,7 @@
  </layer>
  <layer name="objects" width="70" height="70">
   <data encoding="base64" compression="zlib">
-   eJzt18sJgEAMBcBFsFE/NYg1qD1YjIW54G3x6mbBGXjnPJJTUgIAAAAAAAAAAAAAAIDvDDljdIkKxi6lqcjcRbeKd/bvqaXVu2y5w17kqNhrybOuImsDe4kWfRcAAB5/+SMBAKAlN5FHFOU=
+   eJzt180JAjEQBtBhIRbqKv4VINaw2oPF2IttmGUvSxC8JQHfg48hySFD5pQIAAAAAAAAAAAAAAAA+O2QIt6biFOu55zLqh7Tsj+fz+u1bc7YpOO6xiFiV2Q/tO6qvWf6nlp6ncuUe7gXeVTs65rvehW5dfAurbWeCwAAi3/5RwIAQE8+hq0aog==
   </data>
  </layer>
  <layer name="Entities" width="70" height="70">
@@ -23,7 +23,7 @@
  </layer>
  <layer name="walls" width="70" height="70">
   <data encoding="base64" compression="zlib">
-   eJztmclu1EAQhg2ykeAOt+Qe4BC4s8M8wLAFXoD9TeAZgGeAPAIMEtw4QZAIXDixSCQ5UyVcSqlpz7irq+wWU5/0a+J4ppe/F1e7qspxHMdxHMdxHMdxHMcZmvWmqs6DLoAugi5Frk80eeUu+sypxwJs+2XQNdB10PtDVXUzcn08sc1Y7ilWDi8vdn2jkdVjAXmyAboLugf6Bu18ELk+CzoXGd+u+YXlXmHl8PJi1/eb/XrG9uZw2/aHPdowhe9cjYwvfYbzC72+JejblHnDvR5yPaIvRxJ+fycyvvQZzi/0+pGwbeRN3zHQXo8xX17VVfUB9BH0BvSulpWdyzRhDLTX4w70eRe0F/T9O1z/AH0CbQu9mbW+kt5GypnNuZcLX48SYt4cgLIOgn7Vf+9vJ7Yd+7vV+kr6zMohbQX3vhh4Q32REK6no/D3MVDd/m+no19dwv7+DPr4u94vh4TfQe/xXupel4LUlxX43WrEl5CwX10KPVkExTqn2zppf+szBn2w9sUCiqEwXpi0ddL+pjUGEl/CsUKsfFlv/o0HKa6csPpy9oQYkrJWgrFCLHyheUHxBY//KK6k9RPbn3KQ+rIa/G6NPftPKvjDzxsUX/D4j6D1o+kJouXLmcy4KFbHRtN93rCaJ4Rk7pMvX4P2aHkT279CrOYJIZkvXTEvQjFjzl5DZ9PJnDK099kQrbiOk7sHx9apdh2L0IpfOLltnjcfiTWF9ToPrfiFozHHF8X4tJdZrSWt+IWYKT0jaM50nT1f17Z7TM5z+jboMbTvSdtuLU8IfvYMvbF8RiPS5xG29SnoGej5nDOxBvy9BcnyGY1I5yG29QXoJWhTeCaW1odttqwLsYwBrBji3D7UuwFNhmiz9Dn9v+caU31Zllxjii/LlGtM8aX0XKOmNyl7WOm5Rk1vUudLybnG3PcbnBRfSs81ap6XUsspOdc4pi9IqbnGsX0pLdeIaJ+vc957E2PnGhHt87Uk3i0t12hBan9KyjVaIvGllFyjJanrqJRcozVSX8bMNQ6BRlxHDJVr5PSJjySS9GHsXCOnT3wkkXbbh8g1lkgJucYSWYZco4RlyDVKWIZco5Qxc42bhXriOI6jyR9ka9gS
+   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
   </data>
  </layer>
  <objectgroup name="MobSpawns" opacity="0.9">
@@ -32,7 +32,7 @@
     <property name="MobId" value="1"/>
     <property name="MobMax" value="12"/>
     <property name="MobRepeats" value="True"/>
-    <property name="MobSpawnTime" value="60"/>
+    <property name="MobSpawnTime" value="5"/>
     <property name="MobStrays" value="True"/>
    </properties>
   </object>
@@ -45,6 +45,7 @@
     <property name="MobStrays" value="True"/>
    </properties>
   </object>
+  <object x="480" y="1504" width="128"/>
  </objectgroup>
  <objectgroup name="NpcSpawns">
   <object name="Guard" type="NpcSpawn" x="800" y="608" width="32" height="32">

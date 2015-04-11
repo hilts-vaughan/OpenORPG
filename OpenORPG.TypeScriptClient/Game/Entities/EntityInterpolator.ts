@@ -8,11 +8,13 @@ module OpenORPG {
         public _x: number;
         public _y: number;
         public _dir: Direction;
+        public _timestamp : number;
 
         constructor(x: number, y: number, dir: Direction) {
             this._x = x;
             this._y = y;
             this._dir = dir;
+            this._timestamp = new Date().getTime();
         }
 
     }
@@ -24,7 +26,7 @@ module OpenORPG {
         /**
          * Provides a value of backwards time
          */
-        private _backTime: number = 100;
+        private _backTime: number = 95;
 
         /**
          * A maximum amount of packets that can be queued up before being forced to releases
@@ -32,7 +34,7 @@ module OpenORPG {
         
            When set to 10, this is a full second behind (which is quite a lot) 
         */
-        private _maxDelay: number = 10;
+        private _maxDelay: number = 20;
 
         private _threshold: number = 1;
 
@@ -103,15 +105,19 @@ module OpenORPG {
 
                     this._entity.direction = state._dir;
 
+                    var distance: number = Phaser.Point.distance(point, point2);
+
                     // If the distance is small, a teleport is in order and we continue on. This prevents small little hiccups
-                    if (Phaser.Point.distance(point, point2) < this._threshold) {
+                    if ( distance < this._threshold) {
                         this._entity.x = tweenData.x;
                         this._entity.y = tweenData.y;
-                        Logger.debug("Left early...");
+                        //Logger.debug("Left early...");
                         return;
                     }
 
-                    Logger.debug("Starting to kick off an interpolation...");
+                    if (distance > 100) {
+                        debugger;
+                    }
 
                     // Kick off a new tween for the data
                     this._currentMovementTween = this._entity.game.add.tween(this._entity).to(tweenData, this._backTime, Phaser.Easing.Linear.None, true);
@@ -159,10 +165,12 @@ module OpenORPG {
             this._entity.direction = lastState._dir;
 
             Logger.warn("A force flush was performed; looks like the network is falling behind.");
+            
 
             // Remove all elements
-            while (this._states.length) {
-                this._states.pop();
+            while (this._states.length) {                
+                var state : InterpolatorState = this._states.shift();
+                Logger.warn(state);
             }
 
         }

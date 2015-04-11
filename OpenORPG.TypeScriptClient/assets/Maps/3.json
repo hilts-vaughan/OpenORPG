@@ -57,7 +57,7 @@
                      "MobId":"1",
                      "MobMax":"12",
                      "MobRepeats":"True",
-                     "MobSpawnTime":"60",
+                     "MobSpawnTime":"5",
                      "MobStrays":"True"
                     },
                  "rotation":0,

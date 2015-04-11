@@ -10,7 +10,7 @@ module OpenORPG {
         constructor() {
 
             // Choose the technology based on the settings
-            var tech: Number = Phaser.CANVAS;
+            var tech: number = Phaser.CANVAS;
 
             if (Settings.getInstance().debugForceWebGl)
                 tech = Phaser.WEBGL;

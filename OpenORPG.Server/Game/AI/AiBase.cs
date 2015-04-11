@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using Server.Game.Combat;
 using Server.Game.Entities;
 using Server.Game.Network.Packets;
+using Server.Infrastructure.Logging;
 using Server.Infrastructure.Math;
 using Server.Utils.Math;
 using ServiceStack;
@@ -180,11 +182,22 @@ namespace Server.Game.AI
             Current = newPosition;
 
 
+            if ( (_acc > 0.2f && _acc < 500f) || (_acc > 500.2f) )
+            {
+                Debug.Fail("1s delay? desu desu");
+            }
+
             if (_acc > 0.1f)
             {
+                
+                // Need a bit more logging...
+                Logger.Instance.Debug("Sending entity update after {0}s.\nOld Position: {1}\nNew Position:{2}\nDistance: {3}\n",
+                    _acc, Character.Position, Current, Vector2.Distance(Current, Character.Position));
+
                 _acc = 0f;
                 Character.Position = Current;
             }
+
 
 
             if (velocity.X == 0 && velocity.Y == 0)

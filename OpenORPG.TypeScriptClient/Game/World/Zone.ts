@@ -224,8 +224,8 @@
 
 
             for (var entityKey in this.entities) {
-                var entity = this.entities[entityKey];
-                entity.update();
+                var entity = this.entities[entityKey];  
+                // entity.update();
 
                 for (var layer in this.bucket)
                     this.game.physics.arcade.collide(entity, this.bucket[layer]);

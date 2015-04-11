@@ -643,6 +643,7 @@
     <TypeScriptModuleKind>none</TypeScriptModuleKind>
     <TypeScriptOutFile>app.js</TypeScriptOutFile>
     <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
