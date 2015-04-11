@@ -180,6 +180,12 @@ namespace Server.Game.AI
 
             Current = newPosition;
 
+            if (_acc > 0.1f)
+            {
+                _acc = 0f;
+                Character.Position = Current;
+            }
+
             if (velocity.X == 0 && velocity.Y == 0)
             {
                 // We're done with this node
