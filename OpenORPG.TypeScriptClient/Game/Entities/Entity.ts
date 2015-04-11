@@ -28,7 +28,7 @@
             this.anchor.setTo(0, 0);
 
             // Do something with this entity
-            this.game.physics.enable(this, Phaser.Physics.ARCADE, true);
+            game.physics.enable(this, Phaser.Physics.ARCADE, true);            
             this.body.collideWorldBounds = true;
 
             // Disable smoothing on the sprite so pixel art looks good.
@@ -57,7 +57,7 @@
                 this.interpolator.update();
 
             if (this.nameTagText != null)
-                this.nameTagText.position.setTo(this.x + this.texture.width / 2, this.y);
+                this.nameTagText.position.setTo(this.x + this.width / 2, this.y);
 
             var directionString = this.directionToString();
 
@@ -217,7 +217,7 @@
             this.animations.play("idle_down");
 
             // Setup the body for this sprite
-            this.body.setSize(32, 32, this.texture.width / 2 - 16, this.texture.height - 32);
+            this.body.setSize(32, 32, this.width / 2 - 16, this.height - 32);
         }
 
         /* This is used for network transmission only, it can be dangerous if used
