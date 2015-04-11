@@ -235,6 +235,7 @@
     <Compile Include="Infrastructure\Content\AssetLoaders\XmlLoader.cs" />
     <Compile Include="Infrastructure\Content\AssetReader.cs" />
     <Compile Include="Infrastructure\Cryptography\HashHelper.cs" />
+    <Compile Include="Infrastructure\Dialog\DialogReceiver.cs" />
     <Compile Include="Infrastructure\Dialog\DialogProvider.cs" />
     <Compile Include="Infrastructure\Logging\ILogger.cs" />
     <Compile Include="Infrastructure\Logging\Logger.cs" />

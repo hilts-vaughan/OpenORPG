@@ -38,6 +38,8 @@
             this.removeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textScript = new System.Windows.Forms.TextBox();
             this.txtText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,23 +51,29 @@
             this.removeConditionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.textName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textScript = new System.Windows.Forms.TextBox();
+            this.groupActions = new System.Windows.Forms.GroupBox();
+            this.listActions = new System.Windows.Forms.ListBox();
+            this.contextActions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemAddAction = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemRemoveAction = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.contextDialogMenu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupConditions.SuspendLayout();
             this.contextConditionMenu.SuspendLayout();
+            this.groupActions.SuspendLayout();
+            this.contextActions.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.groupActions);
             this.panel1.Controls.Add(this.textName);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.groupConditions);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.treeDialog);
-            this.panel1.Size = new System.Drawing.Size(1066, 466);
+            this.panel1.Size = new System.Drawing.Size(1379, 466);
             // 
             // treeDialog
             // 
@@ -73,7 +81,7 @@
             this.treeDialog.Dock = System.Windows.Forms.DockStyle.Right;
             this.treeDialog.ImageKey = "script.png";
             this.treeDialog.ImageList = this.imageList1;
-            this.treeDialog.Location = new System.Drawing.Point(605, 0);
+            this.treeDialog.Location = new System.Drawing.Point(918, 0);
             this.treeDialog.Name = "treeDialog";
             this.treeDialog.SelectedImageIndex = 0;
             this.treeDialog.Size = new System.Drawing.Size(461, 466);
@@ -141,6 +149,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Script:";
+            // 
+            // textScript
+            // 
+            this.textScript.Location = new System.Drawing.Point(66, 47);
+            this.textScript.Name = "textScript";
+            this.textScript.Size = new System.Drawing.Size(161, 20);
+            this.textScript.TabIndex = 6;
+            // 
             // txtText
             // 
             this.txtText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -180,7 +204,7 @@
             this.groupConditions.Controls.Add(this.listConditions);
             this.groupConditions.Location = new System.Drawing.Point(251, 35);
             this.groupConditions.Name = "groupConditions";
-            this.groupConditions.Size = new System.Drawing.Size(348, 425);
+            this.groupConditions.Size = new System.Drawing.Size(254, 425);
             this.groupConditions.TabIndex = 2;
             this.groupConditions.TabStop = false;
             this.groupConditions.Text = "Conditions";
@@ -192,7 +216,7 @@
             this.listConditions.FormattingEnabled = true;
             this.listConditions.Location = new System.Drawing.Point(3, 16);
             this.listConditions.Name = "listConditions";
-            this.listConditions.Size = new System.Drawing.Size(342, 406);
+            this.listConditions.Size = new System.Drawing.Size(248, 406);
             this.listConditions.TabIndex = 4;
             // 
             // contextConditionMenu
@@ -232,30 +256,58 @@
             // 
             this.textName.Location = new System.Drawing.Point(95, 8);
             this.textName.Name = "textName";
-            this.textName.Size = new System.Drawing.Size(501, 20);
+            this.textName.Size = new System.Drawing.Size(670, 20);
             this.textName.TabIndex = 4;
             // 
-            // label4
+            // groupActions
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 50);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Script:";
+            this.groupActions.Controls.Add(this.listActions);
+            this.groupActions.Location = new System.Drawing.Point(511, 35);
+            this.groupActions.Name = "groupActions";
+            this.groupActions.Size = new System.Drawing.Size(254, 425);
+            this.groupActions.TabIndex = 5;
+            this.groupActions.TabStop = false;
+            this.groupActions.Text = "Actions";
             // 
-            // textScript
+            // listActions
             // 
-            this.textScript.Location = new System.Drawing.Point(66, 47);
-            this.textScript.Name = "textScript";
-            this.textScript.Size = new System.Drawing.Size(161, 20);
-            this.textScript.TabIndex = 6;
+            this.listActions.ContextMenuStrip = this.contextActions;
+            this.listActions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listActions.FormattingEnabled = true;
+            this.listActions.Location = new System.Drawing.Point(3, 16);
+            this.listActions.Name = "listActions";
+            this.listActions.Size = new System.Drawing.Size(248, 406);
+            this.listActions.TabIndex = 4;
+            // 
+            // contextActions
+            // 
+            this.contextActions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemAddAction,
+            this.menuItemRemoveAction});
+            this.contextActions.Name = "contextActions";
+            this.contextActions.Size = new System.Drawing.Size(156, 48);
+            // 
+            // menuItemAddAction
+            // 
+            this.menuItemAddAction.Image = ((System.Drawing.Image)(resources.GetObject("menuItemAddAction.Image")));
+            this.menuItemAddAction.Name = "menuItemAddAction";
+            this.menuItemAddAction.Size = new System.Drawing.Size(155, 22);
+            this.menuItemAddAction.Text = "Add Action";
+            this.menuItemAddAction.Click += new System.EventHandler(this.menuItemAddAction_Click);
+            // 
+            // menuItemRemoveAction
+            // 
+            this.menuItemRemoveAction.Image = ((System.Drawing.Image)(resources.GetObject("menuItemRemoveAction.Image")));
+            this.menuItemRemoveAction.Name = "menuItemRemoveAction";
+            this.menuItemRemoveAction.Size = new System.Drawing.Size(155, 22);
+            this.menuItemRemoveAction.Text = "Remove Action";
+            this.menuItemRemoveAction.Click += new System.EventHandler(this.menuItemRemoveAction_Click);
             // 
             // DialogEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1066, 495);
+            this.ClientSize = new System.Drawing.Size(1379, 495);
             this.Name = "DialogEditor";
             this.Text = "DialougeEditor";
             this.Controls.SetChildIndex(this.panel1, 0);
@@ -266,6 +318,8 @@
             this.groupBox1.PerformLayout();
             this.groupConditions.ResumeLayout(false);
             this.contextConditionMenu.ResumeLayout(false);
+            this.groupActions.ResumeLayout(false);
+            this.contextActions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -293,5 +347,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textScript;
+        private System.Windows.Forms.GroupBox groupActions;
+        private System.Windows.Forms.ListBox listActions;
+        private System.Windows.Forms.ContextMenuStrip contextActions;
+        private System.Windows.Forms.ToolStripMenuItem menuItemAddAction;
+        private System.Windows.Forms.ToolStripMenuItem menuItemRemoveAction;
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using OpenORPG.Common.Dialog;
 using OpenORPG.Database.Models.ContentTemplates;
 using Server.Game.Entities;
 using Server.Infrastructure.Logging;
@@ -29,6 +30,7 @@ namespace Server.Infrastructure.Dialog
         /// The root node of this dialog provider
         /// </summary>
         private DialogNode _rootDialogNode;
+        private DialogReceiver _receiver = new DialogReceiver();
 
 
         private Dictionary<Player, DialogNode> _playerDialogNodeStateTable = new Dictionary<Player, DialogNode>();
@@ -64,13 +66,33 @@ namespace Server.Infrastructure.Dialog
                 return null;
             }
 
-         
+            // Perform actions as required
+            PerformLinkActions(player, link);
+
             // Get and return the next available node for the given link
             _playerDialogNodeStateTable[player] = link.NextNode;
 
             OnDialogNodeChanged(player, link.NextNode);
 
             return link.NextNode;
+        }
+
+
+        private void PerformLinkActions(Player player, DialogLink link)
+        {
+            _receiver.BeginSession(player);
+
+            try
+            {
+                link.DialogActions.ForEach(action => action.Execute(_receiver));
+            }
+            catch (Exception exception)
+            {
+                Logger.Instance.Warn("An action was attempted to be executed and fail. It was likely not implemented. Check for unimplemented actions.");
+            }
+
+
+            _receiver.EndSession();
         }
 
         /// <summary>

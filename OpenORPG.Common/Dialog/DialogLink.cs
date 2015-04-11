@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using OpenORPG.Common.Dialog.Actions;
 using OpenORPG.Common.Dialog.Conditions;
 using OpenORPG.Common.Entity;
 using Server.Infrastructure.Dialog;
@@ -20,6 +21,8 @@ namespace OpenORPG.Common.Dialog
         /// </summary>
         private List<IDialogCondition> _dialogConditions = new List<IDialogCondition>();
 
+        private List<IDialogAction> _dialogActions = new List<IDialogAction>();
+
         public DialogLink(string text, DialogNode nextNode)
         {
             Text = text;
@@ -37,6 +40,16 @@ namespace OpenORPG.Common.Dialog
         {
             get { return _dialogConditions; }
             set { _dialogConditions = value; }
+        }
+
+
+        /// <summary>
+        /// Provides a list of dialog links associated with this particular dialog link
+        /// </summary>
+        public List<IDialogAction> DialogActions
+        {
+            get { return _dialogActions; }
+            set { _dialogActions = value; }
         }
 
 

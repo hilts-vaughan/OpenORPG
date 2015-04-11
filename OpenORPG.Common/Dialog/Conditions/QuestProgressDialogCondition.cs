@@ -19,6 +19,11 @@ namespace OpenORPG.Common.Dialog.Conditions
             StepId = stepId;
         }
 
+        public QuestProgressDialogCondition()
+        {
+            
+        }
+
         public override bool Verify(ICharacterContract player)
         {
             return player.IsOnQuestStep(QuestId, StepId);

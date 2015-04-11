@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialog\Actions\DialogActions.cs" />
+    <Compile Include="Dialog\Actions\IDialogAction.cs" />
+    <Compile Include="Dialog\Actions\IDialogActionReceiver.cs" />
     <Compile Include="Dialog\Conditions\IDialogCondition.cs" />
     <Compile Include="Dialog\Conditions\MinimumLevelDialogCondition.cs" />
     <Compile Include="Dialog\Conditions\QuestProgressDialogCondition.cs" />

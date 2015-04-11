@@ -91,7 +91,7 @@ namespace OpenORPG.Toolkit.Views.Content
                 if (selectedItem == null)
                     elemenetToExpandOn = _rootDialogNode;
                 else
-                    elemenetToExpandOn = (IDialogNodeElement) selectedItem.Tag;
+                    elemenetToExpandOn = (IDialogNodeElement)selectedItem.Tag;
             }
 
             treeDialog.Nodes.Clear();
@@ -101,8 +101,8 @@ namespace OpenORPG.Toolkit.Views.Content
 
             // Using a recursive approach, we'll generate our tree in the best way we can
             RecurisveAdd(root, _rootDialogNode);
-        
-        
+
+
             // Perform a deep search for the node
             var select = FindTreeNodeWithElement(elemenetToExpandOn, root);
 
@@ -183,7 +183,7 @@ namespace OpenORPG.Toolkit.Views.Content
 
             return null;
         }
-        
+
         private TreeNode FindTreeNodeWithElement(IDialogNodeElement elementToFind, TreeNode currentNode)
         {
             if (currentNode.Tag == elementToFind)
@@ -296,14 +296,19 @@ namespace OpenORPG.Toolkit.Views.Content
             if (link != null)
             {
                 listConditions.DataSource = link.DialogConditions;
+                listActions.DataSource = link.DialogActions;
+
+
                 textScript.DataBindings.Add("Text", link, "Script");
                 groupConditions.Enabled = true;
+                groupActions.Enabled = true;
                 textScript.Enabled = true;
             }
             else
             {
                 textScript.Enabled = false;
                 groupConditions.Enabled = false;
+                groupActions.Enabled = false;
             }
 
         }
@@ -415,7 +420,42 @@ namespace OpenORPG.Toolkit.Views.Content
             listConditions.Update();
         }
 
+        private void UpdateActionList()
+        {
+            var link = treeDialog.SelectedNode.Tag as DialogLink;
+            listActions.DataSource = null;
+            listActions.Update();
+            if (link != null)
+                listActions.DataSource = link.DialogActions;
+            listActions.Update();
+        }
 
+        private void menuItemAddAction_Click(object sender, EventArgs e)
+        {
+            // Add action
+            var link = treeDialog.SelectedNode.Tag as DialogLink;
+
+            var dialog = new DialogActionSelectionForm();
+            dialog.ShowDialog();
+
+            if (dialog.Condition != null)
+                link.DialogActions.Add(dialog.Condition);
+
+            UpdateActionList();
+
+        }
+
+        private void menuItemRemoveAction_Click(object sender, EventArgs e)
+        {
+            if (listActions.SelectedIndex < 0)
+                return;
+
+            // Remove condition
+            var link = treeDialog.SelectedNode.Tag as DialogLink;
+            link.DialogActions.RemoveAt(listActions.SelectedIndex);
+
+            UpdateActionList();
+        }
 
 
 
