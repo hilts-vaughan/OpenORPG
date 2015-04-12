@@ -52,6 +52,17 @@ namespace Server.Game.AI
             {
                 var victim = GetVictim();
 
+                if (victim == null)
+                {
+                    // If the victim cannot be found, remove them off the list and search again next tick
+                    // We go back to idle, reset our path and resume
+                    Character.CharacterState = CharacterState.Idle;
+                    AgressionTracker.RemoveAgression(AgressionTracker.GetCharacterIdWithMostAgression());
+                    UpdatePath();
+                    ResetPath();
+                    return;
+                }
+
                 if (Vector2.Distance(victim.Position, Character.Position) < 70)
                 {
                     if (Character.CharacterState == CharacterState.Moving)
@@ -150,8 +161,8 @@ namespace Server.Game.AI
 
             var destList = RegeneratePath();
 
-
-            BeginPath(destList);
+            if (destList.Count > 0)
+                BeginPath(destList);
 
 
 
@@ -202,7 +213,7 @@ namespace Server.Game.AI
         private Character GetVictim()
         {
             var victim =
-                Character.Zone.ZoneCharacters.First(x => x.Id == AgressionTracker.GetCharacterIdWithMostAgression());
+                Character.Zone.ZoneCharacters.FirstOrDefault(x => x.Id == AgressionTracker.GetCharacterIdWithMostAgression());
             return victim;
         }
 

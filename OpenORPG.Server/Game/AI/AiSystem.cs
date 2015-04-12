@@ -40,12 +40,7 @@ namespace Server.Game.AI
 
         public override void OnEntityRemoved(Entity entity)
         {
-            // Remove agression for anyone who leaves
-            foreach (var c in Zone.ZoneCharacters)
-            {
-                if (c.CurrentAi != null)
-                    c.CurrentAi.AgressionTracker.RemoveAgression(entity.Id);
-            }
+   
 
 
         }
