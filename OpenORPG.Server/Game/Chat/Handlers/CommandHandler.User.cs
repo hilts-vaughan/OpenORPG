@@ -70,6 +70,12 @@ namespace Server.Game.Chat.Handlers
                 player.CharacterStats[StatTypes.Hitpoints].MaximumValue;
         }
 
+        [ChatHandler("Rename")]
+        public static void Rename(Player player, List<String> arguments)
+        {
+            var name = String.Join(" ", arguments);
+            player.Name = name;
+        }
 
 
     }
