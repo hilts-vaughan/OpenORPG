@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Server.Game.Chat;
 using Server.Game.Network.Packets;
+using Server.Game.Network.Packets.Server;
 using Server.Infrastructure.Network.Handlers;
 using Server.Utils;
 
@@ -21,7 +23,21 @@ namespace Server.Game.Network.Handlers
 
             // Grab the service and fire off to it
             var chatService = zone.GetGameSystem<ChatService>();
-            var result = chatService.HandleMessage(player, packet);
+
+            bool result;
+
+            try
+            {
+                result = chatService.HandleMessage(player, packet);
+            }
+            catch (Exception exception)
+            {
+                // It's invalid, we should kick out and let the player know they need to retry
+                var msg = new ServerSendGameMessagePacket(GameMessage.ChatCommandInvalid,
+                    new List<string>() {packet.Message});
+                player.Client.Send(msg);
+                return;
+            }
 
             if (!result)
             {

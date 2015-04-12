@@ -21,7 +21,10 @@
     "QuestMonstersKilledRequirement": "Slay {1} {0}'s. Progress: {2}/{1}",
     "QuestHasItemRequirement": "Obtain {1} of {0}. Progress: {2}/{1}",
     "RequirementFormatterMissing": "The formatter for this quest is missing. Contact a developer.",
-    "QuestCompletedFormatter": "This quest has already been completed."
+    "QuestCompletedFormatter": "This quest has already been completed.",
+    "InteractableTooFar": "There is nothing to interact with here.",
+    "CurrentTime": "It is currently {0} on the server.",
+    "ChatCommandInvalid": "The command {0} with the given parameters is invalid. Check out /help for proper usage."
 
 
 

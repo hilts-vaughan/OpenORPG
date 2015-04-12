@@ -70,7 +70,8 @@ namespace Server.Game.Zones
         public void SwitchToZoneAndPosition(Player player, Zone zone, Vector2 position)
         {
 
-
+            if(zone == null)
+                throw new ArgumentNullException("The zone cannot be null");
 
             // Remove our player from here
             player.Zone.RemoveEntity(player);
@@ -79,6 +80,11 @@ namespace Server.Game.Zones
             player.Position = position;
             zone.AddEntity(player);
             
+        }
+
+        public void SwitchToZoneAndPosition(Player player, int zoneId, Vector2 position)
+        {
+            SwitchToZoneAndPosition(player, FindZone(zoneId), position);
         }
 
         /// <summary>

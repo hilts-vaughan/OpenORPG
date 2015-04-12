@@ -27,7 +27,8 @@ namespace Server.Game
         QuestCannotGiveReward,
         ItemCannotBeUsed,
         InteractableTooFar,
-
+        CurrentTime,
+        ChatCommandInvalid,
 
         QuestLogUpdated
     }

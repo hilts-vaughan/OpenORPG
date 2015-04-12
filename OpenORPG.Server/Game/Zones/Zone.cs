@@ -356,14 +356,58 @@ namespace Server.Game.Zones
         /// <param name="player"></param>
         private void ProcessNewPlayer(Player player)
         {
+            
+            // TODO: Hack... doesn't make much sense but is required to send the intital state
             player.CharacterState = CharacterState.Moving;
             player.CharacterState = CharacterState.Idle;
+
+            // Before the player can be notified, let's change if their position is legal
+            if (!IsPositionLegal(player.Position))
+            {
+                // If it's illegal, we need to move them as soon as we can
+                player.Position = GetLegalPosition();
+            }
 
             // Notify the player about this change
             var packet = new ServerZoneChangedPacket(Id, player.Id, Entities);
             player.Client.Send(packet);
 
             OnClientEnter(player.Client, player);
+        }
+
+        private bool IsPositionLegal(Vector2 position)
+        {
+            if(position.X < 0 || position.Y < 0)
+                return false;
+
+            if (position.X > TileMap.Width*TileMap.TileWidth)
+                return false;
+
+            if (position.Y > TileMap.Height*TileMap.TileHeight)
+                return false;
+
+            return true;
+
+        }
+
+        private Vector2 GetLegalPosition()
+        {
+            // Find a safe spot...
+            for (int x = 0; x < TileMap.Width; x++)
+            {
+                for (int y = 0; y < TileMap.Height; y++)
+                {
+                    if (!TileMap.BlockMap[x, y])
+                    {
+                        return new Vector2(x * TileMap.TileWidth, y * TileMap.TileHeight);
+                    }                    
+                }
+            }
+
+            // Set to map middle.. what else can you do? Flag a warning
+            Logger.Instance.Error("Attempted to find a legal position but could not find one. Used map middle instead. #{0}", Id);
+            return new Vector2(TileMap.Width/2 * TileMap.TileWidth, TileMap.Height/2 * TileMap.TileHeight);
+
         }
 
         public void RemoveEntity(Entity entity)
