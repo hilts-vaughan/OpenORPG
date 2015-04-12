@@ -28,7 +28,7 @@ namespace Server.Game.Chat.Handlers
         {
             // Replies with the current server time
             var time = DateTime.Now;
-            player.Client.Send(new ServerSendGameMessagePacket(GameMessage.CurrentTime, new List<string>() { time.ToShortDateString()}));
+            player.Client.Send(new ServerSendGameMessagePacket(GameMessage.CurrentTime, new List<string>() { time.ToLongTimeString()}));
         }
 
 
