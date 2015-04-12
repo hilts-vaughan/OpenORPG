@@ -80,6 +80,7 @@
     <Compile Include="DAL\NpcRepository.cs" />
     <Compile Include="DAL\QuestRepository.cs" />
     <Compile Include="DAL\SkillRepository.cs" />
+    <Compile Include="DAL\UserRepository.cs" />
     <Compile Include="Enums\QuestType.cs" />
     <Compile Include="Enums\SkillType.cs" />
     <Compile Include="GameDatabaseContext.cs" />

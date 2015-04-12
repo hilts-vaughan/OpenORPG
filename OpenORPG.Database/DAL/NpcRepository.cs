@@ -15,5 +15,26 @@ namespace OpenORPG.Database.DAL
             : base(context)
         {
         }
+
+        protected override void PostGet(List<NpcTemplate> entities)
+        {
+
+            // Load the dialog to be used
+            foreach (var npc in entities)
+            {
+                Context.Entry(npc).Reference(a => a.ConversationAvailableTemplate).Load();    
+            }
+
+
+            base.PostGet(entities);
+        }
+
+        protected override void PostUpdate(NpcTemplate entity, int key)
+        {
+            // HACK: Always attempt to save
+            Context.Entry(entity.ConversationAvailableTemplate).State = EntityState.Modified;
+
+            base.PostUpdate(entity, key);
+        }
     }
 }

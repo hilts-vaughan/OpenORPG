@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textName = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -41,6 +41,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.eventPageControl1 = new OpenORPG.Toolkit.Controls.EventPageControl();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textDialog = new System.Windows.Forms.TextBox();
+            this.buttonChooseDialog = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -49,13 +52,16 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonChooseDialog);
+            this.panel1.Controls.Add(this.textDialog);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.textName);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Size = new System.Drawing.Size(1160, 449);
+            this.panel1.Size = new System.Drawing.Size(1160, 501);
             // 
             // label1
             // 
@@ -66,16 +72,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
             // 
-            // textBox1
+            // textName
             // 
-            this.textBox1.Location = new System.Drawing.Point(24, 25);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(353, 20);
-            this.textBox1.TabIndex = 1;
+            this.textName.Location = new System.Drawing.Point(24, 25);
+            this.textName.Name = "textName";
+            this.textName.Size = new System.Drawing.Size(353, 20);
+            this.textName.TabIndex = 1;
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(24, 51);
+            this.groupBox1.Location = new System.Drawing.Point(24, 106);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(353, 164);
             this.groupBox1.TabIndex = 2;
@@ -88,7 +94,7 @@
             this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(171, 221);
+            this.groupBox2.Location = new System.Drawing.Point(171, 276);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(206, 119);
             this.groupBox2.TabIndex = 3;
@@ -133,7 +139,7 @@
             // 
             this.groupBox3.Controls.Add(this.comboBox3);
             this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Location = new System.Drawing.Point(24, 221);
+            this.groupBox3.Location = new System.Drawing.Point(24, 276);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(141, 119);
             this.groupBox3.TabIndex = 4;
@@ -175,6 +181,34 @@
             this.eventPageControl1.Size = new System.Drawing.Size(745, 388);
             this.eventPageControl1.TabIndex = 0;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(21, 409);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(86, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Attached Dialog:";
+            // 
+            // textDialog
+            // 
+            this.textDialog.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textDialog.Location = new System.Drawing.Point(111, 406);
+            this.textDialog.Name = "textDialog";
+            this.textDialog.ReadOnly = true;
+            this.textDialog.Size = new System.Drawing.Size(190, 20);
+            this.textDialog.TabIndex = 8;
+            // 
+            // buttonChooseDialog
+            // 
+            this.buttonChooseDialog.Location = new System.Drawing.Point(307, 406);
+            this.buttonChooseDialog.Name = "buttonChooseDialog";
+            this.buttonChooseDialog.Size = new System.Drawing.Size(70, 23);
+            this.buttonChooseDialog.TabIndex = 9;
+            this.buttonChooseDialog.Text = "Choose...";
+            this.buttonChooseDialog.UseVisualStyleBackColor = true;
+            this.buttonChooseDialog.Click += new System.EventHandler(this.buttonChooseDialog_Click);
+            // 
             // NpcEditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,12 +233,15 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.GroupBox groupBox4;
         private Controls.EventPageControl eventPageControl1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button buttonChooseDialog;
+        private System.Windows.Forms.TextBox textDialog;
     }
 }

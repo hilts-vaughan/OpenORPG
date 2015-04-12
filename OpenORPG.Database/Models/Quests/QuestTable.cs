@@ -20,6 +20,7 @@ namespace Server.Game.Database.Models.Quests
         {
             Rewards = new List<QuestReward>();
             QuestSteps = new List<QuestStepsTable>();      
+            QuestStarters = new Collection<NpcTemplate>();
         }
 
  
@@ -42,9 +43,9 @@ namespace Server.Game.Database.Models.Quests
 
         public virtual ICollection<QuestStepsTable> QuestSteps { get; set; }
 
-        public virtual ICollection<QuestReward> Rewards { get; set; } 
+        public virtual ICollection<QuestReward> Rewards { get; set; }
 
-        public virtual NpcTemplate QuestStarter { get; set; }
+        public virtual ICollection<NpcTemplate> QuestStarters { get; set; } 
 
         public override string ToString()
         {

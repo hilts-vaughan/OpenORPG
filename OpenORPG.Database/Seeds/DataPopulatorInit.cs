@@ -18,7 +18,7 @@ namespace Server.Game.Database.Seeds
     /// <summary>
     ///     A custom initializer that populates the game database with mock data useful for testing, clean, good known states.
     /// </summary>
-    public class CustomInitializer : DropCreateDatabaseIfModelChanges<GameDatabaseContext>    //  //    DropCreateDatabaseAlways<GameDatabaseContext>
+    public class CustomInitializer : DropCreateDatabaseAlways<GameDatabaseContext> // DropCreateDatabaseIfModelChanges<GameDatabaseContext>   
     {
 
 
@@ -214,7 +214,7 @@ namespace Server.Game.Database.Seeds
 
             context.Quests.Add(quest);
 
-            context.SaveChanges();
+          //  context.SaveChanges();
 
 
             var npc = new NpcTemplate();
@@ -234,7 +234,7 @@ namespace Server.Game.Database.Seeds
             var guard_generic = new NpcTemplate();
             guard_generic.Name = "City Guard";
             guard_generic.Sprite = "forestnpc";
-            guard_generic.ConversationAvailableTemplate = guideNpc.ConversationAvailableTemplate;
+            guard_generic.ConversationAvailableTemplate = context.DialogTemplates.First(x => x.Id == 1);
 
 
             context.Npcs.Add(guard_generic);
