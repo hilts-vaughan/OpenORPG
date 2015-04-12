@@ -26,7 +26,7 @@ module OpenORPG {
         /**
          * Provides a value of backwards time
          */
-        private _backTime: number = 95;
+        private _backTime: number = 100;
 
         /**
          * A maximum amount of packets that can be queued up before being forced to releases
@@ -122,7 +122,7 @@ module OpenORPG {
                     }
 
                     // Kick off a new tween for the data
-                    this._currentMovementTween = this._entity.game.add.tween(this._entity).to(tweenData, this._backTime, Phaser.Easing.Linear.None, true);
+                    this._currentMovementTween = this._entity.game.add.tween(this._entity).to(tweenData, this.getInterpolationInterval(), Phaser.Easing.Linear.None, true);
 
                     // Add tween completion callback
                     this._currentMovementTween.onComplete.addOnce(() => {
@@ -145,6 +145,18 @@ module OpenORPG {
 
 
             }
+        }
+
+        private getInterpolationInterval() {
+            if (this._states.length < 5)
+                return this._backTime;
+            if (this._states.length < 6)
+                return this._backTime - 20;
+            if (this._states.length < 10)
+                return this._backTime - 30;
+            if (this._states.length < 12)
+                return this._backTime - 40;
+            return this._backTime;
         }
 
         public isIdle(): boolean {
