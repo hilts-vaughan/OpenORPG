@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenORPG.Database.Enums;
 using Server.Game.Entities;
 using Server.Game.Network.Packets.Server;
 using Server.Game.Zones;
@@ -51,6 +52,22 @@ namespace Server.Game.Chat.Handlers
             // Move the player to the zone they have requested
             ZoneManager.Instance.SwitchToZoneAndPosition(player, zoneId, new Vector2(x, y));
 
+        }
+
+        [ChatHandler("Teleport")]
+        public static void MoveToHandler(Player player, List<string> arguments)
+        {
+            var x = int.Parse(arguments[0]);
+            var y = int.Parse(arguments[1]);
+
+            player.Teleport(new Vector2(x, y));        
+        }
+
+        [ChatHandler("Heal")]
+        public static void FullHeal(Player player, List<string> arguments)
+        {
+            player.CharacterStats[StatTypes.Hitpoints].CurrentValue =
+                player.CharacterStats[StatTypes.Hitpoints].MaximumValue;
         }
 
 
