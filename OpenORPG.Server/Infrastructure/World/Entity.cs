@@ -34,6 +34,7 @@ namespace Server.Infrastructure.World
         private string _name;
         private ulong _id;
         private string _sprite;
+        private Direction _direction;
 
 
         /// <summary>
@@ -127,7 +128,11 @@ namespace Server.Infrastructure.World
             return null;
         }
 
-        public Direction Direction { get; set; }
+        public Direction Direction
+        {
+            get { return _direction; }
+            set { _direction = value; PropertyCollection.WriteValue("Direction", value); }
+        }
 
         /// <summary>
         /// The unique ID that identifies this entity

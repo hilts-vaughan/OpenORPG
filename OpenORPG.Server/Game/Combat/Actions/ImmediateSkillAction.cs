@@ -27,6 +27,11 @@ namespace Server.Game.Combat.Actions
  
             // Grab a nearby target that is valid
             var targets = AcquireTargets(combatCharacters);
+
+            // This prevents monsters from hitting each other and gaining aggro / player's from hitting others. 
+            // In the future, some sort of 'rulebook' may need to be passed in to adjust the behaviour
+            targets = RemoveTargetsOfType(ExecutingCharacter.GetType(), targets);
+
             var results = ExecuteSkill(targets);
             return results;
 
@@ -49,6 +54,11 @@ namespace Server.Game.Combat.Actions
             }
             return new List<Character>() { target };
         }
+
+        private IEnumerable<Character> RemoveTargetsOfType(Type type, IEnumerable<Character> filterable)
+        {
+            return filterable.Where(x => x.GetType() != type);
+        } 
 
     }
 }

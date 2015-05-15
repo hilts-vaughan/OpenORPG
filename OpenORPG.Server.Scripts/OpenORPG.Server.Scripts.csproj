@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Combat\Skills\DeathstrikeSkillScript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Zones\npcs\NpcStorageScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenORPG.Common\OpenORPG.Common.csproj">
