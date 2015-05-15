@@ -3,7 +3,7 @@
 
         public game: Phaser.Game;
         private _mapId: number;
-        private playerInfo : PlayerInfo;
+        private playerInfo: PlayerInfo;
 
         public tileMap: Phaser.Tilemap;
 
@@ -23,11 +23,11 @@
         public systems: Array<GameSystem> = new Array<GameSystem>();
 
         public movementSystem: MovementSystem;
-        public combatSystem : CombatSystem;
+        public combatSystem: CombatSystem;
 
-        constructor(game: Phaser.Game, playerInfo : PlayerInfo) {
+        constructor(game: Phaser.Game, playerInfo: PlayerInfo) {
             this.game = game;
-            this.playerInfo = playerInfo;        
+            this.playerInfo = playerInfo;
 
             Zone.current = this;
 
@@ -79,13 +79,13 @@
             }
 
 
-            this.systems.forEach((system : GameSystem) => {
+            this.systems.forEach((system: GameSystem) => {
                 system.initZone();
             });
 
         }
 
-    
+
 
         public addNetworkEntityToZone(entity: any): Entity {
             var worldEntity = new Entity(this.game, 0, 0);
@@ -170,13 +170,32 @@
             }
 
             for (var entityKey in this.entities) {
-                var entity = this.entities[entityKey];  
+                var entity = this.entities[entityKey];
                 entity.render();
             }
 
         }
 
         public update() {
+
+            // We need to update properties before we remove them, just in case
+            for (var toUpdate in this._toUpdate) {
+                var valueB = this._toUpdate[toUpdate];
+
+                var entityB: any = Zone.current.entities[valueB.entityId];
+
+                // We should check for the existance before updating. 
+                if (entityB) {
+                    entityB.mergeWith(valueB.properties);
+                    for (var key in valueB.properties) {
+                        var v = valueB.properties[key];
+                        entityB.propertyChanged(key, v);
+                    }
+                } else {
+                    Logger.warn("An update was sent for an entity that no longer exists on the client. Out of view?");
+                }
+
+            }
 
             for (var toRemove in this._toRemove) {
 
@@ -208,19 +227,7 @@
 
             }
 
-            for (var toUpdate in this._toUpdate) {
-                var valueB = this._toUpdate[toUpdate];
 
-                var entityB: any = Zone.current.entities[valueB.entityId];
-                entityB.mergeWith(valueB.properties);
-
-                for (var key in valueB.properties) {
-                    var v = valueB.properties[key];
-                    entityB.propertyChanged(key, v);
-                }
-
-
-            }
 
 
             for (var entityKey in this.entities) {
@@ -250,17 +257,17 @@
         private setupNetworkHandlers() {
             var network = NetworkManager.getInstance();
 
-            network.registerPacket(OpCode.SMSG_MOB_CREATE, (packet: any) => {
+            network.registerPacket(OpCode.SMSG_MOB_CREATE,(packet: any) => {
 
 
                 Zone.current._toAdd.push(packet.mobile);
             });
 
-            network.registerPacket(OpCode.SMSG_MOB_DESTROY, (packet: any) => {
+            network.registerPacket(OpCode.SMSG_MOB_DESTROY,(packet: any) => {
                 Zone.current._toRemove.push(packet.id);
             });
 
-            network.registerPacket(OpCode.SMSG_ENTITY_PROPERTY_CHANGE, (packet: any) => {
+            network.registerPacket(OpCode.SMSG_ENTITY_PROPERTY_CHANGE,(packet: any) => {
                 Zone.current._toUpdate.push(packet);
             });
 
