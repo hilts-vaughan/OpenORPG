@@ -17,19 +17,20 @@ namespace Server.Game.Combat.Actions
     /// </summary>
     public class ImmediateSkillAction : CombatAction
     {
-        public ImmediateSkillAction(Character executingCharacter, Skill skill) : base(executingCharacter, skill)
+        public ImmediateSkillAction(Character executingCharacter, Skill skill)
+            : base(executingCharacter, skill)
         {
         }
 
 
         public override List<CombatActionResult> PerformAction(IEnumerable<Character> combatCharacters)
         {
- 
+
             // Grab a nearby target that is valid
             var targets = AcquireTargets(combatCharacters);
 
             // This prevents monsters from hitting each other and gaining aggro / player's from hitting others. 
-            // In the future, some sort of 'rulebook' may need to be passed in to adjust the behaviour
+            // In the future, some sort of 'rulebook' may need to be passed in to adjust the behaviour            
             targets = RemoveTargetsOfType(ExecutingCharacter.GetType(), targets);
 
             var results = ExecuteSkill(targets);
@@ -57,8 +58,8 @@ namespace Server.Game.Combat.Actions
 
         private IEnumerable<Character> RemoveTargetsOfType(Type type, IEnumerable<Character> filterable)
         {
-            return filterable.Where(x => x.GetType() != type);
-        } 
+            return filterable.Where(x => x != null && x.GetType() != type);
+        }
 
     }
 }
