@@ -10,47 +10,39 @@
 /// <reference path="Game/Direction.ts" />
 
 module OpenORPG {
-
     var app = angular.module('game', [])
-
 
         .controller('inventoryController', [
             '$scope', '$rootScope', function ($scope, $rootScope) {
                 $scope.gold = 4000;
-
-
             }
         ])
 
         .controller('SettingsController', [
             '$scope', '$rootScope', function ($scope, $rootScope) {
-
                 $scope.settings = $.extend({}, Settings.getInstance());
 
-                $scope.save = function() {
+                $scope.save = function () {
                     $.extend(Settings.getInstance(), $scope.settings);
                     Settings.getInstance().flush();
                     Settings.getInstance().save();
                 }
 
-                $scope.discard = function() {
+                $scope.discard = function () {
                     $scope.settings = $.extend({}, Settings.getInstance());
                 }
 
-                $scope.reset = function() {
+                $scope.reset = function () {
                     Settings.getInstance().reset();
                 }
-
             }
         ])
 
-
         .controller('QuestListController', [
             '$scope', function ($scope) {
-
                 var formatter: RequirementFormatter = new RequirementFormatter();
 
-                $scope.$on('QuestsChanged', (event, data) => {
+                $scope.$on('QuestsChanged',(event, data) => {
                     $scope.selectQuest($scope.selectedIndex);
                 });
 
@@ -62,29 +54,24 @@ module OpenORPG {
                     if ($scope.selectedQuest.state == 1) {
                         $scope.localizeRequirements($scope.selectedQuest.currentStep.requirements);
                     } else {
-                        $scope.currentTask = LocaleManager.getInstance().getString("QuestCompletedFormatter", []);                        
+                        $scope.currentTask = LocaleManager.getInstance().getString("QuestCompletedFormatter", []);
                     }
                 };
 
                 $scope.localizeRequirements = function (requirements) {
-
                     $scope.currentTask = " ";
 
-                    _.each(requirements, (requirement: any, index : number) => {       
-                        formatter.getFormattedRequirement(requirement.type, requirement.info, $scope.selectedQuest.questInfo.requirementProgress[index].progress, (result) => {
+                    _.each(requirements,(requirement: any, index: number) => {
+                        formatter.getFormattedRequirement(requirement.type, requirement.info, $scope.selectedQuest.questInfo.requirementProgress[index].progress,(result) => {
                             $scope.currentTask += result;
                         });
-                    });           
-
-                  
-
+                    });
                 };
-
             }
         ])
+
         .controller('SkillListController', [
             '$scope', function ($scope) {
-
                 $scope.getIcon = function (index: number) {
                     var skill = $scope.playerInfo.characterSkills[index];
                     var icon = GraphicsUtil.getIconCssFromId(skill.iconId);
@@ -98,29 +85,24 @@ module OpenORPG {
                         NetworkManager.getInstance().sendPacket(packet);
                     }
                 };
-
             }
         ])
 
-
         .controller('DialogController', [
             '$scope', function ($scope) {
-
                 // Respond to a dialog change
-                $scope.$on('DialogChanged', (event, data) => {
+                $scope.$on('DialogChanged',(event, data) => {
                     $scope.selectQuest($scope.selectedIndex);
                 });
 
                 $scope.getIcon = function (index: number) {
-      
-                };
 
+                };
             }
         ])
 
         .controller('CharacterStatusController', [
             '$scope', function ($scope) {
-
                 $scope.getVitalPercent = function (type: number) {
                     var vital = this.playerInfo.characterStats[type];
 
@@ -133,7 +115,6 @@ module OpenORPG {
                 }
 
                 $scope.getVitalLabel = function (type: number) {
-
                     var vital = this.playerInfo.characterStats[type];
 
                     if (!vital)
@@ -141,55 +122,44 @@ module OpenORPG {
 
                     return vital.currentValue.toString() + "/" + vital.maximumValue.toString();
                 }
-
             }
         ])
+
         .controller('BottomBarController', [
             '$scope', function ($scope) {
-
                 $scope.getExpPercent = function (type: number) {
-
                     if (!this.playerInfo.player)
                         return 0;
 
                     var exp = this.playerInfo.player.experience;
-
                     if (!exp)
                         return 0;
 
-                    var percent = (exp / (this.playerInfo.player.level * 500) ) * 100;
+                    var percent = (exp / (this.playerInfo.player.level * 500)) * 100;
 
                     return percent;
                 }
 
-
                 $scope.getExpLabel = function () {
-
                     if (!this.playerInfo.player)
                         return "";
 
                     return this.playerInfo.player.experience + "/" + this.playerInfo.player.level * 500;
-
                 }
-
             }
         ])
 
-
-        .filter("skillFormatter", () => {
+        .filter("skillFormatter",() => {
             return (input: number) => {
                 return Math.max(Math.ceil(input), 0) + "s";
             };
         })
 
-
         .controller('CharacterWindowController', [
             '$scope', function ($scope) {
 
                 // We can do some cool stuff here if we want to, but otherwise we're ok 
-
                 $scope.getStatNameFromIndex = index => {
-
                     var names: string[] = [];
                     for (var n in StatTypes) {
                         if (typeof StatTypes[n] === 'number') names.push(n);
@@ -200,8 +170,6 @@ module OpenORPG {
 
             }
         ]);
-
-
 
     app.directive('openDialog', function () {
         return {
@@ -214,17 +182,9 @@ module OpenORPG {
             }
         };
     });
-
-
 }
 
-
 window.onload = () => {
-
-
-
-
-    // Setup underscore   
-
+    // Setup underscore
     var game = new OpenORPG.Game();
 };

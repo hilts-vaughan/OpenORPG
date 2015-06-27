@@ -23,63 +23,40 @@
     <script src="Scripts/jquery.mCustomScrollbar.js"></script>
 
     <script src="Scripts/log4javascript.js"></script>
-
-
-
-
-
-
 </head>
+<body>
+    {{x}}
 
-    <body >
-        
-        {{x}}
+    <div id="gameContainer">
+        <div id="canvasholder" tabindex="0">
+            <div id="inventorydialog" title="Inventory">
+            </div>
 
-        <div id="gameContainer">
-            <div id="canvasholder" tabindex="0">
+            <div id="characterdialog" title="Character">
+            </div>
 
+            <div id="quest-dialog" title="Quest">
+            </div>
 
+            <div id="dialog-window" title="Conversation">
+            </div>
 
+            <div id="skill-dialog" title="Skills">
+            </div>
 
+            <div id="quest-list-dialog" title="Quests">
+            </div>
 
-
-                <div id="inventorydialog" title="Inventory">
-                </div>
-
-                <div id="characterdialog" title="Character">
-                </div>
-
-                <div id="quest-dialog" title="Quest">
-
-                </div>
-                
-                <div id="dialog-window" title="Conversation">
-
-                </div>
-
-                <div id="skill-dialog" title="Skills">
-
-                </div>
-
-                <div id="quest-list-dialog" title="Quests">
-
-                </div>
-                
-                <div id="settings-dialog" title="Settings">
-                    
-                </div>
-                
-                
-
+            <div id="settings-dialog" title="Settings">
             </div>
         </div>
+    </div>
 
+    <!---Inject angularJS-->
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-animate.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="app.js"></script>
 
-        <!---Inject angularJS-->
-        <script src="Scripts/angular.js"></script>
-        <script src="Scripts/angular-animate.js"></script>
-        <script src="Scripts/angular-route.js"></script>
-        <script src="app.js"></script>
-
-    </body>
+</body>
 </html>
