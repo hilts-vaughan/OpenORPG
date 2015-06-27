@@ -109,13 +109,14 @@ namespace Server.Game.Zones
             {
                 TileMap = new TmxMap(zonePath);
             }
-            catch (FileNotFoundException exception)
+            catch (IOException exception)
             {
                 // Mark the world as offline
                 Available = false;
 
                 Logger.Instance.Error(
-                    "The world in zone #{0} could not be started. The tilemap could not be found. \n" + exception, id);
+                    "The world in zone #{0} could not be started. The tilemap could not be found. \n" +
+                    "Zone path: \"{1}\"\n" + exception, id, zonePath);
             }
 
             AddGameSystems();

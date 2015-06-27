@@ -1,6 +1,5 @@
 ﻿module OpenORPG {
     export class NetworkManager {
-
         private static _instance: NetworkManager = null;
 
         private _host: string;
@@ -62,7 +61,6 @@
             this._socket.onmessage = (event: any) => {
                 this.parseMessage(event);
             };
-
         }
 
         // Parses an incoming message accordingly
@@ -73,10 +71,7 @@
                     value(packet);
                 });
             } else
-                Logger.warn("A packet with the ID of " + packet.opCode + " received but not handled");
-                
+                Logger.warn("A packet with the ID of " + packet.opCode + " received but not handled");       
         }
-
-
     }
 }
