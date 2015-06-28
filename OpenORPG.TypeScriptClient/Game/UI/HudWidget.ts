@@ -108,6 +108,52 @@
         }
 
         onLoaded() {
+            var that = this;
+
+            var tat = new UI.Element(null, "#login-panel");
+
+            $("#remember-user").on("click", function (eventObject: JQueryEventObject, ...args: any[]) {
+                that.refreshCheckboxes(true, false);
+            });
+
+            $("#remember-pass").on("click", function (eventObject: JQueryEventObject, ...args: any[]) {
+                that.refreshCheckboxes(false, true);
+            });
+
+            this.refreshCheckboxes();
+        }
+
+        private refreshCheckboxes(toggleUser: boolean = false, togglePass: boolean = false) {
+            if (toggleUser) {
+                Settings.getInstance().saveUsername = !Settings.getInstance().saveUsername;
+            }
+
+            if (togglePass) {
+                Settings.getInstance().savePassword = !Settings.getInstance().savePassword;
+            }
+
+            Settings.getInstance().savePassword = Settings.getInstance().saveUsername && Settings.getInstance().savePassword;
+
+            Settings.getInstance().flush();
+            Settings.getInstance().save();
+
+            var rememberUser = $("#remember-user");
+            if (Settings.getInstance().saveUsername) {
+                console.log("yes user");
+                rememberUser.attr("checked", "true");
+            } else {
+                console.log("not user");
+                rememberUser.removeAttr("checked");
+            }
+
+            var rememberPass = $("#remember-pass");
+            if (Settings.getInstance().savePassword) {
+                console.log("yes pass");
+                rememberPass.attr("checked", "true");
+            } else {
+                console.log("not pass");
+                rememberPass.removeAttr("checked");
+            }
         }
     }
 

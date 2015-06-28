@@ -4,7 +4,7 @@
 
         constructor() {
             super();
-            
+
             this.loginPanelWidget = new LoginPanelWidget($("#canvasholder"));
         }
 
@@ -20,15 +20,11 @@
             });
 
             if (Settings.getInstance().autoLoginSet) {
-                var options = this.game.net.getQueryString("username");
-  
-
                 //TODO: Get query parameters working
+                var options = this.game.net.getQueryString("username");
                 var loginPacket = PacketFactory.createLoginPacket(options["user"], options["password"]);
                 network.sendPacket(loginPacket);
             }
-
-
         }
 
         preload() {

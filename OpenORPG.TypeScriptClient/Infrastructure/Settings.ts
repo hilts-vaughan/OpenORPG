@@ -18,9 +18,13 @@
             this._hostname = val;
         }
 
-        // Some setting properties can go here
+        /* Login */
         public autoLoginSet: boolean = true;
+
+        public saveUsername: boolean = false;
         public savedUsername: string;
+
+        public savePassword: boolean = false;
         public savedPassword: string;
 
         public playBGM: boolean = true;
@@ -57,6 +61,9 @@
             // Set some defaults if required
             if (!settings) {
                 this.autoLoginSet = true;
+                this.saveUsername = false;
+                this.savePassword = false;
+
                 this.save();
             } else {
                 // Copy the entire settings into here
