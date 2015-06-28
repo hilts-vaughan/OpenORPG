@@ -494,6 +494,7 @@
     <TypeScriptCompile Include="Game\States\GameplayState.ts" />
     <TypeScriptCompile Include="Game\States\HeroSelectState.ts" />
     <TypeScriptCompile Include="Game\States\LoginMenuState.ts" />
+    <TypeScriptCompile Include="Game\UI\Align.ts" />
     <TypeScriptCompile Include="Game\UI\AngularInterop.ts" />
     <TypeScriptCompile Include="Game\UI\Character\EquipmentItemContextMenu.ts" />
     <TypeScriptCompile Include="Game\UI\HudWidget.ts" />
@@ -504,6 +505,8 @@
     <TypeScriptCompile Include="Game\UI\Quest\ItemRequirementFormatter.ts" />
     <TypeScriptCompile Include="Game\UI\Quest\MonstersKilledFormatter.ts" />
     <TypeScriptCompile Include="Game\UI\Quest\RequirementFormatter.ts" />
+    <TypeScriptCompile Include="Game\UI\Element.ts" />
+    <TypeScriptCompile Include="Game\UI\Panel.ts" />
     <TypeScriptCompile Include="Game\World\Zone.ts" />
     <TypeScriptCompile Include="Infrastructure\Content\ContentCache.ts" />
     <TypeScriptCompile Include="Infrastructure\Content\ContentManager.ts" />
@@ -607,7 +610,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\effects\" />
-    <Folder Include="dev\" />
     <Folder Include="Game\Sync\" />
   </ItemGroup>
   <PropertyGroup>
