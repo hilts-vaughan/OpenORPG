@@ -30,6 +30,14 @@
          */
         onLoaded() {
         }
+
+        show() {
+            this.container.show();
+        }
+
+        hide() {
+            this.container.hide();
+        }
     }
     /*
      * A small widget that is bound to the top left of the window space that displays information regarding character status.
@@ -100,34 +108,6 @@
         }
 
         onLoaded() {
-            this.inventoryWindow = new InventoryWindow();
-            this.characterWindow = new CharacterWindow(this.playerInfo);
-            this.questListWindow = new QuestListWindow();
-            this.settingsWindow = new SettingsWindow();
-            var that = this;
-
-            // A few events quickly to bind our menu items
-            this.container.find(".menu-item-backpack").on("click",() => {
-                that.inventoryWindow.toggleVisibility();
-            });
-
-            this.container.find(".menu-item-equip").on("click",() => {
-                that.characterWindow.toggleVisibility();
-            });
-
-            this.container.find(".menu-item-achievements").on("click",() => {
-                that.questListWindow.toggleVisibility();
-            });
-
-            this.container.find(".menu-item-settings").on("click",() => {
-                that.settingsWindow.toggleVisibility();
-            });
-
-            this.container.find(".menu-item-skills").on("click",() => {
-                var q: SkillWindow;
-                q = new SkillWindow(this.playerInfo);
-                q.toggleVisibility();
-            });
         }
     }
 

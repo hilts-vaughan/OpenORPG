@@ -43,7 +43,8 @@
             SpriteManager.loadSpriteInfo(this.game);
         }
 
-
+        shutdown() {
+            this.loginPanelWidget.hide();
+        }
     }
-
 }

@@ -100,6 +100,7 @@
     <Content Include="css\flick\jquery-ui-1.10.4.custom.css" />
     <Content Include="css\flick\jquery-ui-1.10.4.custom.min.css" />
     <Content Include="css\jquery.mCustomScrollbar.css" />
+    <Content Include="Default.htm" />
     <Content Include="game.css" />
     <Content Include="assets\atlas\boxes\box.png" />
     <Content Include="assets\atlas\boxes\boxAlt.png" />
@@ -606,6 +607,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\effects\" />
+    <Folder Include="dev\" />
     <Folder Include="Game\Sync\" />
   </ItemGroup>
   <PropertyGroup>
@@ -625,9 +627,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>53857</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51853/?user=Vaughan1&amp;password=Vaughan</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhost:51853/?username=Vaughan1&amp;password=Vaughan</IISAppRootUrl>
+          <IISUrl>http://localhost:51853/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

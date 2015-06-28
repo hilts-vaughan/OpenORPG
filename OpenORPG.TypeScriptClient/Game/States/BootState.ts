@@ -5,9 +5,9 @@
 
             this.game.stage.disableVisibilityChange = true;
             this.game.scale.setGameSize(window.innerWidth, window.innerHeight);
-            
+
             /* Setup the connecting splash screen */
-            var connectingSplash = this.game.add.sprite(1024 / 2, 768 / 2, "connecting", 0);
+            var connectingSplash = this.game.add.sprite(this.centerX, this.centerY, "connecting", 0);
             connectingSplash.anchor.setTo(0.5, 0.5);
             
             /* Set up the network object. */

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Server.Game.Database;
 using Server.Game.Database.Models;
 
@@ -20,7 +21,10 @@ namespace Server.Game.Network.Authentication.Providers
                 account = context.Accounts.FirstOrDefault((a) => a.Username == username);
 
                 if (account == null)
+                {
                     return false;
+                }
+
                 return account.Password == password;
             }
         }

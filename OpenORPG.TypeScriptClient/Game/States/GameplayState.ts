@@ -58,7 +58,6 @@
             // Load all our audio
             loader.audio("audio_music_town", [DirectoryHelper.getMusicPath() + "town.ogg"]);
             loader.audio("audio_effect_hit", [DirectoryHelper.getAudioEffectPath() + "hit1.ogg"]);
-
         }
 
         render() {
