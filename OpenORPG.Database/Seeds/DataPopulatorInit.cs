@@ -18,11 +18,8 @@ namespace Server.Game.Database.Seeds
     /// <summary>
     ///     A custom initializer that populates the game database with mock data useful for testing, clean, good known states.
     /// </summary>
-    public class CustomInitializer : DropCreateDatabaseAlways<GameDatabaseContext> // DropCreateDatabaseIfModelChanges<GameDatabaseContext>   
+    public class CustomInitializer : DropCreateDatabaseIfModelChanges<GameDatabaseContext>//CreateDatabaseIfNotExists<GameDatabaseContext>//DropCreateDatabaseAlways<GameDatabaseContext> // DropCreateDatabaseIfModelChanges<GameDatabaseContext>
     {
-
-
-
         protected override void Seed(GameDatabaseContext context)
         {
             CreateTestSkills(context);
@@ -32,10 +29,9 @@ namespace Server.Game.Database.Seeds
             // Add a new user
             for (int i = 0; i < 50; i++)
             {
-                var account = new UserAccount("Vaughan" + i, @"Vaughan/", "someone@someone.com");
+                var account = new UserAccount("Vaughan" + i, @"Vaughan", "someone@someone.com");
 
                 var character = new UserHero();
-
 
                 character.Name = GetRandomName();
                 character.Account = account;
@@ -89,12 +85,7 @@ namespace Server.Game.Database.Seeds
             CreateTestQuests(context);
             CreateTestItems(context);
 
- 
             context.SaveChanges();
-
-           
-
-
 
             base.Seed(context);
         }
@@ -122,9 +113,6 @@ namespace Server.Game.Database.Seeds
             context.ItemTemplates.Add(testItem);
             context.ItemTemplates.Add(testPlate);
 
-
-
-
             // Create a bunch of test equipment for the sample game
             var bronzeSword = new ItemTemplate(0, "Bronze Sword",
                 "A basic bronze sword with just enough strength to bang up some monsters.", ItemType.Equipment, 0, false,
@@ -151,7 +139,20 @@ namespace Server.Game.Database.Seeds
                 "Holo",
                 "Haruhi",
                 "Blank",
-                "Himeragi"
+                "Himeragi",
+                "さつき",
+                "ナルト",
+                "ロビー",
+                "Souma-kun",
+                "Nozaki-kun",
+                "Sakura-san",
+                "Seo-senpai",
+                "Mikorin",
+                "月刊少女野崎くん",
+                "Aoi",
+                "ヴォーン",
+                "Urara",
+                "Yamada"
             };
 
             return names.OrderBy(s => Guid.NewGuid()).First();
