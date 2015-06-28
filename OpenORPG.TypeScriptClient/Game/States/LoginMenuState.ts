@@ -1,15 +1,14 @@
 ﻿module OpenORPG {
-    export class LoginMenuState extends Phaser.State {
+    export class LoginMenuState extends AbstractState {
+        private loginPanelWidget: LoginPanelWidget;
+
+        constructor() {
+            super();
+            
+            this.loginPanelWidget = new LoginPanelWidget($("#canvasholder"));
+        }
 
         create() {
-
-            // Create our login button
-            var button = this.game.add.button(1024 / 2, 768 / 2 + 120, "play_button", null, this, 1, 1, 2);
-            button.anchor.setTo(0.5, 0.5);
-
-            var text = this.game.add.text(1024 / 2, 768 / 2 - 170, "Select your hero", FontFactory.getPlayerFont());
-            text.anchor.set(0.5, 0.5);
-
             var network = NetworkManager.getInstance();
 
             network.registerPacket(OpCode.SMSG_LOGIN_RESPONSE, (packet: any) => {

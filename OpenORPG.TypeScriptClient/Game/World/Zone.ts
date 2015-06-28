@@ -1,6 +1,5 @@
 ﻿module OpenORPG {
     export class Zone {
-
         public game: Phaser.Game;
         private _mapId: number;
         private playerInfo: PlayerInfo;
@@ -31,15 +30,10 @@
 
             Zone.current = this;
 
-
             this.setupNetworkHandlers();
-
-
-
         }
 
         public initLocalZone(mapId: number) {
-
             // Setup tilemap
             var game = this.game;
             this._mapId = mapId;
@@ -54,6 +48,7 @@
             for (var layerKey in this.tileMap.layers) {
                 var layer: any = this.tileMap.layers[layerKey];
                 var worldLayer = this.tileMap.createLayer(layer.name);
+
                 worldLayer.resizeWorld();
                 this.bucket.push(worldLayer);
 
@@ -63,29 +58,24 @@
                     this.entityGroup = new Phaser.Group(this.game);
                     this.game.world.addAt(this.entityGroup, worldLayer.index + 1);
                 }
-
             }
 
             this.generateCollisionMap();
 
             // Create systems
             if (this.movementSystem == null) {
-
                 // Create our systems as we need them
                 this.movementSystem = new MovementSystem(this, null);
-                this.combatSystem = new CombatSystem(this, null, this.playerInfo);
                 this.systems.push(this.movementSystem);
+
+                this.combatSystem = new CombatSystem(this, null, this.playerInfo);
                 this.systems.push(this.combatSystem);
             }
-
 
             this.systems.forEach((system: GameSystem) => {
                 system.initZone();
             });
-
         }
-
-
 
         public addNetworkEntityToZone(entity: any): Entity {
             var worldEntity = new Entity(this.game, 0, 0);
@@ -94,7 +84,6 @@
 
             this.entities[worldEntity.id] = worldEntity;
             this.entityGroup.addChild(worldEntity);
-
 
             // Fire off property changes
             for (var key in entity) {
@@ -110,9 +99,7 @@
             return worldEntity;
         }
 
-
         public clearZone() {
-
             for (var entityKey in this.entities) {
                 var entity = this.entities[entityKey];
                 entity.destroy();
@@ -137,10 +124,6 @@
 
             if (this.tileMap != null)
                 this.entityGroup.destroy(true);
-
-
-
-
         }
 
         private generateCollisionMap() {
@@ -156,32 +139,25 @@
                         this.tileMap.setCollision([parseInt(propKey) + 1], true, i);
                     }
                 }
-
             }
-
-
-
         }
 
-
         render() {
-            for (var system in this.systems) {
+            /* FUTUREIMPL: Currently does nothing. */
+            /*for (var system in this.systems) {
                 this.systems[system].render();
             }
 
             for (var entityKey in this.entities) {
                 var entity = this.entities[entityKey];
                 entity.render();
-            }
-
+            }*/
         }
 
         public update() {
-
             // We need to update properties before we remove them, just in case
             for (var toUpdate in this._toUpdate) {
                 var valueB = this._toUpdate[toUpdate];
-
                 var entityB: any = Zone.current.entities[valueB.entityId];
 
                 // We should check for the existance before updating. 
@@ -194,11 +170,9 @@
                 } else {
                     Logger.warn("An update was sent for an entity that no longer exists on the client. Out of view?");
                 }
-
             }
 
             for (var toRemove in this._toRemove) {
-
                 var value = this._toRemove[toRemove];
                 var entity = this.entities[value];
 
@@ -220,15 +194,10 @@
                 Logger.debug("Entity was added to the current zone");
                 Logger.debug(entityA);
 
-
-
                 // Apply the fade effect
                 EffectFactory.fadeEntityIn(entityA);
 
             }
-
-
-
 
             for (var entityKey in this.entities) {
                 var entity = this.entities[entityKey];  
@@ -251,15 +220,12 @@
             // Re sort our entities
             if (this.entityGroup != null)
                 this.entityGroup.sort('y', Phaser.Group.SORT_ASCENDING);
-
         }
 
         private setupNetworkHandlers() {
             var network = NetworkManager.getInstance();
 
             network.registerPacket(OpCode.SMSG_MOB_CREATE,(packet: any) => {
-
-
                 Zone.current._toAdd.push(packet.mobile);
             });
 
@@ -270,10 +236,6 @@
             network.registerPacket(OpCode.SMSG_ENTITY_PROPERTY_CHANGE,(packet: any) => {
                 Zone.current._toUpdate.push(packet);
             });
-
         }
-
-
-
     }
 } 

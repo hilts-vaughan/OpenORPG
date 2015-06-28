@@ -36,25 +36,35 @@
     border: 2px solid #555555;
 }
 
-
-
 body {
     background: black;
     font-family: "AdvoCut";
     cursor: url('assets/img/hand.png'), auto;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#gameContainer {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#canvasholder {
+    width: auto;
+    height: auto;
+    position: relative;
+    cursor: url('assets/img/hand.png'), auto;
+    outline: none;
+    overflow: hidden;
 }
 
 canvas {
     cursor: url('assets/img/hand.png'), auto;
     outline: none;
-}
-
-#canvasholder {
-    width: 1336px;
-    margin: 0 auto;
-    position: relative;
-    cursor: url('assets/img/hand.png'), auto;
-    outline: none;
+    margin: auto;
 }
 
 .rounded-container {
@@ -123,8 +133,6 @@ canvas {
     left: 7px;
 }
 
-
-
     #character-status .labels {
         width: 100%;
         height: 20%;
@@ -185,8 +193,191 @@ canvas {
     padding-top: 5px;
 }
 
+#login-panel {
+    position: absolute;
+    width: 576px;
+    height: 384px;
+    top: 50%;
+    left: 50%;
+    margin-left: -288px;
+    margin-top: -192px;
+    background-color: rgb(12, 11, 11);
+    border-width: 7px;
+    border-color: rgb(70, 47, 40);
+    box-shadow: rgba(0, 0, 0, 0.28) 7px 7px inset;
+    font-family: "AdvoCut";
+    color: ghostwhite;
+    text-align: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
+#login-panel .cbl {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: url('assets/img/hand.png'), auto;
+}
 
+#login-panel .login-opt {
+    display: inline;
+    margin: 2px 6px;
+}
+
+#login-panel #login-opt-user {
+    margin-right: 10px;
+}
+
+#login-panel #login-opt-pass {
+    margin-left: 10px;
+}
+
+#login-panel input[type=checkbox] {
+    display: none;
+    cursor: url('assets/img/hand.png'), auto;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-left: 5px;
+}
+
+#login-panel input[type=checkbox] + label:before {
+    content: "";
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    margin-right: 6px;
+    border: 2px solid rgb(255, 190, 190);
+    background-color: rgb(100, 50, 50);
+    cursor: url('assets/img/hand.png'), auto;
+}
+
+#login-panel input[type=checkbox]:checked + label:before {
+    border: 2px solid rgb(190, 255, 190);
+    background-color: rgb(50, 160, 50);
+    color: black;
+    font-weight: 900;
+    padding-top: -0.2em;
+    font-size: 0.65em;
+    cursor: url('assets/img/hand.png'), auto;
+}
+
+#login-panel h1 {
+    letter-spacing: 4px;
+    font-size: 2.5em;
+}
+
+#login-panel .spacer {
+    position: relative;
+    width: 100%;
+    height: 20px;
+}
+
+#login-panel .spacer-xl {
+    position: relative;
+    width: 100%;
+    height: 90px;
+}
+
+#login-panel .spacer-xs {
+    position: relative;
+    width: 100%;
+    height: 10px;
+}
+
+#login-panel .button {
+    border-width: 3px;
+    border-color: darkgoldenrod;
+    background-color: rgb(80, 60, 50);
+    color: floralwhite;
+    min-width: 96px;
+    width: auto;
+    padding: 5px 12px;
+    margin: 8px 0px;
+    height: auto;
+    font-size: 1.3em;
+    float: left;
+    box-shadow:
+        rgba(0, 0, 0, 0.5) 1px 1px inset,
+        rgba(0, 0, 0, 0.15) -1px -1px inset;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#login-panel .button:hover {
+    background-color: rgb(190, 170, 160);
+    color: rgb(50, 30, 20);
+    box-shadow:
+        rgba(0, 0, 0, 0.5) 1px 1px inset,
+        rgba(0, 0, 0, 0.3) -1px -1px inset;
+}
+
+#login-panel .button:active {
+    background-color: rgb(50, 30, 20);
+    color: floralwhite;
+    box-shadow:
+        rgba(0, 0, 0, 0.7) 2px 2px inset,
+        rgba(0, 0, 0, 0.3) -1px -1px inset;
+}
+
+#login-panel .entry {
+    position: relative;
+    width: 432px;
+    left: 50%;
+    margin-left: -216px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+#login-panel .entry input {
+    width: 320px;
+    display: inline;
+    border-radius: 4px;
+    border-width: 2px;
+    border-color: rgb(190, 190, 190);
+    border-style: solid;
+    background-color: rgb(120, 120, 120);
+    cursor: inherit;
+    padding: 1px 4px;
+    font-family: "AdvoCut";
+}
+
+#login-panel input:focus {
+    border-color: rgb(255, 255, 255);
+    border-style: solid;
+    background-color: rgb(160, 160, 160);
+}
+
+#login-panel .entry .label {
+    width: 104px;
+    margin-right: 4px;
+    display: inline;
+    text-align: right;
+    font-weight: 500;
+    font-stretch: wider;
+}
+
+#login-panel #entry-username {
+}
+
+#login-panel #entry-password {
+}
 
 #overlay {
     position: absolute;
@@ -214,13 +405,9 @@ canvas {
     flex-direction: column; /* column | row */
 }
 
-
     #bottombar .status-bar {
         height: 80%;
     }
-
-
-
 
     #bottombar .top-bar {
         height: 100%;
@@ -250,9 +437,6 @@ canvas {
         margin-right: 5px;
     }
 
-
-
-
 .vertical-text {
     transform: rotate(90deg);
     transform-origin: left top 0;
@@ -270,8 +454,6 @@ canvas {
     background-image: url("assets/hud/slot.png");
     background-repeat: no-repeat;
 }
-
-
 
 #chatlog {
     background-color: rgba(0, 0, 0, 0);
@@ -319,10 +501,6 @@ canvas {
     background-image: url("assets/img/chat.png");
     background-position: center right;
     background-repeat: no-repeat;
-}
-
-#gameContainer {
-    position: relative;
 }
 
 #controls {
@@ -459,10 +637,6 @@ canvas {
         overflow: overlay;
  }
 
-$
-
-
-
     #skill-window .quest-list {
         width: 120px;
         height: auto;
@@ -513,9 +687,6 @@ $
 #skill-window .skillrow:hover {
     color: yellow;
 }
-
-
-
 
 #skill-window .quest-content {
     width: 345px;

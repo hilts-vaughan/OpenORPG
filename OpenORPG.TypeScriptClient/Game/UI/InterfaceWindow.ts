@@ -1,15 +1,12 @@
 ﻿module OpenORPG {
-
     /*
      *  An interface window inside of a game
      */
     export class InterfaceWindow {
-
         public windowName: string;
         public $window: Object;
 
         constructor(windowFile: string, windowName: string) {
-
             this.$window = $(windowName).dialog(
                 {
                     autoOpen: true,
@@ -17,12 +14,7 @@
                     modal: false,
                     width: 'auto',
                     open: function () { $(this).parent().css("padding", "0px"); $(this).parent().css("background", "transparent"); }
-
-
-
                 });
-
-
 
             var that = this;
             // Get jQuery to load the static content into the page
@@ -37,66 +29,43 @@
                     $compile(container)(scope);
                     scope.$apply();
                 });
-
-
-
             });
 
             this.windowName = windowName;
-
-
         }
-
 
         // Close this interface window
         toggleVisibility() {
             ($(this.$window).dialog("isOpen") == false) ? $(this.$window).dialog("open") : $(this.$window).dialog("close");
-
         }
 
         close() {
             $(this.$window).dialog("close");
         }
 
-
         open() {
             $(this.$window).dialog("open");
         }
 
-
-
         ready() {
 
-
-
-
         }
-
     }
 
     export class QuestListWindow extends InterfaceWindow {
-
         constructor() {
             super("assets/hud/quest_list.html", "#quest-list-dialog");
         }
-
     }
 
-
     export class SettingsWindow extends InterfaceWindow {
-        
         constructor() {
             super("assets/hud/settings.html", "#settings-dialog");
         }
-
     }
 
-
     export class DialogWindow extends InterfaceWindow {
-
         //jQuery it up.. oh god this needs a cleaning in the worst way
-        //
-
         presentDialog(text: string, links: Array<string>) {
             this.render(text, links);
             this.open();
@@ -106,24 +75,18 @@
             super("assets/hud/dialog.html", "#dialog-window");
         }
 
-        render(text : string, links : Array<any>) {
-
+        render(text: string, links: Array<any>) {
             $(this.windowName).find("#description").text(text);
-
             $(this.windowName).find(".action-bar").children().remove();
 
             links.forEach((link, index) => {
-                var x : JQuery =  $("<span class='action-button'></span>");
+                var x: JQuery = $("<span class='action-button'></span>");
                 x.data("link", link.index);
                 x.text(link.link);
 
                 $(".action-bar").append(x);
 
-
-
-         
             });
-
 
             $(this.windowName).find(".action-button").click((event: JQueryEventObject) => {
                 var element = $(event.target);
@@ -132,12 +95,8 @@
                 var packet = PacketFactory.createDialogLink(index);
                 NetworkManager.getInstance().sendPacket(packet);
             });
-
         }
-
     }
-
-
 
     /*
      * A window that is used for displaying quest related stuff
@@ -147,7 +106,6 @@
 
         constructor() {
             super("assets/hud/quest.html", "#quest-dialog");
-
         }
 
         presentQuest(questId: number) {
@@ -166,7 +124,7 @@
             $(this.windowName).prev().hide();
 
             // Load the quest info and get ready
-            ContentManager.getInstance().getContent(ContentType.Quest, this.id, (quest) => {
+            ContentManager.getInstance().getContent(ContentType.Quest, this.id,(quest) => {
 
                 $(this.windowName).find("#description").text(quest.description);
                 $(this.windowName).find(".quest-header").text(quest.name);
@@ -184,36 +142,25 @@
             $(this.windowName).find("#decline-button").click(() => {
                 that.close();
             });
-
         }
-
-
     }
 
     export class SkillWindow extends InterfaceWindow {
-
         private playerInfo: PlayerInfo;
 
         constructor(playerInfo: PlayerInfo) {
-
             super("assets/hud/skills.html", "#skill-dialog");
             this.playerInfo = playerInfo;
-
         }
-
 
         ready() {
 
         }
-
     }
 
     export class CharacterWindow extends InterfaceWindow {
-
         equipmentBindings = [];
-
         playerInfo: PlayerInfo;
-
 
         bindEquipmentSlots() {
             this.equipmentBindings[EquipmentSlot.Weapon] = (".weaponslot");
@@ -228,8 +175,6 @@
          * This function is reponsible for rendering character statistics onto the form.
          */
         renderStats() {
-
-
             // Render info
             var selector = $(this.windowName).find("#statspanel").selector;
 
@@ -238,12 +183,10 @@
             // Remove old stat stuff
             $(".statrow").remove();
 
-
             var names: string[] = [];
             for (var n in StatTypes) {
                 if (typeof StatTypes[n] === 'number') names.push(n);
             }
-
 
             for (var key in this.playerInfo.characterStats) {
                 var value = this.playerInfo.characterStats[key];
@@ -255,17 +198,10 @@
                     $(content).html(names[key] + ': <b class="statnumber">' + value.currentValue + '</b>');
 
                 $(selector).append(content);
-
             }
-
-
-
-
-
         }
 
         constructor(playerInfo: PlayerInfo) {
-
             super("assets/hud/character.html", "#characterdialog");
 
             this.bindEquipmentSlots();
@@ -274,10 +210,7 @@
             // Setup a binding to change on character state change
             //this.playerInfo.listenCharacterStatChange($.proxy(this.renderStats, this));
 
-
-
-            NetworkManager.getInstance().registerPacket(OpCode.SMSG_EQUIPMENT_UPDATE, (packet) => {
-
+            NetworkManager.getInstance().registerPacket(OpCode.SMSG_EQUIPMENT_UPDATE,(packet) => {
                 // Update all the things
                 var slot: EquipmentSlot = packet.slot;
                 var equipment: any = packet.equipment;
@@ -298,41 +231,28 @@
                     var menu = new EquipmentItemContextMenu(item.parent()[0]);
 
                     var tooltip: ItemTooltipInfo = new ItemTooltipInfo($(domSlot)[0], equipment);
-
                 }
-
             });
         }
-
-
-
     }
 
     export class InventoryWindow extends InterfaceWindow {
-
         // Create our inventory window
         constructor() {
-
-
-
             super("assets/hud/inventory.html", "#inventorydialog");
 
             // Hook into our network events
-            NetworkManager.getInstance().registerPacket(OpCode.SMSG_STORAGE_HERO_SEND, (packet) => {
+            NetworkManager.getInstance().registerPacket(OpCode.SMSG_STORAGE_HERO_SEND,(packet) => {
                 // Do something about the inventory update   
                 this.renderInventory(packet.itemStorage);
             });
-
         }
 
         ready() {
 
-
-
         }
 
         renderInventory(inventory: any) {
-
             $("#itemback").empty();
 
             for (var i = 0; i < inventory.capacity; i++) {
@@ -358,7 +278,6 @@
 
             }
 
-
             // Setup drag events
             $(".item").draggable({ revert: 'invalid' });
 
@@ -367,8 +286,6 @@
 
                 drop: function (ev, ui) {
 
-
-
                     var dropped = ui.draggable;
                     var droppedOn = $(this);
 
@@ -376,24 +293,15 @@
                     var sourceSlotId: number = parseInt($(dropped).parent().attr("slotId"));
                     var destSlotId: number = parseInt($(droppedOn).attr("slotId"));
 
-
-
                     $(dropped).detach().css({ top: 0, left: 0 }).appendTo(droppedOn);
-
 
                     var packet = PacketFactory.createStorageMoveRequest(sourceSlotId, destSlotId, 0);
                     NetworkManager.getInstance().sendPacket(packet);
-
                 }
-
             });
-
-
 
             // Attach a context menu
             var menu: InventoryContextMenu = new InventoryContextMenu($("#itemback").get(0));
-
-
         }
 
         itemInSpot(drag_item, spot) {
@@ -403,11 +311,5 @@
             }).attr('class', drag_item.attr('class')).appendTo(spot).draggable({ revert: 'invalid' }); // add to spot + make draggable
             drag_item.remove(); // remove the old object
         }
-
-
     }
-
-
-
-
 } 

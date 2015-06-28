@@ -1,14 +1,8 @@
-﻿
-module OpenORPG {
-
-
+﻿module OpenORPG {
     // The gameplay state manages 
-    export class GameplayState extends Phaser.State {
-
+    export class GameplayState extends AbstractState {
         private zone: Zone = null;
         private currenTrack: Phaser.Sound;
-
-
 
         private characterHud: CharacterStatusWidget;
         private bottomBarWidget: BottombarWidget;
@@ -17,7 +11,6 @@ module OpenORPG {
 
         private questWindow: QuestWindow = new QuestWindow();
         private dialogWindow: DialogWindow = new DialogWindow();
-
 
         private chatManager: ChatManager;
 
@@ -39,17 +32,13 @@ module OpenORPG {
                 $rootScope.playerInfo = that.playerInfo;
             });
 
-
             this.playerMonitor = new PlayerInfoMontior(this.playerInfo);
             this.chatManager = new ChatManager();
-       
 
             this.characterHud = new CharacterStatusWidget($("#canvasholder"), this.playerInfo);
             this.bottomBarWidget = new BottombarWidget($("#canvasholder"));
             this.chatWidget = new ChatWidget($("#canvasholder"));
             this.menuWidget = new MenuTrayWidget($("#canvasholder"), this.playerInfo);
-
-
         }
 
         preload() {

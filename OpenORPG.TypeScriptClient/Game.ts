@@ -1,17 +1,35 @@
 ﻿module OpenORPG {
     export class Game {
         constructor() {
-            // Choose the technology based on the settings
-            var tech: number = Phaser.CANVAS;
+            var windowWidth = window.innerWidth;
+            var windowHeight = window.innerHeight;
 
-            if (Settings.getInstance().debugForceWebGl)
-                tech = Phaser.WEBGL;
+            var width = windowWidth;//Math.round(Math.min(windowWidth, windowHeight * 16.0 / 9.0));
+            var height = windowHeight;//Math.round(Math.min(windowHeight, width * 9.0 / 16.0));
 
-            var width = $("#gameContainer").width();
-            var height = $("#canvasholder").height();
-            this.game = new Phaser.Game(1600, 900, tech, 'canvasholder', this, true, false);
-
+            //var canvasHolder = document.getElementById("canvasholder");
+            this.game = new Phaser.Game(width, height, this.pickRenderer(), 'canvasholder', this, true, false);
+            console.log(window.onresize);
+            window.onresize = function (evt: UIEvent) {
+                this.game.camera.setSize(window.innerWidth, window.innerHeight);
+                this.game.scale.setGameSize(window.innerWidth, window.innerHeight);
+                this.game.scale.refresh();
+                console.log(this.game.scale);
+                console.log(this.game.camera);
+            }.bind(this);
+            
             this.game.state.add("boot", new BootState(), false);
+        }
+
+        pickRenderer(): number {
+            if (Settings.getInstance().debugForceWebGl)
+                return Phaser.WEBGL;
+
+            return Phaser.CANVAS;
+        }
+
+        aspectRatio() {
+            return (window.innerWidth / window.innerHeight);
         }
 
         game: Phaser.Game;
