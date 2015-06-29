@@ -1,6 +1,7 @@
 ﻿module OpenORPG.UI {
     /**
      * Alignment enum.
+     * DOCTODO: This documentation is terrible (and I wrote it)
      */
     export enum Align {
         Center = 0xF, /* Left | Right or Top | Bottom */
@@ -18,10 +19,23 @@
         Default = TopLeft
     }
 
+    /**
+     * DOCTODO
+     *
+     * @param hname
+     * @param vname
+     * @returns
+     */
     export function getAlign(hname: string, vname: string): Align {
         return getHAlign(hname) & getVAlign(vname);
     }
 
+    /**
+     * DOCTODO
+     *
+     * @param name
+     * @returns
+     */
     export function getHAlign(name: string): Align {
         switch (name) {
             case "center": return Align.Center;
@@ -31,6 +45,12 @@
         }
     }
 
+    /**
+     * DOCTODO
+     *
+     * @param name
+     * @returns
+     */
     export function getVAlign(name: string): Align {
         switch (name) {
             case "baseline":
@@ -51,6 +71,12 @@
         }
     }
 
+    /**
+     * DOCTODO
+     *
+     * @param align
+     * @returns
+     */
     export function getHAlignName(align: Align): string {
         switch (align) {
             case Align.Left:
@@ -72,6 +98,12 @@
         }
     }
 
+    /**
+     * DOCTODO
+     *
+     * @param align
+     * @returns
+     */
     export function getVAlignName(align: Align): string {
         switch (align) {
             case Align.Center:
