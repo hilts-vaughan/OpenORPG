@@ -1,18 +1,59 @@
 ﻿/**
+ * DOCTODO
+ *
  * @preferred
  */
 module OpenORPG.UI {
+    /**
+     * DOCTODO
+     */
     export class Element {
-        /* Fields */
+        /* ================================================================ *
+         *                              Fields                              *
+         * ================================================================ */
         private _parent: JQuery;
         private _element: JQuery;
         private _align: Align;
 
-        /* Constructors */
+        /* ================================================================ *
+         *                           Constructors                           *
+         * ================================================================ */
+
+        /**
+         * DOCTODO
+         *
+         * @param parent
+         * @param element
+         */
         constructor(parent: JQuery, element: JQuery);
+
+        /**
+         * DOCTODO
+         *
+         * @param parent
+         * @param elementIdOrSourceFile
+         */
         constructor(parent: JQuery, elementIdOrSourceFile: string);
+
+        /**
+         * DOCTODO
+         *
+         * @param parent
+         * @param element
+         */
         constructor(parent: Element, element: JQuery);
+
+        /**
+         * DOCTODO
+         *
+         * @param parent
+         * @param elementIdOrSourceFile
+         */
         constructor(parent: Element, elementIdOrSourceFile: string);
+
+        /**
+         * DOCTODO
+         */
         constructor(parent: any, element: any) {
             if (parent instanceof Element) {
                 /* If we were passed an actual UIElement,
@@ -64,7 +105,7 @@ module OpenORPG.UI {
                             that._parent = that._element.parent();
                         }
 
-                        /* VAUGHAN TODO: Fill in this comment. */
+                        /* VAUGHAN DOCTODO: Fill in this comment. */
                         angular.element(document).injector().invoke($compile => {
                             var container = that._element;
                             var scope = angular.element(container).scope();
@@ -93,7 +134,7 @@ module OpenORPG.UI {
             /* Bind the most important events first */
             this.element.load(this.onLoad);
             this.element.unload(this.onUnload);
-            
+
             /* Bind all of the other events */
             this.element.blur(this.onBlur);
             this.element.click(this.onClick);
@@ -117,14 +158,21 @@ module OpenORPG.UI {
             this.onLoad(null);
         }
 
-        /*
-         *
+        /* ================================================================ *
+         *                           Cache methods                          *
+         * ================================================================ */
+
+        /**
+         * Flushes properties that have not been updated to the DOM.
          */
         public flush(): void {
             this.flushAlign();
         }
 
-        /* Loads cached properties from the DOM */
+        /**
+         * Loads properties that need to be cached from the DOM and sets
+         * the cache values accordingly.
+         */
         public refresh(): void {
             this._align = getAlign(this.css("text-align"), this.css("vertical-align"));
         }
@@ -151,139 +199,139 @@ module OpenORPG.UI {
          * To determine whether it is explicitly non-standard, refer to:    *
          * https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement     *
          * ================================================================ */
-        
+
         /**
          * Called when the jQuery blur() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onBlur(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery change() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onChange(event: JQueryEventObject): void { }
 
         /**
          * Called when the jQuery click() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onClick(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery dblclick() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onDoubleClick(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery focus() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onFocus(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery keydown() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onKeyDown(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery keypress() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onKeyPress(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery keyup() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onKeyUp(event: JQueryEventObject): void { }
 
-        
+
         /**
          * Called when the jQuery load() event is invoked, or
          * in the Element.initialize() method, which is invoked
          * by the Element constructor.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onLoad(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery mosuedown() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onMouseDown(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery mousemove() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onMouseMove(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery mouseout() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onMouseOut(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery mouseover() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onMouseOver(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery mouseup() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onMouseUp(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery resize() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onResize(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery scroll() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onScroll(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery select() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onSelect(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery submit() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onSubmit(event: JQueryEventObject): void { }
-        
+
         /**
          * Called when the jQuery unload() event is invoked.
-         * 
+         *
          * @param event an object containing the event information
          */
         protected onUnload(event: JQueryEventObject): void { }
@@ -417,34 +465,74 @@ module OpenORPG.UI {
             this.flushAlign();
         }
 
+        /**
+         * DOCTODO
+         *
+         * @returns
+         */
         public get backgroundColor(): string {
             return this.css("background-color");
         }
 
+        /**
+         * DOCTODO
+         *
+         * @param value
+         */
         public set backgroundColor(value: string) {
             this.css("background-color", value);
         }
 
+        /**
+         * DOCTODO
+         *
+         * @returns
+         */
         public get textColor(): string {
             return this.css("color");
         }
 
+        /**
+         * DOCTODO
+         *
+         * @param value
+         */
         public set textColor(value: string) {
             this.css("color", value);
         }
 
+        /**
+         * DOCTODO
+         *
+         * @returns
+         */
         public get textSize(): string {
             return this.css("font-size");
         }
 
+        /**
+         * DOCTODO
+         *
+         * @param value
+         */
         public set textSize(value: string) {
             this.css("font-size", value);
         }
 
+        /**
+         * DOCTODO
+         *
+         * @returns
+         */
         public get font(): string {
             return this.css("font-family");
         }
 
+        /**
+         * DOCTODO
+         *
+         * @param value
+         */
         public set font(value: string) {
             this.css("font-family", value);
         }
