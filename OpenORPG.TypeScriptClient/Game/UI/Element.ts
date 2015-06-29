@@ -64,6 +64,7 @@ module OpenORPG.UI {
                             that._parent = that._element.parent();
                         }
 
+                        /* VAUGHAN TODO: Fill in this comment. */
                         angular.element(document).injector().invoke($compile => {
                             var container = that._element;
                             var scope = angular.element(container).scope();
@@ -80,13 +81,45 @@ module OpenORPG.UI {
             }
         }
 
+        /**
+         * Used to initialize the element, retrieve values that it caches
+         * and to bind events. Sub-classes that want to do initialization
+         * work should have an override for the onLoad(JQueryEventObject)
+         * method, which is called at the end of this method's execution.
+         */
         private initialize(): void {
             this.refresh();
 
-            this.onLoaded();
+            /* Bind the most important events first */
+            this.element.load(this.onLoad);
+            this.element.unload(this.onUnload);
+            
+            /* Bind all of the other events */
+            this.element.blur(this.onBlur);
+            this.element.click(this.onClick);
+            this.element.change(this.onChange);
+            this.element.click(this.onClick);
+            this.element.dblclick(this.onDoubleClick);
+            this.element.focus(this.onFocus);
+            this.element.keydown(this.onKeyDown);
+            this.element.keypress(this.onKeyPress);
+            this.element.keyup(this.onKeyUp);
+            this.element.mousedown(this.onMouseDown);
+            this.element.mousemove(this.onMouseMove);
+            this.element.mouseout(this.onMouseOut);
+            this.element.mouseover(this.onMouseOver);
+            this.element.mouseup(this.onMouseUp);
+            this.element.resize(this.onResize);
+            this.element.scroll(this.onScroll);
+            this.element.select(this.onSelect);
+            this.element.submit(this.onSubmit);
+
+            this.onLoad(null);
         }
 
-        /* Flushes cached properties to the DOM */
+        /*
+         *
+         */
         public flush(): void {
             this.flushAlign();
         }
@@ -96,24 +129,164 @@ module OpenORPG.UI {
             this._align = getAlign(this.css("text-align"), this.css("vertical-align"));
         }
 
-        /* Flush methods, these should only be written for multi-value flushes. */
+        /* ================================================================ *
+         *                           Flush methods                          *
+         * These should only be created and used for multi-value flushes.   *
+         * ================================================================ */
 
         /**
-         * Flushes the alignment
+         * Sets the Element's alignment CSS properties with the current value.
          */
-        private flushAlign(): void {
+        public flushAlign(): void {
             this.css("text-align", this.halign);
             this.css("vertical-align", this.valign);
         }
 
-        /* Events */
+        /* ================================================================ *
+         *                              Events                              *
+         * Some of the events here are standard events, some are jQuery     *
+         * specific. Note that any event that is explicitly marked as being *
+         * non-standard should not be added. If it's present as jQuery but  *
+         * not marked non-standard, it is fine to include it.               *
+         * To determine whether it is explicitly non-standard, refer to:    *
+         * https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement     *
+         * ================================================================ */
+        
+        /**
+         * Called when the jQuery blur() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onBlur(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery change() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onChange(event: JQueryEventObject): void { }
 
         /**
-         * Called when the object is initialized and ready.
+         * Called when the jQuery click() event is invoked.
+         * 
+         * @param event an object containing the event information
          */
-        protected onLoaded(): void {
-            console.log(this.backgroundColor);
-        }
+        protected onClick(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery dblclick() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onDoubleClick(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery focus() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onFocus(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery keydown() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onKeyDown(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery keypress() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onKeyPress(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery keyup() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onKeyUp(event: JQueryEventObject): void { }
+
+        
+        /**
+         * Called when the jQuery load() event is invoked, or
+         * in the Element.initialize() method, which is invoked
+         * by the Element constructor.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onLoad(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery mosuedown() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onMouseDown(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery mousemove() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onMouseMove(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery mouseout() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onMouseOut(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery mouseover() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onMouseOver(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery mouseup() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onMouseUp(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery resize() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onResize(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery scroll() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onScroll(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery select() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onSelect(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery submit() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onSubmit(event: JQueryEventObject): void { }
+        
+        /**
+         * Called when the jQuery unload() event is invoked.
+         * 
+         * @param event an object containing the event information
+         */
+        protected onUnload(event: JQueryEventObject): void { }
 
         /* Functions */
 
@@ -131,9 +304,38 @@ module OpenORPG.UI {
             this._element.hide();
         }
 
+        /**
+         * Retrieves the string value of the specified CSS property.
+         *
+         * @param propertyName the name of the CSS property to retrieve
+         * @returns the value of the CSS property
+         */
         public css(propertyName: string): string;
+
+        /**
+         * Sets the values of multiple CSS properties.
+         *
+         * @param properties object of property-value pairs to set
+         * @returns the JQuery object
+         */
         public css(properties: Object): JQuery;
+
+        /**
+         * Sets the value of the specified CSS property.
+         *
+         * Refer to jQuery.css(propertyName, value) for further
+         * reference as to what types of values are acceptable.
+         * https://api.jquery.com/css/#css2
+         *
+         * @param propertyName the name of the CSS property to set
+         * @param value the value to set the CSS property to
+         * @returns the JQuery object
+         */
         public css(propertyName: string, value: any): JQuery;
+
+        /**
+         * Used to interact with the jQuery.css() method group.
+         */
         public css(propertyNameOrProperties: any, value: any = null): any {
             /* If we have an Object of properties
              * let's return the JQuery object. */
@@ -150,28 +352,66 @@ module OpenORPG.UI {
             return this._element.css(propertyNameOrProperties, value);
         }
 
-
-
+        /**
+         * Getts for the JQuery object for the parent element. This does
+         * not return a parent Element object, as Element objects are
+         * merely meant to serve as references to HTML elements, and
+         * has no heiarchy of its own.
+         *
+         * @returns the JQuery object for the parent element
+         */
         public get parent(): JQuery {
             return this._parent;
         }
 
+        /**
+         * Getter for the JQuery object for the element.
+         *
+         * @returns the JQuery object for the element
+         */
         public get element(): JQuery {
             return this._element;
         }
 
+        /**
+         * Getter for the alignment of contents for this the element.
+         *
+         * @returns an Align enum
+         */
         public get align(): Align {
             return this._align;
         }
 
+        /**
+         * Getter for the CSS horizontal alignment value, based on
+         * the current value from the `align` getter. The return
+         * values are valid values for the CSS `text-align` property.
+         *
+         * @returns the horizontal alignment CSS value
+         */
         public get halign(): string {
             return getHAlignName(this._align);
         }
 
+        /**
+         * Getter for the CSS alignment value, based on
+         * the current value from the `align` getter.
+         * The return values are valid values for the
+         * CSS `vertical-align` property.
+         *
+         * @returns the vertical alignment CSS value
+         */
         public get valign(): string {
             return getVAlignName(this._align);
         }
 
+        /**
+         * Setter for this Elements content alignment. This affects
+         * the positioning of the contents of this element, and does
+         * not affect the position of the element itself.
+         *
+         * @param align the alignment value to set
+         */
         public set align(align: Align) {
             this._align = align;
             this.flushAlign();
