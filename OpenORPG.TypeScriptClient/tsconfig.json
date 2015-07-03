@@ -3,7 +3,5 @@
 		"target": "ES5",
 		"module": "amd",
 		"sourceMap": true,
-    "out": "app.js",
-    "outDir": "out/"
 	}
 }

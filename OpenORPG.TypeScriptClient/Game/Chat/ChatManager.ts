@@ -100,15 +100,13 @@
         }
 
         addMessage(message: string, user: string = "", channel: number = ChannelType.System) {
-
-
             $.get("assets/hud/chat/chat_message_line.html", html => {
                 var data =
                     {
                         playerName: user,
                         message: message
                     }
-
+                                                    
                 var chatLineHtml = _.template(html, data);
                 var chatElement = $(chatLineHtml);
                 $(chatElement).css("color", this.channelColorMap[channel]);

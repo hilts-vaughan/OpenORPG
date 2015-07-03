@@ -20,18 +20,16 @@
           * be responsible for matching and executing these. Callbacks will be fired accordingly.
           */
          registerCallback(command: CommandType, callback: ICommandHandler) {
-             this.callbackTable[command] = callback;
+             this.callbackTable[command] = callback;             
          }
 
          /*
           * Handles the incoming command type and parses them on the client sided of things.
           */
-         handleCommand(command: CommandType, message: string) {
-             
+         handleCommand(command: CommandType, message: string) {            
              // Get the arguments to pass in here
-             var arguments = this.getArgumentsFromMessage(message);
-
-             this.callbackTable[command](arguments);
+             var args = this.getArgumentsFromMessage(message);
+             this.callbackTable[command](args);
          }
 
          private getArgumentsFromMessage(message: string) : Array<string> {
