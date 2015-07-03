@@ -3,10 +3,13 @@
     export class DamageText extends Phaser.Text {
         constructor(entity: Entity, damage: number) {
             var style = FontFactory.getDamageFont();
+            
+            // If we were healed, then we want to show a 'healing' color
             if (damage < 0) {
                 damage *= -1;
                 style.fill = "#00CC00";
-            }           
+            }
+                       
             // Be sure to call Phaser constructor properly                        
             super(entity.game, 0, 0, damage.toString(), style);
 
