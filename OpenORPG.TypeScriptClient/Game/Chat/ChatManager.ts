@@ -89,14 +89,11 @@
 
         processIncomingMessage(sender: string, message: string, id: number) {
             var chatChannel = this._chatChannels[id];
-
             if (chatChannel != null) {
                 this.addMessage(message, sender + ": ", chatChannel.channelType);
             } else {
                 Logger.warn("ChatManager - Failed to find chat channel with id of " + id + ". Was it not registered");
             }
-
-
         }
 
         addMessage(message: string, user: string = "", channel: number = ChannelType.System) {
