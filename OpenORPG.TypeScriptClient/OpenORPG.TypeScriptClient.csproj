@@ -496,9 +496,13 @@
     <TypeScriptCompile Include="Game\States\LoginMenuState.ts" />
     <TypeScriptCompile Include="Game\UI\Align.ts" />
     <TypeScriptCompile Include="Game\UI\AngularInterop.ts" />
-    <TypeScriptCompile Include="Game\UI\Button.ts" />
+    <TypeScriptCompile Include="Game\UI\Button.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Game\UI\Character\EquipmentItemContextMenu.ts" />
-    <TypeScriptCompile Include="Game\UI\Checkbox.ts" />
+    <TypeScriptCompile Include="Game\UI\Checkbox.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Game\UI\HudWidget.ts" />
     <TypeScriptCompile Include="Game\UI\InterfaceWindow.ts" />
     <TypeScriptCompile Include="Game\UI\Inventory\InventoryContextMenu.ts" />
@@ -509,8 +513,12 @@
     <TypeScriptCompile Include="Game\UI\Quest\RequirementFormatter.ts" />
     <TypeScriptCompile Include="Game\UI\Element.ts" />
     <TypeScriptCompile Include="Game\UI\Panel.ts" />
-    <TypeScriptCompile Include="Game\UI\RadioButton.ts" />
-    <TypeScriptCompile Include="Game\UI\Textbox.ts" />
+    <TypeScriptCompile Include="Game\UI\RadioButton.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Game\UI\Textbox.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Game\UI\Window.ts" />
     <TypeScriptCompile Include="Game\World\Zone.ts" />
     <TypeScriptCompile Include="Infrastructure\Content\ContentCache.ts" />

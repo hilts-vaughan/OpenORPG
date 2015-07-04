@@ -1,7 +1,5 @@
 ﻿module OpenORPG {
-
     export class PlayerInfoMontior {
-
         private playerInfo: PlayerInfo;
 
         // Setup some network events here and be done with it
@@ -16,7 +14,6 @@
 
             // Register for stat changes
             network.registerPacket(OpCode.SMSG_STAT_CHANGE, (packet: any) => {
-
                 // Update these, fire callback; only update our stats of as of right now
                 
                 //TODO: We only care about ourselves in this spot, so make sure we check to make sure it came from us
@@ -28,12 +25,10 @@
 
                     AngularInterop.updateAngularScope();
                 }
-
             });
 
             // Hook into our network events
             network.registerPacket(OpCode.SMSG_STORAGE_HERO_SEND, (packet) => {
-
                 this.playerInfo.inventory = [];
                 this.playerInfo.inventory.push.apply(this.playerInfo.inventory, packet.itemStorage);
 
@@ -43,7 +38,6 @@
             });
 
             network.registerPacket(OpCode.SMSG_QUEST_SEND_LIST, (packet) => {
-           
                 this.playerInfo.quests = [];
 
                 Logger.debug("PlayerInfoMonitor - Dumping new quest data...");
@@ -62,18 +56,12 @@
                             data.questInfo.requirementProgress.push({ progress: progressLevel });
                         });
 
-               
-
                         this.playerInfo.quests.push(data);
                         AngularInterop.broadcastEvent('QuestsChanged');                                  
                         AngularInterop.updateAngularScope();
                     });
-
                 });
-
-
             });
-
 
             // An update for quest progress stuff
             network.registerPacket(OpCode.SMSG_QUEST_PROGRESS_UPDATE, (packet) => {
@@ -86,13 +74,11 @@
 
                 AngularInterop.broadcastEvent('QuestsChanged');
                 AngularInterop.updateAngularScope();
-
             });
             // skills monitoring
 
             // Listen to events about player information we might care about
             network.registerPacket(OpCode.SMSG_SKILL_CHANGE, (packet) => {
-
                 this.playerInfo.characterSkills = [];
 
                 // Init character info
@@ -108,20 +94,8 @@
                         Logger.info("PlayerInfoMonitor - Player skills have been updated.");
                         Logger.info(this.playerInfo.characterSkills);
                     });
-
-             
                 }
-
-
             });
-
-
         }
-
-
-
-
     }
-
-
 }

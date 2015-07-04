@@ -193,7 +193,13 @@ canvas {
     padding-top: 5px;
 }
 
-#login-panel {
+div.panel {
+    border: 2px solid white;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+div.panel#panel-login {
     position: absolute;
     width: 576px;
     height: 384px;
@@ -216,7 +222,7 @@ canvas {
     user-select: none;
 }
 
-#login-panel .cbl {
+div.panel#panel-login .cbl {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -226,20 +232,20 @@ canvas {
     cursor: url('assets/img/hand.png'), auto;
 }
 
-#login-panel .login-opt {
+div.panel#panel-login .login-opt {
     display: inline;
     margin: 2px 6px;
 }
 
-#login-panel #login-opt-user {
+div.panel#panel-login #login-opt-user {
     margin-right: 10px;
 }
 
-#login-panel #login-opt-pass {
+div.panel#panel-login #login-opt-pass {
     margin-left: 10px;
 }
 
-#login-panel input[type=checkbox] {
+div.panel#panel-login input[type=checkbox] {
     display: none;
     cursor: url('assets/img/hand.png'), auto;
     -webkit-touch-callout: none;
@@ -251,7 +257,7 @@ canvas {
     margin-left: 5px;
 }
 
-#login-panel input[type=checkbox] + label:before {
+div.panel#panel-login input[type=checkbox] + label:before {
     content: "";
     display: inline-block;
     width: 9px;
@@ -263,7 +269,7 @@ canvas {
     cursor: url('assets/img/hand.png'), auto;
 }
 
-#login-panel input[type=checkbox]:checked + label:before {
+div.panel#panel-login input[type=checkbox]:checked + label:before {
     border: 2px solid rgb(190, 255, 190);
     background-color: rgb(50, 160, 50);
     color: black;
@@ -273,30 +279,30 @@ canvas {
     cursor: url('assets/img/hand.png'), auto;
 }
 
-#login-panel h1 {
+div.panel#panel-login h1 {
     letter-spacing: 4px;
     font-size: 2.5em;
 }
 
-#login-panel .spacer {
+div.panel#panel-login .spacer {
     position: relative;
     width: 100%;
     height: 20px;
 }
 
-#login-panel .spacer-xl {
+div.panel#panel-login .spacer-xl {
     position: relative;
     width: 100%;
     height: 90px;
 }
 
-#login-panel .spacer-xs {
+div.panel#panel-login .spacer-xs {
     position: relative;
     width: 100%;
     height: 10px;
 }
 
-#login-panel .button {
+div.panel#panel-login .button {
     border-width: 3px;
     border-color: darkgoldenrod;
     background-color: rgb(80, 60, 50);
@@ -319,7 +325,7 @@ canvas {
     user-select: none;
 }
 
-#login-panel .button:hover {
+div.panel#panel-login .button:hover {
     background-color: rgb(190, 170, 160);
     color: rgb(50, 30, 20);
     box-shadow:
@@ -327,7 +333,7 @@ canvas {
         rgba(0, 0, 0, 0.3) -1px -1px inset;
 }
 
-#login-panel .button:active {
+div.panel#panel-login .button:active {
     background-color: rgb(50, 30, 20);
     color: floralwhite;
     box-shadow:
@@ -335,7 +341,7 @@ canvas {
         rgba(0, 0, 0, 0.3) -1px -1px inset;
 }
 
-#login-panel .entry {
+div.panel#panel-login .entry {
     position: relative;
     width: 432px;
     left: 50%;
@@ -345,7 +351,7 @@ canvas {
     text-align: left;
 }
 
-#login-panel .entry input {
+div.panel#panel-login .entry input {
     width: 320px;
     display: inline;
     border-radius: 4px;
@@ -358,13 +364,13 @@ canvas {
     font-family: "AdvoCut";
 }
 
-#login-panel input:focus {
+div.panel#panel-login input:focus {
     border-color: rgb(255, 255, 255);
     border-style: solid;
     background-color: rgb(160, 160, 160);
 }
 
-#login-panel .entry .label {
+div.panel#panel-login .entry .label {
     width: 104px;
     margin-right: 4px;
     display: inline;
@@ -373,10 +379,10 @@ canvas {
     font-stretch: wider;
 }
 
-#login-panel #entry-username {
+div.panel#panel-login #entry-username {
 }
 
-#login-panel #entry-password {
+div.panel#panel-login #entry-password {
 }
 
 #overlay {

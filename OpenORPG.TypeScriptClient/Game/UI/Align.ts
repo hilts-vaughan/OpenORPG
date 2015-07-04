@@ -1,4 +1,4 @@
-﻿module OpenORPG.UI {
+﻿module OpenORPG {
     /**
      * Alignment enum.
      * DOCTODO: This documentation is terrible (and I wrote it)

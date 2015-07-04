@@ -85,10 +85,16 @@ module OpenORPG.UI {
                 this.initialize();
             } else {
                 /* Otherwise if it is a string it's a selector or source file */
-                var selection =
-                    parent == null
+                var selection = null;
+
+                try {
+                    selection = parent == null
                         ? $(element) /* If the parent is null, look top level. */
                         : parent.find(element); /* Or look at descendants. */
+                } catch (e) {
+                    /* Definitely not a selector */
+                    selection = { length: 0 };
+                }
 
                 /* If it was a valid selector length will be non-zero. */
                 if (selection.length > 0) {
@@ -111,15 +117,15 @@ module OpenORPG.UI {
                         /* Before trying to just add the element to the parent,
                          * we need to make sure that there is a parent. */
                         if (that._parent != null) {
-                            $(that._parent).append(that._element);
+                            $(that.parent).append(that.element);
                         } else {
                             /* If we don't have a parent, let's set it. */
-                            that._parent = that._element.parent();
+                            that._parent = that.element.parent();
                         }
 
                         /* VAUGHAN DOCTODO: Fill in this comment. */
                         angular.element(document).injector().invoke($compile => {
-                            var container = that._element;
+                            var container = that.element;
                             var scope = angular.element(container).scope();
 
                             $compile(container)(scope);

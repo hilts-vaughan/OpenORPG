@@ -3,21 +3,6 @@
         private static _instance: Settings = null;
         private settingsNamespace = "orpg_settings";
 
-        /* Networking */
-        private _hostname: string = null;
-
-        get hostname(): string {
-            if (this._hostname == null) {
-                return window.location.hostname;
-            }
-
-            return this._hostname;
-        }
-
-        set hostname(val: string) {
-            this._hostname = val;
-        }
-
         /* Login */
         public autoLoginSet: boolean = true;
 
@@ -55,7 +40,6 @@
         }
 
         private attemptLoad() {
-
             var settings = localStorage[this.settingsNamespace];
 
             // Set some defaults if required
@@ -97,6 +81,11 @@
                 if (typeof value == "function" || value == this._context) {
                     return undefined;
                 }
+
+                if (typeof value == "boolean") {
+                    return (value ? 1 : 0);
+                }
+
                 return value;
             });
 

@@ -1,17 +1,29 @@
-﻿<div id="login-panel" class="rounded-container">
+﻿<div id="panel-login" class="panel">
     <div class="spacer-xl">
         <div class="spacer"></div>
         <h1>Login</h1>
     </div>
     <div class="spacer"></div>
-    <div class="entry" id="entry-username"><div class="label">Username:</div> <input id="username" type="text" name="username" /></div>
+    <div class="entry" id="entry-username">
+        <div class="label">Username:</div>
+        <input id="username" type="text" name="username" />
+    </div>
     <div class="spacer-xs"></div>
-    <div class="entry" id="entry-password"><div class="label">Password:</div> <input id="password" type="password" name="password" /></div>
+    <div class="entry" id="entry-password">
+        <div class="label">Password:</div>
+        <input id="password" type="password" name="password" />
+    </div>
     <div class="spacer"></div>
     <div class="spacer">
         <div id="login-options" class="cbl">
-            <span id="login-opt-user" class="login-opt"><input id="remember-user" type="checkbox" value="false" /><label for="remember-user" class="cbl">Remember Username</label></span>
-            <span id="login-opt-pass" class="login-opt"><input id="remember-pass" type="checkbox" value="false" /><label for="remember-pass" class="cbl">Remember Password</label></span>
+            <span id="login-opt-user" class="login-opt" ng-click="rememberUsername($event)">
+                <input id="remember-user" type="checkbox" value="false" />
+                <label for="remember-user" class="cbl">Remember Username</label>
+            </span>
+            <span id="login-opt-pass" class="login-opt" ng-click="rememberPassword()">
+                <input id="remember-pass" type="checkbox" value="false" />
+                <label for="remember-pass" class="cbl">Remember Password</label>
+            </span>
         </div>
     </div>
     <div class="spacer"></div>

@@ -4,47 +4,36 @@
     <link rel="stylesheet" type="text/css" href="../../game.css">
     <title>Settings Window</title>
 </head>
-
-
 <body>
-
     <div id="setting-window" class="rounded-container" ng-controller="SettingsController ">
-        
         <div class="tab-wrapper">
             <ul class="tabs">
-
                 <li>
                     <input type="radio" checked name="tabs" id="tab1">
                     <label for="tab1">General</label>
                     <div id="tab-content1" class="tab-content animated fadeIn">
-
                         <div style="float: left">
-                            <span>Game Language: </span>
+                            <span>Game Language:</span>
                             <select>
                                 <option>English</option>
-                                <option>800x600</option>
-                                <option>800x600</option>
+                                <option>日本語</option>
+                                <option>Italiano</option>
                             </select>
                         </div>
-
                     </div>
                 </li>
-
                 <li>
                     <input type="radio" name="tabs" id="tab2">
                     <label for="tab2">Video</label>
                     <div id="tab-content2" class="tab-content animated fadeIn">
-
                         <div style="float: left">
-                            <span>Game Resolution: </span>
+                            <span>Game Resolution:</span>
                             <select>
                                 <option>800x600</option>
                                 <option>800x600</option>
                                 <option>800x600</option>
                             </select>
                         </div>
-
-
                         <div style="float: right;">
                             <span>Scale to fullscreen</span>
                             <span class="squaredThree">
@@ -52,9 +41,6 @@
                                 <label for="squaredThree"></label>
                             </span>
                         </div>
-
-
-
                         <div style="clear: both; float: left; margin-top: 50px;">
                             <span>Game Resolution: </span>
                             <select>
@@ -63,7 +49,6 @@
                                 <option>800x600</option>
                             </select>
                         </div>
-
                         <div style="float: right; margin-top: 10px;">
                             <span>Allow particle effects</span>
                             <span class="squaredThree">
@@ -71,83 +56,47 @@
                                 <label for="squaredThree"></label>
                             </span>
                         </div>
-
-
-
-
                     </div>
                 </li>
                 <li>
                     <input type="radio" name="tabs" id="tab3">
                     <label for="tab3">Audio</label>
                     <div id="tab-content3" class="tab-content animated fadeIn">
-
-                                               
                         <b>Volume: </b> <b>{{settings.volume}}</b><b>%</b>
                         <input class="slider" type="range" min="0" max="100" ng-model="settings.volume" />
-                        
-
-
                     </div>
                 </li>
-
-
                 <li>
                     <input type="radio" checked name="tabs" id="tab4">
                     <label for="tab4">Debug</label>
                     <div id="tab-content1" class="tab-content animated fadeIn">
-
-
                         <span>Display interpolation paths</span>
                         <span class="squaredThree">
                             <input type="checkbox" ng-model="settings.debugShowInterpolationPaths" id="debugShowInterpolationPaths" name="check" checked />
                             <label for="debugShowInterpolationPaths"></label>
                         </span>
-
-
                         <br />
-                        
                         <span>Show debug bodies</span>
                         <span class="squaredThree">
                             <input type="checkbox" ng-model="settings.debugShowBodies" id="debugShowBodies" name="check" checked />
                             <label for="debugShowBodies"></label>
                         </span>
-
-
                         <br />
-
-                        
                         <span>Force WebGL  (experimental, requires restart)</span>
                         <span class="squaredThree">
                             <input type="checkbox" ng-model="settings.debugForceWebGl" id="debugForceWebGl" name="check" checked />
                             <label for="debugForceWebGl"></label>
                         </span>
-
-
                         <br />
-                        
-
                     </div>
                 </li>
-
-
             </ul>
         </div>
         <div class="strip-wrapper">
             <button ng-click="save()" class="btn-custom">Save Changes</button>
             <button ng-click="discard()" class="btn-custom">Discard Changes</button>
             <button ng-click="reset()" class="btn-custom">Reset Default</button>
-
         </div>
-
     </div>
-
-
-
-
-
 </body>
-
-
-
 </html>

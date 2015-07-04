@@ -95,13 +95,9 @@
             } else {
                 Logger.warn("ChatManager - Failed to find chat channel with id of " + id + ". Was it not registered");
             }
-
-
         }
 
         addMessage(message: string, user: string = "", channel: number = ChannelType.System) {
-
-
             $.get("assets/hud/chat/chat_message_line.html", html => {
                 var data =
                     {
@@ -117,9 +113,6 @@
                 // Scroll down
                 $("#chatlog").animate({ scrollTop: $("#chatlog")[0].scrollHeight }, 1000);
             });
-
-
-
         }
     }
 } 

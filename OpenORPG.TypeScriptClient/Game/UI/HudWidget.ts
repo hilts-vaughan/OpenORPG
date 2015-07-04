@@ -110,7 +110,7 @@
         onLoaded() {
             var that = this;
 
-            var tat = new UI.Element(null, "#login-panel");
+            //var tat = new UIElement(null, "#login-panel");
 
             $("#remember-user").on("click", function (eventObject: JQueryEventObject, ...args: any[]) {
                 that.refreshCheckboxes(true, false);

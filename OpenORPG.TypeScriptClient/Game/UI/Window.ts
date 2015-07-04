@@ -1,4 +1,6 @@
-﻿module OpenORPG.UI {
+﻿///<reference path="Element.ts" />
+
+module OpenORPG.UI {
     /**
      * DOCTODO
      */

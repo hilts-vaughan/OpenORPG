@@ -1,5 +1,20 @@
 ﻿module OpenORPG {
     export class NetworkManager {
+        /* Networking */
+        private static _hostname: string = null;
+
+        static get hostname(): string {
+            if (this._hostname == null) {
+                return window.location.hostname;
+            }
+
+            return this._hostname;
+        }
+
+        static set hostname(val: string) {
+            this._hostname = val;
+        }
+
         private static _instance: NetworkManager = null;
 
         private _host: string;
@@ -26,7 +41,7 @@
 
         public static getInstance(): NetworkManager {
             if (NetworkManager._instance === null) {
-                NetworkManager._instance = new NetworkManager(Settings.getInstance().hostname, 4488);
+                NetworkManager._instance = new NetworkManager(this.hostname, 4488);
             }
             return NetworkManager._instance;
         }

@@ -9,7 +9,7 @@
 
             //var canvasHolder = document.getElementById("canvasholder");
             this.game = new Phaser.Game(width, height, this.pickRenderer(), 'canvasholder', this, true, false);
-            console.log(window.onresize);
+
             window.onresize = function (evt: UIEvent) {
                 this.game.camera.setSize(window.innerWidth, window.innerHeight);
                 this.game.scale.setGameSize(window.innerWidth, window.innerHeight);
