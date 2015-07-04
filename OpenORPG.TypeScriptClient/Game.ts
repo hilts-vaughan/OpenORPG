@@ -16,6 +16,8 @@
                 this.game.scale.refresh();
                 console.log(this.game.scale);
                 console.log(this.game.camera);
+                this.game.scale.onSizeChange.dispatch();
+
             }.bind(this);
             
             this.game.state.add("boot", new BootState(), false);

@@ -31,6 +31,19 @@
             Zone.current = this;
 
             this.setupNetworkHandlers();
+
+            
+
+            this.game.scale.onSizeChange.add(() => {
+                console.log("dirty");
+                this.bucket.forEach((layer) => {
+                    layer.dirty = true;
+                    debugger;
+                    layer.resizeCanvas();
+
+                });
+            }, this);
+
         }
 
         public initLocalZone(mapId: number) {
