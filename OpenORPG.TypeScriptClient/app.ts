@@ -15,7 +15,6 @@ module OpenORPG {
 
         public static get Game(): ng.IModule {
             if (this._moduleGame == null) {
-                console.log("test");
                 this._moduleGame = angular.module('game', []);
             }
 
@@ -47,25 +46,20 @@ module OpenORPG {
 
     Angular.Game.controller('inventoryController', [
         '$scope', '$rootScope', function ($scope, $rootScope) {
-            console.log("moomoo");
             $scope.gold = 4000;
         }
     ]);
 
-    //*
     Angular.Game.controller('ControllerPanelLogin', [
         '$scope', '$rootScope', function ($scope, $rootScope) {
-            $scope.settings = $.extend({}, Settings.getInstance());
             console.log("mooooooooooooooooooooooooooooooooooooooooooooosdfihduif");
-            $scope.rememberUsername = function (e: any) {
-                console.log(e);
-                console.log("rememberrrrr the usernameeeee");
-                console.trace();
+            $scope.settings = $.extend({}, Settings.getInstance());
+
+            $scope.rememberUsername = function (event: JQueryEventObject) {
                 LoginMenuState.instance.loginPanel.refreshCheckboxes(true, false);
             };
 
-            $scope.rememberPassword = function () {
-                console.log("remember EL PASSOWORDO");
+            $scope.rememberPassword = function (event: JQueryEventObject) {
                 LoginMenuState.instance.loginPanel.refreshCheckboxes(false, true);
             };
 
@@ -79,7 +73,7 @@ module OpenORPG {
 
             };
         }
-    ]);//*/
+    ]);
 
     Angular.Game.controller('SettingsController', [
         '$scope', '$rootScope', function ($scope, $rootScope) {

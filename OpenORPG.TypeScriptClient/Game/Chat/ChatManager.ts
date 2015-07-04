@@ -89,7 +89,6 @@
 
         processIncomingMessage(sender: string, message: string, id: number) {
             var chatChannel = this._chatChannels[id];
-
             if (chatChannel != null) {
                 this.addMessage(message, sender + ": ", chatChannel.channelType);
             } else {
@@ -104,7 +103,7 @@
                         playerName: user,
                         message: message
                     }
-
+                                                    
                 var chatLineHtml = _.template(html, data);
                 var chatElement = $(chatLineHtml);
                 $(chatElement).css("color", this.channelColorMap[channel]);

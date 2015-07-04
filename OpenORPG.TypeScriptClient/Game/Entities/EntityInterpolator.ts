@@ -1,30 +1,42 @@
-﻿/**
- * Provides a namespace
- */
-module OpenORPG {
+﻿module OpenORPG {
 
+    /**
+     * Stores a single state of interpolated state from an entity movement from the remote client
+     * and or server. 
+     */
     class InterpolatorState {
-
         public _x: number;
         public _y: number;
         public _dir: Direction;
-        public _timestamp : number;
-
+        private _timestamp : number;
+           
+        /**
+         * Returns the timestamp as of the UNIX epoch from when this state was created.          
+         */
+        public get timestamp() : number {
+            return this._timestamp;
+        }
+                
         constructor(x: number, y: number, dir: Direction) {
             this._x = x;
             this._y = y;
             this._dir = dir;
             this._timestamp = new Date().getTime();
         }
-
     }
-
+    
+    /**
+     * Provides services for interpolating a remote entity through various states fed into it.
+     * The interpolator will automatically keep up with the states fed with it, it is only neccessary
+     * to ensure update is called on it and the neccessary properties will be updated.
+     */
     export class EntityInterpolator {
 
         private _states: InterpolatorState[] = new Array<InterpolatorState>();
 
         /**
-         * Provides a value of backwards time
+         * Represents the amount of time a InterpolatorState will take to be tweened to by default.
+         * This value is only the standard -- interpolator states may be consumed faster when running behind.
          */
         private _backTime: number = 100;
 
@@ -34,20 +46,25 @@ module OpenORPG {
         
            When set to 10, this is a full second behind (which is quite a lot) 
         */
-        private _maxDelay: number = 20;
+        private _maxStateBacklog: number = 20;
 
-        private _threshold: number = 1;
+        /**
+         * If the distance between the current property value and the next InterpolatorState value is less than this value,
+         * then no tween is performed and we snap to this value. This prevents cases where small changes cause jitter.
+         */       
+        private _cutoffThreshold: number = 1;
+
 
         private _entity: Entity;
-
         private _currentMovementTween: Phaser.Tween;
 
         constructor(entity: Entity) {
             this._entity = entity;
         }
 
+        
         /**
-         * Given some data from the network, adds it to the state to be interpolated with
+         * Adds state data to this new EntityInterpolator from a remote network feed. 
          */
         public addData(x: number, y: number, dir: Direction) {
 
@@ -55,24 +72,22 @@ module OpenORPG {
             var state: InterpolatorState = new InterpolatorState(x, y, dir);
             this._states.push(state);
 
-            if (this._states.length > this._maxDelay) {
+            if (this._states.length > this._maxStateBacklog) {
                 this.forceFlush();
             }
 
             this.update();
         }
 
+        // This is only used in debug mode
         public render() {
-
             // Render the shapes as required
             this._states.forEach((state: InterpolatorState) => {
                 this._entity.game.debug.geom(new Phaser.Circle(state._x, state._y, 10));
             });
-
         }
 
         public update() {
-
             if (this._entity.game == null) {
                 Logger.warn("An interpolator from a dead entity was left behind. Ignoring...");
                 return;
@@ -98,8 +113,6 @@ module OpenORPG {
                         y: state._y
                     }
 
-
-
                     var point: Phaser.Point = new Phaser.Point(tweenData.x, tweenData.y);
                     var point2: Phaser.Point = new Phaser.Point(this._entity.x, this._entity.y);
 
@@ -108,7 +121,7 @@ module OpenORPG {
                     var distance: number = Phaser.Point.distance(point, point2);
 
                     // If the distance is small, a teleport is in order and we continue on. This prevents small little hiccups
-                    if ( distance < this._threshold) {
+                    if ( distance < this._cutoffThreshold) {
                         this._entity.x = tweenData.x;
                         this._entity.y = tweenData.y;                        
                         return;
@@ -133,20 +146,19 @@ module OpenORPG {
 
                         this.update();
                     });
-
                 } else {
-
                     if (this._currentMovementTween != null) {
                         this._currentMovementTween.stop();
                     }
-
                     this._currentMovementTween = null;
                 }
-
-
             }
         }
 
+        /**
+         * Based on the current backlog, returns a modified time to tween to speed up state consumption.
+         * This is generally done to outpace the server sending rate.
+         */
         private getInterpolationInterval() {
             if (this._states.length < 5)
                 return this._backTime;
@@ -165,8 +177,11 @@ module OpenORPG {
             return false;
         }
 
+        /**
+         * Forces a flush of all states. All propertie will be immediately set to the very last state
+         * available and the backlog will be cleared.
+         */
         private forceFlush() {
-
             if (this._currentMovementTween != null) {
                 this._currentMovementTween.stop();
                 this._currentMovementTween = null;
@@ -178,23 +193,17 @@ module OpenORPG {
             this._entity.y = lastState._y;
             this._entity.direction = lastState._dir;
 
-            Logger.warn("A force flush was performed; looks like the network is falling behind.");
+            Logger.warn("A force flush was performed; looks like the network is falling behind.");           
             
-
-            // Remove all elements
             while (this._states.length) {                
                 var state : InterpolatorState = this._states.shift();
-                Logger.warn(state);
             }
-
         }
 
-
         /**
-         * Resets the interpolator and all state assosciated with it. Allows for clean startsup
+         * Resets the interpolator and all state assosciated with it. 
          */
         reset() {
-
             if (this._currentMovementTween != null) {
                 this._currentMovementTween.stop();
                 this._currentMovementTween = null;
@@ -204,8 +213,6 @@ module OpenORPG {
             while (this._states.length) {
                 this._states.pop();
             }
-
-
         }
 
     }

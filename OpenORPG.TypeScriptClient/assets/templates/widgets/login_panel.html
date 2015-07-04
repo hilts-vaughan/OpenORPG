@@ -1,4 +1,4 @@
-﻿<div id="panel-login" class="panel">
+﻿<div id="panel-login" class="panel" ng-controller="ControllerPanelLogin">
     <div class="spacer-xl">
         <div class="spacer"></div>
         <h1>Login</h1>
@@ -16,12 +16,12 @@
     <div class="spacer"></div>
     <div class="spacer">
         <div id="login-options" class="cbl">
-            <span id="login-opt-user" class="login-opt" ng-click="rememberUsername($event)">
-                <input id="remember-user" type="checkbox" value="false" />
+            <span id="login-opt-user" class="login-opt">
+                <input id="remember-user" type="checkbox" ng-click="rememberUsername($event)" />
                 <label for="remember-user" class="cbl">Remember Username</label>
             </span>
-            <span id="login-opt-pass" class="login-opt" ng-click="rememberPassword()">
-                <input id="remember-pass" type="checkbox" value="false" />
+            <span id="login-opt-pass" class="login-opt">
+                <input id="remember-pass" type="checkbox" ng-click="rememberPassword()" />
                 <label for="remember-pass" class="cbl">Remember Password</label>
             </span>
         </div>
@@ -40,4 +40,4 @@
             <span class="float-vital" style="position: absolute; right: 0">{{getVitalLabel(1)}}</span>
         </div>
     </div>-->
-</div>  
+</div>

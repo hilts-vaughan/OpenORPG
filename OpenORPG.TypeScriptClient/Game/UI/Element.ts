@@ -122,12 +122,12 @@ module OpenORPG.UI {
                             /* If we don't have a parent, let's set it. */
                             that._parent = that.element.parent();
                         }
-
+                        
                         /* VAUGHAN DOCTODO: Fill in this comment. */
                         angular.element(document).injector().invoke($compile => {
                             var container = that.element;
                             var scope = angular.element(container).scope();
-
+                            console.trace();
                             $compile(container)(scope);
                             scope.$apply();
                         });
@@ -157,7 +157,6 @@ module OpenORPG.UI {
             this.element.blur(this.onBlur);
             this.element.click(this.onClick);
             this.element.change(this.onChange);
-            this.element.click(this.onClick);
             this.element.dblclick(this.onDoubleClick);
             this.element.focus(this.onFocus);
             this.element.keydown(this.onKeyDown);

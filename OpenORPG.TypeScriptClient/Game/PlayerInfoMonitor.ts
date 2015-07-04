@@ -12,17 +12,11 @@
                 AngularInterop.updateAngularScope();
             }, 1000);
 
-            // Register for stat changes
+            // Register for stat changes on ourselves, and apply them
             network.registerPacket(OpCode.SMSG_STAT_CHANGE, (packet: any) => {
-                // Update these, fire callback; only update our stats of as of right now
-                
-                //TODO: We only care about ourselves in this spot, so make sure we check to make sure it came from us
-                // We'll worry about the rest another place, they can be used for viewing statistics about party members, allies
-                // and other passerbiers. For now, we don't care about that as there's no actual stats on monsters etc.
                 if (this.playerInfo.player.id == packet.characterId) {
                     this.playerInfo.characterStats[packet.stat].currentValue = packet.currentValue;
                     this.playerInfo.characterStats[packet.stat].maximumValue = packet.maximumValue;
-
                     AngularInterop.updateAngularScope();
                 }
             });

@@ -1,0 +1,8 @@
+{
+	"compilerOptions": {
+		"target": "ES5",
+		"module": "amd",
+		"sourceMap": true,
+		"out": "./public/js/game_appx.js"		    
+	}
+}
