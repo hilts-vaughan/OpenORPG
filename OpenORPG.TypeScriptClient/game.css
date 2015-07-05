@@ -265,7 +265,7 @@ div.panel#panel-login input[type=checkbox] + label:before {
     padding: 0;
     margin-right: 6px;
     border: 2px solid rgb(255, 190, 190);
-    background-color: rgb(100, 50, 50);
+    background-color: rgb(160, 50, 50);
     cursor: url('assets/img/hand.png'), auto;
 }
 

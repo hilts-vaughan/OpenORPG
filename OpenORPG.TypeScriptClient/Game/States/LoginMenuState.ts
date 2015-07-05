@@ -103,18 +103,19 @@ module OpenORPG {
         public refreshCheckboxes(toggleUser: boolean = false, togglePass: boolean = false) {
             if (toggleUser) {
                 Settings.getInstance().saveUsername = !Settings.getInstance().saveUsername;
+
+                /* This makes it so toggling the username saving off while
+                password saving is on will disable password saving as well. */
+                Settings.getInstance().savePassword = Settings.getInstance().saveUsername && Settings.getInstance().savePassword;
             }
 
             if (togglePass) {
                 Settings.getInstance().savePassword = !Settings.getInstance().savePassword;
             }
 
-            /* Since I couldn't get it working consistently, opting
-             * to save the password does nothing unless you've already
-             * opted to save the username, instead of the intended
-             * functionality where opting to save the password would
-             * also flip on saving the username. */
-            Settings.getInstance().savePassword = Settings.getInstance().saveUsername && Settings.getInstance().savePassword;
+            /* This makes it so toggling the password saving on while
+            username saving is off will enable user saving as well. */
+            Settings.getInstance().saveUsername = Settings.getInstance().saveUsername || Settings.getInstance().savePassword;
 
             Settings.getInstance().flush();
             Settings.getInstance().save();

@@ -75,6 +75,7 @@
     <Content Include="assets\sprites\goblin.png" />
     <Content Include="assets\sprites\male_base.png" />
     <Content Include="assets\sprites\snake.png" />
+    <Content Include="assets\states\login.html" />
     <Content Include="assets\templates\widgets\bottom_bar.html" />
     <Content Include="assets\templates\widgets\character_status.html" />
     <Content Include="assets\templates\widgets\chat.html" />
@@ -623,6 +624,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\effects\" />
+    <Folder Include="assets\states\login\" />
     <Folder Include="Game\Sync\" />
   </ItemGroup>
   <PropertyGroup>

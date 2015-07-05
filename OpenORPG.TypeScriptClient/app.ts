@@ -58,7 +58,7 @@ module OpenORPG {
             $scope.rememberUsername = function (event: JQueryEventObject) {
                 LoginMenuState.instance.loginPanel.refreshCheckboxes(true, false);
             };
-
+            /* IDEA: Create controller object model with root interface to be added to each game state */
             $scope.rememberPassword = function (event: JQueryEventObject) {
                 LoginMenuState.instance.loginPanel.refreshCheckboxes(false, true);
             };
