@@ -341,6 +341,14 @@ div.panel#panel-login .button:active {
         rgba(0, 0, 0, 0.3) -1px -1px inset;
 }
 
+div.panel#panel-login .disabled, .disabled:hover, .disabled:active {
+    background-color: rgb(30, 25, 20);
+    color: rgb(150, 145, 140);
+    box-shadow:
+        rgba(0, 0, 0, 0.7) 2px 2px inset,
+        rgba(0, 0, 0, 0.3) -1px -1px inset;
+}
+
 div.panel#panel-login .entry {
     position: relative;
     width: 432px;
