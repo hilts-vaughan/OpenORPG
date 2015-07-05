@@ -505,6 +505,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Game\UI\HudWidget.ts" />
+    <TypeScriptCompile Include="Game\UI\IInterfaceController.ts" />
     <TypeScriptCompile Include="Game\UI\InterfaceWindow.ts" />
     <TypeScriptCompile Include="Game\UI\Inventory\InventoryContextMenu.ts" />
     <TypeScriptCompile Include="Game\UI\ItemTooltipInfo.ts" />

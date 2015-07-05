@@ -6,12 +6,12 @@
     <div class="spacer"></div>
     <div class="entry" id="entry-username">
         <div class="label">Username:</div>
-        <input id="username" type="text" name="username" />
+        <input id="login-username" type="text" />
     </div>
     <div class="spacer-xs"></div>
     <div class="entry" id="entry-password">
         <div class="label">Password:</div>
-        <input id="password" type="password" name="password" />
+        <input id="login-password" type="password" />
     </div>
     <div class="spacer"></div>
     <div class="spacer">
@@ -21,12 +21,12 @@
                 <label for="remember-user" class="cbl">Remember Username</label>
             </span>
             <span id="login-opt-pass" class="login-opt">
-                <input id="remember-pass" type="checkbox" ng-click="rememberPassword()" />
+                <input id="remember-pass" type="checkbox" ng-click="rememberPassword($event)" />
                 <label for="remember-pass" class="cbl">Remember Password</label>
             </span>
         </div>
     </div>
     <div class="spacer"></div>
-    <div class="rounded-container button" style="float: left; margin: 12px 0 0 120px;">Login</div>
+    <div class="rounded-container button" style="float: left; margin: 12px 0 0 120px;" ng-click="login()">Login</div>
     <div class="rounded-container button" style="float: right; margin: 12px 120px 0 0;">Register</div>
 </div>

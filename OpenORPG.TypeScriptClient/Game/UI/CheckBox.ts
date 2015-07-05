@@ -10,7 +10,6 @@ module OpenORPG.UI {
         }
 
         public set checked(value: any) {
-            console.log(this.element.attr("id") + ", " + (typeof value) + ": " + value);
             if (typeof value == "number") {
                 value = value == 0 ? false : true;
             }

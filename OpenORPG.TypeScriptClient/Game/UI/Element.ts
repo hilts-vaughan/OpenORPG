@@ -127,7 +127,7 @@ module OpenORPG.UI {
                         angular.element(document).injector().invoke($compile => {
                             var container = that.element;
                             var scope = angular.element(container).scope();
-                            console.trace();
+
                             $compile(container)(scope);
                             scope.$apply();
                         });

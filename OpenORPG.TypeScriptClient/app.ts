@@ -52,7 +52,6 @@ module OpenORPG {
 
     Angular.Game.controller('ControllerPanelLogin', [
         '$scope', '$rootScope', function ($scope, $rootScope) {
-            console.log("mooooooooooooooooooooooooooooooooooooooooooooosdfihduif");
             $scope.settings = $.extend({}, Settings.getInstance());
 
             $scope.rememberUsername = function (event: JQueryEventObject) {
@@ -64,9 +63,9 @@ module OpenORPG {
             };
 
             $scope.login = function () {
-                $.extend(Settings.getInstance(), $scope.settings);
-                Settings.getInstance().flush();
-                Settings.getInstance().save();
+                LoginMenuState.instance.loginPanel.updateSettings();
+
+                LoginMenuState.instance.login();
             };
 
             $scope.register = function () {

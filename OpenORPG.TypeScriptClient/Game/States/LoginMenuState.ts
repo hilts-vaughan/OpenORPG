@@ -8,39 +8,13 @@ module OpenORPG {
             return this._instance;
         }
 
-        private loginPanelWidget: LoginPanelWidget;
         public loginPanel: LoginPanel;
 
         constructor() {
             super();
 
             LoginMenuState._instance = this;
-            /*var that = this;
-            Angular.Game.controller('ControllerPanelLogin', [
-                '$scope', '$rootScope', function ($scope, $rootScope) {
-                    $scope.settings = $.extend({}, Settings.getInstance());
-                    console.log("sdfuisdfuij");
-                    $scope.rememberUsername = function () {
-                        that.loginPanel.refreshCheckboxes(true, false);
-                    };
 
-                    $scope.rememberPassword = function () {
-                        that.loginPanel.refreshCheckboxes(false, true);
-                    };
-
-                    $scope.login = function () {
-                        $.extend(Settings.getInstance(), $scope.settings);
-                        Settings.getInstance().flush();
-                        Settings.getInstance().save();
-                    };
-
-                    $scope.register = function () {
-
-                    };
-                }
-            ]);*/
-
-            //this.loginPanelWidget = new LoginPanelWidget($("#canvasholder"));
             this.loginPanel = new LoginPanel($("#canvasholder"));
         }
 
@@ -55,12 +29,16 @@ module OpenORPG {
             });
 
             if (Settings.getInstance().autoLoginSet) {
-                //TODO: Get query parameters working
-                var options = this.game.net.getQueryString("username");
-                var loginPacket = PacketFactory.createLoginPacket(options["user"], options["password"]);
-
-                network.sendPacket(loginPacket);
+                this.login();
             }
+        }
+
+        public login(): void {
+            /*//TODO: Get query parameters working
+            var options = this.game.net.getQueryString("username");*/
+            var loginPacket = PacketFactory.createLoginPacket(Settings.getInstance().savedUsername, Settings.getInstance().savedPassword);
+
+            NetworkManager.getInstance().sendPacket(loginPacket);
         }
 
         preload() {
@@ -76,7 +54,7 @@ module OpenORPG {
         }
 
         shutdown() {
-            //this.loginPanelWidget.hide();
+            this.loginPanel.hide();
         }
     }
 
@@ -84,9 +62,11 @@ module OpenORPG {
     class LoginPanel extends UI.Panel {
         private _rememberUser: UI.Checkbox;
         private _rememberPass: UI.Checkbox;
+        private _username: UI.Element;
+        private _password: UI.Element;
 
         constructor(parent: JQuery) {
-            super(parent, "assets/templates/widgets/login_panel.html");
+            super(parent, "assets/states/login.html");
         }
 
         public onLoad(event: JQueryEventObject): void {
@@ -97,7 +77,33 @@ module OpenORPG {
             this._rememberUser = new UI.Checkbox(this.element, "#remember-user");
             this._rememberPass = new UI.Checkbox(this.element, "#remember-pass");
 
+            this._username = new UI.Element(this.element, "#login-username");
+            if (Settings.getInstance().saveUsername) {
+                this._username.element.val(Settings.getInstance().savedUsername);
+            }
+
+            this._password = new UI.Element(this.element, "#login-password");
+            if (Settings.getInstance().savePassword) {
+                this._password.element.val(Settings.getInstance().savedPassword);
+            }
+
             this.refreshCheckboxes();
+        }
+
+        public updateSettings(): void {
+            Settings.getInstance().savedUsername = null;
+            Settings.getInstance().savedPassword = null;
+
+            if (Settings.getInstance().saveUsername) {
+                Settings.getInstance().savedUsername = this._username.element.val();
+            }
+
+            if (Settings.getInstance().savePassword) {
+                Settings.getInstance().savedPassword = this._password.element.val();
+            }
+
+            Settings.getInstance().flush();
+            Settings.getInstance().save();
         }
 
         public refreshCheckboxes(toggleUser: boolean = false, togglePass: boolean = false) {
