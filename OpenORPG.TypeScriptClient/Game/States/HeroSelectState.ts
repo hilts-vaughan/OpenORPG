@@ -1,5 +1,7 @@
-﻿module OpenORPG {
-    export class HeroSelectState extends Phaser.State {
+﻿/// <reference path="./AbstractState.ts" />
+
+module OpenORPG {
+    export class HeroSelectState extends AbstractState {
 
         preload() {
             // Prepare sprites

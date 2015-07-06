@@ -38,9 +38,9 @@
                 console.log("dirty");
                 this.bucket.forEach((layer) => {
                     layer.dirty = true;
-                    debugger;
-                    layer.resizeCanvas();
-
+                    // TODO: Uncomment when it gets implemented in a stable Phaser
+                    /*debugger;
+                    layer.resizeCanvas(); */
                 });
             }, this);
 

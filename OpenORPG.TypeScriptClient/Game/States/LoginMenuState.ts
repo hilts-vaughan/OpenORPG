@@ -1,4 +1,5 @@
-﻿///<reference path="../UI/Panel.ts" />
+﻿/// <reference path="./AbstractState.ts" />
+/// <reference path="../UI/Panel.ts" />
 
 module OpenORPG {
     export class LoginMenuState extends AbstractState {
@@ -12,6 +13,34 @@ module OpenORPG {
 
         constructor() {
             super();
+
+
+            Angular.Game.module.controller('ControllerPanelLogin', [
+                '$scope', '$rootScope', function ($scope, $rootScope) {
+                    $scope.settings = $.extend({}, Settings.getInstance());
+
+                    $scope.rememberUsername = function (event: JQueryEventObject) {
+                        LoginMenuState.instance.loginPanel.refreshCheckboxes(true, false);
+                    };
+                    /* IDEA: Create controller object model with root interface to be added to each game state */
+                    $scope.rememberPassword = function (event: JQueryEventObject) {
+                        LoginMenuState.instance.loginPanel.refreshCheckboxes(false, true);
+                    };
+
+                    $scope.login = function () {
+                        console.log("test");
+                        LoginMenuState.instance.loginPanel.updateSettings();
+
+                        LoginMenuState.instance.login();
+                    };
+
+                    $scope.register = function () {
+
+                    };
+                }
+            ]);
+
+            Angular.Game.register();
 
             LoginMenuState._instance = this;
 
@@ -102,7 +131,6 @@ module OpenORPG {
                 Settings.getInstance().savedPassword = this._password.element.val();
             }
 
-            Settings.getInstance().flush();
             Settings.getInstance().save();
         }
 
@@ -123,7 +151,6 @@ module OpenORPG {
             username saving is off will enable user saving as well. */
             Settings.getInstance().saveUsername = Settings.getInstance().saveUsername || Settings.getInstance().savePassword;
 
-            Settings.getInstance().flush();
             Settings.getInstance().save();
 
             this._rememberUser.checked = Settings.getInstance().saveUsername;

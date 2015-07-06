@@ -1,7 +1,30 @@
 ﻿module OpenORPG {
+    var jsonConverters: { [typeName: string]: (value: any) => any } = {};
+    jsonConverters["function"] = (value: any) => undefined;
+    jsonConverters["boolean"] = (value: any) => (value ? 1 : 0);
+
+    function convert(value: any): any {
+        var converter = jsonConverters[typeof value];
+
+        if (converter) {
+            return converter(value);
+        }
+
+        return value;
+    }
+
     export class Settings {
         private static _instance: Settings = null;
-        private settingsNamespace = "orpg_settings";
+
+        public static getInstance(): Settings {
+            if (Settings._instance === null) {
+                Settings._instance = new Settings();
+            }
+
+            return Settings._instance;
+        }
+
+        private namespace = "orpg_settings";
 
         /* Login */
         public autoLoginSet: boolean = true;
@@ -39,61 +62,50 @@
             this.attemptLoad();
         }
 
-        private attemptLoad() {
-            var settings = localStorage[this.settingsNamespace];
+        private attemptLoad(): void {
+            var settings = localStorage[this.namespace];
 
             // Set some defaults if required
             if (!settings) {
                 this.autoLoginSet = true;
                 this.saveUsername = false;
                 this.savePassword = false;
-
-                this.save();
             } else {
                 // Copy the entire settings into here
                 _.extend(this, JSON.parse(settings));
-                this.save();
             }
+
+            this.save();
         }
 
-        public static getInstance(): Settings {
-            if (Settings._instance === null) {
-                Settings._instance = new Settings();
-            }
-            return Settings._instance;
-        }
-
-
-        onChange(handler: Function, context: any) {
+        public onChange(handler: Function, context: any): void {
             this._handler = handler;
             this._context = context;
-        }
-
-        flush() {
-            this._handler.call(this._context);
         }
 
         /*
          * Persists the entire settings to local storage
          */
-        save() {
-            var json = JSON.stringify(this,(key, value) => {
-                if (typeof value == "function" || value == this._context) {
+        public save(): void {
+            this.flush();
+
+            var json = JSON.stringify(this,(key: string, value: any) => {
+                if (value == this._context) {
                     return undefined;
                 }
 
-                if (typeof value == "boolean") {
-                    return (value ? 1 : 0);
-                }
-
-                return value;
+                return convert(value);
             });
 
-            localStorage[this.settingsNamespace] = json;
+            localStorage[this.namespace] = json;
         }
 
-        reset() {
-            localStorage.removeItem(this.settingsNamespace);
+        public flush(): void {
+            if (this._handler) this._handler.call(this._context);
+        }
+
+        public reset(): void {
+            localStorage.removeItem(this.namespace);
             this.attemptLoad();
         }
     }

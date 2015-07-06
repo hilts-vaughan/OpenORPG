@@ -1,4 +1,6 @@
-﻿module OpenORPG {
+﻿/// <reference path="./AbstractState.ts" />
+
+module OpenORPG {
     // The gameplay state manages 
     export class GameplayState extends AbstractState {
         private zone: Zone = null;

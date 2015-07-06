@@ -1,4 +1,6 @@
-﻿module OpenORPG {
+﻿/// <reference path="./AbstractState.ts" />
+
+module OpenORPG {
     export class BootState extends AbstractState {
         create() {
             Logger.info("Booting the game...");
@@ -13,14 +15,14 @@
             /* Set up the network object. */
             var network = NetworkManager.getInstance();
 
-            network.onConnectionCallback = () => {
+            network.onConnect.push(() => {
                 this.game.state.add("mainmenu", new LoginMenuState());
                 this.game.state.start("mainmenu");
-            }
+            });
 
-            network.onConnectionErrorCallback = () => {
+            network.onError.push(() => {
                 this.game.state.start("errorstate");
-            }
+            });
 
             /* Connect to the server */
             Logger.info("Connecting to the server...");
