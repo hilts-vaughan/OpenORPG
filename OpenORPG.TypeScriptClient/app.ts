@@ -16,149 +16,34 @@
 
 /// <reference path="Game/Direction.ts" />
 
+/// <reference path="OpenORPG/Interface.ts" />
+
 module OpenORPG {
-    export class Indexer<T> {
-        [key: string]: T;
-    }
-
-    export class Dictionary<T> {
-        private _indexer: Indexer<T>;
-
-        constructor() {
-            this._indexer = new Indexer<T>();
-        }
-
-        protected get indexer(): Indexer<T> {
-            return this._indexer;
-        }
-
-        public get(key: string): T {
-            return this.indexer[key];
-        }
-
-        public set(key: string, value: T): T {
-            this.indexer[key] = value;
-
-            return value;
-        }
-
-        public has(key: string): boolean {
-            return !(this.indexer[key] === undefined || this.indexer[key] === null);
-        }
-
-        public del(key: string): boolean {
-            if (!this.has(key)) {
-                return false;
+    Interface.game.angular.directive('openDialog', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, elem, attr, ctrl) {
+                var dialogId = '#' + attr.openDialog;
+                elem.bind('click', function (e) {
+                    $(dialogId).dialog('open');
+                });
             }
+        };
+    });
 
-            this.indexer[key] = undefined;
-            return true;
-        }
-    }
+    Interface.game.angular.filter("skillFormatter", () => {
+        return (input: number) => {
+            return Math.max(Math.ceil(input), 0) + "s";
+        };
+    });
 
-    export class Angular {
-        private static _modules: Dictionary<Angular.Module> = null;
-
-        public static get modules(): Dictionary<Angular.Module> {
-            if (this._modules === undefined || this._modules === null) {
-                this._modules = new Dictionary<Angular.Module>();
-            }
-
-            return this._modules;
-        }
-
-        public static safeGet(name: string): Angular.Module {
-            if (!this.modules.has(name)) {
-                return this.modules.set(name, new Angular.Module(name));
-            }
-
-            return this.modules.get(name);
-        }
-
-        public static get Game(): Angular.Module {
-            return this.safeGet('game');
-        }
-
-        public static initialize(): void {
-            Angular.Game.module.directive('openDialog', function () {
-                return {
-                    restrict: 'A',
-                    link: function (scope, elem, attr, ctrl) {
-                        var dialogId = '#' + attr.openDialog;
-                        elem.bind('click', function (e) {
-                            $(dialogId).dialog('open');
-                        });
-                    }
-                };
-            });
-
-            Angular.Game.module.filter("skillFormatter",() => {
-                return (input: number) => {
-                    return Math.max(Math.ceil(input), 0) + "s";
-                };
-            });
-        }
-    }
-
-    export module Angular {
-        export class Providers {
-            public $controllerProvider: any;
-            public $compileProvider: any;
-            public $provide: any;
-        }
-
-        export class Module {
-            private providers: Providers;
-            private ngModule: ng.IModule;
-            private queueLength: number;
-
-            constructor(name: string) {
-                this.providers = new Angular.Providers();
-
-                var instance = this;
-                this.ngModule = angular.module(name, [],
-                    function ($controllerProvider: any, $compileProvider: any, $provide: any): void {
-                        instance.providers.$controllerProvider = $controllerProvider;
-                        instance.providers.$compileProvider = $compileProvider;
-                        instance.providers.$provide = $provide;
-                    });
-            }
-
-            public get module(): ng.IModule {
-
-                return this.ngModule;
-            }
-
-            public flushQueueLength(): void {
-                this.queueLength = this.ngModule['_invokeQueue'].length;
-            }
-
-            public register(): void {
-                var queue = this.ngModule['_invokeQueue'];
-
-                for (var i = this.queueLength; i < queue.length; i++) {
-                    var call = queue[i];
-
-                    var provider = this.providers[call[0]];
-                    if (provider) {
-                        provider[call[1]].apply(provider, call[2]);
-                    }
-                }
-
-                this.queueLength = queue.length;
-            }
-        }
-    }
-
-    Angular.initialize();
-
-    Angular.Game.module.controller('inventoryController', [
+    Interface.game.angular.controller('inventoryController', [
         '$scope', '$rootScope', function ($scope, $rootScope) {
             $scope.gold = 4000;
         }
     ]);
 
-    Angular.Game.module.controller('SettingsController', [
+    Interface.game.angular.controller('SettingsController', [
         '$scope', '$rootScope', function ($scope, $rootScope) {
             $scope.settings = $.extend({}, Settings.getInstance());
 
@@ -178,7 +63,7 @@ module OpenORPG {
         }
     ]);
 
-    Angular.Game.module.controller('QuestListController', [
+    Interface.game.angular.controller('QuestListController', [
         '$scope', function ($scope) {
             var formatter: RequirementFormatter = new RequirementFormatter();
 
@@ -210,7 +95,7 @@ module OpenORPG {
         }
     ]);
 
-    Angular.Game.module.controller('SkillListController', [
+    Interface.game.angular.controller('SkillListController', [
         '$scope', function ($scope) {
             $scope.getIcon = function (index: number) {
                 var skill = $scope.playerInfo.characterSkills[index];
@@ -228,7 +113,7 @@ module OpenORPG {
         }
     ]);
 
-    Angular.Game.module.controller('DialogController', [
+    Interface.game.angular.controller('DialogController', [
         '$scope', function ($scope) {
             // Respond to a dialog change
             $scope.$on('DialogChanged',(event, data) => {
@@ -241,7 +126,7 @@ module OpenORPG {
         }
     ]);
 
-    Angular.Game.module.controller('CharacterStatusController', [
+    Interface.game.angular.controller('CharacterStatusController', [
         '$scope', function ($scope) {
             $scope.getVitalPercent = function (type: number) {
                 var vital = this.playerInfo.characterStats[type];
@@ -265,7 +150,7 @@ module OpenORPG {
         }
     ]);
 
-    Angular.Game.module.controller('BottomBarController', [
+    Interface.game.angular.controller('BottomBarController', [
         '$scope', function ($scope) {
             $scope.getExpPercent = function (type: number) {
                 if (!this.playerInfo.player)
@@ -289,7 +174,7 @@ module OpenORPG {
         }
     ]);
 
-    Angular.Game.module.controller('CharacterWindowController', [
+    Interface.game.angular.controller('CharacterWindowController', [
         '$scope', function ($scope) {
 
             // We can do some cool stuff here if we want to, but otherwise we're ok 
@@ -302,8 +187,6 @@ module OpenORPG {
             };
         }
     ]);
-
-    Angular.Game.flushQueueLength();
 }
 
 window.onload = () => {

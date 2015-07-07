@@ -505,7 +505,6 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Game\UI\HudWidget.ts" />
-    <TypeScriptCompile Include="Game\UI\IInterfaceController.ts" />
     <TypeScriptCompile Include="Game\UI\InterfaceWindow.ts" />
     <TypeScriptCompile Include="Game\UI\Inventory\InventoryContextMenu.ts" />
     <TypeScriptCompile Include="Game\UI\ItemTooltipInfo.ts" />
@@ -541,12 +540,19 @@
     <TypeScriptCompile Include="Infrastructure\Settings.ts" />
     <TypeScriptCompile Include="Infrastructure\World\GameSystem.ts" />
     <TypeScriptCompile Include="jquery.d.ts" />
+    <TypeScriptCompile Include="OpenORPG\module.def.ts" />
     <TypeScriptCompile Include="p2.d.ts" />
     <TypeScriptCompile Include="pixi.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jqueryui\jqueryui.d.ts" />
+    <TypeScriptCompile Include="OpenORPG\IController.ts" />
+    <TypeScriptCompile Include="OpenORPG\Interface.ts" />
+    <TypeScriptCompile Include="UI\module.def.ts" />
+    <TypeScriptCompile Include="OpenORPG\Module.ts" />
     <TypeScriptCompile Include="underscore.d.ts" />
+    <TypeScriptCompile Include="OpenORPG\Dictionary.ts" />
+    <TypeScriptCompile Include="Utils\module.def.ts" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />

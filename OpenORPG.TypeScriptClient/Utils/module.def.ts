@@ -1,0 +1,6 @@
+﻿/**
+ * @preferred
+ */
+module OpenORPG.Utils {
+
+}

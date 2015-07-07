@@ -9,5 +9,7 @@ module OpenORPG {
         get centerY(): number {
             return this.game.scale.bounds.centerY;
         }
+
+
     }
 }

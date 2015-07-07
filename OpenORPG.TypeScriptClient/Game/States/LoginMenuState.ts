@@ -14,33 +14,7 @@ module OpenORPG {
         constructor() {
             super();
 
-
-            Angular.Game.module.controller('ControllerPanelLogin', [
-                '$scope', '$rootScope', function ($scope, $rootScope) {
-                    $scope.settings = $.extend({}, Settings.getInstance());
-
-                    $scope.rememberUsername = function (event: JQueryEventObject) {
-                        LoginMenuState.instance.loginPanel.refreshCheckboxes(true, false);
-                    };
-                    /* IDEA: Create controller object model with root interface to be added to each game state */
-                    $scope.rememberPassword = function (event: JQueryEventObject) {
-                        LoginMenuState.instance.loginPanel.refreshCheckboxes(false, true);
-                    };
-
-                    $scope.login = function () {
-                        console.log("test");
-                        LoginMenuState.instance.loginPanel.updateSettings();
-
-                        LoginMenuState.instance.login();
-                    };
-
-                    $scope.register = function () {
-
-                    };
-                }
-            ]);
-
-            Angular.Game.register();
+            Interface.game.controller(new LoginController(this));
 
             LoginMenuState._instance = this;
 
@@ -84,6 +58,41 @@ module OpenORPG {
 
         shutdown() {
             this.loginPanel.hide();
+        }
+    }
+
+    class LoginController implements IController {
+        private state: LoginMenuState;
+
+        constructor(state: LoginMenuState) {
+            this.state = state;
+        }
+
+        public get name(): string {
+            return "ControllerPanelLogin";
+        }
+
+        public get angular(): ($scope: any, $rootScope: any) => any {
+            var state = this.state;
+            return ($scope: any, $rootScope: any) => {
+                $scope.rememberUsername = function (event: JQueryEventObject) {
+                    state.loginPanel.refreshCheckboxes(true, false);
+                };
+                /* IDEA: Create controller object model with root interface to be added to each game state */
+                $scope.rememberPassword = function (event: JQueryEventObject) {
+                    state.loginPanel.refreshCheckboxes(false, true);
+                };
+
+                $scope.login = function () {
+                    console.log("test");
+                    state.loginPanel.updateSettings();
+                    state.login();
+                };
+
+                $scope.register = function () {
+
+                };
+            };
         }
     }
 
