@@ -1,15 +1,14 @@
-﻿/// <reference path="jquery.d.ts" />
-/// <reference path="underscore.d.ts" />
-/// <reference path="Scripts/typings/jqueryui/jqueryui.d.ts"/>
+﻿///<reference path="jquery.d.ts" />
+///<reference path="underscore.d.ts" />
+///<reference path="Scripts/typings/jqueryui/jqueryui.d.ts"/>
 
-/// <reference path="phaser.d.ts" />
+///<reference path="phaser.d.ts" />
 
-/// <reference path="Game/CharacterState.ts" />
-/// <reference path="Game/World/Zone.ts" />
+///<reference path="OpenORPG/Interface.ts" />
 
-/// <reference path="Game/Direction.ts" />
-
-/// <reference path="OpenORPG/Interface.ts" />
+///<reference path="Game/CharacterState.ts" />
+///<reference path="Game/World/Zone.ts" />
+///<reference path="Game/Direction.ts" />
 
 module OpenORPG {
     class InventoryController implements IController {
@@ -35,15 +34,15 @@ module OpenORPG {
                     $.extend(Settings.getInstance(), $scope.settings);
                     Settings.getInstance().flush();
                     Settings.getInstance().save();
-                }
+                };
 
                 $scope.discard = function () {
                     $scope.settings = $.extend({}, Settings.getInstance());
-                }
+                };
 
                 $scope.reset = function () {
                     Settings.getInstance().reset();
-                }
+                };
             };
         }
     }
@@ -145,7 +144,7 @@ module OpenORPG {
                     var percent = (vital.currentValue / vital.maximumValue) * 100;
 
                     return percent;
-                }
+                };
 
                 $scope.getVitalLabel = function (type: number) {
                     var vital = this.playerInfo.characterStats[type];
@@ -154,7 +153,7 @@ module OpenORPG {
                         return "0";
 
                     return vital.currentValue.toString() + "/" + vital.maximumValue.toString();
-                }
+                };
             };
         }
     }
@@ -177,14 +176,14 @@ module OpenORPG {
                     var percent = (exp / (this.playerInfo.player.level * 500)) * 100;
 
                     return percent;
-                }
+                };
 
                 $scope.getExpLabel = function () {
                     if (!this.playerInfo.player)
                         return "";
 
                     return this.playerInfo.player.experience + "/" + this.playerInfo.player.level * 500;
-                }
+                };
             };
         }
     }
