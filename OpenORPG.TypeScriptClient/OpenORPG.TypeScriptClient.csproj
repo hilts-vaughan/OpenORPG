@@ -152,7 +152,6 @@
     <Content Include="assets\atlas\hud\hud_p3.png" />
     <Content Include="assets\atlas\hud\hud_p3Alt.png" />
     <Content Include="assets\atlas\hud\hud_x.png" />
-    <Content Include="assets\html\States\LoginScreen.html" />
     <Content Include="assets\ui\connecting.png" />
     <Content Include="assets\ui\player_active.png" />
     <Content Include="assets\ui\player_inactive.png" />
@@ -633,6 +632,7 @@
     <Folder Include="assets\effects\" />
     <Folder Include="assets\states\login\" />
     <Folder Include="Game\Sync\" />
+    <Folder Include="OpenORPG\States\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
