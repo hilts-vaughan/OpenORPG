@@ -33,6 +33,10 @@
             return this.angular.name;
         }
 
+        public bootstrap(): ng.auto.IInjectorService {
+            return angular.bootstrap(document, [this.name]);
+        }
+
         public controller(controller: IController): Module {
             this._angular.controller(controller.name, ['$scope', '$rootScope',
                 ($scope: any, $rootScope: any) => {

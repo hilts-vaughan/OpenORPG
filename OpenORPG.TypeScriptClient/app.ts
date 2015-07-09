@@ -207,46 +207,37 @@ module OpenORPG {
         }
     }
 
+    window.onload = () => {
+        Interface.game.angular.directive('openDialog', function () {
+            return {
+                restrict: 'A',
+                link: function (scope, elem, attr, ctrl) {
+                    var dialogId = '#' + attr.openDialog;
+                    elem.bind('click', function (e) {
+                        $(dialogId).dialog('open');
+                    });
+                }
+            };
+        });
 
+        Interface.game.angular.filter("skillFormatter", () => {
+            return (input: number) => {
+                return Math.max(Math.ceil(input), 0) + "s";
+            };
+        });
 
+        Interface.game.controller(new InventoryController());
+        Interface.game.controller(new SettingsController());
+        Interface.game.controller(new QuestListController());
+        Interface.game.controller(new SkillListController());
+        Interface.game.controller(new DialogController());
+        Interface.game.controller(new CharacterStatusController());
+        Interface.game.controller(new BottomBarController());
+        Interface.game.controller(new CharacterWindowController());
 
-window.onload = () => {
+        Interface.game.bootstrap();
 
-
-    Interface.game.angular.directive('openDialog', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, elem, attr, ctrl) {
-                var dialogId = '#' + attr.openDialog;
-                elem.bind('click', function (e) {
-                    $(dialogId).dialog('open');
-                });
-            }
-        };
-    });
-
-    Interface.game.angular.filter("skillFormatter",() => {
-        return (input: number) => {
-            return Math.max(Math.ceil(input), 0) + "s";
-        };
-    });
-
-    Interface.game.controller(new InventoryController());
-    Interface.game.controller(new SettingsController());
-    Interface.game.controller(new QuestListController());
-    Interface.game.controller(new SkillListController());
-    Interface.game.controller(new DialogController());
-    Interface.game.controller(new CharacterStatusController());
-    Interface.game.controller(new BottomBarController());
-    Interface.game.controller(new CharacterWindowController());
-
-    angular.bootstrap(document, ['game']);
-
-
-    /* Setup underscore */
-    var game = new OpenORPG.Game();
-
-
-}
-
+        /* Setup underscore */
+        var game = new OpenORPG.Game();
+    }
 };
