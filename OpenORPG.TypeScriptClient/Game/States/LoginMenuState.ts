@@ -31,7 +31,7 @@ module OpenORPG {
                 }
             });
 
-            if (Settings.getInstance().autoLoginSet) {
+            if (Settings.getInstance().autoLoginSet && this.credentialsExist()) {
                 this.login();
             }
         }
@@ -58,6 +58,11 @@ module OpenORPG {
 
         shutdown() {
             this.loginPanel.hide();
+        }
+
+        credentialsExist() : boolean {
+            return Settings.getInstance().savedUsername != null;
+
         }
     }
 
