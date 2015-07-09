@@ -48,20 +48,19 @@
             this._socket = null;
 
             this.onConnect.push((event?: any) => {
-                console.log(event);
+                
             });
 
             this.onDisconnect.push((event?: any) => {
                 if (this._reconnectTime >= 0) {
                     setTimeout(() => {
-                        console.log(event);
                         NetworkManager._instance.reconnect();
                     }, this._reconnectTime);
                 }
             });
 
             this.onError.push((event?: any) => {
-                console.log(event);
+                
             });
 
             this.onMessage.push((event?: any) => {
@@ -146,7 +145,6 @@
 
         // Parses an incoming message accordingly
         private parseMessage(response: MessageEvent) {
-            console.log(response);
             var packet: any = JSON.parse(response.data);
             if (this._packetCallbacks[packet.opCode] != undefined) {
                 _.forEach(this._packetCallbacks[packet.opCode], (value: Function) => {
