@@ -1,4 +1,4 @@
-﻿<div id="panel-login" class="panel" ng-controller="ControllerPanelLogin">
+﻿<div id="panel-login" class="panel" data-ng-controller="ControllerPanelLogin">
     <div class="spacer-xl">
         <div class="spacer"></div>
         <h1>Login</h1>
@@ -6,27 +6,27 @@
     <div class="spacer"></div>
     <div class="entry" id="entry-username">
         <div class="label">Username:</div>
-        <input id="login-username" type="text" />
+        <input id="login-username" data-ng-model="settings.savedUsername" type="text" />
     </div>
     <div class="spacer-xs"></div>
     <div class="entry" id="entry-password">
         <div class="label">Password:</div>
-        <input id="login-password" type="password" />
+        <input id="login-password" data-ng-model="settings.savedPassword" type="password" />
     </div>
     <div class="spacer"></div>
     <div class="spacer">
         <div id="login-options" class="cbl">
             <span id="login-opt-user" class="login-opt">
-                <input id="remember-user" type="checkbox" ng-click="rememberUsername($event)" />
+                <input id="remember-user" type="checkbox" data-ng-model="settings.saveUsername" data-ng-change="onSaveUsername($event)" />
                 <label for="remember-user" class="cbl">Remember Username</label>
             </span>
             <span id="login-opt-pass" class="login-opt">
-                <input id="remember-pass" type="checkbox" ng-click="rememberPassword($event)" />
+                <input id="remember-pass" type="checkbox" data-ng-model="settings.savePassword" data-ng-change="onSavePassword($event)" />
                 <label for="remember-pass" class="cbl">Remember Password</label>
             </span>
         </div>
     </div>
     <div class="spacer"></div>
-    <div class="rounded-container button" style="float: left; margin: 12px 0 0 120px;" ng-click="login()">Login</div>
+    <div class="rounded-container button" style="float: left; margin: 12px 0 0 120px;" data-ng-click="login()">Login</div>
     <!--div class="rounded-container button disabled" style="float: right; margin: 12px 120px 0 0;">Register</div-->
 </div>

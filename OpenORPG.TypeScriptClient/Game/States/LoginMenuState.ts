@@ -80,18 +80,24 @@ module OpenORPG {
         public get angular(): ($scope: any, $rootScope: any) => any {
             var state = this.state;
             return ($scope: any, $rootScope: any) => {
-                $scope.rememberUsername = function (event: JQueryEventObject) {
-                    state.loginPanel.refreshCheckboxes(true, false);
+                $scope.onSaveUsername = function (event: JQueryEventObject) {
+                    var settings = $scope.settings;
+                    settings.savePassword = Boolean(settings.saveUsername & settings.savePassword);
                 };
-                /* IDEA: Create controller object model with root interface to be added to each game state */
-                $scope.rememberPassword = function (event: JQueryEventObject) {
-                    state.loginPanel.refreshCheckboxes(false, true);
+
+                $scope.onSavePassword = function (event: JQueryEventObject) {
+                    var settings = $scope.settings;
+                    settings.saveUsername = Boolean(settings.savePassword | settings.saveUsername);
                 };
 
                 $scope.login = function () {
-                    console.log("test");
-                    state.loginPanel.updateSettings();
+                    var settings = $scope.settings;
                     state.login();
+
+                    if (!settings.saveUsername) { settings.savedUsername = null; }
+                    if (!settings.savePassword) { settings.savedPassword = null; }
+
+                    settings.save();
                 };
 
                 $scope.register = function () {
