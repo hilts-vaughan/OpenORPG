@@ -2,8 +2,15 @@
 /// <reference path="../UI/Panel.ts" />
 
 module OpenORPG {
+    /* TODO: Refactor stuff when done writing more UI code */
+    class LoginPanel extends UI.Panel {
+        constructor(parent: JQuery) {
+            super(parent, "assets/states/login.html");
+        }
+    }
+
     export class LoginMenuState extends AbstractState {
-        private static _instance: LoginMenuState;
+        private static _instance: LoginMenuState = null;
 
         public static get instance(): LoginMenuState {
             return this._instance;
@@ -62,119 +69,59 @@ module OpenORPG {
 
         credentialsExist() : boolean {
             return Settings.getInstance().savedUsername != null;
-
         }
     }
 
     class LoginController implements IController {
         private state: LoginMenuState;
+        private scope: Scope;
 
         constructor(state: LoginMenuState) {
             this.state = state;
+            this.scope = null;
         }
 
         public get name(): string {
             return "ControllerPanelLogin";
         }
 
+        protected get settings(): Settings {
+            console.log(this.scope);
+            if (this.scope == null) {
+                return null;
+            }
+
+            return this.scope.settings;
+        }
+
+        public onSaveUsername(event: JQueryEventObject): void {
+            console.log(this.scope);
+            this.settings.savePassword = this.settings.saveUsername && this.settings.savePassword;
+        }
+
+        public onSavePassword(event: JQueryEventObject): void {
+            this.settings.saveUsername = this.settings.savePassword || this.settings.saveUsername;
+        }
+
+        public doLogin(): void {
+            this.state.login();
+
+            if (!this.settings.saveUsername) { this.settings.savedUsername = null; }
+            if (!this.settings.savePassword) { this.settings.savedPassword = null; }
+
+            this.settings.save();
+        }
+
+        public doRegister(): void {
+
+        }
+
         public get angular(): ($scope: any, $rootScope: any) => any {
-            var state = this.state;
-            return ($scope: any, $rootScope: any) => {
-                $scope.onSaveUsername = function (event: JQueryEventObject) {
-                    var settings = $scope.settings;
-                    settings.savePassword = Boolean(settings.saveUsername & settings.savePassword);
-                };
-
-                $scope.onSavePassword = function (event: JQueryEventObject) {
-                    var settings = $scope.settings;
-                    settings.saveUsername = Boolean(settings.savePassword | settings.saveUsername);
-                };
-
-                $scope.login = function () {
-                    var settings = $scope.settings;
-                    state.login();
-
-                    if (!settings.saveUsername) { settings.savedUsername = null; }
-                    if (!settings.savePassword) { settings.savedPassword = null; }
-
-                    settings.save();
-                };
-
-                $scope.register = function () {
-
-                };
-            };
-        }
-    }
-
-    /* TODO: Refactor stuff when done writing more UI code */
-    class LoginPanel extends UI.Panel {
-        private _rememberUser: UI.Checkbox;
-        private _rememberPass: UI.Checkbox;
-        private _username: UI.Element;
-        private _password: UI.Element;
-
-        constructor(parent: JQuery) {
-            super(parent, "assets/states/login.html");
-        }
-
-        public onLoad(event: JQueryEventObject): void {
-            super.onLoad(event);
-
             var that = this;
-            
-            this._rememberUser = new UI.Checkbox(this.element, "#remember-user");
-            this._rememberPass = new UI.Checkbox(this.element, "#remember-pass");
-
-            this._username = new UI.Element(this.element, "#login-username");
-            if (Settings.getInstance().saveUsername) {
-                this._username.element.val(Settings.getInstance().savedUsername);
-            }
-
-            this._password = new UI.Element(this.element, "#login-password");
-            if (Settings.getInstance().savePassword) {
-                this._password.element.val(Settings.getInstance().savedPassword);
-            }
-
-            this.refreshCheckboxes();
-        }
-
-        public updateSettings(): void {
-            Settings.getInstance().savedUsername = null;
-            Settings.getInstance().savedPassword = null;
-
-            if (Settings.getInstance().saveUsername) {
-                Settings.getInstance().savedUsername = this._username.element.val();
-            }
-
-            if (Settings.getInstance().savePassword) {
-                Settings.getInstance().savedPassword = this._password.element.val();
-            }
-
-            Settings.getInstance().save();
-        }
-
-        public refreshCheckboxes(toggleUser: boolean = false, togglePass: boolean = false) {
-            if (toggleUser) {
-                Settings.getInstance().saveUsername = !Settings.getInstance().saveUsername;
-
-                /* This makes it so toggling the username saving off while
-                password saving is on will disable password saving as well. */
-                Settings.getInstance().savePassword = Settings.getInstance().saveUsername && Settings.getInstance().savePassword;
-            }
-
-            if (togglePass) {
-                Settings.getInstance().savePassword = !Settings.getInstance().savePassword;
-            }
-
-            /* This makes it so toggling the password saving on while
-            username saving is off will enable user saving as well. */
-            Settings.getInstance().saveUsername = Settings.getInstance().saveUsername || Settings.getInstance().savePassword;
-
-            Settings.getInstance().save();
-
-            this._rememberUser.checked = Settings.getInstance().saveUsername;
-            this._rememberPass.checked = Settings.getInstance().savePassword;
+            return ($scope: any, $rootScope: any) => {
+                that.scope = $scope;
+                console.log(that.scope);
+            };
         }
     }
 }

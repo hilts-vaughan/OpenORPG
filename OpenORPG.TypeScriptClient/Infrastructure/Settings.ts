@@ -1,16 +1,14 @@
 ﻿module OpenORPG {
-    var jsonConverters: { [typeName: string]: (value: any) => any } = {};
-    jsonConverters["function"] = (value: any) => undefined;
-    jsonConverters["boolean"] = (value: any) => (value ? 1 : 0);
+    var jsonSerializer: { [typeName: string]: (value: any) => any } = {};
+    jsonSerializer["function"] = (value: any) => undefined;
+    jsonSerializer["boolean"] = (value: any) => (value ? 1 : 0);
+    
+    var jsonDeserializer: { [typeName: string]: (value: any) => any } = {};
+    jsonDeserializer["boolean"] = (value: any) => (Number(value) === 0 ? false : true);
 
-    function convert(value: any): any {
-        var converter = jsonConverters[typeof value];
-
-        if (converter) {
-            return converter(value);
-        }
-
-        return value;
+    function safeConverter(func: (value: any) => any): (value: any) => any {
+        if (func) return func;
+        return (value: any) => { return value; };
     }
 
     export class Settings {
@@ -72,7 +70,10 @@
                 this.savePassword = false;
             } else {
                 // Copy the entire settings into here
-                _.extend(this, JSON.parse(settings));
+                var that = this;
+                _.extend(this, JSON.parse(settings, (key: any, value: any) => {
+                    return safeConverter(jsonDeserializer[typeof that[key]])(value);
+                }));
             }
 
             this.save();
@@ -94,7 +95,7 @@
                     return undefined;
                 }
 
-                return convert(value);
+                return safeConverter(jsonSerializer[typeof value])(value);
             });
 
             localStorage[this.namespace] = json;
