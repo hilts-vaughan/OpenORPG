@@ -207,6 +207,12 @@ module OpenORPG {
         }
     }
 
+
+
+
+window.onload = () => {
+
+
     Interface.game.angular.directive('openDialog', function () {
         return {
             restrict: 'A',
@@ -219,7 +225,7 @@ module OpenORPG {
         };
     });
 
-    Interface.game.angular.filter("skillFormatter", () => {
+    Interface.game.angular.filter("skillFormatter",() => {
         return (input: number) => {
             return Math.max(Math.ceil(input), 0) + "s";
         };
@@ -233,9 +239,14 @@ module OpenORPG {
     Interface.game.controller(new CharacterStatusController());
     Interface.game.controller(new BottomBarController());
     Interface.game.controller(new CharacterWindowController());
-}
 
-window.onload = () => {
+    angular.bootstrap(document, ['game']);
+
+
     /* Setup underscore */
     var game = new OpenORPG.Game();
+
+
+}
+
 };
