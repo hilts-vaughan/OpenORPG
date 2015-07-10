@@ -1,5 +1,6 @@
-﻿/// <reference path="./AbstractState.ts" />
-/// <reference path="../UI/Panel.ts" />
+﻿///<reference path="./AbstractState.ts" />
+///<reference path="../UI/Panel.ts" />
+///<reference path="../../OpenORPG/IController.ts" />
 
 module OpenORPG {
     /* TODO: Refactor stuff when done writing more UI code */
@@ -86,7 +87,6 @@ module OpenORPG {
         }
 
         protected get settings(): Settings {
-            console.log(this.scope);
             if (this.scope == null) {
                 return null;
             }
@@ -95,7 +95,6 @@ module OpenORPG {
         }
 
         public onSaveUsername(event: JQueryEventObject): void {
-            console.log(this.scope);
             this.settings.savePassword = this.settings.saveUsername && this.settings.savePassword;
         }
 
@@ -120,7 +119,6 @@ module OpenORPG {
             var that = this;
             return ($scope: any, $rootScope: any) => {
                 that.scope = $scope;
-                console.log(that.scope);
             };
         }
     }
