@@ -17,7 +17,7 @@ namespace Server.Utils
         // These paths are not releative to the AssetBasePath because the content loader already assumes the base asset path as the working directory
         static PathHelper()
         {
-            AssetBasePath = Path.Combine("..", "..", "..", "..", "OpenORPG.TypeScriptClient", "assets");
+            AssetBasePath = Path.Combine("..", "..", "..", "OpenORPG.TypeScriptClient", "assets");
         }
 
         public static string MapExtension
