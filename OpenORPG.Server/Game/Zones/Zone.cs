@@ -418,7 +418,7 @@ namespace Server.Game.Zones
             NotifySystemsRemove(entity);
         }
 
-        private double _timer = 0f;
+        /*private double timer = 0f; /* TODO: This variable was unused. If it should be used it needs to be uncommented */
 
         public void Update(double deltaTime)
         {

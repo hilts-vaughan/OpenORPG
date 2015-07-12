@@ -138,7 +138,7 @@ namespace Server.Game.Entities
         }
 
         private Character _lastCharacterToHitMe;
-        private int _level;
+        /*private int _level; /* TODO: This variable was unused. If it should be used it needs to be uncommented */
 
         public void ApplyDamage(DamagePayload damagePayload)
         {
