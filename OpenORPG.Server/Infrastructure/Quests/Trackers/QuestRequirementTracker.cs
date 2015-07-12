@@ -41,10 +41,10 @@ namespace Server.Infrastructure.Quests.Trackers
         /// Examines the quest log entry of a user and the associated requirements and determines
         /// what requirements are active of a certain type.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="U"></typeparam>
         /// <returns>An iterator version of the current tupled entry</returns>
-        protected IEnumerable<Tuple<QuestLogEntry, T, int>> GetQuestEntryWithRequirementType<T>(Player player)
-            where T : class
+        protected IEnumerable<Tuple<QuestLogEntry, U, int>> GetQuestEntryWithRequirementType<U>(Player player)
+            where U : class
         {
             foreach (var entry in player.QuestLog.GetActiveQuestLogEntries())
             {
@@ -55,7 +55,7 @@ namespace Server.Infrastructure.Quests.Trackers
                     for (int i = 0; i < step.Requirements.Count; i++)
                     {
                         var requirement = step.Requirements[i];
-                        var typedRequirement = requirement as T;
+                        var typedRequirement = requirement as U;
 
                         if (typedRequirement != null)
                             yield return Tuple.Create(entry, typedRequirement, i);
