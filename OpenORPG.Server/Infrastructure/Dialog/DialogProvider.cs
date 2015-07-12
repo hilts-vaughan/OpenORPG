@@ -89,6 +89,7 @@ namespace Server.Infrastructure.Dialog
             catch (Exception exception)
             {
                 Logger.Instance.Warn("An action was attempted to be executed and fail. It was likely not implemented. Check for unimplemented actions.");
+                Logger.Instance.Warn("Exception stack trace: " + exception.StackTrace);
             }
 
 

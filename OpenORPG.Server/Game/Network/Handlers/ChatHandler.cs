@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Server.Game.Chat;
 using Server.Game.Network.Packets;
 using Server.Game.Network.Packets.Server;
+using Server.Infrastructure.Logging;
 using Server.Infrastructure.Network.Handlers;
 using Server.Utils;
 
@@ -36,6 +37,8 @@ namespace Server.Game.Network.Handlers
                 var msg = new ServerSendGameMessagePacket(GameMessage.ChatCommandInvalid,
                     new List<string>() {packet.Message});
                 player.Client.Send(msg);
+                Logger.Instance.Warn("Chat message invalid.");
+                Logger.Instance.Warn("Exception stack trace: " + exception.StackTrace);
                 return;
             }
 
