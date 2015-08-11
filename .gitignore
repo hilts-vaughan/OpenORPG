@@ -181,3 +181,13 @@ OpenORPG.Editor/app.js
 OpenORPG.Editor/app.js.map
 .settings/
 public/
+
+#User Specific
+*.userprefs
+*.usertasks
+
+#Mono Project Files
+*.pidb
+*.resources
+test-results/
+.vs/

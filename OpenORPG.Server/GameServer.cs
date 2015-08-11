@@ -66,7 +66,6 @@ namespace Server
         public void Update()
         {
 
-
             long ms = _stopwatch.ElapsedMilliseconds;
 
             // It's not time to use delta time just 
@@ -83,11 +82,16 @@ namespace Server
                     LoginHandler.Logout(client);
                 }
             }
+            
+            // You just have to get used to the devil Visual Studio wrecking stuff up
 
-            if (ms > 16)
+            if (ms > 100)
             {
-                Logger.Instance.Warn("Server is running at less than 60 FPS. It might be clogged down.");
+                Logger.Instance.Warn("Server is running at less than 10 FPS. It might be clogged down.");
             }
+
+            // Sleep is not a big deal, so do that
+            Thread.Sleep(1);
 
             // We can handle packets without knowledge of delta times
             HandlePackets();
