@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Common;
 using System.Data.Entity.Migrations.History;
 using System.Reflection;
-using MySql.Data.Entity;
 using OpenORPG.Database.Models.ContentTemplates;
 using OpenORPG.Database.Models.Quests;
 using Server.Game.Database.Maps;
